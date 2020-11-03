@@ -3,5 +3,5 @@
   "singleQuote": true,
   "semiColons": true,
   "trailingComma": "none",
-  "jsxSingleQuote": false
+  "jsxSingleQuote": true
 }
