@@ -181,7 +181,7 @@ const About = () => {
             </div>
           </div>
 
-          <main className='mt-10 mx-auto max-w-screen-xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28'>
+          <main className='flex mt-10 max-w-screen-xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28'>
             <div className='sm:text-center lg:text-left'>
               <h2 className='text-4xl tracking-tight leading-10 font-extrabold text-gray-900 sm:text-5xl sm:leading-none md:text-6xl'>
                 Data to enrich your
@@ -211,15 +211,15 @@ const About = () => {
                 </div>
               </div>
             </div>
+            <div className='lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2'>
+              <img
+                className='h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full img1'
+                src='https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80'
+                alt=''
+              />
+            </div>
           </main>
         </div>
-      </div>
-      <div className='lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2'>
-        <img
-          className='h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full img1'
-          src='https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80'
-          alt=''
-        />
       </div>
     </div>
   );
