@@ -1,5 +1,2 @@
 @layer utilities {
-  .img1 {
-    clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 0 100%);
-  }
 }
