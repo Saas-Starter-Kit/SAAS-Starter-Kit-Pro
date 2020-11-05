@@ -7,6 +7,11 @@
 
 @tailwind utilities;
 
+:root {
+  /*indigo-600 tailwind*/
+  --primary-color: #5850ec;
+}
+
 html,
 body {
   padding: 0;
