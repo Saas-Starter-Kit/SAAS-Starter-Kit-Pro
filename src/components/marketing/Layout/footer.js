@@ -23,8 +23,7 @@ const FooterLink = styled.p`
 `;
 
 const IMGContainer = styled.div`
-  background-color: #5145cd;
-  background-color: rgba(81, 69, 205, 1);
+  background-color: #5850ec;
 `;
 
 const BottomFooter = styled.div`
