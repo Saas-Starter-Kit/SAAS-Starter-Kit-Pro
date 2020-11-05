@@ -1,5 +1,19 @@
 import styled from 'styled-components';
 
+{
+  /*
+        <!--
+          'Solutions' flyout menu, show/hide based on flyout menu state.
+
+          Entering: "transition ease-out duration-200"
+            From: "opacity-0 translate-y-1"
+            To: "opacity-100 translate-y-0"
+          Leaving: "transition ease-in duration-150"
+            From: "opacity-100 translate-y-0"
+            To: "opacity-0 translate-y-1"
+        -->*/
+}
+
 const FlyoutMenu = () => {
   return (
     <div className='absolute -ml-4 mt-3 transform w-screen max-w-md md:max-w-3xl lg:ml-0 lg:left-1/2 lg:-translate-x-1/2'>
@@ -180,3 +194,5 @@ const FlyoutMenu = () => {
     </div>
   );
 };
+
+export default FlyoutMenu;
