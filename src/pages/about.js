@@ -1,5 +1,11 @@
+import Layout from '../components/marketing/Layout';
+
 const About = () => {
-  return <div>DDD</div>;
+  return (
+    <Layout>
+      <div>DDD</div>
+    </Layout>
+  );
 };
 
 export default About;
