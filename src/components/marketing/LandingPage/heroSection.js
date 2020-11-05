@@ -3,7 +3,8 @@ import styled from 'styled-components';
 const Container = styled.div`
   display: grid;
   grid-template-columns: auto auto;
-  background-color: lightgray;
+  background-color: #f9fafb;
+  background-color: rgba(249, 250, 251, 1);
   background-image: url('/illustrations/blobSmall.svg');
   background-repeat: no-repeat;
   background-size: contain;
@@ -11,7 +12,8 @@ const Container = styled.div`
 `;
 
 const ImageContainer = styled.div`
-  background-color: lightgray;
+  background-color: #f9fafb;
+  background-color: rgba(249, 250, 251, 1);
   background-image: url('/illustrations/blobBig.svg');
   background-repeat: no-repeat;
   background-position: 0% 0%;
