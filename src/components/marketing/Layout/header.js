@@ -2,14 +2,6 @@ import styled from 'styled-components';
 import { useState } from 'react';
 import FlyoutMenu from './flyoutMenu';
 
-const MenuContainer = styled.div`
-  animation: FadeIn 1s linear;
-`;
-
-const MenuContainerOut = styled.div`
-  animation: FadeOUt 1s linear;
-`;
-
 const Header = () => {
   const [menu, toggleMenu] = useState(false);
 
@@ -58,10 +50,11 @@ const Header = () => {
                 alt='down arrow'
               />
             </button>
-
-            <div className={menu ? 'fadeIn' : 'fadeOut'}>
-              <FlyoutMenu />
-            </div>
+            {menu ? (
+              <div className='fadeInUp'>
+                <FlyoutMenu />
+              </div>
+            ) : null}
           </div>
           <a
             href='#'

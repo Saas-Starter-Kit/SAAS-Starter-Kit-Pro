@@ -1,17 +1,14 @@
 @keyframes FadeIn {
   from {
     opacity: 0;
+    transform: translateY(0.25rem);
   }
   to {
     opacity: 1;
+    transform: translateY(0);
   }
 }
 
-@keyframes FadeOut {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
+.fadeInUp {
+  animation: FadeIn 0.5s linear forwards;
 }

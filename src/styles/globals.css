@@ -13,14 +13,6 @@
   --primary-color: #5850ec;
 }
 
-.fadeIn {
-  animation: FadeIn 1s linear forwards;
-}
-
-.fadeOut {
-  animation: FadeOut 1s linear forwards;
-}
-
 html,
 body {
   padding: 0;
