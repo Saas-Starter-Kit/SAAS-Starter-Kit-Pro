@@ -1,9 +1,13 @@
 import styled from 'styled-components';
 import { useState } from 'react';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
+
 import FlyoutMenu from './flyoutMenu';
 import MobileMenu from './mobileMenu';
 
 const Header = () => {
+  const router = useRouter();
   const [menu, toggleMenu] = useState(false);
   const [mobileMenu, toggleMobileMenu] = useState(false);
 
@@ -57,23 +61,18 @@ const Header = () => {
               />
             </button>
             {menu ? (
-              <div className='fadeInUp'>
+              <div className='FadeInUp'>
                 <FlyoutMenu />
               </div>
             ) : null}
           </div>
-          <a
-            href='#'
-            className='text-base leading-6 font-medium text-gray-500 hover:text-gray-900 focus:outline-none focus:text-gray-900 transition ease-in-out duration-150'
-          >
+
+          <Link href='/pricing' className={router.pathname == '/' ? 'active' : 'headerLink'}>
             Pricing
-          </a>
-          <a
-            href='#'
-            className='text-base leading-6 font-medium text-gray-500 hover:text-gray-900 focus:outline-none focus:text-gray-900 transition ease-in-out duration-150'
-          >
+          </Link>
+          <Link href='/about' className={router.pathname == '/' ? 'active' : 'headerLink'}>
             Docs
-          </a>
+          </Link>
         </nav>
 
         <div className='hidden md:flex items-center justify-end space-x-8 md:flex-1 lg:w-0'>

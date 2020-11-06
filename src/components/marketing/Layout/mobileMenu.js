@@ -15,7 +15,7 @@ import styled from 'styled-components';
 
 const MobileMenu = ({ mobileMenuHandler }) => {
   return (
-    <div className='absolute top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden'>
+    <div className='MobileMenuScale absolute top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden'>
       <div className='rounded-lg shadow-lg'>
         <div className='rounded-lg shadow-xs bg-white divide-y-2 divide-gray-50'>
           <div className='pt-5 pb-6 px-5 space-y-6'>
