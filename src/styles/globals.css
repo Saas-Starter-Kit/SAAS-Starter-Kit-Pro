@@ -1,4 +1,5 @@
 @import url('./tailwind-utils.css');
+@import url('./animations.css');
 
 /* purgecss start ignore */
 @tailwind base;
@@ -10,6 +11,14 @@
 :root {
   /*indigo-600 tailwind*/
   --primary-color: #5850ec;
+}
+
+.fadeIn {
+  animation: FadeIn 1s linear forwards;
+}
+
+.fadeOut {
+  animation: FadeOut 1s linear forwards;
 }
 
 html,
