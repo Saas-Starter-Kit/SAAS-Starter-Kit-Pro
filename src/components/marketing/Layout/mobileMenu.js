@@ -13,7 +13,7 @@ import styled from 'styled-components';
   -->*/
 }
 
-const MobileMenu = () => {
+const MobileMenu = ({ mobileMenuHandler }) => {
   return (
     <div className='absolute top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden'>
       <div className='rounded-lg shadow-lg'>
@@ -29,10 +29,10 @@ const MobileMenu = () => {
               </div>
               <div className='-mr-2'>
                 <button
+                  onClick={mobileMenuHandler}
                   type='button'
                   className='inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out'
                 >
-                  {/*<!-- Heroicon name: x -->*/}
                   <svg
                     className='h-6 w-6'
                     xmlns='http://www.w3.org/2000/svg'
@@ -172,3 +172,5 @@ const MobileMenu = () => {
     </div>
   );
 };
+
+export default MobileMenu;

@@ -1,9 +1,13 @@
 import styled from 'styled-components';
 import { useState } from 'react';
 import FlyoutMenu from './flyoutMenu';
+import MobileMenu from './mobileMenu';
 
 const Header = () => {
   const [menu, toggleMenu] = useState(false);
+  const [mobileMenu, toggleMobileMenu] = useState(false);
+
+  const mobileMenuHandler = () => (mobileMenu ? toggleMobileMenu(false) : toggleMobileMenu(true));
 
   const menuHandler = () => (menu ? toggleMenu(false) : toggleMenu(true));
 
@@ -23,11 +27,13 @@ const Header = () => {
         {/*Mobile menu icon*/}
         <div className='-mr-2 -my-2 md:hidden'>
           <button
+            onClick={mobileMenuHandler}
             type='button'
             className='inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out'
           >
             <img className='w-10 h-10' src='/icons/menu.svg' alt='menu' />
           </button>
+          {mobileMenu ? <MobileMenu mobileMenuHandler={mobileMenuHandler} /> : null}
         </div>
 
         <nav className='hidden md:flex space-x-10'>
