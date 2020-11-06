@@ -1,19 +1,5 @@
 import styled from 'styled-components';
 
-{
-  /*
-        <!--
-          'Solutions' flyout menu, show/hide based on flyout menu state.
-
-          Entering: "transition ease-out duration-200"
-            From: "opacity-0 translate-y-1"
-            To: "opacity-100 translate-y-0"
-          Leaving: "transition ease-in duration-150"
-            From: "opacity-100 translate-y-0"
-            To: "opacity-0 translate-y-1"
-        -->*/
-}
-
 const MenuImg = styled.img`
   height: 2rem;
   width: 2rem;
@@ -22,7 +8,7 @@ const MenuImg = styled.img`
 
 const FlyoutMenu = () => {
   return (
-    <div className='absolute -ml-4 mt-3 transform w-screen max-w-md md:max-w-3xl lg:ml-0 lg:left-1/2 lg:-translate-x-1/2'>
+    <div className='absolute -ml-4 mt-3 transform max-w-md md:max-w-3xl max-content lg:ml-0 lg:left-1/2 lg:-translate-x-1/2'>
       <div className='rounded-lg shadow-lg'>
         <div className='rounded-lg shadow-xs overflow-hidden'>
           <div className='z-20 relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8 lg:grid-cols-2'>
@@ -45,7 +31,6 @@ const FlyoutMenu = () => {
               className='-m-3 p-3 flex items-start space-x-4 rounded-lg hover:bg-gray-50 transition ease-in-out duration-150'
             >
               <div className='flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-md bg-indigo-500 text-white sm:h-12 sm:w-12'>
-                {/*<!-- Heroicon name: cursor-click -->*/}
                 <MenuImg src='/icons/cursor-click.svg' alt='click' />
               </div>
               <div className='space-y-1'>
