@@ -6,6 +6,35 @@ import Link from 'next/link';
 import FlyoutMenu from './flyoutMenu';
 import MobileMenu from './mobileMenu';
 
+const StyledLink = styled.div`
+  text-decoration: none;
+  cursor: pointer;
+  position: relative;
+  font-size: 1.1rem;
+  font-weight: 800;
+
+  &:before {
+    content: '';
+    margin-bottom: -5px;
+    position: absolute;
+    width: 0;
+    height: 6px;
+    bottom: 0;
+    left: 0;
+    background-color: red;
+    visibility: ${(props) => (props.active ? 'visible' : 'hidden')};
+    transition: all 0.3s ease-in-out;
+    width: ${(props) => (props.active ? '100%' : '0')};
+  }
+
+  &:hover {
+    &:before {
+      visibility: visible;
+      width: 100%;
+    }
+  }
+`;
+
 const Header = () => {
   const router = useRouter();
   const [menu, toggleMenu] = useState(false);
@@ -47,7 +76,7 @@ const Header = () => {
               onClick={menuHandler}
               type='button'
               className={`group text-gray-500 inline-flex items-center 
-                        space-x-2 text-base leading-6 font-medium 
+                        space-x-2 text-base leading-6 font-medium
                         hover:text-gray-900 focus:outline-none focus:text-gray-900 
                         transition ease-in-out duration-150'`}
             >
@@ -67,11 +96,11 @@ const Header = () => {
             ) : null}
           </div>
 
-          <Link href='/pricing' className={router.pathname == '/' ? 'active' : 'headerLink'}>
-            Pricing
+          <Link href='/pricing'>
+            <StyledLink active={router.pathname == '/pricing' ? true : false}>Pricing</StyledLink>
           </Link>
-          <Link href='/about' className={router.pathname == '/' ? 'active' : 'headerLink'}>
-            Docs
+          <Link href='/about'>
+            <StyledLink active={router.pathname == '/about' ? true : false}>Docs</StyledLink>
           </Link>
         </nav>
 
