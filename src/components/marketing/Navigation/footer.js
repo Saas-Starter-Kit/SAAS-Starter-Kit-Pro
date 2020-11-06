@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 const Container = styled.div`
   display: grid;
@@ -23,7 +24,7 @@ const FooterLink = styled.p`
 `;
 
 const IMGContainer = styled.div`
-  background-color: #5850ec;
+  background-color: ${(props) => (props.isHome ? '#5850ec' : 'white')};
 `;
 
 const BottomFooter = styled.div`
@@ -35,9 +36,11 @@ const BottomFooter = styled.div`
 `;
 
 const Footer = () => {
+  const router = useRouter();
+
   return (
     <div className='bg-blue-900'>
-      <IMGContainer>
+      <IMGContainer isHome={router.pathname == '/' ? true : false}>
         <img src='/illustrations/waveFooter.svg' alt='wave' />
       </IMGContainer>
       <Container>
