@@ -2,12 +2,16 @@ import styled from 'styled-components';
 import SEO from './seo';
 import Header from './header';
 import Footer from './footer';
+import Headroom from 'react-headroom';
 
 const Layout = ({ children }) => {
   return (
     <>
       <SEO />
-      <Header />
+      <Headroom>
+        <Header />
+      </Headroom>
+
       <div>{children}</div>
       <Footer />
     </>
