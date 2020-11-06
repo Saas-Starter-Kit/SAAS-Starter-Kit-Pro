@@ -144,52 +144,6 @@ const MobileMenu = () => {
                   </div>
                   <div className='text-base leading-6 font-medium text-gray-900'>Integrations</div>
                 </a>
-                <a
-                  href='#'
-                  className='-m-3 p-3 flex items-center space-x-4 rounded-lg hover:bg-gray-50 transition ease-in-out duration-150'
-                >
-                  <div className='flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-md bg-indigo-500 text-white'>
-                    {/*<!-- Heroicon name: refresh -->*/}
-                    <svg
-                      className='h-6 w-6'
-                      xmlns='http://www.w3.org/2000/svg'
-                      fill='none'
-                      viewBox='0 0 24 24'
-                      stroke='currentColor'
-                    >
-                      <path
-                        stroke-linecap='round'
-                        stroke-linejoin='round'
-                        stroke-width='2'
-                        d='M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15'
-                      />
-                    </svg>
-                  </div>
-                  <div className='text-base leading-6 font-medium text-gray-900'>Automations</div>
-                </a>
-                <a
-                  href='#'
-                  className='-m-3 p-3 flex items-center space-x-4 rounded-lg hover:bg-gray-50 transition ease-in-out duration-150'
-                >
-                  <div className='flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-md bg-indigo-500 text-white'>
-                    {/*<!-- Heroicon name: document-report -->*/}
-                    <svg
-                      className='h-6 w-6'
-                      xmlns='http://www.w3.org/2000/svg'
-                      fill='none'
-                      viewBox='0 0 24 24'
-                      stroke='currentColor'
-                    >
-                      <path
-                        stroke-linecap='round'
-                        stroke-linejoin='round'
-                        stroke-width='2'
-                        d='M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z'
-                      />
-                    </svg>
-                  </div>
-                  <div className='text-base leading-6 font-medium text-gray-900'>Reports</div>
-                </a>
               </nav>
             </div>
           </div>
