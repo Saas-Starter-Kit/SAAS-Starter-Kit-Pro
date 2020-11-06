@@ -35,6 +35,12 @@ const BottomFooter = styled.div`
   text-align: center;
 `;
 
+const FooterColHeader = styled.p`
+  font-weight: 800;
+  color: white;
+  text-decoration: underline;
+`;
+
 const Footer = () => {
   const router = useRouter();
 
@@ -45,6 +51,7 @@ const Footer = () => {
       </IMGContainer>
       <Container>
         <Column>
+          <FooterColHeader>Header 1</FooterColHeader>
           <Link href='/'>
             <FooterLink>Link1</FooterLink>
           </Link>
@@ -56,6 +63,7 @@ const Footer = () => {
           </Link>
         </Column>
         <Column>
+          <FooterColHeader>Header 2</FooterColHeader>
           <Link href='/'>
             <FooterLink>Link1</FooterLink>
           </Link>
