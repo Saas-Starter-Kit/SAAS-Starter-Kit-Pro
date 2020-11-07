@@ -1,16 +1,21 @@
+import { useState } from 'react';
 import SidebarDesktop from './sidebarDesktop';
 import SidebarMobile from './sidebarMobile';
 
 const App = () => {
+  const [mobileMenu, toggleMobileMenu] = useState(false);
+  const mobileMenuHandler = () => (mobileMenu ? toggleMobileMenu(false) : toggleMobileMenu(true));
+
   return (
     <div className='h-screen flex overflow-hidden bg-gray-100'>
       {/*<!-- Off-canvas menu for mobile, show/hide based on off-canvas menu state. -->*/}
-      <SidebarMobile />
+      {mobileMenu ? <SidebarMobile mobileMenuHandler={mobileMenuHandler} /> : null}
       {/*<!-- Static sidebar for desktop -->*/}
       <SidebarDesktop />
       <div className='flex flex-col w-0 flex-1 overflow-hidden'>
         <div className='md:hidden pl-1 pt-1 sm:pl-3 sm:pt-3'>
           <button
+            onClick={mobileMenuHandler}
             className='-ml-0.5 -mt-0.5 h-12 w-12 inline-flex items-center justify-center rounded-md text-gray-500 hover:text-gray-900 focus:outline-none focus:bg-gray-200 transition ease-in-out duration-150'
             aria-label='Open sidebar'
           >
