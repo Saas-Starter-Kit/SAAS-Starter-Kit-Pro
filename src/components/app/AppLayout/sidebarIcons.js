@@ -9,6 +9,7 @@ const Sidebar = styled.div`
   background-color: #42389d;
   width: 5.2rem;
   overflow: hidden;
+  animation: ShrinkSideBar 0.4s ease-out forwards;
 `;
 
 const SidebarIcons = () => {

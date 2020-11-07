@@ -27,3 +27,29 @@
 .MobileMenuScale {
   animation: MobileMenuScale 0.3s ease-out forwards;
 }
+
+@keyframes GrowSideBar {
+  from {
+    width: 5.2rem;
+  }
+  to {
+    width: 14rem;
+  }
+}
+
+.GrowSideBar {
+  animation: GrowSideBar 0.3s ease-out forwards;
+}
+
+@keyframes ShrinkSideBar {
+  from {
+    width: 14rem;
+  }
+  to {
+    width: 5.2rem;
+  }
+}
+
+.ShrinkSideBar {
+  animation: ShrinkSideBar 0.3s ease-out forwards;
+}

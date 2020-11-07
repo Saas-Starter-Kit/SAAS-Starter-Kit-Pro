@@ -1,11 +1,22 @@
 import AvatarDropDown from './avatarDropDown';
+import styled from 'styled-components';
+
+const Sidebar = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 0%;
+  background-color: #42389d;
+  width: 14rem;
+  overflow: hidden;
+  animation: GrowSideBar 0.4s ease-out forwards;
+`;
 
 const SidebarDesktop = () => {
   return (
     <div className='hidden md:flex md:flex-shrink-0'>
-      <div className='flex flex-col w-64'>
+      <div className='flex flex-col'>
         {/*<!-- Sidebar component, swap this element with another sidebar if you like -->*/}
-        <div className='flex flex-col h-0 flex-1 bg-indigo-800'>
+        <Sidebar>
           <div className='flex-1 flex flex-col pt-5 pb-4 overflow-y-auto'>
             <div className='flex items-center flex-shrink-0 px-4'>
               <img
@@ -105,7 +116,7 @@ const SidebarDesktop = () => {
               </a>
             </nav>
           </div>
-        </div>
+        </Sidebar>
       </div>
     </div>
   );
