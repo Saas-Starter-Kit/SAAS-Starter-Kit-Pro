@@ -1,8 +1,12 @@
 import { useState } from 'react';
 import SidebarDesktop from './sidebarDesktop';
 import SidebarMobile from './sidebarMobile';
+import SidebarIcons from './sidebarIcons';
 
 const App = () => {
+  const [isSidebar, toggleSidebar] = useState(false);
+  const sidebarHandler = () => (isSidebar ? toggleSidebar(false) : toggleSidebar(true));
+
   const [mobileMenu, toggleMobileMenu] = useState(false);
   const mobileMenuHandler = () => (mobileMenu ? toggleMobileMenu(false) : toggleMobileMenu(true));
 
@@ -11,7 +15,7 @@ const App = () => {
       {/*<!-- Off-canvas menu for mobile, show/hide based on off-canvas menu state. -->*/}
       {mobileMenu ? <SidebarMobile mobileMenuHandler={mobileMenuHandler} /> : null}
       {/*<!-- Static sidebar for desktop -->*/}
-      <SidebarDesktop />
+      {isSidebar ? <SidebarDesktop /> : <SidebarIcons />}
       <div className='flex flex-col w-0 flex-1 overflow-hidden'>
         <div className='md:hidden pl-1 pt-1 sm:pl-3 sm:pt-3'>
           <button
@@ -44,7 +48,9 @@ const App = () => {
             <div className='max-w-7xl mx-auto px-4 sm:px-6 md:px-8'>
               {/*<!-- Replace with your content -->*/}
               <div className='py-4'>
-                <div className='border-4 border-dashed border-gray-200 rounded-lg h-96'></div>
+                <div className='border-4 border-dashed border-gray-200 rounded-lg h-96'>
+                  <button onClick={sidebarHandler}>Open</button>
+                </div>
               </div>
               {/*<!-- /End replace -->*/}
             </div>
