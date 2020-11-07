@@ -1,3 +1,5 @@
+import AvatarDropDown from './avatarDropDown';
+
 const SidebarDesktop = () => {
   return (
     <div className='hidden md:flex md:flex-shrink-0'>
@@ -12,6 +14,7 @@ const SidebarDesktop = () => {
                 alt='Workflow'
               />
             </div>
+            {/*<AvatarDropDown />*/}
             <nav className='mt-5 flex-1 px-2 bg-indigo-800 space-y-1'>
               <a
                 href='#'
