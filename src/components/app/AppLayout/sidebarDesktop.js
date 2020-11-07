@@ -1,4 +1,4 @@
-import AvatarDropDown from './avatarDropDown';
+import Avatar from './avatarSidebarFull';
 import styled from 'styled-components';
 
 const Sidebar = styled.div`
@@ -25,7 +25,8 @@ const SidebarDesktop = () => {
                 alt='Workflow'
               />
             </div>
-            {/*<AvatarDropDown />*/}
+
+            <Avatar />
             <nav className='mt-8 flex-1 px-2 bg-indigo-800 space-y-1'>
               <a
                 href='#'
