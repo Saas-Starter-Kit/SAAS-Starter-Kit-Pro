@@ -15,6 +15,7 @@
     "react-dom": "17.0.1",
     "react-headroom": "^3.0.0",
     "react-icons": "^3.11.0",
+    "react-tooltip": "^4.2.10",
     "styled-components": "^5.2.1",
     "tailwindcss": "^1.9.6"
   },

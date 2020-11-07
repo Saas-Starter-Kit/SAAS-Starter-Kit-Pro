@@ -1,11 +1,22 @@
 import AvatarDropDown from './avatarDropDown';
+import styled from 'styled-components';
+import ReactTooltip from 'react-tooltip';
+
+const Sidebar = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 0%;
+  background-color: #42389d;
+  width: 5.2rem;
+  overflow: hidden;
+`;
 
 const SidebarIcons = () => {
   return (
     <div className='hidden md:flex md:flex-shrink-0'>
-      <div className='flex flex-col justify-center w-20'>
+      <div className='flex flex-col'>
         {/*<!-- Sidebar component, swap this element with another sidebar if you like -->*/}
-        <div className='flex flex-col h-0 flex-1 bg-indigo-800'>
+        <Sidebar>
           <div className='flex-1 flex flex-col pt-5 pb-4 overflow-y-auto'>
             <div className='flex items-center flex-shrink-0 px-4'>
               <img
@@ -16,26 +27,32 @@ const SidebarIcons = () => {
             </div>
             {/*<AvatarDropDown />*/}
             <nav className='mt-8 flex flex-col items-center bg-indigo-800'>
-              <a
-                href='#'
-                className='group flex items-center px-2 py-4 text-sm leading-5 font-medium text-white rounded-md bg-indigo-900 focus:outline-none focus:bg-indigo-700 transition ease-in-out duration-150'
-              >
-                {/*<!-- Heroicon name: home -->*/}
-                <svg
-                  className='mr-3 h-6 w-6 text-indigo-400 group-focus:text-indigo-300 transition ease-in-out duration-150'
-                  xmlns='http://www.w3.org/2000/svg'
-                  fill='none'
-                  viewBox='0 0 24 24'
-                  stroke='currentColor'
+              <div data-tip data-for='registerTip'>
+                <a
+                  href='#'
+                  className='group flex items-center py-4 text-sm leading-5 font-medium text-white rounded-md bg-indigo-900 focus:outline-none focus:bg-indigo-700 transition ease-in-out duration-150'
                 >
-                  <path
-                    stroke-linecap='round'
-                    stroke-linejoin='round'
-                    stroke-width='2'
-                    d='M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6'
-                  />
-                </svg>
-              </a>
+                  {/*<!-- Heroicon name: home -->*/}
+                  <svg
+                    className='h-6 w-6 text-indigo-400 group-focus:text-indigo-300 transition ease-in-out duration-150'
+                    xmlns='http://www.w3.org/2000/svg'
+                    fill='none'
+                    viewBox='0 0 24 24'
+                    stroke='currentColor'
+                  >
+                    <path
+                      stroke-linecap='round'
+                      stroke-linejoin='round'
+                      stroke-width='2'
+                      d='M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6'
+                    />
+                  </svg>
+                </a>
+
+                <ReactTooltip id='registerTip' place='top' effect='solid'>
+                  Tooltip for the register button
+                </ReactTooltip>
+              </div>
 
               <a
                 href='#'
@@ -43,7 +60,7 @@ const SidebarIcons = () => {
               >
                 {/*<!-- Heroicon name: users -->*/}
                 <svg
-                  className='mr-3 h-6 w-6 text-indigo-400 group-hover:text-indigo-300 group-focus:text-indigo-300 transition ease-in-out duration-150'
+                  className='h-6 w-6 text-indigo-400 group-hover:text-indigo-300 group-focus:text-indigo-300 transition ease-in-out duration-150'
                   xmlns='http://www.w3.org/2000/svg'
                   fill='none'
                   viewBox='0 0 24 24'
@@ -64,7 +81,7 @@ const SidebarIcons = () => {
               >
                 {/*<!-- Heroicon name: folder -->*/}
                 <svg
-                  className='mr-3 h-6 w-6 text-indigo-400 group-hover:text-indigo-300 group-focus:text-indigo-300 transition ease-in-out duration-150'
+                  className='h-6 w-6 text-indigo-400 group-hover:text-indigo-300 group-focus:text-indigo-300 transition ease-in-out duration-150'
                   xmlns='http://www.w3.org/2000/svg'
                   fill='none'
                   viewBox='0 0 24 24'
@@ -85,7 +102,7 @@ const SidebarIcons = () => {
               >
                 {/*<!-- Heroicon name: calendar -->*/}
                 <svg
-                  className='mr-3 h-6 w-6 text-indigo-400 group-hover:text-indigo-300 group-focus:text-indigo-300 transition ease-in-out duration-150'
+                  className='h-6 w-6 text-indigo-400 group-hover:text-indigo-300 group-focus:text-indigo-300 transition ease-in-out duration-150'
                   xmlns='http://www.w3.org/2000/svg'
                   fill='none'
                   viewBox='0 0 24 24'
@@ -101,7 +118,7 @@ const SidebarIcons = () => {
               </a>
             </nav>
           </div>
-        </div>
+        </Sidebar>
       </div>
     </div>
   );
