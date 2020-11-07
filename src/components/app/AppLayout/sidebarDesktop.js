@@ -18,7 +18,7 @@ const SidebarDesktop = () => {
             <nav className='mt-8 flex-1 px-2 bg-indigo-800 space-y-1'>
               <a
                 href='#'
-                className='group flex items-center px-2 py-4 text-sm leading-5 font-medium text-white rounded-md bg-indigo-900 focus:outline-none focus:bg-indigo-700 transition ease-in-out duration-150'
+                className='group flex items-center px-2 py-4 text-sm leading-5 font-medium text-indigo-300 rounded-md hover:text-white hover:bg-indigo-700 focus:outline-none focus:text-white focus:bg-indigo-700 transition ease-in-out duration-150'
               >
                 {/*<!-- Heroicon name: home -->*/}
                 <svg
