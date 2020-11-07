@@ -1,4 +1,4 @@
-import AvatarDropDown from './avatarDropDown';
+import Avatar from './avatarSidebarIcons';
 import styled from 'styled-components';
 import ReactTooltip from 'react-tooltip';
 
@@ -28,6 +28,7 @@ const SidebarIcons = () => {
             </div>
             {/*<AvatarDropDown />*/}
             <nav className='mt-8 flex flex-col items-center bg-indigo-800'>
+              <Avatar />
               <div data-tip data-for='Dashboard'>
                 <a
                   href='#'
