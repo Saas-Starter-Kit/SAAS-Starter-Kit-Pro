@@ -1,16 +1,23 @@
 //Mobile App header
+import { useState, useRef } from 'react';
+import useOutsideClick from '../../../hooks/useOutsideClick';
+import AvatarDropDownMobile from './avatarDropDownMobile';
 
 const MobileHeader = ({ mobileMenuHandler }) => {
+  const [avatarMenu, toggleAvatarMenu] = useState(false);
+  const avatarMenuHandler = () => (avatarMenu ? toggleAvatarMenu(false) : toggleAvatarMenu(true));
+  const ref = useRef();
+  useOutsideClick(ref, () => toggleAvatarMenu(false));
+
   return (
-    <div className='md:hidden bg-blue-500 pl-1 pt-1 sm:pl-3 sm:pt-3'>
+    <div className='md:hidden flex justify-between bg-blue-500 p-1'>
       <button
         onClick={mobileMenuHandler}
-        className='-ml-0.5 -mt-0.5 h-12 w-12 font-semibold inline-flex items-center justify-center rounded-md text-white focus:outline-none focus:bg-gray-200 transition ease-in-out duration-150'
+        className='pt-2 pl-2 font-semibold inline-flex items-center justify-center rounded-md text-white focus:outline-none'
         aria-label='Open sidebar'
       >
-        {/*<!-- Heroicon name: menu -->*/}
         <svg
-          className='h-6 w-6'
+          className='h-10 w-10'
           xmlns='http://www.w3.org/2000/svg'
           fill='none'
           viewBox='0 0 24 24'
@@ -24,6 +31,15 @@ const MobileHeader = ({ mobileMenuHandler }) => {
           />
         </svg>
       </button>
+      <div ref={ref} className='p-2'>
+        <img
+          onClick={avatarMenuHandler}
+          className='w-12 h-12 bg-gray-300 rounded-full flex-shrink-0'
+          src='https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80'
+          alt=''
+        />
+      </div>
+      {avatarMenu ? <AvatarDropDownMobile /> : null}
     </div>
   );
 };
