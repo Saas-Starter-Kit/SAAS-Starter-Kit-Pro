@@ -1,6 +1,7 @@
 import styled from 'styled-components';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useRouter } from 'next/router';
+import useOutsideClick from '../../../hooks/useOutsideClick';
 import Link from 'next/link';
 
 import FlyoutMenu from './flyoutMenu';
@@ -36,6 +37,8 @@ const StyledLink = styled.div`
 `;
 
 const Header = () => {
+  const ref = useRef();
+  const refMobile = useRef();
   const router = useRouter();
   const [menu, toggleMenu] = useState(false);
   const [mobileMenu, toggleMobileMenu] = useState(false);
@@ -43,6 +46,9 @@ const Header = () => {
   const mobileMenuHandler = () => (mobileMenu ? toggleMobileMenu(false) : toggleMobileMenu(true));
 
   const menuHandler = () => (menu ? toggleMenu(false) : toggleMenu(true));
+
+  useOutsideClick(ref, () => toggleMenu(false));
+  useOutsideClick(refMobile, () => toggleMobileMenu(false));
 
   return (
     <div className='relative bg-white'>
@@ -58,7 +64,7 @@ const Header = () => {
           </a>
         </div>
         {/*Mobile menu icon*/}
-        <div className='-mr-2 -my-2 md:hidden'>
+        <div ref={refMobile} className='-mr-2 -my-2 md:hidden'>
           <button
             onClick={mobileMenuHandler}
             type='button'
@@ -70,7 +76,7 @@ const Header = () => {
         </div>
 
         <nav className='hidden md:flex space-x-10'>
-          <div className='relative'>
+          <div ref={ref} className='relative'>
             {/*<!-- Item active: "text-gray-900", Item inactive: "text-gray-500" -->*/}
             <button
               onClick={menuHandler}
@@ -89,11 +95,13 @@ const Header = () => {
                 alt='down arrow'
               />
             </button>
-            {menu ? (
-              <div className='FadeInUp'>
-                <FlyoutMenu />
-              </div>
-            ) : null}
+            <div>
+              {menu ? (
+                <div className='FadeInUp'>
+                  <FlyoutMenu />
+                </div>
+              ) : null}
+            </div>
           </div>
 
           <Link href='/pricing'>
