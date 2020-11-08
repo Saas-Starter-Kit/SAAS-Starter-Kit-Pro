@@ -57,7 +57,7 @@ const HeroSection = () => {
         <ImageContainer>
           <div className='hidden lg:block mt-8 p-12'>
             <img
-              className='h-auto z-10'
+              className='h-auto z-10 FadeInLeft'
               src='/illustrations/undraw_stepping_up_g6oo.svg'
               alt='Step Up'
             />

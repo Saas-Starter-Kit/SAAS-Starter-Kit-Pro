@@ -13,6 +13,21 @@
   animation: FadeInUp 0.3s ease-in forwards;
 }
 
+@keyframes FadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(1.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.FadeInLeft {
+  animation: FadeInLeft 0.7s ease-in forwards;
+}
+
 @keyframes MenuScale {
   from {
     opacity: 0;
