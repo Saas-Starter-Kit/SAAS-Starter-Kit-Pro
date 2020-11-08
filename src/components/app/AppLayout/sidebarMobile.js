@@ -1,4 +1,10 @@
-const SidebarMobile = ({ mobileMenuHandler }) => {
+import { useRef } from 'react';
+import useOutsideClick from '../../../hooks/useOutsideClick';
+
+const SidebarMobile = ({ toggleMobileMenu }) => {
+  const ref = useRef();
+  useOutsideClick(ref, () => toggleMobileMenu(false));
+
   return (
     <div className='md:hidden'>
       <div className='fixed inset-0 flex z-40'>
@@ -25,10 +31,10 @@ const SidebarMobile = ({ mobileMenuHandler }) => {
           From: "translate-x-0"
           To: "-translate-x-full"
       -->*/}
-        <div className='relative flex-1 flex flex-col max-w-xs w-full bg-indigo-800'>
+        <div ref={ref} className='relative flex-1 flex flex-col max-w-xs w-full bg-indigo-800'>
           <div className='absolute top-0 right-0 -mr-14 p-1'>
             <button
-              onClick={mobileMenuHandler}
+              onClick={() => toggleMobileMenu(false)}
               className='flex items-center justify-center h-12 w-12 rounded-full focus:outline-none focus:bg-gray-600'
               aria-label='Close sidebar'
             >
