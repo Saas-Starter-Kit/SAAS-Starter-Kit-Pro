@@ -18,8 +18,8 @@ const SidebarMobile = ({ toggleMobileMenu }) => {
           From: "opacity-100"
           To: "opacity-0"
       -->*/}
-        <div className='fixed inset-0'>
-          <div className='absolute inset-0 bg-gray-600 opacity-75'></div>
+        <div className='fixed inset-0 '>
+          <div className='absolute inset-0 bg-gray-600 opacity-75 transition-opacity duration-300 ease-linear'></div>
         </div>
         {/*<!--
         Off-canvas menu, show/hide based on off-canvas menu state.
@@ -31,7 +31,10 @@ const SidebarMobile = ({ toggleMobileMenu }) => {
           From: "translate-x-0"
           To: "-translate-x-full"
       -->*/}
-        <div ref={ref} className='relative flex-1 flex flex-col max-w-xs w-full bg-indigo-800'>
+        <div
+          ref={ref}
+          className='ShowMobileSideBar relative flex-1 flex flex-col max-w-xs w-full bg-indigo-800'
+        >
           <div className='absolute top-0 right-0 -mr-14 p-1'>
             <button
               onClick={() => toggleMobileMenu(false)}
