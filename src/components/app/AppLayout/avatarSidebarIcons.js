@@ -1,12 +1,15 @@
 import AvatarDropDown from './avatarDropDown';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
+import useOutsideClick from '../../../hooks/useOutsideClick';
 
 const AvatarSidebarIcons = () => {
   const [avatarMenu, toggleAvatarMenu] = useState(false);
   const avatarMenuHandler = () => (avatarMenu ? toggleAvatarMenu(false) : toggleAvatarMenu(true));
+  const ref = useRef();
+  useOutsideClick(ref, () => toggleAvatarMenu(false));
 
   return (
-    <div>
+    <div ref={ref}>
       <img
         onClick={avatarMenuHandler}
         className='w-10 h-10 mt-1 mb-2 cursor-pointer bg-gray-300 rounded-full flex-shrink-0'

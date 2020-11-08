@@ -1,12 +1,15 @@
-import { useState } from 'react';
 import AvatarDropDown from './avatarDropDown';
+import { useState, useRef } from 'react';
+import useOutsideClick from '../../../hooks/useOutsideClick';
 
 const AvatarSidebarFull = () => {
   const [avatarMenu, toggleAvatarMenu] = useState(false);
   const avatarMenuHandler = () => (avatarMenu ? toggleAvatarMenu(false) : toggleAvatarMenu(true));
+  const ref = useRef();
+  useOutsideClick(ref, () => toggleAvatarMenu(false));
 
   return (
-    <div>
+    <div ref={ref}>
       <div className='mt-6'>
         <button
           onClick={avatarMenuHandler}
