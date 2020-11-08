@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import SocialBarFooter from './socialBarFooter';
 
 const Container = styled.div`
   display: grid;
@@ -49,6 +50,7 @@ const Footer = () => {
       <IMGContainer isHome={router.pathname == '/' ? true : false}>
         <img src='/illustrations/waveFooter.svg' alt='wave' />
       </IMGContainer>
+      <SocialBarFooter />
       <Container>
         <Column>
           <FooterColHeader>Header 1</FooterColHeader>
