@@ -8,29 +8,9 @@ const SidebarMobile = ({ toggleMobileMenu }) => {
   return (
     <div className='md:hidden'>
       <div className='fixed inset-0 flex z-40'>
-        {/*<!--
-        Off-canvas menu overlay, show/hide based on off-canvas menu state.
-
-        Entering: "transition-opacity ease-linear duration-300"
-          From: "opacity-0"
-          To: "opacity-100"
-        Leaving: "transition-opacity ease-linear duration-300"
-          From: "opacity-100"
-          To: "opacity-0"
-      -->*/}
         <div className='fixed inset-0 '>
           <div className='absolute inset-0 bg-gray-600 opacity-75 transition-opacity duration-300 ease-linear'></div>
         </div>
-        {/*<!--
-        Off-canvas menu, show/hide based on off-canvas menu state.
-
-        Entering: "transition ease-in-out duration-300 transform"
-          From: "-translate-x-full"
-          To: "translate-x-0"
-        Leaving: "transition ease-in-out duration-300 transform"
-          From: "translate-x-0"
-          To: "-translate-x-full"
-      -->*/}
         <div
           ref={ref}
           className='ShowMobileSideBar relative flex-1 flex flex-col max-w-xs w-full bg-indigo-800'
