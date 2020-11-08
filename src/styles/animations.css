@@ -13,7 +13,7 @@
   animation: FadeInUp 0.3s ease-in forwards;
 }
 
-@keyframes MobileMenuScale {
+@keyframes MenuScale {
   from {
     opacity: 0;
     transform: scale(0.95);
@@ -24,8 +24,8 @@
   }
 }
 
-.MobileMenuScale {
-  animation: MobileMenuScale 0.3s ease-out forwards;
+.MenuScale {
+  animation: MenuScale 0.3s ease-out forwards;
 }
 
 @keyframes GrowSideBar {

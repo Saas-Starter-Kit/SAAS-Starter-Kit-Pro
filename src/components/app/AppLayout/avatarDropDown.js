@@ -1,6 +1,6 @@
 const AvatarDropDown = () => {
   return (
-    <div className='z-10 mx-3 origin-top absolute right-0 left-0 mt-1 rounded-md shadow-lg max-content'>
+    <div className='MenuScale z-10 mx-3 origin-top absolute right-0 left-0 mt-1 rounded-md shadow-lg max-content'>
       <div
         className='rounded-md bg-white shadow-xs'
         role='menu'
