@@ -2,10 +2,70 @@ import LoginForm from './loginForm';
 import LoginFormHeader from './loginFormHeader';
 import SocialBar from './socialBar';
 import AuthContext from '../../../utils/authContext';
-import { useContext } from 'react';
+import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
+import { useContext, useEffect } from 'react';
 
 const LoginSignup = () => {
-  const { text, NewText } = useContext(AuthContext);
+  const context = useContext(AuthContext);
+
+  //useEffect(() => {
+  //  context.firebase.auth().signOut();
+  //  setTimeout(() => context.LogOut(), 200);
+  //}, []);
+
+  const uiConfig = {
+    credentialHelper: 'none',
+    signInFlow: 'popup',
+    signInOptions: [
+      context.firebase.auth.GoogleAuthProvider.PROVIDER_ID
+      //context.firebaseApp.auth.GithubAuthProvider.PROVIDER_ID,
+      //context.firebaseApp.auth.FacebookAuthProvider.PROVIDER_ID,
+      //context.firebaseApp.auth.EmailAuthProvider.PROVIDER_ID
+    ],
+    callbacks: {
+      signInSuccessWithAuthResult: function (authResult) {
+        saveProfile(authResult);
+        return false;
+      },
+      signInFailure: function (error) {
+        console.log(error);
+      }
+    }
+  };
+
+  const saveProfile = (authResult) => {
+    console.log(authResult);
+    //setLoading(true);
+
+    context.firebase
+      .auth()
+      .currentUser.getIdToken()
+      .then((token) => console.log(token));
+
+    //const sendtokenToServer = (token) => {
+    //  axios
+    //    .post(`${process.env.GATSBY_SERVER_URL}/auth/sendtoken`, { token })
+    //    .then((res) => sendProfiletoContext(res.data))
+    //    .catch((err) => console.log(err));
+    //};
+
+    const sendProfiletoContext = (data) => {
+      let email = authResult.user.email;
+      let username = authResult.user.displayName;
+      let id = jwt_decode(data.token);
+      let photo = authResult.user.photoURL;
+
+      let user = {
+        email,
+        username,
+        id,
+        photo
+      };
+
+      context.saveUser(user);
+      setTimeout(() => navigate('/app/profile'), 400);
+    };
+  };
 
   return (
     <div className='min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8'>
@@ -13,9 +73,9 @@ const LoginSignup = () => {
       <div className='mt-8 sm:mx-auto sm:w-full sm:max-w-md'>
         <div className='bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10'>
           {/*<LoginForm />*/}
+          <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={context.firebase.auth()} />
+          {console.log(context.firebase.auth)}
           <div className='mt-6'>
-            <p>{text}</p>
-            <button onClick={NewText}>FFFF</button>
             <div className='relative'>
               <div className='absolute inset-0 flex items-center'>
                 <div className='w-full border-t border-gray-300'></div>

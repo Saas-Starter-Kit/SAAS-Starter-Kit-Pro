@@ -104,7 +104,7 @@ const Header = () => {
             </div>
           </div>
 
-          <Link href='/pricing'>
+          <Link href='/login'>
             <StyledLink active={router.pathname == '/pricing' ? true : false}>Pricing</StyledLink>
           </Link>
           <Link href='/app'>
