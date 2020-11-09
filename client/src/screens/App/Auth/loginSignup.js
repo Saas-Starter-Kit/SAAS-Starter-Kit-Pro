@@ -47,11 +47,11 @@ const LoginSignup = () => {
     const sendtokenToServer = (token) => {
       axios
         .post(`http://localhost:3001/auth/sendtoken`, { token })
-        .then((res) => sendProfiletoContext(res.data))
+        .then((res) => LogintoContext(res.data))
         .catch((err) => console.log(err));
     };
 
-    const sendProfiletoContext = (data) => {
+    const LogintoContext = (data) => {
       let email = authResult.user.email;
       let username = authResult.user.displayName;
       let id = jwt_decode(data.token);
@@ -85,7 +85,6 @@ const LoginSignup = () => {
                 <span className='px-2 bg-white text-gray-500'>Or continue with</span>
               </div>
             </div>
-            {context.authState.username}
             <SocialBar />
           </div>
         </div>
