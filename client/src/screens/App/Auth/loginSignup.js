@@ -4,6 +4,8 @@ import SocialBar from './socialBar';
 import AuthContext from '../../../utils/authContext';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import { useContext, useEffect } from 'react';
+import jwt_decode from 'jwt-decode';
+import axios from 'axios';
 
 const LoginSignup = () => {
   const context = useContext(AuthContext);
@@ -40,14 +42,14 @@ const LoginSignup = () => {
     context.firebase
       .auth()
       .currentUser.getIdToken()
-      .then((token) => console.log(token));
+      .then((token) => sendtokenToServer(token));
 
-    //const sendtokenToServer = (token) => {
-    //  axios
-    //    .post(`${process.env.GATSBY_SERVER_URL}/auth/sendtoken`, { token })
-    //    .then((res) => sendProfiletoContext(res.data))
-    //    .catch((err) => console.log(err));
-    //};
+    const sendtokenToServer = (token) => {
+      axios
+        .post(`http://localhost:3001/auth/sendtoken`, { token })
+        .then((res) => sendProfiletoContext(res.data))
+        .catch((err) => console.log(err));
+    };
 
     const sendProfiletoContext = (data) => {
       let email = authResult.user.email;
@@ -62,8 +64,8 @@ const LoginSignup = () => {
         photo
       };
 
-      context.saveUser(user);
-      setTimeout(() => navigate('/app/profile'), 400);
+      context.LogIn(user);
+      //setTimeout(() => navigate('/app/profile'), 400);
     };
   };
 
@@ -74,7 +76,6 @@ const LoginSignup = () => {
         <div className='bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10'>
           {/*<LoginForm />*/}
           <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={context.firebase.auth()} />
-          {console.log(context.firebase.auth)}
           <div className='mt-6'>
             <div className='relative'>
               <div className='absolute inset-0 flex items-center'>
@@ -84,6 +85,7 @@ const LoginSignup = () => {
                 <span className='px-2 bg-white text-gray-500'>Or continue with</span>
               </div>
             </div>
+            {context.authState.username}
             <SocialBar />
           </div>
         </div>
