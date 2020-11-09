@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import AuthContext from '../../../utils/authContext';
+import { useContext } from 'react';
 
 const Container = styled.div`
   display: grid;
@@ -20,6 +22,7 @@ const ImageContainer = styled.div`
 `;
 
 const HeroSection = () => {
+  const { text, NewText } = useContext(AuthContext);
   return (
     <>
       <Container>
@@ -28,6 +31,8 @@ const HeroSection = () => {
             <h2 className='text-4xl tracking-tight leading-10 font-extrabold text-gray-900 sm:text-5xl sm:leading-none md:text-6xl lg:text-5xl xl:text-6xl'>
               Data to enrich your
               <br className='xl:hidden' />
+              <p>{text}</p>
+              <button onClick={NewText}>FFFF</button>
               <span className='text-indigo-600'>online business</span>
             </h2>
             <p className='mt-3 text-lg text-gray-500 sm:text-xl md:mt-5'>

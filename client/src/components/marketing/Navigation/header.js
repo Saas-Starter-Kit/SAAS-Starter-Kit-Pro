@@ -107,8 +107,8 @@ const Header = () => {
           <Link href='/pricing'>
             <StyledLink active={router.pathname == '/pricing' ? true : false}>Pricing</StyledLink>
           </Link>
-          <Link href='/about'>
-            <StyledLink active={router.pathname == '/about' ? true : false}>Docs</StyledLink>
+          <Link href='/app'>
+            <StyledLink active={router.pathname == '/app' ? true : false}>App</StyledLink>
           </Link>
         </nav>
 

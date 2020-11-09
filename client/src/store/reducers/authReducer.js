@@ -1,4 +1,4 @@
-import { LOGIN, LOGOUT } from '../actions/action_types';
+import { LOGIN, LOGOUT } from '../actions/actionTypes';
 
 export const initialStateAuth = {
   isAuthenticated: false,

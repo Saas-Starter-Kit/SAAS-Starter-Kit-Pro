@@ -1,8 +1,12 @@
 import LoginForm from './loginForm';
 import LoginFormHeader from './loginFormHeader';
 import SocialBar from './socialBar';
+import AuthContext from '../../../utils/authContext';
+import { useContext } from 'react';
 
 const LoginSignup = () => {
+  const { text, NewText } = useContext(AuthContext);
+
   return (
     <div className='min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8'>
       {/*<LoginFormHeader />*/}
@@ -10,6 +14,8 @@ const LoginSignup = () => {
         <div className='bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10'>
           {/*<LoginForm />*/}
           <div className='mt-6'>
+            <p>{text}</p>
+            <button onClick={NewText}>FFFF</button>
             <div className='relative'>
               <div className='absolute inset-0 flex items-center'>
                 <div className='w-full border-t border-gray-300'></div>
