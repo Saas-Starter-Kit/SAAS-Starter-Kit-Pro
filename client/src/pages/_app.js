@@ -6,17 +6,6 @@ import AuthContext from '../utils/authContext';
 import { authReducer, initialStateAuth } from '../store/reducers/authReducer';
 import { Login, Logout } from '../store/actions/actions';
 import { firebaseApp as firebase } from '../services/firebase';
-//import firebase from 'firebase/app';
-//import 'firebase/auth';
-
-//const config = {
-//  apiKey: 'AIzaSyABrhAsT8e2cimHbPffpz-r2RkcgThSmR0',
-//  authDomain: 'react-gatsby1.firebaseapp.com'
-//};
-
-//firebase.initializeApp(config);
-
-//const firebaseApp = !firebase.apps.length ? firebase.initializeApp(config) : firebase;
 
 function MyApp({ Component, pageProps }) {
   const [authState, dispatchAuth] = useReducer(authReducer, initialStateAuth);
