@@ -57,8 +57,8 @@ const StyledButton = styled.button`
   color: white;
 
   &:hover {
-    opacity: 90%;
-    outline: lightblue outset 3px;
+    opacity: 95%;
+    outline: lightblue solid 2px;
   }
 `;
 
@@ -76,7 +76,7 @@ const HeroSection = () => {
             commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua.
           </p>
           <Link href='/login'>
-            <StyledButton type='primary'>Get started</StyledButton>
+            <StyledButton type='primary'>Get started &#8594;</StyledButton>
           </Link>
         </HeroTextContainer>
         <ImageContainer>

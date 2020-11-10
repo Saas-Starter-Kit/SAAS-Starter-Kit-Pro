@@ -1,4 +1,5 @@
 //Triple column features
+import styled from 'styled-components';
 
 const TripleColFeatures = () => {
   return (
