@@ -1,5 +1,6 @@
 import React, { useState, useReducer, useEffect } from 'react';
 import '../styles/globals.css';
+import 'antd/dist/antd.css';
 import { ThemeProvider } from 'styled-components';
 import { theme } from '../utils/styledComponentsTheme';
 import AuthContext from '../utils/authContext';

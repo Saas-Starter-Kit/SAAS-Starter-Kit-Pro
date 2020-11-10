@@ -8,6 +8,16 @@
 
 @tailwind utilities;
 
+/* 
+  Break Points:
+
+  small/mobile: <=640px
+  medium/tablet: 768px
+  large/laptop: 1024px
+  xl/Desktop: >1280px
+  
+*/
+
 :root {
   /*indigo-600 tailwind*/
   --primary-color: #5850ec;

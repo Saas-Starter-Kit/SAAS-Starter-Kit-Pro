@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Link from 'next/link';
 
 const Container = styled.div`
   display: grid;
@@ -19,41 +20,65 @@ const ImageContainer = styled.div`
   background-position: 0% 0%;
 `;
 
+const HeroTextContainer = styled.div`
+  padding-top: 3rem;
+  padding-bottom: 5rem;
+  text-align: center;
+  padding-left: 1rem;
+  padding-right: 1rem;
+
+  @media (min-width: 1024px) {
+    padding-top: 6rem;
+    padding-bottom: 12rem;
+    text-align: left;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+`;
+
+const HeroHeader = styled.h2`
+  font-size: 2.25rem;
+  letter-spacing: -0.03rem;
+  line-height: 2.5rem;
+  font-weight: 800;
+  color: #161e2e;
+
+  @media (min-width: 640px) {
+    line-height: 1;
+    font-size: 3.3rem;
+  }
+`;
+
+const StyledButton = styled.button`
+  margin-top: 1rem;
+  font-size: 1.5rem;
+  padding: 0.8rem 1.2rem 0.8rem 1.2rem;
+  background-color: var(--primary-color);
+  color: white;
+
+  &:hover {
+    opacity: 90%;
+    outline: lightblue outset 3px;
+  }
+`;
+
 const HeroSection = () => {
   return (
     <>
       <Container>
-        <div className='pt-16 pb-20 text-center lg:py-48 lg:text-left'>
-          <div className='px-4 sm:px-8 xl:pr-16'>
-            <h2 className='text-4xl tracking-tight leading-10 font-extrabold text-gray-900 sm:text-5xl sm:leading-none md:text-6xl lg:text-5xl xl:text-6xl'>
-              Data to enrich your
-              <br className='xl:hidden' />
-              <span className='text-indigo-600'>online business</span>
-            </h2>
-            <p className='mt-3 text-lg text-gray-500 sm:text-xl md:mt-5'>
-              Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat
-              commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua.
-            </p>
-            <div className='mt-10 sm:flex sm:justify-center lg:justify-start'>
-              <div className='rounded-md shadow'>
-                <a
-                  href='#'
-                  className='w-full flex items-center justify-center px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo transition duration-150 ease-in-out md:py-4 md:text-lg md:px-10'
-                >
-                  Get started
-                </a>
-              </div>
-              <div className='mt-3 rounded-md shadow sm:mt-0 sm:ml-3'>
-                <a
-                  href='#'
-                  className='w-full flex items-center justify-center px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-indigo-600 bg-white hover:text-indigo-500 focus:outline-none focus:border-indigo-300 focus:shadow-outline-indigo transition duration-150 ease-in-out md:py-4 md:text-lg md:px-10'
-                >
-                  Live demo
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
+        <HeroTextContainer>
+          <HeroHeader>
+            Data to enrich your
+            <span className='text-indigo-600'>&nbsp; online business</span>
+          </HeroHeader>
+          <p className='mt-3 text-lg text-gray-500 sm:text-xl md:mt-5'>
+            Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat
+            commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua.
+          </p>
+          <Link href='/login'>
+            <StyledButton type='primary'>Get started</StyledButton>
+          </Link>
+        </HeroTextContainer>
         <ImageContainer>
           <div className='hidden lg:block mt-8 p-12'>
             <img
