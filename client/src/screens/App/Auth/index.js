@@ -3,10 +3,11 @@ import AuthContext from '../../../utils/authContext';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import { useContext, useEffect } from 'react';
 import jwt_decode from 'jwt-decode';
-import axios from 'axios';
+
+import { sendtokenToServer } from '../../../api/authApi';
 
 const LoginSignup = () => {
-  const context = useContext(AuthContext);
+  const { firebase, LogIn, LogOut } = useContext(AuthContext);
 
   //useEffect(() => {
   //  context.firebase.auth().signOut();
@@ -17,10 +18,10 @@ const LoginSignup = () => {
     credentialHelper: 'none',
     signInFlow: 'popup',
     signInOptions: [
-      context.firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-      context.firebase.auth.GithubAuthProvider.PROVIDER_ID,
-      context.firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-      context.firebase.auth.EmailAuthProvider.PROVIDER_ID
+      firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+      firebase.auth.GithubAuthProvider.PROVIDER_ID,
+      firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+      firebase.auth.EmailAuthProvider.PROVIDER_ID
     ],
     callbacks: {
       signInSuccessWithAuthResult: function (authResult) {
@@ -37,17 +38,12 @@ const LoginSignup = () => {
     console.log(authResult);
     //setLoading(true);
 
-    context.firebase
+    firebase
       .auth()
       .currentUser.getIdToken()
-      .then((token) => sendtokenToServer(token));
-
-    const sendtokenToServer = (token) => {
-      axios
-        .post(`http://localhost:3001/auth/sendtoken`, { token })
-        .then((res) => LogintoContext(res.data))
-        .catch((err) => console.log(err));
-    };
+      .then((token) => sendtokenToServer(token))
+      .then((res) => LogintoContext(res.data))
+      .catch((err) => console.log(err));
 
     const LogintoContext = (data) => {
       let email = authResult.user.email;
@@ -62,7 +58,7 @@ const LoginSignup = () => {
         photo
       };
 
-      context.LogIn(user);
+      LogIn(user);
       //setTimeout(() => navigate('/app/profile'), 400);
     };
   };
@@ -72,7 +68,7 @@ const LoginSignup = () => {
       <LoginFormHeader />
       <div className='mt-8 sm:mx-auto sm:w-full sm:max-w-md'>
         <div className='bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10'>
-          <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={context.firebase.auth()} />
+          <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
           <hr />
         </div>
       </div>
