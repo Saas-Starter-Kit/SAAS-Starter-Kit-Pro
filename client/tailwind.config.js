@@ -14,11 +14,6 @@ module.exports = {
 
       xl: '1280px'
       // => @media (min-width: 1260px) { ... }
-    },
-    extend: {
-      fontFamily: {
-        sans: ['Inter var', ...defaultTheme.fontFamily.sans]
-      }
     }
   },
   plugins: [
