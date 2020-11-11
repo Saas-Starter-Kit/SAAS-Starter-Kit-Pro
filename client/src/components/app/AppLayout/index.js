@@ -5,7 +5,7 @@ import SidebarIcons from '../Navigation/sidebarIcons';
 import MobileHeader from '../Navigation/mobileHeader';
 
 const AppLayout = ({ children }) => {
-  const [isSidebar, toggleSidebar] = useState(false);
+  const [isSidebar, toggleSidebar] = useState(true);
   const sidebarHandler = () => (isSidebar ? toggleSidebar(false) : toggleSidebar(true));
 
   const [mobileMenu, toggleMobileMenu] = useState(false);
