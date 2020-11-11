@@ -29,7 +29,9 @@ const AvatarSidebarFull = () => {
                 alt=''
               />
               <div className='flex-1 min-w-0'>
-                <h2 className='text-white text-sm leading-5 font-medium truncate'>Jessy Schwarz</h2>
+                <h2 className='text-white text-sm leading-5 font-medium truncate'>
+                  {authState.user.username}
+                </h2>
               </div>
             </div>
             {/*<!-- Heroicon name: selector -->*/}
