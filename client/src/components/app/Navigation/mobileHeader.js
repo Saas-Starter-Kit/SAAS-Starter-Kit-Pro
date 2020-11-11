@@ -50,7 +50,7 @@ const MobileHeader = ({ mobileMenuHandler }) => {
           />
         )}
       </div>
-      {avatarMenu ? <AvatarDropDownMobile /> : null}
+      {avatarMenu ? <AvatarDropDownMobile avatarMenuHandler={avatarMenuHandler} /> : null}
     </div>
   );
 };

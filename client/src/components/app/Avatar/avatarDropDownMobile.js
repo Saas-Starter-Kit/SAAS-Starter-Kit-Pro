@@ -1,6 +1,6 @@
 import { Link } from '@reach/router';
 
-const AvatarDropDownMobile = () => {
+const AvatarDropDownMobile = ({ avatarMenuHandler }) => {
   return (
     <div className='MenuScale z-10 mx-3 origin-top absolute top-16 right-0 left-100 mt-1 rounded-md shadow-lg max-content'>
       <div
@@ -12,6 +12,7 @@ const AvatarDropDownMobile = () => {
         <div className='py-2 text-xl'>
           <Link to='/app/settings'>
             <div
+              onClick={avatarMenuHandler}
               className='block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900'
               role='menuitem'
             >
