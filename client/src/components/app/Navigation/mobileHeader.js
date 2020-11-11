@@ -1,7 +1,7 @@
 //Mobile App header
 import { useState, useRef } from 'react';
 import useOutsideClick from '../../../hooks/useOutsideClick';
-import AvatarDropDownMobile from './avatarDropDownMobile';
+import AvatarDropDownMobile from '../Avatar/avatarDropDownMobile';
 
 const MobileHeader = ({ mobileMenuHandler }) => {
   const [avatarMenu, toggleAvatarMenu] = useState(false);

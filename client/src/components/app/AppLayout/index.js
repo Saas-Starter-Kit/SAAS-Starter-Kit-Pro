@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import SidebarDesktop from './sidebarDesktop';
-import SidebarMobile from './sidebarMobile';
-import SidebarIcons from './sidebarIcons';
-import MobileHeader from './mobileHeader';
+import SidebarDesktop from '../Navigation/sidebarDesktop';
+import SidebarMobile from '../Navigation/sidebarMobile';
+import SidebarIcons from '../Navigation/sidebarIcons';
+import MobileHeader from '../Navigation/mobileHeader';
 
 const App = () => {
   const [isSidebar, toggleSidebar] = useState(false);

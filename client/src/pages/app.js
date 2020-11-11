@@ -1,6 +1,6 @@
 //Landing Page
-import AppComponent from '../components/app/AppLayout/App';
+import AppLayout from '../components/app/AppLayout';
 
 export default function App() {
-  return <AppComponent />;
+  return <AppLayout />;
 }

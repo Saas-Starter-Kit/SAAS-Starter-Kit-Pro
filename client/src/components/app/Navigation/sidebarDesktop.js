@@ -1,4 +1,4 @@
-import Avatar from './avatarSidebarFull';
+import Avatar from '../Avatar/avatarSidebarFull';
 import styled from 'styled-components';
 
 const Sidebar = styled.div`

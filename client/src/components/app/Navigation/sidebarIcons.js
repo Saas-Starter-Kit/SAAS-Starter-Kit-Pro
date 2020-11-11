@@ -1,4 +1,4 @@
-import Avatar from './avatarSidebarIcons';
+import Avatar from '../Avatar/avatarSidebarIcons';
 import styled from 'styled-components';
 import ReactTooltip from 'react-tooltip';
 
