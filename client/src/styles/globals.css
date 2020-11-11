@@ -1,12 +1,13 @@
-@import url('./tailwind-utils.css');
-@import url('./animations.css');
-
 /* purgecss start ignore */
 @tailwind base;
 @tailwind components;
+
 /* purgecss end ignore */
 
 @tailwind utilities;
+
+@import url('./tailwind-utils.css');
+@import url('./animations.css');
 
 /* 
   Break Points:
