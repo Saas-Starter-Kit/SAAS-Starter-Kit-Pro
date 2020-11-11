@@ -52,7 +52,7 @@ const SidebarIcons = ({ sidebarHandler }) => {
                 </a>
 
                 <ReactTooltip id='Dashboard' place='top' effect='solid'>
-                  Tooltip for Dashboard
+                  Dashboard
                 </ReactTooltip>
               </div>
 
@@ -78,7 +78,7 @@ const SidebarIcons = ({ sidebarHandler }) => {
                   </svg>
                 </a>
                 <ReactTooltip id='Users' place='top' effect='solid'>
-                  Tooltip for Users
+                  Tooltip for Read Update
                 </ReactTooltip>
               </div>
 
@@ -104,33 +104,7 @@ const SidebarIcons = ({ sidebarHandler }) => {
                   </svg>
                 </a>
                 <ReactTooltip id='Folder' place='top' effect='solid'>
-                  Tooltip for Folder
-                </ReactTooltip>
-              </div>
-
-              <div data-tip data-for='Calendar'>
-                <a
-                  href='#'
-                  className='group flex items-center px-2 py-4 text-sm leading-5 font-medium text-indigo-300 rounded-md hover:text-white hover:bg-indigo-700 focus:outline-none focus:text-white focus:bg-indigo-700 transition ease-in-out duration-150'
-                >
-                  {/*<!-- Heroicon name: calendar -->*/}
-                  <svg
-                    className='h-6 w-6 text-indigo-400 group-hover:text-indigo-300 group-focus:text-indigo-300 transition ease-in-out duration-150'
-                    xmlns='http://www.w3.org/2000/svg'
-                    fill='none'
-                    viewBox='0 0 24 24'
-                    stroke='currentColor'
-                  >
-                    <path
-                      stroke-linecap='round'
-                      stroke-linejoin='round'
-                      stroke-width='2'
-                      d='M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z'
-                    />
-                  </svg>
-                </a>
-                <ReactTooltip id='Calendar' place='top' effect='solid'>
-                  Tooltip for Calendar
+                  Create
                 </ReactTooltip>
               </div>
             </nav>

@@ -3,15 +3,8 @@ import { Router, Link } from '@reach/router';
 import Login from '../../../screens/App/Auth';
 import Dashboard from '../../../screens/App/Dashboard';
 import Settings from '../../../screens/App/Settings';
-
-let Home = () => (
-  <div>
-    Home
-    <nav>
-      <Link to='/app/sett'>Home</Link> | <Link to='/app/dashboard'>Dashboard</Link>
-    </nav>
-  </div>
-);
+import Create from '../../../screens/App/Create';
+import ReadUpdate from '../../../screens/App/ReadUpdate';
 
 const Routes = () => {
   return (
@@ -20,6 +13,8 @@ const Routes = () => {
         <Dashboard path='/app' />
         <Login path='/app/login' />
         <Settings path='/app/settings' />
+        <Create path='/app/create' />
+        <ReadUpdate path='/app/readupdate' />
       </Router>
     </AppLayout>
   );
