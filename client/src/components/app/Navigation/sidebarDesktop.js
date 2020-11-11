@@ -1,6 +1,7 @@
 import Avatar from '../Avatar/avatarSidebarFull';
 import styled from 'styled-components';
 import { Link } from '@reach/router';
+import { BiArrowFromRight } from 'react-icons/bi';
 
 const Sidebar = styled.div`
   display: flex;
@@ -10,6 +11,19 @@ const Sidebar = styled.div`
   width: 14rem;
   overflow: hidden;
   animation: GrowSideBar 0.4s ease-out forwards;
+`;
+
+const StyledArrow = styled(BiArrowFromRight)`
+  width: 1.5rem;
+  height: 1.5rem;
+  position: absolute;
+  top: 2rem;
+  left: 13rem;
+  color: white;
+  background-color: #42389d;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  animation: FadeInRight 0.9s ease-in forwards;
 `;
 
 const SidebarDesktop = ({ sidebarHandler }) => {
@@ -91,6 +105,9 @@ const SidebarDesktop = ({ sidebarHandler }) => {
             </nav>
           </div>
         </Sidebar>
+        <div onClick={sidebarHandler}>
+          <StyledArrow />
+        </div>
       </div>
     </div>
   );

@@ -16,6 +16,7 @@ const Sidebar = styled.div`
 `;
 
 const StyledArrow = styled(BiArrowFromLeft)`
+  display: block;
   width: 1.5rem;
   height: 1.5rem;
   position: absolute;
@@ -119,7 +120,9 @@ const SidebarIcons = ({ sidebarHandler }) => {
             </nav>
           </div>
         </Sidebar>
-        <StyledArrow onClick={sidebarHandler} />
+        <div onClick={sidebarHandler}>
+          <StyledArrow />
+        </div>
       </div>
     </div>
   );

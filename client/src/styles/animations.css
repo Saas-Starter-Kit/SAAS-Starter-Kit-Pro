@@ -28,6 +28,21 @@
   animation: FadeInLeft 0.7s ease-in forwards;
 }
 
+@keyframes FadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(-1.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.FadeInRight {
+  animation: FadeInRight 0.7s ease-in forwards;
+}
+
 @keyframes MenuScale {
   from {
     opacity: 0;
