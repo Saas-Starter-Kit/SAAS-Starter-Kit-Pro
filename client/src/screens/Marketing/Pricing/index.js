@@ -2,10 +2,11 @@ import EnterpriseCard from './enterpriseCard';
 import ProCard from './proCard';
 import FreeCard from './freeCard';
 import PricingHeader from './pricingHeader';
+import Layout from '../../../components/marketing/Layout';
 
 const Pricing = () => {
   return (
-    <div>
+    <Layout>
       <div className='bg-gray-900'>
         <PricingHeader />
         <div className='mt-16 bg-white pb-12 lg:mt-20 lg:pb-20'>
@@ -21,7 +22,7 @@ const Pricing = () => {
           </div>
         </div>
       </div>
-    </div>
+    </Layout>
   );
 };
 
