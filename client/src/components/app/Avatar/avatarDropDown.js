@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import { Link } from '@reach/router';
 
 const AvatarDropDown = () => {
   return (
@@ -10,9 +10,9 @@ const AvatarDropDown = () => {
         aria-labelledby='options-menu'
       >
         <div className='py-1'>
-          <Link href='/settings'>
+          <Link to='/app/settings'>
             <div
-              className='block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900'
+              className='block cursor-pointer px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900'
               role='menuitem'
             >
               Account Settings

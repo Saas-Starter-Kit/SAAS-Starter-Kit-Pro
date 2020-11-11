@@ -1,5 +1,8 @@
 import AppLayout from '../AppLayout';
 import { Router, Link } from '@reach/router';
+import Login from '../../../screens/App/Auth';
+import Dashboard from '../../../screens/App/Dashboard';
+import Settings from '../../../screens/App/Settings';
 
 let Home = () => (
   <div>
@@ -9,16 +12,14 @@ let Home = () => (
     </nav>
   </div>
 );
-let Dash = () => <div>Dash</div>;
-let Sett = () => <div>Sett</div>;
 
 const Routes = () => {
   return (
     <AppLayout>
       <Router>
-        <Home path='/app' />
-        <Dash path='/app/dashboard' />
-        <Sett path='/app/sett' />
+        <Dashboard path='/app' />
+        <Login path='/app/login' />
+        <Settings path='/app/settings' />
       </Router>
     </AppLayout>
   );
