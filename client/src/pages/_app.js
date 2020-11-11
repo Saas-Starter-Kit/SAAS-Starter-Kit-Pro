@@ -22,7 +22,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <AuthContext.Provider value={{ authState, LogIn, LogOut, firebase }}>
       <ThemeProvider theme={theme}>
-        <Component {...pageProps} />
+        {typeof window === 'undefined' ? null : <Component {...pageProps} />}
       </ThemeProvider>
     </AuthContext.Provider>
   );
