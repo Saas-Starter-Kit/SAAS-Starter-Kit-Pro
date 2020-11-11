@@ -27,7 +27,7 @@ const AvatarSidebarIcons = () => {
           className='cursor-pointer w-10 h-10 bg-gray-300 rounded-full flex-shrink-0 mb-4'
         />
       )}
-      {avatarMenu ? <AvatarDropDown /> : null}
+      {avatarMenu ? <AvatarDropDown avatarMenuHandler={avatarMenuHandler} /> : null}
     </div>
   );
 };

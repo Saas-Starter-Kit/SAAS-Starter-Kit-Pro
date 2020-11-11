@@ -13,7 +13,6 @@ const AppLayout = ({ children }) => {
 
   return (
     <div className='h-screen flex overflow-hidden bg-gray-100'>
-      {/*<!-- Static sidebar for desktop -->*/}
       {isSidebar ? (
         <SidebarDesktop sidebarHandler={sidebarHandler} />
       ) : (

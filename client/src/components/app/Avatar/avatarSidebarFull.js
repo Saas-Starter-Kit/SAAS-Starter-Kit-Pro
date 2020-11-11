@@ -55,7 +55,7 @@ const AvatarSidebarFull = () => {
           </div>
         </button>
       </div>
-      {avatarMenu ? <AvatarDropDown /> : null}
+      {avatarMenu ? <AvatarDropDown avatarMenuHandler={avatarMenuHandler} /> : null}
     </div>
   );
 };
