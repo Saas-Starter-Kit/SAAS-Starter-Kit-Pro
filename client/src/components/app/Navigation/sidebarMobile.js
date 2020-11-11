@@ -47,7 +47,10 @@ const SidebarMobile = ({ toggleMobileMenu }) => {
             </div>
             <nav className='mt-5 px-2 space-y-1'>
               <Link to='/app'>
-                <div className='group flex items-center px-2 py-4 text-sm leading-5 font-medium text-indigo-300 rounded-md hover:text-white hover:bg-indigo-700 focus:outline-none focus:text-white focus:bg-indigo-700 transition ease-in-out duration-150'>
+                <div
+                  onClick={() => toggleMobileMenu(false)}
+                  className='group flex items-center px-2 py-4 text-sm leading-5 font-medium text-indigo-300 rounded-md hover:text-white hover:bg-indigo-700 focus:outline-none focus:text-white focus:bg-indigo-700 transition ease-in-out duration-150'
+                >
                   <svg
                     className='mr-3 h-6 w-6 text-indigo-400 group-focus:text-indigo-300 transition ease-in-out duration-150'
                     xmlns='http://www.w3.org/2000/svg'
@@ -67,7 +70,10 @@ const SidebarMobile = ({ toggleMobileMenu }) => {
               </Link>
 
               <Link to='/app/readupdate'>
-                <div className='group flex items-center px-2 py-4 text-sm leading-5 font-medium text-indigo-300 rounded-md hover:text-white hover:bg-indigo-700 focus:outline-none focus:text-white focus:bg-indigo-700 transition ease-in-out duration-150'>
+                <div
+                  onClick={() => toggleMobileMenu(false)}
+                  className='group flex items-center px-2 py-4 text-sm leading-5 font-medium text-indigo-300 rounded-md hover:text-white hover:bg-indigo-700 focus:outline-none focus:text-white focus:bg-indigo-700 transition ease-in-out duration-150'
+                >
                   <svg
                     className='mr-3 h-6 w-6 text-indigo-400 group-hover:text-indigo-300 group-focus:text-indigo-300 transition ease-in-out duration-150'
                     xmlns='http://www.w3.org/2000/svg'
@@ -87,7 +93,10 @@ const SidebarMobile = ({ toggleMobileMenu }) => {
               </Link>
 
               <Link to='/app/create'>
-                <div className='group flex items-center px-2 py-4 text-sm leading-5 font-medium text-indigo-300 rounded-md hover:text-white hover:bg-indigo-700 focus:outline-none focus:text-white focus:bg-indigo-700 transition ease-in-out duration-150'>
+                <div
+                  onClick={() => toggleMobileMenu(false)}
+                  className='group flex items-center px-2 py-4 text-sm leading-5 font-medium text-indigo-300 rounded-md hover:text-white hover:bg-indigo-700 focus:outline-none focus:text-white focus:bg-indigo-700 transition ease-in-out duration-150'
+                >
                   <svg
                     className='mr-3 h-6 w-6 text-indigo-400 group-hover:text-indigo-300 group-focus:text-indigo-300 transition ease-in-out duration-150'
                     xmlns='http://www.w3.org/2000/svg'
