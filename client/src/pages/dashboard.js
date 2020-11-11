@@ -1,8 +1,7 @@
-//Landing Page
 import Dashboard from '../screens/App/Dashboard';
 import AppLayout from '../components/app/AppLayout';
 
-export default function LoginPage() {
+export default function DashboardPage() {
   return (
     <AppLayout>
       <Dashboard />

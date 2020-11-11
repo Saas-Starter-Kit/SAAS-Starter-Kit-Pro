@@ -1,4 +1,3 @@
-//Landing Page
 import Login from '../screens/App/Auth';
 import Layout from '../components/marketing/Layout';
 
