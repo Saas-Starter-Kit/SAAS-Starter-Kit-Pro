@@ -2,15 +2,30 @@ import Avatar from '../Avatar/avatarSidebarIcons';
 import styled from 'styled-components';
 import ReactTooltip from 'react-tooltip';
 import { Link } from '@reach/router';
+import { BiArrowFromLeft } from 'react-icons/bi';
 
 const Sidebar = styled.div`
   display: flex;
+  position: relative;
   flex-direction: column;
   flex: 1 1 0%;
   background-color: #42389d;
   width: 5.2rem;
   overflow: hidden;
   animation: ShrinkSideBar 0.4s ease-out forwards;
+`;
+
+const StyledArrow = styled(BiArrowFromLeft)`
+  width: 1.5rem;
+  height: 1.5rem;
+  position: absolute;
+  top: 2rem;
+  left: 4.5rem;
+  color: white;
+  background-color: #42389d;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  animation: FadeInLeft 0.9s ease-in forwards;
 `;
 
 const SidebarIcons = ({ sidebarHandler }) => {
@@ -21,13 +36,9 @@ const SidebarIcons = ({ sidebarHandler }) => {
         <Sidebar>
           <div className='flex-1 flex flex-col pt-5 pb-4 overflow-y-auto'>
             <div className='flex items-center flex-shrink-0 px-4'>
-              <img
-                className='h-8 w-auto'
-                src='https://tailwindui.com/img/logos/workflow-mark-on-white.svg'
-                alt='Workflow'
-              />
-              <button onClick={sidebarHandler}>Close</button>
+              <img className='h-8 w-auto' src='/illustrations/home.svg' alt='Workflow' />
             </div>
+
             <nav className='mt-8 flex flex-col items-center bg-indigo-800'>
               <Avatar />
               <div data-tip data-for='Dashboard'>
@@ -108,6 +119,7 @@ const SidebarIcons = ({ sidebarHandler }) => {
             </nav>
           </div>
         </Sidebar>
+        <StyledArrow onClick={sidebarHandler} />
       </div>
     </div>
   );
