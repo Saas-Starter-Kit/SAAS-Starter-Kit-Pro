@@ -12,19 +12,20 @@ const Sidebar = styled.div`
   animation: GrowSideBar 0.4s ease-out forwards;
 `;
 
-const SidebarDesktop = () => {
+const SidebarDesktop = ({ sidebarHandler }) => {
   return (
     <div className='hidden md:flex md:flex-shrink-0'>
       <div className='flex flex-col'>
         {/*<!-- Sidebar component, swap this element with another sidebar if you like -->*/}
         <Sidebar>
           <div className='flex-1 flex flex-col pt-5 pb-4 overflow-y-auto'>
-            <div className='flex items-center flex-shrink-0 px-4'>
+            <div className='flex '>
               <img
                 className='h-8 w-auto'
                 src='https://tailwindui.com/img/logos/v1/workflow-logo-on-brand.svg'
                 alt='Workflow'
               />
+              <button onClick={sidebarHandler}>Close</button>
             </div>
 
             <Avatar />

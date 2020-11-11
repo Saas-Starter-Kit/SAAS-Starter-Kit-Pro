@@ -12,7 +12,7 @@ const Sidebar = styled.div`
   animation: ShrinkSideBar 0.4s ease-out forwards;
 `;
 
-const SidebarIcons = () => {
+const SidebarIcons = ({ sidebarHandler }) => {
   return (
     <div className='hidden md:flex md:flex-shrink-0'>
       <div className='flex flex-col'>
@@ -25,6 +25,7 @@ const SidebarIcons = () => {
                 src='https://tailwindui.com/img/logos/workflow-mark-on-white.svg'
                 alt='Workflow'
               />
+              <button onClick={sidebarHandler}>Close</button>
             </div>
             <nav className='mt-8 flex flex-col items-center bg-indigo-800'>
               <Avatar />
