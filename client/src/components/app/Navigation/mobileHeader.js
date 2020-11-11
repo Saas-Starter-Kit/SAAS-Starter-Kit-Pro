@@ -3,9 +3,11 @@ import { useState, useRef, useContext } from 'react';
 import useOutsideClick from '../../../hooks/useOutsideClick';
 import AvatarDropDownMobile from '../Avatar/avatarDropDownMobile';
 import AuthContext from '../../../utils/authContext';
+import { MdAccountCircle } from 'react-icons/md';
 
 const MobileHeader = ({ mobileMenuHandler }) => {
   const { authState } = useContext(AuthContext);
+  const photo = authState.user ? authState.user.photo : null;
   const [avatarMenu, toggleAvatarMenu] = useState(false);
   const avatarMenuHandler = () => (avatarMenu ? toggleAvatarMenu(false) : toggleAvatarMenu(true));
   const ref = useRef();
@@ -34,12 +36,19 @@ const MobileHeader = ({ mobileMenuHandler }) => {
         </svg>
       </button>
       <div ref={ref} className='p-2'>
-        <img
-          onClick={avatarMenuHandler}
-          className='w-12 h-12 bg-gray-300 rounded-full flex-shrink-0'
-          src={authState.user ? authState.user.photo : null}
-          alt=''
-        />
+        {photo ? (
+          <img
+            onClick={avatarMenuHandler}
+            className='w-12 h-12  bg-gray-300 rounded-full flex-shrink-0'
+            src={photo}
+            alt=''
+          />
+        ) : (
+          <MdAccountCircle
+            onClick={avatarMenuHandler}
+            className='w-10 h-10 bg-gray-300 rounded-full flex-shrink-0'
+          />
+        )}
       </div>
       {avatarMenu ? <AvatarDropDownMobile /> : null}
     </div>

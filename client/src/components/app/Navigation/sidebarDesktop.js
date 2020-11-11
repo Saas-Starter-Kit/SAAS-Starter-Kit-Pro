@@ -1,5 +1,6 @@
 import Avatar from '../Avatar/avatarSidebarFull';
 import styled from 'styled-components';
+import { MdAccountCircle } from 'react-icons/md';
 
 const Sidebar = styled.div`
   display: flex;

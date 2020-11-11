@@ -26,7 +26,6 @@ const SidebarIcons = () => {
                 alt='Workflow'
               />
             </div>
-            {/*<AvatarDropDown />*/}
             <nav className='mt-8 flex flex-col items-center bg-indigo-800'>
               <Avatar />
               <div data-tip data-for='Dashboard'>

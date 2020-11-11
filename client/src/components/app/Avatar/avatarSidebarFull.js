@@ -2,9 +2,12 @@ import AvatarDropDown from './avatarDropDown';
 import { useState, useRef, useContext } from 'react';
 import useOutsideClick from '../../../hooks/useOutsideClick';
 import AuthContext from '../../../utils/authContext';
+import { MdAccountCircle } from 'react-icons/md';
 
 const AvatarSidebarFull = () => {
   const { authState } = useContext(AuthContext);
+  const photo = authState.user ? authState.user.photo : null;
+  const username = authState.user ? authState.user.username : 'Guest';
   const [avatarMenu, toggleAvatarMenu] = useState(false);
   const avatarMenuHandler = () => (avatarMenu ? toggleAvatarMenu(false) : toggleAvatarMenu(true));
   const ref = useRef();
@@ -23,15 +26,17 @@ const AvatarSidebarFull = () => {
         >
           <div className='flex w-full justify-between items-center'>
             <div className='flex min-w-0 items-center justify-between space-x-3'>
-              <img
-                className='w-10 h-10 bg-gray-300 rounded-full flex-shrink-0'
-                src={authState.user ? authState.user.photo : null}
-                alt=''
-              />
+              {photo ? (
+                <img
+                  className='w-10 h-10 bg-gray-300 rounded-full flex-shrink-0'
+                  src={photo}
+                  alt=''
+                />
+              ) : (
+                <MdAccountCircle className='w-10 h-10 bg-gray-300 rounded-full flex-shrink-0' />
+              )}
               <div className='flex-1 min-w-0'>
-                <h2 className='text-white text-sm leading-5 font-medium truncate'>
-                  {authState.user.username}
-                </h2>
+                <h2 className='text-white text-sm leading-5 font-medium truncate'>{username}</h2>
               </div>
             </div>
             {/*<!-- Heroicon name: selector -->*/}
