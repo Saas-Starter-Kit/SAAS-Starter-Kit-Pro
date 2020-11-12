@@ -6,10 +6,9 @@ import { BiArrowFromLeft } from 'react-icons/bi';
 
 const Sidebar = styled.div`
   display: flex;
-  position: relative;
   flex-direction: column;
   flex: 1 1 0%;
-  background-color: #42389d;
+  background-color: var(--primary-color);
   width: 5.2rem;
   overflow: hidden;
   animation: ShrinkSideBar 0.4s ease-out forwards;
@@ -23,7 +22,7 @@ const StyledArrow = styled(BiArrowFromLeft)`
   top: 2rem;
   left: 4.5rem;
   color: white;
-  background-color: #42389d;
+  background-color: var(--primary-color);
   border-radius: 0.5rem;
   cursor: pointer;
   animation: FadeInLeft 0.9s ease-in forwards;

@@ -23,7 +23,7 @@ const AppLayout = ({ children }) => {
         {mobileMenu ? <SidebarMobile toggleMobileMenu={toggleMobileMenu} /> : null}
         <main className='flex-1  z-0 overflow-y-auto focus:outline-none' tabindex='0'>
           {/*App Screens Here*/}
-          <div className='py-6 px-8'>{children}</div>
+          <div className='my-6 mx-14'>{children}</div>
         </main>
       </div>
     </div>

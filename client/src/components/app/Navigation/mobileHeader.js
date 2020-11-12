@@ -14,7 +14,7 @@ const MobileHeader = ({ mobileMenuHandler }) => {
   useOutsideClick(ref, () => toggleAvatarMenu(false));
 
   return (
-    <div className='md:hidden flex justify-between bg-blue-500 p-1'>
+    <div className='md:hidden flex justify-between bg-indigo-600 p-1'>
       <button
         onClick={mobileMenuHandler}
         className='pt-2 pl-2 font-semibold inline-flex items-center justify-center rounded-md text-white focus:outline-none'
