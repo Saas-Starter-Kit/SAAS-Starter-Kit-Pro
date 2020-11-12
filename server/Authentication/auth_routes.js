@@ -94,15 +94,13 @@ JWT is sessionless, so logout only needs to be implemented
 client side. 
 */
 
-const putTodo = (req, res) => {
-  let title = req.body.title;
-  let description = req.body.description;
-  let author = req.body.author;
-  let todo_id = req.body.todo_id;
+const putUsername = (req, res) => {
+  let id = req.body.id;
+  let username = req.body.username;
 
-  let text = `UPDATE todos SET title= $1, description=$2, author=$3
-              WHERE todo_id = $4`;
-  let values = [title, description, author, todo_id];
+  let text = `UPDATE users SET username=$1
+              WHERE id = $2`;
+  let values = [username, id];
 
   let callback = (q_err, q_res) => {
     if (q_err) console.log(q_err);
@@ -112,6 +110,24 @@ const putTodo = (req, res) => {
   db.query(text, values, callback);
 };
 
-router.put('/put/todo', putTodo);
+router.put('/put/username', putUsername);
+
+const putEmail = (req, res) => {
+  let id = req.body.id;
+  let email = req.body.email;
+
+  let text = `UPDATE users SET email=$1
+              WHERE id = $2`;
+  let values = [email, id];
+
+  let callback = (q_err, q_res) => {
+    if (q_err) console.log(q_err);
+    res.json(q_res.rows);
+  };
+
+  db.query(text, values, callback);
+};
+
+router.put('/put/email', putEmail);
 
 module.exports = router;

@@ -1,5 +1,6 @@
 import { useState, useContext } from 'react';
 import AuthContext from '../../../utils/authContext';
+import axios from 'axios';
 
 const Settings = () => {
   const { firebase, authState } = useContext(AuthContext);
@@ -7,6 +8,7 @@ const Settings = () => {
   const [username, setUsername] = useState(authState.user.username);
   const curUser = firebase.auth().currentUser;
   const id = authState.user ? authState.user.id.user : null;
+  const [resMessage, setResMessage] = useState('');
 
   const updateUsername = (event) => {
     event.preventDefault();
@@ -15,25 +17,33 @@ const Settings = () => {
       .updateProfile({
         displayName: username
       })
-      .then(function () {
+      .then(() => {
         // Update successful.
+        let data = { id, username };
+        axios.put(`${process.env.NEXT_PUBLIC_SERVER_URL}/auth/put/username`, data);
+        setResMessage('Successfully updated Username');
       })
-      .catch(function (error) {
+      .catch((error) => {
         // An error happened.
+        console.log(error);
+        setResMessage('An error occured please try again later');
       });
   };
 
   const updateEmail = (event) => {
     event.preventDefault();
 
+    let data = { id, email };
+
     curUser
       .updateEmail(email)
-      .then((res) => {
-        // Update successful.
-        console.log('ffff');
+      .then(() => {
+        axios.put(`${process.env.NEXT_PUBLIC_SERVER_URL}/auth/put/email`, data);
+        setResMessage('Successfully updated Email');
       })
       .catch(function (error) {
         console.log(error);
+        setResMessage('An error occured please try again later');
       });
   };
 
@@ -49,6 +59,7 @@ const Settings = () => {
     <div>
       <h1>Settings</h1>
       <h3>Changing username and email will cause user to get logged out</h3>
+      <h3>{resMessage}</h3>
       <div>
         <h2>Update Username</h2>
         <form>
