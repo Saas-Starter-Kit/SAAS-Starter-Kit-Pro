@@ -15,9 +15,11 @@ export const fetchTodoApi = async (params) => {
 };
 
 export const deleteTodoApi = async (data) => {
-  let result = await axios.delete(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/delete/todo`, {
+  await axios.delete(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/delete/todo`, {
     data
   });
+};
 
-  return result;
+export const putTodoApi = async (data) => {
+  await axios.put(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/put/todo`, data);
 };

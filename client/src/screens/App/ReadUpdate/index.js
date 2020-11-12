@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import AuthContext from '../../../utils/authContext';
-import axios from 'axios';
 import styled from 'styled-components';
-import { fetchTodoApi, deleteTodoApi } from '../../../api/todoApi';
+import { fetchTodoApi, deleteTodoApi, putTodoApi } from '../../../api/todoApi';
 
 const StyledMain = styled.div`
   display: flex;
@@ -58,9 +57,9 @@ const ReadUpdate = () => {
     let todo_id = todo.todo_id;
 
     let data = { todo_id };
-    //await axios.delete(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/delete/todo`, { data });
-    let result = deleteTodoApi(data);
-    if (result) fetchTodos();
+    deleteTodoApi(data);
+    setEdit(false);
+    setTimeout(() => fetchTodos(), 300);
   };
 
   const putTodo = async (event, todo) => {
@@ -71,9 +70,9 @@ const ReadUpdate = () => {
     let todo_id = todo.todo_id;
 
     let data = { title, description, author, todo_id };
-    await axios.put(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/put/todo`, data);
+    putTodoApi(data);
     setEdit(false);
-    fetchTodos();
+    setTimeout(() => fetchTodos(), 300);
   };
 
   const editTodo = (todo) => {
