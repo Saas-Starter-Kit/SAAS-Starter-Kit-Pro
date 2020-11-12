@@ -17,12 +17,14 @@ router.get('/private', requireAuth, (req, res) => {
 //sign in or sign up user then send jwt token
 router.post('/sendtoken', (req, res) => {
   let token = req.body.token;
+  let username = req.body.username;
+  console.log(username);
 
   admin
     .auth()
     .verifyIdToken(token)
     .then((decodedToken) => {
-      let name = decodedToken.name;
+      let name = username;
       let email = decodedToken.email;
       console.log(name, email);
 
@@ -91,5 +93,25 @@ router.post('/sendtoken', (req, res) => {
 JWT is sessionless, so logout only needs to be implemented
 client side. 
 */
+
+const putTodo = (req, res) => {
+  let title = req.body.title;
+  let description = req.body.description;
+  let author = req.body.author;
+  let todo_id = req.body.todo_id;
+
+  let text = `UPDATE todos SET title= $1, description=$2, author=$3
+              WHERE todo_id = $4`;
+  let values = [title, description, author, todo_id];
+
+  let callback = (q_err, q_res) => {
+    if (q_err) console.log(q_err);
+    res.json(q_res.rows);
+  };
+
+  db.query(text, values, callback);
+};
+
+router.put('/put/todo', putTodo);
 
 module.exports = router;

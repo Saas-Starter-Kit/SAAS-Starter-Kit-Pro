@@ -36,26 +36,29 @@ const LoginSignup = () => {
 
   const saveProfile = (authResult) => {
     console.log(authResult);
+    let username = authResult.user.displayName;
+    console.log(username);
     //setLoading(true);
 
     firebase
       .auth()
       .currentUser.getIdToken()
-      .then((token) => sendtokenToServer(token))
+      .then((token) => sendtokenToServer(token, username))
       .then((res) => LogintoContext(res.data))
       .catch((err) => console.log(err));
 
     const LogintoContext = (data) => {
       let email = authResult.user.email;
-      let username = authResult.user.displayName;
       let id = jwt_decode(data.token);
       let photo = authResult.user.photoURL;
+      let provider = authResult.user.providerData[0].providerId;
 
       let user = {
         email,
         username,
         id,
-        photo
+        photo,
+        provider
       };
 
       LogIn(user);
