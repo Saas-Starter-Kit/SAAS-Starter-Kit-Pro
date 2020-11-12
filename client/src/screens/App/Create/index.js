@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import AuthContext from '../../../utils/authContext';
-import axios from 'axios';
+import { postTodoApi } from '../../../api/todoApi';
 
 const CreateTask = () => {
   const [formTitle, setTitle] = useState('');
@@ -26,11 +26,11 @@ const CreateTask = () => {
     let author = user ? user.username : 'Guest';
     let title = event.target.title.value;
     let description = event.target.description.value;
-
     let data = { title, description, author };
-    await axios
-      .post(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/post/todo`, data)
-      .then((res) => handleRes(res));
+
+    let result = await postTodoApi(data);
+    handleRes(result);
+
     setTitle('');
     setDescription('');
   };
