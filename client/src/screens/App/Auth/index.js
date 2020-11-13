@@ -1,14 +1,15 @@
 import LoginFormHeader from './loginFormHeader';
 import AuthContext from '../../../utils/authContext';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import jwt_decode from 'jwt-decode';
 import { useRouter } from 'next/router';
 import { navigate } from '@reach/router';
-
 import { sendtokenToServer } from '../../../api/authApi';
+import LoadingOverlay from '../../../components/app/Common/LoadingOverlay';
 
 const LoginSignup = () => {
+  const [isLoading, setLoading] = useState(false);
   const { firebase, LogIn, LogOut } = useContext(AuthContext);
 
   const router = useRouter();
@@ -73,6 +74,7 @@ const LoginSignup = () => {
   return (
     <div className='min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8'>
       <LoginFormHeader />
+      <LoadingOverlay />
       <div className='mt-8 sm:mx-auto sm:w-full sm:max-w-md'>
         <div className='bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10'>
           <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
