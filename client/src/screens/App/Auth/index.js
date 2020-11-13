@@ -6,7 +6,7 @@ import jwt_decode from 'jwt-decode';
 import { useRouter } from 'next/router';
 import { navigate } from '@reach/router';
 import { sendtokenToServer } from '../../../api/authApi';
-import LoadingOverlay from '../../../components/app/Common/LoadingOverlay';
+import LoadingOverlay from '../../../components/app/Common/loadingOverlay';
 
 const LoginSignup = () => {
   const [isLoading, setLoading] = useState(false);
@@ -29,6 +29,7 @@ const LoginSignup = () => {
     ],
     callbacks: {
       signInSuccessWithAuthResult: function (authResult) {
+        setLoading(true);
         saveProfile(authResult);
         return false;
       },
@@ -39,10 +40,7 @@ const LoginSignup = () => {
   };
 
   const saveProfile = (authResult) => {
-    console.log(authResult);
     let username = authResult.user.displayName;
-    console.log(username);
-    //setLoading(true);
 
     firebase
       .auth()
@@ -74,7 +72,7 @@ const LoginSignup = () => {
   return (
     <div className='min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8'>
       <LoginFormHeader />
-      <LoadingOverlay />
+      {isLoading ? <LoadingOverlay /> : null}
       <div className='mt-8 sm:mx-auto sm:w-full sm:max-w-md'>
         <div className='bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10'>
           <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
