@@ -3,16 +3,19 @@ import AuthContext from '../../../utils/authContext';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import { useContext, useEffect } from 'react';
 import jwt_decode from 'jwt-decode';
+import { useRouter } from 'next/router';
+import { navigate } from '@reach/router';
 
 import { sendtokenToServer } from '../../../api/authApi';
 
 const LoginSignup = () => {
   const { firebase, LogIn, LogOut } = useContext(AuthContext);
 
-  //useEffect(() => {
-  //  context.firebase.auth().signOut();
-  //  setTimeout(() => context.LogOut(), 200);
-  //}, []);
+  const router = useRouter();
+
+  useEffect(() => {
+    setTimeout(() => LogOut(), 200);
+  }, []);
 
   const uiConfig = {
     credentialHelper: 'none',
@@ -62,7 +65,8 @@ const LoginSignup = () => {
       };
 
       LogIn(user);
-      //setTimeout(() => navigate('/app/profile'), 400);
+      setTimeout(() => navigate('/app'), 200);
+      setTimeout(() => router.push('/app'), 400);
     };
   };
 

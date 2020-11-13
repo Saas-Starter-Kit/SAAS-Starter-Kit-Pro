@@ -1,6 +1,5 @@
 import AppLayout from '../AppLayout';
-import { Router, Link } from '@reach/router';
-import Login from '../../../screens/App/Auth';
+import { Router } from '@reach/router';
 import Dashboard from '../../../screens/App/Dashboard';
 import Settings from '../../../screens/App/Settings';
 import Create from '../../../screens/App/Create';
@@ -10,8 +9,7 @@ const Routes = () => {
   return (
     <AppLayout>
       <Router>
-        <Login path='/login' />
-        <Dashboard path='/app/dashboard' />
+        <Dashboard path='/app' />
         <Settings path='/app/settings' />
         <Create path='/app/create' />
         <ReadUpdate path='/app/readupdate' />
