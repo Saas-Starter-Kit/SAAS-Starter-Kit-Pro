@@ -33,11 +33,7 @@ const SidebarDesktop = ({ sidebarHandler }) => {
         <Sidebar>
           <div className='flex-1 flex flex-col pt-5 pb-4 overflow-y-auto'>
             <div className='flex '>
-              <img
-                className='h-8 w-auto'
-                src='https://tailwindui.com/img/logos/v1/workflow-logo-on-brand.svg'
-                alt='Workflow'
-              />
+              <img className='h-8 w-auto' src='/logo/large_logo.svg' alt='Workflow' />
             </div>
 
             <Avatar />
