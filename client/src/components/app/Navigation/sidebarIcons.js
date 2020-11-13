@@ -42,7 +42,7 @@ const SidebarIcons = ({ sidebarHandler }) => {
             <nav className='mt-8 flex flex-col items-center bg-indigo-800'>
               <Avatar />
               <div data-tip data-for='Dashboard'>
-                <Link to='/app/dashboard'>
+                <Link to='/app'>
                   <div className='group flex items-center px-2 py-4 text-sm leading-5 font-medium text-indigo-300 rounded-md hover:text-white hover:bg-indigo-700 focus:outline-none focus:text-white focus:bg-indigo-700 transition ease-in-out duration-150'>
                     {/*<!-- Heroicon name: home -->*/}
                     <svg
