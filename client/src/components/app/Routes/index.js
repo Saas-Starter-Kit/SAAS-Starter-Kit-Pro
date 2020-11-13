@@ -10,8 +10,8 @@ const Routes = () => {
   return (
     <AppLayout>
       <Router>
-        <Dashboard path='/app' />
-        <Login path='/app/login' />
+        <Login path='/login' />
+        <Dashboard path='/app/dashboard' />
         <Settings path='/app/settings' />
         <Create path='/app/create' />
         <ReadUpdate path='/app/readupdate' />

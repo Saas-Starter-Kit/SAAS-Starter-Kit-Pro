@@ -17,6 +17,7 @@ function MyApp({ Component, pageProps }) {
 
   const LogOut = () => {
     dispatchAuth(Logout);
+    firebase.auth().signOut();
   };
 
   return (
