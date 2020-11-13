@@ -32,7 +32,7 @@ const SidebarDesktop = ({ sidebarHandler }) => {
       <div className='flex flex-col'>
         <Sidebar>
           <div className='flex-1 flex flex-col pt-5 pb-4 overflow-y-auto'>
-            <div className='flex '>
+            <div className='flex pl-6'>
               <img className='h-8 w-auto' src='/logo/large_logo.svg' alt='Workflow' />
             </div>
 

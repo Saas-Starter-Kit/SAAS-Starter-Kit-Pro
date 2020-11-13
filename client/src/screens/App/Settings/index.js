@@ -72,7 +72,7 @@ const Settings = () => {
   return (
     <div>
       <h1 className='text-2xl'>Settings</h1>
-      <div className='bg-white w-3/4 p-4 rounded-xl shadow'>
+      <div className='bg-white w-full p-4 rounded-xl shadow md:w-3/4'>
         <p className='text-l font-bold'>{resMessage}</p>
         {!isEmail ? (
           <p className='text-l font-bold'>

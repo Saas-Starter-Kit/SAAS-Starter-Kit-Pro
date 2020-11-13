@@ -55,9 +55,13 @@ const Header = () => {
       <div className='flex justify-between items-center px-4 py-6 sm:px-6 md:justify-start md:space-x-10'>
         {/*Logo*/}
         <div className='lg:w-0 lg:flex-1'>
-          <a href='#' className='flex'>
-            <img className='h-8 w-auto sm:h-10' src='/logo/small_logo.svg' alt='Logo' />
-          </a>
+          <Link href='/'>
+            <img
+              className='cursor-pointer h-8 w-auto sm:h-10'
+              src='/logo/small_logo.svg'
+              alt='Logo'
+            />
+          </Link>
         </div>
         {/*Mobile menu icon*/}
         <div ref={refMobile} className='-mr-2 -my-2 md:hidden'>

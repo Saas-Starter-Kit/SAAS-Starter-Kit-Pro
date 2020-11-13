@@ -35,11 +35,11 @@ const SidebarIcons = ({ sidebarHandler }) => {
         {/*<!-- Sidebar component, swap this element with another sidebar if you like -->*/}
         <Sidebar>
           <div className='flex-1 flex flex-col pt-5 pb-4 overflow-y-auto'>
-            <div className='flex items-center flex-shrink-0 px-4'>
-              <img className='h-8 w-auto' src='/illustrations/home.svg' alt='Workflow' />
+            <div className='flex items-center flex-shrink-0 px-6'>
+              <img className='h-8 w-auto' src='/logo/small_logo.svg' alt='Workflow' />
             </div>
 
-            <nav className='mt-8 flex flex-col items-center bg-indigo-800'>
+            <nav className='mt-8 flex flex-col items-center bg-indigo-600'>
               <Avatar />
               <div data-tip data-for='Dashboard'>
                 <Link to='/app'>
