@@ -2,12 +2,14 @@ import { useState, useContext } from 'react';
 import AuthContext from '../../../utils/authContext';
 import axios from 'axios';
 import { useRouter } from 'next/router';
+import LoadingOverlay from '../../../components/app/Common/loadingOverlay';
 
 const Settings = () => {
   const { firebase, authState } = useContext(AuthContext);
   let userEmail = authState.user ? authState.user.email : 'Guest@guest.com';
   let displayName = authState.user ? authState.user.username : 'Guest';
 
+  const [isLoading, setLoading] = useState(false);
   const [email, setEmail] = useState(userEmail);
   const [username, setUsername] = useState(displayName);
   const [resMessage, setResMessage] = useState('');
@@ -20,6 +22,7 @@ const Settings = () => {
 
   const updateUsername = (event) => {
     event.preventDefault();
+    setLoading(true);
 
     curUser
       .updateProfile({
@@ -29,18 +32,19 @@ const Settings = () => {
         // Update successful.
         let data = { id, username };
         axios.put(`${process.env.NEXT_PUBLIC_SERVER_URL}/auth/put/username`, data);
-        setResMessage('Successfully updated Username');
         setTimeout(() => router.push('/login'), 500);
       })
       .catch((error) => {
         // An error happened.
         console.log(error);
         setResMessage('An error occured please try again later');
+        setLoading(false);
       });
   };
 
   const updateEmail = (event) => {
     event.preventDefault();
+    setLoading(true);
 
     let data = { id, email };
 
@@ -48,12 +52,12 @@ const Settings = () => {
       .updateEmail(email)
       .then(() => {
         axios.put(`${process.env.NEXT_PUBLIC_SERVER_URL}/auth/put/email`, data);
-        setResMessage('Successfully updated Email');
         setTimeout(() => router.push('/login'), 500);
       })
       .catch(function (error) {
         console.log(error);
         setResMessage('An error occured please try again later');
+        setLoading(false);
       });
   };
 
@@ -77,6 +81,7 @@ const Settings = () => {
             process for changing emails, usernames and passwords.
           </p>
         ) : null}
+        {isLoading ? <LoadingOverlay /> : null}
         <div className='py-6'>
           <h2 className='text-xl'>Update Username</h2>
           <form>
