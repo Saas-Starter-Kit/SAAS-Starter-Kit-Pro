@@ -23,6 +23,7 @@
   "dependencies": {
     "@aws-cdk/aws-ec2": "^1.73.0",
     "@aws-cdk/aws-ecs": "^1.73.0",
+    "@aws-cdk/aws-ecs-patterns": "^1.73.0",
     "@aws-cdk/core": "1.73.0",
     "source-map-support": "^0.5.16"
   }

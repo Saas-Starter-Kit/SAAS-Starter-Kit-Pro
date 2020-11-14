@@ -14,6 +14,10 @@ router.get('/private', requireAuth, (req, res) => {
   res.send('Accessed Private Endpoint');
 });
 
+router.get('/health', (req, res) => {
+  res.send('All ok');
+});
+
 //sign in or sign up user then send jwt token
 router.post('/sendtoken', (req, res) => {
   let token = req.body.token;
