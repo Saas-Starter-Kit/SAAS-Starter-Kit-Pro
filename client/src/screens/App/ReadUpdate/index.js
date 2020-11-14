@@ -92,53 +92,63 @@ const ReadUpdate = () => {
 
   return (
     <StyledMain>
-      <h2>Todos: </h2>
+      <h1 className='text-xl'>Todos: </h1>
 
-      {todos ? (
-        todos.map((todo) => (
-          <div className='py-4' key={todo.todo_id}>
-            <h4>{todo.title}</h4>
-            <p>{todo.description}</p>
-            <EditButtonRow>
-              <button onClick={() => editTodo(todo)}>Edit</button>
+      <div className='bg-white rounded-md shawdow p-4'>
+        {todos ? (
+          todos.map((todo) => (
+            <div className='py-4' key={todo.todo_id}>
+              <h4>{todo.title}</h4>
+              <p>{todo.description}</p>
+              <EditButtonRow>
+                <button
+                  className='py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 shadow-sm hover:bg-indigo-500 focus:outline-none focus:shadow-outline-blue active:bg-indigo-600 transition duration-150 ease-in-out'
+                  onClick={() => editTodo(todo)}
+                >
+                  Edit
+                </button>
 
-              <button className='pl-6' onClick={() => deleteTodo(todo)}>
-                Delete
-              </button>
-            </EditButtonRow>
+                <button
+                  className='ml-4 py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-red-500 shadow-sm hover:bg-indigo-500 focus:outline-none focus:shadow-outline-blue active:bg-indigo-600 transition duration-150 ease-in-out'
+                  onClick={() => deleteTodo(todo)}
+                >
+                  Delete
+                </button>
+              </EditButtonRow>
 
-            {isEditting && todo.todo_id === editTodoID && (
-              <form onSubmit={(event) => putTodo(event, todo)}>
-                <div className='flex flex-col mb-4'>
-                  <label className='pb-2'>Title:</label>
-                  <input
-                    className='p-1'
-                    onChange={handleEditTitleChange}
-                    value={editTitle}
-                    name='title'
-                  />
-                </div>
-                <div className='flex flex-col'>
-                  <label className='pb-2'>Description:</label>
-                  <textarea
-                    className='h-24 p-1'
-                    onChange={handleEditDescChange}
-                    value={editDescription}
-                    name='description'
-                  />
-                </div>
-                <div className='flex flex-col mb-4'>
-                  <StyledButton type='submit'>Send</StyledButton>
-                  <button onClick={() => setEdit(false)}>Cancel</button>
-                </div>
-              </form>
-            )}
-            <hr />
-          </div>
-        ))
-      ) : (
-        <p> No Todos to Show...</p>
-      )}
+              {isEditting && todo.todo_id === editTodoID && (
+                <form className='bg-gray-50 p-2 rounded' onSubmit={(event) => putTodo(event, todo)}>
+                  <div className='flex flex-col mb-4'>
+                    <label className='pb-2'>Title:</label>
+                    <input
+                      className='p-1'
+                      onChange={handleEditTitleChange}
+                      value={editTitle}
+                      name='title'
+                    />
+                  </div>
+                  <div className='flex flex-col'>
+                    <label className='pb-2'>Description:</label>
+                    <textarea
+                      className='h-24 p-1'
+                      onChange={handleEditDescChange}
+                      value={editDescription}
+                      name='description'
+                    />
+                  </div>
+                  <div className='flex flex-col mb-4'>
+                    <StyledButton type='submit'>Send</StyledButton>
+                    <button onClick={() => setEdit(false)}>Cancel</button>
+                  </div>
+                </form>
+              )}
+              <hr />
+            </div>
+          ))
+        ) : (
+          <p> No Todos to Show...</p>
+        )}
+      </div>
     </StyledMain>
   );
 };
