@@ -17,7 +17,7 @@ app.use(bodyParser.json());
 app.use(passport.initialize());
 
 //API routes
-app.user('/', health_api);
+app.use('/', health_api);
 app.use('/auth', auth);
 app.use('/api', todo_api);
 
