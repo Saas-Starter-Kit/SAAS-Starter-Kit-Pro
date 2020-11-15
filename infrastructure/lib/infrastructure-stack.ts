@@ -14,6 +14,9 @@ export class InfrastructureStack extends cdk.Stack {
       natGateways: 1,
     })
 
+    //Bastion Host to access DB
+    const host = new ec2.BastionHostLinux(this, "BastionHost", {vpc})
+
     /* 
 
         Fargate Service
@@ -49,7 +52,7 @@ export class InfrastructureStack extends cdk.Stack {
     */
 
     const db_name = "postgresDB"
-    const db_username = "admin"
+    const db_username = "DBadmin"
 
     const dbInstance = new rds.DatabaseInstance(this, "Instance", {
       engine: rds.DatabaseInstanceEngine.postgres({version: rds.PostgresEngineVersion.VER_10}),
