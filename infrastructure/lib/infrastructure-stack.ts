@@ -58,14 +58,14 @@ export class InfrastructureStack extends cdk.Stack {
       engine: rds.DatabaseInstanceEngine.postgres({version: rds.PostgresEngineVersion.VER_10}),
       vpc,
       vpcSubnets: {
-        subnetType: ec2.SubnetType.PUBLIC,
+        subnetType: ec2.SubnetType.PRIVATE,
       },
       instanceType: ec2.InstanceType.of(ec2.InstanceClass.T2, ec2.InstanceSize.MICRO),
       credentials: rds.Credentials.fromGeneratedSecret(db_username),
       databaseName: db_name,
     })
 
-    dbInstance.connections.allowDefaultPortFromAnyIpv4()
+    //dbInstance.connections.allowDefaultPortFromAnyIpv4()
     dbInstance.connections.allowFrom(securityGroupFargate, ec2.Port.tcp(5432))
   }
 }
