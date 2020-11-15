@@ -5,6 +5,7 @@ var bodyParser = require('body-parser');
 const passport = require('passport');
 const auth = require('./Authentication/auth_routes');
 const todo_api = require('./API/todos');
+const health_api = require('./API/health');
 
 const app = express();
 
@@ -15,12 +16,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(passport.initialize());
 
-//Authentication
+//API routes
+app.user('/', health_api);
 app.use('/auth', auth);
 app.use('/api', todo_api);
 
 //server setup
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 80;
 app.listen(port);
 console.log('Server listening on:', port);
 
