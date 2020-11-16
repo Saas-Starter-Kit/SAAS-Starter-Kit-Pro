@@ -12,7 +12,6 @@ export class InfrastructureStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props)
 
-    // The code that defines your stack goes here
     const vpc = new ec2.Vpc(this, "VPC", {
       maxAzs: 3,
       natGateways: 1,
@@ -23,7 +22,6 @@ export class InfrastructureStack extends cdk.Stack {
     */
 
     const dbSecret = new secretsmanager.Secret(this, "Secret")
-    const dbPassword = dbSecret.secretValue
     const role = new iam.Role(this, "FargateRole", {
       assumedBy: new iam.ServicePrincipal("ecs-tasks.amazonaws.com"),
       managedPolicies: [iam.ManagedPolicy.fromAwsManagedPolicyName("service-role/AmazonECSTaskExecutionRolePolicy")],
@@ -36,7 +34,8 @@ export class InfrastructureStack extends cdk.Stack {
 
     const dbName = process.env.DB_NAME ? process.env.DB_NAME : "postgresDB"
     const dbUsername = process.env.DB_USERNAME ? process.env.DB_USERNAME : "dbUser"
-    const dbPort = "5432"
+    const dbPort = process.env.DB_PORT ? process.env.DB_PORT : "5432"
+    const dbPassword = dbSecret.secretValue
 
     const dbInstance = new rds.DatabaseInstance(this, "Instance", {
       engine: rds.DatabaseInstanceEngine.postgres({version: rds.PostgresEngineVersion.VER_10}),
