@@ -14,8 +14,17 @@ export class InfrastructureStack extends cdk.Stack {
       natGateways: 1,
     })
 
+    const securityGroupBastion = new ec2.SecurityGroup(this, "bastion-security", {
+      vpc,
+    })
+
+    securityGroupBastion.addEgressRule(ec2.Peer.ipv4("0.0.0.0/0"), ec2.Port.tcp(80))
+
     //Bastion Host to access DB
-    const host = new ec2.BastionHostLinux(this, "BastionHost", {vpc})
+    const host = new ec2.BastionHostLinux(this, "BastionHost", {
+      vpc,
+      securityGroup: securityGroupBastion,
+    })
 
     /* 
 
@@ -66,5 +75,6 @@ export class InfrastructureStack extends cdk.Stack {
     })
 
     dbInstance.connections.allowFrom(securityGroupFargate, ec2.Port.tcp(5432))
+    dbInstance.connections.allowFrom(securityGroupBastion, ec2.Port.tcp(5432))
   }
 }
