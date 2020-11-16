@@ -79,7 +79,6 @@ export class InfrastructureStack extends cdk.Stack {
     dbInstance.connections.allowFrom(securityGroupBastion, ec2.Port.tcp(5432))
 
     //const dbHost = dbInstance.dbInstanceEndpointAddress
-
     //var PostgresPassword = new secretsmanager.Secret(this, "PersonalSecOpsMySqlPassword",{
     //generateSecretString }
     //);
