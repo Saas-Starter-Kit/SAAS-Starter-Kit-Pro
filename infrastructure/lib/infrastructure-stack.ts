@@ -20,7 +20,6 @@ export class InfrastructureStack extends cdk.Stack {
 
     /* 
         Secrets Setup 
-
     */
 
     const dbSecret = new secretsmanager.Secret(this, "Secret")
@@ -32,9 +31,7 @@ export class InfrastructureStack extends cdk.Stack {
     dbSecret.grantRead(role)
 
     /* 
-
-    RDS DATABASE SETUP
-
+        RDS DATABASE SETUP
     */
 
     const dbName = process.env.DB_NAME ? process.env.DB_NAME : "postgresDB"
@@ -55,10 +52,9 @@ export class InfrastructureStack extends cdk.Stack {
     const dbHost = dbInstance.dbInstanceEndpointAddress
 
     /* 
-
         Fargate Service
-
     */
+
     const cluster = new ecs.Cluster(this, "Cluster", {
       vpc,
     })
@@ -98,9 +94,7 @@ export class InfrastructureStack extends cdk.Stack {
     //loadBalancedFargateService.loadBalancer.loadBalancerDnsName
 
     /* 
-
         Bastion Host
-
     */
 
     const securityGroupBastion = new ec2.SecurityGroup(this, "bastion-security", {
