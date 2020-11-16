@@ -3,6 +3,7 @@ import * as ec2 from "@aws-cdk/aws-ec2"
 import * as ecs from "@aws-cdk/aws-ecs"
 import * as ecs_patterns from "@aws-cdk/aws-ecs-patterns"
 import * as rds from "@aws-cdk/aws-rds"
+import * as secretsmanager from "@aws-cdk/aws-secretsmanager"
 
 export class InfrastructureStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
@@ -76,5 +77,11 @@ export class InfrastructureStack extends cdk.Stack {
 
     dbInstance.connections.allowFrom(securityGroupFargate, ec2.Port.tcp(5432))
     dbInstance.connections.allowFrom(securityGroupBastion, ec2.Port.tcp(5432))
+
+    //const dbHost = dbInstance.dbInstanceEndpointAddress
+
+    //var PostgresPassword = new secretsmanager.Secret(this, "PersonalSecOpsMySqlPassword",{
+    //generateSecretString }
+    //);
   }
 }
