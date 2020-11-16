@@ -29,7 +29,7 @@ Session Manager:
 3. Click Start New Session
 4. Select Bastion Host and click Start Session
 5. install psql shell on the bastion host
-   sudo amazon-linux-extras install postgresql9.6
+   sudo amazon-linux-extras install postgresql11
 6. connect to the database with the psql shell. host name is avaiable on RDS page
    psql -d name-of-db -h host-name -p port -U username
 7. Copy and paste the create table commands from server/Database/schema.sql
