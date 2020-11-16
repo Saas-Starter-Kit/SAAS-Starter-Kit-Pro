@@ -65,7 +65,6 @@ export class InfrastructureStack extends cdk.Stack {
       databaseName: db_name,
     })
 
-    //dbInstance.connections.allowDefaultPortFromAnyIpv4()
     dbInstance.connections.allowFrom(securityGroupFargate, ec2.Port.tcp(5432))
   }
 }
