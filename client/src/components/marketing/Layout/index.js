@@ -4,18 +4,16 @@ import Header from '../Navigation/header';
 import Footer from '../Navigation/footer';
 import Headroom from 'react-headroom';
 
-const Layout = ({ children }) => {
-  return (
-    <>
-      <SEO />
-      <Headroom>
-        <Header />
-      </Headroom>
+const Layout = ({ children }) => (
+  <>
+    <SEO />
+    <Headroom>
+      <Header />
+    </Headroom>
 
-      <div>{children}</div>
-      <Footer />
-    </>
-  );
-};
+    <div>{children}</div>
+    <Footer />
+  </>
+);
 
 export default Layout;
