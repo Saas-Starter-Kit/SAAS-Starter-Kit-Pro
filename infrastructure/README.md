@@ -4,25 +4,19 @@ Requires aws-cdk.
 
 install the aws-cdk cli
 
-npm install -g aws-cdk
+`npm install -g aws-cdk`
 
 Make sure to have an IAM with Admin priviledges configured with AWS CLI
 
 https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html
 
-Then run
+Then run `cdk synth` to synthesize the configuration into a cloudformation template
 
-cdk synth
-
-and then
-
-cdk deploy
-
-To deploy the entire infastruture to AWS
+and then `cdk deploy` To deploy the entire infastruture to your AWS account
 
 **_IMPORTANT_**
 
-Make sure to run cdk destroy when finihsed otherwise you will be charged by AWS for
+Make sure to run `cdk destroy` when finished otherwise you will be charged by AWS for
 using their services
 
 ## Useful commands
@@ -36,7 +30,7 @@ using their services
 
 # Database - Server Setup
 
-Set dbName, dbPort and dbUsername enviroment variables in the .env file.
+Set `dbName`, `dbPort` and `dbUsername` enviroment variables in the `.env` file.
 
 After deploying to AWS, Secrets Manager will auto generate a password. The Database Credentials are automatically passed to the nodejs server through the fargate enviroment variables.
 
@@ -53,12 +47,12 @@ Session Manager:
 3. Click Start New Session
 4. Select the cdk generated Bastion Host and click Start Session
 5. install postgres on the bastion host
-   sudo amazon-linux-extras install postgresql11
+   `sudo amazon-linux-extras install postgresql11`
 6. Get RDS hostname (see below)
 7. connect to the database with the psql shell using the following command. database name, database port and database username were set by the user in the .env file.
-   psql -d name-of-db -h host-name -p port -U username
+   `psql -d name-of-db -h host-name -p port -U username`
 8. Copy and paste the password from Secrets Manager (see below)
-9. Copy and paste the create table commands from server/Database/schema.sql
+9. Copy and paste the create table commands from `server/Database/schema.sql`
 
 Get RDS hostname
 
