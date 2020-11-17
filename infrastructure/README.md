@@ -1,18 +1,18 @@
-# Infastructure
+# Getting Started
 
-Requires aws-cdk.
-
-install the aws-cdk cli
+1. This project requires aws-cdk, to install the aws-cdk cli run:
 
 `npm install -g aws-cdk`
+
+https://aws.amazon.com/cdk/
 
 Make sure to have an IAM with Admin priviledges configured with AWS CLI
 
 https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html
 
-Then run `cdk synth` to synthesize the configuration into a cloudformation template
+2. Then run `cdk synth` to synthesize the configuration into a cloudformation template
 
-and then `cdk deploy` To deploy the entire infastruture to your AWS account
+3. Then `cdk deploy` To deploy the entire infastruture to your AWS account
 
 **_IMPORTANT_**
 
