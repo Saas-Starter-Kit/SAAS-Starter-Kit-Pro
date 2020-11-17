@@ -1,13 +1,98 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { useState, useRef } from 'react';
 import { useRouter } from 'next/router';
 import useOutsideClick from '../../../hooks/useOutsideClick';
 import Link from 'next/link';
-
+import { colors, breakpoints } from '../../../styles/theme';
 import FlyoutMenu from './flyoutMenu';
 import MobileMenu from './mobileMenu';
 
+const Container1 = styled.div`
+  position: relative;
+  background-color: ${colors.white};
+`;
+
+const LogoWrapper = styled.div`
+  @media (min-width: ${breakpoints.large}) {
+    width: 0;
+    flex: 1 1 0%;
+  }
+`;
+
+const Logo = styled.img`
+  cursor: pointer;
+  height: 2rem;
+  width: auto;
+  @media (min-width: ${breakpoints.small}) {
+    height: 2.5rem;
+  }
+`;
+
+const MenuWrapper = styled.div`
+  margin-right: -0.5rem;
+  margin-top: -0.5rem;
+  margin-bottom: -0.5rem;
+  @media (min-width: ${breakpoints.medium}) {
+    display: none;
+  }
+`;
+
+const MenuButton = styled.button`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  border-radius: 0.375rem;
+  color: ${colors.gray400};
+  &:hover {
+    color: ${colors.gray500};
+    background-color: ${colors.gray100};
+  }
+  &:focus {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    color: ${colors.gray500};
+    background-color: ${colors.gray100};
+  }
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow,
+    transform;
+  transition-duration: 150ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+`;
+
+const MenuImage = styled.img`
+  width: 2.5rem;
+  height: 2.5rem;
+`;
+
+const Nav = styled.nav`
+  display: none;
+  @media (min-width: ${breakpoints.medium}) {
+    display: flex;
+  }
+`;
+
+const SolutionsWrapper = styled.div`
+  position: relative;
+`;
+
+const fadeInUp = keyframes`
+from {
+  opacity: 0;
+  transform: translateY(0.25rem);
+}
+to {
+  opacity: 1;
+  transform: translateY(0);
+}
+`;
+
+const FlyoutMenuWrapper = styled.div`
+  animation: ${fadeInUp} 0.3s ease-in forwards;
+`;
+
 const StyledLink = styled.div`
+  margin-left: 2.5rem;
   text-decoration: none;
   cursor: pointer;
   position: relative;
@@ -36,6 +121,59 @@ const StyledLink = styled.div`
   }
 `;
 
+const ButtonWrapper = styled.div`
+  display: none;
+  @media (min-width: ${breakpoints.medium}) {
+    display: flex;
+    flex: 1 1 0%;
+  }
+  @media (min-width: ${breakpoints.large}) {
+    width: 0;
+  }
+  align-items: center;
+  justify-content: flex-end;
+  margin-left: 2rem;
+`;
+
+const ButtonSpan = styled.span`
+  display: inline-flex;
+  border-radius: 0.375rem;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+`;
+
+const Button = styled.div`
+  cursor: pointer;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  border-width: 1px;
+  border-color: transparent;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 0.375rem;
+  line-height: 1.5rem;
+  color: ${colors.white};
+  background-color: ${colors.indigo600};
+  &:hover {
+    background-color: ${colors.indigo500};
+  }
+  &:focus {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    border-color: ${colors.indigo700};
+    box-shadow: 0 0 0 3px rgba(180, 198, 252, 0.45);
+  }
+  &:active {
+    background-color: ${colors.indigo700};
+  }
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow,
+    transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+`;
+
 const Header = () => {
   const ref = useRef();
   const refMobile = useRef();
@@ -49,42 +187,29 @@ const Header = () => {
 
   useOutsideClick(ref, () => toggleMenu(false));
   useOutsideClick(refMobile, () => toggleMobileMenu(false));
-
   return (
-    <div className='relative bg-white'>
+    <Container1>
       <div className='flex justify-between items-center px-4 py-6 sm:px-6 md:justify-start md:space-x-10'>
-        {/*Logo*/}
-        <div className='lg:w-0 lg:flex-1'>
+        <LogoWrapper>
           <Link href='/'>
-            <img
-              className='cursor-pointer h-8 w-auto sm:h-10'
-              src='/logo/small_logo.svg'
-              alt='Logo'
-            />
+            <Logo src='/logo/small_logo.svg' alt='Logo' />
           </Link>
-        </div>
-        {/*Mobile menu icon*/}
-        <div ref={refMobile} className='-mr-2 -my-2 md:hidden'>
-          <button
-            onClick={mobileMenuHandler}
-            type='button'
-            className='inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out'
-          >
-            <img className='w-10 h-10' src='/icons/menu.svg' alt='menu' />
-          </button>
+        </LogoWrapper>
+        <MenuWrapper ref={refMobile}>
+          <MenuButton>
+            <MenuImage src='/icons/menu.svg' alt='menu' />
+          </MenuButton>
           {mobileMenu ? <MobileMenu mobileMenuHandler={mobileMenuHandler} /> : null}
-        </div>
-
-        <nav className='hidden md:flex space-x-10'>
-          <div ref={ref} className='relative'>
-            {/*<!-- Item active: "text-gray-900", Item inactive: "text-gray-500" -->*/}
+        </MenuWrapper>
+        <Nav>
+          <SolutionsWrapper ref={ref}>
             <button
               onClick={menuHandler}
               type='button'
               className={`group text-gray-500 inline-flex items-center 
                         space-x-2 text-base leading-6 font-medium
                         hover:text-gray-900 focus:outline-none focus:text-gray-900 
-                        transition ease-in-out duration-150'`}
+                        transition ease-in-out duration-150`}
             >
               <span>Solutions</span>
               <img
@@ -95,34 +220,28 @@ const Header = () => {
                 alt='down arrow'
               />
             </button>
-            <div>
-              {menu ? (
-                <div className='FadeInUp'>
-                  <FlyoutMenu />
-                </div>
-              ) : null}
-            </div>
-          </div>
-
+            {menu ? (
+              <FlyoutMenuWrapper>
+                <FlyoutMenu />
+              </FlyoutMenuWrapper>
+            ) : null}
+          </SolutionsWrapper>
           <Link href='/pricing'>
             <StyledLink active={router.pathname == '/pricing' ? true : false}>Pricing</StyledLink>
           </Link>
           <Link href='/app/dashboard'>
             <StyledLink active={router.pathname == '/app' ? true : false}>App</StyledLink>
           </Link>
-        </nav>
-
-        <div className='hidden md:flex items-center justify-end space-x-8 md:flex-1 lg:w-0'>
-          <span className='inline-flex rounded-md shadow-sm'>
+        </Nav>
+        <ButtonWrapper>
+          <ButtonSpan>
             <Link href='/login'>
-              <div className='cursor-pointer whitespace-no-wrap inline-flex items-center justify-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150'>
-                Sign-In
-              </div>
+              <Button>Sign-In</Button>
             </Link>
-          </span>
-        </div>
+          </ButtonSpan>
+        </ButtonWrapper>
       </div>
-    </div>
+    </Container1>
   );
 };
 
