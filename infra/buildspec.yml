@@ -1,6 +1,8 @@
 version: 0.2
 
-# Optional alternate build setup
+env:
+  variables:
+    NODE_ENV: "production"
 
 phases:
   pre_build:
@@ -14,5 +16,5 @@ phases:
       - npm run build
 artifacts:
   files:
-    - "**/*"
-  base-directory: build
+    - out/**/*
+  base-directory: client

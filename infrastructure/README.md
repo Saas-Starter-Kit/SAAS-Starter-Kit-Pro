@@ -1,6 +1,29 @@
 # Infastructure
 
-Requires aws-cdk
+Requires aws-cdk.
+
+install the aws-cdk cli
+
+npm install -g aws-cdk
+
+Make sure to have an IAM with Admin priviledges configured with AWS CLI
+
+https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html
+
+Then run
+
+cdk synth
+
+and then
+
+cdk deploy
+
+To deploy the entire infastruture to AWS
+
+**_IMPORTANT_**
+
+Make sure to run cdk destroy when finihsed otherwise you will be charged by AWS for
+using their services
 
 ## Useful commands
 

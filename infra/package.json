@@ -27,6 +27,9 @@
     "@aws-cdk/aws-codepipeline": "^1.74.0",
     "@aws-cdk/aws-codepipeline-actions": "^1.74.0",
     "@aws-cdk/aws-ec2": "^1.74.0",
+    "@aws-cdk/aws-iam": "^1.74.0",
+    "@aws-cdk/aws-s3": "^1.74.0",
+    "@aws-cdk/aws-secretsmanager": "^1.74.0",
     "@aws-cdk/core": "1.74.0",
     "dotenv": "^8.2.0",
     "source-map-support": "^0.5.16"
