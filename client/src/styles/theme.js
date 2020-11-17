@@ -27,3 +27,10 @@ export const colors = {
   red800: '#9B1C1C',
   white: '#FFFFFF'
 };
+
+export const breakpoints = {
+  small: '640px',
+  medium: '768px',
+  large: '1024px',
+  extraLarge: '1280px'
+};
