@@ -7,11 +7,6 @@ import * as secretsmanager from "@aws-cdk/aws-secretsmanager"
 import * as iam from "@aws-cdk/aws-iam"
 import {Bucket} from "@aws-cdk/aws-s3"
 
-/*
-npm run build
-npm run export > out folder
-*/
-
 require("dotenv").config()
 
 export class InfraStack extends cdk.Stack {
@@ -45,6 +40,7 @@ export class InfraStack extends cdk.Stack {
       owner,
       repo,
       oauthToken,
+      branch: "main",
       output: sourceOutput,
     })
 
@@ -55,7 +51,6 @@ export class InfraStack extends cdk.Stack {
     })
 
     const buildOutput = new codepipeline.Artifact()
-
     const buildAction = new codepipeline_actions.CodeBuildAction({
       actionName: "CodeBuild",
       project,
