@@ -46,8 +46,6 @@ export class InfraStack extends cdk.Stack {
       repo,
       oauthToken,
       output: sourceOutput,
-      //webhook: true,
-      //webhookFilters: [codebuild.FilterGroup.inEventOf(codebuild.EventAction.PUSH).andBranchIs("master")],
     })
 
     //Build Stage with nodejs app

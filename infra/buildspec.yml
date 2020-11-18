@@ -14,6 +14,7 @@ phases:
     commands:
       - echo Build started on `date`
       - npm run build
+      - npm run export
 artifacts:
   files:
     - out/**/*
