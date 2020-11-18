@@ -1,7 +1,6 @@
 import styled from 'styled-components';
-import EnterpriseCard from './enterpriseCard';
 import ProCard from './proCard';
-import FreeCard from './freeCard';
+import BasicCard from './basicCard';
 import PricingHeader from './pricingHeader';
 import Layout from '../../../components/marketing/Layout';
 import { colors, breakpoints } from '../../../styles/theme';
@@ -71,9 +70,9 @@ const Pricing = () => (
           <Div />
           <Wrapper4>
             <Wrapper5>
-              <FreeCard />
+              <BasicCard title='Hobby' price='79' left />
               <ProCard />
-              <EnterpriseCard />
+              <BasicCard title='Scale' price='349' left={false} />
             </Wrapper5>
           </Wrapper4>
         </Wrapper3>
