@@ -24,17 +24,20 @@ export class InfraStack extends cdk.Stack {
       maxAzs: 3,
     })
 
-    const dbSecret = new secretsmanager.Secret(this, "Secret")
-    const role = new iam.Role(this, "FargateRole", {
-      assumedBy: new iam.ServicePrincipal("ecs-tasks.amazonaws.com"),
-      managedPolicies: [iam.ManagedPolicy.fromAwsManagedPolicyName("service-role/AmazonECSTaskExecutionRolePolicy")],
+    //Get Github access token
+    const secretGithub = secretsmanager.Secret.fromSecretAttributes(this, "ImportedSecret", {
+      secretArn: `arn:aws:secretsmanager:us-east-1:867137601660:secret:/github-access-token-NuotsR`,
     })
-    dbSecret.grantRead(role)
+    const roleCodeBuild = new iam.Role(this, "CodeBuildRole", {
+      assumedBy: new iam.ServicePrincipal("codebuild.amazonaws.com"),
+    })
+
+    secretGithub.grantRead(roleCodeBuild)
 
     // Source Stage with github
     const owner = process.env.GITHUB_OWNER ? process.env.GITHUB_OWNER : "GithubOwner"
     const repo = process.env.GITHUB_REPO ? process.env.GITHUB_REPO : "Repo"
-    const oauthToken = process.env.GITHUB_ACCESS_TOKEN ? process.env.GITHUB_ACCESS_TOKEN : "token"
+    const oauthToken = secretGithub.secretValueFromJson("GITHUB_ACCESS_TOKEN")
 
     const sourceOutput = new codepipeline.Artifact()
     const sourceAction = new codepipeline_actions.GitHubSourceAction({
@@ -43,8 +46,8 @@ export class InfraStack extends cdk.Stack {
       repo,
       oauthToken,
       output: sourceOutput,
-      webhook: true,
-      webhookFilters: [codebuild.FilterGroup.inEventOf(codebuild.EventAction.PUSH).andBranchIs("master")],
+      //webhook: true,
+      //webhookFilters: [codebuild.FilterGroup.inEventOf(codebuild.EventAction.PUSH).andBranchIs("master")],
     })
 
     //Build Stage with nodejs app
@@ -53,9 +56,7 @@ export class InfraStack extends cdk.Stack {
       buildSpec: codebuild.BuildSpec.fromObject({filename: "../buildspec.yml"}),
     })
 
-    const buildOutput = new codebuild.Artifacts.s3({
-      bucket: buildBucket,
-    })
+    const buildOutput = new codepipeline.Artifact()
 
     const buildAction = new codepipeline_actions.CodeBuildAction({
       actionName: "CodeBuild",
