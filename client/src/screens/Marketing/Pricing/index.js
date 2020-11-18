@@ -1,29 +1,85 @@
+import styled from 'styled-components';
 import EnterpriseCard from './enterpriseCard';
 import ProCard from './proCard';
 import FreeCard from './freeCard';
 import PricingHeader from './pricingHeader';
 import Layout from '../../../components/marketing/Layout';
+import { colors, breakpoints } from '../../../styles/theme';
 
-const Pricing = () => {
-  return (
-    <Layout>
-      <div className='bg-gray-900'>
-        <PricingHeader />
-        <div className='mt-16 bg-white pb-12 lg:mt-20 lg:pb-20'>
-          <div className='relative z-0'>
-            <div className='absolute inset-0 h-5/6 bg-gray-900 lg:h-2/3'></div>
-            <div className='max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8'>
-              <div className='relative lg:grid lg:grid-cols-7'>
-                <FreeCard />
-                <ProCard />
-                <EnterpriseCard />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </Layout>
-  );
-};
+const Wrapper1 = styled.div`
+  background-color: ${colors.gray900};
+`;
+
+const Wrapper2 = styled.div`
+  background-color: ${colors.white};
+  margin-top: 4rem;
+  padding-bottom: 3rem;
+  @media (min-width: ${breakpoints.large}) {
+    margin-top: 5rem;
+    padding-bottom: 5rem;
+  }
+`;
+
+const Wrapper3 = styled.div`
+  position: relative;
+  z-index: 0;
+`;
+
+const Div = styled.div`
+  position: absolute;
+  background-color: ${colors.gray900};
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 83.3%;
+  @media (min-width: ${breakpoints.large}) {
+    height: 66.6%;
+  }
+`;
+
+const Wrapper4 = styled.div`
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  @media (min-width: ${breakpoints.small}) {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+  @media (min-width: ${breakpoints.large}) {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+`;
+
+const Wrapper5 = styled.div`
+  position: relative;
+  @media (min-width: ${breakpoints.large}) {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+  }
+`;
+
+const Pricing = () => (
+  <Layout>
+    <Wrapper1>
+      <PricingHeader />
+      <Wrapper2>
+        <Wrapper3>
+          <Div />
+          <Wrapper4>
+            <Wrapper5>
+              <FreeCard />
+              <ProCard />
+              <EnterpriseCard />
+            </Wrapper5>
+          </Wrapper4>
+        </Wrapper3>
+      </Wrapper2>
+    </Wrapper1>
+  </Layout>
+);
 
 export default Pricing;
