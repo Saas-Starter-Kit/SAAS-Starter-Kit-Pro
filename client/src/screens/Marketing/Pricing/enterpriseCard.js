@@ -1,6 +1,10 @@
 import styled from 'styled-components';
-import Tick from '../../../components/svgs/tick';
+import ListItem from '../../../components/marketing/Pricing/ListItem';
 import { colors, breakpoints } from '../../../styles/theme';
+
+const StyledListItem = styled(ListItem)`
+  margin-top: 1rem;
+`;
 
 const EnterpriseCard = () => (
   <div className='mt-10 mx-auto max-w-md lg:m-0 lg:max-w-none lg:col-start-6 lg:col-end-8 lg:row-start-2 lg:row-end-3'>
@@ -25,30 +29,9 @@ const EnterpriseCard = () => (
         </div>
         <div className='flex-1 flex flex-col justify-between border-t-2 border-gray-100 p-6 bg-gray-50 sm:p-10 lg:p-6 xl:p-10'>
           <ul>
-            <li className='flex items-start'>
-              <div className='flex-shrink-0'>
-                <Tick />
-              </div>
-              <p className='ml-3 text-base leading-6 font-medium text-gray-500'>
-                Pariatur quod similique
-              </p>
-            </li>
-            <li className='mt-4 flex items-start'>
-              <div className='flex-shrink-0'>
-                <Tick />
-              </div>
-              <p className='ml-3 text-base leading-6 font-medium text-gray-500'>
-                Sapiente libero doloribus
-              </p>
-            </li>
-            <li className='mt-4 flex items-start'>
-              <div className='flex-shrink-0'>
-                <Tick />
-              </div>
-              <p className='ml-3 text-base leading-6 font-medium text-gray-500'>
-                Vel ipsa esse repudiandae
-              </p>
-            </li>
+            <ListItem text='Pariatur quod similique' />
+            <StyledListItem text='Sapiente libero doloribus' />
+            <StyledListItem text='Vel ipsa esse repudiandae' />
           </ul>
           <div className='mt-8'>
             <div className='rounded-lg shadow-md'>
