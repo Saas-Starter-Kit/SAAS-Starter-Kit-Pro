@@ -1,244 +1,293 @@
-// Feature Section for Landing Page
 import styled from 'styled-components';
+import { colors, breakpoints } from '../../../styles/theme';
+import DesktopBackground1 from './svgs/desktopBackground1';
+import MobileBackground1 from './svgs/mobileBackground1';
+import DesktopBackground2 from './svgs/desktopBackground2';
+import MobileBackground2 from './svgs/mobileBackground2';
+
+const Container1 = styled.div`
+  background-color: ${colors.gray50};
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+  overflow: hidden;
+  @media (min-width: ${breakpoints.large}) {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+`;
+
+const Container2 = styled.div`
+  position: relative;
+  max-width: 36rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  @media (min-width: ${breakpoints.small}) {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+  @media (min-width: ${breakpoints.large}) {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    max-width: 1280px;
+  }
+`;
+
+const LargeHeader = styled.h4`
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 800;
+  color: ${colors.gray900};
+  line-height: 2rem;
+  @media (min-width: ${breakpoints.small}) {
+    font-size: 1.875rem;
+    font-size: 1.875rem;
+  }
+`;
+
+const LargeParagraph = styled.p`
+  margin-top: 0.75rem;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  color: ${colors.gray500};
+`;
+
+const TextWrapper = styled.div`
+  margin-left: 1rem;
+`;
+
+const SmallHeader = styled.h5`
+  font-size: 1.125rem;
+  line-height: 1.5rem;
+  font-weight: 500;
+  color: ${colors.gray900};
+`;
+
+const SmallParagraph = styled.p`
+  margin-top: 0.5rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  color: ${colors.gray500};
+`;
+
+const List = styled.ul`
+  margin-top: 2.5rem;
+`;
+
+const ListItem = styled.li`
+  margin-top: 2.5rem;
+`;
+
+const Item = styled.div`
+  display: flex;
+`;
+
+const ImageWrapper1 = styled.div`
+  flex-shrink: 0;
+`;
+
+const ImageWrapper2 = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 3rem;
+  width: 3rem;
+  border-radius: 0.375rem;
+  color: ${colors.white};
+  background-color: ${colors.indigo500};
+`;
 
 const MenuImg = styled.img`
   height: 2rem;
   width: 2rem;
-  color: white;
+  color: ${colors.white};
 `;
 
-const LandingFeatures = () => {
-  return (
-    <div className='py-16 bg-gray-50 overflow-hidden lg:py-24'>
-      <div className='relative max-w-xl mx-auto px-4 sm:px-6 lg:px-8 lg:max-w-screen-xl'>
-        <svg
-          className='hidden lg:block absolute left-full transform -translate-x-1/2 -translate-y-1/4'
-          width='404'
-          height='784'
-          fill='none'
-          viewBox='0 0 404 784'
-        >
-          <defs>
-            <pattern
-              id='b1e6e422-73f8-40a6-b5d9-c8586e37e0e7'
-              x='0'
-              y='0'
-              width='20'
-              height='20'
-              patternUnits='userSpaceOnUse'
-            >
-              <rect
-                x='0'
-                y='0'
-                width='4'
-                height='4'
-                className='text-gray-200'
-                fill='currentColor'
-              />
-            </pattern>
-          </defs>
-          <rect width='404' height='784' fill='url(#b1e6e422-73f8-40a6-b5d9-c8586e37e0e7)' />
-        </svg>
-        <div className='relative mt-12 lg:mt-24 lg:grid lg:grid-cols-2 lg:gap-8 lg:items-center'>
-          <div className='relative'>
-            <h4 className='text-2xl leading-8 font-extrabold text-gray-900 tracking-tight sm:text-3xl sm:leading-9'>
-              Awesome Feature about App 1
-            </h4>
-            <p className='mt-3 text-lg leading-7 text-gray-500'>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur minima sequi
-              recusandae, porro maiores officia assumenda aliquam laborum ab aliquid veritatis
-              impedit odit adipisci optio iste blanditiis facere. Totam, velit.
-            </p>
+const FeatureImage = styled.img`
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+`;
 
-            <ul className='mt-10'>
+const FeatureWrapper1a = styled.div`
+  position: relative;
+  margin-top: 3rem;
+  @media (min-width: ${breakpoints.large}) {
+    margin-top: 6rem;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-gap: 2rem;
+    gap: 2rem;
+    align-items: center;
+  }
+`;
+
+const FeatureWrapper1b = styled.div`
+  position: relative;
+`;
+
+const FeatureWrapper2a = styled.div`
+  position: relative;
+  margin-top: 3rem;
+  @media (min-width: ${breakpoints.small}) {
+    margin-top: 4rem;
+  }
+  @media (min-width: ${breakpoints.large}) {
+    margin-top: 6rem;
+  }
+`;
+
+const FeatureWrapper2b = styled.div`
+  @media (min-width: ${breakpoints.large}) {
+    display: grid;
+    grid-auto-flow: row dense;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-gap: 2rem;
+    gap: 2rem;
+    align-items: center;
+  }
+`;
+
+const FeatureWrapper2c = styled.div`
+  @media (min-width: ${breakpoints.large}) {
+    grid-column-start: 2;
+  }
+`;
+
+const MobileBackgroundWrapper1 = styled.div`
+  margin-top: 2.5rem;
+  margin-left: -1rem;
+  margin-right: -1rem;
+  position: relative;
+  @media (min-width: ${breakpoints.large}) {
+    margin-top: 0;
+  }
+`;
+
+const MobileBackgroundWrapper2 = styled.div`
+  margin-top: 2.5rem;
+  margin-left: -1rem;
+  margin-right: -1rem;
+  position: relative;
+  @media (min-width: ${breakpoints.large}) {
+    margin-top: 0;
+    grid-column-start: 1;
+  }
+`;
+
+const LandingFeatures = () => (
+  <Container1>
+    <Container2>
+      <DesktopBackground1 />
+      <FeatureWrapper1a>
+        <FeatureWrapper1b>
+          <LargeHeader>Awesome Feature about App 1</LargeHeader>
+          <LargeParagraph>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur minima sequi
+            recusandae, porro maiores officia assumenda aliquam laborum ab aliquid veritatis impedit
+            odit adipisci optio iste blanditiis facere. Totam, velit.
+          </LargeParagraph>
+          <List>
+            <li>
+              <Item>
+                <ImageWrapper1>
+                  <ImageWrapper2>
+                    <MenuImg src='/icons/chart-bar.svg' alt='chart bar' />
+                  </ImageWrapper2>
+                </ImageWrapper1>
+                <TextWrapper>
+                  <SmallHeader>Sub Feature 1</SmallHeader>
+                  <SmallParagraph>
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit
+                    perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.
+                  </SmallParagraph>
+                </TextWrapper>
+              </Item>
+            </li>
+            <ListItem>
+              <Item>
+                <ImageWrapper1>
+                  <ImageWrapper2>
+                    <MenuImg src='/icons/chart-bar.svg' alt='chart bar' />
+                  </ImageWrapper2>
+                </ImageWrapper1>
+                <TextWrapper>
+                  <SmallHeader>Sub Feature 2</SmallHeader>
+                  <SmallParagraph>
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit
+                    perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.
+                  </SmallParagraph>
+                </TextWrapper>
+              </Item>
+            </ListItem>
+          </List>
+        </FeatureWrapper1b>
+        <MobileBackgroundWrapper1>
+          <MobileBackground1 />
+          <FeatureImage
+            width='490'
+            src='https://tailwindui.com/img/features/feature-example-1.png'
+            alt=''
+          />
+        </MobileBackgroundWrapper1>
+      </FeatureWrapper1a>
+      <DesktopBackground2 />
+      <FeatureWrapper2a>
+        <FeatureWrapper2b>
+          <FeatureWrapper2c>
+            <LargeHeader>Awesome Feature about App 2</LargeHeader>
+            <LargeParagraph>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit ex obcaecati natus
+              eligendi delectus, cum deleniti sunt in labore nihil quod quibusdam expedita nemo.
+            </LargeParagraph>
+            <List>
               <li>
-                <div className='flex'>
-                  <div className='flex-shrink-0'>
-                    <div className='flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white'>
+                <Item>
+                  <ImageWrapper1>
+                    <ImageWrapper2>
                       <MenuImg src='/icons/chart-bar.svg' alt='chart bar' />
-                    </div>
-                  </div>
-                  <div className='ml-4'>
-                    <h5 className='text-lg leading-6 font-medium text-gray-900'>Sub Feature 1</h5>
-                    <p className='mt-2 text-base leading-6 text-gray-500'>
+                    </ImageWrapper2>
+                  </ImageWrapper1>
+                  <TextWrapper>
+                    <SmallHeader>Sub Feature 1</SmallHeader>
+                    <SmallParagraph>
                       Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit
                       perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.
-                    </p>
-                  </div>
-                </div>
+                    </SmallParagraph>
+                  </TextWrapper>
+                </Item>
               </li>
-              <li className='mt-10'>
-                <div className='flex'>
-                  <div className='flex-shrink-0'>
-                    <div className='flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white'>
+              <ListItem>
+                <Item>
+                  <ImageWrapper1>
+                    <ImageWrapper2>
                       <MenuImg src='/icons/chart-bar.svg' alt='chart bar' />
-                    </div>
-                  </div>
-                  <div className='ml-4'>
-                    <h5 className='text-lg leading-6 font-medium text-gray-900'>Sub Feature 2</h5>
-                    <p className='mt-2 text-base leading-6 text-gray-500'>
+                    </ImageWrapper2>
+                  </ImageWrapper1>
+                  <TextWrapper>
+                    <SmallHeader>Sub Feature 2</SmallHeader>
+                    <SmallParagraph>
                       Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit
                       perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.
-                    </p>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </div>
-
-          <div className='mt-10 -mx-4 relative lg:mt-0'>
-            <svg
-              className='absolute left-1/2 transform -translate-x-1/2 translate-y-16 lg:hidden'
-              width='784'
-              height='404'
-              fill='none'
-              viewBox='0 0 784 404'
-            >
-              <defs>
-                <pattern
-                  id='ca9667ae-9f92-4be7-abcb-9e3d727f2941'
-                  x='0'
-                  y='0'
-                  width='20'
-                  height='20'
-                  patternUnits='userSpaceOnUse'
-                >
-                  <rect
-                    x='0'
-                    y='0'
-                    width='4'
-                    height='4'
-                    className='text-gray-200'
-                    fill='currentColor'
-                  />
-                </pattern>
-              </defs>
-              <rect width='784' height='404' fill='url(#ca9667ae-9f92-4be7-abcb-9e3d727f2941)' />
-            </svg>
-            <img
-              className='relative mx-auto'
+                    </SmallParagraph>
+                  </TextWrapper>
+                </Item>
+              </ListItem>
+            </List>
+          </FeatureWrapper2c>
+          <MobileBackgroundWrapper2>
+            <MobileBackground2 />
+            <FeatureImage
               width='490'
-              src='https://tailwindui.com/img/features/feature-example-1.png'
+              src='https://tailwindui.com/img/features/feature-example-2.png'
               alt=''
             />
-          </div>
-        </div>
-        <svg
-          className='hidden lg:block absolute right-full transform translate-x-1/2 translate-y-12'
-          width='404'
-          height='784'
-          fill='none'
-          viewBox='0 0 404 784'
-        >
-          <defs>
-            <pattern
-              id='64e643ad-2176-4f86-b3d7-f2c5da3b6a6d'
-              x='0'
-              y='0'
-              width='20'
-              height='20'
-              patternUnits='userSpaceOnUse'
-            >
-              <rect
-                x='0'
-                y='0'
-                width='4'
-                height='4'
-                className='text-gray-200'
-                fill='currentColor'
-              />
-            </pattern>
-          </defs>
-          <rect width='404' height='784' fill='url(#64e643ad-2176-4f86-b3d7-f2c5da3b6a6d)' />
-        </svg>
-        <div className='relative mt-12 sm:mt-16 lg:mt-24'>
-          <div className='lg:grid lg:grid-flow-row-dense lg:grid-cols-2 lg:gap-8 lg:items-center'>
-            <div className='lg:col-start-2'>
-              <h4 className='text-2xl leading-8 font-extrabold text-gray-900 tracking-tight sm:text-3xl sm:leading-9'>
-                Awesome Feature about App 2
-              </h4>
-              <p className='mt-3 text-lg leading-7 text-gray-500'>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit ex obcaecati natus
-                eligendi delectus, cum deleniti sunt in labore nihil quod quibusdam expedita nemo.
-              </p>
-
-              <ul className='mt-10'>
-                <li>
-                  <div className='flex'>
-                    <div className='flex-shrink-0'>
-                      <div className='flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white'>
-                        <MenuImg src='/icons/chart-bar.svg' alt='chart bar' />
-                      </div>
-                    </div>
-                    <div className='ml-4'>
-                      <h5 className='text-lg leading-6 font-medium text-gray-900'>Sub Feature 1</h5>
-                      <p className='mt-2 text-base leading-6 text-gray-500'>
-                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit
-                        perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.
-                      </p>
-                    </div>
-                  </div>
-                </li>
-                <li className='mt-10'>
-                  <div className='flex'>
-                    <div className='flex-shrink-0'>
-                      <div className='flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white'>
-                        <MenuImg src='/icons/chart-bar.svg' alt='chart bar' />
-                      </div>
-                    </div>
-                    <div className='ml-4'>
-                      <h5 className='text-lg leading-6 font-medium text-gray-900'>Sub Feature 2</h5>
-                      <p className='mt-2 text-base leading-6 text-gray-500'>
-                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit
-                        perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.
-                      </p>
-                    </div>
-                  </div>
-                </li>
-              </ul>
-            </div>
-
-            <div className='mt-10 -mx-4 relative lg:mt-0 lg:col-start-1'>
-              <svg
-                className='absolute left-1/2 transform -translate-x-1/2 translate-y-16 lg:hidden'
-                width='784'
-                height='404'
-                fill='none'
-                viewBox='0 0 784 404'
-              >
-                <defs>
-                  <pattern
-                    id='e80155a9-dfde-425a-b5ea-1f6fadd20131'
-                    x='0'
-                    y='0'
-                    width='20'
-                    height='20'
-                    patternUnits='userSpaceOnUse'
-                  >
-                    <rect
-                      x='0'
-                      y='0'
-                      width='4'
-                      height='4'
-                      className='text-gray-200'
-                      fill='currentColor'
-                    />
-                  </pattern>
-                </defs>
-                <rect width='784' height='404' fill='url(#e80155a9-dfde-425a-b5ea-1f6fadd20131)' />
-              </svg>
-              <img
-                className='relative mx-auto'
-                width='490'
-                src='https://tailwindui.com/img/features/feature-example-2.png'
-                alt=''
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
+          </MobileBackgroundWrapper2>
+        </FeatureWrapper2b>
+      </FeatureWrapper2a>
+    </Container2>
+  </Container1>
+);
 
 export default LandingFeatures;
