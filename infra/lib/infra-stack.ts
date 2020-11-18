@@ -44,7 +44,7 @@ export class InfraStack extends cdk.Stack {
       output: sourceOutput,
     })
 
-    //Build Stage with nodejs app
+    //Build Stage
     const buildBucket = new Bucket(this, "BuildBucket")
     const project = new codebuild.PipelineProject(this, "MyProject", {
       buildSpec: codebuild.BuildSpec.fromObject({filename: "../buildspec.yml"}),
