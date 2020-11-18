@@ -17,7 +17,7 @@ const Rect = styled.rect`
   color: ${colors.gray200};
 `;
 
-export default () => (
+const DesktopBackground2 = () => (
   <Svg width='404' height='784' fill='none' viewBox='0 0 404 784'>
     <defs>
       <pattern
@@ -34,3 +34,5 @@ export default () => (
     <rect width='404' height='784' fill='url(#64e643ad-2176-4f86-b3d7-f2c5da3b6a6d)' />
   </Svg>
 );
+
+export default DesktopBackground2;

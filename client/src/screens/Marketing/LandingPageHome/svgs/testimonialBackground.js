@@ -20,7 +20,7 @@ const Rect = styled.rect`
   color: ${colors.gray200};
 `;
 
-export default () => (
+const TestimonialBackground = () => (
   <Svg
     width='404'
     height='404'
@@ -45,3 +45,5 @@ export default () => (
     <rect width='404' height='404' fill='url(#ad119f34-7694-4c31-947f-5c9d249b21f3)' />
   </Svg>
 );
+
+export default TestimonialBackground;

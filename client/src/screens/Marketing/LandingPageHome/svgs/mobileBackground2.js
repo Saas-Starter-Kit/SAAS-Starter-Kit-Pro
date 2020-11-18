@@ -16,7 +16,7 @@ const Rect = styled.rect`
   color: ${colors.gray200};
 `;
 
-export default () => (
+const MobileBackground2 = () => (
   <Svg width='784' height='404' fill='none' viewBox='0 0 784 404'>
     <defs>
       <pattern
@@ -33,3 +33,5 @@ export default () => (
     <rect width='784' height='404' fill='url(#e80155a9-dfde-425a-b5ea-1f6fadd20131)' />
   </Svg>
 );
+
+export default MobileBackground2;
