@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import DummySmallIcon from '../../dummyIcons/DummySmallIcon';
+import DummyFooterIcon from '../../svgs/DummyFooterIcon';
 import { colors } from '../../../styles/theme';
 
 const Wrapper = styled.div`
@@ -30,34 +30,19 @@ const Span = styled.span`
   border-width: 0;
 `;
 
-const Facebook = styled(DummySmallIcon)`
-  height: 2.5rem;
-  width: 2.5rem;
-`;
-
-const Twitter = styled(DummySmallIcon)`
-  height: 2.5rem;
-  width: 2.5rem;
-`;
-
-const GitHub = styled(DummySmallIcon)`
-  height: 2.5rem;
-  width: 2.5rem;
-`;
-
 const SocialBarFooter = () => (
   <Wrapper>
     <Link href='#'>
       <Span>Facebook</Span>
-      <Facebook />
+      <DummyFooterIcon />
     </Link>
     <Link href='#'>
       <Span>Twitter</Span>
-      <Twitter />
+      <DummyFooterIcon />
     </Link>
     <Link href='#'>
       <Span>GitHub</Span>
-      <GitHub />
+      <DummyFooterIcon />
     </Link>
   </Wrapper>
 );

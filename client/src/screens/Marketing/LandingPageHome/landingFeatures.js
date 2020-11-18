@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import { colors, breakpoints } from '../../../styles/theme';
-import DesktopBackground1 from './svgs/desktopBackground1';
-import MobileBackground1 from './svgs/mobileBackground1';
-import DesktopBackground2 from './svgs/desktopBackground2';
-import MobileBackground2 from './svgs/mobileBackground2';
+import DesktopBackground1 from '../../../components/svgs/desktopBackground1';
+import MobileBackground1 from '../../../components/svgs/mobileBackground1';
+import DesktopBackground2 from '../../../components/svgs/desktopBackground2';
+import MobileBackground2 from '../../../components/svgs/mobileBackground2';
 
 const Container1 = styled.div`
   background-color: ${colors.gray50};

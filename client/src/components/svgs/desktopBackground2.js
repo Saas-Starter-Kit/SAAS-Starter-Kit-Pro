@@ -1,27 +1,27 @@
 import styled from 'styled-components';
-import { colors, breakpoints, transform } from '../../../../styles/theme';
+import { colors, breakpoints, transform } from '../../styles/theme';
 
 const Svg = styled.svg`
   display: none;
-  position: absolute;
   @media (min-width: ${breakpoints.large}) {
     display: block;
   }
-  left: 100%;
+  position: absolute;
+  right: 100%;
   ${transform}
-  --transform-translate-x: -50%;
-  --transform-translate-y: -25%;
+  --transform-translate-x: 50%;
+  --transform-translate-y: 3rem;
 `;
 
 const Rect = styled.rect`
   color: ${colors.gray200};
 `;
 
-const DesktopBackground1 = () => (
+const DesktopBackground2 = () => (
   <Svg width='404' height='784' fill='none' viewBox='0 0 404 784'>
     <defs>
       <pattern
-        id='b1e6e422-73f8-40a6-b5d9-c8586e37e0e7'
+        id='64e643ad-2176-4f86-b3d7-f2c5da3b6a6d'
         x='0'
         y='0'
         width='20'
@@ -31,8 +31,8 @@ const DesktopBackground1 = () => (
         <Rect x='0' y='0' width='4' height='4' fill='currentColor' />
       </pattern>
     </defs>
-    <rect width='404' height='784' fill='url(#b1e6e422-73f8-40a6-b5d9-c8586e37e0e7)' />
+    <rect width='404' height='784' fill='url(#64e643ad-2176-4f86-b3d7-f2c5da3b6a6d)' />
   </Svg>
 );
 
-export default DesktopBackground1;
+export default DesktopBackground2;

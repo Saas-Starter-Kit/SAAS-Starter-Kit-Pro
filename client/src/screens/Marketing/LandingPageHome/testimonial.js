@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { colors, breakpoints } from '../../../styles/theme';
-import Background from './svgs/testimonialBackground';
+import Background from '../../../components/svgs/testimonialBackground';
 
 const Section = styled.section`
   padding-top: 3rem;

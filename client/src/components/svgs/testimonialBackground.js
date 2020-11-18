@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colors, breakpoints, transform } from '../../../../styles/theme';
+import { colors, breakpoints, transform } from '../../styles/theme';
 
 const Svg = styled.svg`
   position: absolute;
