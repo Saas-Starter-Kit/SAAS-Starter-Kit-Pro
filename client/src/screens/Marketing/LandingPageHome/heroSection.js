@@ -1,38 +1,23 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import Link from 'next/link';
+import { colors, breakpoints } from '../../../styles/theme';
 
 const Container = styled.div`
   display: grid;
   grid-template-columns: auto auto;
-  background-color: #f9fafb;
-  background-color: rgba(249, 250, 251, 1);
+  background-color: ${colors.gray50};
   background-image: url('/illustrations/blobSmall.svg');
   background-repeat: no-repeat;
   background-size: contain;
   background-position: -10% 0%;
 `;
 
-const ImageContainer = styled.div`
-  background-color: #f9fafb;
-  background-color: rgba(249, 250, 251, 1);
-  background-image: url('/illustrations/blobBig.svg');
-  background-repeat: no-repeat;
-  background-position: 0% 0%;
-`;
-
 const HeroTextContainer = styled.div`
-  padding-top: 3rem;
-  padding-bottom: 5rem;
+  padding: 3rem 1rem 5rem;
   text-align: center;
-  padding-left: 1rem;
-  padding-right: 1rem;
-
-  @media (min-width: 1024px) {
-    padding-top: 6rem;
-    padding-bottom: 12rem;
+  @media (min-width: ${breakpoints.large}) {
+    padding: 6rem 2rem 12rem;
     text-align: left;
-    padding-left: 2rem;
-    padding-right: 2rem;
   }
 `;
 
@@ -41,11 +26,26 @@ const HeroHeader = styled.h2`
   letter-spacing: -0.03rem;
   line-height: 2.5rem;
   font-weight: 800;
-  color: #161e2e;
-
-  @media (min-width: 640px) {
+  color: ${colors.gray900};
+  @media (min-width: ${breakpoints.small}) {
     line-height: 1;
     font-size: 3.3rem;
+  }
+`;
+
+const Span = styled.span`
+  color: ${colors.indigo600};
+`;
+
+const Paragraph = styled.p`
+  margin-top: 0.75rem;
+  font-size: 1.125rem;
+  color: ${colors.gray500};
+  @media (min-width: ${breakpoints.small}) {
+    font-size: 1.25rem;
+  }
+  @media (min-width: ${breakpoints.medium}) {
+    margin-top: 1.25rem;
   }
 `;
 
@@ -55,42 +55,66 @@ const StyledButton = styled.button`
   padding: 0.8rem 1.2rem 0.8rem 1.2rem;
   background-color: var(--primary-color);
   color: white;
-
   &:hover {
     opacity: 95%;
     outline: lightblue solid 2px;
   }
 `;
 
-const HeroSection = () => {
-  return (
-    <>
-      <Container>
-        <HeroTextContainer>
-          <HeroHeader>
-            Data to enrich your
-            <span className='text-indigo-600'>&nbsp; online business</span>
-          </HeroHeader>
-          <p className='mt-3 text-lg text-gray-500 sm:text-xl md:mt-5'>
-            Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat
-            commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua.
-          </p>
-          <Link href='/login'>
-            <StyledButton type='primary'>Get started &#8594;</StyledButton>
-          </Link>
-        </HeroTextContainer>
-        <ImageContainer>
-          <div className='hidden lg:block mt-8 p-12'>
-            <img
-              className='h-auto z-10 FadeInLeft'
-              src='/illustrations/undraw_stepping_up_g6oo.svg'
-              alt='Step Up'
-            />
-          </div>
-        </ImageContainer>
-      </Container>
-    </>
-  );
-};
+const ImageContainer1 = styled.div`
+  background-color: ${colors.gray50};
+  background-image: url('/illustrations/blobBig.svg');
+  background-repeat: no-repeat;
+  background-position: 0% 0%;
+`;
+
+const ImageContainer2 = styled.div`
+  display: none;
+  margin-top: 2rem;
+  padding: 3rem;
+  @media (min-width: ${breakpoints.large}) {
+    display: block;
+  }
+`;
+
+const fadeInLeft = keyframes`
+  from {
+    opacity: 0;
+    transform: translateX(1.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+`;
+
+const Image = styled.img`
+  height: auto;
+  z-index: 10;
+  animation: ${fadeInLeft} 0.7s ease-in forwards;
+`;
+
+const HeroSection = () => (
+  <Container>
+    <HeroTextContainer>
+      <HeroHeader>
+        Data to enrich your
+        <Span>&nbsp; online business</Span>
+      </HeroHeader>
+      <Paragraph>
+        Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo.
+        Elit sunt amet fugiat veniam occaecat fugiat aliqua.
+      </Paragraph>
+      <Link href='/login'>
+        <StyledButton type='primary'>Get started &#8594;</StyledButton>
+      </Link>
+    </HeroTextContainer>
+    <ImageContainer1>
+      <ImageContainer2>
+        <Image src='/illustrations/undraw_stepping_up_g6oo.svg' alt='Step Up' />
+      </ImageContainer2>
+    </ImageContainer1>
+  </Container>
+);
 
 export default HeroSection;

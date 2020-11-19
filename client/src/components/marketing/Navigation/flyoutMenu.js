@@ -1,5 +1,52 @@
 import styled from 'styled-components';
 import Link from 'next/link';
+import { colors, breakpoints, transform } from '../../../styles/theme';
+
+const Container1 = styled.div`
+  position: absolute;
+  margin-left: -1rem;
+  margin-top: 0.75rem;
+  ${transform}
+  width: max-content;
+  max-width: 28rem;
+  @media (min-width: ${breakpoints.medium}) {
+    max-width: 48rem;
+  }
+  @media (min-width: ${breakpoints.large}) {
+    margin-left: 0;
+    left: 50%;
+    --transform-translate-x: -50%;
+  }
+`;
+
+const Container2 = styled.div`
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+`;
+
+const Container3 = styled.div`
+  border-radius: 0.5rem;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+`;
+
+const Container4 = styled.div`
+  z-index: 20;
+  position: relative;
+  display: grid;
+  grid-gap: 1.5rem;
+  gap: 1.5rem;
+  background-color: ${colors.white};
+  padding: 1.5rem 1.25rem;
+  @media (min-width: ${breakpoints.small}) {
+    grid-gap: 2rem;
+    gap: 2rem;
+    padding: 2rem;
+  }
+  @media (min-width: ${breakpoints.large}) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+`;
 
 const MenuImg = styled.img`
   height: 2rem;
@@ -7,69 +54,113 @@ const MenuImg = styled.img`
   color: white;
 `;
 
-const FlyoutMenu = () => {
-  return (
-    <div className='absolute -ml-4 mt-3 transform max-w-md md:max-w-3xl max-content lg:ml-0 lg:left-1/2 lg:-translate-x-1/2'>
-      <div className='rounded-lg shadow-lg'>
-        <div className='rounded-lg shadow-xs overflow-hidden'>
-          <div className='z-20 relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8 lg:grid-cols-2'>
-            <Link href='#'>
-              <div className='-m-3 p-3 cursor-pointer flex items-start space-x-4 rounded-lg hover:bg-gray-50 transition ease-in-out duration-150'>
-                <div className='flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-md bg-indigo-500 text-white sm:h-12 sm:w-12'>
-                  <MenuImg src='/icons/chart-bar.svg' alt='chart bar' />
-                </div>
-                <div className='space-y-1'>
-                  <p className='text-base leading-6 font-medium text-gray-900'>Analytics</p>
-                  <p className='text-sm leading-5 text-gray-500'>
-                    Get a better understanding of where your traffic is coming from.
-                  </p>
-                </div>
-              </div>
-            </Link>
-            <Link href='#'>
-              <div className='-m-3 p-3 cursor-pointer flex items-start space-x-4 rounded-lg hover:bg-gray-50 transition ease-in-out duration-150'>
-                <div className='flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-md bg-indigo-500 text-white sm:h-12 sm:w-12'>
-                  <MenuImg src='/icons/cursor-click.svg' alt='click' />
-                </div>
-                <div className='space-y-1'>
-                  <p className='text-base leading-6 font-medium text-gray-900'>Engagement</p>
-                  <p className='text-sm leading-5 text-gray-500'>
-                    Speak directly to your customers in a more meaningful way.
-                  </p>
-                </div>
-              </div>
-            </Link>
-            <Link href='#'>
-              <div className='-m-3 p-3 cursor-pointer flex items-start space-x-4 rounded-lg hover:bg-gray-50 transition ease-in-out duration-150'>
-                <div className='flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-md bg-indigo-500 text-white sm:h-12 sm:w-12'>
-                  <MenuImg src='/icons/shield-check.svg' alt='click' />
-                </div>
-                <div className='space-y-1'>
-                  <p className='text-base leading-6 font-medium text-gray-900'>Security</p>
-                  <p className='text-sm leading-5 text-gray-500'>
-                    Your customers data will be safe and secure.
-                  </p>
-                </div>
-              </div>
-            </Link>
-            <Link href='#'>
-              <div className='-m-3 p-3 cursor-pointer flex items-start space-x-4 rounded-lg hover:bg-gray-50 transition ease-in-out duration-150'>
-                <div className='flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-md bg-indigo-500 text-white sm:h-12 sm:w-12'>
-                  <MenuImg src='/icons/view-grid.svg' alt='click' />
-                </div>
-                <div className='space-y-1'>
-                  <p className='text-base leading-6 font-medium text-gray-900'>Integrations</p>
-                  <p className='text-sm leading-5 text-gray-500'>
-                    Connect with third-party tools that you’re already using.
-                  </p>
-                </div>
-              </div>
-            </Link>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
+const Item = styled.div`
+  margin: -0.75rem;
+  padding: 0.75rem;
+  cursor: pointer;
+  display: flex;
+  align-items: flex-start;
+  border-radius: 0.5rem;
+  &:hover {
+    background-color: ${colors.gray50};
+  }
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow,
+    transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+`;
+
+const MenuImageWrapper = styled.div`
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: 0.375rem;
+  background-color: ${colors.indigo500};
+  color: ${colors.white};
+  @media (min-width: ${breakpoints.small}) {
+    height: 3rem;
+    width: 3rem;
+  }
+`;
+
+const TextWrapper = styled.div`
+  margin-top: 0.25rem;
+  margin-left: 1rem;
+`;
+
+const Title = styled.p`
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 500;
+  color: ${colors.gray900};
+`;
+
+const Description = styled.p`
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: ${colors.gray500};
+`;
+
+const FlyoutMenu = () => (
+  <Container1>
+    <Container2>
+      <Container3>
+        <Container4>
+          <Link href='#'>
+            <Item>
+              <MenuImageWrapper>
+                <MenuImg src='/icons/chart-bar.svg' alt='chart bar' />
+              </MenuImageWrapper>
+              <TextWrapper>
+                <Title>Analytics</Title>
+                <Description>
+                  Get a better understanding of where your traffic is coming from.
+                </Description>
+              </TextWrapper>
+            </Item>
+          </Link>
+          <Link href='#'>
+            <Item>
+              <MenuImageWrapper>
+                <MenuImg src='/icons/cursor-click.svg' alt='click' />
+              </MenuImageWrapper>
+              <TextWrapper>
+                <Title>Engagement</Title>
+                <Description>
+                  Speak directly to your customers in a more meaningful way.
+                </Description>
+              </TextWrapper>
+            </Item>
+          </Link>
+          <Link href='#'>
+            <Item>
+              <MenuImageWrapper>
+                <MenuImg src='/icons/shield-check.svg' alt='click' />
+              </MenuImageWrapper>
+              <TextWrapper>
+                <Title>Security</Title>
+                <Description>Your customers data will be safe and secure.</Description>
+              </TextWrapper>
+            </Item>
+          </Link>
+          <Link href='#'>
+            <Item>
+              <MenuImageWrapper>
+                <MenuImg src='/icons/view-grid.svg' alt='click' />
+              </MenuImageWrapper>
+              <TextWrapper>
+                <Title>Integrations</Title>
+                <Description>Connect with third-party tools that you’re already using.</Description>
+              </TextWrapper>
+            </Item>
+          </Link>
+        </Container4>
+      </Container3>
+    </Container2>
+  </Container1>
+);
 
 export default FlyoutMenu;

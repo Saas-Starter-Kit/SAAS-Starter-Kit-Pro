@@ -1,14 +1,18 @@
-import styled from 'styled-components';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import styled from 'styled-components';
 import SocialBarFooter from './socialBarFooter';
+import { colors } from '../../../styles/theme';
+
+const Wrapper = styled.div`
+  background-color: ${colors.blue900};
+`;
 
 const Container = styled.div`
   display: grid;
   grid-template-columns: auto auto;
   padding: 2rem;
-  background-color: #1e429f;
-  background-color: rgba(30, 66, 159, 1);
+  background-color: ${colors.blue800};
 `;
 
 const Column = styled.div`
@@ -25,11 +29,11 @@ const FooterLink = styled.p`
 `;
 
 const IMGContainer = styled.div`
-  background-color: ${(props) => (props.isHome ? '#5850ec' : 'white')};
+  background-color: ${(props) => (props.isHome ? colors.indigo600 : colors.white)};
 `;
 
 const BottomFooter = styled.div`
-  background-color: #233876;
+  background-color: ${colors.blue900};
   color: white;
   font-size: 1.25rem;
   padding: 1rem;
@@ -44,9 +48,8 @@ const FooterColHeader = styled.p`
 
 const Footer = () => {
   const router = useRouter();
-
   return (
-    <div className='bg-blue-900'>
+    <Wrapper>
       <IMGContainer isHome={router.pathname == '/' ? true : false}>
         <img src='/illustrations/waveFooter.svg' alt='wave' />
       </IMGContainer>
@@ -78,7 +81,7 @@ const Footer = () => {
         </Column>
       </Container>
       <BottomFooter>Copyright &copy; 2020 Example Inc</BottomFooter>
-    </div>
+    </Wrapper>
   );
 };
 

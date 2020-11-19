@@ -1,18 +1,3 @@
-@keyframes FadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(0.25rem);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.FadeInUp {
-  animation: FadeInUp 0.3s ease-in forwards;
-}
-
 @keyframes FadeInLeft {
   from {
     opacity: 0;
