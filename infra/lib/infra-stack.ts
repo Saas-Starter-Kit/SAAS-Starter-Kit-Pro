@@ -6,6 +6,8 @@ import * as codebuild from "@aws-cdk/aws-codebuild"
 import * as secretsmanager from "@aws-cdk/aws-secretsmanager"
 import * as iam from "@aws-cdk/aws-iam"
 import * as s3 from "@aws-cdk/aws-s3"
+import * as cloudfront from "@aws-cdk/aws-cloudfront"
+import * as origins from "@aws-cdk/aws-cloudfront-origins"
 
 require("dotenv").config()
 
@@ -61,9 +63,31 @@ export class InfraStack extends cdk.Stack {
         },
       },
       artifacts: {
-        files: ["**/*"],
+        files: ["*/*"],
+        basedirectory: "build",
       },
     }
+
+    // const buildSpecObj2 = {
+    //  version: "0.2",
+    //  phases: {
+    //    install: {
+    //      "runtime-versions": {
+    //        nodejs: 10,
+    //      },
+    //    },
+    //    pre_build: {
+    //      commands: ['echo "--------PREBUILD PHASE--------"', "cd client", "npm install"],
+    //    },
+    //    build: {
+    //      commands: ["npm run build", "npm run export"],
+    //    },
+    //  },
+    //  artifacts: {
+    //    files: ["out/*"],
+    //    basedirectory: 'client'
+    //  },
+    //}
 
     const project = new codebuild.PipelineProject(this, "MyProject", {
       buildSpec: codebuild.BuildSpec.fromObject(buildSpecObj),
@@ -78,11 +102,15 @@ export class InfraStack extends cdk.Stack {
     })
 
     //deploy stage
-    const targetBucket = new s3.Bucket(this, "BuildOutputBucket", {})
+    const outputBucket = new s3.Bucket(this, "BuildOutputBucket", {})
     const deployAction = new codepipeline_actions.S3DeployAction({
       actionName: "S3Deploy",
-      bucket: targetBucket,
+      bucket: outputBucket,
       input: buildOutput,
+    })
+
+    new cloudfront.Distribution(this, "myDist", {
+      defaultBehavior: {origin: new origins.S3Origin(outputBucket)},
     })
 
     //complete pipeline
