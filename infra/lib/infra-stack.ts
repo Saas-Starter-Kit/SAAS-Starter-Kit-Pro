@@ -5,7 +5,7 @@ import * as codepipeline_actions from "@aws-cdk/aws-codepipeline-actions"
 import * as codebuild from "@aws-cdk/aws-codebuild"
 import * as secretsmanager from "@aws-cdk/aws-secretsmanager"
 import * as iam from "@aws-cdk/aws-iam"
-import {Bucket} from "@aws-cdk/aws-s3"
+import * as s3 from "@aws-cdk/aws-s3"
 
 require("dotenv").config()
 
@@ -45,9 +45,28 @@ export class InfraStack extends cdk.Stack {
     })
 
     //Build Stage
-    const buildBucket = new Bucket(this, "BuildBucket")
+    const buildSpecObj = {
+      version: "0.2",
+      phases: {
+        install: {
+          "runtime-versions": {
+            nodejs: 10,
+          },
+        },
+        pre_build: {
+          commands: ['echo "--------PREBUILD PHASE--------"', "npm install"],
+        },
+        build: {
+          commands: ["npm run build"],
+        },
+      },
+      artifacts: {
+        files: ["**/*"],
+      },
+    }
+
     const project = new codebuild.PipelineProject(this, "MyProject", {
-      buildSpec: codebuild.BuildSpec.fromObject({filename: "../buildspec.yml"}),
+      buildSpec: codebuild.BuildSpec.fromObject(buildSpecObj),
     })
 
     const buildOutput = new codepipeline.Artifact()
@@ -58,6 +77,15 @@ export class InfraStack extends cdk.Stack {
       outputs: [buildOutput],
     })
 
+    //deploy stage
+    const targetBucket = new s3.Bucket(this, "BuildOutputBucket", {})
+    const deployAction = new codepipeline_actions.S3DeployAction({
+      actionName: "S3Deploy",
+      bucket: targetBucket,
+      input: buildOutput,
+    })
+
+    //complete pipeline
     new codepipeline.Pipeline(this, "MyPipeline", {
       stages: [
         {
@@ -67,6 +95,10 @@ export class InfraStack extends cdk.Stack {
         {
           stageName: "Build",
           actions: [buildAction],
+        },
+        {
+          stageName: "Deploy",
+          actions: [deployAction],
         },
       ],
     })
