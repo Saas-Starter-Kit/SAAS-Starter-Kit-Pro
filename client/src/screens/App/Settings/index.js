@@ -1,8 +1,14 @@
 import { useState, useContext } from 'react';
-import AuthContext from '../../../utils/authContext';
 import axios from 'axios';
 import { useRouter } from 'next/router';
+import styled from 'styled-components';
+import AuthContext from '../../../utils/authContext';
 import LoadingOverlay from '../../../components/app/Common/loadingOverlay';
+import { fieldStyles } from '../../../styles/theme';
+
+const Input = styled.input`
+  ${fieldStyles}
+`;
 
 const Settings = () => {
   const { firebase, authState } = useContext(AuthContext);
@@ -88,8 +94,7 @@ const Settings = () => {
             <label htmlFor='title' className='block text-sm font-medium leading-5 text-gray-700'>
               Username:
             </label>
-            <input
-              className='mt-1 form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5'
+            <Input
               onChange={handleUsernameChange}
               value={username}
               type='text'
@@ -110,8 +115,7 @@ const Settings = () => {
             <label htmlFor='title' className='block text-sm font-medium leading-5 text-gray-700'>
               Email:
             </label>
-            <input
-              className='mt-1 form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5'
+            <Input
               type='email'
               onChange={handleEmailChange}
               value={email}

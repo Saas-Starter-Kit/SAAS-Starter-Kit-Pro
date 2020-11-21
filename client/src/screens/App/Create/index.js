@@ -1,6 +1,95 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
+import styled from 'styled-components';
 import AuthContext from '../../../utils/authContext';
 import { postTodoApi } from '../../../api/todoApi';
+import { colors, breakpoints, fieldStyles } from '../../../styles/theme';
+
+const Wrapper1 = styled.div`
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+  @media (min-width: ${breakpoints.small}) {
+    border-radius: 0.375rem;
+  }
+`;
+
+const Wrapper2 = styled.div`
+  padding: 1.25rem 1rem;
+  background-color: ${colors.white};
+  @media (min-width: ${breakpoints.small}) {
+    padding: 1.5rem;
+  }
+`;
+
+const Title = styled.h1`
+  font-size: 1.25rem;
+`;
+
+const Wrapper = styled.div`
+  margin-top: 1.25rem;
+  width: 75%;
+`;
+
+const Label = styled.label`
+  display: block;
+  font-weight: 500;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: ${colors.gray700};
+`;
+
+const InputWrapper = styled.div`
+  padding: 1.5rem;
+`;
+
+const Input = styled.input`
+  ${fieldStyles}
+`;
+
+const TextAreaWrapper = styled.div`
+  padding: 0 1.5rem;
+`;
+
+const TextArea = styled.textarea`
+  ${fieldStyles}
+`;
+
+const ButtonWrapper = styled.div`
+  padding: 1.5rem;
+  background-color: ${colors.white};
+  text-align: left;
+`;
+
+const Button = styled.button`
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  color: ${colors.white};
+  background-color: ${colors.indigo600};
+  border: 1px solid transparent;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  &:hover {
+    background-color: ${colors.indigo500};
+  }
+  &:focus {
+    box-shadow: 0 0 0 3px rgba(164, 202, 254, 0.45);
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+  }
+  &:active {
+    background-color: ${colors.indigo600};
+  }
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow,
+    transform;
+  transition-duration: 150ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+`;
+
+const Response = styled.p`
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+`;
 
 const CreateTask = () => {
   const [formTitle, setTitle] = useState('');
@@ -44,57 +133,29 @@ const CreateTask = () => {
   };
 
   return (
-    <div>
-      <h1 className='text-xl'>Create Todo</h1>
-      <div className='mt-5 w-3/4'>
+    <React.Fragment>
+      <Title>Create Todo</Title>
+      <Wrapper>
         <form onSubmit={postTodo}>
-          <div className='shadow overflow-hidden sm:rounded-md'>
-            <div className='px-4 py-5 bg-white sm:p-6'>
-              <div className='flex flex-col'>
-                <div className='py-6 px-6'>
-                  <label
-                    htmlFor='title'
-                    className='block text-sm font-medium leading-5 text-gray-700'
-                  >
-                    Title
-                  </label>
-                  <input
-                    onChange={handleTitleChange}
-                    value={formTitle}
-                    name='title'
-                    className='mt-1 form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5'
-                  />
-                </div>
-
-                <div className='px-6'>
-                  <label
-                    htmlFor='description'
-                    className='block text-sm font-medium leading-5 text-gray-700'
-                  >
-                    Description
-                  </label>
-                  <textarea
-                    onChange={handleDescChange}
-                    value={formDescription}
-                    name='description'
-                    className='mt-1 form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5'
-                  />
-                </div>
-                <div className='py-6 px-6 bg-white text-left'>
-                  <button
-                    type='submit'
-                    className='py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 shadow-sm hover:bg-indigo-500 focus:outline-none focus:shadow-outline-blue active:bg-indigo-600 transition duration-150 ease-in-out'
-                  >
-                    Save
-                  </button>
-                  <p className='py-4'>{resMessage}</p>
-                </div>
-              </div>
-            </div>
-          </div>
+          <Wrapper1>
+            <Wrapper2>
+              <InputWrapper>
+                <Label htmlFor='title'>Title</Label>
+                <Input onChange={handleTitleChange} value={formTitle} name='title' />
+              </InputWrapper>
+              <TextAreaWrapper>
+                <Label htmlFor='description'>Description</Label>
+                <TextArea onChange={handleDescChange} value={formDescription} name='description' />
+              </TextAreaWrapper>
+              <ButtonWrapper>
+                <Button>Save</Button>
+                <Response>{resMessage}</Response>
+              </ButtonWrapper>
+            </Wrapper2>
+          </Wrapper1>
         </form>
-      </div>
-    </div>
+      </Wrapper>
+    </React.Fragment>
   );
 };
 

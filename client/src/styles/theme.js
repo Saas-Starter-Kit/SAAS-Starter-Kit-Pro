@@ -49,3 +49,28 @@ export const transform = css`
     rotate(var(--transform-rotate)) skewX(var(--transform-skew-x)) skewY(var(--transform-skew-y))
     scaleX(var(--transform-scale-x)) scaleY(var(--transform-scale-y));
 `;
+
+export const fieldStyles = css`
+  appearance: none;
+  background-color: #ffffff;
+  border-color: #d2d6dc;
+  border-width: 1px;
+  border-radius: 0.375rem;
+  padding-top: 0.5rem;
+  padding-right: 0.75rem;
+  padding-bottom: 0.5rem;
+  padding-left: 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-top: 0.25rem;
+  display: block;
+  width: 100%;
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow,
+    transform;
+  transition-duration: 150ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  @media (min-width: ${breakpoints.small}) {
+    font-size: 0.875rem;
+  }
+  line-height: 1.25rem;
+`;
