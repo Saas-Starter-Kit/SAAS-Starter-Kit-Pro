@@ -36,6 +36,14 @@ const UserWrapper2 = styled.div`
   align-items: center;
 `;
 
+const StyledMdAccountCircle = styled(MdAccountCircle)`
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: ${colors.gray300};
+  border-radius: 9999px;
+  flex-shrink: 0;
+`;
+
 const UsernameWrapper = styled.div`
   flex: 1 1 0%;
   min-width: 0;
@@ -79,11 +87,7 @@ const AvatarSidebarFull = () => {
         >
           <UserWrapper1>
             <UserWrapper2>
-              {photo ? (
-                <Image src={photo} alt='' />
-              ) : (
-                <MdAccountCircle className='w-10 h-10 bg-gray-300 rounded-full flex-shrink-0' />
-              )}
+              {photo ? <Image src={photo} alt='' /> : <StyledMdAccountCircle />}
               <UsernameWrapper>
                 <Username>{username}</Username>
               </UsernameWrapper>

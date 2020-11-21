@@ -1,13 +1,29 @@
 import styled from 'styled-components';
+import { colors } from '../../../styles/theme';
+
+const Wrapper = styled.div`
+  cursor: pointer;
+  display: block;
+  padding: 1rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: ${colors.gray700};
+  &:hover {
+    color: ${colors.gray900};
+    background-color: ${colors.gray100};
+  }
+  &:focus {
+    color: ${colors.gray900};
+    background-color: ${colors.gray100};
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+  }
+`;
 
 const MobileDropdownItem = ({ onClick, title }) => (
-  <div
-    onClick={onClick}
-    className='cursor-pointer block px-4 py-4 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900'
-    role='menuitem'
-  >
+  <Wrapper onClick={onClick} role='menuitem'>
     {title}
-  </div>
+  </Wrapper>
 );
 
 export default MobileDropdownItem;
