@@ -1,6 +1,6 @@
 import { useRef } from 'react';
-import useOutsideClick from '../../../hooks/useOutsideClick';
 import { Link } from '@reach/router';
+import useOutsideClick from '../../../hooks/useOutsideClick';
 
 const SidebarMobile = ({ toggleMobileMenu }) => {
   const ref = useRef();

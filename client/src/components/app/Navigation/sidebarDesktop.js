@@ -1,17 +1,36 @@
-import Avatar from '../Avatar/avatarSidebarFull';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { Link } from '@reach/router';
 import { BiArrowFromRight } from 'react-icons/bi';
+import Avatar from '../Avatar/avatarSidebarFull';
+import { colors } from '../../../styles/theme';
+
+const growSideBar = keyframes`
+from {
+  width: 5.2rem;
+}
+to {
+  width: 14rem;
+}`;
 
 const Sidebar = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1 1 0%;
-  background-color: #42389d;
+  background-color: ${colors.indigo800};
   width: 14rem;
   overflow: hidden;
-  animation: GrowSideBar 0.4s ease-out forwards;
+  animation: ${growSideBar} 0.3s ease-out forwards;
 `;
+
+const fadeInRight = keyframes`
+from {
+  opacity: 0;
+  transform: translateX(-1.5rem);
+}
+to {
+  opacity: 1;
+  transform: translateX(0);
+}`;
 
 const StyledArrow = styled(BiArrowFromRight)`
   width: 1.5rem;
@@ -19,11 +38,11 @@ const StyledArrow = styled(BiArrowFromRight)`
   position: absolute;
   top: 2rem;
   left: 13rem;
-  color: white;
-  background-color: #42389d;
+  color: ${colors.white};
+  background-color: ${colors.indigo800};
   border-radius: 0.5rem;
   cursor: pointer;
-  animation: FadeInRight 0.9s ease-in forwards;
+  animation: ${fadeInRight} 0.7s ease-in forwards;
 `;
 
 const SidebarDesktop = ({ sidebarHandler }) => {
