@@ -1,13 +1,77 @@
-import { useState, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import AuthContext from '../../../utils/authContext';
 import LoadingOverlay from '../../../components/app/Common/loadingOverlay';
-import { fieldStyles } from '../../../styles/theme';
+import { colors, breakpoints, fieldStyles } from '../../../styles/theme';
+
+const Title = styled.h1`
+  font-size: 1.5rem;
+`;
+
+const Card = styled.div`
+  background-color: ${colors.white};
+  width: 100%;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  @media (min-width: ${breakpoints.medium}) {
+    width: 75%;
+  }
+`;
+
+const Paragraph = styled.p`
+  font-weight: 700;
+`;
+
+const SectionTitle = styled.h2`
+  font-size: 1.25rem;
+  padding-top: 1.5rem;
+`;
+
+const Form = styled.form`
+  padding-bottom: 1.5rem;
+`;
+
+const Label = styled.label`
+  display: block;
+  font-weight: 500;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: ${colors.gray700};
+`;
 
 const Input = styled.input`
   ${fieldStyles}
+`;
+
+const Button = styled.button`
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid transparent;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+  border-radius: 0.375rem;
+  color: ${colors.white};
+  background-color: ${colors.indigo600};
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  &:hover {
+    background-color: ${colors.indigo500};
+  }
+  &:focus {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 3px rgba(164, 202, 254, 0.45);
+  }
+  &:active {
+    background-color: ${colors.indigo600};
+  }
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow,
+    transform;
+  transition-duration: 150ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 `;
 
 const Settings = () => {
@@ -76,74 +140,50 @@ const Settings = () => {
   };
 
   return (
-    <div>
-      <h1 className='text-2xl'>Settings</h1>
-      <div className='bg-white w-full p-4 rounded-xl shadow md:w-3/4'>
-        <p className='text-l font-bold'>{resMessage}</p>
-        {!isEmail ? (
-          <p className='text-l font-bold'>
+    <React.Fragment>
+      <Title>Settings</Title>
+      <Card>
+        <Paragraph>{resMessage}</Paragraph>
+        {!isEmail && (
+          <Paragraph>
             Email, password and username change is only available for email signups. If you signed
             up with third party providers such as Google or Facebook please follow their respective
             process for changing emails, usernames and passwords.
-          </p>
-        ) : null}
-        {isLoading ? <LoadingOverlay /> : null}
-        <div className='py-6'>
-          <h2 className='text-xl'>Update Username</h2>
-          <form>
-            <label htmlFor='title' className='block text-sm font-medium leading-5 text-gray-700'>
-              Username:
-            </label>
-            <Input
-              onChange={handleUsernameChange}
-              value={username}
-              type='text'
-              disabled={isEmail ? false : true}
-            />
-            <button
-              className='mt-4 py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 shadow-sm hover:bg-indigo-500 focus:outline-none focus:shadow-outline-blue active:bg-indigo-600 transition duration-150 ease-in-out'
-              onClick={updateUsername}
-              disabled={isEmail ? false : true}
-            >
-              Save
-            </button>
-          </form>
-        </div>
-        <div className='py-6'>
-          <h2 className='text-xl'>Update Email</h2>
-          <form>
-            <label htmlFor='title' className='block text-sm font-medium leading-5 text-gray-700'>
-              Email:
-            </label>
-            <Input
-              type='email'
-              onChange={handleEmailChange}
-              value={email}
-              type='text'
-              disabled={isEmail ? false : true}
-            />
-            <button
-              className='mt-4 py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 shadow-sm hover:bg-indigo-500 focus:outline-none focus:shadow-outline-blue active:bg-indigo-600 transition duration-150 ease-in-out'
-              onClick={updateEmail}
-              disabled={isEmail ? false : true}
-            >
-              Save
-            </button>
-          </form>
-        </div>
-
-        <div className='my-8'>
-          <h2 className='text-xl'>Update Password</h2>
-          <p>Please Reset Password on Login Page</p>
-          <button
-            onClick={() => router.push('/login')}
-            className='mt-4 py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 shadow-sm hover:bg-indigo-500 focus:outline-none focus:shadow-outline-blue active:bg-indigo-600 transition duration-150 ease-in-out'
-          >
-            Go to Login
-          </button>
-        </div>
-      </div>
-    </div>
+          </Paragraph>
+        )}
+        {isLoading && <LoadingOverlay />}
+        <SectionTitle>Update Username</SectionTitle>
+        <Form>
+          <Label htmlFor='title'>Username:</Label>
+          <Input
+            onChange={handleUsernameChange}
+            value={username}
+            type='text'
+            disabled={isEmail ? false : true}
+          />
+          <Button onClick={updateUsername} disabled={isEmail ? false : true}>
+            Save
+          </Button>
+        </Form>
+        <SectionTitle>Update Email</SectionTitle>
+        <Form>
+          <Label htmlFor='title'>Email:</Label>
+          <Input
+            type='email'
+            onChange={handleEmailChange}
+            value={email}
+            type='text'
+            disabled={isEmail ? false : true}
+          />
+          <Button onClick={updateEmail} disabled={isEmail ? false : true}>
+            Save
+          </Button>
+        </Form>
+        <SectionTitle>Update Password</SectionTitle>
+        <p>Please Reset Password on Login Page</p>
+        <Button onClick={() => router.push('/login')}>Go to Login</Button>
+      </Card>
+    </React.Fragment>
   );
 };
 
