@@ -1,123 +1,171 @@
 import { useRef } from 'react';
+import styled, { keyframes } from 'styled-components';
 import useOutsideClick from '../../../hooks/useOutsideClick';
-import { Link } from '@reach/router';
+import { colors, breakpoints } from '../../../styles/theme';
+import MobileSidebarItem from './mobileSidebarItem';
+import Cross from '../../svgs/cross';
+import Home from '../../svgs/home';
+import Persons from '../../svgs/persons';
+import Folder from '../../svgs/folder';
+
+const Wrapper1 = styled.div`
+  @media (min-width: ${breakpoints.medium}) {
+    display: none;
+  }
+`;
+
+const Wrapper2 = styled.div`
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  z-index: 40;
+`;
+
+const FixedDiv = styled.div`
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+`;
+
+const AbsoluteDiv = styled.div`
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: ${colors.gray600};
+  opacity: 0.75;
+  transition-property: opacity;
+  transition-duration: 300ms;
+  transition-timing-function: linear;
+`;
+
+const showMobileSidebar = keyframes`
+  from {
+    transform: scaleX(0);
+    transform-origin: left center;
+  }
+  to {
+    transform: scaleX(100%);
+    transform-origin: left center;
+  }
+`;
+
+const Wrapper3 = styled.div`
+  animation: ${showMobileSidebar} 0.5s ease-in-out;
+  position: relative;
+  flex: 1 1 0%;
+  display: flex;
+  flex-direction: column;
+  max-width: 20rem;
+  width: 100%;
+  background-color: ${colors.indigo800};
+`;
+
+const Sidebar = styled.div`
+  flex: 1 1 0%;
+  height: 0;
+  padding-top: 1.25rem;
+  padding-bottom: 1rem;
+  overflow-y: auto;
+`;
+
+const ButtonWrapper = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-right: -3.5rem;
+  padding: 0.25rem;
+`;
+
+const Button = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 9999px;
+  &:hover {
+    background-color: ${colors.gray600};
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+  }
+`;
+
+const LogoWrapper = styled.div`
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  padding-left: 1rem;
+  padding-right: 1rem;
+`;
+
+const Logo = styled.img`
+  height: 2rem;
+  width: auto;
+`;
+
+const Nav = styled.nav`
+  margin-top: 1.25rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+`;
+
+const ShrinkDiv = styled.div`
+  flex-shrink: 0;
+`;
 
 const SidebarMobile = ({ toggleMobileMenu }) => {
   const ref = useRef();
   useOutsideClick(ref, () => toggleMobileMenu(false));
 
   return (
-    <div className='md:hidden'>
-      <div className='fixed inset-0 flex z-40'>
-        <div className='fixed inset-0 '>
-          <div className='absolute inset-0 bg-gray-600 opacity-75 transition-opacity duration-300 ease-linear'></div>
-        </div>
-        <div
-          ref={ref}
-          className='ShowMobileSideBar relative flex-1 flex flex-col max-w-xs w-full bg-indigo-800'
-        >
-          <div className='absolute top-0 right-0 -mr-14 p-1'>
-            <button
-              onClick={() => toggleMobileMenu(false)}
-              className='flex items-center justify-center h-12 w-12 rounded-full focus:outline-none focus:bg-gray-600'
-              aria-label='Close sidebar'
-            >
-              <svg
-                className='h-6 w-6 text-white'
-                stroke='currentColor'
-                fill='none'
-                viewBox='0 0 24 24'
-              >
-                <path
-                  stroke-linecap='round'
-                  stroke-linejoin='round'
-                  stroke-width='2'
-                  d='M6 18L18 6M6 6l12 12'
-                />
-              </svg>
-            </button>
-          </div>
-          <div className='flex-1 h-0 pt-5 pb-4 overflow-y-auto'>
-            <div className='flex-shrink-0 flex items-center px-4'>
-              <img className='h-8 w-auto' src='/logo/large_logo.svg' alt='Workflow' />
-            </div>
-            <nav className='mt-5 px-2 space-y-1'>
-              <Link to='/app'>
-                <div
-                  onClick={() => toggleMobileMenu(false)}
-                  className='group flex items-center px-2 py-4 text-sm leading-5 font-medium text-indigo-300 rounded-md hover:text-white hover:bg-indigo-700 focus:outline-none focus:text-white focus:bg-indigo-700 transition ease-in-out duration-150'
-                >
-                  <svg
-                    className='mr-3 h-6 w-6 text-indigo-400 group-focus:text-indigo-300 transition ease-in-out duration-150'
-                    xmlns='http://www.w3.org/2000/svg'
-                    fill='none'
-                    viewBox='0 0 24 24'
-                    stroke='currentColor'
-                  >
-                    <path
-                      stroke-linecap='round'
-                      stroke-linejoin='round'
-                      stroke-width='2'
-                      d='M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6'
-                    />
-                  </svg>
-                  Dashboard
-                </div>
-              </Link>
-
-              <Link to='/app/readupdate'>
-                <div
-                  onClick={() => toggleMobileMenu(false)}
-                  className='group flex items-center px-2 py-4 text-sm leading-5 font-medium text-indigo-300 rounded-md hover:text-white hover:bg-indigo-700 focus:outline-none focus:text-white focus:bg-indigo-700 transition ease-in-out duration-150'
-                >
-                  <svg
-                    className='mr-3 h-6 w-6 text-indigo-400 group-hover:text-indigo-300 group-focus:text-indigo-300 transition ease-in-out duration-150'
-                    xmlns='http://www.w3.org/2000/svg'
-                    fill='none'
-                    viewBox='0 0 24 24'
-                    stroke='currentColor'
-                  >
-                    <path
-                      stroke-linecap='round'
-                      stroke-linejoin='round'
-                      stroke-width='2'
-                      d='M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z'
-                    />
-                  </svg>
-                  Read Update
-                </div>
-              </Link>
-
-              <Link to='/app/create'>
-                <div
-                  onClick={() => toggleMobileMenu(false)}
-                  className='group flex items-center px-2 py-4 text-sm leading-5 font-medium text-indigo-300 rounded-md hover:text-white hover:bg-indigo-700 focus:outline-none focus:text-white focus:bg-indigo-700 transition ease-in-out duration-150'
-                >
-                  <svg
-                    className='mr-3 h-6 w-6 text-indigo-400 group-hover:text-indigo-300 group-focus:text-indigo-300 transition ease-in-out duration-150'
-                    xmlns='http://www.w3.org/2000/svg'
-                    fill='none'
-                    viewBox='0 0 24 24'
-                    stroke='currentColor'
-                  >
-                    <path
-                      stroke-linecap='round'
-                      stroke-linejoin='round'
-                      stroke-width='2'
-                      d='M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z'
-                    />
-                  </svg>
-                  Create
-                </div>
-              </Link>
-            </nav>
-          </div>
-        </div>
-        <div className='flex-shrink-0 w-14'>
-          {/*<!-- Force sidebar to shrink to fit close icon -->*/}
-        </div>
-      </div>
-    </div>
+    <Wrapper1>
+      <Wrapper2>
+        <FixedDiv>
+          <AbsoluteDiv />
+        </FixedDiv>
+        <Wrapper3 ref={ref}>
+          <ButtonWrapper>
+            <Button onClick={() => toggleMobileMenu(false)} aria-label='Close sidebar'>
+              <Cross />
+            </Button>
+          </ButtonWrapper>
+          <Sidebar>
+            <LogoWrapper>
+              <Logo src='/logo/large_logo.svg' alt='Workflow' />
+            </LogoWrapper>
+            <Nav>
+              <MobileSidebarItem
+                link='/app'
+                onClick={() => toggleMobileMenu(false)}
+                svg={<Home />}
+                title='Dashboard'
+              />
+              <MobileSidebarItem
+                link='/app/readupdate'
+                onClick={() => toggleMobileMenu(false)}
+                svg={<Persons />}
+                title='Read Update'
+              />
+              <MobileSidebarItem
+                link='/app/create'
+                onClick={() => toggleMobileMenu(false)}
+                svg={<Folder />}
+                title='Create'
+              />
+            </Nav>
+          </Sidebar>
+        </Wrapper3>
+        {/*<!-- Force sidebar to shrink to fit close icon -->*/}
+        <ShrinkDiv />
+      </Wrapper2>
+    </Wrapper1>
   );
 };
 

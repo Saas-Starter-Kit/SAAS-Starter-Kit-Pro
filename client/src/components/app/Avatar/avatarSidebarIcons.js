@@ -1,8 +1,28 @@
-import AvatarDropDown from './avatarDropDown';
 import { useState, useRef, useContext } from 'react';
+import { MdAccountCircle } from 'react-icons/md';
+import styled, { css } from 'styled-components';
+import AvatarDropDown from './avatarDropDown';
 import useOutsideClick from '../../../hooks/useOutsideClick';
 import AuthContext from '../../../utils/authContext';
-import { MdAccountCircle } from 'react-icons/md';
+import { colors } from '../../../styles/theme';
+
+const imageStyles = css`
+  cursor: pointer;
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: ${colors.gray300};
+  border-radius: 9999px;
+  flex-shrink: 0;
+  margin-bottom: 1rem;
+`;
+
+const Image = styled.img`
+  ${imageStyles}
+`;
+
+const StyledMdAccountCircle = styled(MdAccountCircle)`
+  ${imageStyles}
+`;
 
 const AvatarSidebarIcons = () => {
   const { authState } = useContext(AuthContext);
@@ -15,17 +35,9 @@ const AvatarSidebarIcons = () => {
   return (
     <div ref={ref}>
       {photo ? (
-        <img
-          onClick={avatarMenuHandler}
-          className='cursor-pointer w-10 h-10 bg-gray-300 rounded-full flex-shrink-0 mb-4'
-          src={photo}
-          alt=''
-        />
+        <Image onClick={avatarMenuHandler} src={photo} alt='' />
       ) : (
-        <MdAccountCircle
-          onClick={avatarMenuHandler}
-          className='cursor-pointer w-10 h-10 bg-gray-300 rounded-full flex-shrink-0 mb-4'
-        />
+        <StyledMdAccountCircle onClick={avatarMenuHandler} />
       )}
       {avatarMenu ? <AvatarDropDown avatarMenuHandler={avatarMenuHandler} /> : null}
     </div>

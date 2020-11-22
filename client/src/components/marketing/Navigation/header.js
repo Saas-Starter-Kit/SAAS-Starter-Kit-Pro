@@ -174,6 +174,62 @@ const Button = styled.div`
   transition-duration: 150ms;
 `;
 
+const SolutionsButton = styled.button`
+  color: ${colors.gray500};
+  display: inline-flex;
+  align-items: center;
+  font-weight: 500;
+  justify-content: space-between;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow,
+    transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+  &:hover {
+    color: ${colors.gray900};
+  }
+  &:focus {
+    color: ${colors.gray900};
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+  }
+`;
+
+const Chevron = styled.img`
+  margin-left: 8px;
+  color: ${colors.gray500};
+  height: 1.25rem;
+  width: 1.25rem;
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow,
+    transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+  &:hover ${SolutionsButton} {
+    color: ${colors.gray500};
+  }
+  &:focus ${SolutionsButton} {
+    color: ${colors.gray500};
+  }
+`;
+
+const Container2 = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 1rem;
+  @media (min-width: ${breakpoints.small}) {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+  @media (min-width: ${breakpoints.medium}) {
+    justify-content: flex-start;
+  }
+  * {
+    margin-right: 10px;
+  }
+`;
+
 const Header = () => {
   const ref = useRef();
   const refMobile = useRef();
@@ -189,7 +245,7 @@ const Header = () => {
   useOutsideClick(refMobile, () => toggleMobileMenu(false));
   return (
     <Container1>
-      <div className='flex justify-between items-center px-4 py-6 sm:px-6 md:justify-start md:space-x-10'>
+      <Container2>
         <LogoWrapper>
           <Link href='/'>
             <Logo src='/logo/small_logo.svg' alt='Logo' />
@@ -203,23 +259,10 @@ const Header = () => {
         </MenuWrapper>
         <Nav>
           <SolutionsWrapper ref={ref}>
-            <button
-              onClick={menuHandler}
-              type='button'
-              className={`group text-gray-500 inline-flex items-center 
-                        space-x-2 text-base leading-6 font-medium
-                        hover:text-gray-900 focus:outline-none focus:text-gray-900 
-                        transition ease-in-out duration-150`}
-            >
+            <SolutionsButton onClick={menuHandler} type='button'>
               <span>Solutions</span>
-              <img
-                className={`text-gray-400 h-5 w-5 group-hover:text-gray-500
-                            group-focus:text-gray-500 
-                            transition ease-in-out duration-150`}
-                src='/icons/chevron-down.svg'
-                alt='down arrow'
-              />
-            </button>
+              <Chevron src='/icons/chevron-down.svg' alt='down arrow' />
+            </SolutionsButton>
             {menu ? (
               <FlyoutMenuWrapper>
                 <FlyoutMenu />
@@ -240,7 +283,7 @@ const Header = () => {
             </Link>
           </ButtonSpan>
         </ButtonWrapper>
-      </div>
+      </Container2>
     </Container1>
   );
 };

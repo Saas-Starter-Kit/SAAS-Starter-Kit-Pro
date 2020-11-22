@@ -2,61 +2,183 @@ import styled from 'styled-components';
 import ListItem from '../../../components/marketing/Pricing/ListItem';
 import { colors, breakpoints } from '../../../styles/theme';
 
+const Wrapper1 = styled.div`
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 28rem;
+  margin-top: ${({ left }) => (left ? '0' : '2.3rem;')};
+  @media (min-width: ${breakpoints.large}) {
+    grid-row-start: 2;
+    grid-row-end: 3;
+    max-width: none;
+    grid-column-start: ${({ left }) => (left ? '1' : '6')};
+    grid-column-end: ${({ left }) => (left ? '3' : '8')};
+    margin: 0;
+  }
+`;
+
+const Wrapper2 = styled.div`
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  @media (min-width: ${breakpoints.large}) {
+    border-radius: 0;
+    border-top-right-radius: ${({ left }) => (left ? '0' : '0.5rem')};
+    border-bottom-right-radius: ${({ left }) => (left ? '0' : '0.5rem')};
+    border-top-left-radius: ${({ left }) => (left ? '0.5rem' : '0')};
+    border-bottom-left-radius: ${({ left }) => (left ? '0.5rem' : '0')};
+  }
+`;
+
+const Wrapper3 = styled.div`
+  flex: 1 1 0%;
+  display: flex;
+  flex-direction: column;
+`;
+
+const CardHeader = styled.div`
+  background-color: ${colors.white};
+  padding: 2.5rem 1.5rem;
+`;
+
+const Title = styled.h3`
+  text-align: center;
+  color: ${colors.gray900};
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 500;
+`;
+
+const PriceWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+`;
+
+const Price = styled.span`
+  display: flex;
+  align-items: flex-start;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  color: ${colors.gray900};
+  font-size: 4rem;
+  line-height: 1;
+  letter-spacing: -0.025em;
+`;
+
+const Currency = styled.span`
+  margin-top: 0.5rem;
+  margin-right: 0.5rem;
+  font-size: 2.25rem;
+  font-weight: 500;
+`;
+
+const Number = styled.div`
+  font-weight: 800;
+`;
+
+const TimePeriod = styled.span`
+  color: ${colors.gray500};
+  font-weight: 500;
+  line-height: 1.75rem;
+  font-size: 1.25rem;
+`;
+
+const CardBody = styled.div`
+  flex: 1 1 0%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-top-width: 2px;
+  border-color: ${colors.gray100};
+  background-color: ${colors.gray50};
+  padding: 1.5rem;
+  @media (min-width: ${breakpoints.small}) {
+    padding: 2.5rem;
+  }
+  @media (min-width: ${breakpoints.large}) {
+    padding: 1.5rem;
+  }
+  @media (min-width: ${breakpoints.extraLarge}) {
+    padding: 2.5rem;
+  }
+`;
+
+const LinkWrapper = styled.div`
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  margin-top: 2rem;
+`;
+
 const StyledListItem = styled(ListItem)`
   margin-top: 1rem;
 `;
 
-const getWrapper1Class = (left) =>
-  left
-    ? 'mx-auto max-w-md lg:mx-0 lg:max-w-none lg:col-start-1 lg:col-end-3 lg:row-start-2 lg:row-end-3'
-    : 'mt-10 mx-auto max-w-md lg:m-0 lg:max-w-none lg:col-start-6 lg:col-end-8 lg:row-start-2 lg:row-end-3';
-
-const getWrapper2Class = (left) =>
-  left
-    ? 'h-full flex flex-col rounded-lg shadow-lg overflow-hidden lg:rounded-none lg:rounded-l-lg'
-    : 'h-full flex flex-col rounded-lg shadow-lg overflow-hidden lg:rounded-none lg:rounded-r-lg';
+const Link = styled.a`
+  display: block;
+  width: 100%;
+  text-align: center;
+  width: 100%;
+  background-color: ${colors.white};
+  color: ${colors.indigo600};
+  border-radius: 0.5rem;
+  border-width: 1px;
+  border-color: transparent;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 500;
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow,
+    transform;
+  transition-duration: 150ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  &:hover {
+    color: ${colors.indigo500};
+  }
+  &:focus {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 3px rgba(118, 169, 250, 0.45);
+  }
+`;
 
 const BasicCard = ({ title, price, left }) => {
   const id = 'tier-' + title.toLowerCase();
   return (
-    <div className={getWrapper1Class(left)}>
-      <div className={getWrapper2Class(left)}>
-        <div className='flex-1 flex flex-col'>
-          <div className='bg-white px-6 py-10'>
+    <Wrapper1 left={left}>
+      <Wrapper2 left={left}>
+        <Wrapper3>
+          <CardHeader>
             <div>
-              <h3 className='text-center text-2xl leading-8 font-medium text-gray-900' id={id}>
-                {title}
-              </h3>
-              <div className='mt-4 flex items-center justify-center'>
-                <span className='px-3 flex items-start text-6xl leading-none tracking-tight text-gray-900'>
-                  <span className='mt-2 mr-2 text-4xl font-medium'>$</span>
-                  <span className='font-extrabold'>{price}</span>
-                </span>
-                <span className='text-xl leading-7 font-medium text-gray-500'>/month</span>
-              </div>
+              <Title id={id}>{title}</Title>
+              <PriceWrapper>
+                <Price>
+                  <Currency>$</Currency>
+                  <Number>{price}</Number>
+                </Price>
+                <TimePeriod>/month</TimePeriod>
+              </PriceWrapper>
             </div>
-          </div>
-          <div className='flex-1 flex flex-col justify-between border-t-2 border-gray-100 p-6 bg-gray-50 sm:p-10 lg:p-6 xl:p-10'>
+          </CardHeader>
+          <CardBody>
             <ul>
               <ListItem text='Pariatur quod similique' />
               <StyledListItem text='Sapiente libero doloribus' />
               <StyledListItem text='Vel ipsa esse repudiandae' />
             </ul>
-            <div className='mt-8'>
-              <div className='rounded-lg shadow-md'>
-                <a
-                  href='#'
-                  className='block w-full text-center rounded-lg border border-transparent bg-white px-6 py-3 text-base leading-6 font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:shadow-outline transition ease-in-out duration-150'
-                  aria-describedby={id}
-                >
-                  Start your trial
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+            <LinkWrapper>
+              <Link href='#' aria-describedby={id}>
+                Start your trial
+              </Link>
+            </LinkWrapper>
+          </CardBody>
+        </Wrapper3>
+      </Wrapper2>
+    </Wrapper1>
   );
 };
 

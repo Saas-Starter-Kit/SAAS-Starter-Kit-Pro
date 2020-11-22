@@ -1,9 +1,57 @@
 //Mobile App header
 import { useState, useRef, useContext } from 'react';
+import { MdAccountCircle } from 'react-icons/md';
+import styled from 'styled-components';
+import { colors, breakpoints } from '../../../styles/theme';
 import useOutsideClick from '../../../hooks/useOutsideClick';
 import AvatarDropDownMobile from '../Avatar/avatarDropDownMobile';
 import AuthContext from '../../../utils/authContext';
-import { MdAccountCircle } from 'react-icons/md';
+import Burger from '../../svgs/burger';
+
+const Wrapper = styled.div`
+  @media (min-width: ${breakpoints.medium}) {
+    display: none;
+  }
+  display: flex;
+  justify-content: space-between;
+  background-color: ${colors.indigo600};
+  padding: 0.25rem;
+`;
+
+const Button = styled.button`
+  padding-top: 0.5rem;
+  padding-left: 0.5rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.375rem;
+  color: ${colors.white};
+  &:focus {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+  }
+`;
+
+const AvatarWrapper = styled.div`
+  padding: 0.5rem;
+`;
+
+const Image = styled.img`
+  width: 3rem;
+  height: 3rem;
+  backround-color: ${colors.gray300};
+  border-radius: 9999px;
+  flex-shrink: 0;
+`;
+
+const StyledMdAccountCircle = styled(MdAccountCircle)`
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: ${colors.gray300};
+  border-radius: 9999px;
+  flex-shrink: 0;
+`;
 
 const MobileHeader = ({ mobileMenuHandler }) => {
   const { authState } = useContext(AuthContext);
@@ -14,44 +62,19 @@ const MobileHeader = ({ mobileMenuHandler }) => {
   useOutsideClick(ref, () => toggleAvatarMenu(false));
 
   return (
-    <div className='md:hidden flex justify-between bg-indigo-600 p-1'>
-      <button
-        onClick={mobileMenuHandler}
-        className='pt-2 pl-2 font-semibold inline-flex items-center justify-center rounded-md text-white focus:outline-none'
-        aria-label='Open sidebar'
-      >
-        <svg
-          className='h-10 w-10'
-          xmlns='http://www.w3.org/2000/svg'
-          fill='none'
-          viewBox='0 0 24 24'
-          stroke='currentColor'
-        >
-          <path
-            stroke-linecap='round'
-            stroke-linejoin='round'
-            stroke-width='2'
-            d='M4 6h16M4 12h16M4 18h16'
-          />
-        </svg>
-      </button>
-      <div ref={ref} className='p-2'>
+    <Wrapper>
+      <Button onClick={mobileMenuHandler} aria-label='Open sidebar'>
+        <Burger />
+      </Button>
+      <AvatarWrapper ref={ref}>
         {photo ? (
-          <img
-            onClick={avatarMenuHandler}
-            className='w-12 h-12  bg-gray-300 rounded-full flex-shrink-0'
-            src={photo}
-            alt=''
-          />
+          <Image onClick={avatarMenuHandler} src={photo} alt='' />
         ) : (
-          <MdAccountCircle
-            onClick={avatarMenuHandler}
-            className='w-10 h-10 bg-gray-300 rounded-full flex-shrink-0'
-          />
+          <StyledMdAccountCircle onClick={avatarMenuHandler} />
         )}
-      </div>
-      {avatarMenu ? <AvatarDropDownMobile avatarMenuHandler={avatarMenuHandler} /> : null}
-    </div>
+      </AvatarWrapper>
+      {avatarMenu && <AvatarDropDownMobile avatarMenuHandler={avatarMenuHandler} />}
+    </Wrapper>
   );
 };
 

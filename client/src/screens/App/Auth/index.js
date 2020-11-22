@@ -1,12 +1,53 @@
-import LoginFormHeader from './loginFormHeader';
-import AuthContext from '../../../utils/authContext';
-import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import { useContext, useEffect, useState } from 'react';
 import jwt_decode from 'jwt-decode';
 import { useRouter } from 'next/router';
 import { navigate } from '@reach/router';
+import styled from 'styled-components';
+import LoginFormHeader from './loginFormHeader';
+import AuthContext from '../../../utils/authContext';
+import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import { sendtokenToServer } from '../../../api/authApi';
 import LoadingOverlay from '../../../components/app/Common/loadingOverlay';
+import { colors, breakpoints } from '../../../styles/theme';
+
+const Wrapper = styled.div`
+  background-color: ${colors.gray50};
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  @media (min-width: ${breakpoints.small}) {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+  @media (min-width: ${breakpoints.large}) {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+`;
+
+const CardWrapper = styled.div`
+  margin-top: 2rem;
+  @media (min-width: ${breakpoints.small}) {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    max-width: 28rem;
+  }
+`;
+
+const Card = styled.div`
+  background-color: ${colors.white};
+  padding: 2rem 1rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  @media (min-width: ${breakpoints.small}) {
+    border-radius: 0.5rem;
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+`;
 
 const LoginSignup = () => {
   const [isLoading, setLoading] = useState(false);
@@ -70,16 +111,16 @@ const LoginSignup = () => {
   };
 
   return (
-    <div className='min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8'>
+    <Wrapper>
       <LoginFormHeader />
-      {isLoading ? <LoadingOverlay /> : null}
-      <div className='mt-8 sm:mx-auto sm:w-full sm:max-w-md'>
-        <div className='bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10'>
+      {isLoading && <LoadingOverlay />}
+      <CardWrapper>
+        <Card>
           <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
           <hr />
-        </div>
-      </div>
-    </div>
+        </Card>
+      </CardWrapper>
+    </Wrapper>
   );
 };
 

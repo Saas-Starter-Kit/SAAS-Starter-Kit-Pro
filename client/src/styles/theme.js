@@ -4,6 +4,14 @@ export const colors = {
   blue300: '#A4CAFE',
   blue800: '#1E429F',
   blue900: '#233876',
+  coolGray50: '#F8FAFC',
+  coolGray100: '#F1F5F9',
+  coolGray200: '#E2E8F0',
+  coolGray300: '#CFD8E3',
+  coolGray400: '#97A6BA',
+  coolGray500: '#64748B',
+  coolGray700: '#364152',
+  coolGray900: '1A202E',
   gray50: '#F9FAFB',
   gray100: '#F4F5F7',
   gray200: '#E2E8F0',
@@ -48,4 +56,29 @@ export const transform = css`
   transform: translateX(var(--transform-translate-x)) translateY(var(--transform-translate-y))
     rotate(var(--transform-rotate)) skewX(var(--transform-skew-x)) skewY(var(--transform-skew-y))
     scaleX(var(--transform-scale-x)) scaleY(var(--transform-scale-y));
+`;
+
+export const fieldStyles = css`
+  appearance: none;
+  background-color: #ffffff;
+  border-color: #d2d6dc;
+  border-width: 1px;
+  border-radius: 0.375rem;
+  padding-top: 0.5rem;
+  padding-right: 0.75rem;
+  padding-bottom: 0.5rem;
+  padding-left: 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-top: 0.25rem;
+  display: block;
+  width: 100%;
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow,
+    transform;
+  transition-duration: 150ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  @media (min-width: ${breakpoints.small}) {
+    font-size: 0.875rem;
+  }
+  line-height: 1.25rem;
 `;

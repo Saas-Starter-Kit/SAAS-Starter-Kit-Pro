@@ -58,17 +58,15 @@ const WaveThree = styled.div`
   border-top: 8px solid var(--primary-color);
 `;
 
-const LoadingOverlay = () => {
-  return (
-    <div>
-      <Loader>
-        <WaveOne />
-        <WaveTwo />
-        <WaveThree />
-      </Loader>
-      <StyledOverlay />
-    </div>
-  );
-};
+const LoadingOverlay = () => (
+  <div>
+    <Loader>
+      <WaveOne />
+      <WaveTwo />
+      <WaveThree />
+    </Loader>
+    <StyledOverlay />
+  </div>
+);
 
 export default LoadingOverlay;
