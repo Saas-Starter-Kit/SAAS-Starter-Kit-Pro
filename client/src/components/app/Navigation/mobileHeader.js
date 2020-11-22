@@ -40,7 +40,7 @@ const AvatarWrapper = styled.div`
 const Image = styled.img`
   width: 3rem;
   height: 3rem;
-  backround-color: ${colors.gray300};
+  background-color: ${colors.gray300};
   border-radius: 9999px;
   flex-shrink: 0;
 `;
