@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
-import AuthContext from '../../../utils/authContext';
 import styled from 'styled-components';
+import AuthContext from '../../../utils/authContext';
 import { fetchTodoApi, deleteTodoApi, putTodoApi } from '../../../api/todoApi';
+import { colors } from '../../../styles/theme';
+import Todo from './todo';
 
 const StyledMain = styled.div`
   display: flex;
@@ -9,23 +11,14 @@ const StyledMain = styled.div`
   width: 75%;
 `;
 
-const EditButtonRow = styled.div`
-  display: flex;
-  padding-bottom: 1em;
+const Title = styled.h1`
+  font-size: 1.25rem;
 `;
 
-const StyledButton = styled.button`
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  align-self: center;
-  width: 50%;
-  padding: 0.5rem 1rem 0.5rem 1rem;
-  background-color: blue;
-  color: white;
-  border: none;
-  font-weight: 500;
-  text-align: center;
-  cursor: pointer;
+const Card = styled.div`
+  background-color: ${colors.white};
+  border-radius: 0.375rem;
+  padding: 1rem;
 `;
 
 const ReadUpdate = () => {
@@ -92,63 +85,27 @@ const ReadUpdate = () => {
 
   return (
     <StyledMain>
-      <h1 className='text-xl'>Todos: </h1>
-
-      <div className='bg-white rounded-md shawdow p-4'>
+      <Title>Todos: </Title>
+      <Card>
         {todos ? (
           todos.map((todo) => (
-            <div className='py-4' key={todo.todo_id}>
-              <h4>{todo.title}</h4>
-              <p>{todo.description}</p>
-              <EditButtonRow>
-                <button
-                  className='py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 shadow-sm hover:bg-indigo-500 focus:outline-none focus:shadow-outline-blue active:bg-indigo-600 transition duration-150 ease-in-out'
-                  onClick={() => editTodo(todo)}
-                >
-                  Edit
-                </button>
-
-                <button
-                  className='ml-4 py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-red-500 shadow-sm hover:bg-indigo-500 focus:outline-none focus:shadow-outline-blue active:bg-indigo-600 transition duration-150 ease-in-out'
-                  onClick={() => deleteTodo(todo)}
-                >
-                  Delete
-                </button>
-              </EditButtonRow>
-
-              {isEditting && todo.todo_id === editTodoID && (
-                <form className='bg-gray-50 p-2 rounded' onSubmit={(event) => putTodo(event, todo)}>
-                  <div className='flex flex-col mb-4'>
-                    <label className='pb-2'>Title:</label>
-                    <input
-                      className='p-1'
-                      onChange={handleEditTitleChange}
-                      value={editTitle}
-                      name='title'
-                    />
-                  </div>
-                  <div className='flex flex-col'>
-                    <label className='pb-2'>Description:</label>
-                    <textarea
-                      className='h-24 p-1'
-                      onChange={handleEditDescChange}
-                      value={editDescription}
-                      name='description'
-                    />
-                  </div>
-                  <div className='flex flex-col mb-4'>
-                    <StyledButton type='submit'>Send</StyledButton>
-                    <button onClick={() => setEdit(false)}>Cancel</button>
-                  </div>
-                </form>
-              )}
-              <hr />
-            </div>
+            <Todo
+              todo={todo}
+              isEditting={isEditting}
+              editTodoID={editTodoID}
+              handleEditTitleChange={handleEditTitleChange}
+              editTitle={editTitle}
+              handleEditDescChange={handleEditDescChange}
+              editDescription={editDescription}
+              editTodo={editTodo}
+              deleteTodo={deleteTodo}
+              putTodo={putTodo}
+            />
           ))
         ) : (
           <p> No Todos to Show...</p>
         )}
-      </div>
+      </Card>
     </StyledMain>
   );
 };
