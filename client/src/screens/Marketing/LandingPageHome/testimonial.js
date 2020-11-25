@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colors, breakpoints } from '../../../styles/theme';
+import { breakpoints } from '../../../styles/theme';
 
 const Wrapper = styled.div`
   max-width: 1280px;
