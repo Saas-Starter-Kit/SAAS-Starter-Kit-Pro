@@ -9,7 +9,7 @@ const Container = styled.div`
   background-image: url('/illustrations/blobSmall.svg');
   background-repeat: no-repeat;
   background-size: contain;
-  background-position: -10% 0%;
+  background-position: 0% 0%;
 `;
 
 const HeroTextContainer = styled.div`
@@ -53,7 +53,7 @@ const StyledButton = styled.button`
   margin-top: 1rem;
   font-size: 1.5rem;
   padding: 0.8rem 1.2rem 0.8rem 1.2rem;
-  background-color: var(--primary-color);
+  background-color: ${(props) => props.theme.primary};
   color: white;
   &:hover {
     opacity: 95%;
@@ -61,17 +61,13 @@ const StyledButton = styled.button`
   }
 `;
 
-const ImageContainer1 = styled.div`
+const ImageContainer = styled.div`
+  display: none;
   background-color: ${colors.gray50};
   background-image: url('/illustrations/blobBig.svg');
   background-repeat: no-repeat;
   background-position: 0% 0%;
-`;
 
-const ImageContainer2 = styled.div`
-  display: none;
-  margin-top: 2rem;
-  padding: 3rem;
   @media (min-width: ${breakpoints.large}) {
     display: block;
   }
@@ -89,7 +85,10 @@ const fadeInLeft = keyframes`
 `;
 
 const Image = styled.img`
+  margin-top: 3rem;
+  padding: 3rem;
   height: auto;
+  width: 32rem;
   z-index: 10;
   animation: ${fadeInLeft} 0.7s ease-in forwards;
 `;
@@ -99,7 +98,7 @@ const HeroSection = () => (
     <HeroTextContainer>
       <HeroHeader>
         Data to enrich your
-        <Span>&nbsp; online business</Span>
+        <Span> online business</Span>
       </HeroHeader>
       <Paragraph>
         Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo.
@@ -109,11 +108,10 @@ const HeroSection = () => (
         <StyledButton type='primary'>Get started &#8594;</StyledButton>
       </Link>
     </HeroTextContainer>
-    <ImageContainer1>
-      <ImageContainer2>
-        <Image src='/illustrations/undraw_stepping_up_g6oo.svg' alt='Step Up' />
-      </ImageContainer2>
-    </ImageContainer1>
+
+    <ImageContainer>
+      <Image src='/illustrations/undraw_stepping_up_g6oo.svg' alt='Step Up' />
+    </ImageContainer>
   </Container>
 );
 
