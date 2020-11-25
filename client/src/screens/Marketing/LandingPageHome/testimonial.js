@@ -1,41 +1,22 @@
 import styled from 'styled-components';
 import { colors, breakpoints } from '../../../styles/theme';
-import Background from '../../../components/svgs/testimonialBackground';
 
 const Wrapper = styled.div`
-  position: relative;
   max-width: 1280px;
   margin-left: auto;
   margin-right: auto;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  @media (min-width: ${breakpoints.small}) {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-  }
-  @media (min-width: ${breakpoints.large}) {
-    padding-left: 2rem;
-    padding-right: 2rem;
-  }
-`;
-
-const Section = styled.section`
-  padding-top: 3rem;
-  background-color: ${colors.gray50};
+  padding: 3rem 1rem 0rem 1rem;
+  background-color: ${(props) => props.theme.backgroundLanding};
   overflow: hidden;
-  @media (min-width: ${breakpoints.medium}) {
-    padding-top: 5rem;
+  @media (min-width: ${breakpoints.small}) {
+    padding: 5rem 1.5rem 0rem 1.5rem;
   }
   @media (min-width: ${breakpoints.large}) {
-    padding-top: 6rem;
+    padding: 6rem 2rem 1rem 2rem;
   }
 `;
 
 const TextWrapper = styled.div`
-  position: relative;
-`;
-
-const BlockQuote = styled.blockquote`
   margin-top: 2rem;
 `;
 
@@ -47,14 +28,10 @@ const QuoteWrapper = styled.div`
   font-size: 1.5rem;
   line-height: 2.25rem;
   font-weight: 500;
-  color: ${colors.gray900};
-`;
-
-const Footer = styled.footer`
-  margin-top: 2rem;
 `;
 
 const FooterWrapper = styled.div`
+  margin-top: 2rem;
   @media (min-width: ${breakpoints.medium}) {
     display: flex;
     align-items: center;
@@ -91,7 +68,6 @@ const Title = styled.div`
   font-size: 1rem;
   line-height: 1.5rem;
   font-weight: 500;
-  color: ${colors.gray900};
 `;
 
 const SlashSvg = styled.svg`
@@ -99,9 +75,7 @@ const SlashSvg = styled.svg`
   @media (min-width: ${breakpoints.medium}) {
     display: block;
   }
-  color: ${colors.indigo600};
-  margin-left: 0.25rem;
-  margin-right: 0.25rem;
+  color: ${(props) => props.theme.primary};
   margin-left: 0.25rem;
   margin-right: 0.25rem;
   width: 1.25rem;
@@ -111,43 +85,34 @@ const Job = styled.div`
   font-size: 1rem;
   line-height: 1.5rem;
   font-weight: 500;
-  color: ${colors.gray500};
 `;
 
 const Testimonial = () => (
-  <Section>
-    <Wrapper>
-      <Background />
-      <TextWrapper>
-        <BlockQuote>
-          <QuoteWrapper>
-            <p>
-              &ldquo;Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo expedita voluptas
-              culpa sapiente alias molestiae. Numquam corrupti in laborum sed rerum et
-              corporis.&rdquo;
-            </p>
-          </QuoteWrapper>
-          <Footer>
-            <FooterWrapper>
-              <ImageWrapper>
-                <Image
-                  src='https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
-                  alt=''
-                />
-              </ImageWrapper>
-              <TitleWrapper>
-                <Title>Judith Black</Title>
-                <SlashSvg fill='currentColor' viewBox='0 0 20 20'>
-                  <path d='M11 0h3L9 20H6l5-20z' />
-                </SlashSvg>
-                <Job>CEO, Workcation</Job>
-              </TitleWrapper>
-            </FooterWrapper>
-          </Footer>
-        </BlockQuote>
-      </TextWrapper>
-    </Wrapper>
-  </Section>
+  <Wrapper>
+    <TextWrapper>
+      <QuoteWrapper>
+        <p>
+          &ldquo;Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo expedita voluptas
+          culpa sapiente alias molestiae. Numquam corrupti in laborum sed rerum et corporis.&rdquo;
+        </p>
+      </QuoteWrapper>
+      <FooterWrapper>
+        <ImageWrapper>
+          <Image
+            src='https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
+            alt=''
+          />
+        </ImageWrapper>
+        <TitleWrapper>
+          <Title>Judith Black</Title>
+          <SlashSvg fill='currentColor' viewBox='0 0 20 20'>
+            <path d='M11 0h3L9 20H6l5-20z' />
+          </SlashSvg>
+          <Job>CEO, Workcation</Job>
+        </TitleWrapper>
+      </FooterWrapper>
+    </TextWrapper>
+  </Wrapper>
 );
 
 export default Testimonial;
