@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 import { colors, breakpoints } from '../../../styles/theme';
-import DesktopBackground2 from '../../../components/svgs/desktopBackground2';
-import MobileBackground2 from '../../../components/svgs/mobileBackground2';
 
 const Container = styled.div`
   background-color: ${(props) => props.theme.backgroundLanding};
@@ -60,7 +58,7 @@ const MenuImg = styled.img`
 `;
 
 const FeatureImage = styled.img`
-  position: relative;
+  width: 90%;
   margin-left: auto;
   margin-right: auto;
 `;
@@ -77,17 +75,11 @@ const FeatureWrapper1 = styled.div`
   }
 `;
 
-const FeatureWrapper2a = styled.div`
+const FeatureWrapper2 = styled.div`
   margin-top: 3rem;
   @media (min-width: ${breakpoints.small}) {
     margin-top: 4rem;
   }
-  @media (min-width: ${breakpoints.large}) {
-    margin-top: 6rem;
-  }
-`;
-
-const FeatureWrapper2b = styled.div`
   @media (min-width: ${breakpoints.large}) {
     display: grid;
     grid-auto-flow: row dense;
@@ -95,23 +87,13 @@ const FeatureWrapper2b = styled.div`
     grid-gap: 2rem;
     gap: 2rem;
     align-items: center;
+    margin-top: 6rem;
   }
 `;
 
-const FeatureWrapper2c = styled.div`
+const FeatureWrapper2b = styled.div`
   @media (min-width: ${breakpoints.large}) {
     grid-column-start: 2;
-  }
-`;
-
-const MobileBackgroundWrapper2 = styled.div`
-  margin-top: 2.5rem;
-  margin-left: -1rem;
-  margin-right: -1rem;
-  position: relative;
-  @media (min-width: ${breakpoints.large}) {
-    margin-top: 0;
-    grid-column-start: 1;
   }
 `;
 
@@ -186,52 +168,50 @@ const LandingFeatures = () => (
         alt=''
       />
     </FeatureWrapper1>
-    <FeatureWrapper2a>
+    <FeatureWrapper2>
       <FeatureWrapper2b>
-        <FeatureWrapper2c>
-          <LargeHeader>Awesome Feature about App 2</LargeHeader>
-          <LargeParagraph>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit ex obcaecati natus
-            eligendi delectus, cum deleniti sunt in labore nihil quod quibusdam expedita nemo.
-          </LargeParagraph>
-          <List>
-            <li>
-              <Item>
-                <ImageWrapper>
-                  <MenuImg src='/icons/chart-bar.svg' alt='chart bar' />
-                </ImageWrapper>
-                <TextWrapper>
-                  <SmallHeader>Sub Feature 1</SmallHeader>
-                  <SmallParagraph>
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit
-                    perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.
-                  </SmallParagraph>
-                </TextWrapper>
-              </Item>
-            </li>
-            <ListItem>
-              <Item>
-                <ImageWrapper>
-                  <MenuImg src='/icons/chart-bar.svg' alt='chart bar' />
-                </ImageWrapper>
-                <TextWrapper>
-                  <SmallHeader>Sub Feature 2</SmallHeader>
-                  <SmallParagraph>
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit
-                    perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.
-                  </SmallParagraph>
-                </TextWrapper>
-              </Item>
-            </ListItem>
-          </List>
-        </FeatureWrapper2c>
-        <FeatureImage
-          width='490'
-          src='https://tailwindui.com/img/features/feature-example-2.png'
-          alt=''
-        />
+        <LargeHeader>Awesome Feature about App 2</LargeHeader>
+        <LargeParagraph>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit ex obcaecati natus
+          eligendi delectus, cum deleniti sunt in labore nihil quod quibusdam expedita nemo.
+        </LargeParagraph>
+        <List>
+          <ListItem>
+            <Item>
+              <ImageWrapper>
+                <MenuImg src='/icons/chart-bar.svg' alt='chart bar' />
+              </ImageWrapper>
+              <TextWrapper>
+                <SmallHeader>Sub Feature 1</SmallHeader>
+                <SmallParagraph>
+                  Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit
+                  perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.
+                </SmallParagraph>
+              </TextWrapper>
+            </Item>
+          </ListItem>
+          <ListItem>
+            <Item>
+              <ImageWrapper>
+                <MenuImg src='/icons/chart-bar.svg' alt='chart bar' />
+              </ImageWrapper>
+              <TextWrapper>
+                <SmallHeader>Sub Feature 2</SmallHeader>
+                <SmallParagraph>
+                  Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit
+                  perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.
+                </SmallParagraph>
+              </TextWrapper>
+            </Item>
+          </ListItem>
+        </List>
       </FeatureWrapper2b>
-    </FeatureWrapper2a>
+      <FeatureImage
+        width='490'
+        src='https://tailwindui.com/img/features/feature-example-2.png'
+        alt=''
+      />
+    </FeatureWrapper2>
   </Container>
 );
 
