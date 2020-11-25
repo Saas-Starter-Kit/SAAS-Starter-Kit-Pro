@@ -1,5 +1,11 @@
 import { css } from 'styled-components';
 
+export const theme = {
+  colors: {
+    primary: '#1976d2'
+  }
+};
+
 export const colors = {
   blue300: '#A4CAFE',
   blue800: '#1E429F',

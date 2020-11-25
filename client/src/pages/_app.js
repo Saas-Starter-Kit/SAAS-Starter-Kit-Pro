@@ -2,7 +2,7 @@ import React, { useState, useReducer, useEffect } from 'react';
 import '../styles/globals.css';
 import 'antd/dist/antd.css';
 import { ThemeProvider } from 'styled-components';
-import { theme } from '../utils/styledComponentsTheme';
+import { theme } from '../styles/theme';
 import AuthContext from '../utils/authContext';
 import { authReducer, initialStateAuth } from '../store/reducers/authReducer';
 import { Login, Logout } from '../store/actions/actions';
