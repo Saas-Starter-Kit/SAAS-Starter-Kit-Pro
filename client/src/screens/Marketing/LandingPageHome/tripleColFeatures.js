@@ -2,12 +2,12 @@ import styled from 'styled-components';
 import { colors, breakpoints } from '../../../styles/theme';
 
 const Wrapper = styled.div`
-  background-color: ${colors.gray50};
-  padding-top: 3rem;
+  background-color: ${(props) => props.theme.backgroundLanding};
+  padding: 6rem 2rem 2rem 2rem;
 `;
 
 const Heading = styled.div`
-  padding-bottom: 5rem;
+  padding-bottom: 3rem;
 `;
 
 const LargeHeader = styled.h3`
@@ -16,7 +16,7 @@ const LargeHeader = styled.h3`
   line-height: 2rem;
   font-weight: 800;
   letter-spacing: -0.025em;
-  color: ${colors.gray900};
+
   @media (min-width: ${breakpoints.small}) {
     font-size: 2.25rem;
     line-height: 2.5rem;
@@ -26,7 +26,6 @@ const LargeHeader = styled.h3`
 const SectionDescription = styled.p`
   margin-top: 1rem;
   max-width: 48rem;
-  color: ${colors.gray500};
   text-align: center;
   margin-left: auto;
   margin-right: auto;
@@ -34,7 +33,7 @@ const SectionDescription = styled.p`
   line-height: 1.75rem;
 `;
 
-const ContentWrapper1 = styled.div`
+const ContentWrapper = styled.div`
   max-width: 36rem;
   margin-left: auto;
   margin-right: auto;
@@ -45,18 +44,13 @@ const ContentWrapper1 = styled.div`
     padding-right: 1.5rem;
   }
   @media (min-width: ${breakpoints.large}) {
-    max-width: 1280px;
-    padding-left: 2rem;
-    padding-right: 2rem;
-  }
-`;
-
-const ContentWrapper2 = styled.div`
-  @media (min-width: ${breakpoints.large}) {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     grid-gap: 2rem;
     gap: 2rem;
+    max-width: 1280px;
+    padding-left: 2rem;
+    padding-right: 2rem;
   }
 `;
 
@@ -82,13 +76,11 @@ const SmallHeader = styled.h5`
   font-size: 1.125rem;
   line-height: 1.5rem;
   font-weight: 500;
-  color: ${colors.gray900};
 `;
 
 const Paragraph = styled.p`
   margin-top: 0.5rem;
   font-size: 1rem;
-  color: ${colors.gray500};
   line-height: 1.5rem;
 `;
 
@@ -101,43 +93,41 @@ const TripleColFeatures = () => (
         cupiditate veritatis in, accusamus quisquam.
       </SectionDescription>
     </Heading>
-    <ContentWrapper1>
-      <ContentWrapper2>
-        <div>
-          {/*<!-- Heroicon name: globe-alt -->*/}
-          <FakeIcon />
-          <TextWrapper>
-            <SmallHeader>Competitive exchange rates</SmallHeader>
-            <Paragraph>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis
-              suscipit eaque, iste dolor cupiditate blanditiis ratione.
-            </Paragraph>
-          </TextWrapper>
-        </div>
-        <Column>
-          {/*<!-- Heroicon name: scale -->*/}
-          <FakeIcon />
-          <TextWrapper>
-            <SmallHeader>No hidden fees</SmallHeader>
-            <Paragraph>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis
-              suscipit eaque, iste dolor cupiditate blanditiis ratione.
-            </Paragraph>
-          </TextWrapper>
-        </Column>
-        <Column>
-          {/*<!-- Heroicon name: lightning-bolt -->*/}
-          <FakeIcon />
-          <TextWrapper>
-            <SmallHeader>Transfers are instant</SmallHeader>
-            <Paragraph>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis
-              suscipit eaque, iste dolor cupiditate blanditiis ratione.
-            </Paragraph>
-          </TextWrapper>
-        </Column>
-      </ContentWrapper2>
-    </ContentWrapper1>
+    <ContentWrapper>
+      <Column>
+        {/*<!-- Heroicon name: globe-alt -->*/}
+        <FakeIcon />
+        <TextWrapper>
+          <SmallHeader>Competitive exchange rates</SmallHeader>
+          <Paragraph>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis
+            suscipit eaque, iste dolor cupiditate blanditiis ratione.
+          </Paragraph>
+        </TextWrapper>
+      </Column>
+      <Column>
+        {/*<!-- Heroicon name: scale -->*/}
+        <FakeIcon />
+        <TextWrapper>
+          <SmallHeader>No hidden fees</SmallHeader>
+          <Paragraph>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis
+            suscipit eaque, iste dolor cupiditate blanditiis ratione.
+          </Paragraph>
+        </TextWrapper>
+      </Column>
+      <Column>
+        {/*<!-- Heroicon name: lightning-bolt -->*/}
+        <FakeIcon />
+        <TextWrapper>
+          <SmallHeader>Transfers are instant</SmallHeader>
+          <Paragraph>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis
+            suscipit eaque, iste dolor cupiditate blanditiis ratione.
+          </Paragraph>
+        </TextWrapper>
+      </Column>
+    </ContentWrapper>
   </Wrapper>
 );
 
