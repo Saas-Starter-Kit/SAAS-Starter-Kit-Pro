@@ -5,7 +5,7 @@ import { colors, breakpoints } from '../../../styles/theme';
 const Container = styled.div`
   display: grid;
   grid-template-columns: auto auto;
-  background-color: ${colors.gray50};
+  background-color: ${(props) => props.theme.backgroundLanding};
   background-image: url('/illustrations/blobSmall.svg');
   background-repeat: no-repeat;
   background-size: contain;
@@ -26,7 +26,6 @@ const HeroHeader = styled.h2`
   letter-spacing: -0.03rem;
   line-height: 2.5rem;
   font-weight: 800;
-  color: ${colors.gray900};
   @media (min-width: ${breakpoints.small}) {
     line-height: 1;
     font-size: 3.3rem;
@@ -34,13 +33,12 @@ const HeroHeader = styled.h2`
 `;
 
 const Span = styled.span`
-  color: ${colors.indigo600};
+  color: ${(props) => props.theme.primary};
 `;
 
 const Paragraph = styled.p`
   margin-top: 0.75rem;
   font-size: 1.125rem;
-  color: ${colors.gray500};
   @media (min-width: ${breakpoints.small}) {
     font-size: 1.25rem;
   }
@@ -63,7 +61,7 @@ const StyledButton = styled.button`
 
 const ImageContainer = styled.div`
   display: none;
-  background-color: ${colors.gray50};
+  background-color: ${(props) => props.theme.backgroundLanding};
   background-image: url('/illustrations/blobBig.svg');
   background-repeat: no-repeat;
   background-position: 0% 0%;
