@@ -12,6 +12,10 @@ export class InfrastructureStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props)
 
+    /* 
+        VPC Setup
+    */
+
     const vpc = new ec2.Vpc(this, "VPC", {
       maxAzs: 3,
       natGateways: 0,
