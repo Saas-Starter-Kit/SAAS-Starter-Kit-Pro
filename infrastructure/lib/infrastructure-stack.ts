@@ -14,7 +14,7 @@ export class InfrastructureStack extends cdk.Stack {
 
     const vpc = new ec2.Vpc(this, "VPC", {
       maxAzs: 3,
-      natGateways: 1,
+      natGateways: 0,
     })
 
     /* 
