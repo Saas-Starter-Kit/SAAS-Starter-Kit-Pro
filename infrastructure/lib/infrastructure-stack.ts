@@ -18,7 +18,7 @@ export class InfrastructureStack extends cdk.Stack {
 
     const vpc = new ec2.Vpc(this, "VPC", {
       maxAzs: 3,
-      natGateways: 0,
+      natGateways: 0, //NatGW not needed for RDS
     })
 
     /* 
