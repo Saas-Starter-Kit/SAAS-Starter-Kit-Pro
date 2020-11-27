@@ -2,11 +2,16 @@ import styled from 'styled-components';
 import ListItem from '../../../components/marketing/Pricing/ListItem';
 import { colors, breakpoints, transform } from '../../../styles/theme';
 
-const Wrapper1 = styled.div`
+const Wrapper = styled.div`
+  position: relative;
   margin-top: 2.5rem;
   max-width: 32rem;
   margin-left: auto;
   margin-right: auto;
+  z-index: 10;
+  border-radius: 0.5rem;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
   @media (min-width: ${breakpoints.large}) {
     margin-top: 0;
     max-width: none;
@@ -17,13 +22,6 @@ const Wrapper1 = styled.div`
     grid-row-start: 1;
     grid-row-end: 4;
   }
-`;
-
-const Wrapper2 = styled.div`
-  position: relative;
-  z-index: 10;
-  border-radius: 0.5rem;
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 `;
 
 const Border = styled.div`
@@ -176,42 +174,40 @@ const Link = styled.a`
 `;
 
 const GrowthCard = () => (
-  <Wrapper1>
-    <Wrapper2>
-      <Border />
-      <LabelWrapper1>
-        <LabelWrapper2>
-          <Label>Most popular</Label>
-        </LabelWrapper2>
-      </LabelWrapper1>
-      <CardHeader>
-        <div>
-          <Title id='tier-growth'>Growth</Title>
-          <PriceWrapper>
-            <Price>
-              <Currency>$</Currency>
-              <Number>149</Number>
-            </Price>
-            <TimePeriod>/month</TimePeriod>
-          </PriceWrapper>
-        </div>
-      </CardHeader>
-      <CardBody>
-        <ul>
-          <ListItem text='Quia rem est sed impedit magnam' />
-          <StyledListItem text='Dolorem vero ratione voluptates' />
-          <StyledListItem text='Qui sed ab doloribus voluptatem dolore' />
-          <StyledListItem text='Laborum commodi molestiae id et fugiat' />
-          <StyledListItem text='Nam ut ipsa nesciunt culpa modi dolor' />
-        </ul>
-        <LinkWrapper>
-          <Link href='#' aria-describedby='tier-growth'>
-            Start your trial
-          </Link>
-        </LinkWrapper>
-      </CardBody>
-    </Wrapper2>
-  </Wrapper1>
+  <Wrapper>
+    <Border />
+    <LabelWrapper1>
+      <LabelWrapper2>
+        <Label>Most popular</Label>
+      </LabelWrapper2>
+    </LabelWrapper1>
+    <CardHeader>
+      <div>
+        <Title id='tier-growth'>Growth</Title>
+        <PriceWrapper>
+          <Price>
+            <Currency>$</Currency>
+            <Number>149</Number>
+          </Price>
+          <TimePeriod>/month</TimePeriod>
+        </PriceWrapper>
+      </div>
+    </CardHeader>
+    <CardBody>
+      <ul>
+        <ListItem text='Quia rem est sed impedit magnam' />
+        <StyledListItem text='Dolorem vero ratione voluptates' />
+        <StyledListItem text='Qui sed ab doloribus voluptatem dolore' />
+        <StyledListItem text='Laborum commodi molestiae id et fugiat' />
+        <StyledListItem text='Nam ut ipsa nesciunt culpa modi dolor' />
+      </ul>
+      <LinkWrapper>
+        <Link href='#' aria-describedby='tier-growth'>
+          Start your trial
+        </Link>
+      </LinkWrapper>
+    </CardBody>
+  </Wrapper>
 );
 
 export default GrowthCard;

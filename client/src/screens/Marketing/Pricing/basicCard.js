@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import ListItem from '../../../components/marketing/Pricing/ListItem';
 import { colors, breakpoints } from '../../../styles/theme';
 
-const Wrapper1 = styled.div`
+const OuterWrapper = styled.div`
   margin-left: auto;
   margin-right: auto;
   max-width: 28rem;
@@ -17,7 +17,7 @@ const Wrapper1 = styled.div`
   }
 `;
 
-const Wrapper2 = styled.div`
+const InnerWrapper = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -31,12 +31,6 @@ const Wrapper2 = styled.div`
     border-top-left-radius: ${({ left }) => (left ? '0.5rem' : '0')};
     border-bottom-left-radius: ${({ left }) => (left ? '0.5rem' : '0')};
   }
-`;
-
-const Wrapper3 = styled.div`
-  flex: 1 1 0%;
-  display: flex;
-  flex-direction: column;
 `;
 
 const CardHeader = styled.div`
@@ -149,36 +143,34 @@ const Link = styled.a`
 const BasicCard = ({ title, price, left }) => {
   const id = 'tier-' + title.toLowerCase();
   return (
-    <Wrapper1 left={left}>
-      <Wrapper2 left={left}>
-        <Wrapper3>
-          <CardHeader>
-            <div>
-              <Title id={id}>{title}</Title>
-              <PriceWrapper>
-                <Price>
-                  <Currency>$</Currency>
-                  <Number>{price}</Number>
-                </Price>
-                <TimePeriod>/month</TimePeriod>
-              </PriceWrapper>
-            </div>
-          </CardHeader>
-          <CardBody>
-            <ul>
-              <ListItem text='Pariatur quod similique' />
-              <StyledListItem text='Sapiente libero doloribus' />
-              <StyledListItem text='Vel ipsa esse repudiandae' />
-            </ul>
-            <LinkWrapper>
-              <Link href='#' aria-describedby={id}>
-                Start your trial
-              </Link>
-            </LinkWrapper>
-          </CardBody>
-        </Wrapper3>
-      </Wrapper2>
-    </Wrapper1>
+    <OuterWrapper left={left}>
+      <InnerWrapper left={left}>
+        <CardHeader>
+          <div>
+            <Title id={id}>{title}</Title>
+            <PriceWrapper>
+              <Price>
+                <Currency>$</Currency>
+                <Number>{price}</Number>
+              </Price>
+              <TimePeriod>/month</TimePeriod>
+            </PriceWrapper>
+          </div>
+        </CardHeader>
+        <CardBody>
+          <ul>
+            <ListItem text='Pariatur quod similique' />
+            <StyledListItem text='Sapiente libero doloribus' />
+            <StyledListItem text='Vel ipsa esse repudiandae' />
+          </ul>
+          <LinkWrapper>
+            <Link href='#' aria-describedby={id}>
+              Start your trial
+            </Link>
+          </LinkWrapper>
+        </CardBody>
+      </InnerWrapper>
+    </OuterWrapper>
   );
 };
 
