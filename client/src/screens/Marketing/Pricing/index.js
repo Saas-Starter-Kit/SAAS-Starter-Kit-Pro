@@ -5,11 +5,11 @@ import PricingHeader from './pricingHeader';
 import Layout from '../../../components/marketing/Layout';
 import { colors, breakpoints } from '../../../styles/theme';
 
-const Wrapper1 = styled.div`
+const Background = styled.div`
   background-color: ${colors.gray900};
 `;
 
-const Wrapper2 = styled.div`
+const BackgroundSecondary = styled.div`
   background-color: ${colors.white};
   margin-top: 4rem;
   padding-bottom: 3rem;
@@ -19,12 +19,12 @@ const Wrapper2 = styled.div`
   }
 `;
 
-const Wrapper3 = styled.div`
+const InnerBackgroundWrapper = styled.div`
   position: relative;
   z-index: 0;
 `;
 
-const Div = styled.div`
+const InnerBackground = styled.div`
   position: absolute;
   background-color: ${colors.gray900};
   top: 0;
@@ -37,47 +37,42 @@ const Div = styled.div`
   }
 `;
 
-const Wrapper4 = styled.div`
+const InnerWrapper = styled.div`
+  position: relative;
   max-width: 1280px;
   margin-left: auto;
   margin-right: auto;
   padding-left: 1rem;
   padding-right: 1rem;
+
   @media (min-width: ${breakpoints.small}) {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
   }
+
   @media (min-width: ${breakpoints.large}) {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
     padding-left: 2rem;
     padding-right: 2rem;
   }
 `;
 
-const Wrapper5 = styled.div`
-  position: relative;
-  @media (min-width: ${breakpoints.large}) {
-    display: grid;
-    grid-template-columns: repeat(7, minmax(0, 1fr));
-  }
-`;
-
 const Pricing = () => (
   <Layout>
-    <Wrapper1>
+    <Background>
       <PricingHeader />
-      <Wrapper2>
-        <Wrapper3>
-          <Div />
-          <Wrapper4>
-            <Wrapper5>
-              <BasicCard title='Hobby' price='79' left />
-              <ProCard />
-              <BasicCard title='Scale' price='349' left={false} />
-            </Wrapper5>
-          </Wrapper4>
-        </Wrapper3>
-      </Wrapper2>
-    </Wrapper1>
+      <BackgroundSecondary>
+        <InnerBackgroundWrapper>
+          <InnerBackground />
+          <InnerWrapper>
+            <BasicCard title='Hobby' price='79' left />
+            <ProCard />
+            <BasicCard title='Scale' price='349' left={false} />
+          </InnerWrapper>
+        </InnerBackgroundWrapper>
+      </BackgroundSecondary>
+    </Background>
   </Layout>
 );
 

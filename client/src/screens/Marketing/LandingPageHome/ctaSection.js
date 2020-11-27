@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 import { colors, breakpoints } from '../../../styles/theme';
 
-const Wrapper1 = styled.div`
+const Background = styled.div`
   background-color: ${colors.indigo600};
 `;
 
-const Wrapper2 = styled.div`
+const Wrapper = styled.div`
   max-width: 42rem;
   margin-left: auto;
   margin-right: auto;
@@ -71,8 +71,8 @@ const Link = styled.a`
 `;
 
 const CTASection = () => (
-  <Wrapper1>
-    <Wrapper2>
+  <Background>
+    <Wrapper>
       <Header>
         <Span>Boost your productivity.</Span>
         <Span>Start using Workflow today.</Span>
@@ -82,8 +82,8 @@ const CTASection = () => (
         sagittis vel nulla nec.
       </Paragraph>
       <Link href='#'>Sign up for free</Link>
-    </Wrapper2>
-  </Wrapper1>
+    </Wrapper>
+  </Background>
 );
 
 export default CTASection;
