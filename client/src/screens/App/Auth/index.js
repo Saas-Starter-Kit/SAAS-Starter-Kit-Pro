@@ -16,8 +16,8 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-top: 3rem;
-  padding-bottom: 3rem;
+  margin-top: -4rem;
+
   @media (min-width: ${breakpoints.small}) {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
@@ -29,10 +29,14 @@ const Wrapper = styled.div`
 `;
 
 const CardWrapper = styled.div`
-  margin-top: 2rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+
   @media (min-width: ${breakpoints.small}) {
     margin-left: auto;
     margin-right: auto;
+    padding-left: 2rem;
+    padding-right: 2rem;
     width: 100%;
     max-width: 28rem;
   }

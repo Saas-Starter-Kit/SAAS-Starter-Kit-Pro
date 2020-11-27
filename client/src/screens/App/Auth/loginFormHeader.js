@@ -2,6 +2,9 @@ import styled from 'styled-components';
 import { colors, breakpoints } from '../../../styles/theme';
 
 const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   @media (min-width: ${breakpoints.small}) {
     margin-left: auto;
     margin-right: auto;
@@ -11,13 +14,13 @@ const Wrapper = styled.div`
 `;
 
 const Image = styled.img`
-  margin-left: auto;
-  margin-right: auto;
   height: 3rem;
   width: auto;
 `;
 
 const Title = styled.h2`
+  padding-right: 2rem;
+  padding-left: 2rem;
   margin-top: 1.5rem;
   color: ${colors.gray900};
   text-align: center;
