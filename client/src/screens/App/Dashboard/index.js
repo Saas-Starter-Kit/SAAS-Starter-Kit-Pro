@@ -11,11 +11,11 @@ const Title = styled.h1`
 `;
 
 const Dashboard = () => (
-  <React.Fragment>
+  <>
     <Title>Dashboard</Title>
     <Stats />
     <ActivityList />
-  </React.Fragment>
+  </>
 );
 
 export default Dashboard;

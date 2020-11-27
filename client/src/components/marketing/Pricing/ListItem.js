@@ -19,8 +19,8 @@ const Paragraph = styled.p`
   font-size: 1rem;
 `;
 
-const ListItem = ({ text, className }) => (
-  <Item className={className}>
+const ListItem = ({ text }) => (
+  <Item>
     <Wrapper>
       <Tick />
     </Wrapper>

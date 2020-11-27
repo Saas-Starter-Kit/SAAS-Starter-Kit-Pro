@@ -4,29 +4,25 @@ import AuthContext from '../../../utils/authContext';
 import { postTodoApi } from '../../../api/todoApi';
 import { colors, breakpoints, fieldStyles } from '../../../styles/theme';
 
-const Wrapper1 = styled.div`
+const Wrapper = styled.div`
+  padding: 1.5;
+  background-color: ${colors.white};
+  margin-top: 1.25rem;
+  width: 100%;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
   overflow: hidden;
   @media (min-width: ${breakpoints.small}) {
     border-radius: 0.375rem;
-  }
-`;
-
-const Wrapper2 = styled.div`
-  padding: 1.25rem 1rem;
-  background-color: ${colors.white};
-  @media (min-width: ${breakpoints.small}) {
     padding: 1.5rem;
+  }
+
+  @media (min-width: ${breakpoints.large}) {
+    width: 75%;
   }
 `;
 
 const Title = styled.h1`
   font-size: 1.25rem;
-`;
-
-const Wrapper = styled.div`
-  margin-top: 1.25rem;
-  width: 75%;
 `;
 
 const Label = styled.label`
@@ -133,29 +129,25 @@ const CreateTask = () => {
   };
 
   return (
-    <React.Fragment>
+    <>
       <Title>Create Todo</Title>
-      <Wrapper>
-        <form onSubmit={postTodo}>
-          <Wrapper1>
-            <Wrapper2>
-              <InputWrapper>
-                <Label htmlFor='title'>Title</Label>
-                <Input onChange={handleTitleChange} value={formTitle} name='title' />
-              </InputWrapper>
-              <TextAreaWrapper>
-                <Label htmlFor='description'>Description</Label>
-                <TextArea onChange={handleDescChange} value={formDescription} name='description' />
-              </TextAreaWrapper>
-              <ButtonWrapper>
-                <Button>Save</Button>
-                <Response>{resMessage}</Response>
-              </ButtonWrapper>
-            </Wrapper2>
-          </Wrapper1>
-        </form>
-      </Wrapper>
-    </React.Fragment>
+      <form onSubmit={postTodo}>
+        <Wrapper>
+          <InputWrapper>
+            <Label htmlFor='title'>Title</Label>
+            <Input onChange={handleTitleChange} value={formTitle} name='title' />
+          </InputWrapper>
+          <TextAreaWrapper>
+            <Label htmlFor='description'>Description</Label>
+            <TextArea onChange={handleDescChange} value={formDescription} name='description' />
+          </TextAreaWrapper>
+          <ButtonWrapper>
+            <Button>Save</Button>
+            <Response>{resMessage}</Response>
+          </ButtonWrapper>
+        </Wrapper>
+      </form>
+    </>
   );
 };
 
