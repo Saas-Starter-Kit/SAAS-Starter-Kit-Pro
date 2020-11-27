@@ -9,20 +9,19 @@ import DropdownSelector from '../../svgs/dropdownSelector';
 
 const Wrapper = styled.div`
   margin-top: 1.5rem;
-  background-color: blue;
+  cursor: pointer;
+  &:hover {
+    opacity: 95%;
+  }
 `;
 
-const Button = styled.button`
+const StyledAvatarWrapper = styled.div`
   color: ${colors.white};
   font-weight: 500;
   line-height: 1.25rem;
   font-size: 0.875rem;
   width: 100%;
   padding: 0.5rem 0.875rem;
-  &:focus {
-    outline: 2px solid transparent;
-    outline-offset: 2px;
-  }
 `;
 
 const UserWrapper1 = styled.div`
@@ -60,7 +59,6 @@ const Username = styled.h2`
 `;
 
 const Image = styled.img`
-  background-color: ${colors.gray300};
   width: 2.5rem;
   height: 2.5rem;
   border-radius: 9999px;
@@ -79,7 +77,12 @@ const AvatarSidebarFull = () => {
   return (
     <div ref={ref}>
       <Wrapper>
-        <Button onClick={avatarMenuHandler} type='button' aria-haspopup='true' aria-expanded='true'>
+        <StyledAvatarWrapper
+          onClick={avatarMenuHandler}
+          type='button'
+          aria-haspopup='true'
+          aria-expanded='true'
+        >
           <UserWrapper1>
             <UserWrapper2>
               {photo ? <Image src={photo} alt='' /> : <StyledMdAccountCircle />}
@@ -89,7 +92,7 @@ const AvatarSidebarFull = () => {
             </UserWrapper2>
             <DropdownSelector />
           </UserWrapper1>
-        </Button>
+        </StyledAvatarWrapper>
       </Wrapper>
       {avatarMenu ? <AvatarDropDown avatarMenuHandler={avatarMenuHandler} /> : null}
     </div>

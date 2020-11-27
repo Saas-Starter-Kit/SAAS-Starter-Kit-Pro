@@ -11,10 +11,10 @@ const ItemWrapper = styled.div`
   line-height: 1.25rem;
   color: ${colors.indigo300};
   border-radius: 0.375rem;
-  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow,
+  /*transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow,
     transform;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
+  transition-duration: 150ms;*/
   &:hover {
     color: ${colors.white};
     background-color: ${colors.indigo700};
