@@ -9,6 +9,7 @@ import DropdownSelector from '../../svgs/dropdownSelector';
 
 const Wrapper = styled.div`
   margin-top: 1.5rem;
+  background-color: blue;
 `;
 
 const Button = styled.button`
@@ -78,13 +79,7 @@ const AvatarSidebarFull = () => {
   return (
     <div ref={ref}>
       <Wrapper>
-        <Button
-          onClick={avatarMenuHandler}
-          type='button'
-          id='options-menu'
-          aria-haspopup='true'
-          aria-expanded='true'
-        >
+        <Button onClick={avatarMenuHandler} type='button' aria-haspopup='true' aria-expanded='true'>
           <UserWrapper1>
             <UserWrapper2>
               {photo ? <Image src={photo} alt='' /> : <StyledMdAccountCircle />}
