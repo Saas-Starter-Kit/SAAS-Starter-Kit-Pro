@@ -17,7 +17,7 @@ const menuScale = keyframes`
   }
 `;
 
-const Wrapper1 = styled.div`
+const Wrapper = styled.div`
   animation: ${menuScale} 0.3s ease-out forwards;
   z-index: 10;
   margin-left: 0.75rem;
@@ -25,14 +25,11 @@ const Wrapper1 = styled.div`
   margin-top: 0.25rem;
   transform-origin: top;
   position: absolute;
-  right: 0;
-  left: 0;
+  top: 7rem;
+  left: 2rem;
   border-radius: 0.375rem;
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
   width: max-content;
-`;
-
-const Wrapper2 = styled.div`
   border-radius: 0.375rem;
   background-color: ${colors.white};
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
@@ -58,20 +55,18 @@ const AvatarDropDown = ({ avatarMenuHandler }) => {
   };
 
   return (
-    <Wrapper1>
-      <Wrapper2 role='menu' aria-orientation='vertical' aria-labelledby='options-menu'>
-        <ItemWrapper>
-          <Link to='/app/settings'>
-            <DropdownItem onClick={avatarMenuHandler} title='Account Settings' />
-          </Link>
-        </ItemWrapper>
-        <Border />
-        <Border />
-        <ItemWrapper>
-          <DropdownItem onClick={signOut} title='Logout' />
-        </ItemWrapper>
-      </Wrapper2>
-    </Wrapper1>
+    <Wrapper role='menu' aria-orientation='vertical' aria-labelledby='options-menu'>
+      <ItemWrapper>
+        <Link to='/app/settings'>
+          <DropdownItem onClick={avatarMenuHandler} title='Account Settings' />
+        </Link>
+      </ItemWrapper>
+      <Border />
+      <Border />
+      <ItemWrapper>
+        <DropdownItem onClick={signOut} title='Logout' />
+      </ItemWrapper>
+    </Wrapper>
   );
 };
 
