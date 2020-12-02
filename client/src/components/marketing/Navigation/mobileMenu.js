@@ -2,6 +2,16 @@ import styled, { keyframes } from 'styled-components';
 import Link from 'next/link';
 import { colors, breakpoints } from '../../../styles/theme';
 
+const menuUp = keyframes`
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }`;
+
 const Wrapper = styled.div`
   animation: ${menuUp} 0.3s ease-out forwards;
   position: absolute;
@@ -159,16 +169,6 @@ const Button = styled.div`
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
 `;
-
-const menuUp = keyframes`
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }`;
 
 const MobileMenu = ({ mobileMenuHandler }) => (
   <Wrapper>

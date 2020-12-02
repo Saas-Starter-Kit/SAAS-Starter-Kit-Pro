@@ -1,11 +1,32 @@
 var express = require('express');
-require('dotenv').config();
 var cors = require('cors');
 var bodyParser = require('body-parser');
 const passport = require('passport');
 const auth = require('./Authentication/auth_routes');
 const todo_api = require('./API/todos');
 const health_api = require('./API/health');
+
+//Env variables setup
+const env = process.env.NODE_ENV;
+console.log(`Testing for: ${env}`);
+try {
+  switch (env) {
+    case 'development':
+      require('dotenv').config({
+        path: `${__dirname}/dev.env`
+      });
+      break;
+    case 'production':
+      require('dotenv').config({
+        path: `${__dirname}/.env`
+      });
+      break;
+    default:
+      Error('Unrecognized Environment');
+  }
+} catch (err) {
+  Error('Error trying to run file');
+}
 
 const app = express();
 
@@ -22,7 +43,7 @@ app.use('/auth', auth);
 app.use('/api', todo_api);
 
 //server setup
-const port = process.env.PORT || 80;
+const port = process.env.PORT || 3001;
 app.listen(port);
 console.log('Server listening on:', port);
 

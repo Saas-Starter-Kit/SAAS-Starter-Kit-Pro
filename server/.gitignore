@@ -2,3 +2,4 @@ node_modules
 keys.js
 .env
 .env.local
+dev.env

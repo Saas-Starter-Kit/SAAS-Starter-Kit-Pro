@@ -9,3 +9,5 @@ export const sendtokenToServer = async (token, username) => {
 
   return result;
 };
+
+export const updateUserNameApi = async () => {};
