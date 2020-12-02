@@ -1,7 +1,8 @@
 import { css } from 'styled-components';
 
 export const theme = {
-  primary: '#1976d2',
+  primary: '#42389D',
+  primaryHover: '#5145CD',
   backgroundLanding: 'lightblue'
 };
 

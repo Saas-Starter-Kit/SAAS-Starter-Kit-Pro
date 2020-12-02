@@ -14,11 +14,11 @@ const SvgWrapper = styled.div`
   border-radius: 0.375rem;
   &:hover {
     color: ${colors.white};
-    background-color: ${colors.indigo700};
+    background-color: ${(props) => props.theme.primaryHover};
   }
   &:focus {
     color: ${colors.white};
-    background-color: ${colors.indigo700};
+    background-color: ${(props) => props.theme.primaryHover};
     outline: 2px solid transparent;
     outline-offset: 2px;
   }
