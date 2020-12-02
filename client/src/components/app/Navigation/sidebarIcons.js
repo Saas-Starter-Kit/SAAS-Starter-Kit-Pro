@@ -57,7 +57,7 @@ const Nav = styled.nav`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: ${colors.indigo600};
+  background-color: ${(props) => props.theme.primary};
 `;
 
 const fadeInLeft = keyframes`

@@ -32,7 +32,7 @@ const SidebarWrapper1 = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1 1 0%;
-  background-color: ${colors.indigo800};
+  background-color: ${(props) => props.theme.primary};
   width: 14rem;
   overflow: hidden;
   animation: ${growSideBar} 0.3s ease-out forwards;
@@ -62,7 +62,7 @@ const Nav = styled.nav`
   flex: 1 1 0%;
   padding-left: 0.5rem;
   padding-right: 0.5rem;
-  background-color: ${colors.indigo800};
+  background-color: ${(props) => props.theme.primary};
 `;
 
 const fadeInRight = keyframes`
@@ -82,7 +82,7 @@ const StyledArrow = styled(BiArrowFromRight)`
   top: 2rem;
   left: 13rem;
   color: ${colors.white};
-  background-color: ${colors.indigo800};
+  background-color: ${(props) => props.theme.primary};
   border-radius: 0.5rem;
   cursor: pointer;
   animation: ${fadeInRight} 0.7s ease-in forwards;
