@@ -258,7 +258,8 @@ const Header = () => {
           {mobileMenu ? <MobileMenu mobileMenuHandler={mobileMenuHandler} /> : null}
         </MenuWrapper>
         <Nav>
-          <SolutionsWrapper ref={ref}>
+          {/* Uncomment for Flyout Menu
+            <SolutionsWrapper ref={ref}>
             <SolutionsButton onClick={menuHandler} type='button'>
               <span>Solutions</span>
               <Chevron src='/icons/chevron-down.svg' alt='down arrow' />
@@ -268,7 +269,7 @@ const Header = () => {
                 <FlyoutMenu />
               </FlyoutMenuWrapper>
             ) : null}
-          </SolutionsWrapper>
+          </SolutionsWrapper>*/}
           <Link href='/pricing'>
             <StyledLink active={router.pathname == '/pricing' ? true : false}>Pricing</StyledLink>
           </Link>

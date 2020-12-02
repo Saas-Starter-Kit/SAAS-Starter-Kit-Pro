@@ -5,7 +5,7 @@ import SocialBarFooter from './socialBarFooter';
 import { colors } from '../../../styles/theme';
 
 const Wrapper = styled.div`
-  background-color: ${colors.blue900};
+  background-color: ${colors.blue800};
 `;
 
 const Container = styled.div`
