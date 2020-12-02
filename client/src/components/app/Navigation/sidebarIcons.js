@@ -7,17 +7,14 @@ import Home from '../../svgs/home';
 import Persons from '../../svgs/persons';
 import Folder from '../../svgs/folder';
 
-const Wrapper1 = styled.div`
+const Wrapper = styled.div`
   display: none;
   @media (min-width: ${breakpoints.medium}) {
     display: flex;
+    flex-direction: column;
     flex-shrink: 0;
+    background-color: ${(props) => props.theme.primary};
   }
-`;
-
-const Wrapper2 = styled.div`
-  display: flex;
-  flex-direction: column;
 `;
 
 const shrinkSideBar = keyframes`
@@ -29,23 +26,17 @@ const shrinkSideBar = keyframes`
   }
 `;
 
-const SidebarWrapper1 = styled.div`
+const SidebarWrapper = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1 1 0%;
-  background-color: var(--primary-color);
+  background-color: ${(props) => props.theme.primary};
   width: 5.2rem;
   overflow: hidden;
-  animation: ${shrinkSideBar} 0.3s ease-out forwards;
-`;
-
-const SideBarWrapper2 = styled.div`
-  flex: 1 1 0%;
-  display: flex;
-  flex-direction: column;
   padding-top: 1.25rem;
   padding-bottom: 1rem;
   overflow-y: auto;
+  animation: ${shrinkSideBar} 0.3s ease-out forwards;
 `;
 
 const LogoWrapper = styled.div`
@@ -88,39 +79,30 @@ const StyledArrow = styled(BiArrowFromLeft)`
   top: 2rem;
   left: 4.5rem;
   color: ${colors.white};
-  background-color: var(--primary-color);
+  background-color: ${(props) => props.theme.primary};
   border-radius: 0.5rem;
   cursor: pointer;
   animation: ${fadeInLeft} 0.7s ease-in forwards;
 `;
 
 const SidebarIcons = ({ sidebarHandler }) => (
-  <Wrapper1>
-    <Wrapper2>
-      {/*<!-- Sidebar component, swap this element with another sidebar if you like -->*/}
-      <SidebarWrapper1>
-        <SideBarWrapper2>
-          <LogoWrapper>
-            <Logo src='/logo/small_logo.svg' alt='Workflow' />
-          </LogoWrapper>
-          <Nav>
-            <Avatar />
-            <SidebarItem id='Dashboard' title='Dashboard' link='/app' svg={<Home />} />
-            <SidebarItem
-              id='ReadUpdate'
-              title='Read Update'
-              link='/app/readupdate'
-              svg={<Persons />}
-            />
-            <SidebarItem id='Create' title='Create' link='/app/create' svg={<Folder />} />
-          </Nav>
-        </SideBarWrapper2>
-      </SidebarWrapper1>
-      <div onClick={sidebarHandler}>
-        <StyledArrow />
-      </div>
-    </Wrapper2>
-  </Wrapper1>
+  <Wrapper>
+    {/*<!-- Sidebar component, swap this element with another sidebar if you like -->*/}
+    <SidebarWrapper>
+      <LogoWrapper>
+        <Logo src='/logo/small_logo.svg' alt='Workflow' />
+      </LogoWrapper>
+      <Nav>
+        <Avatar />
+        <SidebarItem id='Dashboard' title='Dashboard' link='/app' svg={<Home />} />
+        <SidebarItem id='ReadUpdate' title='Read Update' link='/app/readupdate' svg={<Persons />} />
+        <SidebarItem id='Create' title='Create' link='/app/create' svg={<Folder />} />
+      </Nav>
+    </SidebarWrapper>
+    <div onClick={sidebarHandler}>
+      <StyledArrow />
+    </div>
+  </Wrapper>
 );
 
 export default SidebarIcons;

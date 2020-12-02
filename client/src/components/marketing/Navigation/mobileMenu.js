@@ -78,9 +78,10 @@ const Item = styled.div`
   align-items: center;
   border-radius: 0.5rem;
   &:hover {
-    background-color@ ${colors.gray50};
+    background-color: ${colors.gray50};
   }
-  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow,
+    transform;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
 `;
@@ -174,9 +175,9 @@ const Wrapper1 = styled.div`
   right: 0;
   left: 0;
   padding: 0.5rem;
-  ransition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow,
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow,
     transform;
-  ransition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow,
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow,
     transform;
   transform-origin: top right;
   @media (min-width: ${breakpoints.medium}) {
