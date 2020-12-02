@@ -8,13 +8,7 @@ import Home from '../../svgs/home';
 import Persons from '../../svgs/persons';
 import Folder from '../../svgs/folder';
 
-const Wrapper1 = styled.div`
-  @media (min-width: ${breakpoints.medium}) {
-    display: none;
-  }
-`;
-
-const Wrapper2 = styled.div`
+const Wrapper = styled.div`
   position: fixed;
   top: 0;
   right: 0;
@@ -22,6 +16,9 @@ const Wrapper2 = styled.div`
   left: 0;
   display: flex;
   z-index: 40;
+  @media (min-width: ${breakpoints.medium}) {
+    display: none;
+  }
 `;
 
 const FixedDiv = styled.div`
@@ -64,7 +61,7 @@ const Wrapper3 = styled.div`
   flex-direction: column;
   max-width: 20rem;
   width: 100%;
-  background-color: ${colors.indigo800};
+  background-color: ${(props) => props.theme.primary};
 `;
 
 const Sidebar = styled.div`
@@ -83,7 +80,7 @@ const ButtonWrapper = styled.div`
   padding: 0.25rem;
 `;
 
-const Button = styled.button`
+const Button = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -125,47 +122,45 @@ const SidebarMobile = ({ toggleMobileMenu }) => {
   useOutsideClick(ref, () => toggleMobileMenu(false));
 
   return (
-    <Wrapper1>
-      <Wrapper2>
-        <FixedDiv>
-          <AbsoluteDiv />
-        </FixedDiv>
-        <Wrapper3 ref={ref}>
-          <ButtonWrapper>
-            <Button onClick={() => toggleMobileMenu(false)} aria-label='Close sidebar'>
-              <Cross />
-            </Button>
-          </ButtonWrapper>
-          <Sidebar>
-            <LogoWrapper>
-              <Logo src='/logo/large_logo.svg' alt='Workflow' />
-            </LogoWrapper>
-            <Nav>
-              <MobileSidebarItem
-                link='/app'
-                onClick={() => toggleMobileMenu(false)}
-                svg={<Home />}
-                title='Dashboard'
-              />
-              <MobileSidebarItem
-                link='/app/readupdate'
-                onClick={() => toggleMobileMenu(false)}
-                svg={<Persons />}
-                title='Read Update'
-              />
-              <MobileSidebarItem
-                link='/app/create'
-                onClick={() => toggleMobileMenu(false)}
-                svg={<Folder />}
-                title='Create'
-              />
-            </Nav>
-          </Sidebar>
-        </Wrapper3>
-        {/*<!-- Force sidebar to shrink to fit close icon -->*/}
-        <ShrinkDiv />
-      </Wrapper2>
-    </Wrapper1>
+    <Wrapper>
+      <FixedDiv>
+        <AbsoluteDiv />
+      </FixedDiv>
+      <Wrapper3 ref={ref}>
+        <ButtonWrapper>
+          <Button onClick={() => toggleMobileMenu(false)} aria-label='Close sidebar'>
+            <Cross />
+          </Button>
+        </ButtonWrapper>
+        <Sidebar>
+          <LogoWrapper>
+            <Logo src='/logo/large_logo.svg' alt='Workflow' />
+          </LogoWrapper>
+          <Nav>
+            <MobileSidebarItem
+              link='/app'
+              toggleMenu={() => toggleMobileMenu(false)}
+              svg={<Home />}
+              title='Dashboard'
+            />
+            <MobileSidebarItem
+              link='/app/readupdate'
+              toggleMenu={() => toggleMobileMenu(false)}
+              svg={<Persons />}
+              title='Read Update'
+            />
+            <MobileSidebarItem
+              link='/app/create'
+              toggleMenu={() => toggleMobileMenu(false)}
+              svg={<Folder />}
+              title='Create'
+            />
+          </Nav>
+        </Sidebar>
+      </Wrapper3>
+      {/*<!-- Force sidebar to shrink to fit close icon -->*/}
+      <ShrinkDiv />
+    </Wrapper>
   );
 };
 

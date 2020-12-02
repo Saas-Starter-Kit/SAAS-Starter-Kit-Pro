@@ -14,11 +14,11 @@ const Wrapper = styled.div`
   }
   display: flex;
   justify-content: space-between;
-  background-color: ${colors.indigo600};
+  background-color: ${(props) => props.theme.primary};
   padding: 0.25rem;
 `;
 
-const Button = styled.button`
+const Button = styled.div`
   padding-top: 0.5rem;
   padding-left: 0.5rem;
   font-weight: 600;
@@ -26,6 +26,7 @@ const Button = styled.button`
   align-items: center;
   justify-content: center;
   border-radius: 0.375rem;
+  cursor: pointer;
   color: ${colors.white};
   &:focus {
     outline: 2px solid transparent;

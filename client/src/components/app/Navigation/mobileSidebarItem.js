@@ -31,9 +31,9 @@ const SvgWrapper = styled.div`
   margin-right: 0.75rem;
 `;
 
-const MobileSidebarItem = ({ link, onClick, svg, title }) => (
+const MobileSidebarItem = ({ link, toggleMenu, svg, title }) => (
   <Link to={link}>
-    <Wrapper>
+    <Wrapper onClick={toggleMenu}>
       <SvgWrapper>{svg}</SvgWrapper>
       {title}
     </Wrapper>
