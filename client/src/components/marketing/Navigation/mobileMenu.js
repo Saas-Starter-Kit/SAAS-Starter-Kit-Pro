@@ -2,20 +2,26 @@ import styled, { keyframes } from 'styled-components';
 import Link from 'next/link';
 import { colors, breakpoints } from '../../../styles/theme';
 
-const Wrapper2 = styled.div`
+const Wrapper = styled.div`
+  animation: ${menuUp} 0.3s ease-out forwards;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  padding: 0.5rem;
   border-radius: 0.5rem;
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-`;
-
-const Wrapper3 = styled.div`
-  border-radius: 0.5rem;
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
+  padding: 1.25rem 1.25rem 1.5rem;
   background-color: ${colors.white};
   border-color: ${colors.gray50};
-`;
-
-const Wrapper4 = styled.div`
-  padding: 1.25rem 1.25rem 1.5rem;
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow,
+    transform;
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow,
+    transform;
+  transform-origin: top right;
+  @media (min-width: ${breakpoints.medium}) {
+    display: none;
+  }
 `;
 
 const Header = styled.div`
@@ -36,7 +42,7 @@ const CloseButtonWrapper = styled.div`
   margin-right: -0.5rem;
 `;
 
-const CloseButton = styled.button`
+const CloseButton = styled.div`
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -112,10 +118,6 @@ const Title = styled.div`
   color: ${colors.gray900};
 `;
 
-const SmallHeader = styled.h2`
-  font-size: 1.125rem;
-`;
-
 const ButtonWrapper1 = styled.div`
   margin-top: 1.5rem;
   padding: 0 1.25rem 1.5rem;
@@ -168,107 +170,47 @@ const menuUp = keyframes`
     transform: scale(1);
   }`;
 
-const Wrapper1 = styled.div`
-  animation: ${menuUp} 0.3s ease-out forwards;
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  padding: 0.5rem;
-  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow,
-    transform;
-  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow,
-    transform;
-  transform-origin: top right;
-  @media (min-width: ${breakpoints.medium}) {
-    display: none;
-  }
-`;
-
 const MobileMenu = ({ mobileMenuHandler }) => (
-  <Wrapper1>
-    <Wrapper2>
-      <Wrapper3>
-        <Wrapper4>
-          <Header>
-            <LogoImage src='/logo/small_logo.svg' alt='Workflow' />
-            <CloseButtonWrapper>
-              <CloseButton onClick={mobileMenuHandler} type='button'>
-                <CloseImage src='/icons/close.svg' alt='menu icon' />
-              </CloseButton>
-            </CloseButtonWrapper>
-          </Header>
-          <div>
-            <Nav>
-              <Link href='/pricing'>
-                <Item>
-                  <MenuImageWrapper>
-                    {/*<!-- Heroicon name: view-grid -->*/}
-                    <MenuImg src='/icons/view-grid.svg' alt='click' />
-                  </MenuImageWrapper>
-                  <Title>Pricing</Title>
-                </Item>
-              </Link>
-              <Link href='/app'>
-                <Item>
-                  <MenuImageWrapper>
-                    {/*<!-- Heroicon name: view-grid -->*/}
-                    <MenuImg src='/icons/view-grid.svg' alt='click' />
-                  </MenuImageWrapper>
-                  <Title>App</Title>
-                </Item>
-              </Link>
-              <hr />
-              <SmallHeader>Solutions: </SmallHeader>
-              <Link href='#'>
-                <Item>
-                  <MenuImageWrapper>
-                    {/*<!-- Heroicon name: chart-bar -->*/}
-                    <MenuImg src='/icons/chart-bar.svg' alt='chart bar' />
-                  </MenuImageWrapper>
-                  <Title>Analytics</Title>
-                </Item>
-              </Link>
-              <Link href='#'>
-                <Item href='#'>
-                  <MenuImageWrapper>
-                    {/*<!-- Heroicon name: cursor-click -->*/}
-                    <MenuImg src='/icons/cursor-click.svg' alt='click' />
-                  </MenuImageWrapper>
-                  <Title>Engagement</Title>
-                </Item>
-              </Link>
-              <Link href='#'>
-                <Item href='#'>
-                  <MenuImageWrapper>
-                    {/*<!-- Heroicon name: shield-check -->*/}
-                    <MenuImg src='/icons/shield-check.svg' alt='click' />
-                  </MenuImageWrapper>
-                  <Title>Security</Title>
-                </Item>
-              </Link>
-              <Link href='#'>
-                <Item href='#'>
-                  <MenuImageWrapper>
-                    {/*<!-- Heroicon name: view-grid -->*/}
-                    <MenuImg src='/icons/view-grid.svg' alt='click' />
-                  </MenuImageWrapper>
-                  <Title>Integrations</Title>
-                </Item>
-              </Link>
-            </Nav>
-          </div>
-        </Wrapper4>
-        <ButtonWrapper1>
-          <ButtonWrapper2>
-            <Link href='/login'>
-              <Button>Sign up</Button>
-            </Link>
-          </ButtonWrapper2>
-        </ButtonWrapper1>
-      </Wrapper3>
-    </Wrapper2>
-  </Wrapper1>
+  <Wrapper>
+    <Header>
+      <LogoImage src='/logo/small_logo.svg' alt='Workflow' />
+      <CloseButtonWrapper>
+        <CloseButton onClick={mobileMenuHandler} type='button'>
+          <CloseImage src='/icons/close.svg' alt='menu icon' />
+        </CloseButton>
+      </CloseButtonWrapper>
+    </Header>
+    <div>
+      <Nav>
+        <Link href='/pricing'>
+          <Item>
+            <MenuImageWrapper>
+              {/*<!-- Heroicon name: view-grid -->*/}
+              <MenuImg src='/icons/view-grid.svg' alt='click' />
+            </MenuImageWrapper>
+            <Title>Pricing</Title>
+          </Item>
+        </Link>
+        <Link href='/app'>
+          <Item>
+            <MenuImageWrapper>
+              {/*<!-- Heroicon name: view-grid -->*/}
+              <MenuImg src='/icons/view-grid.svg' alt='click' />
+            </MenuImageWrapper>
+            <Title>App</Title>
+          </Item>
+        </Link>
+        <hr />
+      </Nav>
+    </div>
+    <ButtonWrapper1>
+      <ButtonWrapper2>
+        <Link href='/login'>
+          <Button>Sign up</Button>
+        </Link>
+      </ButtonWrapper2>
+    </ButtonWrapper1>
+  </Wrapper>
 );
 
 export default MobileMenu;

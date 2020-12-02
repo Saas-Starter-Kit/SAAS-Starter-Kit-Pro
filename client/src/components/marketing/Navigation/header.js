@@ -37,7 +37,7 @@ const MenuWrapper = styled.div`
   }
 `;
 
-const MenuButton = styled.button`
+const MenuButton = styled.div`
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -252,7 +252,7 @@ const Header = () => {
           </Link>
         </LogoWrapper>
         <MenuWrapper ref={refMobile}>
-          <MenuButton>
+          <MenuButton onClick={mobileMenuHandler}>
             <MenuImage src='/icons/menu.svg' alt='menu' />
           </MenuButton>
           {mobileMenu ? <MobileMenu mobileMenuHandler={mobileMenuHandler} /> : null}
