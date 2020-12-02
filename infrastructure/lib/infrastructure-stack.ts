@@ -68,6 +68,9 @@ export class InfrastructureStack extends cdk.Stack {
 
     securityGroupFargate.addIngressRule(ec2.Peer.ipv4("0.0.0.0/0"), ec2.Port.tcp(80))
 
+    const GoogleProjectID = process.env.GOOGLE_CLOUD_PROJECT ? process.env.GOOGLE_CLOUD_PROJECT : "Gid"
+    const AuthSecret = process.env.AUTH_SECRET ? process.env.AUTH_SECRET : "Secret"
+
     const loadBalancedFargateService = new ecs_patterns.ApplicationLoadBalancedFargateService(this, "MyFargateService", {
       cluster: cluster,
       cpu: 512,
@@ -83,6 +86,8 @@ export class InfrastructureStack extends cdk.Stack {
           DB_PORT: dbPort,
           DB_NAME: dbName,
           DB_USER: dbUsername,
+          GOOGLE_CLOUD_PROJECT: GoogleProjectID,
+          AUTH_SECRET: AuthSecret,
         },
       },
       memoryLimitMiB: 2048,
