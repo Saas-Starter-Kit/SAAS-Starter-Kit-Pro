@@ -1,5 +1,32 @@
 //loading animation
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+
+const rotateOne = keyframes`
+  0% {
+    transform: rotateX(35deg) rotateY(-45deg) rotateZ(0deg);
+  }
+  100% {
+    transform: rotateX(35deg) rotateY(-45deg) rotateZ(360deg);
+  }
+`;
+
+const rotateTwo = keyframes`
+  0% {
+    transform: rotateX(50deg) rotateY(10deg) rotateZ(0deg);
+  }
+  100% {
+    transform: rotateX(50deg) rotateY(10deg) rotateZ(360deg);
+  }
+`;
+
+const rotateThree = keyframes`
+ 0% {
+    transform: rotateX(35deg) rotateY(55deg) rotateZ(0deg);
+  }
+  100% {
+    transform: rotateX(35deg) rotateY(55deg) rotateZ(360deg);
+  }
+`;
 
 const StyledOverlay = styled.div`
   z-index: 9;
@@ -30,8 +57,8 @@ const WaveOne = styled.div`
   border-radius: 50%;
   left: 0%;
   top: 0%;
-  animation: cssload-rotate-one 1.15s linear infinite;
-  border-bottom: 8px solid var(--primary-color);
+  animation: ${rotateOne} 1.15s linear infinite;
+  border-bottom: 8px solid ${(props) => props.theme.primary}; ;
 `;
 
 const WaveTwo = styled.div`
@@ -42,8 +69,8 @@ const WaveTwo = styled.div`
   border-radius: 50%;
   right: 0%;
   top: 0%;
-  animation: cssload-rotate-two 1.15s linear infinite;
-  border-right: 8px solid var(--primary-color);
+  animation: ${rotateTwo} 1.15s linear infinite;
+  border-right: 8px solid ${(props) => props.theme.primary}; ;
 `;
 
 const WaveThree = styled.div`
@@ -54,8 +81,8 @@ const WaveThree = styled.div`
   border-radius: 50%;
   right: 0%;
   bottom: 0%;
-  animation: cssload-rotate-three 1.15s linear infinite;
-  border-top: 8px solid var(--primary-color);
+  animation: ${rotateThree} 1.15s linear infinite;
+  border-top: 8px solid ${(props) => props.theme.primary}; ;
 `;
 
 const LoadingOverlay = () => (

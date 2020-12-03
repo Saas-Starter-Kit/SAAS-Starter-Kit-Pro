@@ -117,7 +117,7 @@ const LoginSignup = () => {
   return (
     <Wrapper>
       <LoginFormHeader />
-      {isLoading && <LoadingOverlay />}
+      <LoadingOverlay />
       <CardWrapper>
         <Card>
           <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
