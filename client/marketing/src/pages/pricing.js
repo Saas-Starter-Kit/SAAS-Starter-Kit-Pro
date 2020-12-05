@@ -1,4 +1,4 @@
-import Pricing from '../screens/Marketing/Pricing';
+import Pricing from '../screens/Pricing';
 
 export default function PricingPage() {
   return <Pricing />;

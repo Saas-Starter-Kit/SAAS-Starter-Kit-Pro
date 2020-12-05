@@ -1,4 +1,4 @@
-import Landing from '../screens/Marketing/LandingPageHome';
+import Landing from '../screens/LandingPageHome';
 
 export default function Home() {
   return <Landing />;
