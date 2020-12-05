@@ -1,7 +1,6 @@
 import { useContext, useEffect } from 'react';
 import { Router } from '@reach/router';
 // import { useRouter } from 'next/router';
-import Layout from '../components/Layout';
 import Login from '../screens/Auth';
 import Dashboard from '../screens/Dashboard';
 import Settings from '../screens/Settings';
@@ -52,16 +51,14 @@ const Routes = () => {
   // };
 
   return (
-    <Layout>
-      <Router>
-        {/*<PrivateRoute path='/app' component={Dashboard} />*/}
-        <Login path='/login' />
-        <Dashboard path='/app' />
-        <Settings path='/app/settings' />
-        <Create path='/app/create' />
-        <ReadUpdate path='/app/readupdate' />
-      </Router>
-    </Layout>
+    <Router>
+      {/*<PrivateRoute path='/app' component={Dashboard} />*/}
+      <Login path='/login' />
+      <Dashboard path='/app' />
+      <Settings path='/app/settings' />
+      <Create path='/app/create' />
+      <ReadUpdate path='/app/readupdate' />
+    </Router>
   );
 };
 

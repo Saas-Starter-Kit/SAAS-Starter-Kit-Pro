@@ -4,6 +4,7 @@ import AuthContext from '../../utils/authContext';
 import { fetchTodoApi, deleteTodoApi, putTodoApi } from '../../api/todoApi';
 import { colors } from '../../styles/theme';
 import Todo from './todo';
+import Layout from '../../components/Layout';
 
 const StyledMain = styled.div`
   display: flex;
@@ -84,30 +85,32 @@ const ReadUpdate = () => {
   };
 
   return (
-    <StyledMain>
-      <Title>Todos: </Title>
-      <Card>
-        {todos ? (
-          todos.map((todo) => (
-            <Todo
-              todo={todo}
-              isEditting={isEditting}
-              editTodoID={editTodoID}
-              handleEditTitleChange={handleEditTitleChange}
-              editTitle={editTitle}
-              handleEditDescChange={handleEditDescChange}
-              editDescription={editDescription}
-              editTodo={editTodo}
-              deleteTodo={deleteTodo}
-              putTodo={putTodo}
-              setEdit={setEdit}
-            />
-          ))
-        ) : (
-          <p> No Todos to Show...</p>
-        )}
-      </Card>
-    </StyledMain>
+    <Layout>
+      <StyledMain>
+        <Title>Todos: </Title>
+        <Card>
+          {todos ? (
+            todos.map((todo) => (
+              <Todo
+                todo={todo}
+                isEditting={isEditting}
+                editTodoID={editTodoID}
+                handleEditTitleChange={handleEditTitleChange}
+                editTitle={editTitle}
+                handleEditDescChange={handleEditDescChange}
+                editDescription={editDescription}
+                editTodo={editTodo}
+                deleteTodo={deleteTodo}
+                putTodo={putTodo}
+                setEdit={setEdit}
+              />
+            ))
+          ) : (
+            <p> No Todos to Show...</p>
+          )}
+        </Card>
+      </StyledMain>
+    </Layout>
   );
 };
 
