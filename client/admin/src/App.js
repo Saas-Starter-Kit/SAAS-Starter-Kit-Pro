@@ -9,7 +9,7 @@ import { Login, Logout } from './store/actions/actions';
 import { firebaseApp as firebase } from './services/firebase';
 import Routes from './routes';
 
-function App({ Component, pageProps }) {
+function App() {
   const [authState, dispatchAuth] = useReducer(authReducer, initialStateAuth);
 
   const LogIn = (user) => {

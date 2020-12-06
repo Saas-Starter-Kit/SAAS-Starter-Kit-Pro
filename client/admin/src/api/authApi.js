@@ -5,7 +5,7 @@ import axios from 'axios';
 export const sendtokenToServer = async (token, username) => {
   const data = { token, username };
 
-  const result = await axios.post(`${process.env.NEXT_PUBLIC_SERVER_URL}/auth/sendtoken`, data);
+  const result = await axios.post(`${process.env.React_APP_SERVER_URL}/auth/sendtoken`, data);
 
   return result;
 };

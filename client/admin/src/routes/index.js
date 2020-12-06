@@ -1,6 +1,5 @@
 import { useContext, useEffect } from 'react';
 import { Router } from '@reach/router';
-// import { useRouter } from 'next/router';
 import Login from '../screens/Auth';
 import Dashboard from '../screens/Dashboard';
 import Settings from '../screens/Settings';
