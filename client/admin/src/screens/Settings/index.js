@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import AuthContext from '../../utils/authContext';
 import LoadingOverlay from '../../components/loadingOverlay';
 import { colors, breakpoints, fieldStyles } from '../../styles/theme';
-import Layout from '../../components/Layout';
 
 const Title = styled.h1`
   font-size: 1.5rem;
@@ -141,7 +140,7 @@ const Settings = () => {
   };
 
   return (
-    <Layout>
+    <>
       <Title>Settings</Title>
       <Card>
         <Paragraph>{resMessage}</Paragraph>
@@ -190,7 +189,7 @@ const Settings = () => {
           Go to Login
         </Button>
       </Card>
-    </Layout>
+    </>
   );
 };
 

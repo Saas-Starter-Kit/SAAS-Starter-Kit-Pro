@@ -4,7 +4,6 @@ import AuthContext from '../../utils/authContext';
 import { fetchTodoApi, deleteTodoApi, putTodoApi } from '../../api/todoApi';
 import { colors } from '../../styles/theme';
 import Todo from './todo';
-import Layout from '../../components/Layout';
 
 const StyledMain = styled.div`
   display: flex;
@@ -85,7 +84,7 @@ const ReadUpdate = () => {
   };
 
   return (
-    <Layout>
+    <>
       <StyledMain>
         <Title>Todos: </Title>
         <Card>
@@ -110,7 +109,7 @@ const ReadUpdate = () => {
           )}
         </Card>
       </StyledMain>
-    </Layout>
+    </>
   );
 };
 

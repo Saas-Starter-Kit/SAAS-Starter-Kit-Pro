@@ -6,11 +6,10 @@ import Settings from '../screens/Settings';
 import Create from '../screens/Create';
 import ReadUpdate from '../screens/ReadUpdate';
 import AuthContext from '../utils/authContext';
+import Layout from '../components/Layout';
 
 const Routes = () => {
   const { LogIn, LogOut } = useContext(AuthContext);
-
-  // const router = useRouter();
 
   const silentAuth = () => {
     let user, expiresAt;
@@ -28,11 +27,11 @@ const Routes = () => {
     }
   };
 
-  useEffect(() => {
-    if (!typeof window === 'undefined') {
-      setTimeout(() => silentAuth(), 300);
-    }
-  }, []);
+  //useEffect(() => {
+  //  if (!typeof window === 'undefined') {
+  //    setTimeout(() => silentAuth(), 300);
+  //  }
+  //}, []);
 
   //check token expires time on private routes
   const isTokenValid = () => {
@@ -50,14 +49,16 @@ const Routes = () => {
   // };
 
   return (
-    <Router>
-      {/*<PrivateRoute path='/app' component={Dashboard} />*/}
-      <Login path='/login' />
-      <Dashboard path='/app' />
-      <Settings path='/app/settings' />
-      <Create path='/app/create' />
-      <ReadUpdate path='/app/readupdate' />
-    </Router>
+    <Layout>
+      <Router>
+        {/*<PrivateRoute path='/app' component={Dashboard} />*/}
+        <Login path='/login' />
+        <Dashboard path='/app' />
+        <Settings path='/app/settings' />
+        <Create path='/app/create' />
+        <ReadUpdate path='/app/readupdate' />
+      </Router>
+    </Layout>
   );
 };
 

@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import AuthContext from '../../utils/authContext';
 import { postTodoApi } from '../../api/todoApi';
 import { colors, breakpoints, fieldStyles } from '../../styles/theme';
-import Layout from '../../components/Layout';
 
 const Wrapper = styled.div`
   padding: 1.5;
@@ -130,7 +129,7 @@ const CreateTask = () => {
   };
 
   return (
-    <Layout>
+    <>
       <Title>Create Todo</Title>
       <form onSubmit={postTodo}>
         <Wrapper>
@@ -148,7 +147,7 @@ const CreateTask = () => {
           </ButtonWrapper>
         </Wrapper>
       </form>
-    </Layout>
+    </>
   );
 };
 
