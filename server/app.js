@@ -5,6 +5,8 @@ if (!process.env.NODE_ENV === 'production') {
   dotenv.config();
 }
 
+require('./Stripe/stripe');
+
 var cors = require('cors');
 var bodyParser = require('body-parser');
 const passport = require('passport');
