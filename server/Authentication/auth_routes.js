@@ -1,3 +1,5 @@
+import { stripe } from '../Stripe/stripe';
+
 const db = require('../Database/db.js');
 
 const requireAuth = require('./passport_config').requireAuth;
@@ -12,10 +14,6 @@ const router = express.Router();
 //Example of authenticated route
 router.get('/private', requireAuth, (req, res) => {
   res.send('Accessed Private Endpoint');
-});
-
-router.get('/health', (req, res) => {
-  res.send('All ok');
 });
 
 //sign in or sign up user then send jwt token
