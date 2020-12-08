@@ -1,4 +1,4 @@
-import * as pg from 'pg';
+import pg from 'pg';
 const { Pool } = pg;
 
 // Meant for heroku db env var
