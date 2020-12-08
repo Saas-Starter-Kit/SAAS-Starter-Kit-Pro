@@ -1,7 +1,17 @@
 import express from 'express';
 const router = express.Router();
 
-import { LoginOrSignUp, updateEmail, updateUsername } from '../Services/authentication.js';
+import {
+  LoginOrSignUp,
+  updateEmail,
+  updateUsername,
+  Login,
+  SignUp
+} from '../Services/authentication.js';
+
+//sign in or sign up user then send jwt token
+router.post('/signup', SignUp);
+router.post('/login', Login);
 
 //sign in or sign up user then send jwt token
 router.post('/sendtoken', LoginOrSignUp);
