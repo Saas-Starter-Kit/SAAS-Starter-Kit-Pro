@@ -1,9 +1,11 @@
 import React, { useState, useContext } from "react"
 import axios from "axios"
 import styled from "styled-components"
+import { navigate } from "gatsby"
 import AuthContext from "../../../utils/authContext"
 import LoadingOverlay from "../../../components/Admin/Common/loadingOverlay"
 import { colors, breakpoints, fieldStyles } from "../../../styles/theme"
+import { updateUserNameApi, updateEmailApi } from "../../../api/authApi"
 
 const Title = styled.h1`
   font-size: 1.5rem;
@@ -87,8 +89,6 @@ const Settings = () => {
   const id = authState.user ? authState.user.id.user : null
   const isEmail = authState.user ? authState.user.provider === "password" : null
 
-  // const router = useRouter();
-
   const updateUsername = event => {
     event.preventDefault()
     setLoading(true)
@@ -99,12 +99,12 @@ const Settings = () => {
       })
       .then(() => {
         // Update successful.
-        let data = { id, username }
-        axios.put(
-          `${process.env.NEXT_PUBLIC_SERVER_URL}/auth/put/username`,
-          data
-        )
-        // setTimeout(() => router.push('/login'), 500);
+        //axios.put(
+        //  `${process.env.NEXT_PUBLIC_SERVER_URL}/auth/put/username`,
+        //  data
+        //)
+        //setTimeout(() => navigate("/login"), 500)
+        updateUserNameApi(id, username)
       })
       .catch(error => {
         // An error happened.
@@ -118,13 +118,12 @@ const Settings = () => {
     event.preventDefault()
     setLoading(true)
 
-    let data = { id, email }
-
     curUser
       .updateEmail(email)
       .then(() => {
-        axios.put(`${process.env.NEXT_PUBLIC_SERVER_URL}/auth/put/email`, data)
-        // setTimeout(() => router.push('/login'), 500);
+        //axios.put(`${process.env.NEXT_PUBLIC_SERVER_URL}/auth/put/email`, data)
+        //setTimeout(() => navigate("/login"), 500)
+        updateEmailApi(id, email)
       })
       .catch(function (error) {
         console.log(error)
@@ -186,7 +185,7 @@ const Settings = () => {
         <p>Please Reset Password on Login Page</p>
         <Button
           onClick={() => {
-            // router.push('/login');
+            navigate("/login")
           }}
         >
           Go to Login
