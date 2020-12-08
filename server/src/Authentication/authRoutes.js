@@ -1,4 +1,4 @@
-import stripe from '../Config/stripe.js';
+import stripe from './Config/stripe.js';
 
 const db = require('../Database/db.js');
 

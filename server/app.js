@@ -7,10 +7,10 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import passport from 'passport';
 
-import('./Config/stripe.js');
-import auth from './Authentication/authRoutes.js';
-import todoApi from './API/todos.js';
-import healthApi from './API/health.js';
+import('./src/Authentication/Config/stripe.js');
+import auth from './src/Authentication/authRoutes.js';
+import todoApi from './src/Authentication/API/todos.js';
+import healthApi from './src/Authentication/API/health.js';
 
 const app = express();
 
