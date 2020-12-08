@@ -1,8 +1,7 @@
 import express from 'express';
 
-//Config
-import('./src/Config/dotenv.js');
-import('./src/Config/stripe.js');
+import './src/Config/dotenv.js';
+import './src/Config/stripe.js';
 
 import cors from 'cors';
 import bodyParser from 'body-parser';
