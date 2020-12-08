@@ -81,6 +81,7 @@ export const Login = (req, res) => {
     /* Check if users exists then jwt login */
 
     //check if email exists
+
     let query1 = `SELECT * FROM users
                   WHERE email=$1`;
 
