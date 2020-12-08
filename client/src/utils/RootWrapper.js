@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from "react"
+import React, { useState, useReducer, useEffect } from "react"
 import AuthContext from "./authContext"
 import { authReducer, initialStateAuth } from "../store/reducers/authReducer"
 import { Login, Logout } from "../store/actions/actions"
@@ -16,6 +16,26 @@ const RootWrapper = ({ children }) => {
   const LogOut = () => {
     dispatchAuth(Logout)
     firebase.auth().signOut()
+  }
+
+  useEffect(() => {
+    silentAuth()
+  }, []) // eslint-disable-line
+
+  const silentAuth = () => {
+    let user, expiresAt
+
+    user = JSON.parse(localStorage.getItem("user"))
+    expiresAt = JSON.parse(localStorage.getItem("expiresIn"))
+
+    console.log(user)
+    if (user && new Date().getTime() < expiresAt) {
+      LogIn(user)
+      console.log("fffff")
+    } else if (!user || new Date().getTime() > expiresAt) {
+      LogOut()
+      console.log("rrrrr")
+    }
   }
 
   return (
