@@ -1,7 +1,7 @@
 import express from 'express';
-import dotenv from 'dotenv';
+import './src/Config/dotenv.js';
 
-dotenv.config();
+console.log(process.env.StripeSecret);
 
 import cors from 'cors';
 import bodyParser from 'body-parser';

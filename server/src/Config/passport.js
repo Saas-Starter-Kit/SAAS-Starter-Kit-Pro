@@ -8,7 +8,7 @@ export const setToken = (user) => {
   let opts = {
     expiresIn: '7d'
   };
-  let secret = 'SSSS';
+  let secret = process.env.AUTH_SECRET;
 
   return jwt.sign({ user }, secret, opts);
 };
@@ -19,7 +19,7 @@ passport.use(
   new Strategy(
     {
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-      secretOrKey: 'SSSSS'
+      secretOrKey: process.env.AUTH_SECRET
     },
     (jwtPayload, cb) => {
       let id = [jwtPayload];
