@@ -50,7 +50,7 @@ export const LoginOrSignUp = (req, res) => {
       //send back user id after signup
       if (q_res.rows[0]) {
         let id = q_res.rows[0].id;
-
+        console.log(id);
         //jwt token login after signup
         res.send({ token: setToken(id) });
       }
@@ -65,11 +65,12 @@ export const LoginOrSignUp = (req, res) => {
       if (q_res.rows.length != 0) {
         //if user exists then jwt login
         let id = q_res.rows[0].id;
-
+        console.log(id);
         res.send({ token: setToken(id) });
       }
       if (q_res.rows.length === 0) {
         //if email not found, create user in db
+        console.log('FFFF');
         db.query(query2, values2, callback2);
       }
     };

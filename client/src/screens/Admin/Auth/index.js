@@ -56,8 +56,6 @@ const LoginSignup = () => {
   const [isLoading, setLoading] = useState(false)
   const { firebase, LogIn, LogOut } = useContext(AuthContext)
 
-  // const router = useRouter();
-
   useEffect(() => {
     setTimeout(() => LogOut(), 200)
   }, [])
@@ -94,6 +92,7 @@ const LoginSignup = () => {
       .catch(err => console.log(err))
 
     const LogintoContext = data => {
+      console.log(data)
       let email = authResult.user.email
       let id = jwt_decode(data.token)
       let photo = authResult.user.photoURL
@@ -109,7 +108,6 @@ const LoginSignup = () => {
 
       LogIn(user)
       setTimeout(() => navigate("/app"), 200)
-      // setTimeout(() => router.push('/app'), 400);
     }
   }
 
