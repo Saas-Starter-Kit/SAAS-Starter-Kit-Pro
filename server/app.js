@@ -1,15 +1,15 @@
 import express from 'express';
-import './src/Config/dotenv.js';
 
-console.log(process.env.StripeSecret);
+//Config
+import('./src/Config/dotenv.js');
+import('./src/Config/stripe.js');
 
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import passport from 'passport';
 import morgan from 'morgan';
 
-import('./src/Config/stripe.js');
-import auth from './src/Authentication/authRoutes.js';
+import auth from './src/API/authRoutes.js';
 import todoApi from './src/API/todos.js';
 import healthApi from './src/API/health.js';
 
