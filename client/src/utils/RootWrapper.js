@@ -28,13 +28,10 @@ const RootWrapper = ({ children }) => {
     user = JSON.parse(localStorage.getItem("user"))
     expiresAt = JSON.parse(localStorage.getItem("expiresIn"))
 
-    console.log(user)
     if (user && new Date().getTime() < expiresAt) {
       LogIn(user)
-      console.log("fffff")
     } else if (!user || new Date().getTime() > expiresAt) {
       LogOut()
-      console.log("rrrrr")
     }
   }
 
