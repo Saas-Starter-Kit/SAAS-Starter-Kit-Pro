@@ -1,6 +1,5 @@
-import { Link } from "@reach/router"
 import React, { useContext } from "react"
-// import { useRouter } from 'next/router';
+import { navigate, Link } from "gatsby"
 import styled, { keyframes } from "styled-components"
 import AuthContext from "../../../utils/authContext"
 import { colors } from "../../../styles/theme"
@@ -47,11 +46,9 @@ const Border = styled.div`
 const AvatarDropDownMobile = ({ avatarMenuHandler }) => {
   const { LogOut } = useContext(AuthContext)
 
-  // const router = useRouter();
-
   const signOut = () => {
     LogOut()
-    // setTimeout(() => router.push('/login'), 200);
+    setTimeout(() => navigate("/login"), 200)
   }
 
   return (

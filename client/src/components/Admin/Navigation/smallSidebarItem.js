@@ -1,5 +1,5 @@
 import React from "react"
-import { Link } from "@reach/router"
+import { Link } from "gatsby"
 import ReactTooltip from "react-tooltip"
 import styled from "styled-components"
 import { colors } from "../../../styles/theme"
