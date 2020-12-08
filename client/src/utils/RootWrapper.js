@@ -1,5 +1,5 @@
 import React, { useState, useReducer } from "react"
-import AuthContext from "../utils/authContext"
+import AuthContext from "./authContext"
 import { authReducer, initialStateAuth } from "../store/reducers/authReducer"
 import { Login, Logout } from "../store/actions/actions"
 import { firebaseApp as firebase } from "../services/firebase"
