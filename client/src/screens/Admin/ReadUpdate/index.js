@@ -22,7 +22,7 @@ const Card = styled.div`
 `
 
 const ReadUpdate = () => {
-  const [todos, setTodos] = useState(null)
+  const [todos, setTodos] = useState([])
 
   const context = useContext(AuthContext)
   const { authState } = context
@@ -88,7 +88,7 @@ const ReadUpdate = () => {
       <StyledMain>
         <Title>Todos: </Title>
         <Card>
-          {/*{todos.map(todo => (
+          {todos.map(todo => (
             <Todo
               todo={todo}
               isEditting={isEditting}
@@ -102,7 +102,7 @@ const ReadUpdate = () => {
               putTodo={putTodo}
               setEdit={setEdit}
             />
-          ))}*/}
+          ))}
         </Card>
       </StyledMain>
     </>
