@@ -1,10 +1,9 @@
-const passport = require('passport');
-const ExtractJWT = require('passport-jwt').ExtractJwt;
-const JWTStrategy = require('passport-jwt').Strategy;
-const db = require('../Database/db.js');
-const jwt = require('jsonwebtoken');
+import passport from 'passport';
+import { Strategy, ExtractJWT } from 'passport-jwt';
+import jwt from 'jsonwebtoken';
+import db from '../Database/db.js';
 
-const setToken = (user) => {
+export const setToken = (user) => {
   let opts = {
     expiresIn: '7d'
   };
@@ -13,10 +12,10 @@ const setToken = (user) => {
   return jwt.sign({ user }, secret, opts);
 };
 
-const requireAuth = passport.authenticate('jwt', { session: false });
+export const requireAuth = passport.authenticate('jwt', { session: false });
 
 passport.use(
-  new JWTStrategy(
+  new Strategy(
     {
       jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
       secretOrKey: process.env.AUTH_SECRET
@@ -43,10 +42,3 @@ passport.use(
     }
   )
 );
-
-const exportObj = {
-  requireAuth,
-  setToken
-};
-
-module.exports = exportObj;

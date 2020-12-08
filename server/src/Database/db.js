@@ -1,11 +1,11 @@
-const { Pool } = require('pg');
+import { Pool } from 'pg';
 
 // Meant for heroku db env var
 //let connectionString =
 //  process.env.NODE_ENV === 'production'
 //    ? process.env.DATABASE_URL
 //    : `postgresql://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`;
-
+//
 //let pool = new Pool({
 //  connectionString
 //});

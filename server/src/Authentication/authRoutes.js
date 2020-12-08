@@ -1,20 +1,16 @@
 import stripe from './Config/stripe.js';
+import express from 'express';
+import db from '../Database/db';
+import { setToken } from '../Config/passport';
+import firebase from 'firebase-admin';
 
-const db = require('../Database/db.js');
-
-const requireAuth = require('./passportConfig').requireAuth;
-const setToken = require('./passportConfig').setToken;
-
-const firebase = require('firebase-admin');
 const admin = firebase.initializeApp();
-
-const express = require('express');
 const router = express.Router();
 
 //Example of authenticated route
-router.get('/private', requireAuth, (req, res) => {
-  res.send('Accessed Private Endpoint');
-});
+//router.get('/private', requireAuth, (req, res) => {
+//  res.send('Accessed Private Endpoint');
+//});
 
 //sign in or sign up user then send jwt token
 router.post('/sendtoken', (req, res) => {
@@ -132,4 +128,4 @@ const putEmail = (req, res) => {
 
 router.put('/put/email', putEmail);
 
-module.exports = router;
+export default router;

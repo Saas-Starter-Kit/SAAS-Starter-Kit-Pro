@@ -1,8 +1,7 @@
-var express = require('express');
-var router = express.Router();
-var db = require('../Database/db');
+import express from 'express';
+import db from '../Database/db';
 
-const requireAuth = require('../Authentication/passportConfig').requireAuth;
+const router = express.Router();
 
 /* 
 To make authenticated request simply add requireAuth as the second arguement in router()
@@ -92,4 +91,4 @@ const deleteTodo = (req, res) => {
 
 router.delete('/delete/todo', deleteTodo);
 
-module.exports = router;
+export default router;

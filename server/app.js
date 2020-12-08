@@ -31,4 +31,4 @@ const port = process.env.PORT || 80;
 app.listen(port);
 console.log('Server listening on:', port);
 
-module.exports = app;
+export default app;
