@@ -1,9 +1,9 @@
-import { stripe } from '../Stripe/stripe';
+import stripe from '../Config/stripe.js';
 
 const db = require('../Database/db.js');
 
-const requireAuth = require('./passport_config').requireAuth;
-const setToken = require('./passport_config').setToken;
+const requireAuth = require('./passportConfig').requireAuth;
+const setToken = require('./passportConfig').setToken;
 
 const firebase = require('firebase-admin');
 const admin = firebase.initializeApp();

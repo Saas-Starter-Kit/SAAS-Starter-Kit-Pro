@@ -1,19 +1,16 @@
-var express = require('express');
+import express from 'express';
+import dotenv from 'dotenv';
 
-var dotenv = require('dotenv').config();
-if (!process.env.NODE_ENV === 'production') {
-  dotenv.config();
-}
+if (!process.env.NODE_ENV === 'production') dotenv.config();
 
-require('./Stripe/stripe');
+import cors from 'cors';
+import bodyParser from 'body-parser';
+import passport from 'passport';
 
-var cors = require('cors');
-var bodyParser = require('body-parser');
-const passport = require('passport');
-
-const auth = require('./Authentication/auth_routes');
-const todo_api = require('./API/todos');
-const health_api = require('./API/health');
+import('./Config/stripe.js');
+import auth from './Authentication/authRoutes.js';
+import todoApi from './API/todos.js';
+import healthApi from './API/health.js';
 
 const app = express();
 
@@ -25,9 +22,9 @@ app.use(bodyParser.json());
 app.use(passport.initialize());
 
 //API routes
-app.use('/', health_api);
+app.use('/', healthApi);
 app.use('/auth', auth);
-app.use('/api', todo_api);
+app.use('/api', todoApi);
 
 //server setup
 const port = process.env.PORT || 80;

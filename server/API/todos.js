@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var db = require('../Database/db');
 
-const requireAuth = require('../Authentication/passport_config').requireAuth;
+const requireAuth = require('../Authentication/passportConfig').requireAuth;
 
 /* 
 To make authenticated request simply add requireAuth as the second arguement in router()

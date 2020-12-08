@@ -23,5 +23,6 @@
     "passport-local": "^1.0.0",
     "pg": "^7.12.1",
     "stripe": "^8.127.0"
-  }
+  },
+  "type": "module"
 }
