@@ -78,3 +78,35 @@ export const LoginOrSignUp = (req, res) => {
     db.query(query1, values1, callback1);
   };
 };
+
+export const updateUsername = (req, res) => {
+  let id = req.body.id;
+  let username = req.body.username;
+
+  let text = `UPDATE users SET username=$1
+              WHERE id = $2`;
+  let values = [username, id];
+
+  let callback = (q_err, q_res) => {
+    if (q_err) console.log(q_err);
+    res.json(q_res.rows);
+  };
+
+  db.query(text, values, callback);
+};
+
+export const updateEmail = (req, res) => {
+  let id = req.body.id;
+  let email = req.body.email;
+
+  let text = `UPDATE users SET email=$1
+              WHERE id = $2`;
+  let values = [email, id];
+
+  let callback = (q_err, q_res) => {
+    if (q_err) console.log(q_err);
+    res.json(q_res.rows);
+  };
+
+  db.query(text, values, callback);
+};
