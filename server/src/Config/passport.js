@@ -1,5 +1,6 @@
 import passport from 'passport';
-import { Strategy, ExtractJWT } from 'passport-jwt';
+import { Strategy, ExtractJwt } from 'passport-jwt';
+
 import jwt from 'jsonwebtoken';
 import db from '../Database/db.js';
 
@@ -7,7 +8,7 @@ export const setToken = (user) => {
   let opts = {
     expiresIn: '7d'
   };
-  let secret = process.env.AUTH_SECRET;
+  let secret = 'SSSS';
 
   return jwt.sign({ user }, secret, opts);
 };
@@ -17,8 +18,8 @@ export const requireAuth = passport.authenticate('jwt', { session: false });
 passport.use(
   new Strategy(
     {
-      jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
-      secretOrKey: process.env.AUTH_SECRET
+      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+      secretOrKey: 'SSSSS'
     },
     (jwtPayload, cb) => {
       let id = [jwtPayload];

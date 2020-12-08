@@ -1,7 +1,6 @@
-import stripe from './Config/stripe.js';
 import express from 'express';
-import db from '../Database/db';
-import { setToken } from '../Config/passport';
+import db from '../Database/db.js';
+import { setToken } from '../Config/passport.js';
 import firebase from 'firebase-admin';
 
 const admin = firebase.initializeApp();

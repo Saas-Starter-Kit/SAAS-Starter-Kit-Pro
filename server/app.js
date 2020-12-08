@@ -1,22 +1,23 @@
 import express from 'express';
 import dotenv from 'dotenv';
 
-if (!process.env.NODE_ENV === 'production') dotenv.config();
+dotenv.config();
 
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import passport from 'passport';
+import morgan from 'morgan';
 
-import('./src/Authentication/Config/stripe.js');
+import('./src/Config/stripe.js');
 import auth from './src/Authentication/authRoutes.js';
-import todoApi from './src/Authentication/API/todos.js';
-import healthApi from './src/Authentication/API/health.js';
+import todoApi from './src/API/todos.js';
+import healthApi from './src/API/health.js';
 
 const app = express();
 
 //Middleware
 app.use(cors());
-app.use(require('morgan')('dev'));
+app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(passport.initialize());
