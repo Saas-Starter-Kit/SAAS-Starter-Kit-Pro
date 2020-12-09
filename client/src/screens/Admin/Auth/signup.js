@@ -105,6 +105,13 @@ const Card = styled.div`
   }
 `
 
+const ErrorText = styled.div`
+  color: red;
+  font-size: 0.8em;
+  margin-bottom: 0.5em;
+  margin-top: -0.2rem;
+`
+
 const Signup = () => {
   const [loading, setLoading] = useState(false)
   const { firebase, LogIn, LogOut } = useContext(AuthContext)
@@ -177,7 +184,9 @@ const Signup = () => {
                     value={values.email}
                   />
                 </InputWrapper>
-                {errors.email && touched.email && <span>{errors.email}</span>}
+                {errors.email && touched.email && (
+                  <ErrorText>{errors.email}</ErrorText>
+                )}
                 <Label htmlFor="password">Password:</Label>
                 <InputWrapper>
                   <Input
@@ -190,7 +199,7 @@ const Signup = () => {
                   />
                 </InputWrapper>
                 {errors.password && touched.password && (
-                  <span>{errors.password}</span>
+                  <ErrorText>{errors.password}</ErrorText>
                 )}
                 <ButtonWrapper>
                   <Button disabled={isSubmitting} type="submit">

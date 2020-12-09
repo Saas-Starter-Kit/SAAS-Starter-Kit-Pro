@@ -131,6 +131,13 @@ const RememberMeLabel = styled.label`
   color: ${colors.coolGray900};
 `
 
+const ErrorText = styled.div`
+  color: red;
+  font-size: 0.8em;
+  margin-bottom: 0.5em;
+  margin-top: -0.2rem;
+`
+
 const Login = () => {
   const [loading, setLoading] = useState(false)
   const { firebase, LogIn, LogOut } = useContext(AuthContext)
@@ -204,7 +211,9 @@ const Login = () => {
                     value={values.email}
                   />
                 </InputWrapper>
-                {errors.email && touched.email && <span>{errors.email}</span>}
+                {errors.email && touched.email && (
+                  <ErrorText>{errors.email}</ErrorText>
+                )}
                 <Label htmlFor="password">Password:</Label>
                 <InputWrapper>
                   <Input
@@ -217,7 +226,7 @@ const Login = () => {
                   />
                 </InputWrapper>
                 {errors.password && touched.password && (
-                  <span>{errors.password}</span>
+                  <ErrorText>{errors.password}</ErrorText>
                 )}
                 <ButtonWrapper>
                   <Button disabled={isSubmitting} type="submit">
@@ -230,7 +239,9 @@ const Login = () => {
           <ForgotPasswordWrapper>
             <RememberMeWrapper>
               <input id="remember_me" name="remember_me" type="checkbox" />
-              <RememberMeLabel for="remember_me">Remember me</RememberMeLabel>
+              <RememberMeLabel htmlFor="remember_me">
+                Remember me
+              </RememberMeLabel>
             </RememberMeWrapper>
 
             <ForgotPassword>Forgot your password?</ForgotPassword>
