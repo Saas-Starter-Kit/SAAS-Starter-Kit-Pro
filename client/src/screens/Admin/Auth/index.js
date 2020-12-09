@@ -3,7 +3,6 @@ import jwt_decode from "jwt-decode"
 import { navigate } from "gatsby"
 import styled from "styled-components"
 import { Formik } from "formik"
-
 import * as Yup from "yup"
 import AuthContext from "../../../utils/authContext"
 
@@ -13,20 +12,23 @@ import LoginFormHeader from "./loginFormHeader"
 
 const ValidSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Required"),
-  subject: Yup.string()
-    .min(3, "Subject must be at least 3 Characters")
-    .max(50, "Subject Too Long")
-    .required("Subject Required"),
+  password: Yup.string()
+    .min(3, "Password must be at least 3 Characters")
+    .max(50, "Password Too Long")
+    .required("Password Required"),
 })
 
 const Signup = () => {
+  const [loading, setLoading] = useState(false)
   const { firebase, LogIn, LogOut } = useContext(AuthContext)
-  const handleSubmit = event => {
-    event.preventDefault()
-    let email = event.target
-    let password = event.target
 
-    console.log(email, password)
+  const handleSubmit = event => {
+    setLoading(true)
+
+    //let email = values.emaillogin
+    //let password = values.passwordlogin
+
+    console.log(event)
   }
 
   return (
@@ -34,29 +36,41 @@ const Signup = () => {
       Sign Up
       <Formik
         validationSchema={ValidSchema}
-        initialValues={{ emaillogin: "", passwordlogin: "" }}
+        initialValues={{ email: "", password: "" }}
         onSubmit={handleSubmit}
       >
-        {({ values, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
-          <form className={styles.form} onSubmit={handleSubmit}>
-            <label htmlFor="emaillogin">Username or Email:</label>
+        {({
+          values,
+          errors,
+          touched,
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          isSubmitting,
+        }) => (
+          <form onSubmit={handleSubmit}>
+            <label htmlFor="email">Username or Email:</label>
             <input
               type="email"
-              name="emaillogin"
-              id="emaillogin"
+              name="email"
+              id="email"
               onChange={handleChange}
               onBlur={handleBlur}
-              value={values.emaillogin}
+              value={values.email}
             />
-            <label htmlFor="passwordlogin">Password:</label>
+            {errors.email && touched.email && <span>{errors.email}</span>}
+            <label htmlFor="password">Password:</label>
             <input
               type="password"
-              name="passwordlogin"
-              id="passwordlogin"
+              name="password"
+              id="password"
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.passwordlogin}
             />
+            {errors.password && touched.password && (
+              <span>{errors.password}</span>
+            )}
             <button type="submit" disabled={isSubmitting}>
               Login
             </button>
