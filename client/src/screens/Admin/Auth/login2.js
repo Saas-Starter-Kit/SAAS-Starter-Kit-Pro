@@ -48,8 +48,7 @@ const Signup = () => {
     firebase
       .auth()
       .currentUser.getIdToken()
-      .then(token => LoginToServer(token, username))
-      .then(res => console.log(res))
+      .then(token => SignupToServer(token, username))
   }
 
   const handleSubmit = values => {
@@ -60,8 +59,8 @@ const Signup = () => {
 
     firebase
       .auth()
-      //.createUserWithEmailAndPassword(email, password)
-      .signInWithEmailAndPassword(email, password)
+      .createUserWithEmailAndPassword(email, password)
+      //.signInWithEmailAndPassword(email, password)
       .then(authRes => saveToDb(authRes))
   }
 

@@ -76,7 +76,6 @@ export const SignUp = (req, res) => {
 
 export const Login = (req, res) => {
   let token = req.body.token;
-  console.log(token);
 
   const CheckUserExists = (email) => {
     /* Check if users exists then jwt login */
