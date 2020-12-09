@@ -63,7 +63,7 @@ export const SignUp = (req, res) => {
     .auth()
     .verifyIdToken(token)
     .then((decodedToken) => {
-      let name = username;
+      let name = username ? username : decodedToken.email;
       let email = decodedToken.email;
 
       saveUsertoDB(email, name);

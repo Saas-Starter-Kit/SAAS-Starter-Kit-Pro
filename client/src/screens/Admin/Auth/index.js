@@ -5,6 +5,11 @@ import styled from "styled-components"
 import { Formik } from "formik"
 import * as Yup from "yup"
 import AuthContext from "../../../utils/authContext"
+import {
+  sendtokenToServer,
+  SignupToServer,
+  LoginToServer,
+} from "../../../api/authApi"
 
 import LoadingOverlay from "../../../components/Admin/Common/loadingOverlay"
 import { colors, breakpoints } from "../../../styles/theme"
@@ -22,19 +27,42 @@ const Signup = () => {
   const [loading, setLoading] = useState(false)
   const { firebase, LogIn, LogOut } = useContext(AuthContext)
 
-  const handleSubmit = async values => {
+  const provider = new firebase.auth.GoogleAuthProvider()
+
+  const googleSignin = () => {
+    firebase
+      .auth()
+      .signInWithPopup(provider)
+      .then(function (result) {
+        var user = result.user
+        console.log(user)
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
+  }
+
+  const saveToDb = authRes => {
+    let username = authRes.user.displayName
+    console.log(authRes)
+
+    firebase
+      .auth()
+      .currentUser.getIdToken()
+      .then(token => SignupToServer(token, username))
+  }
+
+  const handleSubmit = values => {
     setLoading(true)
 
     let email = values.email
     let password = values.password
 
-    await firebase.auth().signInWithEmailAndPassword(email, password)
-    const result = await firebase.auth().currentUser.getIdToken()
-    console.log(result)
-  }
-
-  const getToken = () => {
-    console.log(firebase.auth().currentUser.getIdToken())
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      //.signInWithEmailAndPassword(email, password)
+      .then(authRes => saveToDb(authRes))
   }
 
   return (
@@ -55,7 +83,7 @@ const Signup = () => {
           isSubmitting,
         }) => (
           <form onSubmit={handleSubmit}>
-            <label htmlFor="email">Username or Email:</label>
+            <label htmlFor="email">Email:</label>
             <input
               type="email"
               name="email"
@@ -83,7 +111,7 @@ const Signup = () => {
           </form>
         )}
       </Formik>
-      <button onClick={getToken}>GGGGGG</button>
+      <button onClick={googleSignin}>Google</button>
     </div>
   )
 }
