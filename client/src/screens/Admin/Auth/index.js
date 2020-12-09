@@ -22,13 +22,19 @@ const Signup = () => {
   const [loading, setLoading] = useState(false)
   const { firebase, LogIn, LogOut } = useContext(AuthContext)
 
-  const handleSubmit = event => {
+  const handleSubmit = async values => {
     setLoading(true)
 
-    //let email = values.emaillogin
-    //let password = values.passwordlogin
+    let email = values.email
+    let password = values.password
 
-    console.log(event)
+    await firebase.auth().signInWithEmailAndPassword(email, password)
+    const result = await firebase.auth().currentUser.getIdToken()
+    console.log(result)
+  }
+
+  const getToken = () => {
+    console.log(firebase.auth().currentUser.getIdToken())
   }
 
   return (
@@ -66,7 +72,7 @@ const Signup = () => {
               id="password"
               onChange={handleChange}
               onBlur={handleBlur}
-              value={values.passwordlogin}
+              value={values.password}
             />
             {errors.password && touched.password && (
               <span>{errors.password}</span>
@@ -77,6 +83,7 @@ const Signup = () => {
           </form>
         )}
       </Formik>
+      <button onClick={getToken}>GGGGGG</button>
     </div>
   )
 }
