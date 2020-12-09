@@ -15,6 +15,49 @@ import LoadingOverlay from "../../../components/Admin/Common/loadingOverlay"
 import { colors, breakpoints } from "../../../styles/theme"
 import LoginFormHeader from "./loginFormHeader"
 
+const Wrapper = styled.div`
+  background-color: ${colors.gray50};
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: -4rem;
+
+  @media (min-width: ${breakpoints.small}) {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+  @media (min-width: ${breakpoints.large}) {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+`
+
+const CardWrapper = styled.div`
+  padding-left: 2rem;
+  padding-right: 2rem;
+
+  @media (min-width: ${breakpoints.small}) {
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    width: 100%;
+    max-width: 28rem;
+  }
+`
+
+const Card = styled.div`
+  background-color: ${colors.white};
+  padding: 2rem 1rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  @media (min-width: ${breakpoints.small}) {
+    border-radius: 0.5rem;
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+`
+
 const ValidSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Required"),
   password: Yup.string()
