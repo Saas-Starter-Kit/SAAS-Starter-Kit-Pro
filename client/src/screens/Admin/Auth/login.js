@@ -8,7 +8,7 @@ import { LoginToServer } from "../../../api/authApi"
 import { ValidSchema, LogintoContext } from "./helpers"
 
 import LoadingOverlay from "../../../components/Admin/Common/loadingOverlay"
-import { colors, breakpoints } from "../../../styles/theme"
+import { colors, breakpoints, fieldStyles } from "../../../styles/theme"
 import LoginFormHeader from "../../../components/Admin/Auth/loginFormHeader"
 
 const Wrapper = styled.div`
@@ -17,7 +17,6 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-top: -4rem;
 
   @media (min-width: ${breakpoints.small}) {
     padding-left: 1.5rem;
@@ -27,6 +26,59 @@ const Wrapper = styled.div`
     padding-left: 2rem;
     padding-right: 2rem;
   }
+`
+
+const Label = styled.label`
+  display: block;
+  font-weight: 500;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: ${colors.gray700};
+  padding-top: 0.5rem;
+`
+
+const InputWrapper = styled.div`
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+`
+
+const Input = styled.input`
+  ${fieldStyles}
+`
+
+const ButtonWrapper = styled.div`
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  background-color: ${colors.white};
+  text-align: left;
+`
+
+const Button = styled.button`
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  width: 100%;
+  color: ${colors.white};
+  background-color: ${colors.indigo600};
+  border: 1px solid transparent;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  &:hover {
+    background-color: ${colors.indigo500};
+  }
+  &:focus {
+    box-shadow: 0 0 0 3px rgba(164, 202, 254, 0.45);
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+  }
+  &:active {
+    background-color: ${colors.indigo600};
+  }
+  transition-property: background-color, border-color, color, fill, stroke,
+    opacity, box-shadow, transform;
+  transition-duration: 150ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 `
 
 const CardWrapper = styled.div`
@@ -52,6 +104,31 @@ const Card = styled.div`
     padding-left: 2.5rem;
     padding-right: 2.5rem;
   }
+`
+
+const ForgotPasswordWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding-top: 0.3rem;
+  padding-bottom: 0.3rem;
+`
+
+const ForgotPassword = styled.div`
+  text-decoration: underline;
+  color: blue;
+  font-size: 0.875rem;
+  font-weight: 500;
+`
+
+const RememberMeWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`
+
+const RememberMeLabel = styled.label`
+  margin-left: 0.1rem;
+  font-size: 0.925rem;
+  color: ${colors.coolGray900};
 `
 
 const Login = () => {
@@ -96,53 +173,75 @@ const Login = () => {
   }
 
   return (
-    <div>
+    <Wrapper>
       <LoginFormHeader />
-      <Formik
-        validationSchema={ValidSchema}
-        initialValues={{ email: "", password: "" }}
-        onSubmit={handleSubmit}
-      >
-        {({
-          values,
-          errors,
-          touched,
-          handleChange,
-          handleBlur,
-          handleSubmit,
-          isSubmitting,
-        }) => (
-          <form onSubmit={handleSubmit}>
-            <label htmlFor="email">Email:</label>
-            <input
-              type="email"
-              name="email"
-              id="email"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.email}
-            />
-            {errors.email && touched.email && <span>{errors.email}</span>}
-            <label htmlFor="password">Password:</label>
-            <input
-              type="password"
-              name="password"
-              id="password"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.password}
-            />
-            {errors.password && touched.password && (
-              <span>{errors.password}</span>
+
+      <CardWrapper>
+        <Card>
+          <Formik
+            validationSchema={ValidSchema}
+            initialValues={{ email: "", password: "" }}
+            onSubmit={handleSubmit}
+          >
+            {({
+              values,
+              errors,
+              touched,
+              handleChange,
+              handleBlur,
+              handleSubmit,
+              isSubmitting,
+            }) => (
+              <form onSubmit={handleSubmit}>
+                <Label htmlFor="email">Email:</Label>
+                <InputWrapper>
+                  <Input
+                    type="email"
+                    name="email"
+                    id="email"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.email}
+                  />
+                </InputWrapper>
+                {errors.email && touched.email && <span>{errors.email}</span>}
+                <Label htmlFor="password">Password:</Label>
+                <InputWrapper>
+                  <Input
+                    type="password"
+                    name="password"
+                    id="password"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.password}
+                  />
+                </InputWrapper>
+                {errors.password && touched.password && (
+                  <span>{errors.password}</span>
+                )}
+                <ButtonWrapper>
+                  <Button disabled={isSubmitting} type="submit">
+                    Signin
+                  </Button>
+                </ButtonWrapper>
+              </form>
             )}
-            <button type="submit" disabled={isSubmitting}>
-              Login
-            </button>
-          </form>
-        )}
-      </Formik>
-      <button onClick={GoogleSignin}>Google</button>
-    </div>
+          </Formik>
+          <ForgotPasswordWrapper>
+            <RememberMeWrapper>
+              <input id="remember_me" name="remember_me" type="checkbox" />
+              <RememberMeLabel for="remember_me">Remember me</RememberMeLabel>
+            </RememberMeWrapper>
+
+            <ForgotPassword>Forgot your password?</ForgotPassword>
+          </ForgotPasswordWrapper>
+
+          <ButtonWrapper>
+            <Button onClick={GoogleSignin}>Google</Button>
+          </ButtonWrapper>
+        </Card>
+      </CardWrapper>
+    </Wrapper>
   )
 }
 
