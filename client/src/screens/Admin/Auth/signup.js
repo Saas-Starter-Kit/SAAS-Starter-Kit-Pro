@@ -8,7 +8,7 @@ import { ValidSchema, LogintoContext } from "./helpers"
 
 import LoadingOverlay from "../../../components/Admin/Common/loadingOverlay"
 import { colors, breakpoints } from "../../../styles/theme"
-import SignUpFormHeader from "./signupFormHeader"
+import SignUpFormHeader from "../../../components/Admin/Auth/signupFormHeader"
 
 const Signup = () => {
   const [loading, setLoading] = useState(false)

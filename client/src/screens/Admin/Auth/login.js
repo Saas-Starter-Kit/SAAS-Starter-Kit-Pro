@@ -9,7 +9,7 @@ import { ValidSchema, LogintoContext } from "./helpers"
 
 import LoadingOverlay from "../../../components/Admin/Common/loadingOverlay"
 import { colors, breakpoints } from "../../../styles/theme"
-import LoginFormHeader from "./loginFormHeader"
+import LoginFormHeader from "../../../components/Admin/Auth/loginFormHeader"
 
 const Wrapper = styled.div`
   background-color: ${colors.gray50};
