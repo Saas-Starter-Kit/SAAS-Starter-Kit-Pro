@@ -1,7 +1,8 @@
 import React, { useContext, useEffect } from "react"
 import { Router } from "@reach/router"
 import { navigate } from "gatsby"
-import Auth from "../screens/Admin/Auth"
+import Login from "../screens/Admin/Auth/login"
+import SignUp from "../screens/Admin/Auth/signup"
 import Dashboard from "../screens/Admin/Dashboard"
 import Settings from "../screens/Admin/Settings"
 import Create from "../screens/Admin/Create"
@@ -28,7 +29,8 @@ const Routes = () => {
     <Layout>
       <Router>
         {/*<PrivateRoute path='/app' component={Dashboard} />*/}
-        <Auth path="/login" />
+        {/*<SignUp path="/signup" />*/}
+        {/*<Login path="/login" />*/}
         <Dashboard path="/app" />
         <Settings path="/app/settings" />
         <Create path="/app/create" />

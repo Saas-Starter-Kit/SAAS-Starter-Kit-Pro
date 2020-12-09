@@ -1,58 +1,73 @@
 import React, { useContext, useEffect, useState } from "react"
-import jwt_decode from "jwt-decode"
-import { navigate } from "gatsby"
+
 import styled from "styled-components"
 import { Formik } from "formik"
-import * as Yup from "yup"
+
 import AuthContext from "../../../utils/authContext"
-import { SignupToServer } from "../../../api/authApi"
+import { LoginToServer } from "../../../api/authApi"
+import { ValidSchema, LogintoContext } from "./helpers"
 
 import LoadingOverlay from "../../../components/Admin/Common/loadingOverlay"
 import { colors, breakpoints } from "../../../styles/theme"
-import SignUpFormHeader from "./signupFormHeader"
+import LoginFormHeader from "./loginFormHeader"
 
-const ValidSchema = Yup.object().shape({
-  email: Yup.string().email("Invalid email").required("Required"),
-  password: Yup.string()
-    .min(3, "Password must be at least 3 Characters")
-    .max(50, "Password Too Long")
-    .required("Password Required"),
-})
+const Wrapper = styled.div`
+  background-color: ${colors.gray50};
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: -4rem;
 
-const Signup = () => {
+  @media (min-width: ${breakpoints.small}) {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+  @media (min-width: ${breakpoints.large}) {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+`
+
+const CardWrapper = styled.div`
+  padding-left: 2rem;
+  padding-right: 2rem;
+
+  @media (min-width: ${breakpoints.small}) {
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    width: 100%;
+    max-width: 28rem;
+  }
+`
+
+const Card = styled.div`
+  background-color: ${colors.white};
+  padding: 2rem 1rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  @media (min-width: ${breakpoints.small}) {
+    border-radius: 0.5rem;
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+`
+
+const Login = () => {
   const [loading, setLoading] = useState(false)
   const { firebase, LogIn, LogOut } = useContext(AuthContext)
 
-  const LogintoContext = (data, authRes) => {
-    let email = authRes.user.email
-    let username = authRes.user.displayName
-      ? authRes.user.displayName
-      : authRes.user.email
-    let id = jwt_decode(data.token)
-    let photo = authRes.user.photoURL
-    let provider = authRes.user.providerData[0].providerId
-
-    let user = {
-      email,
-      username,
-      id,
-      photo,
-      provider,
-    }
-
-    LogIn(user)
-    setTimeout(() => navigate("/app"), 200)
-  }
-
-  const saveToDb = authRes => {
+  //Save information from firebase to our own db
+  const saveToDb = (authRes, LogIn) => {
     let username = authRes.user.displayName
     console.log(authRes)
 
     firebase
       .auth()
       .currentUser.getIdToken()
-      .then(token => SignupToServer(token, username))
-      .then(res => LogintoContext(res.data, authRes))
+      .then(token => LoginToServer(token, username))
+      .then(res => LogintoContext(res.data, authRes, LogIn))
       .catch(error => console.log(error))
   }
 
@@ -64,24 +79,25 @@ const Signup = () => {
 
     firebase
       .auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then(authRes => saveToDb(authRes))
+      .signInWithEmailAndPassword(email, password)
+      .then(authRes => saveToDb(authRes, LogIn))
       .catch(error => console.log(error))
   }
 
-  const googleSignUp = () => {
+  //Google OAuth2 Signin
+  const GoogleSignin = () => {
     let provider = new firebase.auth.GoogleAuthProvider()
 
     firebase
       .auth()
       .signInWithPopup(provider)
-      .then(authRes => saveToDb(authRes))
+      .then(authRes => saveToDb(authRes, LogIn))
       .catch(error => console.log(error))
   }
 
   return (
     <div>
-      <SignUpFormHeader />
+      <LoginFormHeader />
       <Formik
         validationSchema={ValidSchema}
         initialValues={{ email: "", password: "" }}
@@ -120,14 +136,14 @@ const Signup = () => {
               <span>{errors.password}</span>
             )}
             <button type="submit" disabled={isSubmitting}>
-              SignUp
+              Login
             </button>
           </form>
         )}
       </Formik>
-      <button onClick={googleSignUp}>Google</button>
+      <button onClick={GoogleSignin}>Google</button>
     </div>
   )
 }
 
-export default Signup
+export default Login
