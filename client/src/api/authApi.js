@@ -5,10 +5,26 @@ import { navigate } from "gatsby"
 const axiosBase = process.env.GATSBY_SERVER_URL
 
 //Send Firebase auth token to authenticate against our own server
-export const sendtokenToServer = async (token, username) => {
+//export const sendtokenToServer = async (token, username) => {
+//  const data = { token, username }
+
+//  const result = await axios.post(`${axiosBase}/auth/login`, data)
+
+//  return result
+//}
+
+export const LoginToServer = async token => {
+  const data = { token }
+
+  const result = await axios.post(`${axiosBase}/auth/login`, data)
+
+  return result
+}
+
+export const SignupToServer = async (token, username) => {
   const data = { token, username }
 
-  const result = await axios.post(`${axiosBase}/auth/sendtoken`, data)
+  const result = await axios.post(`${axiosBase}/auth/signup`, data)
 
   return result
 }

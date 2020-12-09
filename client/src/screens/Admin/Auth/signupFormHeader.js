@@ -30,14 +30,14 @@ const Title = styled.h2`
   line-height: 2.25rem;
 `
 
-const LoginFormHeader = () => (
+const SignupFormHeader = () => (
   <Wrapper>
     <Image
       src="https://tailwindui.com/img/logos/v1/workflow-mark-on-white.svg"
       alt="Workflow"
     />
-    <Title>Sign-In to Your Account</Title>
+    <Title>SignUp for an Account</Title>
   </Wrapper>
 )
 
-export default LoginFormHeader
+export default SignupFormHeader
