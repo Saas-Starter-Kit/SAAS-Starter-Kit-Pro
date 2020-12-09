@@ -27,20 +27,6 @@ const Signup = () => {
   const [loading, setLoading] = useState(false)
   const { firebase, LogIn, LogOut } = useContext(AuthContext)
 
-  const provider = new firebase.auth.GoogleAuthProvider()
-
-  const googleSignin = () => {
-    firebase
-      .auth()
-      .signInWithPopup(provider)
-      .then(authRes => {
-        saveToDb(authRes)
-      })
-      .catch(function (error) {
-        console.log(error)
-      })
-  }
-
   const saveToDb = authRes => {
     let username = authRes.user.displayName
     console.log(authRes)
@@ -50,6 +36,16 @@ const Signup = () => {
       .currentUser.getIdToken()
       .then(token => LoginToServer(token, username))
       .then(res => console.log(res))
+  }
+
+  const GoogleSignin = () => {
+    const provider = new firebase.auth.GoogleAuthProvider()
+
+    firebase
+      .auth()
+      .signInWithPopup(provider)
+      .then(authRes => saveToDb(authRes))
+      .catch(error => console.log(error))
   }
 
   const handleSubmit = values => {
@@ -111,7 +107,7 @@ const Signup = () => {
           </form>
         )}
       </Formik>
-      <button onClick={googleSignin}>Google</button>
+      <button onClick={GoogleSignin}>Google</button>
     </div>
   )
 }

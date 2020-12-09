@@ -15,7 +15,7 @@ router.post('/signup', SignUp);
 router.post('/login', Login);
 
 //sign in or sign up user then send jwt token
-router.post('/sendtoken', LoginOrSignUp);
+//router.post('/sendtoken', LoginOrSignUp);
 
 //update username
 router.put('/put/username', updateUsername);

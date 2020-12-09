@@ -1,11 +1,11 @@
 import React from "react"
-import Login from "../screens/Admin/Auth/login2"
+import SignUp from "../screens/Admin/Auth/signup2"
 import Layout from "../components/Marketing/Layout"
 
-export default function LoginPage() {
+export default function SignUpPage() {
   return (
     <Layout>
-      <Login />
+      <SignUp />
     </Layout>
   )
 }

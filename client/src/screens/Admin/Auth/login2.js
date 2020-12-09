@@ -23,7 +23,7 @@ const ValidSchema = Yup.object().shape({
     .required("Password Required"),
 })
 
-const Signup = () => {
+const Login = () => {
   const [loading, setLoading] = useState(false)
   const { firebase, LogIn, LogOut } = useContext(AuthContext)
 
@@ -48,7 +48,7 @@ const Signup = () => {
     firebase
       .auth()
       .currentUser.getIdToken()
-      .then(token => SignupToServer(token, username))
+      .then(token => LoginToServer(token, username))
   }
 
   const handleSubmit = values => {
@@ -59,8 +59,7 @@ const Signup = () => {
 
     firebase
       .auth()
-      .createUserWithEmailAndPassword(email, password)
-      //.signInWithEmailAndPassword(email, password)
+      .signInWithEmailAndPassword(email, password)
       .then(authRes => saveToDb(authRes))
   }
 
@@ -115,4 +114,4 @@ const Signup = () => {
   )
 }
 
-export default Signup
+export default Login

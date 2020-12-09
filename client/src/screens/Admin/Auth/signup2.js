@@ -33,12 +33,8 @@ const Signup = () => {
     firebase
       .auth()
       .signInWithPopup(provider)
-      .then(authRes => {
-        saveToDb(authRes)
-      })
-      .catch(function (error) {
-        console.log(error)
-      })
+      .then(authRes => saveToDb(authRes))
+      .catch(error => console.log(error))
   }
 
   const saveToDb = authRes => {
@@ -60,7 +56,6 @@ const Signup = () => {
     firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
-      //.signInWithEmailAndPassword(email, password)
       .then(authRes => saveToDb(authRes))
   }
 
