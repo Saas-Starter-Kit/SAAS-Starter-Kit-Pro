@@ -27,18 +27,25 @@ const Login = () => {
   const [loading, setLoading] = useState(false)
   const { firebase, LogIn, LogOut } = useContext(AuthContext)
 
-  const provider = new firebase.auth.GoogleAuthProvider()
+  const LogintoContext = (data, authRes) => {
+    let email = authRes.user.email
+    let username = authRes.user.displayName
+      ? authRes.user.displayName
+      : authRes.user.email
+    let id = jwt_decode(data.token)
+    let photo = authRes.user.photoURL
+    let provider = authRes.user.providerData[0].providerId
 
-  const googleSignin = () => {
-    firebase
-      .auth()
-      .signInWithPopup(provider)
-      .then(authRes => {
-        saveToDb(authRes)
-      })
-      .catch(function (error) {
-        console.log(error)
-      })
+    let user = {
+      email,
+      username,
+      id,
+      photo,
+      provider,
+    }
+
+    LogIn(user)
+    setTimeout(() => navigate("/app"), 200)
   }
 
   const saveToDb = authRes => {
@@ -49,6 +56,8 @@ const Login = () => {
       .auth()
       .currentUser.getIdToken()
       .then(token => LoginToServer(token, username))
+      .then(res => LogintoContext(res.data, authRes))
+      .catch(error => console.log(error))
   }
 
   const handleSubmit = values => {
@@ -61,11 +70,21 @@ const Login = () => {
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then(authRes => saveToDb(authRes))
+      .catch(error => console.log(error))
+  }
+
+  const googleSignin = () => {
+    let provider = new firebase.auth.GoogleAuthProvider()
+    firebase
+      .auth()
+      .signInWithPopup(provider)
+      .then(authRes => saveToDb(authRes))
+      .catch(error => console.log(error))
   }
 
   return (
     <div>
-      Sign Up
+      <LoginFormHeader />
       <Formik
         validationSchema={ValidSchema}
         initialValues={{ email: "", password: "" }}

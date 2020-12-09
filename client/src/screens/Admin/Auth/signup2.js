@@ -5,15 +5,11 @@ import styled from "styled-components"
 import { Formik } from "formik"
 import * as Yup from "yup"
 import AuthContext from "../../../utils/authContext"
-import {
-  sendtokenToServer,
-  SignupToServer,
-  LoginToServer,
-} from "../../../api/authApi"
+import { SignupToServer } from "../../../api/authApi"
 
 import LoadingOverlay from "../../../components/Admin/Common/loadingOverlay"
 import { colors, breakpoints } from "../../../styles/theme"
-import LoginFormHeader from "./loginFormHeader"
+import SignUpFormHeader from "./signupFormHeader"
 
 const ValidSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Required"),
@@ -27,14 +23,25 @@ const Signup = () => {
   const [loading, setLoading] = useState(false)
   const { firebase, LogIn, LogOut } = useContext(AuthContext)
 
-  const provider = new firebase.auth.GoogleAuthProvider()
+  const LogintoContext = (data, authRes) => {
+    let email = authRes.user.email
+    let username = authRes.user.displayName
+      ? authRes.user.displayName
+      : authRes.user.email
+    let id = jwt_decode(data.token)
+    let photo = authRes.user.photoURL
+    let provider = authRes.user.providerData[0].providerId
 
-  const googleSignin = () => {
-    firebase
-      .auth()
-      .signInWithPopup(provider)
-      .then(authRes => saveToDb(authRes))
-      .catch(error => console.log(error))
+    let user = {
+      email,
+      username,
+      id,
+      photo,
+      provider,
+    }
+
+    LogIn(user)
+    setTimeout(() => navigate("/app"), 200)
   }
 
   const saveToDb = authRes => {
@@ -45,6 +52,8 @@ const Signup = () => {
       .auth()
       .currentUser.getIdToken()
       .then(token => SignupToServer(token, username))
+      .then(res => LogintoContext(res.data, authRes))
+      .catch(error => console.log(error))
   }
 
   const handleSubmit = values => {
@@ -57,11 +66,22 @@ const Signup = () => {
       .auth()
       .createUserWithEmailAndPassword(email, password)
       .then(authRes => saveToDb(authRes))
+      .catch(error => console.log(error))
+  }
+
+  const googleSignUp = () => {
+    let provider = new firebase.auth.GoogleAuthProvider()
+
+    firebase
+      .auth()
+      .signInWithPopup(provider)
+      .then(authRes => saveToDb(authRes))
+      .catch(error => console.log(error))
   }
 
   return (
     <div>
-      Sign Up
+      <SignUpFormHeader />
       <Formik
         validationSchema={ValidSchema}
         initialValues={{ email: "", password: "" }}
@@ -100,12 +120,12 @@ const Signup = () => {
               <span>{errors.password}</span>
             )}
             <button type="submit" disabled={isSubmitting}>
-              Login
+              SignUp
             </button>
           </form>
         )}
       </Formik>
-      <button onClick={googleSignin}>Google</button>
+      <button onClick={googleSignUp}>Google</button>
     </div>
   )
 }
