@@ -1,7 +1,7 @@
 import pg from 'pg';
 const { Pool } = pg;
 
-// Meant for heroku db env var
+// uncomment for heroku db env var
 //let connectionString =
 //  process.env.NODE_ENV === 'production'
 //    ? process.env.DATABASE_URL
