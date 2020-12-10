@@ -1,11 +1,14 @@
 import React from "react"
-import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js"
+import CheckoutForm from "./checkoutForm"
+import stripeConfig from "../../../services/stripe"
+import { Elements } from "@stripe/react-stripe-js"
 
 const Purchase = () => {
-  const stripe = useStripe()
-  const elements = useElements()
-
-  return <div>Purchase</div>
+  return (
+    <Elements stripe={stripeConfig}>
+      <CheckoutForm />
+    </Elements>
+  )
 }
 
 export default Purchase
