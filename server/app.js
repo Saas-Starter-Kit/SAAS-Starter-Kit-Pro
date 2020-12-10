@@ -11,6 +11,7 @@ import morgan from 'morgan';
 import auth from './src/API/authRoutes.js';
 import todoApi from './src/API/todos.js';
 import healthApi from './src/API/health.js';
+import stripeApi from './src/API/stripe.js';
 
 const app = express();
 
@@ -23,6 +24,7 @@ app.use(passport.initialize());
 
 //API routes
 app.use('/', healthApi);
+app.use('/stripe', stripeApi);
 app.use('/auth', auth);
 app.use('/api', todoApi);
 
