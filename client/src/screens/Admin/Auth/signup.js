@@ -90,7 +90,7 @@ const CardWrapper = styled.div`
     padding-left: 2rem;
     padding-right: 2rem;
     width: 100%;
-    max-width: 32rem;
+    max-width: 28rem;
   }
 `
 
