@@ -6,3 +6,11 @@ export const CreateCustomer = async (req, res) => {
   const customer = await stripe.customers.create({ email });
   res.send(customer);
 };
+
+export const CreateSetupIntent = async (req, res) => {
+  const setupIntent = await stripe.setupIntents.create({
+    customer: 'cus_IY1vr2IUrT3e6Z'
+  });
+
+  res.send(setupIntent);
+};

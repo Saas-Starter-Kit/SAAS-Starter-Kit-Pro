@@ -1,8 +1,10 @@
 import express from 'express';
 const router = express.Router();
 
-import { CreateCustomer } from '../Services/stripe.js';
+import { CreateCustomer, CreateSetupIntent } from '../Services/stripe.js';
 
 router.post('/customer', CreateCustomer);
+
+router.post('/wallet', CreateSetupIntent);
 
 export default router;
