@@ -3,6 +3,6 @@ const router = express.Router();
 
 import { CreateCustomer } from '../Services/stripe.js';
 
-router.get('/customer', CreateCustomer);
+router.post('/customer', CreateCustomer);
 
 export default router;
