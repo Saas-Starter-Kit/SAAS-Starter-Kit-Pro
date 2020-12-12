@@ -29,7 +29,14 @@ const CheckoutForm = () => {
       }
     )
 
-    console.log(setupIntent)
+    console.log(setupIntent.payment_method)
+
+    let data = {
+      payment_method: setupIntent.payment_method,
+    }
+
+    let result = await axios.post("http://localhost/stripe/subscription", data)
+    console.log(result)
   }
 
   return (

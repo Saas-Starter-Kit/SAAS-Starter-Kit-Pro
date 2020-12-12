@@ -62,6 +62,7 @@ const Button = styled.button`
   border-radius: 0.375rem;
   font-size: 0.875rem;
   line-height: 1.25rem;
+  cursor: pointer;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   &:hover {
     background-color: ${colors.indigo500};

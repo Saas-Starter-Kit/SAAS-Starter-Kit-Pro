@@ -17,8 +17,8 @@ export const CreateSetupIntent = async (req, res) => {
 
 export const CreateSubscription = async (req, res) => {
   let customer = 'cus_IY1vr2IUrT3e6Z';
-  let payment_method = 'pm_1HwxtwAtqjBKUOx98KEzuuWh';
-  let plan = 'prod_IWXuNM17jweetX';
+  let payment_method = req.body.payment_method;
+  let plan = 'price_1HvUopAtqjBKUOx9tEoDdrhQ';
 
   // Attach the  payment method to the customer
   await stripe.paymentMethods.attach(payment_method, { customer });
