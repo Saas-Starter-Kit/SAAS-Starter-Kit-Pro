@@ -12,14 +12,17 @@ export const CreateCustomer = async (req, res) => {
     }
   });
 
-  let text;
-  let values;
-  let query;
+  let text = `UPDATE users SET StripeCustomerID=$1 
+              WHERE email=$2`;
+  let values = [customer.id, email];
 
-  db.query(query1, values1, callback1);
-  console.log(customer);
+  let callback = (q_err, q_res) => {
+    if (q_err) console.log(q_err);
+    res.send(q_res);
+  };
 
-  res.send('Customer Created');
+  //save stripe customer id to database
+  db.query(text, values, callback);
 };
 
 export const CreateSetupIntent = async (req, res) => {
