@@ -1,4 +1,5 @@
 import stripe from '../Config/stripe.js';
+import db from '../Database/db.js';
 
 export const CreateCustomer = async (req, res) => {
   let email = req.body.email;
@@ -10,7 +11,15 @@ export const CreateCustomer = async (req, res) => {
       databaseUID: userId
     }
   });
-  res.send(customer);
+
+  let text;
+  let values;
+  let query;
+
+  db.query(query1, values1, callback1);
+  console.log(customer);
+
+  res.send('Customer Created');
 };
 
 export const CreateSetupIntent = async (req, res) => {

@@ -230,9 +230,7 @@ const Login = () => {
                   <ErrorText>{errors.password}</ErrorText>
                 )}
                 <ButtonWrapper>
-                  <Button disabled={isSubmitting} type="submit">
-                    Signin
-                  </Button>
+                  <Button type="submit">Signin</Button>
                 </ButtonWrapper>
               </form>
             )}

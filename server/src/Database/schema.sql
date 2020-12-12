@@ -4,7 +4,7 @@ CREATE TABLE users (
   id SERIAL PRIMARY KEY,
   username VARCHAR(255),
   email VARCHAR(255) UNIQUE,
-  StripeCustomerID VARCHAR
+  stripeCustomerID VARCHAR
 );
 
 CREATE TABLE todos (
