@@ -147,10 +147,7 @@ const Settings = () => {
         <Paragraph>{resMessage}</Paragraph>
         {!isEmail && (
           <Paragraph>
-            Email, password and username change is only available for email
-            signups. If you signed up with third party providers such as Google
-            or Facebook please follow their respective process for changing
-            emails, usernames and passwords.
+            Account Settings Changes Only Available for Email Signups
           </Paragraph>
         )}
         {isLoading && <LoadingOverlay />}

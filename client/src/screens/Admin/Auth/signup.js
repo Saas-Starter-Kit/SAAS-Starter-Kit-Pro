@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useState } from "react"
 import styled from "styled-components"
 import { Formik } from "formik"
+import jwt_decode from "jwt-decode"
+import axios from "axios"
 
 import AuthContext from "../../../utils/authContext"
 import { SignupToServer } from "../../../api/authApi"
@@ -118,16 +120,27 @@ const Signup = () => {
   const { firebase, LogIn, LogOut } = useContext(AuthContext)
 
   //Save information from firebase to our own db
-  const saveToDb = (authRes, LogIn) => {
+  const saveToDb = async (authRes, LogIn) => {
     let username = authRes.user.displayName
     console.log(authRes)
 
-    firebase
-      .auth()
-      .currentUser.getIdToken()
-      .then(token => SignupToServer(token, username))
-      .then(res => LogintoContext(res.data, authRes, LogIn))
-      .catch(error => console.log(error))
+    let token = await firebase.auth().currentUser.getIdToken()
+    let serverRes = await SignupToServer(token, username)
+
+    let userId = jwt_decode(serverRes.data.token)
+    let email = authRes.user.email
+
+    let data = {
+      userId,
+      email,
+    }
+
+    axios
+      .post("http://localhost/stripe/customer", data)
+      .then(res => console.log(res))
+      .catch(err => console.log(err))
+
+    LogintoContext(serverRes.data, authRes, LogIn)
   }
 
   const handleSubmit = values => {
@@ -203,9 +216,7 @@ const Signup = () => {
                   <ErrorText>{errors.password}</ErrorText>
                 )}
                 <ButtonWrapper>
-                  <Button disabled={isSubmitting} type="submit">
-                    SignUp
-                  </Button>
+                  <Button type="submit">SignUp</Button>
                 </ButtonWrapper>
               </form>
             )}

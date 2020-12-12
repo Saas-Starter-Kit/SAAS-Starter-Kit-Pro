@@ -2,8 +2,14 @@ import stripe from '../Config/stripe.js';
 
 export const CreateCustomer = async (req, res) => {
   let email = req.body.email;
+  let userId = req.body.userId;
 
-  const customer = await stripe.customers.create({ email });
+  const customer = await stripe.customers.create({
+    email,
+    metadata: {
+      databaseUID: userId
+    }
+  });
   res.send(customer);
 };
 
