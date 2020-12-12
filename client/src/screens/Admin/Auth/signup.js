@@ -127,8 +127,10 @@ const Signup = () => {
     let token = await firebase.auth().currentUser.getIdToken()
     let serverRes = await SignupToServer(token, username)
 
-    let userId = jwt_decode(serverRes.data.token)
+    let userId = jwt_decode(serverRes.data.token).user
     let email = authRes.user.email
+
+    console.log(userId, serverRes)
 
     let data = {
       userId,
@@ -140,7 +142,7 @@ const Signup = () => {
       .then(res => console.log(res))
       .catch(err => console.log(err))
 
-    LogintoContext(serverRes.data, authRes, LogIn)
+    //LogintoContext(serverRes.data, authRes, LogIn)
   }
 
   const handleSubmit = values => {
