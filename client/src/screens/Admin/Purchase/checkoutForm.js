@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useContext } from "react"
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js"
 import axios from "axios"
+import AuthContext from "../../../utils/authContext"
 
 const CheckoutForm = () => {
+  const { authState } = useContext(AuthContext)
   const [setupIntentState, setSetupIntent] = useState()
 
   const stripe = useStripe()
@@ -47,7 +49,7 @@ const CheckoutForm = () => {
           Pay
         </button>
       </form>
-      <button onClick={() => console.log(setupIntentState)}> DDDDDD</button>
+      <button onClick={() => console.log(authState)}> DDDDDD</button>
     </>
   )
 }

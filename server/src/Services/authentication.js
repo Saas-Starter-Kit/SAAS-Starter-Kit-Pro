@@ -33,7 +33,8 @@ export const SignUp = (req, res) => {
       //send back user id after signup
       if (q_res.rows[0]) {
         let id = q_res.rows[0].id;
-        console.log(id);
+
+        console.log(q_res.rows);
         //jwt token login after signup
         res.send({ token: setToken(id) });
       }

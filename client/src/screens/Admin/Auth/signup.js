@@ -137,12 +137,14 @@ const Signup = () => {
       email,
     }
 
-    axios
-      .post("http://localhost/stripe/customer", data)
-      .then(res => console.log(res))
-      .catch(err => console.log(err))
+    const stripeServerRes = await axios.post(
+      "http://localhost/stripe/customer",
+      data
+    )
 
-    //LogintoContext(serverRes.data, authRes, LogIn)
+    console.log(stripeServerRes.data.stripecustomerid)
+
+    LogintoContext(serverRes.data, authRes, stripeServerRes, LogIn)
   }
 
   const handleSubmit = values => {

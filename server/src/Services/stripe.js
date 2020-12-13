@@ -13,12 +13,13 @@ export const CreateCustomer = async (req, res) => {
   });
 
   let text = `UPDATE users SET StripeCustomerID=$1 
-              WHERE email=$2`;
+              WHERE email=$2
+              RETURNING StripeCustomerID`;
   let values = [customer.id, email];
 
   let callback = (q_err, q_res) => {
     if (q_err) console.log(q_err);
-    res.send(q_res);
+    res.send(q_res.rows[0]);
   };
 
   //save stripe customer id to database
@@ -36,6 +37,9 @@ export const CreateSetupIntent = async (req, res) => {
 export const CreateSubscription = async (req, res) => {
   let customer = 'cus_IY1vr2IUrT3e6Z';
   let payment_method = req.body.payment_method;
+
+  /* It is Possible to retrieve the plans programtically but this is a waste 
+    of an api call, plans dont change often so it is faster just to hard code */
   let plan = 'price_1HvUopAtqjBKUOx9tEoDdrhQ';
 
   // Attach the  payment method to the customer
@@ -51,6 +55,8 @@ export const CreateSubscription = async (req, res) => {
     items: [{ plan }],
     expand: ['latest_invoice.payment_intent']
   });
+
+  //subscription is active db
 
   res.send(subscription);
 };

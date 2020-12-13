@@ -12,7 +12,8 @@ export const ValidSchema = Yup.object().shape({
 })
 
 //Save user Info to Context
-export const LogintoContext = (data, authRes, LogIn) => {
+export const LogintoContext = (data, authRes, stripeKey, LogIn) => {
+  console.log(authRes)
   let email = authRes.user.email
   let username = authRes.user.displayName
     ? authRes.user.displayName
@@ -20,6 +21,9 @@ export const LogintoContext = (data, authRes, LogIn) => {
   let id = jwt_decode(data.token)
   let photo = authRes.user.photoURL
   let provider = authRes.user.providerData[0].providerId
+  let stripeCustomerKey = stripeKey.data.stripecustomerid
+
+  console.log(stripeCustomerKey)
 
   let user = {
     email,
@@ -27,6 +31,7 @@ export const LogintoContext = (data, authRes, LogIn) => {
     id,
     photo,
     provider,
+    stripeCustomerKey,
   }
 
   LogIn(user)
