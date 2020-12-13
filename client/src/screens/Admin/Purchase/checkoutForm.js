@@ -41,7 +41,9 @@ const CheckoutForm = () => {
     }
 
     let result = await axios.post("http://localhost/stripe/subscription", data)
-    console.log(result)
+    console.log(
+      result.data.latest_invoice.payment_intent.status === "succeeded"
+    )
   }
 
   return (

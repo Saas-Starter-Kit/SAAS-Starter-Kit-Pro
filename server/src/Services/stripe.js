@@ -65,6 +65,10 @@ export const CreateSubscription = async (req, res) => {
     expand: ['latest_invoice.payment_intent']
   });
 
+  if (subscription.latest_invoice.payment_intent.status === 'succeeded') {
+    //update db
+  }
+
   //subscription is active db
   res.send(subscription);
 };
