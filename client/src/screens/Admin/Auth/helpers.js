@@ -14,6 +14,8 @@ export const ValidSchema = Yup.object().shape({
 //Save user Info to Context
 export const LogintoContext = (data, authRes, stripeKey, LogIn) => {
   console.log(authRes)
+  console.log(data)
+
   let email = authRes.user.email
   let username = authRes.user.displayName
     ? authRes.user.displayName

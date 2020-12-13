@@ -47,7 +47,6 @@ export const SignUp = (req, res) => {
         res.status(500).send(q_err);
       }
       if (q_res.rows.length != 0) {
-        //if user exists then jwt login
         res.send('User Already Exists');
       }
       if (q_res.rows.length === 0) {
@@ -82,7 +81,6 @@ export const Login = (req, res) => {
     /* Check if users exists then jwt login */
 
     //check if email exists
-
     let query1 = `SELECT * FROM users
                   WHERE email=$1`;
 
@@ -102,7 +100,12 @@ export const Login = (req, res) => {
       }
       if (q_res.rows.length === 0) {
         //if email not found
-        res.send('Email Not Found');
+        let response = {
+          type: 'error',
+          message: 'Email Not Found'
+        };
+
+        res.send(response);
       }
     };
 

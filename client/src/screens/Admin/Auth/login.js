@@ -153,8 +153,15 @@ const Login = () => {
       .auth()
       .currentUser.getIdToken()
       .then(token => LoginToServer(token, username))
-      .then(res => LogintoContext(res.data, authRes, LogIn))
-      .catch(error => console.log(error))
+      .then(res =>
+        !res.data.type === "error"
+          ? LogintoContext(res.data, authRes, LogIn)
+          : setResMessage(res.data.message)
+      )
+      .catch(error => {
+        console.log(error)
+        setResMessage(error.message)
+      })
   }
 
   const handleSubmit = values => {
