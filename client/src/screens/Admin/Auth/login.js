@@ -194,6 +194,16 @@ const Login = () => {
       })
   }
 
+  const handlePassReset = event => {
+    event.preventDefault()
+    let email = event.target.email2.value
+    firebase
+      .auth()
+      .sendPasswordResetEmail(email)
+      .then(res => console.log(res))
+      .catch(err => console.log(err))
+  }
+
   return (
     <Wrapper>
       <LoginFormHeader />
@@ -266,6 +276,10 @@ const Login = () => {
           </ButtonWrapper>
         </Card>
       </CardWrapper>
+
+      <form onSubmit={handlePassReset}>
+        <input type="email" name="email2" />
+      </form>
     </Wrapper>
   )
 }
