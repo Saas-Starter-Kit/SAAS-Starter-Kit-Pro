@@ -1,6 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 import { colors, breakpoints } from "../../../styles/theme"
+import { Link } from "gatsby"
 
 const Wrapper = styled.div`
   display: flex;
@@ -22,12 +23,18 @@ const Image = styled.img`
 const Title = styled.h2`
   padding-right: 2rem;
   padding-left: 2rem;
-  margin-top: 1.5rem;
   color: ${colors.gray900};
   text-align: center;
   font-weight: 800;
   font-size: 1.875rem;
   line-height: 2.25rem;
+`
+
+const AltText = styled.div`
+  text-align: center;
+  margin-top: -1rem;
+  margin-bottom: 2rem;
+  color: ${colors.gray500};
 `
 
 const SignupFormHeader = () => (
@@ -37,6 +44,10 @@ const SignupFormHeader = () => (
       alt="Workflow"
     />
     <Title>SignUp for an Account</Title>
+
+    <AltText>
+      <Link to="/login">Or sign-in to your account </Link>
+    </AltText>
   </Wrapper>
 )
 

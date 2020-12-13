@@ -1,6 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 import { colors, breakpoints } from "../../../styles/theme"
+import { Link } from "gatsby"
 
 const Wrapper = styled.div`
   display: flex;
@@ -30,6 +31,13 @@ const Title = styled.h2`
   line-height: 2.25rem;
 `
 
+const AltText = styled.div`
+  text-align: center;
+  margin-top: -1rem;
+  margin-bottom: 2rem;
+  color: ${colors.gray500};
+`
+
 const LoginFormHeader = () => (
   <Wrapper>
     <Image
@@ -37,6 +45,9 @@ const LoginFormHeader = () => (
       alt="Workflow"
     />
     <Title>Sign-In to Your Account</Title>
+    <AltText>
+      <Link to="/signup">Or signup for an account </Link>
+    </AltText>
   </Wrapper>
 )
 
