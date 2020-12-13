@@ -27,15 +27,22 @@ export const CreateCustomer = async (req, res) => {
 };
 
 export const CreateSetupIntent = async (req, res) => {
-  const setupIntent = await stripe.setupIntents.create({
-    customer: 'cus_IY1vr2IUrT3e6Z'
-  });
+  let customer_id = req.body.customer.stripeCustomerKey;
+  console.log(customer_id);
 
-  res.send(setupIntent);
+  if (customer_id) {
+    const setupIntent = await stripe.setupIntents.create({
+      customer: customer_id
+    });
+
+    res.send(setupIntent);
+  } else {
+    res.send('Customer Key Not Found');
+  }
 };
 
 export const CreateSubscription = async (req, res) => {
-  let customer = 'cus_IY1vr2IUrT3e6Z';
+  let customer_id = req.body.customer_id;
   let payment_method = req.body.payment_method;
 
   /* It is Possible to retrieve the plans programtically but this is a waste 
@@ -51,7 +58,7 @@ export const CreateSubscription = async (req, res) => {
   });
 
   const subscription = await stripe.subscriptions.create({
-    customer: customer,
+    customer: customer_id,
     items: [{ plan }],
     expand: ['latest_invoice.payment_intent']
   });

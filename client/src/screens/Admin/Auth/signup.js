@@ -142,8 +142,6 @@ const Signup = () => {
       data
     )
 
-    console.log(stripeServerRes.data.stripecustomerid)
-
     LogintoContext(serverRes.data, authRes, stripeServerRes, LogIn)
   }
 

@@ -11,13 +11,15 @@ const CheckoutForm = () => {
   const elements = useElements()
 
   const createSetupIntent = async event => {
-    const result = await axios.post("http://localhost/stripe/wallet")
+    let data = { customer: authState.user }
+    const result = await axios.post("http://localhost/stripe/wallet", data)
     setSetupIntent(result.data)
   }
 
   useEffect(() => {
-    createSetupIntent()
-  }, [])
+    if (authState.user) createSetupIntent()
+    console.log(authState)
+  }, [authState])
 
   const handleSubmit = async event => {
     event.preventDefault()
@@ -49,7 +51,9 @@ const CheckoutForm = () => {
           Pay
         </button>
       </form>
-      <button onClick={() => console.log(authState)}> DDDDDD</button>
+      <button onClick={() => console.log(authState, setupIntentState)}>
+        DDDDDD
+      </button>
     </>
   )
 }
