@@ -9,7 +9,7 @@ import { ValidSchema, LogintoContext } from "./helpers"
 
 import LoadingOverlay from "../../../components/Admin/Common/loadingOverlay"
 import { colors, breakpoints, fieldStyles } from "../../../styles/theme"
-import LoginFormHeader from "../../../components/Admin/Auth/loginFormHeader"
+import ResetFormHeader from "../../../components/Admin/Auth/resetFormHeader"
 
 const Wrapper = styled.div`
   background-color: ${colors.gray50};
@@ -206,8 +206,7 @@ const PasswordReset = () => {
 
   return (
     <Wrapper>
-      <LoginFormHeader />
-
+      <ResetFormHeader />
       <CardWrapper>
         <Card>
           <h3>{resMessage}</h3>
@@ -260,20 +259,6 @@ const PasswordReset = () => {
               </form>
             )}
           </Formik>
-          <ForgotPasswordWrapper>
-            <RememberMeWrapper>
-              <input id="remember_me" name="remember_me" type="checkbox" />
-              <RememberMeLabel htmlFor="remember_me">
-                Remember me
-              </RememberMeLabel>
-            </RememberMeWrapper>
-
-            <ForgotPassword>Forgot your password?</ForgotPassword>
-          </ForgotPasswordWrapper>
-
-          <ButtonWrapper>
-            <Button onClick={GoogleSignin}>Google</Button>
-          </ButtonWrapper>
         </Card>
       </CardWrapper>
 

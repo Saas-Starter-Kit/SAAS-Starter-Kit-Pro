@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react"
 
 import styled from "styled-components"
 import { Formik } from "formik"
-
+import { Link } from "gatsby"
 import AuthContext from "../../../utils/authContext"
 import { LoginToServer } from "../../../api/authApi"
 import { ValidSchema, LogintoContext } from "./helpers"
@@ -119,6 +119,7 @@ const ForgotPassword = styled.div`
   color: blue;
   font-size: 0.875rem;
   font-weight: 500;
+  cursor: pointer;
 `
 
 const RememberMeWrapper = styled.div`
@@ -194,16 +195,6 @@ const Login = () => {
       })
   }
 
-  const handlePassReset = event => {
-    event.preventDefault()
-    let email = event.target.email2.value
-    firebase
-      .auth()
-      .sendPasswordResetEmail(email)
-      .then(res => console.log(res))
-      .catch(err => console.log(err))
-  }
-
   return (
     <Wrapper>
       <LoginFormHeader />
@@ -268,7 +259,9 @@ const Login = () => {
               </RememberMeLabel>
             </RememberMeWrapper>
 
-            <ForgotPassword>Forgot your password?</ForgotPassword>
+            <ForgotPassword>
+              <Link to="/passwordreset"> Forgot your password?</Link>
+            </ForgotPassword>
           </ForgotPasswordWrapper>
 
           <ButtonWrapper>
@@ -276,10 +269,6 @@ const Login = () => {
           </ButtonWrapper>
         </Card>
       </CardWrapper>
-
-      <form onSubmit={handlePassReset}>
-        <input type="email" name="email2" />
-      </form>
     </Wrapper>
   )
 }
