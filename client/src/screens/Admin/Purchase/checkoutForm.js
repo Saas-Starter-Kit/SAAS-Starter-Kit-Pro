@@ -37,6 +37,7 @@ const CheckoutForm = () => {
 
     let data = {
       payment_method: setupIntent.payment_method,
+      customer: authState.user,
     }
 
     let result = await axios.post("http://localhost/stripe/subscription", data)

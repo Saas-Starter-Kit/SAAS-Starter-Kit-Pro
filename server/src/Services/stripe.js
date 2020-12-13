@@ -42,28 +42,31 @@ export const CreateSetupIntent = async (req, res) => {
 };
 
 export const CreateSubscription = async (req, res) => {
-  let customer_id = req.body.customer_id;
+  let customer_id = req.body.customer.stripeCustomerKey;
   let payment_method = req.body.payment_method;
+
+  console.log(customer_id);
 
   /* It is Possible to retrieve the plans programtically but this is a waste 
     of an api call, plans dont change often so it is faster just to hard code */
   let plan = 'price_1HvUopAtqjBKUOx9tEoDdrhQ';
 
   // Attach the  payment method to the customer
-  await stripe.paymentMethods.attach(payment_method, { customer });
+  await stripe.paymentMethods.attach(payment_method, { customer: customer_id });
 
   // Set it as the default payment method
-  await stripe.customers.update(customer, {
+  await stripe.customers.update(customer_id, {
     invoice_settings: { default_payment_method: payment_method }
   });
 
-  const subscription = await stripe.subscriptions.create({
-    customer: customer_id,
-    items: [{ plan }],
-    expand: ['latest_invoice.payment_intent']
-  });
+  stripe.subscriptions
+    .create({
+      customer: customer_id,
+      items: [{ plan }],
+      expand: ['latest_invoice.payment_intent']
+    })
+    .then((res2) => res.send(res2))
+    .catch((err) => console.log(err));
 
   //subscription is active db
-
-  res.send(subscription);
 };
