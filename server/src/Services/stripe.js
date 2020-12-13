@@ -59,14 +59,12 @@ export const CreateSubscription = async (req, res) => {
     invoice_settings: { default_payment_method: payment_method }
   });
 
-  stripe.subscriptions
-    .create({
-      customer: customer_id,
-      items: [{ plan }],
-      expand: ['latest_invoice.payment_intent']
-    })
-    .then((res2) => res.send(res2))
-    .catch((err) => console.log(err));
+  const subscription = await stripe.subscriptions.create({
+    customer: customer_id,
+    items: [{ plan }],
+    expand: ['latest_invoice.payment_intent']
+  });
 
   //subscription is active db
+  res.send(subscription);
 };
