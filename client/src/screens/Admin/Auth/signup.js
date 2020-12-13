@@ -118,6 +118,7 @@ const ErrorText = styled.div`
 const Signup = () => {
   const [loading, setLoading] = useState(false)
   const { firebase, LogIn, LogOut } = useContext(AuthContext)
+  const [resMessage, setResMessage] = useState("")
 
   //Save information from firebase to our own db
   const saveToDb = async (authRes, LogIn) => {
@@ -155,7 +156,10 @@ const Signup = () => {
       .auth()
       .createUserWithEmailAndPassword(email, password)
       .then(authRes => saveToDb(authRes, LogIn))
-      .catch(error => console.log(error))
+      .catch(error => {
+        console.log(error)
+        setResMessage(error.message)
+      })
   }
 
   //Google OAuth2 Signin
@@ -166,7 +170,10 @@ const Signup = () => {
       .auth()
       .signInWithPopup(provider)
       .then(authRes => saveToDb(authRes))
-      .catch(error => console.log(error))
+      .catch(error => {
+        console.log(error)
+        setResMessage(error.message)
+      })
   }
 
   return (
@@ -174,6 +181,7 @@ const Signup = () => {
       <SignUpFormHeader />
       <CardWrapper>
         <Card>
+          <h3>{resMessage}</h3>
           <Formik
             validationSchema={ValidSchema}
             initialValues={{ email: "", password: "" }}
