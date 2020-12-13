@@ -4,12 +4,12 @@ import styled from "styled-components"
 import { Formik } from "formik"
 
 import AuthContext from "../../../utils/authContext"
-import { LoginToServer } from "../../../api/authApi"
-import { ValidSchema, LogintoContext } from "./helpers"
+import { ValidSchema } from "./helpers"
 
 import LoadingOverlay from "../../../components/Admin/Common/loadingOverlay"
 import { colors, breakpoints, fieldStyles } from "../../../styles/theme"
 import ResetFormHeader from "../../../components/Admin/Auth/resetFormHeader"
+import ResetSuccess from "../../../components/Admin/Auth/resetSuccessMessage"
 
 const Wrapper = styled.div`
   background-color: ${colors.gray50};
@@ -107,31 +107,6 @@ const Card = styled.div`
   }
 `
 
-const ForgotPasswordWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  padding-top: 0.3rem;
-  padding-bottom: 0.3rem;
-`
-
-const ForgotPassword = styled.div`
-  text-decoration: underline;
-  color: blue;
-  font-size: 0.875rem;
-  font-weight: 500;
-`
-
-const RememberMeWrapper = styled.div`
-  display: flex;
-  align-items: center;
-`
-
-const RememberMeLabel = styled.label`
-  margin-left: 0.1rem;
-  font-size: 0.925rem;
-  color: ${colors.coolGray900};
-`
-
 const ErrorText = styled.div`
   color: red;
   font-size: 0.8em;
@@ -141,130 +116,53 @@ const ErrorText = styled.div`
 
 const PasswordReset = () => {
   const [loading, setLoading] = useState(false)
+  const [success, setSuccess] = useState(false)
   const { firebase, LogIn, LogOut } = useContext(AuthContext)
   const [resMessage, setResMessage] = useState("")
 
-  //Save information from firebase to our own db
-  const saveToDb = (authRes, LogIn) => {
-    let username = authRes.user.displayName
-    console.log(authRes)
-
-    firebase
-      .auth()
-      .currentUser.getIdToken()
-      .then(token => LoginToServer(token, username))
-      .then(res =>
-        !res.data.type === "error"
-          ? LogintoContext(res.data, authRes, LogIn)
-          : setResMessage(res.data.message)
-      )
-      .catch(error => {
-        console.log(error)
-        setResMessage(error.message)
-      })
-  }
-
-  const handleSubmit = values => {
+  const handleSubmit = event => {
+    event.preventDefault()
     setLoading(true)
 
-    let email = values.email
-    let password = values.password
+    let email = event.target.email.value
 
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(email, password)
-      .then(authRes => saveToDb(authRes, LogIn))
-      .catch(error => {
-        console.log(error)
-        setResMessage(error.message)
-      })
-  }
-
-  //Google OAuth2 Signin
-  const GoogleSignin = () => {
-    let provider = new firebase.auth.GoogleAuthProvider()
-
-    firebase
-      .auth()
-      .signInWithPopup(provider)
-      .then(authRes => saveToDb(authRes, LogIn))
-      .catch(error => {
-        console.log(error)
-        resMessage(error.message)
-      })
-  }
-
-  const handlePassReset = event => {
-    event.preventDefault()
-    let email = event.target.email2.value
     firebase
       .auth()
       .sendPasswordResetEmail(email)
-      .then(res => console.log(res))
-      .catch(err => console.log(err))
+      .then(res =>
+        !res
+          ? setSuccess(true)
+          : setResMessage("Reset Failed, Please try Again")
+      )
+      .catch(err => {
+        console.log(err)
+        setResMessage(err.message)
+      })
   }
 
   return (
     <Wrapper>
-      <ResetFormHeader />
-      <CardWrapper>
-        <Card>
-          <h3>{resMessage}</h3>
-          <Formik
-            validationSchema={ValidSchema}
-            initialValues={{ email: "", password: "" }}
-            onSubmit={handleSubmit}
-          >
-            {({
-              values,
-              errors,
-              touched,
-              handleChange,
-              handleBlur,
-              handleSubmit,
-              isSubmitting,
-            }) => (
+      {!success ? (
+        <>
+          <ResetFormHeader />
+          <CardWrapper>
+            <Card>
+              <h3>{resMessage}</h3>
               <form onSubmit={handleSubmit}>
                 <Label htmlFor="email">Email:</Label>
                 <InputWrapper>
-                  <Input
-                    type="email"
-                    name="email"
-                    id="email"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.email}
-                  />
+                  <Input type="email" name="email" id="email" />
                 </InputWrapper>
-                {errors.email && touched.email && (
-                  <ErrorText>{errors.email}</ErrorText>
-                )}
-                <Label htmlFor="password">Password:</Label>
-                <InputWrapper>
-                  <Input
-                    type="password"
-                    name="password"
-                    id="password"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.password}
-                  />
-                </InputWrapper>
-                {errors.password && touched.password && (
-                  <ErrorText>{errors.password}</ErrorText>
-                )}
                 <ButtonWrapper>
-                  <Button type="submit">Signin</Button>
+                  <Button type="submit">Submit</Button>
                 </ButtonWrapper>
               </form>
-            )}
-          </Formik>
-        </Card>
-      </CardWrapper>
-
-      <form onSubmit={handlePassReset}>
-        <input type="email" name="email2" />
-      </form>
+            </Card>
+          </CardWrapper>
+        </>
+      ) : (
+        <ResetSuccess />
+      )}
     </Wrapper>
   )
 }
