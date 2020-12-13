@@ -44,6 +44,7 @@ export const CreateSetupIntent = async (req, res) => {
 export const CreateSubscription = async (req, res) => {
   let customer_id = req.body.customer.stripeCustomerKey;
   let payment_method = req.body.payment_method;
+  let email = req.body.customer.email;
 
   console.log(customer_id);
 
@@ -66,9 +67,17 @@ export const CreateSubscription = async (req, res) => {
   });
 
   if (subscription.latest_invoice.payment_intent.status === 'succeeded') {
-    //update db
+    //update db to users subscription
+    let text = `UPDATE users SET isPaidMember=$1
+                WHERE email = $2`;
+    let values = ['true', email];
+
+    let callback = (q_err, q_res) => {
+      if (q_err) res.send(q_err);
+    };
+
+    db.query(text, values, callback);
   }
 
-  //subscription is active db
   res.send(subscription);
 };
