@@ -6,7 +6,7 @@ import { colors, breakpoints } from '../../../styles/theme';
 import styled from 'styled-components';
 import LoadingOverlay from '../../../components/Admin/Common/loadingOverlay';
 import ConfirmSub from './confirmSubscription';
-import stripeConfig from '../../../services/stripe';
+import PlanCard from './planCard';
 
 const Wrapper = styled.div`
   background-color: ${colors.gray50};
@@ -87,19 +87,6 @@ const Card = styled.div`
   }
 `;
 
-const PlanWrapper = styled.div`
-  display: flex;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  margin-bottom: 3rem;
-  justify-content: space-between;
-`;
-
-const PlanCard = styled.div`
-  border: 1px solid blue;
-  padding: 2rem;
-`;
-
 const CheckoutForm = () => {
   const { authState } = useContext(AuthContext);
 
@@ -108,6 +95,7 @@ const CheckoutForm = () => {
   const [isLoading, setLoading] = useState(false);
   const [isSuccess, setSuccess] = useState(false);
   const [plan, setPlan] = useState('');
+  const [planActive, setPlanActive] = useState();
 
   const premium_plan = process.env.GATSBY_STRIPE_PREMIUM_PLAN;
   const basic_plan = process.env.GATSBY_STRIPE_BASIC_PLAN;
@@ -124,10 +112,6 @@ const CheckoutForm = () => {
   const elements = useElements();
 
   const createSetupIntent = async () => {
-    const plans = await stripeConfig.plans.list({ limit: 3 });
-
-    console.log(plans);
-
     let data = { customer: authState.user };
     const result = await axios.post('http://localhost/stripe/wallet', data);
     if (!result) setResMessage('Payment Setup Failed, Please Contact Support');
@@ -185,11 +169,8 @@ const CheckoutForm = () => {
       <h3>{resMessage}</h3>
       {!isSuccess ? (
         <CardWrapper>
+          <PlanCard setBasic={setBasic} setPremium={setPremium} />
           <Card>
-            <PlanWrapper>
-              <PlanCard onClick={setBasic}>Basic Plan</PlanCard>
-              <PlanCard onClick={setPremium}>Premium Plan </PlanCard>
-            </PlanWrapper>
             <form onSubmit={handleSubmit}>
               <CardElement />
               <ButtonWrapper>
