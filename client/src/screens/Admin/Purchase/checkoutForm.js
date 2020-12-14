@@ -87,6 +87,13 @@ const Card = styled.div`
   }
 `;
 
+const ErrorResponse = styled.div`
+  font-size: 0.9rem;
+  color: red;
+  font-weight: 100;
+  margin-bottom: 1rem;
+`;
+
 const CheckoutForm = () => {
   const { authState } = useContext(AuthContext);
 
@@ -169,7 +176,7 @@ const CheckoutForm = () => {
   return (
     <Wrapper>
       {isLoading && <LoadingOverlay />}
-      <h3>{resMessage}</h3>
+      <ErrorResponse>{resMessage}</ErrorResponse>
       {!isSuccess ? (
         <CardWrapper>
           <PlanCard setBasic={setBasic} setPremium={setPremium} isBasicActive={isBasicActive} />

@@ -1,14 +1,14 @@
-import React, { useContext, useEffect, useState } from "react"
+import React, { useContext, useEffect, useState } from 'react';
 
-import styled from "styled-components"
-import { Formik } from "formik"
-import { Link } from "gatsby"
-import AuthContext from "../../../utils/authContext"
-import { ValidSchema, saveToDb } from "./helpers"
+import styled from 'styled-components';
+import { Formik } from 'formik';
+import { Link } from 'gatsby';
+import AuthContext from '../../../utils/authContext';
+import { ValidSchema, saveToDb } from './helpers';
 
-import LoadingOverlay from "../../../components/Admin/Common/loadingOverlay"
-import { colors, breakpoints, fieldStyles } from "../../../styles/theme"
-import LoginFormHeader from "../../../components/Admin/Auth/loginFormHeader"
+import LoadingOverlay from '../../../components/Admin/Common/loadingOverlay';
+import { colors, breakpoints, fieldStyles } from '../../../styles/theme';
+import LoginFormHeader from '../../../components/Admin/Auth/loginFormHeader';
 
 const Wrapper = styled.div`
   background-color: ${colors.gray50};
@@ -25,7 +25,7 @@ const Wrapper = styled.div`
     padding-left: 2rem;
     padding-right: 2rem;
   }
-`
+`;
 
 const Label = styled.label`
   display: block;
@@ -34,23 +34,23 @@ const Label = styled.label`
   line-height: 1.25rem;
   color: ${colors.gray700};
   padding-top: 0.5rem;
-`
+`;
 
 const InputWrapper = styled.div`
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
-`
+`;
 
 const Input = styled.input`
   ${fieldStyles}
-`
+`;
 
 const ButtonWrapper = styled.div`
   padding-top: 1rem;
   padding-bottom: 1rem;
   background-color: ${colors.white};
   text-align: left;
-`
+`;
 
 const Button = styled.button`
   padding: 0.5rem 1rem;
@@ -75,11 +75,11 @@ const Button = styled.button`
   &:active {
     background-color: ${colors.indigo600};
   }
-  transition-property: background-color, border-color, color, fill, stroke,
-    opacity, box-shadow, transform;
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow,
+    transform;
   transition-duration: 150ms;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-`
+`;
 
 const CardWrapper = styled.div`
   padding-left: 2rem;
@@ -93,7 +93,7 @@ const CardWrapper = styled.div`
     width: 100%;
     max-width: 28rem;
   }
-`
+`;
 
 const Card = styled.div`
   background-color: ${colors.white};
@@ -104,14 +104,14 @@ const Card = styled.div`
     padding-left: 2.5rem;
     padding-right: 2.5rem;
   }
-`
+`;
 
 const ForgotPasswordWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   padding-top: 0.3rem;
   padding-bottom: 0.3rem;
-`
+`;
 
 const ForgotPassword = styled.div`
   text-decoration: underline;
@@ -119,67 +119,70 @@ const ForgotPassword = styled.div`
   font-size: 0.875rem;
   font-weight: 500;
   cursor: pointer;
-`
+`;
 
 const RememberMeWrapper = styled.div`
   display: flex;
   align-items: center;
-`
+`;
 
 const RememberMeLabel = styled.label`
   margin-left: 0.1rem;
   font-size: 0.925rem;
   color: ${colors.coolGray900};
-`
+`;
 
 const ErrorText = styled.div`
   color: red;
   font-size: 0.8em;
   margin-bottom: 0.5em;
   margin-top: -0.2rem;
-`
+`;
+
+const ErrorResponse = styled.div`
+  font-size: 0.9rem;
+  color: red;
+  font-weight: 100;
+  margin-bottom: 1rem;
+`;
 
 const Login = () => {
-  const [isLoading, setLoading] = useState(false)
-  const { firebase, LogIn, LogOut } = useContext(AuthContext)
-  const [resMessage, setResMessage] = useState("")
+  const [isLoading, setLoading] = useState(false);
+  const { firebase, LogIn, LogOut } = useContext(AuthContext);
+  const [resMessage, setResMessage] = useState('');
 
-  const handleSubmit = values => {
-    setLoading(true)
+  const handleSubmit = (values) => {
+    setLoading(true);
 
-    let email = values.email
-    let password = values.password
+    let email = values.email;
+    let password = values.password;
 
     firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
-      .then(authRes =>
-        saveToDb(authRes, LogIn, true, firebase, setResMessage, setLoading)
-      )
-      .catch(error => {
-        console.log(error)
-        setLoading(false)
-        setResMessage(error.message)
-      })
-  }
+      .then((authRes) => saveToDb(authRes, LogIn, true, firebase, setResMessage, setLoading))
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+        setResMessage(error.message);
+      });
+  };
 
   //Google OAuth2 Signin
   const GoogleSignin = () => {
-    setLoading(true)
-    let provider = new firebase.auth.GoogleAuthProvider()
+    setLoading(true);
+    let provider = new firebase.auth.GoogleAuthProvider();
 
     firebase
       .auth()
       .signInWithPopup(provider)
-      .then(authRes =>
-        saveToDb(authRes, LogIn, true, firebase, setResMessage, setLoading)
-      )
-      .catch(error => {
-        console.log(error)
-        setLoading(false)
-        setResMessage(error.message)
-      })
-  }
+      .then((authRes) => saveToDb(authRes, LogIn, true, firebase, setResMessage, setLoading))
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+        setResMessage(error.message);
+      });
+  };
 
   return (
     <Wrapper>
@@ -187,10 +190,10 @@ const Login = () => {
       <LoginFormHeader />
       <CardWrapper>
         <Card>
-          <h3>{resMessage}</h3>
+          <ErrorResponse>{resMessage}</ErrorResponse>
           <Formik
             validationSchema={ValidSchema}
-            initialValues={{ email: "", password: "" }}
+            initialValues={{ email: '', password: '' }}
             onSubmit={handleSubmit}
           >
             {({
@@ -200,7 +203,7 @@ const Login = () => {
               handleChange,
               handleBlur,
               handleSubmit,
-              isSubmitting,
+              isSubmitting
             }) => (
               <form onSubmit={handleSubmit}>
                 <Label htmlFor="email">Email:</Label>
@@ -214,9 +217,7 @@ const Login = () => {
                     value={values.email}
                   />
                 </InputWrapper>
-                {errors.email && touched.email && (
-                  <ErrorText>{errors.email}</ErrorText>
-                )}
+                {errors.email && touched.email && <ErrorText>{errors.email}</ErrorText>}
                 <Label htmlFor="password">Password:</Label>
                 <InputWrapper>
                   <Input
@@ -228,9 +229,7 @@ const Login = () => {
                     value={values.password}
                   />
                 </InputWrapper>
-                {errors.password && touched.password && (
-                  <ErrorText>{errors.password}</ErrorText>
-                )}
+                {errors.password && touched.password && <ErrorText>{errors.password}</ErrorText>}
                 <ButtonWrapper>
                   <Button type="submit">Signin</Button>
                 </ButtonWrapper>
@@ -240,9 +239,7 @@ const Login = () => {
           <ForgotPasswordWrapper>
             <RememberMeWrapper>
               <input id="remember_me" name="remember_me" type="checkbox" />
-              <RememberMeLabel htmlFor="remember_me">
-                Remember me
-              </RememberMeLabel>
+              <RememberMeLabel htmlFor="remember_me">Remember me</RememberMeLabel>
             </RememberMeWrapper>
 
             <ForgotPassword>
@@ -256,7 +253,7 @@ const Login = () => {
         </Card>
       </CardWrapper>
     </Wrapper>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

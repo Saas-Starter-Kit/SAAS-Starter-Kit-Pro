@@ -1,15 +1,15 @@
-import React, { useContext, useEffect, useState } from "react"
+import React, { useContext, useEffect, useState } from 'react';
 
-import styled from "styled-components"
-import { Formik } from "formik"
+import styled from 'styled-components';
+import { Formik } from 'formik';
 
-import AuthContext from "../../../utils/authContext"
-import { ValidSchema } from "./helpers"
+import AuthContext from '../../../utils/authContext';
+import { ValidSchema } from './helpers';
 
-import LoadingOverlay from "../../../components/Admin/Common/loadingOverlay"
-import { colors, breakpoints, fieldStyles } from "../../../styles/theme"
-import ResetFormHeader from "../../../components/Admin/Auth/resetFormHeader"
-import ResetSuccess from "../../../components/Admin/Auth/resetSuccessMessage"
+import LoadingOverlay from '../../../components/Admin/Common/loadingOverlay';
+import { colors, breakpoints, fieldStyles } from '../../../styles/theme';
+import ResetFormHeader from '../../../components/Admin/Auth/resetFormHeader';
+import ResetSuccess from '../../../components/Admin/Auth/resetSuccessMessage';
 
 const Wrapper = styled.div`
   background-color: ${colors.gray50};
@@ -26,7 +26,7 @@ const Wrapper = styled.div`
     padding-left: 2rem;
     padding-right: 2rem;
   }
-`
+`;
 
 const Label = styled.label`
   display: block;
@@ -35,23 +35,23 @@ const Label = styled.label`
   line-height: 1.25rem;
   color: ${colors.gray700};
   padding-top: 0.5rem;
-`
+`;
 
 const InputWrapper = styled.div`
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
-`
+`;
 
 const Input = styled.input`
   ${fieldStyles}
-`
+`;
 
 const ButtonWrapper = styled.div`
   padding-top: 1rem;
   padding-bottom: 1rem;
   background-color: ${colors.white};
   text-align: left;
-`
+`;
 
 const Button = styled.button`
   padding: 0.5rem 1rem;
@@ -76,11 +76,11 @@ const Button = styled.button`
   &:active {
     background-color: ${colors.indigo600};
   }
-  transition-property: background-color, border-color, color, fill, stroke,
-    opacity, box-shadow, transform;
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow,
+    transform;
   transition-duration: 150ms;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-`
+`;
 
 const CardWrapper = styled.div`
   padding-left: 2rem;
@@ -94,7 +94,7 @@ const CardWrapper = styled.div`
     width: 100%;
     max-width: 28rem;
   }
-`
+`;
 
 const Card = styled.div`
   background-color: ${colors.white};
@@ -105,44 +105,44 @@ const Card = styled.div`
     padding-left: 2.5rem;
     padding-right: 2.5rem;
   }
-`
+`;
 
-const ErrorText = styled.div`
+const ErrorResponse = styled.div`
+  font-size: 0.9rem;
   color: red;
-  font-size: 0.8em;
-  margin-bottom: 0.5em;
-  margin-top: -0.2rem;
-`
+  font-weight: 100;
+  margin-bottom: 1rem;
+`;
 
 const PasswordReset = () => {
-  const [isLoading, setLoading] = useState(false)
-  const [success, setSuccess] = useState(false)
-  const { firebase, LogIn, LogOut } = useContext(AuthContext)
-  const [resMessage, setResMessage] = useState("")
+  const [isLoading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const { firebase, LogIn, LogOut } = useContext(AuthContext);
+  const [resMessage, setResMessage] = useState('');
 
-  const handleSubmit = async event => {
-    event.preventDefault()
-    setLoading(true)
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setLoading(true);
 
-    let email = event.target.email.value
+    let email = event.target.email.value;
 
     let res = await firebase
       .auth()
       .sendPasswordResetEmail(email)
       .then(() => {
-        setLoading(false)
-        setSuccess(true)
+        setLoading(false);
+        setSuccess(true);
       })
-      .catch(error => {
-        setLoading(false)
-        setResMessage(error.message)
-        return
-      })
+      .catch((error) => {
+        setLoading(false);
+        setResMessage(error.message);
+        return;
+      });
 
     if (!res) {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   return (
     <Wrapper>
@@ -152,7 +152,7 @@ const PasswordReset = () => {
           <ResetFormHeader />
           <CardWrapper>
             <Card>
-              <h3>{resMessage}</h3>
+              <ErrorResponse>{resMessage}</ErrorResponse>
               <form onSubmit={handleSubmit}>
                 <Label htmlFor="email">Email:</Label>
                 <InputWrapper>
@@ -169,7 +169,7 @@ const PasswordReset = () => {
         <ResetSuccess />
       )}
     </Wrapper>
-  )
-}
+  );
+};
 
-export default PasswordReset
+export default PasswordReset;

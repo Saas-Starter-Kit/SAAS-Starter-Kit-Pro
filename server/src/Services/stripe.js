@@ -80,10 +80,9 @@ export const CreateSubscription = async (req, res) => {
 
     let callback = (q_err, q_res) => {
       if (q_err) res.send(q_err);
+      res.send(subscription);
     };
 
     db.query(text, values, callback);
   }
-
-  res.send(subscription);
 };
