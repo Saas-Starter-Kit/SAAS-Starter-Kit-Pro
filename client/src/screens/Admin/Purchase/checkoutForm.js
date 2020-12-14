@@ -5,6 +5,7 @@ import AuthContext from '../../../utils/authContext';
 import { colors, breakpoints } from '../../../styles/theme';
 import styled from 'styled-components';
 import LoadingOverlay from '../../../components/Admin/Common/loadingOverlay';
+import ConfirmSub from './confirmSubscription';
 
 const Wrapper = styled.div`
   background-color: ${colors.gray50};
@@ -90,13 +91,16 @@ const CheckoutForm = () => {
   const [resMessage, setResMessage] = useState('');
   const [setupIntentState, setSetupIntent] = useState();
   const [isLoading, setLoading] = useState(false);
+  const [isSuccess, setSuccess] = useState(false);
 
   const stripe = useStripe();
   const elements = useElements();
 
-  const createSetupIntent = async (event) => {
+  const createSetupIntent = async () => {
     let data = { customer: authState.user };
     const result = await axios.post('http://localhost/stripe/wallet', data);
+    if (!result) setResMessage('Payment Setup Failed, Please Contact Support');
+
     setSetupIntent(result.data);
   };
 
@@ -115,7 +119,15 @@ const CheckoutForm = () => {
       payment_method: { card: cardElement }
     });
 
-    console.log(setupIntent.payment_method);
+    if (!setupIntent && error) {
+      setLoading(false);
+      setResMessage(error.message);
+      return;
+    } else if (!setupIntent && !error) {
+      setLoading(false);
+      setResMessage('Card confirmation failed, please contact support');
+      return;
+    }
 
     let data = {
       payment_method: setupIntent.payment_method,
@@ -123,25 +135,30 @@ const CheckoutForm = () => {
     };
 
     let result = await axios.post('http://localhost/stripe/subscription', data);
+
     console.log(result);
+    setSuccess(true);
   };
 
   return (
     <Wrapper>
       {isLoading && <LoadingOverlay />}
-      <CardWrapper>
-        <Card>
-          <form onSubmit={handleSubmit}>
-            <CardElement />
-            <ButtonWrapper>
-              <Button type="submit" disabled={!stripe && !setupIntentState}>
-                Pay
-              </Button>
-            </ButtonWrapper>
-          </form>
-          <button onClick={() => console.log(setupIntentState)}>FFFFF</button>
-        </Card>
-      </CardWrapper>
+      <h3>{resMessage}</h3>
+      {!isSuccess ? (
+        <CardWrapper>
+          <Card>
+            <form onSubmit={handleSubmit}>
+              <CardElement />
+              <ButtonWrapper>
+                <Button type="submit" disabled={!stripe && !setupIntentState}>
+                  Pay
+                </Button>
+              </ButtonWrapper>
+            </form>
+            <button onClick={() => console.log(setupIntentState)}>FFFFF</button>
+          </Card>
+        </CardWrapper>
+      ) : null}
     </Wrapper>
   );
 };
