@@ -45,12 +45,13 @@ export const CreateSubscription = async (req, res) => {
   let customer_id = req.body.customer.stripeCustomerKey;
   let payment_method = req.body.payment_method;
   let email = req.body.customer.email;
+  let plan = req.body.planSelect;
 
-  console.log(customer_id);
-
-  /* It is Possible to retrieve the plans programtically but this is a waste 
-    of an api call, plans dont change often so it is faster just to hard code */
-  let plan = 'price_1HvUopAtqjBKUOx9tEoDdrhQ';
+  console.log(plan);
+  if (!customer_id || !payment_method || !email || !plan) {
+    res.send('Missing Required info');
+    return;
+  }
 
   // Attach the  payment method to the customer
   await stripe.paymentMethods.attach(payment_method, { customer: customer_id });

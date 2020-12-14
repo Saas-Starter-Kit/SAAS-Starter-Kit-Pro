@@ -90,15 +90,15 @@ const Card = styled.div`
 const CheckoutForm = () => {
   const { authState } = useContext(AuthContext);
 
+  const premium_plan = process.env.GATSBY_STRIPE_PREMIUM_PLAN;
+  const basic_plan = process.env.GATSBY_STRIPE_BASIC_PLAN;
+
   const [resMessage, setResMessage] = useState('');
   const [setupIntentState, setSetupIntent] = useState();
   const [isLoading, setLoading] = useState(false);
   const [isSuccess, setSuccess] = useState(false);
-  const [plan, setPlan] = useState('');
+  const [plan, setPlan] = useState(basic_plan);
   const [isBasicActive, setBasicActive] = useState(true);
-
-  const premium_plan = process.env.GATSBY_STRIPE_PREMIUM_PLAN;
-  const basic_plan = process.env.GATSBY_STRIPE_BASIC_PLAN;
 
   const setPremium = () => {
     setPlan(premium_plan);
@@ -148,7 +148,8 @@ const CheckoutForm = () => {
 
     let data = {
       payment_method: setupIntent.payment_method,
-      customer: authState.user
+      customer: authState.user,
+      planSelect: plan
     };
 
     let result = await axios.post('http://localhost/stripe/subscription', data);
