@@ -115,33 +115,38 @@ const ErrorText = styled.div`
 `
 
 const PasswordReset = () => {
-  const [loading, setLoading] = useState(false)
+  const [isLoading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
   const { firebase, LogIn, LogOut } = useContext(AuthContext)
   const [resMessage, setResMessage] = useState("")
 
-  const handleSubmit = event => {
+  const handleSubmit = async event => {
     event.preventDefault()
     setLoading(true)
 
     let email = event.target.email.value
 
-    firebase
+    let res = await firebase
       .auth()
       .sendPasswordResetEmail(email)
-      .then(res =>
-        !res
-          ? setSuccess(true)
-          : setResMessage("Reset Failed, Please try Again")
-      )
-      .catch(err => {
-        console.log(err)
-        setResMessage(err.message)
+      .then(() => {
+        setLoading(false)
+        setSuccess(true)
       })
+      .catch(error => {
+        setLoading(false)
+        setResMessage(error.message)
+        return
+      })
+
+    if (!res) {
+      setLoading(false)
+    }
   }
 
   return (
     <Wrapper>
+      {isLoading && <LoadingOverlay />}
       {!success ? (
         <>
           <ResetFormHeader />
