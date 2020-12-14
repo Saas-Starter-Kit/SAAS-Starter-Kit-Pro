@@ -5,7 +5,7 @@ import { Formik } from "formik"
 import { Link } from "gatsby"
 import AuthContext from "../../../utils/authContext"
 import { LoginToServer } from "../../../api/authApi"
-import { ValidSchema, LogintoContext } from "./helpers"
+import { ValidSchema, saveToDb } from "./helpers"
 
 import LoadingOverlay from "../../../components/Admin/Common/loadingOverlay"
 import { colors, breakpoints, fieldStyles } from "../../../styles/theme"
@@ -144,26 +144,6 @@ const Login = () => {
   const [isLoading, setLoading] = useState(false)
   const { firebase, LogIn, LogOut } = useContext(AuthContext)
   const [resMessage, setResMessage] = useState("")
-
-  //Save information from firebase to our own db
-  const saveToDb = (authRes, LogIn) => {
-    let username = authRes.user.displayName
-    console.log(authRes)
-
-    firebase
-      .auth()
-      .currentUser.getIdToken()
-      .then(token => LoginToServer(token, username))
-      .then(res =>
-        !res.data.type === "error"
-          ? LogintoContext(res.data, authRes, LogIn)
-          : setResMessage(res.data.message)
-      )
-      .catch(error => {
-        console.log(error)
-        setResMessage(error.message)
-      })
-  }
 
   const handleSubmit = values => {
     setLoading(true)

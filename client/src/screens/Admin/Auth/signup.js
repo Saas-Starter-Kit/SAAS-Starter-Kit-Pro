@@ -6,7 +6,7 @@ import axios from "axios"
 
 import AuthContext from "../../../utils/authContext"
 import { SignupToServer } from "../../../api/authApi"
-import { ValidSchema, LogintoContext } from "./helpers"
+import { ValidSchema, saveToDb } from "./helpers"
 
 import LoadingOverlay from "../../../components/Admin/Common/loadingOverlay"
 import { colors, breakpoints, fieldStyles } from "../../../styles/theme"
@@ -120,32 +120,6 @@ const Signup = () => {
   const { firebase, LogIn, LogOut } = useContext(AuthContext)
   const [resMessage, setResMessage] = useState("")
 
-  //Save information from firebase to our own db
-  const saveToDb = async (authRes, LogIn) => {
-    let username = authRes.user.displayName
-    console.log(authRes)
-
-    let token = await firebase.auth().currentUser.getIdToken()
-    let serverRes = await SignupToServer(token, username)
-
-    let userId = jwt_decode(serverRes.data.token).user
-    let email = authRes.user.email
-
-    console.log(userId, serverRes)
-
-    let data = {
-      userId,
-      email,
-    }
-
-    const stripeServerRes = await axios.post(
-      "http://localhost/stripe/customer",
-      data
-    )
-
-    LogintoContext(serverRes.data, authRes, stripeServerRes, LogIn)
-  }
-
   const handleSubmit = values => {
     setLoading(true)
 
@@ -155,7 +129,7 @@ const Signup = () => {
     firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
-      .then(authRes => saveToDb(authRes, LogIn))
+      .then(authRes => saveToDb(authRes, LogIn, false, firebase, setResMessage))
       .catch(error => {
         console.log(error)
         setResMessage(error.message)
@@ -169,7 +143,7 @@ const Signup = () => {
     firebase
       .auth()
       .signInWithPopup(provider)
-      .then(authRes => saveToDb(authRes, LogIn))
+      .then(authRes => saveToDb(authRes, LogIn, false, firebase, setResMessage))
       .catch(error => {
         console.log(error)
         setResMessage(error.message)
