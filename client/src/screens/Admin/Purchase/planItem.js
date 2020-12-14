@@ -4,6 +4,7 @@ import styled from 'styled-components';
 const Plan = styled.div`
   border: 1px solid blue;
   padding: 2rem;
+  background-color: ${(props) => (props.isActive ? 'lightblue' : 'white')};
   cursor: pointer;
   &:hover {
     background-color: lightblue;
@@ -21,9 +22,9 @@ const PlanPrice = styled.div`
   font-weight: 900;
 `;
 
-const PlanItem = ({ planHandler, planType, planPrice }) => {
+const PlanItem = ({ planHandler, planType, planPrice, isActive }) => {
   return (
-    <Plan onClick={planHandler}>
+    <Plan isActive={isActive} onClick={planHandler}>
       <PlanHeader>{planType} Plan</PlanHeader>
       <PlanPrice>${planPrice}/month</PlanPrice>
     </Plan>

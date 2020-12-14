@@ -95,17 +95,19 @@ const CheckoutForm = () => {
   const [isLoading, setLoading] = useState(false);
   const [isSuccess, setSuccess] = useState(false);
   const [plan, setPlan] = useState('');
-  const [planActive, setPlanActive] = useState();
+  const [isBasicActive, setBasicActive] = useState(true);
 
   const premium_plan = process.env.GATSBY_STRIPE_PREMIUM_PLAN;
   const basic_plan = process.env.GATSBY_STRIPE_BASIC_PLAN;
 
   const setPremium = () => {
     setPlan(premium_plan);
+    setBasicActive(false);
   };
 
   const setBasic = () => {
     setPlan(basic_plan);
+    setBasicActive(true);
   };
 
   const stripe = useStripe();
@@ -169,7 +171,7 @@ const CheckoutForm = () => {
       <h3>{resMessage}</h3>
       {!isSuccess ? (
         <CardWrapper>
-          <PlanCard setBasic={setBasic} setPremium={setPremium} />
+          <PlanCard setBasic={setBasic} setPremium={setPremium} isBasicActive={isBasicActive} />
           <Card>
             <form onSubmit={handleSubmit}>
               <CardElement />
