@@ -1,7 +1,7 @@
 import jwt_decode from "jwt-decode"
 import { navigate } from "gatsby"
 import * as Yup from "yup"
-import { SignupToServer } from "../../../api/authApi"
+import { SignupToServer, LoginToServer } from "../../../api/authApi"
 import axios from "axios"
 
 //valid format for setting an email and password
@@ -54,8 +54,14 @@ export const saveToDb = async (
   console.log(authRes)
 
   let token = await firebase.auth().currentUser.getIdToken()
+
   //server auth, returns jwt token
-  let serverRes = await SignupToServer(token, username)
+  let serverRes
+  if (isLogin) {
+    serverRes = await LoginToServer(token, username)
+  } else {
+    serverRes = await SignupToServer(token, username)
+  }
 
   let userId
   let email = authRes.user.email
@@ -81,6 +87,7 @@ export const saveToDb = async (
     data
   )
 
+  //save user data to React context
   LogintoContext(userId, authRes, stripeServerRes, LogIn)
 }
 
