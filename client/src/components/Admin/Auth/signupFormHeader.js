@@ -43,7 +43,7 @@ const SignupFormHeader = () => (
       src="https://tailwindui.com/img/logos/v1/workflow-mark-on-white.svg"
       alt="Workflow"
     />
-    <Title>SignUp for an Account</Title>
+    <Title>Sign-Up for an Account</Title>
 
     <AltText>
       <Link to="/login">Or sign-in to your account </Link>

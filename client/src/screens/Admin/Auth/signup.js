@@ -169,7 +169,7 @@ const Signup = () => {
     firebase
       .auth()
       .signInWithPopup(provider)
-      .then(authRes => saveToDb(authRes))
+      .then(authRes => saveToDb(authRes, LogIn))
       .catch(error => {
         console.log(error)
         setResMessage(error.message)

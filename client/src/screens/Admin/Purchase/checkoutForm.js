@@ -2,8 +2,9 @@ import React, { useState, useEffect, useContext } from "react"
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js"
 import axios from "axios"
 import AuthContext from "../../../utils/authContext"
-import { colors, breakpoints, fieldStyles } from "../../../styles/theme"
+import { colors, breakpoints } from "../../../styles/theme"
 import styled from "styled-components"
+import LoadingOverlay from "../../../components/Admin/Common/loadingOverlay"
 
 const Wrapper = styled.div`
   background-color: ${colors.gray50};
@@ -87,6 +88,7 @@ const Card = styled.div`
 const CheckoutForm = () => {
   const { authState } = useContext(AuthContext)
   const [setupIntentState, setSetupIntent] = useState()
+  const [isLoading, setLoading] = useState(false)
 
   const stripe = useStripe()
   const elements = useElements()
@@ -104,6 +106,7 @@ const CheckoutForm = () => {
 
   const handleSubmit = async event => {
     event.preventDefault()
+    setLoading(true)
 
     const cardElement = elements.getElement(CardElement)
 
@@ -127,6 +130,7 @@ const CheckoutForm = () => {
 
   return (
     <Wrapper>
+      {isLoading && <LoadingOverlay />}
       <CardWrapper>
         <Card>
           <form onSubmit={handleSubmit}>
@@ -137,6 +141,7 @@ const CheckoutForm = () => {
               </Button>
             </ButtonWrapper>
           </form>
+          <button onClick={() => console.log(setupIntentState)}>FFFFF</button>
         </Card>
       </CardWrapper>
     </Wrapper>

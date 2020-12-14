@@ -141,7 +141,7 @@ const ErrorText = styled.div`
 `
 
 const Login = () => {
-  const [loading, setLoading] = useState(false)
+  const [isLoading, setLoading] = useState(false)
   const { firebase, LogIn, LogOut } = useContext(AuthContext)
   const [resMessage, setResMessage] = useState("")
 
@@ -183,6 +183,7 @@ const Login = () => {
 
   //Google OAuth2 Signin
   const GoogleSignin = () => {
+    setLoading(true)
     let provider = new firebase.auth.GoogleAuthProvider()
 
     firebase
@@ -197,8 +198,8 @@ const Login = () => {
 
   return (
     <Wrapper>
+      {isLoading && <LoadingOverlay />}
       <LoginFormHeader />
-
       <CardWrapper>
         <Card>
           <h3>{resMessage}</h3>
