@@ -86,6 +86,10 @@ const Card = styled.div`
   }
 `;
 
+const Box = styled.div`
+  display: flex;
+`;
+
 const CheckoutForm = () => {
   const { authState } = useContext(AuthContext);
   const [resMessage, setResMessage] = useState('');
@@ -155,6 +159,10 @@ const CheckoutForm = () => {
       {!isSuccess ? (
         <CardWrapper>
           <Card>
+            <Box>
+              <div>Basic Plan</div>
+              <div>Premium Plan </div>
+            </Box>
             <form onSubmit={handleSubmit}>
               <CardElement />
               <ButtonWrapper>
