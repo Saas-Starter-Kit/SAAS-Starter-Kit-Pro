@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useContext } from "react"
-import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js"
-import axios from "axios"
-import AuthContext from "../../../utils/authContext"
-import { colors, breakpoints } from "../../../styles/theme"
-import styled from "styled-components"
-import LoadingOverlay from "../../../components/Admin/Common/loadingOverlay"
+import React, { useState, useEffect, useContext } from 'react';
+import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import axios from 'axios';
+import AuthContext from '../../../utils/authContext';
+import { colors, breakpoints } from '../../../styles/theme';
+import styled from 'styled-components';
+import LoadingOverlay from '../../../components/Admin/Common/loadingOverlay';
 
 const Wrapper = styled.div`
   background-color: ${colors.gray50};
@@ -22,14 +22,14 @@ const Wrapper = styled.div`
     padding-left: 2rem;
     padding-right: 2rem;
   }
-`
+`;
 
 const ButtonWrapper = styled.div`
   padding-top: 2rem;
   padding-bottom: 1rem;
   background-color: ${colors.white};
   text-align: left;
-`
+`;
 
 const Button = styled.button`
   padding: 0.5rem 1rem;
@@ -54,11 +54,11 @@ const Button = styled.button`
   &:active {
     background-color: ${colors.indigo600};
   }
-  transition-property: background-color, border-color, color, fill, stroke,
-    opacity, box-shadow, transform;
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow,
+    transform;
   transition-duration: 150ms;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-`
+`;
 
 const CardWrapper = styled.div`
   padding-left: 2rem;
@@ -72,7 +72,7 @@ const CardWrapper = styled.div`
     width: 100%;
     max-width: 28rem;
   }
-`
+`;
 
 const Card = styled.div`
   background-color: ${colors.white};
@@ -83,51 +83,48 @@ const Card = styled.div`
     padding-left: 2.5rem;
     padding-right: 2.5rem;
   }
-`
+`;
 
 const CheckoutForm = () => {
-  const { authState } = useContext(AuthContext)
-  const [resMessage, setResMessage] = useState("")
-  const [setupIntentState, setSetupIntent] = useState()
-  const [isLoading, setLoading] = useState(false)
+  const { authState } = useContext(AuthContext);
+  const [resMessage, setResMessage] = useState('');
+  const [setupIntentState, setSetupIntent] = useState();
+  const [isLoading, setLoading] = useState(false);
 
-  const stripe = useStripe()
-  const elements = useElements()
+  const stripe = useStripe();
+  const elements = useElements();
 
-  const createSetupIntent = async event => {
-    let data = { customer: authState.user }
-    const result = await axios.post("http://localhost/stripe/wallet", data)
-    setSetupIntent(result.data)
-  }
+  const createSetupIntent = async (event) => {
+    let data = { customer: authState.user };
+    const result = await axios.post('http://localhost/stripe/wallet', data);
+    setSetupIntent(result.data);
+  };
 
   useEffect(() => {
-    if (authState.user) createSetupIntent()
-    console.log(authState)
-  }, [authState])
+    if (authState.user) createSetupIntent();
+    console.log(authState);
+  }, [authState]);
 
-  const handleSubmit = async event => {
-    event.preventDefault()
-    setLoading(true)
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setLoading(true);
 
-    const cardElement = elements.getElement(CardElement)
+    const cardElement = elements.getElement(CardElement);
 
-    const { setupIntent, error } = await stripe.confirmCardSetup(
-      setupIntentState.client_secret,
-      {
-        payment_method: { card: cardElement },
-      }
-    )
+    const { setupIntent, error } = await stripe.confirmCardSetup(setupIntentState.client_secret, {
+      payment_method: { card: cardElement }
+    });
 
-    console.log(setupIntent.payment_method)
+    console.log(setupIntent.payment_method);
 
     let data = {
       payment_method: setupIntent.payment_method,
-      customer: authState.user,
-    }
+      customer: authState.user
+    };
 
-    let result = await axios.post("http://localhost/stripe/subscription", data)
-    console.log(result)
-  }
+    let result = await axios.post('http://localhost/stripe/subscription', data);
+    console.log(result);
+  };
 
   return (
     <Wrapper>
@@ -146,7 +143,7 @@ const CheckoutForm = () => {
         </Card>
       </CardWrapper>
     </Wrapper>
-  )
-}
+  );
+};
 
-export default CheckoutForm
+export default CheckoutForm;
