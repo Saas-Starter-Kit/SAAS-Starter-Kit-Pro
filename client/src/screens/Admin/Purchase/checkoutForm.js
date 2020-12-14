@@ -135,9 +135,17 @@ const CheckoutForm = () => {
     };
 
     let result = await axios.post('http://localhost/stripe/subscription', data);
+    if (!result) setResMessage('Subscription confirmation Failed, please contact support');
 
     console.log(result);
-    setSuccess(true);
+    if (result.data.status === 'active') {
+      setLoading(false);
+      setSuccess(true);
+    } else {
+      setLoading(false);
+      setResMessage('Subscription confirmation Failed, please contact support');
+      return;
+    }
   };
 
   return (
@@ -158,7 +166,9 @@ const CheckoutForm = () => {
             <button onClick={() => console.log(setupIntentState)}>FFFFF</button>
           </Card>
         </CardWrapper>
-      ) : null}
+      ) : (
+        <ConfirmSub />
+      )}
     </Wrapper>
   );
 };

@@ -66,7 +66,10 @@ export const CreateSubscription = async (req, res) => {
     expand: ['latest_invoice.payment_intent']
   });
 
-  if (!subscription) res.send('Failed to create subscription, please contact support');
+  if (!subscription) {
+    res.send('Failed to create subscription');
+    return;
+  }
 
   if (subscription.latest_invoice.payment_intent.status === 'succeeded') {
     //update db to users subscription
