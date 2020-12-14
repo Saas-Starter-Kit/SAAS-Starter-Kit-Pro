@@ -70,7 +70,7 @@ export const saveToDb = async (
     userId = jwt_decode(serverRes.data.token).user
   } else {
     console.log(serverRes)
-    setResMessage(serverRes.data)
+    setResMessage(serverRes.data.message)
     return
   }
 

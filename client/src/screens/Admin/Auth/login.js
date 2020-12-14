@@ -146,7 +146,7 @@ const Login = () => {
   const [resMessage, setResMessage] = useState("")
 
   const handleSubmit = values => {
-    setLoading(true)
+    //setLoading(true)
 
     let email = values.email
     let password = values.password

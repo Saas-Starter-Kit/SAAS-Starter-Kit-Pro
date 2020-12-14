@@ -47,7 +47,12 @@ export const SignUp = (req, res) => {
         res.status(500).send(q_err);
       }
       if (q_res.rows.length != 0) {
-        res.send('User Already Exists');
+        let response = {
+          type: 'error',
+          message: 'User Already Exists'
+        };
+
+        res.send(response);
       }
       if (q_res.rows.length === 0) {
         //if email not found, create user in db
