@@ -6,6 +6,7 @@ import { colors, breakpoints } from '../../../styles/theme';
 import styled from 'styled-components';
 import LoadingOverlay from '../../../components/Admin/Common/loadingOverlay';
 import ConfirmSub from './confirmSubscription';
+import stripeConfig from '../../../services/stripe';
 
 const Wrapper = styled.div`
   background-color: ${colors.gray50};
@@ -71,7 +72,7 @@ const CardWrapper = styled.div`
     padding-left: 2rem;
     padding-right: 2rem;
     width: 100%;
-    max-width: 28rem;
+    max-width: 36rem;
   }
 `;
 
@@ -86,21 +87,47 @@ const Card = styled.div`
   }
 `;
 
-const Box = styled.div`
+const PlanWrapper = styled.div`
   display: flex;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  margin-bottom: 3rem;
+  justify-content: space-between;
+`;
+
+const PlanCard = styled.div`
+  border: 1px solid blue;
+  padding: 2rem;
 `;
 
 const CheckoutForm = () => {
   const { authState } = useContext(AuthContext);
+
   const [resMessage, setResMessage] = useState('');
   const [setupIntentState, setSetupIntent] = useState();
   const [isLoading, setLoading] = useState(false);
   const [isSuccess, setSuccess] = useState(false);
+  const [plan, setPlan] = useState('');
+
+  const premium_plan = process.env.GATSBY_STRIPE_PREMIUM_PLAN;
+  const basic_plan = process.env.GATSBY_STRIPE_BASIC_PLAN;
+
+  const setPremium = () => {
+    setPlan(premium_plan);
+  };
+
+  const setBasic = () => {
+    setPlan(basic_plan);
+  };
 
   const stripe = useStripe();
   const elements = useElements();
 
   const createSetupIntent = async () => {
+    const plans = await stripeConfig.plans.list({ limit: 3 });
+
+    console.log(plans);
+
     let data = { customer: authState.user };
     const result = await axios.post('http://localhost/stripe/wallet', data);
     if (!result) setResMessage('Payment Setup Failed, Please Contact Support');
@@ -159,10 +186,10 @@ const CheckoutForm = () => {
       {!isSuccess ? (
         <CardWrapper>
           <Card>
-            <Box>
-              <div>Basic Plan</div>
-              <div>Premium Plan </div>
-            </Box>
+            <PlanWrapper>
+              <PlanCard onClick={setBasic}>Basic Plan</PlanCard>
+              <PlanCard onClick={setPremium}>Premium Plan </PlanCard>
+            </PlanWrapper>
             <form onSubmit={handleSubmit}>
               <CardElement />
               <ButtonWrapper>
