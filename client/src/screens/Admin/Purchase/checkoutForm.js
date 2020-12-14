@@ -87,6 +87,7 @@ const Card = styled.div`
 
 const CheckoutForm = () => {
   const { authState } = useContext(AuthContext)
+  const [resMessage, setResMessage] = useState("")
   const [setupIntentState, setSetupIntent] = useState()
   const [isLoading, setLoading] = useState(false)
 
