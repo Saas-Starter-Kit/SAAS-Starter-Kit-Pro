@@ -1,11 +1,9 @@
 import React, { useContext, useEffect, useState } from "react"
 import styled from "styled-components"
 import { Formik } from "formik"
-import jwt_decode from "jwt-decode"
-import axios from "axios"
 
 import AuthContext from "../../../utils/authContext"
-import { SignupToServer } from "../../../api/authApi"
+
 import { ValidSchema, saveToDb } from "./helpers"
 
 import LoadingOverlay from "../../../components/Admin/Common/loadingOverlay"
@@ -116,7 +114,7 @@ const ErrorText = styled.div`
 `
 
 const Signup = () => {
-  const [loading, setLoading] = useState(false)
+  const [isLoading, setLoading] = useState(false)
   const { firebase, LogIn, LogOut } = useContext(AuthContext)
   const [resMessage, setResMessage] = useState("")
 
@@ -129,29 +127,37 @@ const Signup = () => {
     firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
-      .then(authRes => saveToDb(authRes, LogIn, false, firebase, setResMessage))
+      .then(authRes =>
+        saveToDb(authRes, LogIn, false, firebase, setResMessage, setLoading)
+      )
       .catch(error => {
         console.log(error)
+        setLoading(false)
         setResMessage(error.message)
       })
   }
 
   //Google OAuth2 Signin
   const GoogleSignin = () => {
+    setLoading(true)
     let provider = new firebase.auth.GoogleAuthProvider()
 
     firebase
       .auth()
       .signInWithPopup(provider)
-      .then(authRes => saveToDb(authRes, LogIn, false, firebase, setResMessage))
+      .then(authRes =>
+        saveToDb(authRes, LogIn, false, firebase, setResMessage, setLoading)
+      )
       .catch(error => {
         console.log(error)
+        setLoading(false)
         setResMessage(error.message)
       })
   }
 
   return (
     <Wrapper>
+      {isLoading && <LoadingOverlay />}
       <SignUpFormHeader />
       <CardWrapper>
         <Card>

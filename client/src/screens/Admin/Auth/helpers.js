@@ -14,7 +14,7 @@ export const ValidSchema = Yup.object().shape({
 })
 
 //Save user Info to Context
-export const LogintoContext = (user_id, authRes, stripeKey, LogIn) => {
+export const LogintoContext = async (user_id, authRes, stripeKey, LogIn) => {
   console.log(authRes)
   console.log(user_id)
 
@@ -38,7 +38,7 @@ export const LogintoContext = (user_id, authRes, stripeKey, LogIn) => {
     stripeCustomerKey,
   }
 
-  LogIn(user)
+  await LogIn(user)
   setTimeout(() => navigate("/app"), 200)
 }
 
@@ -48,11 +48,11 @@ export const saveToDb = async (
   LogIn,
   isLogin,
   firebase,
-  setResMessage
+  setResMessage,
+  setLoading
 ) => {
-  let username = authRes.user.displayName
   console.log(authRes)
-
+  let username = authRes.user.displayName
   let token = await firebase.auth().currentUser.getIdToken()
 
   //server auth, returns jwt token
@@ -68,9 +68,14 @@ export const saveToDb = async (
 
   if (serverRes.data.token) {
     userId = jwt_decode(serverRes.data.token).user
-  } else {
+  } else if (serverRes.data.type === "error") {
     console.log(serverRes)
+    setLoading(false)
     setResMessage(serverRes.data.message)
+    return
+  } else {
+    setLoading(false)
+    setResMessage("Authentication Failed Please Try Again")
     return
   }
 
@@ -87,26 +92,12 @@ export const saveToDb = async (
     data
   )
 
+  if (!stripeServerRes) {
+    setLoading(false)
+    setResMessage("Authentication Failed Please Try Again")
+    return
+  }
+
   //save user data to React context
   LogintoContext(userId, authRes, stripeServerRes, LogIn)
 }
-
-//Save information from firebase to our own db
-//const saveToDb = (authRes, LogIn) => {
-//  let username = authRes.user.displayName
-//  console.log(authRes)
-
-//  firebase
-//    .auth()
-//    .currentUser.getIdToken()
-//    .then(token => LoginToServer(token, username))
-//    .then(res =>
-//      !res.data.type === "error"
-//        ? LogintoContext(res.data, authRes, LogIn)
-//        : setResMessage(res.data.message)
-//    )
-//    .catch(error => {
-//      console.log(error)
-//      setResMessage(error.message)
-//    })
-//}

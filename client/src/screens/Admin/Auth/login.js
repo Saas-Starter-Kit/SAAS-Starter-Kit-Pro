@@ -4,7 +4,6 @@ import styled from "styled-components"
 import { Formik } from "formik"
 import { Link } from "gatsby"
 import AuthContext from "../../../utils/authContext"
-import { LoginToServer } from "../../../api/authApi"
 import { ValidSchema, saveToDb } from "./helpers"
 
 import LoadingOverlay from "../../../components/Admin/Common/loadingOverlay"
@@ -146,7 +145,7 @@ const Login = () => {
   const [resMessage, setResMessage] = useState("")
 
   const handleSubmit = values => {
-    //setLoading(true)
+    setLoading(true)
 
     let email = values.email
     let password = values.password
@@ -154,9 +153,12 @@ const Login = () => {
     firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
-      .then(authRes => saveToDb(authRes, LogIn, true, firebase, setResMessage))
+      .then(authRes =>
+        saveToDb(authRes, LogIn, true, firebase, setResMessage, setLoading)
+      )
       .catch(error => {
         console.log(error)
+        setLoading(false)
         setResMessage(error.message)
       })
   }
@@ -169,10 +171,13 @@ const Login = () => {
     firebase
       .auth()
       .signInWithPopup(provider)
-      .then(authRes => saveToDb(authRes, LogIn, true, firebase, setResMessage))
+      .then(authRes =>
+        saveToDb(authRes, LogIn, true, firebase, setResMessage, setLoading)
+      )
       .catch(error => {
         console.log(error)
-        resMessage(error.message)
+        setLoading(false)
+        setResMessage(error.message)
       })
   }
 
