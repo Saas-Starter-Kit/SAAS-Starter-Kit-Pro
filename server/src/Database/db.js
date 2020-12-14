@@ -11,7 +11,7 @@ const { Pool } = pg;
 //  connectionString
 //});
 
-// Alternate Syntax
+// Standard Syntax
 const db = new Pool({
   user: process.env.DB_USER,
   host: process.env.DB_HOST,
