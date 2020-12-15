@@ -8,7 +8,7 @@ import { ValidSchema, saveToDb } from './helpers';
 
 import LoadingOverlay from '../../../components/Admin/Common/loadingOverlay';
 import { colors, breakpoints, fieldStyles } from '../../../styles/theme';
-import LoginFormHeader from '../../../components/Admin/Auth/loginFormHeader';
+import LoginFormHeader from './loginFormHeader';
 
 const Wrapper = styled.div`
   background-color: ${colors.gray50};

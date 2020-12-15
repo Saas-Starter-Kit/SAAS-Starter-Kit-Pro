@@ -1,15 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
-
 import styled from 'styled-components';
-import { Formik } from 'formik';
-
 import AuthContext from '../../../utils/authContext';
-import { ValidSchema } from './helpers';
 
 import LoadingOverlay from '../../../components/Admin/Common/loadingOverlay';
 import { colors, breakpoints, fieldStyles } from '../../../styles/theme';
-import ResetFormHeader from '../../../components/Admin/Auth/resetFormHeader';
-import ResetSuccess from '../../../components/Admin/Auth/resetSuccessMessage';
+import ResetFormHeader from './resetFormHeader';
+import ResetSuccess from './resetSuccessMessage';
 
 const Wrapper = styled.div`
   background-color: ${colors.gray50};
