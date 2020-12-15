@@ -1,14 +1,13 @@
-import React from "react"
-import styled from "styled-components"
-import ProCard from "./proCard"
-import BasicCard from "./basicCard"
-import PricingHeader from "./pricingHeader"
-import Layout from "../../../components/Marketing/Layout"
-import { colors, breakpoints } from "../../../styles/theme"
+import React from 'react';
+import styled from 'styled-components';
+import ProCard from './proCard';
+import BasicCard from './basicCard';
+import PricingHeader from './pricingHeader';
+import { colors, breakpoints } from '../../../styles/theme';
 
 const Background = styled.div`
   background-color: ${colors.gray900};
-`
+`;
 
 const BackgroundSecondary = styled.div`
   background-color: ${colors.white};
@@ -18,12 +17,12 @@ const BackgroundSecondary = styled.div`
     margin-top: 5rem;
     padding-bottom: 5rem;
   }
-`
+`;
 
 const InnerBackgroundWrapper = styled.div`
   position: relative;
   z-index: 0;
-`
+`;
 
 const InnerBackground = styled.div`
   position: absolute;
@@ -36,7 +35,7 @@ const InnerBackground = styled.div`
   @media (min-width: ${breakpoints.large}) {
     height: 66.6%;
   }
-`
+`;
 
 const InnerWrapper = styled.div`
   position: relative;
@@ -57,24 +56,22 @@ const InnerWrapper = styled.div`
     padding-left: 2rem;
     padding-right: 2rem;
   }
-`
+`;
 
 const Pricing = () => (
-  <Layout>
-    <Background>
-      <PricingHeader />
-      <BackgroundSecondary>
-        <InnerBackgroundWrapper>
-          <InnerBackground />
-          <InnerWrapper>
-            <BasicCard title="Hobby" price="79" left />
-            <ProCard />
-            <BasicCard title="Scale" price="349" left={false} />
-          </InnerWrapper>
-        </InnerBackgroundWrapper>
-      </BackgroundSecondary>
-    </Background>
-  </Layout>
-)
+  <Background>
+    <PricingHeader />
+    <BackgroundSecondary>
+      <InnerBackgroundWrapper>
+        <InnerBackground />
+        <InnerWrapper>
+          <BasicCard title="Hobby" price="79" left />
+          <ProCard />
+          <BasicCard title="Scale" price="349" left={false} />
+        </InnerWrapper>
+      </InnerBackgroundWrapper>
+    </BackgroundSecondary>
+  </Background>
+);
 
-export default Pricing
+export default Pricing;

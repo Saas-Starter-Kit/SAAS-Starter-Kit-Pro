@@ -1,6 +1,11 @@
-import React from "react"
-import Pricing from "../screens/Marketing/Pricing"
+import React from 'react';
+import Pricing from '../screens/Marketing/Pricing';
+import Layout from '../components/Marketing/Layout';
 
 export default function PricingPage() {
-  return <Pricing />
+  return (
+    <Layout>
+      <Pricing />
+    </Layout>
+  );
 }
