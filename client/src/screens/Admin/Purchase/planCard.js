@@ -6,12 +6,18 @@ import PlanItem from './planItem';
 
 const PlanWrapper = styled.div`
   display: flex;
-  margin-bottom: 1rem;
-  justify-content: space-between;
+  flex-direction: column;
   padding: 2.2rem;
   background-color: ${colors.white};
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+
+  @media (min-width: ${breakpoints.small}) {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-radius: 0.5rem;
+  }
 `;
 
 const PlanCard = ({ setBasic, setPremium, isBasicActive }) => {

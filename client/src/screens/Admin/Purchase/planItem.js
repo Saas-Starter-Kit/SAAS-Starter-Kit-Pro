@@ -6,6 +6,7 @@ const Plan = styled.div`
   padding: 2rem;
   background-color: ${(props) => (props.isActive ? 'lightblue' : 'white')};
   cursor: pointer;
+  margin-bottom: 1rem;
   &:hover {
     background-color: lightblue;
     opacity: 85%;
