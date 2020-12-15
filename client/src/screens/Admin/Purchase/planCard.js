@@ -1,5 +1,5 @@
 import React from 'react';
-import { colors, breakpoints } from '../../../styles/theme';
+import { colors } from '../../../styles/theme';
 import styled from 'styled-components';
 
 import PlanItem from './planItem';
@@ -11,13 +11,6 @@ const PlanWrapper = styled.div`
   background-color: ${colors.white};
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
   margin-bottom: 1rem;
-
-  @media (min-width: ${breakpoints.small}) {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    border-radius: 0.5rem;
-  }
 `;
 
 const PlanCard = ({ setBasic, setPremium, isBasicActive }) => {
