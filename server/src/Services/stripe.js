@@ -72,11 +72,13 @@ export const CreateSubscription = async (req, res) => {
     return;
   }
 
+  let subscritionId = subscription.id;
+
   if (subscription.latest_invoice.payment_intent.status === 'succeeded') {
     //update db to users subscription
-    let text = `UPDATE users SET isPaidMember=$1
+    let text = `UPDATE users SET isPaidMember=$1, subscriptionId=$3
                 WHERE email = $2`;
-    let values = ['true', email];
+    let values = ['true', email, subscritionId];
 
     let callback = (q_err, q_res) => {
       if (q_err) res.send(q_err);
@@ -85,4 +87,14 @@ export const CreateSubscription = async (req, res) => {
 
     db.query(text, values, callback);
   }
+};
+
+const CancelSubscription = async (req, res) => {
+  const subscription = await stripe.subscriptions.del(subscriptionId);
+};
+
+export const GetCustomer = async (req, res) => {
+  let customer = await stripe.customers.retrieve('cus_IZYimwl472n7S7');
+
+  res.send(customer);
 };

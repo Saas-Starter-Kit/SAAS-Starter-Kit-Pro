@@ -6,6 +6,7 @@ CREATE TABLE users (
   email VARCHAR(255) UNIQUE,
   stripeCustomerID VARCHAR,
   isPaidMember BOOLEAN DEFAULT FALSE,
+  subscriptionId VARCHAR,
 );
 
 CREATE TABLE todos (
