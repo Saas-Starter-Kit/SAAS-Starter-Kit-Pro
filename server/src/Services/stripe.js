@@ -110,9 +110,9 @@ export const AttachPaymentMethod = async (req, res) => {
 };
 
 export const RemovePaymentMethod = async (req, res) => {
-  let customer = req.query.customer;
+  let paymentMethod = req.body.payment;
 
-  const paymentMethod = await stripe.paymentMethods.detach('pm_1Hz1pcAtqjBKUOx9JxMTtmn4');
+  const paymentMethods = await stripe.paymentMethods.detach(paymentMethod);
 
   res.send(paymentMethods);
 };

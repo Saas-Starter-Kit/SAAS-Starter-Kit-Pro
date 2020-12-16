@@ -141,26 +141,13 @@ const Settings = () => {
     setEmail(event.target.value);
   };
 
-  const attachPaymentMethod = async () => {
-    let params = {
-      customer: stripeCustomerId
+  const deletePaymentMethod = async (id) => {
+    let data = {
+      payment: id
     };
 
-    let wallet = await axios.post('http://localhost/stripe/attach-payment', { params });
+    let wallet = await axios.post('http://localhost/stripe/remove-payment', data);
     console.log(wallet);
-    const cards = wallet.data.data;
-    setPayCards(cards);
-  };
-
-  const deletePaymentMethod = async () => {
-    let params = {
-      customer: stripeCustomerId
-    };
-
-    let wallet = await axios.delete('http://localhost/stripe/get-wallet', { params });
-    console.log(wallet);
-    const cards = wallet.data.data;
-    setPayCards(cards);
   };
 
   const getWallet = async () => {
@@ -244,10 +231,13 @@ const Settings = () => {
         <button onClick={getWallet}>Get Wallet</button>
 
         {payCards.map((item) => (
-          <option key={item.id}>
-            {item.card.brand} **** **** **** {item.card.last4} expires {item.card.exp_month}/
-            {item.card.exp_year}
-          </option>
+          <>
+            <option key={item.id}>
+              {item.card.brand} **** **** **** {item.card.last4} expires {item.card.exp_month}/
+              {item.card.exp_year}
+            </option>
+            <button onClick={() => deletePaymentMethod(item.id)}>Remove Card</button>
+          </>
         ))}
 
         <SectionTitle>Manage Subscription</SectionTitle>
