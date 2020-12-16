@@ -12,9 +12,9 @@ export const CreateCustomer = async (req, res) => {
     }
   });
 
-  let text = `UPDATE users SET StripeCustomerID=$1 
+  let text = `UPDATE users SET stripe_customer_id=$1 
               WHERE email=$2
-              RETURNING StripeCustomerID`;
+              RETURNING stripe_customer_id`;
   let values = [customer.id, email];
 
   let callback = (q_err, q_res) => {
@@ -76,7 +76,7 @@ export const CreateSubscription = async (req, res) => {
 
   if (subscription.latest_invoice.payment_intent.status === 'succeeded') {
     //update db to users subscription
-    let text = `UPDATE users SET isPaidMember=$1, subscriptionId=$3
+    let text = `UPDATE users SET is_paid_member=$1, subscription_id=$3
                 WHERE email = $2`;
     let values = ['true', email, subscritionId];
 
@@ -96,7 +96,7 @@ export const GetCustomer = async (req, res) => {
 
   //check if email exists
   let query1 = `SELECT * FROM users
-                  WHERE email=$1`;
+                WHERE email=$1`;
 
   let values1 = [email];
 
@@ -104,7 +104,7 @@ export const GetCustomer = async (req, res) => {
   const user = await db.query(query1, values1);
   if (!user) res.send('User Not Found');
 
-  console.log(user.rows[0].subscriptionId);
+  console.log(user.rows[0].subscription_id);
 
   //const subscription = await stripe.subscriptions.del(subscriptionId);
 };
