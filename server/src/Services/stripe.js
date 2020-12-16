@@ -89,10 +89,8 @@ export const CreateSubscription = async (req, res) => {
   }
 };
 
-const CancelSubscription = async (req, res) => {};
-
-export const GetCustomer = async (req, res) => {
-  let email = 'qwer@qwer.com';
+export const CancelSubscription = async (req, res) => {
+  let email = req.body.email;
 
   //check if email exists
   let query1 = `SELECT * FROM users
@@ -105,6 +103,11 @@ export const GetCustomer = async (req, res) => {
   if (!user) res.send('User Not Found');
 
   console.log(user.rows[0].subscription_id);
+  let subscription_id = user.rows[0].subscription_id;
 
-  //const subscription = await stripe.subscriptions.del(subscriptionId);
+  //delete subscription and send back response
+  const subscription = await stripe.subscriptions.del(subscription_id);
+  if (!subscription) res.send('Subscription Cancel failed');
+
+  res.send(subscription);
 };

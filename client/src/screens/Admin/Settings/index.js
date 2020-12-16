@@ -87,6 +87,7 @@ const Settings = () => {
   const [email, setEmail] = useState(userEmail);
   const [username, setUsername] = useState(displayName);
   const [resMessage, setResMessage] = useState('');
+  const [resPayMessage, setResPayMessage] = useState('');
 
   const curUser = firebase.auth().currentUser;
   const id = authState.user ? authState.user.id.user : null;
@@ -135,9 +136,19 @@ const Settings = () => {
     setEmail(event.target.value);
   };
 
-  const cancelSubscription = () => {};
+  const cancelSubscription = async () => {
+    let data = {
+      email: userEmail
+    };
 
-  const getSubscription = () => {};
+    const subscriptionCancel = await axios.post(
+      'http://localhost/stripe/cancel-subscription',
+      data
+    );
+    if (!subscriptionCancel) setResPayMessage('Subscription Cancel failed');
+
+    //if subscription.status == failed
+  };
 
   return (
     <>
@@ -189,6 +200,7 @@ const Settings = () => {
       <Card>
         <Title>Billing Settings</Title>
         {isLoading && <LoadingOverlay />}
+        <Paragraph>{resPayMessage}</Paragraph>
         <SectionTitle>Update Payment</SectionTitle>
 
         <SectionTitle>Manage Subscription</SectionTitle>
