@@ -37,7 +37,7 @@ export const LogintoContext = async (user_id, authRes, stripeKey, LogIn) => {
   };
 
   await LogIn(user);
-  //setTimeout(() => navigate('/app'), 200);
+  setTimeout(() => navigate('/app'), 200);
 };
 
 //Save information from firebase to our own db

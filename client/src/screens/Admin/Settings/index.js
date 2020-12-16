@@ -80,19 +80,20 @@ const Button = styled.button`
 
 const Settings = () => {
   const { firebase, authState } = useContext(AuthContext);
+
   let userEmail = authState.user ? authState.user.email : 'Guest@guest.com';
   let displayName = authState.user ? authState.user.username : 'Guest';
+  const curUser = firebase.auth().currentUser;
+  const id = authState.user ? authState.user.id.user : null;
+  const stripeCustomerId = authState.user ? authState.user.stripeCustomerKey : null;
+  const isEmail = authState.user ? authState.user.provider === 'password' : null;
 
   const [isLoading, setLoading] = useState(false);
   const [email, setEmail] = useState(userEmail);
   const [username, setUsername] = useState(displayName);
   const [resMessage, setResMessage] = useState('');
   const [resPayMessage, setResPayMessage] = useState('');
-
-  const curUser = firebase.auth().currentUser;
-  const id = authState.user ? authState.user.id.user : null;
-  const stripeCustomerId = authState.user ? authState.user.stripeCustomerKey : null;
-  const isEmail = authState.user ? authState.user.provider === 'password' : null;
+  const [payCards, setPayCards] = useState([]);
 
   const updateUsername = (event) => {
     event.preventDefault();
@@ -137,12 +138,15 @@ const Settings = () => {
     setEmail(event.target.value);
   };
 
-  const getWallet = () => {
-    let data = {
+  const getWallet = async () => {
+    let params = {
       customer: stripeCustomerId
     };
 
-    axios.get();
+    let wallet = await axios.get('http://localhost/stripe/get-wallet', { params });
+    console.log(wallet);
+    const cards = wallet.data.data;
+    setPayCards(cards);
   };
 
   const cancelSubscription = async () => {
@@ -210,7 +214,16 @@ const Settings = () => {
         <Title>Billing Settings</Title>
         {isLoading && <LoadingOverlay />}
         <Paragraph>{resPayMessage}</Paragraph>
+
         <SectionTitle>Update Payment</SectionTitle>
+        <button onClick={getWallet}>Get Wallet</button>
+
+        {payCards.map((item) => (
+          <option key={item.id}>
+            {item.card.brand} **** **** **** {item.card.last4} expires {item.card.exp_month}/
+            {item.card.exp_year}
+          </option>
+        ))}
 
         <SectionTitle>Manage Subscription</SectionTitle>
         <button onClick={cancelSubscription}>Cancel Sub</button>

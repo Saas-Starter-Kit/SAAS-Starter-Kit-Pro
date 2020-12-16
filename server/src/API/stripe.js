@@ -9,7 +9,7 @@ import {
   GetWallet
 } from '../Services/stripe.js';
 
-router.post('/get-wallet', GetWallet);
+router.get('/get-wallet', GetWallet);
 
 router.post('/customer', CreateCustomer);
 

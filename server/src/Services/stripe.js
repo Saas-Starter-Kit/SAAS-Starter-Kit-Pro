@@ -90,7 +90,7 @@ export const CreateSubscription = async (req, res) => {
 };
 
 export const GetWallet = async (req, res) => {
-  let customer = 'cus_IZz4qkn6en4D5G';
+  let customer = req.query.customer;
 
   const paymentMethods = await stripe.paymentMethods.list({
     customer: customer,
