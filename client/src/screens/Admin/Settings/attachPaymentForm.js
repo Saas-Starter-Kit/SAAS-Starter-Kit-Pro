@@ -112,6 +112,14 @@ const AttachPaymentForm = () => {
       setResMessage('Card confirmation failed, please contact support');
       return;
     }
+
+    let data = {
+      payment_method: setupIntent.payment_method,
+      customer: authState.user
+    };
+
+    const result = await axios.post('http://localhost/stripe/attach-payment', data);
+    console.log(result);
   };
 
   return (
@@ -124,10 +132,11 @@ const AttachPaymentForm = () => {
             <CardElement />
             <ButtonWrapper>
               <Button type="submit" disabled={!stripe && !setupIntentState}>
-                Pay
+                Add
               </Button>
             </ButtonWrapper>
           </form>
+          <p>Adding a card will make it the default payment method</p>
           <button onClick={() => console.log(setupIntentState)}>FFFFF</button>
         </Card>
       </CardWrapper>

@@ -10,7 +10,7 @@ import {
   AttachPaymentMethod
 } from '../Services/stripe.js';
 
-router.get('/attach-payment', AttachPaymentMethod);
+router.post('/attach-payment', AttachPaymentMethod);
 
 router.get('/get-wallet', GetWallet);
 
