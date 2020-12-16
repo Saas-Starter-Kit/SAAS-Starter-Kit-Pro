@@ -7,7 +7,6 @@ import styled from 'styled-components';
 import LoadingOverlay from '../../../components/Admin/Common/loadingOverlay';
 
 const Wrapper = styled.div`
-  background-color: ${colors.gray50};
   display: flex;
   flex-direction: column;
   justify-content: center;

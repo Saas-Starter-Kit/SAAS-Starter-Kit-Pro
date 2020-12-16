@@ -92,11 +92,9 @@ export const CreateSubscription = async (req, res) => {
 const AttackPaymentMethod = async (req, res) => {
   let customer_id = req.body.customer.stripeCustomerKey;
   let payment_method = req.body.payment_method;
-  let email = req.body.customer.email;
-  let plan = req.body.planSelect;
 
   console.log(plan);
-  if (!customer_id || !payment_method || !email || !plan) {
+  if (!customer_id || !payment_method) {
     res.send('Missing Required info');
     return;
   }

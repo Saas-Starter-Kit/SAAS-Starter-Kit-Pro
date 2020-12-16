@@ -8,6 +8,8 @@ import { colors, breakpoints, fieldStyles } from '../../../styles/theme';
 import { updateUserNameApi, updateEmailApi } from '../../../api/authApi';
 import AttachPaymentFormWrapper from './attachPaymentFormWrapper';
 
+const Wrapper = styled.div``;
+
 const Title = styled.h1`
   font-size: 1.5rem;
 `;
@@ -19,7 +21,7 @@ const Card = styled.div`
   border-radius: 0.75rem;
   margin-bottom: 2rem;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-  @media (min-width: ${breakpoints.medium}) {
+  @media (min-width: ${breakpoints.large}) {
     width: 75%;
   }
 `;
@@ -187,7 +189,7 @@ const Settings = () => {
   };
 
   return (
-    <>
+    <Wrapper>
       <Card>
         <Title>Account Settings</Title>
         <Paragraph>{resMessage}</Paragraph>
@@ -252,7 +254,7 @@ const Settings = () => {
         <button onClick={cancelSubscription}>Cancel Sub</button>
       </Card>
       <AttachPaymentFormWrapper />
-    </>
+    </Wrapper>
   );
 };
 
