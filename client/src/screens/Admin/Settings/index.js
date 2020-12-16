@@ -91,6 +91,7 @@ const Settings = () => {
 
   const curUser = firebase.auth().currentUser;
   const id = authState.user ? authState.user.id.user : null;
+  const stripeCustomerId = authState.user ? authState.user.stripeCustomerKey : null;
   const isEmail = authState.user ? authState.user.provider === 'password' : null;
 
   const updateUsername = (event) => {
@@ -136,6 +137,14 @@ const Settings = () => {
     setEmail(event.target.value);
   };
 
+  const getWallet = () => {
+    let data = {
+      customer: stripeCustomerId
+    };
+
+    axios.get();
+  };
+
   const cancelSubscription = async () => {
     let data = {
       email: userEmail
@@ -147,9 +156,7 @@ const Settings = () => {
     );
     if (!subscriptionCancel) console.log('Subscription Cancel failed');
 
-    console.log(subscriptionCancel);
-
-    //if subscription.status == failed
+    setResPayMessage(subscriptionCancel.data);
   };
 
   return (
