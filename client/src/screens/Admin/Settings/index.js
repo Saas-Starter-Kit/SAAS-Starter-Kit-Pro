@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import { navigate } from 'gatsby';
@@ -6,6 +6,7 @@ import AuthContext from '../../../utils/authContext';
 import LoadingOverlay from '../../../components/Admin/Common/loadingOverlay';
 import { colors, breakpoints, fieldStyles } from '../../../styles/theme';
 import { updateUserNameApi, updateEmailApi } from '../../../api/authApi';
+import AttachPaymentFormWrapper from './attachPaymentFormWrapper';
 
 const Title = styled.h1`
   font-size: 1.5rem;
@@ -138,6 +139,28 @@ const Settings = () => {
     setEmail(event.target.value);
   };
 
+  const attachPaymentMethod = async () => {
+    let params = {
+      customer: stripeCustomerId
+    };
+
+    let wallet = await axios.post('http://localhost/stripe/attach-payment', { params });
+    console.log(wallet);
+    const cards = wallet.data.data;
+    setPayCards(cards);
+  };
+
+  const deletePaymentMethod = async () => {
+    let params = {
+      customer: stripeCustomerId
+    };
+
+    let wallet = await axios.delete('http://localhost/stripe/get-wallet', { params });
+    console.log(wallet);
+    const cards = wallet.data.data;
+    setPayCards(cards);
+  };
+
   const getWallet = async () => {
     let params = {
       customer: stripeCustomerId
@@ -228,6 +251,7 @@ const Settings = () => {
         <SectionTitle>Manage Subscription</SectionTitle>
         <button onClick={cancelSubscription}>Cancel Sub</button>
       </Card>
+      <AttachPaymentFormWrapper />
     </>
   );
 };

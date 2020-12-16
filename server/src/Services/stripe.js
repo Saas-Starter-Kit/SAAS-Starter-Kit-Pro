@@ -89,6 +89,37 @@ export const CreateSubscription = async (req, res) => {
   }
 };
 
+const AttackPaymentMethod = async (req, res) => {
+  let customer_id = req.body.customer.stripeCustomerKey;
+  let payment_method = req.body.payment_method;
+  let email = req.body.customer.email;
+  let plan = req.body.planSelect;
+
+  console.log(plan);
+  if (!customer_id || !payment_method || !email || !plan) {
+    res.send('Missing Required info');
+    return;
+  }
+
+  // Attach the  payment method to the customer
+  await stripe.paymentMethods.attach(payment_method, { customer: customer_id });
+
+  // Set it as the default payment method
+  const result = await stripe.customers.update(customer_id, {
+    invoice_settings: { default_payment_method: payment_method }
+  });
+
+  res.send(result);
+};
+
+export const RemovePaymentMethod = async (req, res) => {
+  let customer = req.query.customer;
+
+  const paymentMethod = await stripe.paymentMethods.detach('pm_1Hz1pcAtqjBKUOx9JxMTtmn4');
+
+  res.send(paymentMethods);
+};
+
 export const GetWallet = async (req, res) => {
   let customer = req.query.customer;
 
