@@ -4,9 +4,9 @@ CREATE TABLE users (
   id SERIAL PRIMARY KEY,
   username VARCHAR(255),
   email VARCHAR(255) UNIQUE,
-  stripeCustomerID VARCHAR,
-  isPaidMember BOOLEAN DEFAULT FALSE,
-  subscriptionId VARCHAR,
+  stripe_customer_id VARCHAR,
+  is_paid_member BOOLEAN DEFAULT FALSE,
+  subscription_id VARCHAR
 );
 
 CREATE TABLE todos (

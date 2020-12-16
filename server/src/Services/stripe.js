@@ -89,12 +89,22 @@ export const CreateSubscription = async (req, res) => {
   }
 };
 
-const CancelSubscription = async (req, res) => {
-  const subscription = await stripe.subscriptions.del(subscriptionId);
-};
+const CancelSubscription = async (req, res) => {};
 
 export const GetCustomer = async (req, res) => {
-  let customer = await stripe.customers.retrieve('cus_IZYimwl472n7S7');
+  let email = 'qwer@qwer.com';
 
-  res.send(customer);
+  //check if email exists
+  let query1 = `SELECT * FROM users
+                  WHERE email=$1`;
+
+  let values1 = [email];
+
+  //check if user exists
+  const user = await db.query(query1, values1);
+  if (!user) res.send('User Not Found');
+
+  console.log(user.rows[0].subscriptionId);
+
+  //const subscription = await stripe.subscriptions.del(subscriptionId);
 };
