@@ -145,7 +145,9 @@ const Settings = () => {
       'http://localhost/stripe/cancel-subscription',
       data
     );
-    if (!subscriptionCancel) setResPayMessage('Subscription Cancel failed');
+    if (!subscriptionCancel) console.log('Subscription Cancel failed');
+
+    console.log(subscriptionCancel);
 
     //if subscription.status == failed
   };

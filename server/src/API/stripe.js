@@ -5,8 +5,11 @@ import {
   CreateCustomer,
   CreateSetupIntent,
   CreateSubscription,
-  CancelSubscription
+  CancelSubscription,
+  GetWallet
 } from '../Services/stripe.js';
+
+router.post('/get-wallet', GetWallet);
 
 router.post('/customer', CreateCustomer);
 

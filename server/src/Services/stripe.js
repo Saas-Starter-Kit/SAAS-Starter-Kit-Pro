@@ -89,6 +89,17 @@ export const CreateSubscription = async (req, res) => {
   }
 };
 
+export const GetWallet = async (req, res) => {
+  let customer = 'cus_IZz4qkn6en4D5G';
+
+  const paymentMethods = await stripe.paymentMethods.list({
+    customer: customer,
+    type: 'card'
+  });
+
+  res.send(paymentMethods);
+};
+
 export const CancelSubscription = async (req, res) => {
   let email = req.body.email;
 
@@ -109,5 +120,16 @@ export const CancelSubscription = async (req, res) => {
   const subscription = await stripe.subscriptions.del(subscription_id);
   if (!subscription) res.send('Subscription Cancel failed');
 
-  res.send(subscription);
+  if (subscription.status === 'canceled') {
+    let text2 = `UPDATE users SET is_paid_member=$1, subscription_id=$2
+               WHERE email=$3`;
+    let values2 = ['false', '', email];
+
+    let serverUpdate = await db.query(text2, values2);
+
+    if (!serverUpdate) res.send('Subscription Cancel Failed');
+    if (serverUpdate.command === 'UPDATE') res.send('Subscription Successfully Canceled');
+  } else {
+    res.send("'Subscription Cancel Failed'");
+  }
 };
