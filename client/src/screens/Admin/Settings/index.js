@@ -161,6 +161,14 @@ const Settings = () => {
     setPayCards(cards);
   };
 
+  const getSubscription = async () => {
+    let params = {};
+
+    const subscription = await axios.post('http://localhost/stripe/cancel-subscription');
+
+    console.log(subscription);
+  };
+
   const cancelSubscription = async () => {
     let data = {
       email: userEmail
@@ -243,7 +251,13 @@ const Settings = () => {
         <SectionTitle>Manage Subscription</SectionTitle>
         <button onClick={cancelSubscription}>Cancel Sub</button>
       </Card>
-      <AttachPaymentFormWrapper />
+      <Card>
+        <AttachPaymentFormWrapper />
+      </Card>
+      <Card>
+        <h2>Payment Information</h2>
+        <button onClick={getSubscription}>Get Subscription</button>
+      </Card>
     </Wrapper>
   );
 };

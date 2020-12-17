@@ -8,14 +8,15 @@ import {
   CancelSubscription,
   GetWallet,
   AttachPaymentMethod,
-  RemovePaymentMethod
+  RemovePaymentMethod,
+  GetSubscription
 } from '../Services/stripe.js';
 
 router.get('/get-wallet', GetWallet);
 
-router.post('/remove-payment', RemovePaymentMethod);
+router.get('/get-subscription', GetSubscription);
 
-router.post('/attach-payment', AttachPaymentMethod);
+router.post('/remove-payment', RemovePaymentMethod);
 
 router.post('/attach-payment', AttachPaymentMethod);
 

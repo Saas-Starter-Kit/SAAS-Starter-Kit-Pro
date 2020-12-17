@@ -10,6 +10,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  width: 100%;
 `;
 
 const ButtonWrapper = styled.div`
@@ -20,9 +21,9 @@ const ButtonWrapper = styled.div`
 `;
 
 const Button = styled.button`
-  padding: 0.5rem 1rem;
+  margin-top: 1rem;
+  padding: 0.6rem 2rem 0.6rem 2rem;
   font-weight: 500;
-  width: 100%;
   color: ${colors.white};
   background-color: ${colors.indigo600};
   border: 1px solid transparent;
@@ -48,26 +49,15 @@ const Button = styled.button`
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 `;
 
-const CardWrapper = styled.div`
-  @media (min-width: ${breakpoints.small}) {
-    max-width: 36rem;
-  }
-`;
-
-const Card = styled.div`
-  background-color: ${colors.white};
-  padding: 2rem 1rem;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-  @media (min-width: ${breakpoints.small}) {
-    border-radius: 0.5rem;
-  }
+const Header = styled.h2`
+  margin-bottom: 4rem;
 `;
 
 const ErrorResponse = styled.div`
   font-size: 0.9rem;
   color: red;
   font-weight: 100;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 `;
 
 const AttachPaymentForm = () => {
@@ -119,28 +109,35 @@ const AttachPaymentForm = () => {
     };
 
     const result = await axios.post('http://localhost/stripe/attach-payment', data);
-    console.log(result);
+    if (!result) {
+      setLoading(false);
+      setResMessage('Adding Payment method failed, please contact support');
+      return;
+    }
+
+    if (result) {
+      setLoading(true);
+      setResMessage('Payment Method Successfully updated');
+      return;
+    }
   };
 
   return (
-    <Wrapper>
+    <>
       {isLoading && <LoadingOverlay />}
-      <CardWrapper>
-        <Card>
-          <ErrorResponse>{resMessage}</ErrorResponse>
-          <form onSubmit={handleSubmit}>
-            <CardElement />
-            <ButtonWrapper>
-              <Button type="submit" disabled={!stripe && !setupIntentState}>
-                Add
-              </Button>
-            </ButtonWrapper>
-          </form>
-          <p>Adding a card will make it the default payment method</p>
-          <button onClick={() => console.log(setupIntentState)}>FFFFF</button>
-        </Card>
-      </CardWrapper>
-    </Wrapper>
+      <Header>Add a Payment Method</Header>
+      <ErrorResponse>{resMessage}</ErrorResponse>
+      <form onSubmit={handleSubmit}>
+        <CardElement />
+        <ButtonWrapper>
+          <Button type="submit" disabled={!stripe && !setupIntentState}>
+            Add
+          </Button>
+        </ButtonWrapper>
+      </form>
+      <p>Adding a card will make it the default payment method</p>
+      <button onClick={() => console.log(setupIntentState)}>FFFFF</button>
+    </>
   );
 };
 

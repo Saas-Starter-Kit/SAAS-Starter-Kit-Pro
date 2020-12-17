@@ -26,6 +26,14 @@ export const CreateCustomer = async (req, res) => {
   db.query(text, values, callback);
 };
 
+export const GetSubscription = async (req, res) => {
+  let subscriptionId = req.body;
+
+  const subscription = await stripe.subscriptions.retrieve(subscriptionId);
+
+  res.send(subscription);
+};
+
 export const CreateSetupIntent = async (req, res) => {
   let customer_id = req.body.customer.stripeCustomerKey;
   console.log(customer_id);
