@@ -163,7 +163,7 @@ const CheckoutForm = () => {
     if (!result) setResMessage('Subscription confirmation Failed, please contact support');
 
     console.log(result);
-    if (result.data.status === 'active') {
+    if (result.data.status === 'active' || result.data.status === 'trialing') {
       setLoading(false);
       setSuccess(true);
     } else {

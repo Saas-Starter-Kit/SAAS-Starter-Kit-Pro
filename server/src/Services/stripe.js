@@ -89,8 +89,11 @@ export const CreateSubscription = async (req, res) => {
   const subscription = await stripe.subscriptions.create({
     customer: customer_id,
     items: [{ plan }],
-    expand: ['latest_invoice.payment_intent']
+    expand: ['latest_invoice.payment_intent'],
+    trial_period_days: 14
   });
+
+  console.log(subscription);
 
   if (!subscription) {
     res.send('Failed to create subscription');
@@ -99,7 +102,7 @@ export const CreateSubscription = async (req, res) => {
 
   let subscritionId = subscription.id;
 
-  if (subscription.latest_invoice.payment_intent.status === 'succeeded') {
+  if (subscription.status === 'succeeded' || subscription.status === 'trialing') {
     //update db to users subscription
     let text = `UPDATE users SET is_paid_member=$1, subscription_id=$3
                 WHERE email = $2`;
