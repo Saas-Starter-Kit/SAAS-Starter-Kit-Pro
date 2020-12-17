@@ -162,9 +162,9 @@ const Settings = () => {
   };
 
   const getSubscription = async () => {
-    let params = {};
+    let params = { email: userEmail };
 
-    const subscription = await axios.post('http://localhost/stripe/cancel-subscription');
+    const subscription = await axios.get('http://localhost/stripe/get-subscription', { params });
 
     console.log(subscription);
   };
@@ -256,7 +256,7 @@ const Settings = () => {
       </Card>
       <Card>
         <h2>Payment Information</h2>
-        <button onClick={getSubscription}>Get Subscription</button>
+        <button onClick={getSubscription}>Retrieve Payment Information</button>
       </Card>
     </Wrapper>
   );
