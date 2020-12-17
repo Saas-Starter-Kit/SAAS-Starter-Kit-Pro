@@ -7,6 +7,7 @@ import LoadingOverlay from '../../../components/Admin/Common/loadingOverlay';
 import { colors, breakpoints, fieldStyles } from '../../../styles/theme';
 import { updateUserNameApi, updateEmailApi } from '../../../api/authApi';
 import AttachPaymentFormWrapper from './attachPaymentFormWrapper';
+import moment from 'moment';
 
 const Wrapper = styled.div``;
 
@@ -97,6 +98,7 @@ const Settings = () => {
   const [resMessage, setResMessage] = useState('');
   const [resPayMessage, setResPayMessage] = useState('');
   const [payCards, setPayCards] = useState([]);
+  const [subscriptionState, setSubscription] = useState();
 
   const updateUsername = (event) => {
     event.preventDefault();
@@ -166,7 +168,7 @@ const Settings = () => {
 
     const subscription = await axios.get('http://localhost/stripe/get-subscription', { params });
 
-    console.log(subscription);
+    setSubscription(subscription.data);
   };
 
   const cancelSubscription = async () => {
@@ -257,6 +259,14 @@ const Settings = () => {
       <Card>
         <h2>Payment Information</h2>
         <button onClick={getSubscription}>Retrieve Payment Information</button>
+        {subscriptionState && (
+          <div>
+            <div>Next Payment</div>
+            <p>{moment(subscriptionState.current_period_end * 1000).format('MMM Do YYYY')}</p>
+          </div>
+        )}
+
+        <button onClick={console.log(subscriptionState)}>DDDDD</button>
       </Card>
     </Wrapper>
   );
