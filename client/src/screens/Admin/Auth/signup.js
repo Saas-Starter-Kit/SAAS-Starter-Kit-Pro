@@ -9,6 +9,7 @@ import { ValidSchema, saveToDb } from './helpers';
 import LoadingOverlay from '../../../components/Admin/Common/loadingOverlay';
 import { colors, breakpoints, fieldStyles } from '../../../styles/theme';
 import SignUpFormHeader from './signupFormHeader';
+import GoogleSignInImg from '../../../images/icons/google-signin.svg';
 
 const Wrapper = styled.div`
   background-color: ${colors.gray50};
@@ -120,6 +121,12 @@ const ErrorResponse = styled.div`
   margin-bottom: 1rem;
 `;
 
+const ImgWrapper = styled.img`
+  width: 100%;
+  /*height: 4rem;*/
+  color: blue;
+`;
+
 const Signup = () => {
   const [isLoading, setLoading] = useState(false);
   const { firebase, LogIn, LogOut } = useContext(AuthContext);
@@ -210,10 +217,7 @@ const Signup = () => {
               </form>
             )}
           </Formik>
-
-          <ButtonWrapper>
-            <Button onClick={GoogleSignin}>Google</Button>
-          </ButtonWrapper>
+          <ImgWrapper onClick={GoogleSignin} src={GoogleSignInImg} />
         </Card>
       </CardWrapper>
     </Wrapper>
