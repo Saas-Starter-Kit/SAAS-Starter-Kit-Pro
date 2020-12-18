@@ -271,7 +271,7 @@ const Login = () => {
 
           <StyledGoogleButton
             style={{ width: '100%' }}
-            label="Sign-Up with Google"
+            label="Login with Google"
             onClick={GoogleSignin}
           />
         </Card>
