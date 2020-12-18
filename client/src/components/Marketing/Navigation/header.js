@@ -91,6 +91,35 @@ const FlyoutMenuWrapper = styled.div`
   animation: ${fadeInUp} 0.3s ease-in forwards;
 `;
 
+const StyledLink = css`
+  margin-left: 2.5rem;
+  text-decoration: none;
+  cursor: pointer;
+  position: relative;
+  font-size: 1.1rem;
+  font-weight: 800;
+
+  &:before {
+    content: '';
+    margin-bottom: -5px;
+    position: absolute;
+    width: 0;
+    height: 6px;
+    bottom: 0;
+    left: 0;
+    background-color: red;
+    visibility: ;
+    transition: all 0.3s ease-in-out;
+  }
+
+  &:hover {
+    &:before {
+      visibility: visible;
+      width: 100%;
+    }
+  }
+`;
+
 const ButtonWrapper = styled.div`
   display: none;
   @media (min-width: ${breakpoints.medium}) {
