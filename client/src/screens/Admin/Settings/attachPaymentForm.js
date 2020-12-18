@@ -6,15 +6,6 @@ import { colors, breakpoints } from '../../../styles/theme';
 import styled from 'styled-components';
 import LoadingOverlay from '../../../components/Admin/Common/loadingOverlay';
 
-import LocalLoader from '../../../components/Admin/Common/localLoading';
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 100%;
-`;
-
 const ButtonWrapper = styled.div`
   padding-top: 2rem;
   padding-bottom: 1rem;
@@ -60,12 +51,22 @@ const ErrorResponse = styled.div`
   color: red;
   font-weight: 100;
   margin-bottom: 1rem;
+  margin-top: -3rem;
+`;
+
+const SuccessResponse = styled.div`
+  font-size: 0.9rem;
+  color: green;
+  font-weight: 100;
+  margin-bottom: 1rem;
+  margin-top: -3rem;
 `;
 
 const AttachPaymentForm = () => {
   const { authState } = useContext(AuthContext);
 
   const [resMessage, setResMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
   const [setupIntentState, setSetupIntent] = useState();
   const [isLoading, setLoading] = useState(false);
 
@@ -119,27 +120,31 @@ const AttachPaymentForm = () => {
 
     if (result) {
       setLoading(false);
-      //setSuccessMessage('Payment Method Successfully updated');
+      setSuccessMessage('Payment Method Successfully updated');
       return;
     }
   };
 
   return (
     <>
-      {isLoading && <LocalLoader />}
-      <LocalLoader />
+      {isLoading && <LoadingOverlay />}
       <Header>Add a Payment Method</Header>
       <ErrorResponse>{resMessage}</ErrorResponse>
-      <form onSubmit={handleSubmit}>
-        <CardElement />
-        <ButtonWrapper>
-          <Button type="submit" disabled={!stripe && !setupIntentState}>
-            Add
-          </Button>
-        </ButtonWrapper>
-      </form>
-      <p>Adding a card will make it the default payment method</p>
-      <button onClick={() => console.log(setupIntentState)}>FFFFF</button>
+      <SuccessResponse>{successMessage}</SuccessResponse>
+      {!successMessage && !resMessage && (
+        <>
+          <form onSubmit={handleSubmit}>
+            <CardElement />
+            <ButtonWrapper>
+              <Button type="submit" disabled={!stripe && !setupIntentState}>
+                Add
+              </Button>
+            </ButtonWrapper>
+          </form>
+          <p>Adding a card will make it the default payment method</p>
+        </>
+      )}
+      <button onClick={() => console.log(setupIntentState)}>FFFFF</button>{' '}
     </>
   );
 };
