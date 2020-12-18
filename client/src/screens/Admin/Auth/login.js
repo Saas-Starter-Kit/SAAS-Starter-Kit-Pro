@@ -9,6 +9,7 @@ import { ValidSchema, saveToDb } from './helpers';
 import LoadingOverlay from '../../../components/Admin/Common/loadingOverlay';
 import { colors, breakpoints, fieldStyles } from '../../../styles/theme';
 import LoginFormHeader from './loginFormHeader';
+import GoogleButton from 'react-google-button';
 
 const Wrapper = styled.div`
   background-color: ${colors.gray50};
@@ -146,6 +147,23 @@ const ErrorResponse = styled.div`
   margin-bottom: 1rem;
 `;
 
+const StyledGoogleButton = styled(GoogleButton)`
+  margin-top: 2rem;
+`;
+
+const StyledOrContinueWithText = styled.p`
+  width: 100%;
+  text-align: center;
+  border-bottom: 1px solid #000;
+  line-height: 0.1em;
+  margin-top: 2rem;
+`;
+
+const StyledSpan = styled.span`
+  background: #fff;
+  padding: 0 0.7rem;
+`;
+
 const Login = () => {
   const [isLoading, setLoading] = useState(false);
   const { firebase, LogIn, LogOut } = useContext(AuthContext);
@@ -247,9 +265,15 @@ const Login = () => {
             </ForgotPassword>
           </ForgotPasswordWrapper>
 
-          <ButtonWrapper>
-            <Button onClick={GoogleSignin}>Google</Button>
-          </ButtonWrapper>
+          <StyledOrContinueWithText>
+            <StyledSpan>Or Continue With</StyledSpan>
+          </StyledOrContinueWithText>
+
+          <StyledGoogleButton
+            style={{ width: '100%' }}
+            label="Sign-Up with Google"
+            onClick={GoogleSignin}
+          />
         </Card>
       </CardWrapper>
     </Wrapper>

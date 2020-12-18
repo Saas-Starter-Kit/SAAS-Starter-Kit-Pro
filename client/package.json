@@ -22,6 +22,7 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-firebaseui": "^4.1.0",
+    "react-google-button": "^0.7.1",
     "react-headroom": "^3.1.0",
     "react-helmet": "^6.1.0",
     "react-icons": "^4.1.0",

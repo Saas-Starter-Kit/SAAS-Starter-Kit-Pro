@@ -9,7 +9,8 @@ import { ValidSchema, saveToDb } from './helpers';
 import LoadingOverlay from '../../../components/Admin/Common/loadingOverlay';
 import { colors, breakpoints, fieldStyles } from '../../../styles/theme';
 import SignUpFormHeader from './signupFormHeader';
-import GoogleSignInImg from '../../../images/icons/google-signin.svg';
+
+import GoogleButton from 'react-google-button';
 
 const Wrapper = styled.div`
   background-color: ${colors.gray50};
@@ -121,10 +122,20 @@ const ErrorResponse = styled.div`
   margin-bottom: 1rem;
 `;
 
-const ImgWrapper = styled.img`
+const StyledGoogleButton = styled(GoogleButton)`
+  margin-top: 2rem;
+`;
+
+const StyledOrContinueWithText = styled.p`
   width: 100%;
-  /*height: 4rem;*/
-  color: blue;
+  text-align: center;
+  border-bottom: 1px solid #000;
+  line-height: 0.1em;
+`;
+
+const StyledSpan = styled.span`
+  background: #fff;
+  padding: 0 0.7rem;
 `;
 
 const Signup = () => {
@@ -217,7 +228,16 @@ const Signup = () => {
               </form>
             )}
           </Formik>
-          <ImgWrapper onClick={GoogleSignin} src={GoogleSignInImg} />
+
+          <StyledOrContinueWithText>
+            <StyledSpan>Or Continue With</StyledSpan>
+          </StyledOrContinueWithText>
+
+          <StyledGoogleButton
+            style={{ width: '100%' }}
+            label="Sign-Up with Google"
+            onClick={GoogleSignin}
+          />
         </Card>
       </CardWrapper>
     </Wrapper>
