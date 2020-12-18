@@ -1,7 +1,7 @@
-import React from "react"
-import styled, { keyframes } from "styled-components"
-import { Link } from "gatsby"
-import { colors, breakpoints } from "../../../styles/theme"
+import React from 'react';
+import styled, { keyframes } from 'styled-components';
+import { Link } from 'gatsby';
+import { colors, breakpoints } from '../../../styles/theme';
 
 const menuUp = keyframes`
   from {
@@ -11,7 +11,7 @@ const menuUp = keyframes`
   to {
     opacity: 1;
     transform: scale(1);
-  }`
+  }`;
 
 const Wrapper = styled.div`
   animation: ${menuUp} 0.3s ease-out forwards;
@@ -21,20 +21,19 @@ const Wrapper = styled.div`
   left: 0;
   padding: 0.5rem;
   border-radius: 0.5rem;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
-    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
   padding: 1.25rem 1.25rem 1.5rem;
   background-color: ${colors.white};
   border-color: ${colors.gray50};
-  transition-property: background-color, border-color, color, fill, stroke,
-    opacity, box-shadow, transform;
-  transition-property: background-color, border-color, color, fill, stroke,
-    opacity, box-shadow, transform;
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow,
+    transform;
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow,
+    transform;
   transform-origin: top right;
   @media (min-width: ${breakpoints.medium}) {
     display: none;
   }
-`
+`;
 
 const Header = styled.div`
   display: flex;
@@ -43,16 +42,16 @@ const Header = styled.div`
   padding-top: 1rem;
   padding-bottom: 2rem;
 }
-`
+`;
 
 const LogoImage = styled.img`
   height: 2rem;
   width: auto;
-`
+`;
 
 const CloseButtonWrapper = styled.div`
   margin-right: -0.5rem;
-`
+`;
 
 const CloseButton = styled.div`
   display: inline-flex;
@@ -71,23 +70,23 @@ const CloseButton = styled.div`
     color: ${colors.gray500};
     background-color: ${colors.gray100};
   }
-  transition-property: background-color, border-color, color, fill, stroke,
-    opacity, box-shadow, transform;
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow,
+    transform;
   transition-duration: 150ms;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-`
+`;
 
 const CloseImage = styled.img`
   height: 1.5rem;
   width: 1.5rem;
-`
+`;
 
 const Nav = styled.nav`
   display: grid;
   grid-template-columns: repeat(1, minmax(0, 1fr));
   grid-gap: 1.75rem;
   gap: 1.75rem;
-`
+`;
 
 const Item = styled.div`
   margin: -0.75rem;
@@ -98,11 +97,11 @@ const Item = styled.div`
   &:hover {
     background-color: ${colors.gray50};
   }
-  transition-property: background-color, border-color, color, fill, stroke,
-    opacity, box-shadow, transform;
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow,
+    transform;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
-`
+`;
 
 const MenuImageWrapper = styled.div`
   flex-shrink: 0;
@@ -114,13 +113,13 @@ const MenuImageWrapper = styled.div`
   border-radius: 0.375rem;
   background-color: ${colors.indigo500};
   color: ${colors.white};
-`
+`;
 
 const MenuImg = styled.img`
   height: 2rem;
   width: 2rem;
   color: white;
-`
+`;
 
 const Title = styled.div`
   padding-left: 1rem;
@@ -128,16 +127,16 @@ const Title = styled.div`
   line-height: 1.5rem;
   font-weight: 500;
   color: ${colors.gray900};
-`
+`;
 
 const ButtonWrapper1 = styled.div`
   margin-top: 1.5rem;
   padding: 0 1.25rem 1.5rem;
-`
+`;
 
 const ButtonWrapper2 = styled.div`
   margin-top: 1.5rem;
-`
+`;
 
 const Button = styled.div`
   cursor: pointer;
@@ -166,11 +165,11 @@ const Button = styled.div`
   &:active {
     background-color: ${colors.indigo700};
   }
-  transition-property: background-color, border-color, color, fill, stroke,
-    opacity, box-shadow, transform;
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow,
+    transform;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
-`
+`;
 
 const MobileMenu = ({ mobileMenuHandler }) => (
   <Wrapper>
@@ -184,7 +183,7 @@ const MobileMenu = ({ mobileMenuHandler }) => (
     </Header>
     <div>
       <Nav>
-        <Link href="/pricing">
+        <Link to="/pricing">
           <Item>
             <MenuImageWrapper>
               {/*<!-- Heroicon name: view-grid -->*/}
@@ -193,7 +192,7 @@ const MobileMenu = ({ mobileMenuHandler }) => (
             <Title>Pricing</Title>
           </Item>
         </Link>
-        <Link href="/app">
+        <Link to="/app">
           <Item>
             <MenuImageWrapper>
               {/*<!-- Heroicon name: view-grid -->*/}
@@ -207,12 +206,12 @@ const MobileMenu = ({ mobileMenuHandler }) => (
     </div>
     <ButtonWrapper1>
       <ButtonWrapper2>
-        <Link href="/login">
+        <Link to="/login">
           <Button>Sign up</Button>
         </Link>
       </ButtonWrapper2>
     </ButtonWrapper1>
   </Wrapper>
-)
+);
 
-export default MobileMenu
+export default MobileMenu;

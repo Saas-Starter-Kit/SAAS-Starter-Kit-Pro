@@ -245,7 +245,7 @@ const Header = () => {
     <Container1>
       <Container2>
         <LogoWrapper>
-          <Link href="/">
+          <Link to="/">
             <Logo src="/logo/small_logo.svg" alt="Logo" />
           </Link>
         </LogoWrapper>
@@ -279,7 +279,7 @@ const Header = () => {
         </Nav>
         <ButtonWrapper>
           <ButtonSpan>
-            <Link href="/login">
+            <Link to="/login">
               <Button>Sign-In</Button>
             </Link>
           </ButtonSpan>
