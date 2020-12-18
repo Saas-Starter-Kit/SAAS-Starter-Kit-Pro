@@ -49,5 +49,18 @@ Heroku will be the easiest and cheapest ($0/month) deployment for this server an
 7. The Heroku provided URL will be the API endpoint. Subsitute it in the GATSBY_SERVER_URL env variable of the frontend App.
 
 Stripe
-
 Go to settings > billings > subscriptions and emails and fill out all fields in the first box. (include pic)
+
+SendInBlue Chat
+Click add app > search chat > add chat and setup.
+
+SendInBlue CRM
+Click add app > CRM > add crm and setup.
+
+SendInBlue Transactional Email
+Go to Transactional
+
+SendInBlue Email Marketing
+link to SendInBlue tutorial
+
+Registar Domain Name with GoDaddy
