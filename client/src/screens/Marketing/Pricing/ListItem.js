@@ -9,7 +9,7 @@ const Item = styled.li`
 `;
 
 const Wrapper = styled.div`
-  flex-shrink: 0;
+  margin-top: 1rem;
 `;
 
 const Paragraph = styled.p`
