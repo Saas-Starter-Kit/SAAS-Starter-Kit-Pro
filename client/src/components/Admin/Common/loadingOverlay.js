@@ -1,5 +1,5 @@
-import React from "react"
-import styled, { keyframes } from "styled-components"
+import React from 'react';
+import styled, { keyframes } from 'styled-components';
 
 const rotateOne = keyframes`
   0% {
@@ -8,7 +8,7 @@ const rotateOne = keyframes`
   100% {
     transform: rotateX(35deg) rotateY(-45deg) rotateZ(360deg);
   }
-`
+`;
 
 const rotateTwo = keyframes`
   0% {
@@ -17,7 +17,7 @@ const rotateTwo = keyframes`
   100% {
     transform: rotateX(50deg) rotateY(10deg) rotateZ(360deg);
   }
-`
+`;
 
 const rotateThree = keyframes`
  0% {
@@ -26,7 +26,7 @@ const rotateThree = keyframes`
   100% {
     transform: rotateX(35deg) rotateY(55deg) rotateZ(360deg);
   }
-`
+`;
 
 const StyledOverlay = styled.div`
   z-index: 9;
@@ -37,9 +37,10 @@ const StyledOverlay = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-`
+`;
 
 const Loader = styled.div`
+  z-index: 9;
   position: relative;
   top: 50%;
   left: calc(50% - 100px);
@@ -47,9 +48,10 @@ const Loader = styled.div`
   height: 200px;
   border-radius: 50%;
   perspective: 480px;
-`
+`;
 
 const WaveOne = styled.div`
+  z-index: 9;
   position: absolute;
   width: 100%;
   height: 100%;
@@ -58,10 +60,11 @@ const WaveOne = styled.div`
   left: 0%;
   top: 0%;
   animation: ${rotateOne} 1.15s linear infinite;
-  border-bottom: 8px solid ${props => props.theme.primary};
-`
+  border-bottom: 8px solid ${(props) => props.theme.primary};
+`;
 
 const WaveTwo = styled.div`
+  z-index: 9;
   position: absolute;
   width: 100%;
   height: 100%;
@@ -70,10 +73,11 @@ const WaveTwo = styled.div`
   right: 0%;
   top: 0%;
   animation: ${rotateTwo} 1.15s linear infinite;
-  border-right: 8px solid ${props => props.theme.primary};
-`
+  border-right: 8px solid ${(props) => props.theme.primary};
+`;
 
 const WaveThree = styled.div`
+  z-index: 9;
   position: absolute;
   width: 100%;
   height: 100%;
@@ -82,8 +86,8 @@ const WaveThree = styled.div`
   right: 0%;
   bottom: 0%;
   animation: ${rotateThree} 1.15s linear infinite;
-  border-top: 8px solid ${props => props.theme.primary};
-`
+  border-top: 8px solid ${(props) => props.theme.primary};
+`;
 
 const LoadingOverlay = () => (
   <div>
@@ -94,6 +98,6 @@ const LoadingOverlay = () => (
     </Loader>
     <StyledOverlay />
   </div>
-)
+);
 
-export default LoadingOverlay
+export default LoadingOverlay;

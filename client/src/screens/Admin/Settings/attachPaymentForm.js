@@ -6,6 +6,8 @@ import { colors, breakpoints } from '../../../styles/theme';
 import styled from 'styled-components';
 import LoadingOverlay from '../../../components/Admin/Common/loadingOverlay';
 
+import LocalLoader from '../../../components/Admin/Common/localLoading';
+
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -116,15 +118,16 @@ const AttachPaymentForm = () => {
     }
 
     if (result) {
-      setLoading(true);
-      setResMessage('Payment Method Successfully updated');
+      setLoading(false);
+      //setSuccessMessage('Payment Method Successfully updated');
       return;
     }
   };
 
   return (
     <>
-      {isLoading && <LoadingOverlay />}
+      {isLoading && <LocalLoader />}
+      <LocalLoader />
       <Header>Add a Payment Method</Header>
       <ErrorResponse>{resMessage}</ErrorResponse>
       <form onSubmit={handleSubmit}>
