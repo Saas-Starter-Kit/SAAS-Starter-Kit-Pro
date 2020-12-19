@@ -14,7 +14,7 @@ import {
   CancelSubscription,
   GetSubscription,
   CreateSubscription
-} from '../Services/stripeSubscription';
+} from '../Services/stripeSubscription.js';
 
 /* Helper Routes */
 router.get('/get-wallet', GetWallet);
