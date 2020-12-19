@@ -225,6 +225,7 @@ const Settings = () => {
   };
 
   const cancelSubscription = async () => {
+    setModalSub(false);
     let data = {
       email: userEmail
     };

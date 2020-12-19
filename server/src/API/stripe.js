@@ -1,31 +1,38 @@
 import express from 'express';
 const router = express.Router();
 
+import { CreateCustomer } from '../Services/stripeCustomer.js';
+
 import {
-  CreateCustomer,
   CreateSetupIntent,
-  CreateSubscription,
-  CancelSubscription,
   GetWallet,
   AttachPaymentMethod,
-  RemovePaymentMethod,
-  GetSubscription
-} from '../Services/stripe.js';
+  RemovePaymentMethod
+} from '../Services/stripeHelpers.js';
 
+import {
+  CancelSubscription,
+  GetSubscription,
+  CreateSubscription
+} from '../Services/stripeSubscription';
+
+/* Helper Routes */
 router.get('/get-wallet', GetWallet);
 
-router.get('/get-subscription', GetSubscription);
+router.post('/wallet', CreateSetupIntent);
 
 router.post('/remove-payment', RemovePaymentMethod);
 
 router.post('/attach-payment', AttachPaymentMethod);
 
-router.post('/customer', CreateCustomer);
-
-router.post('/wallet', CreateSetupIntent);
+/* Subscription Routes */
+router.get('/get-subscription', GetSubscription);
 
 router.post('/subscription', CreateSubscription);
 
 router.post('/cancel-subscription', CancelSubscription);
+
+/* Customer Routers */
+router.post('/customer', CreateCustomer);
 
 export default router;

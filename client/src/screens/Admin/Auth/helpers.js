@@ -78,7 +78,12 @@ export const saveToDb = async (authRes, LogIn, isLogin, firebase, setResMessage,
   };
 
   //create stripe customer based on our own server user id
-  const stripeServerRes = await axios.post('http://localhost/stripe/customer', data);
+  let stripeServerRes;
+  //if (!isLogin) {
+  stripeServerRes = await axios.post('http://localhost/stripe/customer', data);
+  //}
+
+  console.log();
 
   if (!stripeServerRes) {
     setLoading(false);
