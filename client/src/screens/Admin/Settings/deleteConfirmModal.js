@@ -1,16 +1,16 @@
 import React from 'react';
+import { Modal } from 'antd';
 
+//visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}
 
-
-const Modal = () => {
+const ModalDelete = () => {
   return (
-    <div className="modal_background">
-      <div className="modal-content">
-        <span className="close">&times;</span>
-      </div>
-    </div>
+    <Modal visisble={true} title="Basic Modal">
+      <p>Some contents...</p>
+      <p>Some contents...</p>
+      <p>Some contents...</p>
+    </Modal>
   );
 };
 
-
-export const Modal
+export default ModalDelete;

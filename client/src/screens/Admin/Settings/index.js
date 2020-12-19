@@ -8,7 +8,8 @@ import { colors, breakpoints, fieldStyles } from '../../../styles/theme';
 import { updateUserNameApi, updateEmailApi } from '../../../api/authApi';
 import AttachPaymentFormWrapper from './attachPaymentFormWrapper';
 import moment from 'moment';
-
+import ModalDelete from './deleteConfirmModal';
+import { Modal } from 'antd';
 const Wrapper = styled.div``;
 
 const Title = styled.h1`
@@ -96,7 +97,7 @@ const StyledCardDisplay = styled.div`
   margin: 1rem;
 `;
 
-const RemoveCardButton = styled.button`
+const DangerButton = styled.button`
   background-color: red;
   color: white;
   padding: 0.4rem 0.8rem;
@@ -115,6 +116,16 @@ const CancelSubscriptionButton = styled.button`
   cursor: pointer;
 `;
 
+const CancelDangerButton = styled.button`
+  background-color: white;
+  color: black;
+  padding: 0.4rem 0.8rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  margin-left: 1rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
+`;
+
 const Settings = () => {
   const { firebase, authState } = useContext(AuthContext);
 
@@ -126,6 +137,7 @@ const Settings = () => {
   const isEmail = authState.user ? authState.user.provider === 'password' : null;
 
   const [isLoading, setLoading] = useState(false);
+  const [isModal, setModal] = useState(false);
   const [email, setEmail] = useState(userEmail);
   const [username, setUsername] = useState(displayName);
   const [resMessage, setResMessage] = useState('');
@@ -222,6 +234,10 @@ const Settings = () => {
     setResPayMessage(subscriptionCancel.data);
   };
 
+  const handleModalCancel = () => {
+    setModal(false);
+  };
+
   return (
     <Wrapper>
       <Card>
@@ -282,9 +298,7 @@ const Settings = () => {
               {item.card.brand} **** **** **** {item.card.last4} expires {item.card.exp_month}/
               {item.card.exp_year}
             </StyledCardDisplay>
-            <RemoveCardButton onClick={() => deletePaymentMethod(item.id)}>
-              Remove Card
-            </RemoveCardButton>
+            <DangerButton onClick={() => deletePaymentMethod(item.id)}>Remove Card</DangerButton>
           </StyledCardDisplayWrapper>
         ))}
 
@@ -296,6 +310,18 @@ const Settings = () => {
       <Card>
         <AttachPaymentFormWrapper />
       </Card>
+      <Modal
+        visible={isModal}
+        title="Removing Card"
+        onCancel={handleModalCancel}
+        footer={[
+          <DangerButton>Delete?</DangerButton>,
+          <CancelDangerButton>Cancel</CancelDangerButton>
+        ]}
+      >
+        Are You sure you want to remove Card?
+      </Modal>
+      <button onClick={() => setModal(true)}>Open</button>
       <Card>
         <h2>Payment Information</h2>
         <button onClick={getSubscription}>Retrieve Payment Information</button>
