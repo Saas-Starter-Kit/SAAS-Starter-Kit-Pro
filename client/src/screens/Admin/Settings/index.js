@@ -82,6 +82,39 @@ const Button = styled.button`
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 `;
 
+const StyledCardDisplayWrapper = styled.div`
+  border: 1px solid black;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  margin-bottom: 1rem;
+`;
+
+const StyledCardDisplay = styled.div`
+  border: 1px solid black;
+  border-radius: 1rem;
+  padding: 0.5rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  margin: 1rem;
+`;
+
+const RemoveCardButton = styled.button`
+  background-color: red;
+  color: white;
+  padding: 0.4rem 0.8rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  margin-left: 1rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
+`;
+
+const CancelSubscriptionButton = styled.button`
+  background-color: red;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  margin-bottom: 2rem;
+  cursor: pointer;
+`;
+
 const Settings = () => {
   const { firebase, authState } = useContext(AuthContext);
 
@@ -99,6 +132,10 @@ const Settings = () => {
   const [resPayMessage, setResPayMessage] = useState('');
   const [payCards, setPayCards] = useState([]);
   const [subscriptionState, setSubscription] = useState();
+
+  useEffect(() => {
+    if (authState.user) getWallet();
+  }, [authState]);
 
   const updateUsername = (event) => {
     event.preventDefault();
@@ -238,20 +275,23 @@ const Settings = () => {
         <Paragraph>{resPayMessage}</Paragraph>
 
         <SectionTitle>Update Payment</SectionTitle>
-        <button onClick={getWallet}>Get Wallet</button>
 
         {payCards.map((item) => (
-          <>
-            <option key={item.id}>
+          <StyledCardDisplayWrapper>
+            <StyledCardDisplay key={item.id}>
               {item.card.brand} **** **** **** {item.card.last4} expires {item.card.exp_month}/
               {item.card.exp_year}
-            </option>
-            <button onClick={() => deletePaymentMethod(item.id)}>Remove Card</button>
-          </>
+            </StyledCardDisplay>
+            <RemoveCardButton onClick={() => deletePaymentMethod(item.id)}>
+              Remove Card
+            </RemoveCardButton>
+          </StyledCardDisplayWrapper>
         ))}
 
         <SectionTitle>Manage Subscription</SectionTitle>
-        <button onClick={cancelSubscription}>Cancel Sub</button>
+        <CancelSubscriptionButton onClick={cancelSubscription}>
+          Cancel Subscription
+        </CancelSubscriptionButton>
       </Card>
       <Card>
         <AttachPaymentFormWrapper />
@@ -265,8 +305,6 @@ const Settings = () => {
             <p>{moment(subscriptionState.current_period_end * 1000).format('MMM Do YYYY')}</p>
           </div>
         )}
-
-        <button onClick={console.log(subscriptionState)}>DDDDD</button>
       </Card>
     </Wrapper>
   );
