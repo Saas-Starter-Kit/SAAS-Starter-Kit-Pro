@@ -8,8 +8,9 @@ import { colors, breakpoints, fieldStyles } from '../../../styles/theme';
 import { updateUserNameApi, updateEmailApi } from '../../../api/authApi';
 import AttachPaymentFormWrapper from './attachPaymentFormWrapper';
 import moment from 'moment';
-import ModalDelete from './deleteConfirmModal';
-import { Modal } from 'antd';
+import ModalCardDelete from './deleteCardConfirmModal';
+import ModalSubscriptionCancel from './cancelSubscriptionModal';
+
 const Wrapper = styled.div``;
 
 const Title = styled.h1`
@@ -116,14 +117,10 @@ const CancelSubscriptionButton = styled.button`
   cursor: pointer;
 `;
 
-const CancelDangerButton = styled.button`
-  background-color: white;
-  color: black;
-  padding: 0.4rem 0.8rem;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-  margin-left: 1rem;
-  margin-bottom: 1rem;
-  cursor: pointer;
+const SuccessResponse = styled.div`
+  font-size: 0.9rem;
+  color: green;
+  font-weight: 100;
 `;
 
 const Settings = () => {
@@ -137,13 +134,18 @@ const Settings = () => {
   const isEmail = authState.user ? authState.user.provider === 'password' : null;
 
   const [isLoading, setLoading] = useState(false);
-  const [isModal, setModal] = useState(false);
+  const [isModalCard, setModalCard] = useState(false);
+
+  const [isModalSub, setModalSub] = useState(false);
+  const [deletePaymentId, setDeletePaymentId] = useState('');
   const [email, setEmail] = useState(userEmail);
   const [username, setUsername] = useState(displayName);
   const [resMessage, setResMessage] = useState('');
   const [resPayMessage, setResPayMessage] = useState('');
   const [payCards, setPayCards] = useState([]);
+
   const [subscriptionState, setSubscription] = useState();
+  const [paymentRemoved, setPaymentRemoved] = useState(false);
 
   useEffect(() => {
     if (authState.user) getWallet();
@@ -193,12 +195,14 @@ const Settings = () => {
   };
 
   const deletePaymentMethod = async (id) => {
+    setModalCard(false);
     let data = {
-      payment: id
+      payment: deletePaymentId
     };
 
     let wallet = await axios.post('http://localhost/stripe/remove-payment', data);
     console.log(wallet);
+    if (wallet) setPaymentRemoved(true);
   };
 
   const getWallet = async () => {
@@ -232,10 +236,15 @@ const Settings = () => {
     if (!subscriptionCancel) console.log('Subscription Cancel failed');
 
     setResPayMessage(subscriptionCancel.data);
+    setModalSub(false);
   };
 
-  const handleModalCancel = () => {
-    setModal(false);
+  const handleModalCardCancel = () => {
+    setModalCard(false);
+  };
+
+  const handleModalSubCancel = () => {
+    setModalSub(false);
   };
 
   return (
@@ -291,37 +300,45 @@ const Settings = () => {
         <Paragraph>{resPayMessage}</Paragraph>
 
         <SectionTitle>Update Payment</SectionTitle>
-
-        {payCards.map((item) => (
-          <StyledCardDisplayWrapper>
-            <StyledCardDisplay key={item.id}>
-              {item.card.brand} **** **** **** {item.card.last4} expires {item.card.exp_month}/
-              {item.card.exp_year}
-            </StyledCardDisplay>
-            <DangerButton onClick={() => deletePaymentMethod(item.id)}>Remove Card</DangerButton>
-          </StyledCardDisplayWrapper>
-        ))}
-
+        {!paymentRemoved ? (
+          payCards.map((item) => (
+            <StyledCardDisplayWrapper>
+              <StyledCardDisplay key={item.id}>
+                {item.card.brand} **** **** **** {item.card.last4} expires {item.card.exp_month}/
+                {item.card.exp_year}
+              </StyledCardDisplay>
+              <DangerButton
+                onClick={() => {
+                  setDeletePaymentId(item.id);
+                  setModalCard(true);
+                }}
+              >
+                Remove Card
+              </DangerButton>
+            </StyledCardDisplayWrapper>
+          ))
+        ) : (
+          <SuccessResponse>Payment Removed Successfully</SuccessResponse>
+        )}
+        <ModalCardDelete
+          isModalCard={isModalCard}
+          handleModalCardCancel={handleModalCardCancel}
+          deletePaymentMethod={deletePaymentMethod}
+        />
         <SectionTitle>Manage Subscription</SectionTitle>
-        <CancelSubscriptionButton onClick={cancelSubscription}>
+        <CancelSubscriptionButton onClick={() => setModalSub(true)}>
           Cancel Subscription
         </CancelSubscriptionButton>
+        <ModalSubscriptionCancel
+          isModalSub={isModalSub}
+          handleModalSubCancel={handleModalSubCancel}
+          cancelSubscription={cancelSubscription}
+        />
       </Card>
       <Card>
         <AttachPaymentFormWrapper />
       </Card>
-      <Modal
-        visible={isModal}
-        title="Removing Card"
-        onCancel={handleModalCancel}
-        footer={[
-          <DangerButton>Delete?</DangerButton>,
-          <CancelDangerButton>Cancel</CancelDangerButton>
-        ]}
-      >
-        Are You sure you want to remove Card?
-      </Modal>
-      <button onClick={() => setModal(true)}>Open</button>
+
       <Card>
         <h2>Payment Information</h2>
         <button onClick={getSubscription}>Retrieve Payment Information</button>
