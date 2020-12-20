@@ -167,7 +167,7 @@ const StyledSpan = styled.span`
 const Login = () => {
   const [isLoading, setLoading] = useState(false);
   const { firebase, LogIn, LogOut } = useContext(AuthContext);
-  const [resMessage, setResMessage] = useState('');
+  const [errMessage, setErrMessage] = useState('');
 
   const handleSubmit = (values) => {
     setLoading(true);
@@ -178,11 +178,11 @@ const Login = () => {
     firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
-      .then((authRes) => saveToDb(authRes, LogIn, true, firebase, setResMessage, setLoading))
+      .then((authRes) => saveToDb(authRes, LogIn, true, firebase, setErrMessage, setLoading))
       .catch((error) => {
         console.log(error);
         setLoading(false);
-        setResMessage(error.message);
+        setErrMessage(error.message);
       });
   };
 
@@ -194,11 +194,11 @@ const Login = () => {
     firebase
       .auth()
       .signInWithPopup(provider)
-      .then((authRes) => saveToDb(authRes, LogIn, true, firebase, setResMessage, setLoading))
+      .then((authRes) => saveToDb(authRes, LogIn, true, firebase, setErrMessage, setLoading))
       .catch((error) => {
         console.log(error);
         setLoading(false);
-        setResMessage(error.message);
+        setErrMessage(error.message);
       });
   };
 
@@ -208,7 +208,7 @@ const Login = () => {
       <LoginFormHeader />
       <CardWrapper>
         <Card>
-          <ErrorResponse>{resMessage}</ErrorResponse>
+          <ErrorResponse>{errMessage}</ErrorResponse>
           <Formik
             validationSchema={ValidSchema}
             initialValues={{ email: '', password: '' }}

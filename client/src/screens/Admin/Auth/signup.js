@@ -142,40 +142,44 @@ const StyledSpan = styled.span`
 const Signup = () => {
   const [isLoading, setLoading] = useState(false);
   const { firebase, LogIn, LogOut } = useContext(AuthContext);
-  const [resMessage, setResMessage] = useState('');
+  const [errMessage, setErrMessage] = useState('');
   const isLogin = false;
 
-  const handleSubmit = (values) => {
+  const handleSubmit = async (values) => {
     setLoading(true);
 
     let email = values.email;
     let password = values.password;
 
-    firebase
+    let authRes = await firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
-      .then((authRes) => saveToDb(authRes, LogIn, isLogin, firebase, setResMessage, setLoading))
       .catch((error) => {
         console.log(error);
         setLoading(false);
-        setResMessage(error.message);
+        setErrMessage(error.message);
+        throw new Error('Firebase Login Failed');
       });
+
+    saveToDb(authRes, LogIn, isLogin, firebase, setErrMessage, setLoading);
   };
 
   //Google OAuth2 Signin
-  const GoogleSignin = () => {
+  const GoogleSignin = async () => {
     setLoading(true);
     let provider = new firebase.auth.GoogleAuthProvider();
 
-    firebase
+    let authRes = await firebase
       .auth()
       .signInWithPopup(provider)
-      .then((authRes) => saveToDb(authRes, LogIn, false, firebase, setResMessage, setLoading))
       .catch((error) => {
         console.log(error);
         setLoading(false);
-        setResMessage(error.message);
+        setErrMessage(error.message);
+        throw new Error('Firebase Login Failed');
       });
+
+    saveToDb(authRes, LogIn, false, firebase, setErrMessage, setLoading);
   };
 
   return (
@@ -184,7 +188,7 @@ const Signup = () => {
       <SignUpFormHeader />
       <CardWrapper>
         <Card>
-          <ErrorResponse>{resMessage}</ErrorResponse>
+          <ErrorResponse>{errMessage}</ErrorResponse>
           <Formik
             validationSchema={ValidSchema}
             initialValues={{ email: '', password: '' }}

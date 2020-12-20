@@ -41,20 +41,37 @@ export const LogintoContext = async (user_id, authRes, stripeKey, LogIn) => {
 };
 
 //Save information from firebase to our own db
-export const saveToDb = async (authRes, LogIn, isLogin, firebase, setResMessage, setLoading) => {
+export const saveToDb = async (authRes, LogIn, isLogin, firebase, setErrMessage, setLoading) => {
   console.log(authRes);
   let username = authRes.user.displayName;
 
-  //.catch no ID token
-  let token = await firebase.auth().currentUser.getIdToken();
+  //Get Auth token from Firebase
+  let token = await firebase
+    .auth()
+    .currentUser.getIdToken()
+    .catch((err) => {
+      console.log(err);
+      setLoading(false);
+      setErrMessage('Firebase Login Failed, please refresh the browser and try again');
+      throw new Error('Firebase Token Not Found');
+    });
 
   //server auth, returns jwt token
   let serverRes;
   if (isLogin) {
-    //.catch
-    serverRes = await LoginToServer(token, username);
+    serverRes = await LoginToServer(token, username).catch((err) => {
+      console.log(err);
+      setLoading(false);
+      setErrMessage('Server Login Failed, please refresh the browser and try again');
+      throw new Error('Server Side Login Fail');
+    });
   } else {
-    serverRes = await SignupToServer(token, username);
+    serverRes = await SignupToServer(token, username).catch((err) => {
+      console.log(err);
+      setLoading(false);
+      setErrMessage('Server Login Failed, please refresh the browser and try again');
+      throw new Error('Server Side Signup Fail');
+    });
   }
 
   let userId;
@@ -65,11 +82,7 @@ export const saveToDb = async (authRes, LogIn, isLogin, firebase, setResMessage,
   } else if (serverRes.data.type === 'error') {
     console.log(serverRes);
     setLoading(false);
-    setResMessage(serverRes.data.message);
-    return;
-  } else {
-    setLoading(false);
-    setResMessage('Authentication Failed Please Try Again');
+    setErrMessage(serverRes.data.message);
     return;
   }
 
@@ -90,7 +103,7 @@ export const saveToDb = async (authRes, LogIn, isLogin, firebase, setResMessage,
 
   if (!stripeServerRes) {
     setLoading(false);
-    setResMessage('Authentication Failed Please Try Again');
+    setErrMessage('Authentication Failed Please Try Again');
     return;
   }
 
