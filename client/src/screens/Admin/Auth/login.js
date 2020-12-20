@@ -168,8 +168,9 @@ const Login = () => {
   const [isLoading, setLoading] = useState(false);
   const { firebase, LogIn, LogOut } = useContext(AuthContext);
   const [errMessage, setErrMessage] = useState('');
+  const isLogin = true;
 
-  const handleSubmit = (values) => {
+  const handleSubmit = async (values) => {
     setLoading(true);
 
     let email = values.email;
@@ -184,11 +185,11 @@ const Login = () => {
         setErrMessage(error.message);
       });
 
-    saveToDb(authRes, LogIn, true, firebase, setErrMessage, setLoading);
+    saveToDb(authRes, LogIn, isLogin, firebase, setErrMessage, setLoading);
   };
 
   //Google OAuth2 Signin
-  const GoogleSignin = () => {
+  const GoogleSignin = async () => {
     setLoading(true);
     let provider = new firebase.auth.GoogleAuthProvider();
 
@@ -201,8 +202,7 @@ const Login = () => {
         setErrMessage(error.message);
       });
 
-    saveToDb(authRes, LogIn, true, firebase, setErrMessage, setLoading)
-
+    saveToDb(authRes, LogIn, isLogin, firebase, setErrMessage, setLoading);
   };
 
   return (

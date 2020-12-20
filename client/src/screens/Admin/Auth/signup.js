@@ -179,7 +179,7 @@ const Signup = () => {
         throw new Error('Firebase Login Failed');
       });
 
-    saveToDb(authRes, LogIn, false, firebase, setErrMessage, setLoading);
+    saveToDb(authRes, LogIn, isLogin, firebase, setErrMessage, setLoading);
   };
 
   return (
