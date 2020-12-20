@@ -6,7 +6,6 @@
     "start": "node ./app.js"
   },
   "dependencies": {
-    "await-to-js": "^2.1.1",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
