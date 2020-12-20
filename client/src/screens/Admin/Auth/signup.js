@@ -131,6 +131,7 @@ const StyledOrContinueWithText = styled.p`
   text-align: center;
   border-bottom: 1px solid #000;
   line-height: 0.1em;
+  margin-top: 1rem;
 `;
 
 const StyledSpan = styled.span`
