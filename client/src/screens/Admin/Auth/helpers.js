@@ -40,7 +40,7 @@ export const LogintoContext = async (user_id, authRes, stripeKey, LogIn) => {
   setTimeout(() => navigate('/app'), 200);
 };
 
-//Save information from firebase to our own db
+//Save user information to our own db and stripe
 export const saveToDb = async (authRes, LogIn, isLogin, firebase, setErrMessage, setLoading) => {
   console.log(authRes);
   let username = authRes.user.displayName;
@@ -52,7 +52,7 @@ export const saveToDb = async (authRes, LogIn, isLogin, firebase, setErrMessage,
     .catch((err) => {
       console.log(err);
       setLoading(false);
-      setErrMessage('Firebase Login Failed, please refresh the browser and try again');
+      setErrMessage('Login Failed, please contact support');
       throw new Error('Firebase Token Not Found');
     });
 
@@ -69,7 +69,7 @@ export const saveToDb = async (authRes, LogIn, isLogin, firebase, setErrMessage,
     serverRes = await SignupToServer(token, username).catch((err) => {
       console.log(err);
       setLoading(false);
-      setErrMessage('Server Login Failed, please refresh the browser and try again');
+      setErrMessage('Server Login Failed, please contact Support');
       throw new Error('Server Side Signup Fail');
     });
   }
@@ -77,6 +77,7 @@ export const saveToDb = async (authRes, LogIn, isLogin, firebase, setErrMessage,
   let userId;
   let email = authRes.user.email;
 
+  //refactor
   if (serverRes.data.token) {
     userId = jwt_decode(serverRes.data.token).user;
   } else if (serverRes.data.type === 'error') {
@@ -95,17 +96,18 @@ export const saveToDb = async (authRes, LogIn, isLogin, firebase, setErrMessage,
 
   //create stripe customer based on our own server user id
   let stripeServerRes;
-  //if (!isLogin) {
-  stripeServerRes = await axios.post('http://localhost/stripe/customer', data);
-  //}
+  if (!isLogin) {
+    stripeServerRes = await axios.post('http://localhost/stripe/customer', data).catch((err) => {
+      console.log(err);
+      setLoading(false);
+      setErrMessage('Sign-Up Failed, Please Contact support');
+      throw new Error('Stripe Signup Fail');
+    });
+  } else {
+    //get customer stripe info
+  }
 
   console.log();
-
-  if (!stripeServerRes) {
-    setLoading(false);
-    setErrMessage('Authentication Failed Please Try Again');
-    return;
-  }
 
   //save user data to React context
   LogintoContext(userId, authRes, stripeServerRes, LogIn);

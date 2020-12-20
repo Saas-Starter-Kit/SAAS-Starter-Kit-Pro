@@ -1,5 +1,5 @@
 export const healthCheck = (req, res) => {
-  res.send('All ok');
+  res.status(200).send('All ok');
 };
 
 export const privateRoute = (req, res) => {

@@ -175,15 +175,16 @@ const Login = () => {
     let email = values.email;
     let password = values.password;
 
-    firebase
+    let authRes = await firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
-      .then((authRes) => saveToDb(authRes, LogIn, true, firebase, setErrMessage, setLoading))
       .catch((error) => {
         console.log(error);
         setLoading(false);
         setErrMessage(error.message);
       });
+
+    saveToDb(authRes, LogIn, true, firebase, setErrMessage, setLoading);
   };
 
   //Google OAuth2 Signin
@@ -191,15 +192,17 @@ const Login = () => {
     setLoading(true);
     let provider = new firebase.auth.GoogleAuthProvider();
 
-    firebase
+    let authRes = await firebase
       .auth()
       .signInWithPopup(provider)
-      .then((authRes) => saveToDb(authRes, LogIn, true, firebase, setErrMessage, setLoading))
       .catch((error) => {
         console.log(error);
         setLoading(false);
         setErrMessage(error.message);
       });
+
+    saveToDb(authRes, LogIn, true, firebase, setErrMessage, setLoading)
+
   };
 
   return (
