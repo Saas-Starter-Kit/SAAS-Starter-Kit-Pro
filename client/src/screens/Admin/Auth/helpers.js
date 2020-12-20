@@ -44,11 +44,14 @@ export const LogintoContext = async (user_id, authRes, stripeKey, LogIn) => {
 export const saveToDb = async (authRes, LogIn, isLogin, firebase, setResMessage, setLoading) => {
   console.log(authRes);
   let username = authRes.user.displayName;
+
+  //.catch no ID token
   let token = await firebase.auth().currentUser.getIdToken();
 
   //server auth, returns jwt token
   let serverRes;
   if (isLogin) {
+    //.catch
     serverRes = await LoginToServer(token, username);
   } else {
     serverRes = await SignupToServer(token, username);

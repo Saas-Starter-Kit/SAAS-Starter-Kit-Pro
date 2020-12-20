@@ -142,6 +142,7 @@ const Signup = () => {
   const [isLoading, setLoading] = useState(false);
   const { firebase, LogIn, LogOut } = useContext(AuthContext);
   const [resMessage, setResMessage] = useState('');
+  const isLogin = false;
 
   const handleSubmit = (values) => {
     setLoading(true);
@@ -152,7 +153,7 @@ const Signup = () => {
     firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
-      .then((authRes) => saveToDb(authRes, LogIn, false, firebase, setResMessage, setLoading))
+      .then((authRes) => saveToDb(authRes, LogIn, isLogin, firebase, setResMessage, setLoading))
       .catch((error) => {
         console.log(error);
         setLoading(false);
