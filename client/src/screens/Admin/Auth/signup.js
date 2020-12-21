@@ -169,6 +169,7 @@ const Signup = () => {
     setLoading(true);
     let provider = new firebase.auth.GoogleAuthProvider();
 
+    //wait for firebase to confirm signup
     let authRes = await firebase
       .auth()
       .signInWithPopup(provider)

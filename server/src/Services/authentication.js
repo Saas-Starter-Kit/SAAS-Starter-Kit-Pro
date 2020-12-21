@@ -13,12 +13,12 @@ const CheckUserExists = async (email, next) => {
 
   let queryResult = await db.query(text, values).catch((err) => {
     console.log(err);
-    return { type: 'error', message: 'Database query failed' };
+    throw new Error('Database Query failed');
   });
 
-  if (!queryResult) {
-    return { type: 'error', message: 'Database query failed' };
-  } else if (queryResult.rows.length != 0) {
+  console.log('ddddd');
+
+  if (queryResult.rows.length != 0) {
     return { type: 'error', message: 'User Already Exists' };
   } else if (queryResult.rows.length === 0) {
     return { type: 'success', message: 'User Not Found' };
@@ -37,13 +37,14 @@ export const SignUp = async (req, res, next) => {
   let userExists = await CheckUserExists(email, next).catch((err) => {
     console.log(err);
     res.status(500).send('Database query failed');
-    throw new Error('Database query Failed');
+    throw new Error('Database Query Failed');
   });
 
-  if (!userExists) {
-    res.status(500).send('Database query failed');
-  } else if (userExists.type === 'error') {
+  console.log('FFFF');
+
+  if (userExists.type === 'error') {
     res.status(500).send(userExists.message);
+    throw new Error(userExists.message);
   } else if (userExists.type === 'success') {
     //res.status(500).send(userExists.message);
   }
