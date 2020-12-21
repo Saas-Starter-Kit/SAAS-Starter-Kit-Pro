@@ -201,6 +201,7 @@ const Login = () => {
         console.log(error);
         setLoading(false);
         setErrMessage(error.message);
+        throw new Error('Firebase Login Failed');
       });
 
     saveToDb(authRes, LogIn, isLogin, firebase, setErrMessage, setLoading);

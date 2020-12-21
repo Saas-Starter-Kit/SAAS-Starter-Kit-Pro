@@ -61,7 +61,7 @@ export const saveToDb = async (authRes, LogIn, isLogin, firebase, setErrMessage,
   let email = authRes.user.email;
 
   if (isLogin) {
-    serverRes = await LoginToServer(token, username).catch((err) => {
+    serverRes = await LoginToServer(email, token).catch((err) => {
       console.log(err);
       setLoading(false);
       setErrMessage('Server Login Failed, please refresh the browser and try again');

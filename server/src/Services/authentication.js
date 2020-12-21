@@ -95,42 +95,7 @@ export const SignUp = async (req, res) => {
 
 export const Login = (req, res) => {
   let token = req.body.token;
-
-  const CheckUserExists = (email) => {
-    /* Check if users exists then jwt login */
-
-    //check if email exists
-    let query1 = `SELECT * FROM users
-                  WHERE email=$1`;
-
-    let values1 = [email];
-
-    //Check if user exists callback
-    let callback1 = (q_err, q_res) => {
-      if (q_err) {
-        console.log(q_err);
-        res.status(500).send(q_err);
-      }
-      if (q_res.rows.length != 0) {
-        //if user exists then jwt login
-        let id = q_res.rows[0].id;
-        console.log(id);
-        res.send({ token: setToken(id) });
-      }
-      if (q_res.rows.length === 0) {
-        //if email not found
-        let response = {
-          type: 'error',
-          message: 'Email Not Found'
-        };
-
-        res.send(response);
-      }
-    };
-
-    //check if user exists
-    db.query(query1, values1, callback1);
-  };
+  let email = req.body.email;
 
   admin
     .auth()
@@ -145,6 +110,42 @@ export const Login = (req, res) => {
       console.log(error);
     });
 };
+
+//const CheckUserExists = (email) => {
+//  /* Check if users exists then jwt login */
+
+//  //check if email exists
+//  let query1 = `SELECT * FROM users
+//                WHERE email=$1`;
+
+//  let values1 = [email];
+
+//  //Check if user exists callback
+//  let callback1 = (q_err, q_res) => {
+//    if (q_err) {
+//      console.log(q_err);
+//      res.status(500).send(q_err);
+//    }
+//    if (q_res.rows.length != 0) {
+//      //if user exists then jwt login
+//      let id = q_res.rows[0].id;
+//      console.log(id);
+//      res.send({ token: setToken(id) });
+//    }
+//    if (q_res.rows.length === 0) {
+//      //if email not found
+//      let response = {
+//        type: 'error',
+//        message: 'Email Not Found'
+//      };
+
+//      res.send(response);
+//    }
+//  };
+
+//  //check if user exists
+//  db.query(query1, values1, callback1);
+//};
 
 export const updateUsername = (req, res) => {
   let id = req.body.id;

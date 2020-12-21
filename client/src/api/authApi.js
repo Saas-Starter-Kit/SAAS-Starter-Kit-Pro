@@ -4,8 +4,8 @@ import { navigate } from 'gatsby';
 
 const axiosBase = process.env.GATSBY_SERVER_URL;
 
-export const LoginToServer = async (token) => {
-  const data = { token };
+export const LoginToServer = async (email, token) => {
+  const data = { email, token };
 
   const result = await axios.post(`${axiosBase}/auth/login`, data);
 
