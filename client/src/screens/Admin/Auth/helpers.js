@@ -43,7 +43,6 @@ export const LogintoContext = async (user_id, authRes, stripeKey, LogIn) => {
 //Save user information to our own db and stripe
 export const saveToDb = async (authRes, LogIn, isLogin, firebase, setErrMessage, setLoading) => {
   console.log(authRes);
-  let username = authRes.user.displayName;
 
   //Get Auth token from Firebase
   let token = await firebase
@@ -56,8 +55,9 @@ export const saveToDb = async (authRes, LogIn, isLogin, firebase, setErrMessage,
       throw new Error('Firebase Token Not Found');
     });
 
-  //server auth, returns jwt token
+  //server authentication, returns jwt token
   let serverRes;
+  let username = authRes.user.displayName;
   if (isLogin) {
     serverRes = await LoginToServer(token, username).catch((err) => {
       console.log(err);

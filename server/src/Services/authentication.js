@@ -30,10 +30,10 @@ const CheckUserExists = async (email, next) => {
 export const SignUp = async (req, res, next) => {
   let token = req.body.token;
   let username = req.body.username;
-
   let email = req.body.email;
   console.log(email);
 
+  //first Check if User exists
   let userExists = await CheckUserExists(email, next).catch((err) => {
     console.log(err);
     res.status(500).send('Database query failed');
@@ -47,6 +47,22 @@ export const SignUp = async (req, res, next) => {
   } else if (userExists.type === 'success') {
     //res.status(500).send(userExists.message);
   }
+
+  let decodedToken = await admin
+    .auth()
+    .verifyIdToken(token)
+    .catch((error) => {
+      res.send('error signing up');
+      console.log(error);
+    });
+
+  console.log(decodedToken);
+
+  //.then((decodedToken) => {
+  //    let name = username ? username : decodedToken.email;
+  //    let email = decodedToken.email;
+  //    saveUsertoDB(email, name);
+  //  });
 
   console.log(userExists);
   //let token = req.body.token;
@@ -74,18 +90,6 @@ export const SignUp = async (req, res, next) => {
   //  };
   //  //check if user exists
   //};
-  //admin
-  //  .auth()
-  //  .verifyIdToken(token)
-  //  .then((decodedToken) => {
-  //    let name = username ? username : decodedToken.email;
-  //    let email = decodedToken.email;
-  //    saveUsertoDB(email, name);
-  //  })
-  //  .catch((error) => {
-  //    res.send('error signing up');
-  //    console.log(error);
-  //  });
 };
 
 export const Login = (req, res) => {
