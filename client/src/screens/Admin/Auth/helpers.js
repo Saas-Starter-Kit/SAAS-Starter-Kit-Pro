@@ -40,7 +40,7 @@ export const LogintoContext = async (user_id, authRes, stripeKey, LogIn) => {
   setTimeout(() => navigate('/app'), 200);
 };
 
-//Save user information to our own db and stripe
+//Save user information to our own db and and create stripe customer
 export const saveToDb = async (authRes, LogIn, isLogin, firebase, setErrMessage, setLoading) => {
   console.log(authRes);
 
@@ -57,7 +57,9 @@ export const saveToDb = async (authRes, LogIn, isLogin, firebase, setErrMessage,
 
   //server authentication, returns jwt token
   let serverRes;
-  let username = authRes.user.displayName;
+  let username = authRes.user.displayName ? authRes.user.displayName : authRes.user.email;
+  let email = authRes.user.email;
+
   if (isLogin) {
     serverRes = await LoginToServer(token, username).catch((err) => {
       console.log(err);
@@ -66,7 +68,7 @@ export const saveToDb = async (authRes, LogIn, isLogin, firebase, setErrMessage,
       throw new Error('Server Side Login Fail');
     });
   } else {
-    serverRes = await SignupToServer(token, username).catch((err) => {
+    serverRes = await SignupToServer(email, username, token).catch((err) => {
       console.log(err);
       setLoading(false);
       setErrMessage('Server Login Failed, please contact Support');
@@ -75,8 +77,6 @@ export const saveToDb = async (authRes, LogIn, isLogin, firebase, setErrMessage,
   }
 
   let userId;
-  let email = authRes.user.email;
-
   //refactor
   if (serverRes.data.token) {
     userId = jwt_decode(serverRes.data.token).user;
@@ -95,20 +95,20 @@ export const saveToDb = async (authRes, LogIn, isLogin, firebase, setErrMessage,
   };
 
   //create stripe customer based on our own server user id
-  let stripeServerRes;
-  if (!isLogin) {
-    stripeServerRes = await axios.post('http://localhost/stripe/customer', data).catch((err) => {
-      console.log(err);
-      setLoading(false);
-      setErrMessage('Sign-Up Failed, Please Contact support');
-      throw new Error('Stripe Signup Fail');
-    });
-  } else {
-    //get customer stripe info
-  }
+  //let stripeServerRes;
+  //if (!isLogin) {
+  //  stripeServerRes = await axios.post('http://localhost/stripe/customer', data).catch((err) => {
+  //    console.log(err);
+  //    setLoading(false);
+  //    setErrMessage('Sign-Up Failed, Please Contact support');
+  //    throw new Error('Stripe Signup Fail');
+  //  });
+  //} else {
+  //  //get customer stripe info
+  //}
 
   console.log();
 
   //save user data to React context
-  LogintoContext(userId, authRes, stripeServerRes, LogIn);
+  //LogintoContext(userId, authRes, stripeServerRes, LogIn);
 };

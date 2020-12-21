@@ -1,37 +1,37 @@
 //API requests related to authentication
-import axios from "axios"
-import { navigate } from "gatsby"
+import axios from 'axios';
+import { navigate } from 'gatsby';
 
-const axiosBase = process.env.GATSBY_SERVER_URL
+const axiosBase = process.env.GATSBY_SERVER_URL;
 
-export const LoginToServer = async token => {
-  const data = { token }
+export const LoginToServer = async (token) => {
+  const data = { token };
 
-  const result = await axios.post(`${axiosBase}/auth/login`, data)
+  const result = await axios.post(`${axiosBase}/auth/login`, data);
 
-  return result
-}
+  return result;
+};
 
-export const SignupToServer = async (token, username) => {
-  const data = { token, username }
+export const SignupToServer = async (email, username, token) => {
+  const data = { email, username, token };
 
-  const result = await axios.post(`${axiosBase}/auth/signup`, data)
+  const result = await axios.post(`${axiosBase}/auth/signup`, data);
 
-  return result
-}
+  return result;
+};
 
 export const updateUserNameApi = async (id, username) => {
-  const data = { id, username }
+  const data = { id, username };
 
-  await axios.put(`${axiosBase}/auth/put/username`, data)
+  await axios.put(`${axiosBase}/auth/put/username`, data);
 
-  navigate("/login")
-}
+  navigate('/login');
+};
 
 export const updateEmailApi = async (id, email) => {
-  const data = { id, email }
+  const data = { id, email };
 
-  await axios.put(`${axiosBase}/auth/put/email`, data)
+  await axios.put(`${axiosBase}/auth/put/email`, data);
 
-  navigate("/login")
-}
+  navigate('/login');
+};
