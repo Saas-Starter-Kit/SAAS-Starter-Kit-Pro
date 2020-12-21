@@ -5,6 +5,7 @@ CREATE TABLE users (
   username VARCHAR(255),
   email VARCHAR(255) UNIQUE,
   stripe_customer_id VARCHAR,
+  firebase_user_id VARCHAR,
   is_paid_member BOOLEAN DEFAULT FALSE,
   subscription_id VARCHAR
 );

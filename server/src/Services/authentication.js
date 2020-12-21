@@ -13,10 +13,8 @@ const CheckUserExists = async (email, next) => {
 
   let queryResult = await db.query(text, values).catch((err) => {
     console.log(err);
-    throw new Error('Database Query failed');
+    throw new Error('Database Query Failed');
   });
-
-  console.log('ddddd');
 
   if (queryResult.rows.length != 0) {
     return { type: 'error', message: 'User Already Exists' };
@@ -40,21 +38,18 @@ export const SignUp = async (req, res, next) => {
     throw new Error('Database Query Failed');
   });
 
-  console.log('FFFF');
-
   if (userExists.type === 'error') {
     res.status(500).send(userExists.message);
     throw new Error(userExists.message);
-  } else if (userExists.type === 'success') {
-    //res.status(500).send(userExists.message);
   }
 
   let decodedToken = await admin
     .auth()
     .verifyIdToken(token)
     .catch((error) => {
-      res.send('error signing up');
       console.log(error);
+      res.status(500).send('error signing up');
+      throw new Error('Firebase Token Decode error');
     });
 
   console.log(decodedToken);
