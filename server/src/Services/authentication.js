@@ -55,8 +55,6 @@ export const Login = async (req, res) => {
   let token = req.body.token;
   let email = req.body.email;
 
-  console.log(email);
-
   //decode the firebase token recieved from frontend
   await admin
     .auth()
@@ -74,57 +72,16 @@ export const Login = async (req, res) => {
     throw new Error('Database Query Failed');
   });
 
+  //If user not found send error message
+  if (user.message === 'User Not Found') {
+    res.status(500).send(user.message);
+    throw new Error(user.message);
+  }
+
+  let user_id = user.rows[0].id;
   console.log(user);
-
-  //admin
-  //  .auth()
-  //  .verifyIdToken(token)
-  //  .then((decodedToken) => {
-  //    let email = decodedToken.email;
-
-  //    CheckUserExists(email);
-  //  })
-  //  .catch((error) => {
-  //    res.send('error loggin in');
-  //    console.log(error);
-  //  });
+  res.send({ token: setToken(user_id) });
 };
-
-//const CheckUserExists = (email) => {
-//  /* Check if users exists then jwt login */
-
-//  //check if email exists
-//  let query1 = `SELECT * FROM users
-//                WHERE email=$1`;
-
-//  let values1 = [email];
-
-//  //Check if user exists callback
-//  let callback1 = (q_err, q_res) => {
-//    if (q_err) {
-//      console.log(q_err);
-//      res.status(500).send(q_err);
-//    }
-//    if (q_res.rows.length != 0) {
-//      //if user exists then jwt login
-//      let id = q_res.rows[0].id;
-//      console.log(id);
-//      res.send({ token: setToken(id) });
-//    }
-//    if (q_res.rows.length === 0) {
-//      //if email not found
-//      let response = {
-//        type: 'error',
-//        message: 'Email Not Found'
-//      };
-
-//      res.send(response);
-//    }
-//  };
-
-//  //check if user exists
-//  db.query(query1, values1, callback1);
-//};
 
 export const updateUsername = (req, res) => {
   let id = req.body.id;
