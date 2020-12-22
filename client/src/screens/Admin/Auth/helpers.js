@@ -51,7 +51,7 @@ export const Authentication = async (
 ) => {
   console.log(authRes);
 
-  //Get Auth token from Firebase
+  //Get Auth id token from Firebase
   let token = await firebase
     .auth()
     .currentUser.getIdToken()
@@ -62,7 +62,7 @@ export const Authentication = async (
       throw new Error('Firebase Token Not Found');
     });
 
-  //server authentication, returns jwt token
+  //server firebase authentication, returns jwt token
   let serverRes;
   let username = authRes.user.displayName ? authRes.user.displayName : authRes.user.email;
   let email = authRes.user.email;
