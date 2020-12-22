@@ -11,7 +11,7 @@ const Wrapper = styled.div`
     margin-left: auto;
     margin-right: auto;
     width: 100%;
-    max-width: 28rem;
+    max-width: 32rem;
   }
 `;
 
