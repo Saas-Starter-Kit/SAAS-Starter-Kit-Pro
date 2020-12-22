@@ -79,8 +79,9 @@ export const Login = async (req, res) => {
   }
 
   let user_id = user.rows[0].id;
-  console.log(user);
-  res.send({ token: setToken(user_id) });
+  let stripe_customer_id = user.rows[0].stripe_customer_id;
+
+  res.send({ token: setToken(user_id), stripe_customer_id });
 };
 
 export const updateUsername = (req, res) => {

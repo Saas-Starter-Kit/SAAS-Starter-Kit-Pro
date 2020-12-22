@@ -33,6 +33,6 @@ router.post('/subscription', CreateSubscription);
 router.post('/cancel-subscription', CancelSubscription);
 
 /* Customer Routers */
-router.post('/customer', CreateCustomer);
+router.post('/create-customer', CreateCustomer);
 
 export default router;
