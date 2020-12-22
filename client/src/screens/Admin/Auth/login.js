@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { Formik } from 'formik';
 import { Link } from 'gatsby';
 import AuthContext from '../../../utils/authContext';
-import { ValidSchema, saveToDb } from './helpers';
+import { ValidSchema, Authentication } from './helpers';
 
 import LoadingOverlay from '../../../components/Admin/Common/loadingOverlay';
 import { colors, breakpoints, fieldStyles } from '../../../styles/theme';
@@ -186,7 +186,7 @@ const Login = () => {
         throw new Error('Firebase Login Failed');
       });
 
-    saveToDb(authRes, LogIn, isLogin, firebase, setErrMessage, setLoading);
+    Authentication(authRes, LogIn, isLogin, firebase, setErrMessage, setLoading);
   };
 
   //Google OAuth2 Signin
@@ -204,7 +204,7 @@ const Login = () => {
         throw new Error('Firebase Login Failed');
       });
 
-    saveToDb(authRes, LogIn, isLogin, firebase, setErrMessage, setLoading);
+    Authentication(authRes, LogIn, isLogin, firebase, setErrMessage, setLoading);
   };
 
   return (

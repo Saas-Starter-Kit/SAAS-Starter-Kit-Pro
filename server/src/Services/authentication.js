@@ -4,7 +4,7 @@ import firebase from 'firebase-admin';
 
 const admin = firebase.initializeApp();
 
-const CheckUserExists = async (email) => {
+const getUser = async (email) => {
   //check if email exists
   let text = `SELECT * FROM users
               WHERE email=$1`;
@@ -16,13 +16,7 @@ const CheckUserExists = async (email) => {
     throw new Error('Database Query Failed');
   });
 
-  if (queryResult.rows.length != 0) {
-    return { type: 'error', message: 'User Already Exists' };
-  } else if (queryResult.rows.length === 0) {
-    return { type: 'success', message: 'User Not Found' };
-  } else {
-    return { type: 'error', message: 'Database query failed' };
-  }
+  return queryResult
 };
 
 const saveUsertoDB = async (email, username, firebaseId) => {
@@ -50,22 +44,30 @@ export const SignUp = async (req, res) => {
   console.log(email, username, token);
 
   //First Check if User exists
-  let userExists = await CheckUserExists(email).catch((err) => {
+  let userExists = await getUser(email).catch((err) => {
     console.log(err);
     res.status(500).send('Database Query Failed');
     throw new Error('Database Query Failed');
   });
 
   //handle database non-operational errors
-  if (userExists.type === 'error') {
-    res.status(500).send(userExists.message);
-    throw new Error(userExists.message);
-  }
+  //if (userExists.type === 'error') {
+  //  res.status(500).send(userExists.message);
+  //  throw new Error(userExists.message);
+  //}
 
-  //if user not found, console.log and continue code execution
-  if (userExists.type === 'success') {
-    console.log('Success ', userExists.message);
-  }
+  ////if user not found, console.log and continue code execution
+  //if (userExists.type === 'success') {
+  //  console.log('Success ', userExists.message);
+  //}
+
+  //if (queryResult.rows.length != 0) {
+  //  return { type: 'error', message: 'User Already Exists', user: queryResult };
+  //} else if (queryResult.rows.length === 0) {
+  //  return { type: 'success', message: 'User Not Found' };
+  //} else {
+  //  return { type: 'error', message: 'Database query failed' };
+  //}
 
   //decode the firebase token recieved from frontend and save firebase uuid
   let decodedToken = await admin
@@ -97,18 +99,40 @@ export const Login = (req, res) => {
   let token = req.body.token;
   let email = req.body.email;
 
-  admin
+  console.log(email);
+
+ //decode the firebase token recieved from frontend
+  await admin
     .auth()
     .verifyIdToken(token)
-    .then((decodedToken) => {
-      let email = decodedToken.email;
-
-      CheckUserExists(email);
-    })
     .catch((error) => {
-      res.send('error loggin in');
       console.log(error);
+      res.status(500).send('Error signing up');
+      throw new Error('Firebase Token Decode error');
     });
+
+  //Check if User exists
+  let user = await getUser(email).catch((err) => {
+    console.log(err);
+    res.status(500).send('Database Query Failed');
+    throw new Error('Database Query Failed');
+  });
+
+  console.log(user)
+
+
+  //admin
+  //  .auth()
+  //  .verifyIdToken(token)
+  //  .then((decodedToken) => {
+  //    let email = decodedToken.email;
+
+  //    CheckUserExists(email);
+  //  })
+  //  .catch((error) => {
+  //    res.send('error loggin in');
+  //    console.log(error);
+  //  });
 };
 
 //const CheckUserExists = (email) => {

@@ -41,7 +41,14 @@ export const LogintoContext = async (user_id, authRes, stripeKey, LogIn) => {
 };
 
 //Save user information to our own db and and create stripe customer
-export const saveToDb = async (authRes, LogIn, isLogin, firebase, setErrMessage, setLoading) => {
+export const Authentication = async (
+  authRes,
+  LogIn,
+  isLogin,
+  firebase,
+  setErrMessage,
+  setLoading
+) => {
   console.log(authRes);
 
   //Get Auth token from Firebase
