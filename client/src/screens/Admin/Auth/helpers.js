@@ -2,6 +2,7 @@ import jwt_decode from 'jwt-decode';
 import { navigate } from 'gatsby';
 import * as Yup from 'yup';
 import { SignupToServer, LoginToServer } from '../../../api/authApi';
+import { createCustomer } from '../../../api/stripeApi';
 import axios from 'axios';
 
 //valid format for setting an email and password
@@ -93,17 +94,10 @@ export const Authentication = async (
     throw new Error('JWT decode failed or JWT invalid');
   }
 
-  console.log(userId, authServerRes);
-
-  let data = {
-    userId,
-    email
-  };
-
   //create stripe customer based on our own server user id
   let stripeServerRes;
   if (!isLogin) {
-    stripeServerRes = await axios.post('http://localhost/stripe/customer', data).catch((err) => {
+    stripeServerRes = await createCustomer(userId, email).catch((err) => {
       console.log(err);
       setLoading(false);
       setErrMessage('Sign-Up Failed, Please Contact support');

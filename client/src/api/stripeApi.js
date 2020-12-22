@@ -1,10 +1,10 @@
 //API requests related to authentication
 import axios from 'axios';
 
-const createCustomer = async (userId, email) => {
+export const createCustomer = async (userId, email) => {
   let data = { userId, email };
 
-  let result = axios.post('http://localhost/stripe/customer', data);
+  let result = await axios.post('http://localhost/stripe/customer', data);
 
   return result;
 };
