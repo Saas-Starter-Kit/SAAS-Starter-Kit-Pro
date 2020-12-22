@@ -28,7 +28,7 @@ router.post('/attach-payment', AttachPaymentMethod);
 /* Subscription Routes */
 router.get('/get-subscription', GetSubscription);
 
-router.post('/subscription', CreateSubscription);
+router.post('/create-subscription', CreateSubscription);
 
 router.post('/cancel-subscription', CancelSubscription);
 

@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import LoadingOverlay from '../../../components/Admin/Common/loadingOverlay';
 import ConfirmSub from './confirmSubscription';
 import PlanCard from './planCard';
+import { createSubscription } from '../../../api/stripeApi';
 
 const Wrapper = styled.div`
   background-color: ${colors.gray50};
@@ -121,8 +122,11 @@ const CheckoutForm = () => {
 
   const createSetupIntent = async () => {
     let data = { customer: authState.user };
-    const result = await axios.post('http://localhost/stripe/wallet', data);
-    if (!result) setResMessage('Payment Setup Failed, Please Contact Support');
+    const result = await axios.post('http://localhost/stripe/wallet', data).catch((err) => {
+      console.log(err);
+      setResMessage('Payment Setup Failed, Please Contact Support');
+      throw new Error('Create Setup Intent on Server Failed');
+    });
 
     setSetupIntent(result.data);
   };
@@ -138,28 +142,35 @@ const CheckoutForm = () => {
 
     const cardElement = elements.getElement(CardElement);
 
-    const { setupIntent, error } = await stripe.confirmCardSetup(setupIntentState.client_secret, {
-      payment_method: { card: cardElement }
-    });
+    const { setupIntent, error } = await stripe
+      .confirmCardSetup(setupIntentState.client_secret, {
+        payment_method: { card: cardElement }
+      })
+      .catch((err) => {
+        console.log(err);
+        setLoading(false);
+        setResMessage('Card confirmation failed, please contact support');
+        throw new Error('Stripe Setup Intent Failed');
+      });
 
     if (!setupIntent && error) {
       setLoading(false);
       setResMessage(error.message);
-      return;
+      throw new Error('User Card Confirmation Error');
     } else if (!setupIntent && !error) {
       setLoading(false);
       setResMessage('Card confirmation failed, please contact support');
-      return;
+      throw new Error('Stripe Setup Intent Failed');
     }
 
-    let data = {
-      payment_method: setupIntent.payment_method,
-      customer: authState.user,
-      planSelect: plan
-    };
-
-    let result = await axios.post('http://localhost/stripe/subscription', data);
-    if (!result) setResMessage('Subscription confirmation Failed, please contact support');
+    let result = await createSubscription(setupIntent.payment_method, authState.user, plan).catch(
+      (err) => {
+        console.log(err);
+        setLoading(false);
+        setResMessage('Create Subscription failed, please contact support');
+        throw new Error('Server Side Create Subscription Failed');
+      }
+    );
 
     console.log(result);
     if (result.data.status === 'active' || result.data.status === 'trialing') {
@@ -167,19 +178,19 @@ const CheckoutForm = () => {
       setSuccess(true);
     } else {
       setLoading(false);
-      setResMessage('Subscription confirmation Failed, please contact support');
-      return;
+      setResMessage('Subscription Confirmation Failed, please contact support');
+      throw new Error('Server Side Create Subscription Failed');
     }
   };
 
   return (
     <Wrapper>
       {isLoading && <LoadingOverlay />}
-      <ErrorResponse>{resMessage}</ErrorResponse>
       {!isSuccess ? (
         <CardWrapper>
           <PlanCard setBasic={setBasic} setPremium={setPremium} isBasicActive={isBasicActive} />
           <Card>
+            <ErrorResponse>{resMessage}</ErrorResponse>
             <form onSubmit={handleSubmit}>
               <CardElement />
               <ButtonWrapper>

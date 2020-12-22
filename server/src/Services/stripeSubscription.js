@@ -32,33 +32,36 @@ export const CreateSubscription = async (req, res) => {
   let email = req.body.customer.email;
   let plan = req.body.planSelect;
 
-  console.log(plan);
-  if (!customer_id || !payment_method || !email || !plan) {
-    res.send('Missing Required info');
-    return;
-  }
-
   // Attach the  payment method to the customer
-  await stripe.paymentMethods.attach(payment_method, { customer: customer_id });
+  await stripe.paymentMethods.attach(payment_method, { customer: customer_id }).catch((err) => {
+    console.log(err);
+    res.status(500).send('Server Side Purchase Failed');
+    throw new Error('Stripe Attach Payment Failed');
+  });
 
   // Set it as the default payment method
-  await stripe.customers.update(customer_id, {
-    invoice_settings: { default_payment_method: payment_method }
-  });
+  await stripe.customers
+    .update(customer_id, {
+      invoice_settings: { default_payment_method: payment_method }
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).send('Server Side Purchase Failed');
+      throw new Error('Stripe Set Payment Failed');
+    });
 
-  const subscription = await stripe.subscriptions.create({
-    customer: customer_id,
-    items: [{ plan }],
-    expand: ['latest_invoice.payment_intent'],
-    trial_period_days: 14
-  });
-
-  console.log(subscription);
-
-  if (!subscription) {
-    res.send('Failed to create subscription');
-    return;
-  }
+  const subscription = await stripe.subscriptions
+    .create({
+      customer: customer_id,
+      items: [{ plan }],
+      expand: ['latest_invoice.payment_intent'],
+      trial_period_days: 14
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).send('Server Side Purchase Failed');
+      throw new Error('Stripe Create Subscription Failed');
+    });
 
   let subscritionId = subscription.id;
 
@@ -68,12 +71,16 @@ export const CreateSubscription = async (req, res) => {
                 WHERE email = $2`;
     let values = ['true', email, subscritionId];
 
-    let callback = (q_err, q_res) => {
-      if (q_err) res.send(q_err);
-      res.send(subscription);
-    };
+    let queryResult = await db.query(text, values).catch((err) => {
+      res.status(500).send('Server Side Purchase Failed');
+      throw new Error('Database Query Failed');
+    });
 
-    db.query(text, values, callback);
+    if (queryResult) res.send(subscription);
+  } else {
+    //if subscription fails send error message
+    res.status(500).send('Server Side Purchase Failed');
+    throw new Error('Subscription Status not succeeded');
   }
 };
 
