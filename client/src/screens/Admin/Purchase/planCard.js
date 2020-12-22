@@ -3,6 +3,21 @@ import { colors } from '../../../styles/theme';
 import styled from 'styled-components';
 import PlanItem from './planItem';
 
+const PurchaseHeader = styled.div`
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: ${colors.coolGray500};
+  text-align: center;
+`;
+
+const PurchaseText = styled.div`
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: ${colors.coolGray500};
+  text-align: center;
+  padding-bottom: 1rem;
+`;
+
 const PlanWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -20,8 +35,8 @@ const PlanCard = ({ setBasic, setPremium, isBasicActive }) => {
 
   return (
     <PlanWrapper>
-      <div>Purchasing SAAS Pro</div>
-      <div>Main Benefit of product</div>
+      <PurchaseHeader>Buy SAAS Pro Now</PurchaseHeader>
+      <PurchaseText>Main Benefit of product</PurchaseText>
       <PlanItem
         isActive={isBasicActive ? true : false}
         planHandler={setBasic}
