@@ -14,33 +14,6 @@ export const ValidSchema = Yup.object().shape({
     .required('Password Required')
 });
 
-//Save user Info to Context
-export const LogintoContext = async (user_id, authRes, stripeKey, LogIn) => {
-  console.log(authRes);
-  console.log(stripeKey);
-
-  let email = authRes.user.email;
-  let username = authRes.user.displayName ? authRes.user.displayName : authRes.user.email;
-  let id = user_id;
-  let photo = authRes.user.photoURL;
-  let provider = authRes.user.providerData[0].providerId;
-  let stripeCustomerKey = stripeKey.data.stripe_customer_id;
-
-  console.log(stripeCustomerKey);
-
-  let user = {
-    email,
-    username,
-    id,
-    photo,
-    provider,
-    stripeCustomerKey
-  };
-
-  await LogIn(user);
-  //setTimeout(() => navigate('/app'), 200);
-};
-
 //Save user information to our own db and and create stripe customer
 export const Authentication = async (
   authRes,
@@ -94,10 +67,10 @@ export const Authentication = async (
     throw new Error('JWT decode failed or JWT invalid');
   }
 
-  //create stripe customer based on our own server user id
   let stripeServerRes;
   console.log(authServerRes);
   if (!isLogin) {
+    //create stripe customer based on our own server user id
     stripeServerRes = await createCustomer(userId, email).catch((err) => {
       console.log(err);
       setLoading(false);
@@ -113,4 +86,31 @@ export const Authentication = async (
 
   //save user data to React context
   LogintoContext(userId, authRes, stripeServerRes, LogIn);
+};
+
+//Save user Info to Context
+export const LogintoContext = async (user_id, authRes, stripeKey, LogIn) => {
+  console.log(authRes);
+  console.log(stripeKey);
+
+  let email = authRes.user.email;
+  let username = authRes.user.displayName ? authRes.user.displayName : authRes.user.email;
+  let id = user_id;
+  let photo = authRes.user.photoURL;
+  let provider = authRes.user.providerData[0].providerId;
+  let stripeCustomerKey = stripeKey.data.stripe_customer_id;
+
+  console.log(stripeCustomerKey);
+
+  let user = {
+    email,
+    username,
+    id,
+    photo,
+    provider,
+    stripeCustomerKey
+  };
+
+  await LogIn(user);
+  setTimeout(() => navigate('/app'), 200);
 };

@@ -1,13 +1,12 @@
 import React from 'react';
 import { colors } from '../../../styles/theme';
 import styled from 'styled-components';
-
 import PlanItem from './planItem';
 
 const PlanWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 2.2rem;
+  padding: 2rem;
   background-color: ${colors.white};
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
   margin-bottom: 1rem;
@@ -21,6 +20,8 @@ const PlanCard = ({ setBasic, setPremium, isBasicActive }) => {
 
   return (
     <PlanWrapper>
+      <div>Purchasing SAAS Pro</div>
+      <div>Main Benefit of product</div>
       <PlanItem
         isActive={isBasicActive ? true : false}
         planHandler={setBasic}

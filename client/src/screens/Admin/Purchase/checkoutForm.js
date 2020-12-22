@@ -14,7 +14,6 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-top: -2rem;
 
   @media (min-width: ${breakpoints.small}) {
     padding-left: 1.5rem;
@@ -65,6 +64,7 @@ const Button = styled.button`
 const CardWrapper = styled.div`
   padding-left: 2rem;
   padding-right: 2rem;
+  max-width: 36rem;
 
   @media (min-width: ${breakpoints.small}) {
     margin-left: auto;
@@ -72,7 +72,6 @@ const CardWrapper = styled.div`
     padding-left: 2rem;
     padding-right: 2rem;
     width: 100%;
-    max-width: 36rem;
   }
 `;
 
