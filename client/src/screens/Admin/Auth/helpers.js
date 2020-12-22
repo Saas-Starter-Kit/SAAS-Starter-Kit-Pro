@@ -93,7 +93,7 @@ export const Authentication = async (
     throw new Error('JWT decode failed or JWT invalid');
   }
 
-  console.log(userId, serverRes);
+  console.log(userId, authServerRes);
 
   let data = {
     userId,
@@ -101,19 +101,19 @@ export const Authentication = async (
   };
 
   //create stripe customer based on our own server user id
-  //let stripeServerRes;
-  //if (!isLogin) {
-  //  stripeServerRes = await axios.post('http://localhost/stripe/customer', data).catch((err) => {
-  //    console.log(err);
-  //    setLoading(false);
-  //    setErrMessage('Sign-Up Failed, Please Contact support');
-  //    throw new Error('Stripe Signup Fail');
-  //  });
-  //} else {
-  //  //get customer stripe info
-  //}
+  let stripeServerRes;
+  if (!isLogin) {
+    stripeServerRes = await axios.post('http://localhost/stripe/customer', data).catch((err) => {
+      console.log(err);
+      setLoading(false);
+      setErrMessage('Sign-Up Failed, Please Contact support');
+      throw new Error('Stripe Signup Fail');
+    });
+  } else {
+    //get customer stripe info
+  }
 
-  console.log();
+  console.log(stripeServerRes);
 
   //save user data to React context
   //LogintoContext(userId, authRes, stripeServerRes, LogIn);

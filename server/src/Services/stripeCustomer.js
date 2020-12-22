@@ -25,3 +25,9 @@ export const CreateCustomer = async (req, res) => {
   //save stripe customer id to database
   db.query(text, values, callback);
 };
+
+const GetCustomer = async (req, res) => {
+  let customer_id = req.body.customer.stripeCustomerKey;
+
+  let customer = await stripe.customers.retrieve('cus_IaHhrMfzSpEDVS');
+};

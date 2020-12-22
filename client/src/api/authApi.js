@@ -25,6 +25,7 @@ export const updateUserNameApi = async (id, username) => {
 
   await axios.put(`${axiosBase}/auth/put/username`, data);
 
+  //extract out
   navigate('/login');
 };
 
@@ -33,5 +34,6 @@ export const updateEmailApi = async (id, email) => {
 
   await axios.put(`${axiosBase}/auth/put/email`, data);
 
+  //extract out
   navigate('/login');
 };
