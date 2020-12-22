@@ -63,35 +63,34 @@ export const Authentication = async (
     });
 
   //server firebase authentication, returns jwt token
-  let serverRes;
+  let authServerRes;
   let username = authRes.user.displayName ? authRes.user.displayName : authRes.user.email;
   let email = authRes.user.email;
 
   if (isLogin) {
-    serverRes = await LoginToServer(email, token).catch((err) => {
+    authServerRes = await LoginToServer(email, token).catch((err) => {
       console.log(err);
       setLoading(false);
       setErrMessage('Server Login Failed, please refresh the browser and try again');
       throw new Error('Server Side Login Fail');
     });
   } else {
-    serverRes = await SignupToServer(email, username, token).catch((err) => {
+    authServerRes = await SignupToServer(email, username, token).catch((err) => {
       console.log(err);
       setLoading(false);
-      setErrMessage('Server Login Failed, please contact Support');
+      setErrMessage('Server Signup Failed, please contact Support');
       throw new Error('Server Side Signup Fail');
     });
   }
 
   let userId;
-  //refactor
-  if (serverRes.data.token) {
-    userId = jwt_decode(serverRes.data.token).user;
-  } else if (serverRes.data.type === 'error') {
-    console.log(serverRes);
+  //decode jwt token recieved from server
+  if (jwt_decode(authServerRes.data.token)) {
+    userId = jwt_decode(authServerRes.data.token).user;
+  } else {
     setLoading(false);
-    setErrMessage(serverRes.data.message);
-    return;
+    setErrMessage('Authentication Failed, please contact Support');
+    throw new Error('JWT decode failed or JWT invalid');
   }
 
   console.log(userId, serverRes);

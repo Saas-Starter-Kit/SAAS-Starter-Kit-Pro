@@ -7,5 +7,5 @@ export const failHealthCheck = (req, res) => {
 };
 
 export const privateRoute = (req, res) => {
-  res.send('Accessed Private Endpoint');
+  res.status(200).send('Accessed Private Endpoint');
 };
