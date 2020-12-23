@@ -4,6 +4,7 @@ export const healthCheck = (req, res) => {
 
 export const failHealthCheck = (req, res) => {
   res.status(404).send('Failed Health Check');
+  throw new Error('Request Failed');
 };
 
 export const privateRoute = (req, res) => {

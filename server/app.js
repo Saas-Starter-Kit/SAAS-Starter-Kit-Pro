@@ -28,9 +28,30 @@ app.use('/stripe', stripeApi);
 app.use('/auth', auth);
 app.use('/api', todoApi);
 
+// error handling
+app.use((err, req, res, next) => {
+  let message = null;
+
+  if (err.raw) {
+    message = err.raw.message;
+  } else if (err.message) {
+    message = err.message;
+  } else if (err.sqlMessage) {
+    message = err.sqlMessage;
+  }
+
+  console.error(err);
+
+  message ? res.status(500).send({ message: message }) : res.status(500).send(err);
+});
+
 //server setup
 const port = process.env.PORT || 80;
 app.listen(port);
 console.log('Server listening on:', port);
+
+process.on('unhandledRejection', (err) => {
+  console.log(err);
+});
 
 export default app;

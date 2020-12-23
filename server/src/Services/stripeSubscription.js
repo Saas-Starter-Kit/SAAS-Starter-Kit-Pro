@@ -52,7 +52,7 @@ export const CreateSubscription = async (req, res) => {
 
   const subscription = await stripe.subscriptions
     .create({
-      customer: customer_id,
+      customer: 'ddd',
       items: [{ plan }],
       expand: ['latest_invoice.payment_intent'],
       trial_period_days: 14
