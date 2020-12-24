@@ -3,14 +3,11 @@ import db from '../Database/db.js';
 export const getUser = async (email) => {
   //check if email exists
   let text = `SELECT * FROM users
-              WHERE email=$1`;
+              WHERE eail=$1`;
 
   let values = [email];
 
-  let queryResult = await db.query(text, values).catch((err) => {
-    console.log(err);
-    throw new Error('Database Query Failed');
-  });
+  let queryResult = await db.query(text, values);
 
   if (queryResult.rows.length === 0) {
     return { message: 'User Not Found' };

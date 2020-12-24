@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Button, notification, Space } from 'antd';
-import LoadingOverlay from '../../components/Admin/Common/loadingOverlay';
 
 const Axios = axios.create({
   baseURL: 'http://localhost',
@@ -53,28 +52,4 @@ const useApi = (url, method, data, params) => {
   return [response, isLoading, error];
 };
 
-const Test = () => {
-  let params = { title: 'FFFFFF' };
-  const [response, isLoading, error] = useApi('/fail-health', 'get', '', params);
-
-  //const openNotification = () => {
-  //  notification.error({
-  //    message: 'Notification Title',
-  //    description:
-  //      'This is the content of the notification. This is the content of the notification. This is the content of the notification.'
-  //  });
-  //};
-
-  return (
-    <div>
-      {response && console.log(response)}
-      {error && console.log(error)}
-      {isLoading && console.log(isLoading)}
-
-      {isLoading && <LoadingOverlay />}
-      {/*<button onClick={openNotification}>DFFFFFFFFFFFF </button>{' '}*/}
-    </div>
-  );
-};
-
-export default Test;
+export default useApi;

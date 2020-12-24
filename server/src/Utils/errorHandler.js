@@ -1,18 +1,6 @@
 export const errorHandler = (err, req, res, next) => {
-  let message = null;
+  console.error(err.message);
 
-  //check for more conditions
-  if (err.raw) {
-    message = err.raw.message;
-  } else if (err.message) {
-    message = err.message;
-  } else if (err.sqlMessage) {
-    message = err.sqlMessage;
-  } else {
-    message = 'Server Request Failed';
-  }
-
-  console.error(err);
-
+  let message = 'Request Failed Try Again or Contact Support';
   res.status(500).send({ message });
 };

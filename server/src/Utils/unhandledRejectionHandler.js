@@ -1,4 +1,6 @@
 export const unhandledRejectionHandler = (err) => {
   console.log(err);
-  //Send Error Message
+
+  let message = 'Request Failed Try Again or Contact Support';
+  res.status(500).send({ message });
 };
