@@ -21,7 +21,7 @@ export const SignUp = async (req, res) => {
 
   //If user exists send error message, otherwise continue code
   if (!userExists.message === 'User Not Found') {
-    res.status(500).send('User Already Exists');
+    res.status(500).send({ message: 'User Already Exists' });
     throw new Error('User Already exists in Database');
   }
 
