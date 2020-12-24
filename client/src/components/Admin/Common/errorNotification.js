@@ -1,6 +1,6 @@
 import { Button, notification, Space } from 'antd';
 
-const errorNotification = (errorType, errorMessage) => {
+const errorNotification = (errorMessage, errorType) => {
   let errorTitle = errorType ? errorType : 'Error Detected';
   let errorDescription = errorMessage
     ? errorMessage
@@ -11,7 +11,9 @@ const errorNotification = (errorType, errorMessage) => {
     description: errorDescription
   });
 
-  return;
+  console.log(errorMessage);
+  console.log(errorType);
+  throw new Error('An Error occured, code execution stopped');
 };
 
 export default errorNotification;

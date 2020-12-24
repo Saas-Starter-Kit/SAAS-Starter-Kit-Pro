@@ -30,8 +30,8 @@ const useApi = (url, method, data, params) => {
           console.log(error.response.data);
           let errorMessage = error.response.data.message
             ? error.response.data.message
-            : 'Request Failed Please Try Again';
-          let errorType = 'Server Error';
+            : 'Request Failed Please Try Again or Contact Support';
+          let errorType = error.response.data.type ? error.response.data.type : '500 Server Error';
           errorNotification(errorType, errorMessage);
         }
         //error handle conditions
@@ -42,7 +42,9 @@ const useApi = (url, method, data, params) => {
     fetchData();
   }, [url]);
 
-  return [response, isLoading, error];
+  return [response, error, isLoading];
 };
+
+//custom response var, custom response var, loading
 
 export default useApi;
