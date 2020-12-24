@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { Button, notification, Space } from 'antd';
 import LoadingOverlay from '../../components/Admin/Common/loadingOverlay';
+import ApiContext from '../../utils/apiContext';
 
 const Axios = axios.create({
   baseURL: 'http://localhost',
@@ -55,7 +56,9 @@ const useApi = (url, method, data, params) => {
 
 const Test = () => {
   let params = { title: 'FFFFFF' };
-  const [response, isLoading, error] = useApi('/fail-health', 'get', '', params);
+  const [response, error] = useApi('/fail-health', 'get', '', params);
+  const { apiState, Fetch_Init, Fetch_Failure } = useContext(ApiContext);
+  const { isLoading } = apiState;
 
   //const openNotification = () => {
   //  notification.error({
@@ -67,12 +70,10 @@ const Test = () => {
 
   return (
     <div>
-      {response && console.log(response)}
-      {error && console.log(error)}
-      {isLoading && console.log(isLoading)}
-
       {isLoading && <LoadingOverlay />}
-      {/*<button onClick={openNotification}>DFFFFFFFFFFFF </button>{' '}*/}
+      <button onClick={Fetch_Init}>DFFFFFFFFFFFF </button>{' '}
+      <button onClick={Fetch_Failure}>dddddddddddddd </button>{' '}
+      <button onClick={() => console.log(isLoading)}>dddddddddddddd </button>{' '}
     </div>
   );
 };

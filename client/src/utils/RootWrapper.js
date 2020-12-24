@@ -30,6 +30,7 @@ const RootWrapper = ({ children }) => {
   };
 
   const Fetch_Init = () => {
+    console.log('dddd');
     dispatchApi(Fetch_init);
   };
 

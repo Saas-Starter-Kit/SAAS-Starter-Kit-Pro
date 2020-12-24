@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { ErrorMessage, Formik } from 'formik';
 import jwt_decode from 'jwt-decode';
 import { SignupToServer, LoginToServer, LogintoContext } from '../../../api/authApi';
-
+import { createCustomer } from '../../../api/stripeApi';
 import AuthContext from '../../../utils/authContext';
 
 import { ValidSchema, Authentication } from './helpers';
@@ -15,6 +15,7 @@ import { colors, breakpoints, fieldStyles } from '../../../styles/theme';
 import SignUpFormHeader from './signupFormHeader';
 import GoogleButton from 'react-google-button';
 import errorNotification from '../../../components/Admin/Common/errorNotification';
+import { FormProvider } from 'antd/lib/form/context';
 
 const Wrapper = styled.div`
   background-color: ${colors.gray50};
