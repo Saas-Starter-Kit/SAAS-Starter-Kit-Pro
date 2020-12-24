@@ -3,7 +3,6 @@ import { navigate } from 'gatsby';
 import * as Yup from 'yup';
 import { SignupToServer, LoginToServer } from '../../../api/authApi';
 import { createCustomer } from '../../../api/stripeApi';
-import axios from 'axios';
 
 //valid format for setting an email and password
 export const ValidSchema = Yup.object().shape({

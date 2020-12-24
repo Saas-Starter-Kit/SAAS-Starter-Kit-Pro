@@ -40,26 +40,15 @@ export const Login = async (req, res) => {
   let email = req.body.email;
 
   //decode the firebase token recieved from frontend
-  await admin
-    .auth()
-    .verifyIdToken(token)
-    .catch((error) => {
-      console.log(error);
-      res.status(500).send('Error signing up');
-      throw new Error('Firebase Token Decode error');
-    });
+  await admin.auth().verifyIdToken(token);
 
   //Check if User exists
-  let user = await getUser(email).catch((err) => {
-    console.log(err);
-    res.status(500).send('Database Query Failed');
-    throw new Error('Database Query Failed');
-  });
+  let user = await getUser(email);
 
   //If user not found send error message
   if (user.message === 'User Not Found') {
     res.status(500).send(user.message);
-    throw new Error(user.message);
+    return;
   }
 
   let user_id = user.rows[0].id;

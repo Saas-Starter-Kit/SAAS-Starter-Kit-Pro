@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Button, notification, Space } from 'antd';
+import { errorNotification } from '../components/Admin/Common/errorNotification';
 
 const Axios = axios.create({
   baseURL: 'http://localhost',
@@ -11,13 +11,6 @@ const useApi = (url, method, data, params) => {
   const [response, setResponse] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-
-  const openNotification = (error, errorMessage) => {
-    notification.error({
-      message: error,
-      description: errorMessage
-    });
-  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -39,7 +32,7 @@ const useApi = (url, method, data, params) => {
             ? error.response.data.message
             : 'Request Failed Please Try Again';
           let errorType = 'Server Error';
-          openNotification(errorType, errorMessage);
+          errorNotification(errorType, errorMessage);
         }
         //error handle conditions
       }
