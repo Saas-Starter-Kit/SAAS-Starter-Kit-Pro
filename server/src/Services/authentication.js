@@ -14,36 +14,25 @@ export const SignUp = async (req, res) => {
   let userExists = await getUser(email);
   console.log(userExists);
 
-  ////If user exists send error message, otherwise continue code
-  //if (!userExists.message === 'User Not Found') {
-  //  res.status(500).send({ message: 'User Already Exists' });
-  //  throw new Error('User Already exists in Database');
-  //}
+  //If user exists send error message, otherwise continue code
+  if (!userExists.message === 'User Not Found') {
+    res.status(500).send({ message: 'User Already Exists' });
+    return;
+  }
 
-  ////decode the firebase token recieved from frontend and save firebase uuid
-  //let decodedToken = await admin
-  //  .auth()
-  //  .verifyIdToken(token)
-  //  .catch((error) => {
-  //    console.log(error);
-  //    res.status(500).send('Error signing up');
-  //    throw new Error('Firebase Token Decode error');
-  //  });
+  //decode the firebase token recieved from frontend and save firebase uuid
+  let decodedToken = await admin.auth().verifyIdToken(token);
 
-  //let firebaseId = decodedToken.user_id;
+  let firebaseId = decodedToken.user_id;
 
   ////save user firebase info to our own db, and get unique user database id
-  //let databaseQuery = await saveUsertoDB(email, username, firebaseId).catch((err) => {
-  //  console.log(err);
-  //  res.status(500).send('Error signing up');
-  //  throw new Error('Error Saving User Info to Database');
-  //});
+  let databaseQuery = await saveUsertoDB(email, username, firebaseId);
 
-  //let userId = databaseQuery.rows[0].id;
+  let userId = databaseQuery.rows[0].id;
 
-  //console.log(userId);
+  console.log(userId);
 
-  //res.send({ token: setToken(userId) });
+  res.send({ token: setToken(userId) });
 };
 
 export const Login = async (req, res) => {

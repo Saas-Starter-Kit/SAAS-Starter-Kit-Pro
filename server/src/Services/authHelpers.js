@@ -3,7 +3,7 @@ import db from '../Database/db.js';
 export const getUser = async (email) => {
   //check if email exists
   let text = `SELECT * FROM users
-              WHERE eail=$1`;
+              WHERE email=$1`;
 
   let values = [email];
 
@@ -26,10 +26,7 @@ export const saveUsertoDB = async (email, username, firebaseId) => {
 
   let values = [username, email, firebaseId];
 
-  let queryResult = await db.query(text, values).catch((err) => {
-    console.log(err);
-    throw new Error('Database Query Failed');
-  });
+  let queryResult = await db.query(text, values);
 
   return queryResult;
 };

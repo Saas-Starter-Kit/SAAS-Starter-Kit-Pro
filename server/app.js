@@ -33,7 +33,7 @@ app.use('/api', todoApi);
 
 // error handling
 app.use(errorHandler);
-//process.on('unhandledRejection', unhandledRejectionHandler);
+process.on('unhandledRejection', unhandledRejectionHandler);
 
 //server setup
 const port = process.env.PORT || 80;
