@@ -9,7 +9,7 @@ import passport from 'passport';
 import morgan from 'morgan';
 
 import { errorHandler } from './src/Utils/errorHandler.js';
-import { unhandledRejectionHandler } from './src/Utils/unhandledRejectionHandler';
+import { unhandledRejectionHandler } from './src/Utils/unhandledRejectionHandler.js';
 
 import auth from './src/API/authRoutes.js';
 import todoApi from './src/API/todos.js';
