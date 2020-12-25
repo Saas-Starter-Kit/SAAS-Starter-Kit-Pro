@@ -33,35 +33,19 @@ export const CreateSubscription = async (req, res) => {
   let plan = req.body.planSelect;
 
   // Attach the  payment method to the customer
-  await stripe.paymentMethods.attach(payment_method, { customer: customer_id }).catch((err) => {
-    console.log(err);
-    res.status(500).send('Server Side Purchase Failed');
-    throw new Error('Stripe Attach Payment Failed');
-  });
+  await stripe.paymentMethods.attach(payment_method, { customer: customer_id });
 
   // Set it as the default payment method
-  await stripe.customers
-    .update(customer_id, {
-      invoice_settings: { default_payment_method: payment_method }
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).send('Server Side Purchase Failed');
-      throw new Error('Stripe Set Payment Failed');
-    });
+  await stripe.customers.update(customer_id, {
+    invoice_settings: { default_payment_method: payment_method }
+  });
 
-  const subscription = await stripe.subscriptions
-    .create({
-      customer: 'ddd',
-      items: [{ plan }],
-      expand: ['latest_invoice.payment_intent'],
-      trial_period_days: 14
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).send('Server Side Purchase Failed');
-      throw new Error('Stripe Create Subscription Failed');
-    });
+  const subscription = await stripe.subscriptions.create({
+    customer: customer_id,
+    items: [{ plan }],
+    expand: ['latest_invoice.payment_intent'],
+    trial_period_days: 14
+  });
 
   let subscritionId = subscription.id;
 
@@ -71,16 +55,16 @@ export const CreateSubscription = async (req, res) => {
                 WHERE email = $2`;
     let values = ['true', email, subscritionId];
 
-    let queryResult = await db.query(text, values).catch((err) => {
-      res.status(500).send('Server Side Purchase Failed');
-      throw new Error('Database Query Failed');
-    });
+    let queryResult = await db.query(text, values);
+    console.log(queryResult);
 
     if (queryResult) res.send(subscription);
   } else {
     //if subscription fails send error message
-    res.status(500).send('Server Side Purchase Failed');
-    throw new Error('Subscription Status not succeeded');
+    res
+      .status(400)
+      .send({ type: 'Stripe Purchase Error', message: 'Stripe Server Side Purchase Failed' });
+    return;
   }
 };
 

@@ -9,10 +9,10 @@ router.post('/signup', asyncHandler(SignUp));
 router.post('/login', asyncHandler(Login));
 
 //update username
-router.put('/put/username', updateUsername);
+router.put('/put/username', asyncHandler(updateUsername));
 
 //update email
-router.put('/put/email', updateEmail);
+router.put('/put/email', asyncHandler(updateEmail));
 
 /*
 JWT is sessionless, so logout only needs to be implemented

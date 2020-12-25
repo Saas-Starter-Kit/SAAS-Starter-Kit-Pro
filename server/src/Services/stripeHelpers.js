@@ -4,15 +4,13 @@ export const CreateSetupIntent = async (req, res) => {
   let customer_id = req.body.customer.stripeCustomerKey;
   console.log(customer_id);
 
-  if (customer_id) {
-    const setupIntent = await stripe.setupIntents.create({
-      customer: customer_id
-    });
+  const setupIntent = await stripe.setupIntents.create({
+    customer: customer_id
+  });
 
-    res.send(setupIntent);
-  } else {
-    res.send('Customer Key Not Found');
-  }
+  console.log(setupIntent);
+
+  res.send(setupIntent);
 };
 
 export const AttachPaymentMethod = async (req, res) => {

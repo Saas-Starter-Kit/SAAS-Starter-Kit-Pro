@@ -36,19 +36,19 @@ export const apiReducer = (state, action) => {
           let errorType = error.response.data.type ? error.response.data.type : '500 Server Error';
           errorNotification(errorType, errorMessage);
         }
-      } else if (error.message && error.code) {
-        //firebase auth errors
-        let errorType = 'Firebase Authentication Error';
-        let errorMessage = error.message;
-        errorNotification(errorType, errorMessage);
       } else if (error.type && error.message) {
-        //custom non-async errors, thrown by app
         let errorType = error.type;
         let errorMessage = error.message;
-
+        errorNotification(errorType, errorMessage);
+      } else if (error.message && error.code) {
+        let errorType = error.code;
+        let errorMessage = error.message;
+        errorNotification(errorType, errorMessage);
+      } else {
+        let errorType = 'An Error Occurred';
+        let errorMessage = 'There was an Error, please try again or contact support';
         errorNotification(errorType, errorMessage);
       }
-
       return {
         ...state,
         isLoading: false

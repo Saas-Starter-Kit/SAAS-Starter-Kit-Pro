@@ -2,6 +2,7 @@ import express from 'express';
 const router = express.Router();
 
 import { CreateCustomer } from '../Services/stripeCustomer.js';
+import { asyncHandler } from '../Utils/asyncErrorHandler.js';
 
 import {
   CreateSetupIntent,
@@ -17,22 +18,22 @@ import {
 } from '../Services/stripeSubscription.js';
 
 /* Helper Routes */
-router.get('/get-wallet', GetWallet);
+router.get('/get-wallet', asyncHandler(GetWallet));
 
-router.post('/wallet', CreateSetupIntent);
+router.post('/wallet', asyncHandler(CreateSetupIntent));
 
-router.post('/remove-payment', RemovePaymentMethod);
+router.post('/remove-payment', asyncHandler(RemovePaymentMethod));
 
-router.post('/attach-payment', AttachPaymentMethod);
+router.post('/attach-payment', asyncHandler(AttachPaymentMethod));
 
 /* Subscription Routes */
-router.get('/get-subscription', GetSubscription);
+router.get('/get-subscription', asyncHandler(GetSubscription));
 
-router.post('/create-subscription', CreateSubscription);
+router.post('/create-subscription', asyncHandler(CreateSubscription));
 
-router.post('/cancel-subscription', CancelSubscription);
+router.post('/cancel-subscription', asyncHandler(CancelSubscription));
 
 /* Customer Routers */
-router.post('/create-customer', CreateCustomer);
+router.post('/create-customer', asyncHandler(CreateCustomer));
 
 export default router;
