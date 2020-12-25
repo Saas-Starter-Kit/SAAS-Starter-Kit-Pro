@@ -1,6 +1,6 @@
 import { Button, notification, Space } from 'antd';
 
-const errorNotification = (errorMessage, errorType) => {
+const errorNotification = (errorType, errorMessage) => {
   let errorTitle = errorType ? errorType : 'Error Detected';
   let errorDescription = errorMessage
     ? errorMessage

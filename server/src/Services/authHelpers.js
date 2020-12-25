@@ -9,6 +9,8 @@ export const getUser = async (email) => {
 
   let queryResult = await db.query(text, values);
 
+  console.log(queryResult.rows.length);
+
   if (queryResult.rows.length === 0) {
     return { message: 'User Not Found' };
   } else {

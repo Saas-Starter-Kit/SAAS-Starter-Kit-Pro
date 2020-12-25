@@ -15,8 +15,8 @@ export const SignUp = async (req, res) => {
   console.log(userExists);
 
   //If user exists send error message, otherwise continue code
-  if (!userExists.message === 'User Not Found') {
-    res.status(500).send({ message: 'User Already Exists' });
+  if (userExists.rows.length !== 0) {
+    res.status(400).send({ type: 'Failed Sign Up', message: 'User Already Exists' });
     return;
   }
 
@@ -26,13 +26,13 @@ export const SignUp = async (req, res) => {
   let firebaseId = decodedToken.user_id;
 
   ////save user firebase info to our own db, and get unique user database id
-  let databaseQuery = await saveUsertoDB(email, username, firebaseId);
+  //let databaseQuery = await saveUsertoDB(email, username, firebaseId);
 
-  let userId = databaseQuery.rows[0].id;
+  //let userId = databaseQuery.rows[0].id;
 
-  console.log(userId);
+  //console.log(userId);
 
-  res.send({ token: setToken(userId) });
+  //res.send({ token: setToken(userId) });
 };
 
 export const Login = async (req, res) => {

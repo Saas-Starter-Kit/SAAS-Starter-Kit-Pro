@@ -15,8 +15,7 @@ export const ValidSchema = Yup.object().shape({
 });
 
 //Save user information to our own db and and create stripe customer
-export const Authentication = async (authRes, LogIn, isLogin, firebase) => {
-  const { fetchFailure } = useContext(apiContext);
+export const Authentication = async (authRes, LogIn, isLogin, firebase, fetchFailure) => {
   console.log(authRes);
 
   //Get Auth id token from Firebase

@@ -23,17 +23,24 @@ export const apiReducer = (state, action) => {
 
       //extract out to error handler
       if (error.response) {
-        console.log(error.response.data);
-        let errorMessage = error.response.data.message
-          ? error.response.data.message
-          : 'Request Failed Please Try Again or Contact Support';
-        let errorType = error.response.data.type ? error.response.data.type : '500 Server Error';
-        errorNotification(errorType, errorMessage);
-      } else if (error.message) {
+        //error messages from server with response data
+        if (error.response.data.type === 'Failed Sign Up') {
+          let errorMessage = error.response.data.message;
+          let errorType = error.response.data.type;
+          errorNotification(errorType, errorMessage);
+        } else {
+          console.log(error.response.data);
+          let errorMessage = error.response.data.message
+            ? error.response.data.message
+            : 'Request Failed Please Try Again or Contact Support';
+          let errorType = error.response.data.type ? error.response.data.type : '500 Server Error';
+          errorNotification(errorType, errorMessage);
+        }
+      } else if (error.message && error.code) {
         //firebase auth errors
         let errorType = 'Firebase Authentication Error';
         let errorMessage = error.message;
-        errorNotification(errorMessage, errorType);
+        errorNotification(errorType, errorMessage);
       }
 
       return {

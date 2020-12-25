@@ -135,11 +135,10 @@ const StyledSpan = styled.span`
 `;
 
 const Signup = () => {
-  const [isLoading2, setLoading] = useState(false);
   const { firebase, LogIn, LogOut } = useContext(AuthContext);
   const { fetchFailure, fetchInit, apiState } = useContext(ApiContext);
   const { isLoading } = apiState;
-  const [errMessage, setErrMessage] = useState('');
+
   const isLogin = false;
 
   const handleSubmit = async (values) => {
@@ -155,7 +154,7 @@ const Signup = () => {
         fetchFailure(error);
       });
 
-    Authentication(authRes, LogIn, isLogin, firebase, setErrMessage, setLoading);
+    Authentication(authRes, LogIn, isLogin, firebase, fetchFailure);
   };
 
   //Google OAuth2 Signin
@@ -171,7 +170,7 @@ const Signup = () => {
         fetchFailure(error);
       });
 
-    Authentication(authRes, LogIn, isLogin, firebase, setErrMessage, setLoading);
+    Authentication(authRes, LogIn, isLogin, firebase, fetchFailure);
   };
 
   return (
