@@ -133,7 +133,6 @@ const CheckoutForm = () => {
 
   useEffect(() => {
     if (authState.user) createSetupIntent();
-    console.log(authState);
   }, [authState]);
 
   const handleSubmit = async (event) => {
