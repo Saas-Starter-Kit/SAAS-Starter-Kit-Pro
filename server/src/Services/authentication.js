@@ -1,10 +1,7 @@
 import db from '../Database/db.js';
 import { setToken } from '../Config/passport.js';
-//import firebase from 'firebase-admin';
 import { saveUsertoDB, getUser } from './authHelpers.js';
-import admin from '../Config/firebase.js';
-
-//const admin = firebase.initializeApp();
+import firebaseAdmin from '../Config/firebase.js';
 
 export const SignUp = async (req, res) => {
   let token = req.body.token;
@@ -22,7 +19,7 @@ export const SignUp = async (req, res) => {
   }
 
   //decode the firebase token recieved from frontend and save firebase uuid
-  let decodedToken = await admin.auth().verifyIdToken(token);
+  let decodedToken = await firebaseAdmin.auth().verifyIdToken(token);
 
   let firebaseId = decodedToken.user_id;
 
@@ -41,7 +38,7 @@ export const Login = async (req, res) => {
   let email = req.body.email;
 
   //decode the firebase token recieved from frontend
-  let decodedToken = await admin.auth().verifyIdToken(token);
+  let decodedToken = await firebaseAdmin.auth().verifyIdToken(token);
 
   let firebaseId = decodedToken.user_id;
 
@@ -52,7 +49,7 @@ export const Login = async (req, res) => {
   //If user not found send error message
   if (user.rows.length === 0) {
     //delete user from firebase
-    await admin.auth().deleteUser(firebaseId);
+    await firebaseAdmin.auth().deleteUser(firebaseId);
     res.status(400).send({ type: 'Failed Login', message: 'User Does Not Exists' });
     return;
   }
