@@ -136,6 +136,10 @@ const Signup = () => {
 
   const isLogin = false;
 
+  useEffect(() => {
+    return () => fetchSuccess();
+  }, []);
+
   const handleSubmit = async (values) => {
     fetchInit();
 
@@ -149,7 +153,7 @@ const Signup = () => {
         fetchFailure(error);
       });
 
-    Authentication(authRes, LogIn, isLogin, firebase, fetchFailure, fetchSuccess);
+    Authentication(authRes, LogIn, isLogin, firebase, fetchFailure);
   };
 
   //Google OAuth2 Signin
@@ -165,7 +169,7 @@ const Signup = () => {
         fetchFailure(error);
       });
 
-    Authentication(authRes, LogIn, isLogin, firebase, fetchFailure, fetchSuccess);
+    Authentication(authRes, LogIn, isLogin, firebase, fetchFailure);
   };
 
   return (

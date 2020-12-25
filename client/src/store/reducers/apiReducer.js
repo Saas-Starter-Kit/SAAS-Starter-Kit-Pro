@@ -24,7 +24,7 @@ export const apiReducer = (state, action) => {
       //extract out to error handler
       if (error.response) {
         //error messages from server with response data
-        if (error.response.data.type === 'Failed Sign Up') {
+        if (error.response.data.type && error.response.data.message) {
           let errorMessage = error.response.data.message;
           let errorType = error.response.data.type;
           errorNotification(errorType, errorMessage);

@@ -3,3 +3,5 @@ keys.js
 .env
 .env.local
 dev.env
+
+firebase-admin.json
