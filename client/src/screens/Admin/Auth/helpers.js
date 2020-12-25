@@ -62,7 +62,7 @@ export const Authentication = async (
     console.log('JWT token decode failed');
     let error = {
       type: 'Authentication Failed',
-      message: 'Authentication Failed, please contact Support'
+      message: 'Authentication Failed, please try again or contact Support'
     };
 
     fetchFailure(error);

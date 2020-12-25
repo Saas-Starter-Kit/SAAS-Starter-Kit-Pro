@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { Formik } from 'formik';
 import { Link } from 'gatsby';
 import AuthContext from '../../../utils/authContext';
+import ApiContext from '../../../utils/apiContext';
 import { ValidSchema, Authentication } from './helpers';
 
 import LoadingOverlay from '../../../components/Admin/Common/loadingOverlay';
@@ -140,13 +141,6 @@ const ErrorText = styled.div`
   margin-top: -0.2rem;
 `;
 
-const ErrorResponse = styled.div`
-  font-size: 0.9rem;
-  color: red;
-  font-weight: 100;
-  margin-bottom: 1rem;
-`;
-
 const StyledGoogleButton = styled(GoogleButton)`
   margin-top: 2rem;
 `;
@@ -165,13 +159,13 @@ const StyledSpan = styled.span`
 `;
 
 const Login = () => {
-  const [isLoading, setLoading] = useState(false);
   const { firebase, LogIn, LogOut } = useContext(AuthContext);
-  const [errMessage, setErrMessage] = useState('');
+  const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
+  const { isLoading } = apiState;
   const isLogin = true;
 
   const handleSubmit = async (values) => {
-    setLoading(true);
+    fetchInit();
 
     let email = values.email;
     let password = values.password;
@@ -180,31 +174,25 @@ const Login = () => {
       .auth()
       .signInWithEmailAndPassword(email, password)
       .catch((error) => {
-        console.log(error);
-        setLoading(false);
-        setErrMessage(error.message);
-        throw new Error('Firebase Login Failed');
+        fetchFailure(error);
       });
 
-    Authentication(authRes, LogIn, isLogin, firebase, setErrMessage, setLoading);
+    Authentication(authRes, LogIn, isLogin, firebase, fetchFailure, fetchSuccess);
   };
 
   //Google OAuth2 Signin
   const GoogleSignin = async () => {
-    setLoading(true);
+    fetchInit();
     let provider = new firebase.auth.GoogleAuthProvider();
 
     let authRes = await firebase
       .auth()
       .signInWithPopup(provider)
       .catch((error) => {
-        console.log(error);
-        setLoading(false);
-        setErrMessage(error.message);
-        throw new Error('Firebase Login Failed');
+        fetchFailure(error);
       });
 
-    Authentication(authRes, LogIn, isLogin, firebase, setErrMessage, setLoading);
+    Authentication(authRes, LogIn, isLogin, firebase, fetchFailure, fetchSuccess);
   };
 
   return (
@@ -213,21 +201,12 @@ const Login = () => {
       <LoginFormHeader />
       <CardWrapper>
         <Card>
-          <ErrorResponse>{errMessage}</ErrorResponse>
           <Formik
             validationSchema={ValidSchema}
             initialValues={{ email: '', password: '' }}
             onSubmit={handleSubmit}
           >
-            {({
-              values,
-              errors,
-              touched,
-              handleChange,
-              handleBlur,
-              handleSubmit,
-              isSubmitting
-            }) => (
+            {({ values, errors, touched, handleChange, handleBlur, handleSubmit }) => (
               <form onSubmit={handleSubmit}>
                 <Label htmlFor="email">Email:</Label>
                 <InputWrapper>
