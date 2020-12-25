@@ -1,10 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { ErrorMessage, Formik } from 'formik';
-import jwt_decode from 'jwt-decode';
-import { SignupToServer, LoginToServer, LogintoContext } from '../../../api/authApi';
-import { createCustomer } from '../../../api/stripeApi';
+import { Formik } from 'formik';
 import AuthContext from '../../../utils/authContext';
+import ApiContext from '../../../utils/apiContext';
 
 import { ValidSchema, Authentication } from './helpers';
 
@@ -15,7 +13,6 @@ import { colors, breakpoints, fieldStyles } from '../../../styles/theme';
 import SignUpFormHeader from './signupFormHeader';
 import GoogleButton from 'react-google-button';
 import errorNotification from '../../../components/Admin/Common/errorNotification';
-import { FormProvider } from 'antd/lib/form/context';
 
 const Wrapper = styled.div`
   background-color: ${colors.gray50};
@@ -138,64 +135,15 @@ const StyledSpan = styled.span`
 `;
 
 const Signup = () => {
-  const [isLoading, setLoading] = useState(false);
+  const [isLoading2, setLoading] = useState(false);
   const { firebase, LogIn, LogOut } = useContext(AuthContext);
+  const { Fetch_Failure, Fetch_Init, apiState } = useContext(ApiContext);
+  const { isLoading } = apiState;
   const [errMessage, setErrMessage] = useState('');
   const isLogin = false;
 
-  //Save user information to our own db and and create stripe customer
-  const Authentication2 = async (authRes, LogIn, isLogin, firebase, setErrMessage, setLoading) => {
-    console.log(authRes);
-
-    //Get Auth id token from Firebase
-    let token = await firebase
-      .auth()
-      .currentUser.getIdToken()
-      .catch((err) => {
-        console.log(err);
-        setLoading(false);
-        setErrMessage('Login Failed, please contact support');
-        throw new Error('Firebase Token Not Found');
-      });
-
-    //server firebase authentication, returns jwt token
-    let authServerRes;
-    let username = authRes.user.displayName ? authRes.user.displayName : authRes.user.email;
-    let email = authRes.user.email;
-
-    authServerRes = await SignupToServer(email, username, token).catch((err) => {
-      console.log(err);
-      setLoading(false);
-      setErrMessage('Server Signup Failed, please contact Support');
-      throw new Error('Server Side Signup Fail');
-    });
-
-    let userId;
-    //decode jwt token recieved from server
-    if (jwt_decode(authServerRes.data.token)) {
-      userId = jwt_decode(authServerRes.data.token).user;
-    } else {
-      setLoading(false);
-      setErrMessage('Authentication Failed, please contact Support');
-      throw new Error('JWT decode failed or JWT invalid');
-    }
-
-    //create stripe customer based on our own server user id
-    let stripeServerRes = await createCustomer(userId, email).catch((err) => {
-      console.log(err);
-      setLoading(false);
-      setErrMessage('Sign-Up Failed, Please Contact support');
-      throw new Error('Stripe Signup Fail');
-    });
-
-    console.log(stripeServerRes);
-
-    //save user data to React context
-    LogintoContext(userId, authRes, stripeServerRes, LogIn);
-  };
-
   const handleSubmit = async (values) => {
-    setLoading(true);
+    Fetch_Init();
 
     let email = values.email;
     let password = values.password;
@@ -208,9 +156,10 @@ const Signup = () => {
         //setLoading(false);
         //setErrMessage(error.message);
         //throw new Error('Firebase Login Failed');
-        setLoading(false);
-        let errorType = 'Firebase Authentication Error';
-        errorNotification(error.message, errorType);
+        //setLoading(false);
+        //let errorType = 'Firebase Authentication Error';
+        //errorNotification(error.message, errorType);
+        Fetch_Failure(error);
       });
 
     Authentication(authRes, LogIn, isLogin, firebase, setErrMessage, setLoading);

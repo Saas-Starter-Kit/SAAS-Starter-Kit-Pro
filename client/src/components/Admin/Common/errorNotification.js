@@ -8,12 +8,12 @@ const errorNotification = (errorMessage, errorType) => {
 
   notification.error({
     message: errorTitle,
-    description: errorDescription
+    description: errorDescription,
+    duration: 10
   });
 
   console.log(errorMessage);
   console.log(errorType);
-  throw new Error('An Error occured, code execution stopped');
 };
 
 export default errorNotification;

@@ -25,12 +25,12 @@ const RootWrapper = ({ children }) => {
     firebase.auth().signOut();
   };
 
-  const Fetch_Failure = () => {
-    dispatchApi(Fetch_failure);
+  const Fetch_Failure = (error) => {
+    dispatchApi(Fetch_failure(error));
+    throw new Error('Error Detected, code execution stopped');
   };
 
   const Fetch_Init = () => {
-    console.log('dddd');
     dispatchApi(Fetch_init);
   };
 

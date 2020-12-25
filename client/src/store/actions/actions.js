@@ -15,8 +15,11 @@ export const Fetch_init = {
   type: FETCH_INIT
 };
 
-export const Fetch_failure = {
-  type: FETCH_FAILURE
+export const Fetch_failure = (error) => {
+  return {
+    type: FETCH_FAILURE,
+    payload: error
+  };
 };
 export const Fetch_success = {
   type: FETCH_SUCCESS
