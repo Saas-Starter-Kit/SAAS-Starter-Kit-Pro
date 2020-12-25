@@ -3,16 +3,11 @@ import styled from 'styled-components';
 import { Formik } from 'formik';
 import AuthContext from '../../../utils/authContext';
 import ApiContext from '../../../utils/apiContext';
-
 import { ValidSchema, Authentication } from './helpers';
-
-import useApi from '../../../hooks/useApi';
-
 import LoadingOverlay from '../../../components/Admin/Common/loadingOverlay';
 import { colors, breakpoints, fieldStyles } from '../../../styles/theme';
 import SignUpFormHeader from './signupFormHeader';
 import GoogleButton from 'react-google-button';
-import errorNotification from '../../../components/Admin/Common/errorNotification';
 
 const Wrapper = styled.div`
   background-color: ${colors.gray50};
