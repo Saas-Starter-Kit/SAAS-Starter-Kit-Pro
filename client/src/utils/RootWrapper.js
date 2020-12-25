@@ -25,16 +25,16 @@ const RootWrapper = ({ children }) => {
     firebase.auth().signOut();
   };
 
-  const Fetch_Failure = (error) => {
+  const fetchFailure = (error) => {
     dispatchApi(Fetch_failure(error));
     throw new Error('Error Detected, code execution stopped');
   };
 
-  const Fetch_Init = () => {
+  const fetchInit = () => {
     dispatchApi(Fetch_init);
   };
 
-  const Fetch_Success = () => {
+  const fetchSuccess = () => {
     dispatchApi(Fetch_success);
   };
 
@@ -57,7 +57,7 @@ const RootWrapper = ({ children }) => {
 
   return (
     <AuthContext.Provider value={{ authState, LogIn, LogOut, firebase }}>
-      <ApiContext.Provider value={{ apiState, Fetch_Failure, Fetch_Init, Fetch_Success }}>
+      <ApiContext.Provider value={{ apiState, fetchFailure, fetchInit, fetchSuccess }}>
         <ThemeProvider theme={theme}>{children}</ThemeProvider>
       </ApiContext.Provider>
     </AuthContext.Provider>

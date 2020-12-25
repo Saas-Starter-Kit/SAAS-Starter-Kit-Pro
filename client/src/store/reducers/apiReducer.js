@@ -21,6 +21,7 @@ export const apiReducer = (state, action) => {
       let error = action.payload;
       console.log(error);
 
+      //extract out to error handler
       if (error.response) {
         console.log(error.response.data);
         let errorMessage = error.response.data.message

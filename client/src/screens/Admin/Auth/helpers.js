@@ -1,8 +1,9 @@
+import { useContext } from 'react';
+import apiContext from '../../../utils/apiContext';
 import jwt_decode from 'jwt-decode';
 import { navigate } from 'gatsby';
 import * as Yup from 'yup';
-import { SignupToServer, LoginToServer } from '../../../api/authApi';
-import { createCustomer } from '../../../api/stripeApi';
+import axios from '../../../services/axios';
 
 //valid format for setting an email and password
 export const ValidSchema = Yup.object().shape({
@@ -14,14 +15,8 @@ export const ValidSchema = Yup.object().shape({
 });
 
 //Save user information to our own db and and create stripe customer
-export const Authentication = async (
-  authRes,
-  LogIn,
-  isLogin,
-  firebase,
-  setErrMessage,
-  setLoading
-) => {
+export const Authentication = async (authRes, LogIn, isLogin, firebase) => {
+  const { fetchFailure } = useContext(apiContext);
   console.log(authRes);
 
   //Get Auth id token from Firebase
@@ -29,10 +24,7 @@ export const Authentication = async (
     .auth()
     .currentUser.getIdToken()
     .catch((err) => {
-      console.log(err);
-      setLoading(false);
-      setErrMessage('Login Failed, please contact support');
-      throw new Error('Firebase Token Not Found');
+      fetchFailure(err);
     });
 
   //server firebase authentication, returns jwt token
@@ -41,19 +33,19 @@ export const Authentication = async (
   let email = authRes.user.email;
 
   if (isLogin) {
-    authServerRes = await LoginToServer(email, token).catch((err) => {
-      console.log(err);
-      setLoading(false);
-      setErrMessage('Server Login Failed, please refresh the browser and try again');
-      throw new Error('Server Side Login Fail');
+    let data = { email, token };
+
+    authServerRes = await axios.post(`/auth/login`, data).catch((err) => {
+      fetchFailure(err);
     });
   } else {
-    authServerRes = await SignupToServer(email, username, token).catch((err) => {
-      console.log(err);
-      setLoading(false);
-      setErrMessage('Server Signup Failed, please contact Support');
-      throw new Error('Server Side Signup Fail');
+    let data = { email, username, token };
+
+    authServerRes = await axios.post(`/auth/signup`, data).catch((err) => {
+      fetchFailure(err);
     });
+
+    console.log(authServerRes);
   }
 
   let userId;
@@ -61,20 +53,19 @@ export const Authentication = async (
   if (jwt_decode(authServerRes.data.token)) {
     userId = jwt_decode(authServerRes.data.token).user;
   } else {
-    setLoading(false);
-    setErrMessage('Authentication Failed, please contact Support');
+    //figure out
+    //setLoading(false);
+    //setErrMessage('Authentication Failed, please contact Support');
     throw new Error('JWT decode failed or JWT invalid');
   }
 
   let stripeServerRes;
   console.log(authServerRes);
   if (!isLogin) {
+    let data = { userId, email };
     //create stripe customer based on our own server user id
-    stripeServerRes = await createCustomer(userId, email).catch((err) => {
-      console.log(err);
-      setLoading(false);
-      setErrMessage('Sign-Up Failed, Please Contact support');
-      throw new Error('Stripe Signup Fail');
+    stripeServerRes = await axios.post('/stripe/create-customer', data).catch((err) => {
+      fetchFailure(err);
     });
   } else {
     //for login, stripe customer key is returned from our own db during server auth
@@ -83,7 +74,7 @@ export const Authentication = async (
 
   console.log(stripeServerRes);
 
-  //save user data to React context
+  ////save user data to React context
   LogintoContext(userId, authRes, stripeServerRes, LogIn);
 };
 

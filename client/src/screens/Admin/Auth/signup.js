@@ -137,13 +137,13 @@ const StyledSpan = styled.span`
 const Signup = () => {
   const [isLoading2, setLoading] = useState(false);
   const { firebase, LogIn, LogOut } = useContext(AuthContext);
-  const { Fetch_Failure, Fetch_Init, apiState } = useContext(ApiContext);
+  const { fetchFailure, fetchInit, apiState } = useContext(ApiContext);
   const { isLoading } = apiState;
   const [errMessage, setErrMessage] = useState('');
   const isLogin = false;
 
   const handleSubmit = async (values) => {
-    Fetch_Init();
+    fetchInit();
 
     let email = values.email;
     let password = values.password;
@@ -152,14 +152,7 @@ const Signup = () => {
       .auth()
       .createUserWithEmailAndPassword(email, password)
       .catch((error) => {
-        //console.log(error);
-        //setLoading(false);
-        //setErrMessage(error.message);
-        //throw new Error('Firebase Login Failed');
-        //setLoading(false);
-        //let errorType = 'Firebase Authentication Error';
-        //errorNotification(error.message, errorType);
-        Fetch_Failure(error);
+        fetchFailure(error);
       });
 
     Authentication(authRes, LogIn, isLogin, firebase, setErrMessage, setLoading);
@@ -167,7 +160,7 @@ const Signup = () => {
 
   //Google OAuth2 Signin
   const GoogleSignin = async () => {
-    setLoading(true);
+    fetchInit();
     let provider = new firebase.auth.GoogleAuthProvider();
 
     //wait for firebase to confirm signup
@@ -175,10 +168,7 @@ const Signup = () => {
       .auth()
       .signInWithPopup(provider)
       .catch((error) => {
-        console.log(error);
-        setLoading(false);
-        setErrMessage(error.message);
-        throw new Error('Firebase Login Failed');
+        fetchFailure(error);
       });
 
     Authentication(authRes, LogIn, isLogin, firebase, setErrMessage, setLoading);
@@ -195,15 +185,7 @@ const Signup = () => {
             initialValues={{ email: '', password: '' }}
             onSubmit={handleSubmit}
           >
-            {({
-              values,
-              errors,
-              touched,
-              handleChange,
-              handleBlur,
-              handleSubmit,
-              isSubmitting
-            }) => (
+            {({ values, errors, touched, handleChange, handleBlur, handleSubmit }) => (
               <form onSubmit={handleSubmit}>
                 <Label htmlFor="email">Email:</Label>
                 <InputWrapper>
