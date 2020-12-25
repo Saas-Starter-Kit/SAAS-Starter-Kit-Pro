@@ -15,7 +15,14 @@ export const ValidSchema = Yup.object().shape({
 });
 
 //Save user information to our own db and and create stripe customer
-export const Authentication = async (authRes, LogIn, isLogin, firebase, fetchFailure) => {
+export const Authentication = async (
+  authRes,
+  LogIn,
+  isLogin,
+  firebase,
+  fetchFailure,
+  fetchSuccess
+) => {
   console.log(authRes);
 
   //Get Auth id token from Firebase
@@ -47,16 +54,23 @@ export const Authentication = async (authRes, LogIn, isLogin, firebase, fetchFai
     console.log(authServerRes);
   }
 
-  let userId;
   //decode jwt token recieved from server
-  if (jwt_decode(authServerRes.data.token)) {
-    userId = jwt_decode(authServerRes.data.token).user;
-  } else {
-    //figure out
-    //setLoading(false);
-    //setErrMessage('Authentication Failed, please contact Support');
-    throw new Error('JWT decode failed or JWT invalid');
+  let validToken;
+  try {
+    validToken = jwt_decode(authServerRes.data.token);
+  } catch {
+    console.log('JWT token decode failed');
+    let error = {
+      type: 'Authentication Failed',
+      message: 'Authentication Failed, please contact Support'
+    };
+
+    fetchFailure(error);
   }
+
+  let userId = validToken.user;
+
+  console.log(userId);
 
   let stripeServerRes;
   console.log(authServerRes);
@@ -74,11 +88,11 @@ export const Authentication = async (authRes, LogIn, isLogin, firebase, fetchFai
   console.log(stripeServerRes);
 
   ////save user data to React context
-  LogintoContext(userId, authRes, stripeServerRes, LogIn);
+  LogintoContext(userId, authRes, stripeServerRes, LogIn, fetchSuccess);
 };
 
 //Save user Info to Context
-export const LogintoContext = async (user_id, authRes, stripeKey, LogIn) => {
+export const LogintoContext = async (user_id, authRes, stripeKey, LogIn, fetchSuccess) => {
   console.log(authRes);
   console.log(stripeKey);
 
@@ -101,5 +115,6 @@ export const LogintoContext = async (user_id, authRes, stripeKey, LogIn) => {
   };
 
   await LogIn(user);
+  fetchSuccess();
   setTimeout(() => navigate('/app'), 200);
 };

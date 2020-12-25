@@ -41,6 +41,12 @@ export const apiReducer = (state, action) => {
         let errorType = 'Firebase Authentication Error';
         let errorMessage = error.message;
         errorNotification(errorType, errorMessage);
+      } else if (error.type && error.message) {
+        //custom non-async errors, thrown by app
+        let errorType = error.type;
+        let errorMessage = error.message;
+
+        errorNotification(errorType, errorMessage);
       }
 
       return {

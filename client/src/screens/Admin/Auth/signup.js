@@ -131,7 +131,7 @@ const StyledSpan = styled.span`
 
 const Signup = () => {
   const { firebase, LogIn, LogOut } = useContext(AuthContext);
-  const { fetchFailure, fetchInit, apiState } = useContext(ApiContext);
+  const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
   const { isLoading } = apiState;
 
   const isLogin = false;
@@ -149,7 +149,7 @@ const Signup = () => {
         fetchFailure(error);
       });
 
-    Authentication(authRes, LogIn, isLogin, firebase, fetchFailure);
+    Authentication(authRes, LogIn, isLogin, firebase, fetchFailure, fetchSuccess);
   };
 
   //Google OAuth2 Signin
@@ -165,7 +165,7 @@ const Signup = () => {
         fetchFailure(error);
       });
 
-    Authentication(authRes, LogIn, isLogin, firebase, fetchFailure);
+    Authentication(authRes, LogIn, isLogin, firebase, fetchFailure, fetchSuccess);
   };
 
   return (
