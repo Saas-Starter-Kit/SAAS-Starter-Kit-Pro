@@ -9,13 +9,9 @@ export const getUser = async (email) => {
 
   let queryResult = await db.query(text, values);
 
-  console.log(queryResult.rows.length);
+  console.log(queryResult.rows);
 
-  if (queryResult.rows.length === 0) {
-    return { message: 'User Not Found' };
-  } else {
-    return queryResult;
-  }
+  return queryResult;
 };
 
 export const saveUsertoDB = async (email, username, firebaseId) => {
