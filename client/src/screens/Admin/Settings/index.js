@@ -1,8 +1,8 @@
 import React, { useState, useContext, useEffect } from 'react';
-import axios from 'axios';
 import styled from 'styled-components';
 import { navigate } from 'gatsby';
 import AuthContext from '../../../utils/authContext';
+import ApiContext from '../../../utils/apiContext';
 import LoadingOverlay from '../../../components/Admin/Common/loadingOverlay';
 import { colors, breakpoints, fieldStyles } from '../../../styles/theme';
 import { updateUserNameApi, updateEmailApi } from '../../../api/authApi';
@@ -10,6 +10,7 @@ import AttachPaymentFormWrapper from './attachPaymentFormWrapper';
 import moment from 'moment';
 import ModalCardDelete from './deleteCardConfirmModal';
 import ModalSubscriptionCancel from './cancelSubscriptionModal';
+import axios from '../../../services/axios';
 
 const Wrapper = styled.div``;
 
@@ -125,73 +126,85 @@ const SuccessResponse = styled.div`
 
 const Settings = () => {
   const { firebase, authState } = useContext(AuthContext);
+  const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
+  const { isLoading } = apiState;
 
-  let userEmail = authState.user ? authState.user.email : 'Guest@guest.com';
-  let displayName = authState.user ? authState.user.username : 'Guest';
   const curUser = firebase.auth().currentUser;
-  const id = authState.user ? authState.user.id.user : null;
-  const stripeCustomerId = authState.user ? authState.user.stripeCustomerKey : null;
-  const isEmail = authState.user ? authState.user.provider === 'password' : null;
 
-  const [isLoading, setLoading] = useState(false);
   const [isModalCard, setModalCard] = useState(false);
-
   const [isModalSub, setModalSub] = useState(false);
+
   const [deletePaymentId, setDeletePaymentId] = useState('');
-  const [email, setEmail] = useState(userEmail);
-  const [username, setUsername] = useState(displayName);
-  const [resMessage, setResMessage] = useState('');
   const [resPayMessage, setResPayMessage] = useState('');
   const [payCards, setPayCards] = useState([]);
-
   const [subscriptionState, setSubscription] = useState();
   const [paymentRemoved, setPaymentRemoved] = useState(false);
 
+  const [id, setId] = useState('');
+  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
+  const [stripeCustomerId, setStripeId] = useState('');
+  const [isEmail, setIsEmail] = useState('');
+
   useEffect(() => {
-    if (authState.user) getWallet();
+    if (authState.user) {
+      setUser();
+      getWallet();
+    }
   }, [authState]);
 
-  const updateUsername = (event) => {
-    event.preventDefault();
-    setLoading(true);
+  const setUser = () => {
+    let userEmail = authState.user.email;
+    let displayName = authState.user.username;
+    let stripeCustomerId = authState.user.stripeCustomerKey;
+    let id = authState.user.id.user;
+    let isEmail = authState.user.provider === 'password';
 
-    curUser
+    setId(id);
+    setEmail(userEmail);
+    setIsEmail(isEmail);
+    setUsername(displayName);
+    setStripeId(stripeCustomerId);
+  };
+
+  const updateUsername = async (event) => {
+    event.preventDefault();
+    fetchInit();
+
+    await curUser
       .updateProfile({
         displayName: username
       })
-      .then(() => {
-        updateUserNameApi(id, username);
-      })
-      .catch((error) => {
-        // An error happened.
-        console.log(error);
-        setResMessage('An error occured please try again later');
-        setLoading(false);
+      .catch((err) => {
+        fetchFailure(err);
       });
+
+    const data = { id, username };
+
+    await axios.put(`/auth/put/username`, data).catch((err) => {
+      fetchFailure(err);
+    });
+
+    //show success message
+    //navigate('/login');
   };
 
-  const updateEmail = (event) => {
+  const updateEmail = async (event) => {
     event.preventDefault();
-    setLoading(true);
+    fetchInit();
 
-    curUser
-      .updateEmail(email)
-      .then(() => {
-        updateEmailApi(id, email);
-      })
-      .catch(function (error) {
-        console.log(error);
-        setResMessage('An error occured please try again later');
-        setLoading(false);
-      });
-  };
+    await curUser.updateEmail(email).catch(function (error) {
+      fetchFailure(error);
+    });
 
-  const handleUsernameChange = (event) => {
-    setUsername(event.target.value);
-  };
+    const data = { id, email };
 
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
+    await axios.put(`/auth/put/email`, data).catch((err) => {
+      fetchFailure(err);
+    });
+
+    //extract out
+    //navigate('/login');
   };
 
   const deletePaymentMethod = async (id) => {
@@ -200,9 +213,12 @@ const Settings = () => {
       payment: deletePaymentId
     };
 
-    let wallet = await axios.post('http://localhost/stripe/remove-payment', data);
+    let wallet = await axios.post('/stripe/remove-payment', data).catch((err) => {
+      fetchFailure(err);
+    });
+
     console.log(wallet);
-    if (wallet) setPaymentRemoved(true);
+    setPaymentRemoved(true);
   };
 
   const getWallet = async () => {
@@ -210,16 +226,20 @@ const Settings = () => {
       customer: stripeCustomerId
     };
 
-    let wallet = await axios.get('http://localhost/stripe/get-wallet', { params });
+    let wallet = await axios.get('/stripe/get-wallet', { params }).catch((err) => {
+      fetchFailure(err);
+    });
     console.log(wallet);
     const cards = wallet.data.data;
     setPayCards(cards);
   };
 
   const getSubscription = async () => {
-    let params = { email: userEmail };
+    let params = { email: authState.user.email };
 
-    const subscription = await axios.get('http://localhost/stripe/get-subscription', { params });
+    const subscription = await axios.get('/stripe/get-subscription', { params }).catch((err) => {
+      fetchFailure(err);
+    });
 
     setSubscription(subscription.data);
   };
@@ -227,17 +247,25 @@ const Settings = () => {
   const cancelSubscription = async () => {
     setModalSub(false);
     let data = {
-      email: userEmail
+      email: authState.user.email
     };
 
-    const subscriptionCancel = await axios.post(
-      'http://localhost/stripe/cancel-subscription',
-      data
-    );
-    if (!subscriptionCancel) console.log('Subscription Cancel failed');
+    const subscriptionCancel = await axios
+      .post('/stripe/cancel-subscription', data)
+      .catch((err) => {
+        fetchFailure(err);
+      });
 
     setResPayMessage(subscriptionCancel.data);
     setModalSub(false);
+  };
+
+  const handleUsernameChange = (event) => {
+    setUsername(event.target.value);
+  };
+
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
   };
 
   const handleModalCardCancel = () => {
@@ -252,7 +280,6 @@ const Settings = () => {
     <Wrapper>
       <Card>
         <Title>Account Settings</Title>
-        <Paragraph>{resMessage}</Paragraph>
         {!isEmail && (
           <Paragraph>Account Settings Changes Only Available for Email Signups</Paragraph>
         )}
@@ -277,7 +304,6 @@ const Settings = () => {
             type="email"
             onChange={handleEmailChange}
             value={email}
-            type="text"
             disabled={isEmail ? false : true}
           />
           <Button onClick={updateEmail} disabled={isEmail ? false : true}>

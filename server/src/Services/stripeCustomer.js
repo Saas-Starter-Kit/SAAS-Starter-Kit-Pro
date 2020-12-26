@@ -37,13 +37,3 @@ export const CreateCustomer = async (req, res) => {
 
   res.send(queryResult.rows[0]);
 };
-
-//const GetCustomer = async (req, res) => {
-//  let customer_id = req.body.customer.stripeCustomerKey;
-
-//  let customer = await stripe.customers.retrieve(customer_id).catch((err) => {
-//    console.log(err);
-//    res.status(500).send('Stripe Sign Up Failed');
-//    throw new Error('Stripe SignUp Failed');
-//  });
-//};
