@@ -134,24 +134,29 @@ const Settings = () => {
   const [isModalCard, setModalCard] = useState(false);
   const [isModalSub, setModalSub] = useState(false);
 
-  const [deletePaymentId, setDeletePaymentId] = useState('');
-  const [resPayMessage, setResPayMessage] = useState('');
+  const [deletePaymentId, setDeletePaymentId] = useState();
+  const [resPayMessage, setResPayMessage] = useState();
   const [payCards, setPayCards] = useState([]);
   const [subscriptionState, setSubscription] = useState();
   const [paymentRemoved, setPaymentRemoved] = useState(false);
 
-  const [id, setId] = useState('');
-  const [email, setEmail] = useState('');
-  const [username, setUsername] = useState('');
-  const [stripeCustomerId, setStripeId] = useState('');
-  const [isEmail, setIsEmail] = useState('');
+  const [id, setId] = useState();
+  const [email, setEmail] = useState();
+  const [username, setUsername] = useState();
+  const [stripeCustomerId, setStripeId] = useState();
+  const [isEmail, setIsEmail] = useState();
 
   useEffect(() => {
     if (authState.user) {
       setUser();
-      getWallet();
     }
   }, [authState]);
+
+  useEffect(() => {
+    if (stripeCustomerId) {
+      getWallet();
+    }
+  }, [stripeCustomerId]);
 
   const setUser = () => {
     let userEmail = authState.user.email;
@@ -185,7 +190,7 @@ const Settings = () => {
       fetchFailure(err);
     });
 
-    //show success message
+    //show success message, instead of form
     //navigate('/login');
   };
 
@@ -203,7 +208,7 @@ const Settings = () => {
       fetchFailure(err);
     });
 
-    //extract out
+    //show success instead of form
     //navigate('/login');
   };
 

@@ -72,32 +72,34 @@ export const CancelSubscription = async (req, res) => {
   let email = req.body.email;
 
   //check if email exists
-  let query1 = `SELECT * FROM users
+  let query = `SELECT * FROM users
                 WHERE email=$1`;
 
-  let values1 = [email];
+  let values = [email];
 
   //check if user exists
-  const user = await db.query(query1, values1);
-  if (!user) res.send('User Not Found');
+  const user = await db.query(query, values);
 
   console.log(user.rows[0].subscription_id);
   let subscription_id = user.rows[0].subscription_id;
 
   //delete subscription and send back response
   const subscription = await stripe.subscriptions.del(subscription_id);
-  if (!subscription) res.send('Subscription Cancel failed');
 
   if (subscription.status === 'canceled') {
-    let text2 = `UPDATE users SET is_paid_member=$1, subscription_id=$2
+    let text = `UPDATE users SET is_paid_member=$1, subscription_id=$2
                WHERE email=$3`;
-    let values2 = ['false', '', email];
+    let values = ['false', '', email];
 
-    let serverUpdate = await db.query(text2, values2);
+    await db.query(text, values);
 
-    if (!serverUpdate) res.send('Subscription Cancel Failed');
-    if (serverUpdate.command === 'UPDATE') res.send('Subscription Successfully Canceled');
+    res
+      .status(200)
+      .send({ type: 'Request Successful', message: 'Subscription Successfully Canceled' });
   } else {
-    res.send("'Subscription Cancel Failed'");
+    res.status(400).send({
+      type: 'Subscription Cancel Failed',
+      message: 'Subscription Cancel Failed, please contact support'
+    });
   }
 };
