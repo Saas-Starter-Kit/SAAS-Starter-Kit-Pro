@@ -15,6 +15,18 @@ const ButtonWrapper = styled.div`
   text-align: left;
 `;
 
+const Card = styled.div`
+  background-color: ${colors.white};
+  width: 100%;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  @media (min-width: ${breakpoints.large}) {
+    width: 75%;
+  }
+`;
+
 const Button = styled.button`
   margin-top: 1rem;
   padding: 0.6rem 2rem 0.6rem 2rem;
@@ -123,7 +135,7 @@ const AttachPaymentForm = () => {
   };
 
   return (
-    <>
+    <Card>
       {isLoading && <LoadingOverlay />}
       <Header>Add a Payment Method</Header>
       <SuccessResponse>{successMessage}</SuccessResponse>
@@ -140,7 +152,7 @@ const AttachPaymentForm = () => {
           <p>Adding a card will make it the default payment method</p>
         </>
       )}
-    </>
+    </Card>
   );
 };
 

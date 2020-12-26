@@ -1,13 +1,19 @@
 import React, { useState, useContext, useEffect } from 'react';
-import styled from 'styled-components';
+
 import { navigate } from 'gatsby';
+import moment from 'moment';
+
 import AuthContext from '../../../utils/authContext';
 import ApiContext from '../../../utils/apiContext';
+
 import LoadingOverlay from '../../../components/Admin/Common/loadingOverlay';
+import styled from 'styled-components';
 import { colors, breakpoints, fieldStyles } from '../../../styles/theme';
-import { updateUserNameApi, updateEmailApi } from '../../../api/authApi';
+
+import UpdateUsernameCard from './updateUsernameCard';
+import UpdateEmailCard from './updateEmailCard';
 import AttachPaymentFormWrapper from './attachPaymentFormWrapper';
-import moment from 'moment';
+
 import ModalCardDelete from './deleteCardConfirmModal';
 import ModalSubscriptionCancel from './cancelSubscriptionModal';
 import axios from '../../../services/axios';
@@ -158,6 +164,10 @@ const Settings = () => {
     }
   }, [stripeCustomerId]);
 
+  /*
+      Auth Methods
+  */
+
   const setUser = () => {
     let userEmail = authState.user.email;
     let displayName = authState.user.username;
@@ -190,8 +200,7 @@ const Settings = () => {
       fetchFailure(err);
     });
 
-    //show success message, instead of form
-    //navigate('/login');
+    navigate('/login');
   };
 
   const updateEmail = async (event) => {
@@ -208,9 +217,12 @@ const Settings = () => {
       fetchFailure(err);
     });
 
-    //show success instead of form
-    //navigate('/login');
+    navigate('/login');
   };
+
+  /* 
+      Stripe Methods
+  */
 
   const deletePaymentMethod = async (id) => {
     setModalCard(false);
@@ -223,6 +235,7 @@ const Settings = () => {
     });
 
     console.log(wallet);
+    //show ant d success message
     setPaymentRemoved(true);
   };
 
@@ -261,9 +274,14 @@ const Settings = () => {
         fetchFailure(err);
       });
 
+    //replace with antd success message
     setResPayMessage(subscriptionCancel.data);
     setModalSub(false);
   };
+
+  /* 
+      Helper Methods
+  */
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
@@ -283,38 +301,24 @@ const Settings = () => {
 
   return (
     <Wrapper>
+      <Title>Account Settings</Title>
+
+      {isLoading && <LoadingOverlay />}
+
+      <UpdateUsernameCard
+        isEmail={isEmail}
+        handleUsernameChange={handleUsernameChange}
+        username={username}
+        updateUsername={updateUsername}
+      />
+      <UpdateEmailCard
+        handleEmailChange={handleEmailChange}
+        isEmail={isEmail}
+        email={email}
+        updateEmail={updateEmail}
+      />
+
       <Card>
-        <Title>Account Settings</Title>
-        {!isEmail && (
-          <Paragraph>Account Settings Changes Only Available for Email Signups</Paragraph>
-        )}
-        {isLoading && <LoadingOverlay />}
-        <SectionTitle>Update Username</SectionTitle>
-        <Form>
-          <Label htmlFor="title">Username:</Label>
-          <Input
-            onChange={handleUsernameChange}
-            value={username}
-            type="text"
-            disabled={isEmail ? false : true}
-          />
-          <Button onClick={updateUsername} disabled={isEmail ? false : true}>
-            Save
-          </Button>
-        </Form>
-        <SectionTitle>Update Email</SectionTitle>
-        <Form>
-          <Label htmlFor="title">Email:</Label>
-          <Input
-            type="email"
-            onChange={handleEmailChange}
-            value={email}
-            disabled={isEmail ? false : true}
-          />
-          <Button onClick={updateEmail} disabled={isEmail ? false : true}>
-            Save
-          </Button>
-        </Form>
         <SectionTitle>Update Password</SectionTitle>
         <p>Please Reset Password on Login Page</p>
         <Button
@@ -367,9 +371,8 @@ const Settings = () => {
           cancelSubscription={cancelSubscription}
         />
       </Card>
-      <Card>
-        <AttachPaymentFormWrapper />
-      </Card>
+
+      <AttachPaymentFormWrapper />
 
       <Card>
         <h2>Payment Information</h2>
