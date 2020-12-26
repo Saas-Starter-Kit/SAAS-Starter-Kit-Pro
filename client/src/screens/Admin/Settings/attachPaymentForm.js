@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
-import axios from 'axios';
+
 import AuthContext from '../../../utils/authContext';
+import ApiContext from '../../../utils/apiContext';
 import { colors, breakpoints } from '../../../styles/theme';
 import styled from 'styled-components';
 import LoadingOverlay from '../../../components/Admin/Common/loadingOverlay';
+import axios from '../../../services/axios';
 
 const ButtonWrapper = styled.div`
   padding-top: 2rem;
@@ -64,19 +66,20 @@ const SuccessResponse = styled.div`
 
 const AttachPaymentForm = () => {
   const { authState } = useContext(AuthContext);
+  const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
+  const { isLoading } = apiState;
 
-  const [resMessage, setResMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
   const [setupIntentState, setSetupIntent] = useState();
-  const [isLoading, setLoading] = useState(false);
 
   const stripe = useStripe();
   const elements = useElements();
 
   const createSetupIntent = async () => {
     let data = { customer: authState.user };
-    const result = await axios.post('http://localhost/stripe/wallet', data);
-    if (!result) setResMessage('Payment Setup Failed, Please Contact Support');
+    const result = await axios.post('/stripe/wallet', data).catch((err) => {
+      fetchFailure(err);
+    });
 
     setSetupIntent(result.data);
   };
@@ -88,7 +91,7 @@ const AttachPaymentForm = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setLoading(true);
+    fetchInit();
 
     const cardElement = elements.getElement(CardElement);
 
@@ -97,13 +100,13 @@ const AttachPaymentForm = () => {
     });
 
     if (!setupIntent && error) {
-      setLoading(false);
-      setResMessage(error.message);
-      return;
+      fetchFailure(error);
     } else if (!setupIntent && !error) {
-      setLoading(false);
-      setResMessage('Card confirmation failed, please contact support');
-      return;
+      let error = {
+        type: 'Stripe Confirmation Error',
+        message: 'Stripe Confirmation Failed, Please contact support'
+      };
+      fetchFailure(error);
     }
 
     let data = {
@@ -111,27 +114,20 @@ const AttachPaymentForm = () => {
       customer: authState.user
     };
 
-    const result = await axios.post('http://localhost/stripe/attach-payment', data);
-    if (!result) {
-      setLoading(false);
-      setResMessage('Adding Payment method failed, please contact support');
-      return;
-    }
+    await axios.post('/stripe/attach-payment', data).catch((err) => {
+      fetchFailure(err);
+    });
 
-    if (result) {
-      setLoading(false);
-      setSuccessMessage('Payment Method Successfully updated');
-      return;
-    }
+    fetchSuccess();
+    setSuccessMessage('Payment Method Successfully updated');
   };
 
   return (
     <>
       {isLoading && <LoadingOverlay />}
       <Header>Add a Payment Method</Header>
-      <ErrorResponse>{resMessage}</ErrorResponse>
       <SuccessResponse>{successMessage}</SuccessResponse>
-      {!successMessage && !resMessage && (
+      {!successMessage && (
         <>
           <form onSubmit={handleSubmit}>
             <CardElement />
@@ -144,7 +140,6 @@ const AttachPaymentForm = () => {
           <p>Adding a card will make it the default payment method</p>
         </>
       )}
-      <button onClick={() => console.log(setupIntentState)}>FFFFF</button>{' '}
     </>
   );
 };

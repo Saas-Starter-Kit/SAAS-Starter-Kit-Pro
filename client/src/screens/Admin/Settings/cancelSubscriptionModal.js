@@ -26,10 +26,10 @@ const ModalSubscriptionCancel = ({ isModalSub, handleModalSubCancel, cancelSubsc
   return (
     <Modal
       visible={isModalSub}
-      title="Removing Card"
+      title="Ending Subscription"
       onCancel={handleModalSubCancel}
       footer={[
-        <DangerButton onClick={cancelSubscription}>Remove?</DangerButton>,
+        <DangerButton onClick={cancelSubscription}>End Subscription?</DangerButton>,
         <CancelDangerButton onClick={handleModalSubCancel}>Cancel</CancelDangerButton>
       ]}
     >

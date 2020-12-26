@@ -10,7 +10,7 @@ import styled from 'styled-components';
 import LoadingOverlay from '../../../components/Admin/Common/loadingOverlay';
 import ConfirmSub from './confirmSubscription';
 import PlanCard from './planCard';
-import { createSubscription } from '../../../api/stripeApi';
+
 import axios from '../../../services/axios';
 
 const Wrapper = styled.div`
@@ -193,7 +193,6 @@ const CheckoutForm = () => {
                 </Button>
               </ButtonWrapper>
             </form>
-            <button onClick={() => console.log(setupIntentState)}>FFFFF</button>
           </Card>
         </CardWrapper>
       ) : (
