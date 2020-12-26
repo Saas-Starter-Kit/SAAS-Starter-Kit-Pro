@@ -60,7 +60,7 @@ export const Login = async (req, res) => {
   res.send({ token: setToken(user_id), stripe_customer_id });
 };
 
-export const updateUsername = (req, res) => {
+export const updateUsername = async (req, res) => {
   let id = req.body.id;
   let username = req.body.username;
 
@@ -68,15 +68,12 @@ export const updateUsername = (req, res) => {
               WHERE id = $2`;
   let values = [username, id];
 
-  let callback = (q_err, q_res) => {
-    if (q_err) console.log(q_err);
-    res.json(q_res.rows);
-  };
+  let queryResult = await db.query(text, values);
 
-  db.query(text, values, callback);
+  res.send(queryResult.rows);
 };
 
-export const updateEmail = (req, res) => {
+export const updateEmail = async (req, res) => {
   let id = req.body.id;
   let email = req.body.email;
 
@@ -84,10 +81,7 @@ export const updateEmail = (req, res) => {
               WHERE id = $2`;
   let values = [email, id];
 
-  let callback = (q_err, q_res) => {
-    if (q_err) console.log(q_err);
-    res.json(q_res.rows);
-  };
+  let queryResult = await db.query(text, values);
 
-  db.query(text, values, callback);
+  res.send(queryResult);
 };

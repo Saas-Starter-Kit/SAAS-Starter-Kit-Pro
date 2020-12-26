@@ -115,6 +115,7 @@ const Settings = () => {
       fetchFailure(err);
     });
 
+    fetchSuccess();
     navigate('/login');
   };
 
@@ -132,6 +133,7 @@ const Settings = () => {
       fetchFailure(err);
     });
 
+    fetchSuccess();
     navigate('/login');
   };
 
