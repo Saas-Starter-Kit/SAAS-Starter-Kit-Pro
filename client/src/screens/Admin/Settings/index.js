@@ -10,9 +10,11 @@ import LoadingOverlay from '../../../components/Admin/Common/loadingOverlay';
 import styled from 'styled-components';
 import { colors, breakpoints, fieldStyles } from '../../../styles/theme';
 
+import PaymentInformationCard from './paymentInformationCard';
 import UpdateUsernameCard from './updateUsernameCard';
 import UpdateEmailCard from './updateEmailCard';
 import AttachPaymentFormWrapper from './attachPaymentFormWrapper';
+import UpdatePasswordCard from './updatePasswordCard';
 
 import ModalCardDelete from './deleteCardConfirmModal';
 import ModalSubscriptionCancel from './cancelSubscriptionModal';
@@ -302,9 +304,7 @@ const Settings = () => {
   return (
     <Wrapper>
       <Title>Account Settings</Title>
-
       {isLoading && <LoadingOverlay />}
-
       <UpdateUsernameCard
         isEmail={isEmail}
         handleUsernameChange={handleUsernameChange}
@@ -317,18 +317,7 @@ const Settings = () => {
         email={email}
         updateEmail={updateEmail}
       />
-
-      <Card>
-        <SectionTitle>Update Password</SectionTitle>
-        <p>Please Reset Password on Login Page</p>
-        <Button
-          onClick={() => {
-            navigate('/login');
-          }}
-        >
-          Go to Login
-        </Button>
-      </Card>
+      <UpdatePasswordCard />
 
       <Card>
         <Title>Billing Settings</Title>
@@ -374,16 +363,10 @@ const Settings = () => {
 
       <AttachPaymentFormWrapper />
 
-      <Card>
-        <h2>Payment Information</h2>
-        <button onClick={getSubscription}>Retrieve Payment Information</button>
-        {subscriptionState && (
-          <div>
-            <div>Next Payment</div>
-            <p>{moment(subscriptionState.current_period_end * 1000).format('MMM Do YYYY')}</p>
-          </div>
-        )}
-      </Card>
+      <PaymentInformationCard
+        getSubscription={getSubscription}
+        subscriptionState={subscriptionState}
+      />
     </Wrapper>
   );
 };

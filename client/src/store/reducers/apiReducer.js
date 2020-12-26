@@ -13,6 +13,7 @@ export const apiReducer = (state, action) => {
         isLoading: true
       };
     case FETCH_SUCCESS:
+      //showSuccess object as in payload
       return {
         ...state,
         isLoading: false
