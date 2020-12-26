@@ -1,7 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 
 import { navigate } from 'gatsby';
-import moment from 'moment';
 
 import AuthContext from '../../../utils/authContext';
 import ApiContext from '../../../utils/apiContext';
@@ -10,13 +9,14 @@ import LoadingOverlay from '../../../components/Admin/Common/loadingOverlay';
 import styled from 'styled-components';
 import { colors, breakpoints, fieldStyles } from '../../../styles/theme';
 
+import CancelSubscriptionCard from './cancelSubscirptionCard';
 import PaymentInformationCard from './paymentInformationCard';
 import UpdateUsernameCard from './updateUsernameCard';
 import UpdateEmailCard from './updateEmailCard';
+import UpdatePaymentCard from './updatePaymentCard';
 import AttachPaymentFormWrapper from './attachPaymentFormWrapper';
 import UpdatePasswordCard from './updatePasswordCard';
 
-import ModalCardDelete from './deleteCardConfirmModal';
 import ModalSubscriptionCancel from './cancelSubscriptionModal';
 import axios from '../../../services/axios';
 
@@ -38,98 +38,9 @@ const Card = styled.div`
   }
 `;
 
-const Paragraph = styled.p`
-  font-weight: 700;
-`;
-
 const SectionTitle = styled.h2`
   font-size: 1.25rem;
   padding-top: 1.5rem;
-`;
-
-const Form = styled.form`
-  padding-bottom: 1.5rem;
-`;
-
-const Label = styled.label`
-  display: block;
-  font-weight: 500;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-  color: ${colors.gray700};
-`;
-
-const Input = styled.input`
-  ${fieldStyles}
-`;
-
-const Button = styled.button`
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  padding: 0.5rem 1rem;
-  border: 1px solid transparent;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-  font-weight: 500;
-  border-radius: 0.375rem;
-  color: ${colors.white};
-  cursor: pointer;
-  background-color: ${colors.indigo600};
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  &:hover {
-    background-color: ${colors.indigo500};
-  }
-  &:focus {
-    outline: 2px solid transparent;
-    outline-offset: 2px;
-    box-shadow: 0 0 0 3px rgba(164, 202, 254, 0.45);
-  }
-  &:active {
-    background-color: ${colors.indigo600};
-  }
-  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow,
-    transform;
-  transition-duration: 150ms;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-`;
-
-const StyledCardDisplayWrapper = styled.div`
-  border: 1px solid black;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-  margin-bottom: 1rem;
-`;
-
-const StyledCardDisplay = styled.div`
-  border: 1px solid black;
-  border-radius: 1rem;
-  padding: 0.5rem;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-  margin: 1rem;
-`;
-
-const DangerButton = styled.button`
-  background-color: red;
-  color: white;
-  padding: 0.4rem 0.8rem;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-  margin-left: 1rem;
-  margin-bottom: 1rem;
-  cursor: pointer;
-`;
-
-const CancelSubscriptionButton = styled.button`
-  background-color: red;
-  color: white;
-  padding: 0.6rem 1.2rem;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-  margin-bottom: 2rem;
-  cursor: pointer;
-`;
-
-const SuccessResponse = styled.div`
-  font-size: 0.9rem;
-  color: green;
-  font-weight: 100;
 `;
 
 const Settings = () => {
@@ -142,12 +53,14 @@ const Settings = () => {
   const [isModalCard, setModalCard] = useState(false);
   const [isModalSub, setModalSub] = useState(false);
 
+  //stripe payment state
   const [deletePaymentId, setDeletePaymentId] = useState();
   const [resPayMessage, setResPayMessage] = useState();
   const [payCards, setPayCards] = useState([]);
   const [subscriptionState, setSubscription] = useState();
   const [paymentRemoved, setPaymentRemoved] = useState(false);
 
+  //user state
   const [id, setId] = useState();
   const [email, setEmail] = useState();
   const [username, setUsername] = useState();
@@ -226,7 +139,7 @@ const Settings = () => {
       Stripe Methods
   */
 
-  const deletePaymentMethod = async (id) => {
+  const deletePaymentMethod = async () => {
     setModalCard(false);
     let data = {
       payment: deletePaymentId
@@ -318,54 +231,25 @@ const Settings = () => {
         updateEmail={updateEmail}
       />
       <UpdatePasswordCard />
-
-      <Card>
-        <Title>Billing Settings</Title>
-        {isLoading && <LoadingOverlay />}
-        <Paragraph>{resPayMessage}</Paragraph>
-
-        <SectionTitle>Update Payment</SectionTitle>
-        {!paymentRemoved ? (
-          payCards.map((item) => (
-            <StyledCardDisplayWrapper>
-              <StyledCardDisplay key={item.id}>
-                {item.card.brand} **** **** **** {item.card.last4} expires {item.card.exp_month}/
-                {item.card.exp_year}
-              </StyledCardDisplay>
-              <DangerButton
-                onClick={() => {
-                  setDeletePaymentId(item.id);
-                  setModalCard(true);
-                }}
-              >
-                Remove Card
-              </DangerButton>
-            </StyledCardDisplayWrapper>
-          ))
-        ) : (
-          <SuccessResponse>Payment Removed Successfully</SuccessResponse>
-        )}
-        <ModalCardDelete
-          isModalCard={isModalCard}
-          handleModalCardCancel={handleModalCardCancel}
-          deletePaymentMethod={deletePaymentMethod}
-        />
-        <SectionTitle>Manage Subscription</SectionTitle>
-        <CancelSubscriptionButton onClick={() => setModalSub(true)}>
-          Cancel Subscription
-        </CancelSubscriptionButton>
-        <ModalSubscriptionCancel
-          isModalSub={isModalSub}
-          handleModalSubCancel={handleModalSubCancel}
-          cancelSubscription={cancelSubscription}
-        />
-      </Card>
-
+      <UpdatePaymentCard
+        payCards={payCards}
+        paymentRemoved={paymentRemoved}
+        isModalCard={isModalCard}
+        handleModalCardCancel={handleModalCardCancel}
+        deletePaymentMethod={deletePaymentMethod}
+        setDeletePaymentId={setDeletePaymentId}
+        setModalCard={setModalCard}
+      />
       <AttachPaymentFormWrapper />
-
       <PaymentInformationCard
         getSubscription={getSubscription}
         subscriptionState={subscriptionState}
+      />
+      <CancelSubscriptionCard
+        setModalSub={setModalSub}
+        isModalSub={isModalSub}
+        handleModalSubCancel={handleModalSubCancel}
+        cancelSubscription={cancelSubscription}
       />
     </Wrapper>
   );
