@@ -33,7 +33,7 @@ const ModalSubscriptionCancel = ({ isModalSub, handleModalSubCancel, cancelSubsc
         <CancelDangerButton onClick={handleModalSubCancel}>Cancel</CancelDangerButton>
       ]}
     >
-      Are You sure you want to remove Card?
+      Are You sure you want to Cancel Subscription?
     </Modal>
   );
 };

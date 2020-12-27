@@ -8,6 +8,9 @@ export const initialStateApi = {
 export const apiReducer = (state, action) => {
   switch (action.type) {
     case FETCH_INIT:
+      if (action.payload) {
+        console.log(action.payload);
+      }
       return {
         ...state,
         isLoading: true

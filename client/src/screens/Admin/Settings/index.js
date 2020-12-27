@@ -7,7 +7,6 @@ import ApiContext from '../../../utils/apiContext';
 
 import LoadingOverlay from '../../../components/Admin/Common/loadingOverlay';
 import styled from 'styled-components';
-import { colors, breakpoints, fieldStyles } from '../../../styles/theme';
 
 import CancelSubscriptionCard from './cancelSubscirptionCard';
 import PaymentInformationCard from './paymentInformationCard';
@@ -17,30 +16,12 @@ import UpdatePaymentCard from './updatePaymentCard';
 import AttachPaymentFormWrapper from './attachPaymentFormWrapper';
 import UpdatePasswordCard from './updatePasswordCard';
 
-import ModalSubscriptionCancel from './cancelSubscriptionModal';
 import axios from '../../../services/axios';
 
 const Wrapper = styled.div``;
 
 const Title = styled.h1`
   font-size: 1.5rem;
-`;
-
-const Card = styled.div`
-  background-color: ${colors.white};
-  width: 100%;
-  padding: 1rem;
-  border-radius: 0.75rem;
-  margin-bottom: 2rem;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-  @media (min-width: ${breakpoints.large}) {
-    width: 75%;
-  }
-`;
-
-const SectionTitle = styled.h2`
-  font-size: 1.25rem;
-  padding-top: 1.5rem;
 `;
 
 const Settings = () => {
@@ -55,7 +36,6 @@ const Settings = () => {
 
   //stripe payment state
   const [deletePaymentId, setDeletePaymentId] = useState();
-  const [resPayMessage, setResPayMessage] = useState();
   const [payCards, setPayCards] = useState([]);
   const [subscriptionState, setSubscription] = useState();
   const [paymentRemoved, setPaymentRemoved] = useState(false);
@@ -192,9 +172,10 @@ const Settings = () => {
         fetchFailure(err);
       });
 
+    fetchSuccess(true, subscriptionCancel);
     //replace with antd success message
-    setResPayMessage(subscriptionCancel.data);
     setModalSub(false);
+    navigate('/login');
   };
 
   /* 

@@ -5,7 +5,8 @@ import AuthContext from '../../../utils/authContext';
 import ApiContext from '../../../utils/apiContext';
 import { colors, breakpoints } from '../../../styles/theme';
 import styled from 'styled-components';
-import LoadingOverlay from '../../../components/Admin/Common/loadingOverlay';
+
+import { Spin } from 'antd';
 import axios from '../../../services/axios';
 
 const ButtonWrapper = styled.div`
@@ -58,14 +59,6 @@ const Button = styled.button`
 
 const Header = styled.h2`
   margin-bottom: 4rem;
-`;
-
-const ErrorResponse = styled.div`
-  font-size: 0.9rem;
-  color: red;
-  font-weight: 100;
-  margin-bottom: 1rem;
-  margin-top: -3rem;
 `;
 
 const SuccessResponse = styled.div`
@@ -130,28 +123,29 @@ const AttachPaymentForm = () => {
       fetchFailure(err);
     });
 
-    fetchSuccess();
     setSuccessMessage('Payment Method Successfully updated');
+    fetchSuccess();
   };
 
   return (
     <Card>
-      {isLoading && <LoadingOverlay />}
-      <Header>Add a Payment Method</Header>
-      <SuccessResponse>{successMessage}</SuccessResponse>
-      {!successMessage && (
-        <>
-          <form onSubmit={handleSubmit}>
-            <CardElement />
-            <ButtonWrapper>
-              <Button type="submit" disabled={!stripe && !setupIntentState}>
-                Add
-              </Button>
-            </ButtonWrapper>
-          </form>
-          <p>Adding a card will make it the default payment method</p>
-        </>
-      )}
+      <Spin tip="Loading..." spinning={isLoading}>
+        <Header>Add a Payment Method</Header>
+        <SuccessResponse>{successMessage}</SuccessResponse>
+        {!successMessage && (
+          <>
+            <form onSubmit={handleSubmit}>
+              <CardElement />
+              <ButtonWrapper>
+                <Button type="submit" disabled={!stripe && !setupIntentState}>
+                  Add
+                </Button>
+              </ButtonWrapper>
+            </form>
+            <p>Adding a card will make it the default payment method</p>
+          </>
+        )}
+      </Spin>
     </Card>
   );
 };
