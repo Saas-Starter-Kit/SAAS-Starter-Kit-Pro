@@ -64,12 +64,22 @@ export const updateUsername = async (req, res) => {
   let id = req.body.id;
   let username = req.body.username;
 
+  console.log(id, username);
+
   let text = `UPDATE users SET username=$1
               WHERE id = $2`;
   let values = [username, id];
 
   let queryResult = await db.query(text, values);
 
+  if (queryResult.rows.length === 0) {
+    res.send(500).send({
+      type: 'Database Logic Error',
+      message: 'Update Failed, please try again or cantact support'
+    });
+  }
+
+  console.log(queryResult);
   res.send(queryResult.rows);
 };
 
@@ -83,5 +93,13 @@ export const updateEmail = async (req, res) => {
 
   let queryResult = await db.query(text, values);
 
+  if (queryResult.rows.length === 0) {
+    res.send(500).send({
+      type: 'Database Logic Error',
+      message: 'Update Failed, please try again or cantact support'
+    });
+  }
+
+  console.log(queryResult);
   res.send(queryResult);
 };

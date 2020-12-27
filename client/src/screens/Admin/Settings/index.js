@@ -79,6 +79,10 @@ const Settings = () => {
     }
   }, [stripeCustomerId]);
 
+  useEffect(() => {
+    return () => fetchSuccess();
+  }, []);
+
   /*
       Auth Methods
   */
@@ -87,7 +91,7 @@ const Settings = () => {
     let userEmail = authState.user.email;
     let displayName = authState.user.username;
     let stripeCustomerId = authState.user.stripeCustomerKey;
-    let id = authState.user.id.user;
+    let id = authState.user.id;
     let isEmail = authState.user.provider === 'password';
 
     setId(id);
@@ -101,6 +105,12 @@ const Settings = () => {
     event.preventDefault();
     fetchInit();
 
+    const data = { id, username };
+
+    await axios.put(`/auth/put/username`, data).catch((err) => {
+      fetchFailure(err);
+    });
+
     await curUser
       .updateProfile({
         displayName: username
@@ -109,13 +119,6 @@ const Settings = () => {
         fetchFailure(err);
       });
 
-    const data = { id, username };
-
-    await axios.put(`/auth/put/username`, data).catch((err) => {
-      fetchFailure(err);
-    });
-
-    fetchSuccess();
     navigate('/login');
   };
 
@@ -123,17 +126,15 @@ const Settings = () => {
     event.preventDefault();
     fetchInit();
 
-    await curUser.updateEmail(email).catch(function (error) {
-      fetchFailure(error);
-    });
-
     const data = { id, email };
-
     await axios.put(`/auth/put/email`, data).catch((err) => {
       fetchFailure(err);
     });
 
-    fetchSuccess();
+    await curUser.updateEmail(email).catch((error) => {
+      fetchFailure(error);
+    });
+
     navigate('/login');
   };
 
