@@ -5,6 +5,7 @@ import ApiContext from '../../../utils/apiContext';
 import { postTodoApi } from '../../../api/todoApi';
 import { colors, breakpoints, fieldStyles } from '../../../styles/theme';
 import { Spin } from 'antd';
+import axios from '../../../services/axios';
 
 const Wrapper = styled.div`
   padding: 1.5;
@@ -97,13 +98,12 @@ const CreateTask = () => {
   const postTodo = async (event) => {
     event.preventDefault();
     fetchInit();
-    //local loading state
     let author = user ? user.username : 'Guest';
     let title = event.target.title.value;
     let description = event.target.description.value;
     let data = { title, description, author };
 
-    await postTodoApi(data).catch((err) => {
+    await axios.post(`/api/post/todo`, data).catch((err) => {
       fetchFailure(err);
     });
 

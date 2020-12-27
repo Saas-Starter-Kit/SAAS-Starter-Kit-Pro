@@ -4,6 +4,7 @@ import AuthContext from '../../../utils/authContext';
 import { fetchTodoApi, deleteTodoApi, putTodoApi } from '../../../api/todoApi';
 import { colors } from '../../../styles/theme';
 import Todo from './todo';
+import { Empty } from 'antd';
 
 const StyledMain = styled.div`
   display: flex;
@@ -40,7 +41,9 @@ const ReadUpdate = () => {
     let author = user ? user.username : 'Guest';
     let params = { author };
 
-    let result = await fetchTodoApi(params);
+    let result = await axios.get(`${axiosBase}/api/get/todos`, {
+      params
+    });
     setTodos(result.data);
   };
 
@@ -52,7 +55,9 @@ const ReadUpdate = () => {
     let todo_id = todo.todo_id;
 
     let data = { todo_id };
-    deleteTodoApi(data);
+    await axios.delete(`${axiosBase}/api/delete/todo`, {
+      data
+    });
     setEdit(false);
     setTimeout(() => fetchTodos(), 300);
   };
@@ -65,7 +70,7 @@ const ReadUpdate = () => {
     let todo_id = todo.todo_id;
 
     let data = { title, description, author, todo_id };
-    putTodoApi(data);
+    await axios.put(`${axiosBase}/api/put/todo`, data);
     setEdit(false);
     setTimeout(() => fetchTodos(), 300);
   };
@@ -86,28 +91,28 @@ const ReadUpdate = () => {
   };
 
   return (
-    <>
-      <StyledMain>
-        <Title>Todos: </Title>
-        <Card>
-          {todos.map((todo) => (
-            <Todo
-              todo={todo}
-              isEditting={isEditting}
-              editTodoID={editTodoID}
-              handleEditTitleChange={handleEditTitleChange}
-              editTitle={editTitle}
-              handleEditDescChange={handleEditDescChange}
-              editDescription={editDescription}
-              editTodo={editTodo}
-              deleteTodo={deleteTodo}
-              putTodo={putTodo}
-              setEdit={setEdit}
-            />
-          ))}
-        </Card>
-      </StyledMain>
-    </>
+    <StyledMain>
+      <Title>Todos: </Title>
+      <Card>
+        {todos.map((todo) => (
+          <Todo
+            todo={todo}
+            isEditting={isEditting}
+            editTodoID={editTodoID}
+            handleEditTitleChange={handleEditTitleChange}
+            editTitle={editTitle}
+            handleEditDescChange={handleEditDescChange}
+            editDescription={editDescription}
+            editTodo={editTodo}
+            deleteTodo={deleteTodo}
+            putTodo={putTodo}
+            setEdit={setEdit}
+          />
+        ))}
+      </Card>
+
+      <Empty />
+    </StyledMain>
   );
 };
 
