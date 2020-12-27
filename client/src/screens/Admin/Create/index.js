@@ -1,8 +1,10 @@
-import React, { useState, useContext } from "react"
-import styled from "styled-components"
-import AuthContext from "../../../utils/authContext"
-import { postTodoApi } from "../../../api/todoApi"
-import { colors, breakpoints, fieldStyles } from "../../../styles/theme"
+import React, { useState, useContext } from 'react';
+import styled from 'styled-components';
+import AuthContext from '../../../utils/authContext';
+import ApiContext from '../../../utils/apiContext';
+import { postTodoApi } from '../../../api/todoApi';
+import { colors, breakpoints, fieldStyles } from '../../../styles/theme';
+import { Spin } from 'antd';
 
 const Wrapper = styled.div`
   padding: 1.5;
@@ -19,11 +21,11 @@ const Wrapper = styled.div`
   @media (min-width: ${breakpoints.large}) {
     width: 75%;
   }
-`
+`;
 
 const Title = styled.h1`
   font-size: 1.25rem;
-`
+`;
 
 const Label = styled.label`
   display: block;
@@ -31,29 +33,29 @@ const Label = styled.label`
   font-size: 0.875rem;
   line-height: 1.25rem;
   color: ${colors.gray700};
-`
+`;
 
 const InputWrapper = styled.div`
   padding: 1.5rem;
-`
+`;
 
 const Input = styled.input`
   ${fieldStyles}
-`
+`;
 
 const TextAreaWrapper = styled.div`
   padding: 0 1.5rem;
-`
+`;
 
 const TextArea = styled.textarea`
   ${fieldStyles}
-`
+`;
 
 const ButtonWrapper = styled.div`
   padding: 1.5rem;
   background-color: ${colors.white};
   text-align: left;
-`
+`;
 
 const Button = styled.button`
   padding: 0.5rem 1rem;
@@ -76,87 +78,70 @@ const Button = styled.button`
   &:active {
     background-color: ${colors.indigo600};
   }
-  transition-property: background-color, border-color, color, fill, stroke,
-    opacity, box-shadow, transform;
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow,
+    transform;
   transition-duration: 150ms;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-`
-
-const Response = styled.p`
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-`
+`;
 
 const CreateTask = () => {
-  const [formTitle, setTitle] = useState("")
-  const [formDescription, setDescription] = useState("")
+  const [formTitle, setTitle] = useState('');
+  const [formDescription, setDescription] = useState('');
+  const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
+  const { isLoading } = apiState;
 
-  const [resMessage, setResMessage] = useState("")
+  const context = useContext(AuthContext);
+  const { authState } = context;
+  const { user } = authState;
 
-  const context = useContext(AuthContext)
-  const { authState } = context
-  const { user } = authState
+  const postTodo = async (event) => {
+    event.preventDefault();
+    fetchInit();
+    //local loading state
+    let author = user ? user.username : 'Guest';
+    let title = event.target.title.value;
+    let description = event.target.description.value;
+    let data = { title, description, author };
 
-  let handleRes = res => {
-    console.log(res.statusText)
-    if (res.statusText == "OK") {
-      setResMessage("Successfully Submitted")
-    } else {
-      setResMessage("Request Failed Please Try Again")
-    }
-  }
+    await postTodoApi(data).catch((err) => {
+      fetchFailure(err);
+    });
 
-  const postTodo = async event => {
-    event.preventDefault()
-    let author = user ? user.username : "Guest"
-    let title = event.target.title.value
-    let description = event.target.description.value
-    let data = { title, description, author }
+    setTitle('');
+    setDescription('');
+    fetchSuccess();
+  };
 
-    let result = await postTodoApi(data)
-    handleRes(result)
+  const handleTitleChange = (event) => {
+    setTitle(event.target.value);
+  };
 
-    setTitle("")
-    setDescription("")
-  }
-
-  const handleTitleChange = event => {
-    setTitle(event.target.value)
-  }
-
-  const handleDescChange = event => {
-    setDescription(event.target.value)
-  }
+  const handleDescChange = (event) => {
+    setDescription(event.target.value);
+  };
 
   return (
-    <>
+    <div>
       <Title>Create Todo</Title>
       <form onSubmit={postTodo}>
         <Wrapper>
-          <InputWrapper>
-            <Label htmlFor="title">Title</Label>
-            <Input
-              onChange={handleTitleChange}
-              value={formTitle}
-              name="title"
-            />
-          </InputWrapper>
-          <TextAreaWrapper>
-            <Label htmlFor="description">Description</Label>
-            <TextArea
-              onChange={handleDescChange}
-              value={formDescription}
-              name="description"
-            />
-          </TextAreaWrapper>
-          <ButtonWrapper>
-            <Button>Save</Button>
-            <Response>{resMessage}</Response>
-          </ButtonWrapper>
+          <Spin tip="Loading..." spinning={isLoading}>
+            <InputWrapper>
+              <Label htmlFor="title">Title</Label>
+              <Input onChange={handleTitleChange} value={formTitle} name="title" />
+            </InputWrapper>
+            <TextAreaWrapper>
+              <Label htmlFor="description">Description</Label>
+              <TextArea onChange={handleDescChange} value={formDescription} name="description" />
+            </TextAreaWrapper>
+            <ButtonWrapper>
+              <Button>Save</Button>
+            </ButtonWrapper>
+          </Spin>
         </Wrapper>
       </form>
-    </>
-  )
-}
+    </div>
+  );
+};
 
-export default CreateTask
+export default CreateTask;
