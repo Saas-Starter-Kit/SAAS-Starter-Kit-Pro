@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 import AuthContext from '../../../utils/authContext';
 import ApiContext from '../../../utils/apiContext';
-import { postTodoApi } from '../../../api/todoApi';
+
 import { colors, breakpoints, fieldStyles } from '../../../styles/theme';
 import { Spin } from 'antd';
 import axios from '../../../services/axios';

@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import AuthContext from '../../../utils/authContext';
-import { fetchTodoApi, deleteTodoApi, putTodoApi } from '../../../api/todoApi';
+import ApiContext from '../../../utils/apiContext';
 import { colors } from '../../../styles/theme';
 import Todo from './todo';
 import { Empty } from 'antd';
+import axios from '../../../services/axios';
 
 const StyledMain = styled.div`
   display: flex;
@@ -23,13 +24,12 @@ const Card = styled.div`
 `;
 
 const ReadUpdate = () => {
-  const [todos, setTodos] = useState([]);
-
-  const context = useContext(AuthContext);
-  const { authState } = context;
+  const { authState } = useContext(AuthContext);
+  const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
+  const { isLoading } = apiState;
   const { user } = authState;
 
-  //set user
+  const [todos, setTodos] = useState([]);
 
   //Edit Todo state and form state
   const [isEditting, setEdit] = useState(false);
@@ -38,26 +38,38 @@ const ReadUpdate = () => {
   const [editDescription, setEditDescription] = useState('');
 
   const fetchTodos = async () => {
-    let author = user ? user.username : 'Guest';
-    let params = { author };
+    if (user) {
+      let author = user.username;
+      let params = { author };
 
-    let result = await axios.get(`${axiosBase}/api/get/todos`, {
-      params
-    });
-    setTodos(result.data);
+      let result = await axios
+        .get(`/api/get/todos`, {
+          params
+        })
+        .catch((err) => {
+          fetchFailure(err);
+        });
+      setTodos(result.data);
+    } else {
+      //show dummy data
+    }
   };
 
   useEffect(() => {
-    fetchTodos();
-  }, []);
+    if (authState) fetchTodos();
+  }, [authState]);
 
   const deleteTodo = async (todo) => {
     let todo_id = todo.todo_id;
 
     let data = { todo_id };
-    await axios.delete(`${axiosBase}/api/delete/todo`, {
-      data
-    });
+    await axios
+      .delete(`/api/delete/todo`, {
+        data
+      })
+      .catch((err) => {
+        fetchFailure(err);
+      });
     setEdit(false);
     setTimeout(() => fetchTodos(), 300);
   };
@@ -66,12 +78,15 @@ const ReadUpdate = () => {
     event.preventDefault();
     let title = event.target.title.value;
     let description = event.target.description.value;
-    let author = user ? user.username : 'Guest';
+    let author = user.username;
     let todo_id = todo.todo_id;
 
     let data = { title, description, author, todo_id };
-    await axios.put(`${axiosBase}/api/put/todo`, data);
+    await axios.put(`/api/put/todo`, data).catch((err) => {
+      fetchFailure(err);
+    });
     setEdit(false);
+    //Save data to context to limit api calls
     setTimeout(() => fetchTodos(), 300);
   };
 
@@ -94,24 +109,26 @@ const ReadUpdate = () => {
     <StyledMain>
       <Title>Todos: </Title>
       <Card>
-        {todos.map((todo) => (
-          <Todo
-            todo={todo}
-            isEditting={isEditting}
-            editTodoID={editTodoID}
-            handleEditTitleChange={handleEditTitleChange}
-            editTitle={editTitle}
-            handleEditDescChange={handleEditDescChange}
-            editDescription={editDescription}
-            editTodo={editTodo}
-            deleteTodo={deleteTodo}
-            putTodo={putTodo}
-            setEdit={setEdit}
-          />
-        ))}
+        {!todos.length == 0 ? (
+          todos.map((todo) => (
+            <Todo
+              todo={todo}
+              isEditting={isEditting}
+              editTodoID={editTodoID}
+              handleEditTitleChange={handleEditTitleChange}
+              editTitle={editTitle}
+              handleEditDescChange={handleEditDescChange}
+              editDescription={editDescription}
+              editTodo={editTodo}
+              deleteTodo={deleteTodo}
+              putTodo={putTodo}
+              setEdit={setEdit}
+            />
+          ))
+        ) : (
+          <Empty />
+        )}
       </Card>
-
-      <Empty />
     </StyledMain>
   );
 };
