@@ -1,25 +1,20 @@
 import stripe from '../Config/stripe.js';
 import db from '../Database/db.js';
+import { getUser } from './authHelpers.js';
 
 export const GetSubscription = async (req, res) => {
   let email = req.query.email;
 
-  console.log(email);
-
-  //check if email exists
-  let query1 = `SELECT * FROM users
-                WHERE email=$1`;
-
-  let values1 = [email];
-
   //check if user exists
-  const user = await db.query(query1, values1);
-  if (!user) res.send('User Not Found');
+  const user = await getUser(email);
 
-  console.log(user.rows[0].subscription_id);
+  //If subscription not found send error message
+  if (!user.rows[0].subscription_id) {
+    res.status(400).send({ type: 'Failed Request', message: 'Subscription Not Found' });
+    return;
+  }
+
   let subscription_id = user.rows[0].subscription_id;
-
-  console.log(subscription_id);
 
   const subscription = await stripe.subscriptions.retrieve(subscription_id);
 
@@ -55,10 +50,9 @@ export const CreateSubscription = async (req, res) => {
                 WHERE email = $2`;
     let values = ['true', email, subscritionId];
 
-    let queryResult = await db.query(text, values);
-    console.log(queryResult);
+    await db.query(text, values);
 
-    if (queryResult) res.send(subscription);
+    res.send(subscription);
   } else {
     //if subscription fails send error message
     res
@@ -71,14 +65,8 @@ export const CreateSubscription = async (req, res) => {
 export const CancelSubscription = async (req, res) => {
   let email = req.body.email;
 
-  //check if email exists
-  let query = `SELECT * FROM users
-                WHERE email=$1`;
-
-  let values = [email];
-
   //check if user exists
-  const user = await db.query(query, values);
+  const user = await getUser(email);
 
   console.log(user.rows[0].subscription_id);
   let subscription_id = user.rows[0].subscription_id;
