@@ -4,7 +4,7 @@ import AuthContext from '../../../utils/authContext';
 import ApiContext from '../../../utils/apiContext';
 import { colors } from '../../../styles/theme';
 import Todo from './todo';
-import { Empty } from 'antd';
+import { Empty, Spin } from 'antd';
 import axios from '../../../services/axios';
 
 const StyledMain = styled.div`
@@ -38,6 +38,7 @@ const ReadUpdate = () => {
   const [editDescription, setEditDescription] = useState('');
 
   const fetchTodos = async () => {
+    fetchInit();
     if (user) {
       let author = user.username;
       let params = { author };
@@ -50,8 +51,10 @@ const ReadUpdate = () => {
           fetchFailure(err);
         });
       setTodos(result.data);
+      fetchSuccess();
     } else {
       //show dummy data
+      fetchSuccess();
     }
   };
 
@@ -60,6 +63,7 @@ const ReadUpdate = () => {
   }, [authState]);
 
   const deleteTodo = async (todo) => {
+    fetchInit();
     let todo_id = todo.todo_id;
 
     let data = { todo_id };
@@ -71,11 +75,14 @@ const ReadUpdate = () => {
         fetchFailure(err);
       });
     setEdit(false);
+    //Save data to context to limit api calls
     setTimeout(() => fetchTodos(), 300);
+    fetchSuccess();
   };
 
   const putTodo = async (event, todo) => {
     event.preventDefault();
+    fetchInit();
     let title = event.target.title.value;
     let description = event.target.description.value;
     let author = user.username;
@@ -88,6 +95,7 @@ const ReadUpdate = () => {
     setEdit(false);
     //Save data to context to limit api calls
     setTimeout(() => fetchTodos(), 300);
+    fetchSuccess();
   };
 
   const editTodo = (todo) => {
@@ -109,25 +117,27 @@ const ReadUpdate = () => {
     <StyledMain>
       <Title>Todos: </Title>
       <Card>
-        {!todos.length == 0 ? (
-          todos.map((todo) => (
-            <Todo
-              todo={todo}
-              isEditting={isEditting}
-              editTodoID={editTodoID}
-              handleEditTitleChange={handleEditTitleChange}
-              editTitle={editTitle}
-              handleEditDescChange={handleEditDescChange}
-              editDescription={editDescription}
-              editTodo={editTodo}
-              deleteTodo={deleteTodo}
-              putTodo={putTodo}
-              setEdit={setEdit}
-            />
-          ))
-        ) : (
-          <Empty />
-        )}
+        <Spin tip="Loading..." spinning={isLoading}>
+          {!todos.length == 0 ? (
+            todos.map((todo) => (
+              <Todo
+                todo={todo}
+                isEditting={isEditting}
+                editTodoID={editTodoID}
+                handleEditTitleChange={handleEditTitleChange}
+                editTitle={editTitle}
+                handleEditDescChange={handleEditDescChange}
+                editDescription={editDescription}
+                editTodo={editTodo}
+                deleteTodo={deleteTodo}
+                putTodo={putTodo}
+                setEdit={setEdit}
+              />
+            ))
+          ) : (
+            <Empty />
+          )}
+        </Spin>
       </Card>
     </StyledMain>
   );
