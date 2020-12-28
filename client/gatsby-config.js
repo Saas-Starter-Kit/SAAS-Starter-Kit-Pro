@@ -20,6 +20,16 @@ module.exports = {
         trackingId: process.env.GATSBY_GOOGLE_ANALYTICS_ID,
         head: true
       }
+    },
+    {
+      resolve: `gatsby-source-prismic`,
+      options: {
+        repositoryName: `test1qwer`,
+        linkResolver: ({ node, key, value }) => (post) => `/${post.uid}`,
+        schemas: {
+          blog_post: require('./src/schemas/blog_post.json')
+        }
+      }
     }
   ]
 };

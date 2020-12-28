@@ -9,3 +9,5 @@ of an api call. plan details dont change often so it is faster just to hard code
 Complete Authentication Error handling
 
 Complete Payment Error handling
+
+Project Structure and Overview
