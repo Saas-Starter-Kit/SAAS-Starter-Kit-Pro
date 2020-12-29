@@ -27,7 +27,8 @@ module.exports = {
         repositoryName: `test1qwer`,
         linkResolver: ({ node, key, value }) => (post) => `/${post.uid}`,
         schemas: {
-          post: require('./src/schemas/post.json')
+          post: require('./src/schemas/post.json'),
+          docs: require('./src/schemas/docs.json')
         }
       }
     }
