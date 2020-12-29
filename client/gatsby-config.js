@@ -25,7 +25,6 @@ module.exports = {
       resolve: `gatsby-source-prismic`,
       options: {
         repositoryName: `test1qwer`,
-        linkResolver: ({ node, key, value }) => (post) => `/${post.uid}`,
         schemas: {
           post: require('./src/schemas/post.json'),
           docs: require('./src/schemas/docs.json')
