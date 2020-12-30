@@ -1,5 +1,13 @@
 import React from 'react';
+import styled from 'styled-components';
 import { BodyContent, CodeBlock, Image, Quote } from './slicesPrismic';
+
+const Wrapper = styled.div``;
+
+const BottomSpace = styled.div`
+  opacity: 0;
+  margin-bottom: 2rem;
+`;
 
 const SliceZone = ({ body }) => {
   console.log(body);
@@ -18,7 +26,12 @@ const SliceZone = ({ body }) => {
         return null;
     }
   });
-  return <div>{slice}</div>;
+  return (
+    <div>
+      <Wrapper>{slice}</Wrapper>
+      <BottomSpace>Invisible Text</BottomSpace>
+    </div>
+  );
 };
 
 export default SliceZone;

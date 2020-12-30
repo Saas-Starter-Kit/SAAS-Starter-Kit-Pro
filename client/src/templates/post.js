@@ -1,10 +1,14 @@
 import React from 'react';
 import { graphql } from 'gatsby';
+import styled from 'styled-components';
 import moment from 'moment';
 import SliceZone from './sliceZone';
 
+const Wrapper = styled.div`
+  margin: 3rem 7rem;
+`;
+
 const Post = ({ data }) => {
-  //const { data } = prismicPost;
   const author = data.prismicPost.data.author.text;
   const date = moment(data.prismicPost.data.date).format('MMM Do YY');
   const title = data.prismicPost.data.title.text;
@@ -12,12 +16,12 @@ const Post = ({ data }) => {
 
   console.log(data.prismicPost.data);
   return (
-    <React.Fragment>
+    <Wrapper>
       <h1>{title}</h1>
       <h2>{author}</h2>
       <h3>{date}</h3>
       <SliceZone body={body} />
-    </React.Fragment>
+    </Wrapper>
   );
 };
 

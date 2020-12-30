@@ -7,12 +7,12 @@ const Docs = ({ data }) => {
   const body = data.prismicDocs.data.body;
 
   return (
-    <React.Fragment>
+    <div>
       <h1>{title}</h1>
       <div style={{ width: '80%', borderRadius: '3rem' }}>
         <SliceZone body={body} />
       </div>
-    </React.Fragment>
+    </div>
   );
 };
 
