@@ -1,6 +1,6 @@
-import BodyText from './bodyText';
+import BodyContent from './bodyContent';
 import CodeBlock from './codeBlock';
 import Image from './imageSlice';
 import Quote from './quote';
 
-export { Image, CodeBlock, BodyText, Quote };
+export { Image, CodeBlock, BodyContent, Quote };

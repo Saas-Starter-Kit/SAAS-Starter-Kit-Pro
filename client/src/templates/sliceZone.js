@@ -1,26 +1,24 @@
 import React from 'react';
-import { BodyText, CodeBlock, Image, Quote } from './slicesPrismic';
+import { BodyContent, CodeBlock, Image, Quote } from './slicesPrismic';
 
-const SliceZone = (props) => {
-  console.log(props);
-  //  const slice = allSlices.map((s) => {
-  //    switch (s.slice_type) {
-  //      // These are the API IDs of the slices
-  //      case 'text':
-  //        return <BodyText key={s.id} input={s} />;
-  //      case 'code_block':
-  //        return <CodeBlock key={s.id} input={s} />;
-  //      case 'image':
-  //        return <Image key={s.id} input={s} />;
-  //      case 'quote':
-  //        return <Quote key={s.id} input={s} />;
-  //      default:
-  //        return null;
-  //    }
-  //  });
-  //  return <div>{slice}</div>;
-
-  return <div>Slice</div>;
+const SliceZone = ({ body }) => {
+  console.log(body);
+  const slice = body.map((slice) => {
+    switch (slice.slice_type) {
+      // These are the API IDs of the slices
+      case 'content':
+        return <BodyContent key={slice.id} slice={slice} />;
+      case 'code':
+        return <CodeBlock key={slice.id} slice={slice} />;
+      case 'image':
+        return <Image key={slice.id} slice={slice} />;
+      case 'quote':
+        return <Quote key={slice.id} slice={slice} />;
+      default:
+        return null;
+    }
+  });
+  return <div>{slice}</div>;
 };
 
 export default SliceZone;

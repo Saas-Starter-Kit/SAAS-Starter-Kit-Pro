@@ -5,8 +5,6 @@ const Content = styled.div`
   padding-bottom: 2rem;
 `;
 
-const CodeBlock = ({ input }) => (
-  <Content dangerouslySetInnerHTML={{ __html: input.primary.code_block.html }} />
-);
+const CodeBlock = ({ slice }) => <div>{console.log(slice)}</div>;
 
 export default CodeBlock;

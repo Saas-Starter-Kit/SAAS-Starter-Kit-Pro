@@ -11,14 +11,17 @@ const Docs = ({ data }) => {
 
   console.log(data.prismicDocs.data);
 
+  const body = data.prismicDocs.data.body;
+
   return (
     <React.Fragment>
-      {/*<h1>{data.title.text}</h1>*/}
+      {/*<h1>{data.prismicDocs.data.title}</h1>*/}
 
       <div style={{ width: '80%', borderRadius: '3rem' }}>
         {/*<SyntaxHighlighter language="jsx" style={dark}>
           {htmlText}
         </SyntaxHighlighter>*/}
+        <SliceZone body={body} />
       </div>
     </React.Fragment>
   );
@@ -31,13 +34,34 @@ export const pageQuery = graphql`
     prismicDocs(uid: { eq: $uid }) {
       uid
       data {
+        title {
+          text
+        }
         body {
           ... on PrismicDocsBodyCode {
             id
+            slice_type
             primary {
               code {
                 text
+              }
+            }
+          }
+          ... on PrismicDocsBodyContent {
+            id
+            slice_type
+            primary {
+              content {
                 html
+              }
+            }
+          }
+          ... on PrismicDocsBodyQuote {
+            id
+            slice_type
+            primary {
+              quote {
+                text
               }
             }
           }
