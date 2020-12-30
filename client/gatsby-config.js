@@ -26,8 +26,8 @@ module.exports = {
       options: {
         repositoryName: `test1qwer`,
         schemas: {
-          post: require('./prismic_schemas/post.json'),
-          docs: require('./prismic_schemas/docs.json')
+          post: require('./.prismic/post.json'),
+          docs: require('./.prismic/docs.json')
         }
       }
     }
