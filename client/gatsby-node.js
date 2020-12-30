@@ -16,6 +16,10 @@ exports.createPages = async ({ graphql, actions }) => {
     }
   `);
 
+  if (pages.errors) {
+    reporter.panic(pages.errors);
+  }
+
   const templatePost = path.resolve('src/templates/post.js');
   console.log(pages);
   pages.data.allPrismicPost.edges.forEach((edge) => {
@@ -40,6 +44,10 @@ exports.createPages = async ({ graphql, actions }) => {
       }
     }
   `);
+
+  if (docs.errors) {
+    reporter.panic(docs.errors);
+  }
 
   const templateDocs = path.resolve('src/templates/docs.js');
   console.log(pages);

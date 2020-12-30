@@ -5,16 +5,17 @@ import { dark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 const Docs = ({ data }) => {
   console.log(data);
-  const htmlCode = data.prismicDocs.data.body[2].primary.quote.html;
-  const htmlText = data.prismicDocs.data.body[2].primary.quote.text;
+  //const htmlCode = data.prismicDocs.data.body[2].primary.quote.html;
+  const htmlText = data.prismicDocs.data.body[0].primary.quote.text;
+
+  console.log(data.prismicDocs.data);
 
   return (
     <React.Fragment>
       {/*<h1>{data.title.text}</h1>*/}
-      <div dangerouslySetInnerHTML={{ __html: htmlCode }} />
-      <code>{htmlText}</code>
+
       <div style={{ width: '80%', borderRadius: '3rem' }}>
-        <SyntaxHighlighter language="javascript" style={dark}>
+        <SyntaxHighlighter language="jsx" style={dark}>
           {htmlText}
         </SyntaxHighlighter>
       </div>
