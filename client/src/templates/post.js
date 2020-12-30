@@ -20,11 +20,43 @@ export const pageQuery = graphql`
     prismicPost(uid: { eq: $uid }) {
       uid
       data {
-        title {
+        author {
           text
         }
-        content {
-          html
+        body {
+          ... on PrismicPostBodyCode {
+            id
+            primary {
+              code {
+                text
+              }
+            }
+            slice_type
+          }
+          ... on PrismicPostBodyContent {
+            id
+            primary {
+              content {
+                text
+              }
+            }
+            slice_type
+          }
+          ... on PrismicPostBodyQuote {
+            id
+            primary {
+              quote {
+                text
+              }
+            }
+          }
+          ... on PrismicPostBodyFullwidthimage {
+            id
+          }
+        }
+        date
+        title {
+          text
         }
       }
     }

@@ -6,7 +6,7 @@ import { dark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 const Docs = ({ data }) => {
   console.log(data);
   //const htmlCode = data.prismicDocs.data.body[2].primary.quote.html;
-  const htmlText = data.prismicDocs.data.body[0].primary.quote.text;
+  //const htmlText = data.prismicDocs.data.body[0].primary.quote.text;
 
   console.log(data.prismicDocs.data);
 
@@ -15,9 +15,9 @@ const Docs = ({ data }) => {
       {/*<h1>{data.title.text}</h1>*/}
 
       <div style={{ width: '80%', borderRadius: '3rem' }}>
-        <SyntaxHighlighter language="jsx" style={dark}>
+        {/*<SyntaxHighlighter language="jsx" style={dark}>
           {htmlText}
-        </SyntaxHighlighter>
+        </SyntaxHighlighter>*/}
       </div>
     </React.Fragment>
   );
@@ -30,14 +30,11 @@ export const pageQuery = graphql`
     prismicDocs(uid: { eq: $uid }) {
       uid
       data {
-        author {
-          link_type
-        }
         body {
-          ... on PrismicDocsBodyCodeSnippet {
+          ... on PrismicDocsBodyCode {
             id
             primary {
-              quote {
+              code {
                 text
                 html
               }
