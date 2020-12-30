@@ -7,7 +7,7 @@ import ApiContext from '../../../utils/apiContext';
 import { colors, breakpoints } from '../../../styles/theme';
 import styled from 'styled-components';
 
-import LoadingOverlay from '../../../components/Admin/Common/loadingOverlay';
+import LoadingOverlay from '../../../components/Common/loadingOverlay';
 import ConfirmSub from './confirmSubscription';
 import PlanCard from './planCard';
 

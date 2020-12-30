@@ -1,4 +1,4 @@
-import errorNotification from '../../components/Admin/Common/errorNotification';
+import errorNotification from '../../components/Common/errorNotification';
 import { FETCH_FAILURE, FETCH_INIT, FETCH_SUCCESS } from '../actions/actionTypes';
 
 export const initialStateApi = {

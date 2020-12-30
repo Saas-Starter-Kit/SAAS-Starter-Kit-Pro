@@ -1,7 +1,6 @@
 import React from 'react';
 import { colors, breakpoints, fieldStyles } from '../../../styles/theme';
 import styled from 'styled-components';
-import { Button as Button2 } from 'antd';
 
 const Card = styled.div`
   background-color: ${colors.white};

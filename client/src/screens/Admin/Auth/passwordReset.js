@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import AuthContext from '../../../utils/authContext';
 
-import LoadingOverlay from '../../../components/Admin/Common/loadingOverlay';
+import LoadingOverlay from '../../../components/Common/loadingOverlay';
 import { colors, breakpoints, fieldStyles } from '../../../styles/theme';
 import ResetFormHeader from './resetFormHeader';
 import ResetSuccess from './resetSuccessMessage';

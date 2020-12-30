@@ -5,7 +5,7 @@ import { navigate } from 'gatsby';
 import AuthContext from '../../../utils/authContext';
 import ApiContext from '../../../utils/apiContext';
 
-import LoadingOverlay from '../../../components/Admin/Common/loadingOverlay';
+import LoadingOverlay from '../../../components/Common/loadingOverlay';
 import styled from 'styled-components';
 
 import CancelSubscriptionCard from './cancelSubscirptionCard';

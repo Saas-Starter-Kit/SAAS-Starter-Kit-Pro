@@ -4,7 +4,7 @@ import { Formik } from 'formik';
 import AuthContext from '../../../utils/authContext';
 import ApiContext from '../../../utils/apiContext';
 import { ValidSchema, Authentication } from './helpers';
-import LoadingOverlay from '../../../components/Admin/Common/loadingOverlay';
+import LoadingOverlay from '../../../components/Common/loadingOverlay';
 import { colors, breakpoints, fieldStyles } from '../../../styles/theme';
 import SignUpFormHeader from './signupFormHeader';
 import GoogleButton from 'react-google-button';
