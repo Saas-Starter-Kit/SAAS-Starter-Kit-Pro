@@ -1,19 +1,14 @@
 import React from 'react';
 import { graphql } from 'gatsby';
-
 import SliceZone from './sliceZone';
 
 const Docs = ({ data }) => {
-  console.log(data);
-
-  console.log(data.prismicDocs.data);
-
+  const title = data.prismicDocs.data.title.text;
   const body = data.prismicDocs.data.body;
 
   return (
     <React.Fragment>
-      {/*<h1>{data.prismicDocs.data.title}</h1>*/}
-
+      <h1>{title}</h1>
       <div style={{ width: '80%', borderRadius: '3rem' }}>
         <SliceZone body={body} />
       </div>

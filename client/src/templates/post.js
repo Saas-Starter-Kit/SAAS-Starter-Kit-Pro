@@ -1,14 +1,22 @@
 import React from 'react';
 import { graphql } from 'gatsby';
+import moment from 'moment';
+import SliceZone from './sliceZone';
 
-const Post = ({ data: { prismicPost } }) => {
-  const { data } = prismicPost;
+const Post = ({ data }) => {
+  //const { data } = prismicPost;
+  const author = data.prismicPost.data.author.text;
+  const date = moment(data.prismicPost.data.date).format('MMM Do YY');
+  const title = data.prismicPost.data.title.text;
+  const body = data.prismicPost.data.body;
 
-  console.log(data);
+  console.log(data.prismicPost.data);
   return (
     <React.Fragment>
-      {/*<h1>{data.title.text}</h1>
-      <div dangerouslySetInnerHTML={{ __html: data.text.html }} />*/}
+      <h1>{title}</h1>
+      <h2>{author}</h2>
+      <h3>{date}</h3>
+      <SliceZone body={body} />
     </React.Fragment>
   );
 };
@@ -26,18 +34,18 @@ export const pageQuery = graphql`
         body {
           ... on PrismicPostBodyCode {
             id
+            slice_type
             primary {
               code {
                 text
               }
             }
-            slice_type
           }
           ... on PrismicPostBodyContent {
             id
             primary {
               content {
-                text
+                html
               }
             }
             slice_type
@@ -49,9 +57,7 @@ export const pageQuery = graphql`
                 text
               }
             }
-          }
-          ... on PrismicPostBodyFullwidthimage {
-            id
+            slice_type
           }
         }
         date
