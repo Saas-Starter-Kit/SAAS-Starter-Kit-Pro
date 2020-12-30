@@ -1,38 +1,23 @@
 import React from 'react';
 import { graphql } from 'gatsby';
-//import Markdown from 'react-markdown';
-import { RichText } from 'prismic-reactjs';
-import Prism from 'prismjs';
-import Highlight, { defaultProps } from 'prism-react-renderer';
-import theme from 'prism-react-renderer/themes/nightOwl';
-
-//Prism.highlightAll();
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { dark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 const Docs = ({ data }) => {
   console.log(data);
   const htmlCode = data.prismicDocs.data.body[2].primary.quote.html;
   const htmlText = data.prismicDocs.data.body[2].primary.quote.text;
-  const rawMarkdown = RichText.asText(htmlText);
 
   return (
     <React.Fragment>
       {/*<h1>{data.title.text}</h1>*/}
       <div dangerouslySetInnerHTML={{ __html: htmlCode }} />
       <code>{htmlText}</code>
-      {/*<Markdown source={htmlText} />*/}
-      <Highlight {...defaultProps} code={htmlText} language="javascript">
-        {({ className, style, tokens, getLineProps, getTokenProps }) => (
-          <pre className={className} style={style}>
-            {tokens.map((line, i) => (
-              <div {...getLineProps({ line, key: i })}>
-                {line.map((token, key) => (
-                  <span {...getTokenProps({ token, key })} />
-                ))}
-              </div>
-            ))}
-          </pre>
-        )}
-      </Highlight>
+      <div style={{ width: '80%', borderRadius: '3rem' }}>
+        <SyntaxHighlighter language="javascript" style={dark}>
+          {htmlText}
+        </SyntaxHighlighter>
+      </div>
     </React.Fragment>
   );
 };
