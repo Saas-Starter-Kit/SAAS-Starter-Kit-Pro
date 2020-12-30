@@ -1,5 +1,5 @@
 import React from 'react';
-import { BodyText, CodeBlock, Image, Quote } from '../slices';
+import { BodyText, CodeBlock, Image, Quote } from './slicesPrismic';
 
 const SliceZone = (props) => {
   console.log(props);
