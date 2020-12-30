@@ -3,6 +3,9 @@ import styled from 'styled-components';
 
 const BlockQuote = styled.blockquote``;
 
-const Quote = ({ slice }) => <BlockQuote>{console.log(slice)}</BlockQuote>;
+const Quote = ({ slice }) => {
+  const quote = slice.primary.quote.text;
+  return <BlockQuote>{quote}</BlockQuote>;
+};
 
 export default Quote;

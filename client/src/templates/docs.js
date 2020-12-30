@@ -1,13 +1,10 @@
 import React from 'react';
 import { graphql } from 'gatsby';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { dark } from 'react-syntax-highlighter/dist/esm/styles/prism';
+
 import SliceZone from './sliceZone';
 
 const Docs = ({ data }) => {
   console.log(data);
-  //const htmlCode = data.prismicDocs.data.body[2].primary.quote.html;
-  //const htmlText = data.prismicDocs.data.body[0].primary.quote.text;
 
   console.log(data.prismicDocs.data);
 
@@ -18,9 +15,6 @@ const Docs = ({ data }) => {
       {/*<h1>{data.prismicDocs.data.title}</h1>*/}
 
       <div style={{ width: '80%', borderRadius: '3rem' }}>
-        {/*<SyntaxHighlighter language="jsx" style={dark}>
-          {htmlText}
-        </SyntaxHighlighter>*/}
         <SliceZone body={body} />
       </div>
     </React.Fragment>

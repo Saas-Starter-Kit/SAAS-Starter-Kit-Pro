@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Content = styled.div``;
-
-const BodyContent = ({ slice }) => <div>{console.log(slice)}</div>;
-//<Content dangerouslySetInnerHTML={{ __html: input.primary.text.html }} />
+const BodyContent = ({ slice }) => {
+  const content = slice.primary.content.html;
+  return <div dangerouslySetInnerHTML={{ __html: content }} />;
+};
 
 export default BodyContent;
