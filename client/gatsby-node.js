@@ -24,7 +24,7 @@ exports.createPages = async ({ graphql, actions }) => {
   console.log(pages);
   pages.data.allPrismicPost.edges.forEach((edge) => {
     createPage({
-      path: `/${edge.node.uid}`,
+      path: `/blog/${edge.node.uid}`,
       component: templatePost,
       context: {
         uid: edge.node.uid
@@ -53,7 +53,7 @@ exports.createPages = async ({ graphql, actions }) => {
   console.log(pages);
   docs.data.allPrismicDocs.edges.forEach((edge) => {
     createPage({
-      path: `/${edge.node.uid}`,
+      path: `/docs/${edge.node.uid}`,
       component: templateDocs,
       context: {
         uid: edge.node.uid
