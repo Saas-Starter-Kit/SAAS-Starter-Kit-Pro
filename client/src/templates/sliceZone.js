@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { BodyContent, CodeBlock, Image, Quote } from './slicesPrismic';
+import { BodyContent, CodeBlock, Image, Quote, WarningBlock } from './slicesPrismic';
 
 const Wrapper = styled.div``;
 
@@ -10,6 +10,7 @@ const BottomSpace = styled.div`
 `;
 
 const SliceZone = ({ body }) => {
+  console.log(body);
   const slice = body.map((slice) => {
     switch (slice.slice_type) {
       // These are the API IDs of the slices
@@ -21,6 +22,8 @@ const SliceZone = ({ body }) => {
         return <Image key={slice.id} slice={slice} />;
       case 'quote':
         return <Quote key={slice.id} slice={slice} />;
+      case 'warningblock':
+        return <WarningBlock key={slice.id} slice={slice} />;
       default:
         return null;
     }

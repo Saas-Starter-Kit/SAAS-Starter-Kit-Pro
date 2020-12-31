@@ -27,7 +27,8 @@
           "image1": [],
           "quote": [],
           "content": [],
-          "fullwidthimage": []
+          "fullwidthimage": [],
+          "warningblock": []
         },
         "choices": {
           "code": {
@@ -97,6 +98,23 @@
                   },
                   "thumbnails": [],
                   "label": "image"
+                }
+              }
+            },
+            "repeat": {}
+          },
+          "warningblock": {
+            "type": "Slice",
+            "fieldset": "warningBlock",
+            "description": "a warning quote block",
+            "icon": "warning",
+            "display": "list",
+            "non-repeat": {
+              "warningblock": {
+                "type": "StructuredText",
+                "config": {
+                  "multi": "paragraph",
+                  "label": "warningBlock"
                 }
               }
             },

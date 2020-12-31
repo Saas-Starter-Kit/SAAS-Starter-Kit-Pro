@@ -15,11 +15,11 @@ const Blog = () => {
 
   const blogLinks = edges;
 
-  const featuredArticle = 'Featured Article Title';
-  const findFeaturedArticle = edges.filter();
+  //const featuredArticle = 'Featured Article Title';
+  //const findFeaturedArticle = edges.filter();
 
-  const topArticles = [];
-  const findTopArticles = edges.filter();
+  //const topArticles = [];
+  //const findTopArticles = edges.filter();
 
   return (
     <Wrapper>

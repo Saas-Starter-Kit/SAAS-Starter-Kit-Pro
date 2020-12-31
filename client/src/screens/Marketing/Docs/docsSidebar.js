@@ -12,6 +12,7 @@ const DocsSidebar = () => {
   const data = useStaticQuery(staticQuery);
   const { allPrismicDocs } = data;
   const { edges } = allPrismicDocs;
+  console.log(edges);
 
   const docsLinks = edges;
 

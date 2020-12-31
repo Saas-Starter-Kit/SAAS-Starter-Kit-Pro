@@ -69,6 +69,15 @@ export const pageQuery = graphql`
               }
             }
           }
+          ... on PrismicDocsBodyWarningblock {
+            id
+            slice_type
+            primary {
+              warningblock {
+                text
+              }
+            }
+          }
         }
       }
     }
