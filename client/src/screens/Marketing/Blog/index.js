@@ -15,12 +15,23 @@ const Blog = () => {
 
   const blogLinks = edges;
 
+  const featuredArticle = 'Featured Article Title';
+  const findFeaturedArticle = edges.filter();
+
+  const topArticles = [];
+  const findTopArticles = edges.filter();
+
   return (
     <Wrapper>
       <div>
         <h3>Featured:</h3>
         {/*hardcode*/}
       </div>
+      <div>
+        <h3>Top Articles:</h3>
+        {/*hardcode*/}
+      </div>
+      <h3>Recent Articles</h3>
       {blogLinks.map((blogLink) => (
         <div>
           <Link to={`/blog/${blogLink.node.uid}`}>{blogLink.node.data.title.text}</Link>
