@@ -1,7 +1,17 @@
 import React from 'react';
+import styled from 'styled-components';
 
+const Wrapper = styled.div`
+  display: flex;
+`;
+//just use graphql nad make welcome page
 const Docs = () => {
-  return <div>Docs</div>;
+  return (
+    <Wrapper>
+      <div>Sidebar</div>
+      <div>Docs</div>
+    </Wrapper>
+  );
 };
 
 export default Docs;

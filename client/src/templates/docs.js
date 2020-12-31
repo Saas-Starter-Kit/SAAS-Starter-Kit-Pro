@@ -1,18 +1,37 @@
 import React from 'react';
 import { graphql } from 'gatsby';
+import styled from 'styled-components';
+import { Link } from 'gatsby';
 import SliceZone from './sliceZone';
+
+const Wrapper = styled.div`
+  display: flex;
+`;
+
+const Sidebar = styled.div`
+  width: 30%;
+`;
 
 const Docs = ({ data }) => {
   const title = data.prismicDocs.data.title.text;
   const body = data.prismicDocs.data.body;
+  console.log(data);
 
   return (
-    <div>
-      <h1>{title}</h1>
-      <div style={{ width: '80%', borderRadius: '3rem' }}>
-        <SliceZone body={body} />
+    <Wrapper>
+      <Sidebar>
+        <div>Sidebar</div>
+        <div>Sidebar</div>
+        <div>Sidebar</div>
+        <div>Sidebar</div>
+      </Sidebar>
+      <div>
+        <h1>{title}</h1>
+        <div style={{ borderRadius: '3rem' }}>
+          <SliceZone body={body} />
+        </div>
       </div>
-    </div>
+    </Wrapper>
   );
 };
 
