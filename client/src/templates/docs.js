@@ -1,8 +1,8 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import styled from 'styled-components';
-import { Link } from 'gatsby';
 import SliceZone from './sliceZone';
+import DocsSidebar from '../screens/Marketing/Docs/docsSidebar';
 
 const Wrapper = styled.div`
   display: flex;
@@ -20,10 +20,7 @@ const Docs = ({ data }) => {
   return (
     <Wrapper>
       <Sidebar>
-        <div>Sidebar</div>
-        <div>Sidebar</div>
-        <div>Sidebar</div>
-        <div>Sidebar</div>
+        <DocsSidebar />
       </Sidebar>
       <div>
         <h1>{title}</h1>
