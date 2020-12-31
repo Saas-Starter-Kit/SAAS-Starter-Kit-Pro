@@ -15,7 +15,6 @@ const Sidebar = styled.div`
 const Docs = ({ data }) => {
   const title = data.prismicDocs.data.title.text;
   const body = data.prismicDocs.data.body;
-  console.log(data);
 
   return (
     <Wrapper>

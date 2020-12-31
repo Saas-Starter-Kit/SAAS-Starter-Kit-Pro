@@ -10,7 +10,6 @@ const BottomSpace = styled.div`
 `;
 
 const SliceZone = ({ body }) => {
-  console.log(body);
   const slice = body.map((slice) => {
     switch (slice.slice_type) {
       // These are the API IDs of the slices

@@ -8,13 +8,11 @@ const Wrapper = styled.div`
   flex-direction: column;
 `;
 
-//just use graphql and make welcome page
 const DocsSidebar = () => {
   const data = useStaticQuery(staticQuery);
   const { allPrismicDocs } = data;
   const { edges } = allPrismicDocs;
 
-  console.log(edges);
   const docsLinks = edges;
 
   return (
