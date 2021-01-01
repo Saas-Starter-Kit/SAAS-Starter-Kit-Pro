@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import SliceZone from './sliceZone';
 import DocsSidebar from '../screens/Marketing/Docs/docsSidebar';
 
-//test quote
 const Wrapper = styled.div`
   display: flex;
 `;

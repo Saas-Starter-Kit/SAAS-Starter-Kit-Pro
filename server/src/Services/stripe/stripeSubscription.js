@@ -1,6 +1,6 @@
-import stripe from '../Config/stripe.js';
-import db from '../Database/db.js';
-import { getUser } from './authHelpers.js';
+import stripe from '../../Config/stripe.js';
+import db from '../../Database/db.js';
+import { getUser } from '../auth/authHelpers.js';
 
 export const GetSubscription = async (req, res) => {
   let email = req.query.email;

@@ -1,5 +1,5 @@
 import express from 'express';
-import { getTodos, postTodo, putTodo, deleteTodo } from '../Services/todosCRUD.js';
+import { getTodos, postTodo, putTodo, deleteTodo } from '../Services/CRUD/todosCRUD.js';
 
 const router = express.Router();
 

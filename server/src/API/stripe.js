@@ -1,21 +1,22 @@
 import express from 'express';
 const router = express.Router();
 
-import { CreateCustomer } from '../Services/stripeCustomer.js';
 import { asyncHandler } from '../Utils/asyncErrorHandler.js';
+
+import { CreateCustomer } from '../Services/stripe/stripeCustomer.js';
 
 import {
   CreateSetupIntent,
   GetWallet,
   AttachPaymentMethod,
   RemovePaymentMethod
-} from '../Services/stripeHelpers.js';
+} from '../Services/stripe/stripeHelpers.js';
 
 import {
   CancelSubscription,
   GetSubscription,
   CreateSubscription
-} from '../Services/stripeSubscription.js';
+} from '../Services/stripe/stripeSubscription.js';
 
 /* Helper Routes */
 router.get('/get-wallet', asyncHandler(GetWallet));
@@ -33,7 +34,7 @@ router.post('/create-subscription', asyncHandler(CreateSubscription));
 
 router.post('/cancel-subscription', asyncHandler(CancelSubscription));
 
-/* Customer Routers */
+/* Customer Routes */
 router.post('/create-customer', asyncHandler(CreateCustomer));
 
 export default router;

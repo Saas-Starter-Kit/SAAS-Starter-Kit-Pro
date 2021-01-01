@@ -1,7 +1,7 @@
-import db from '../Database/db.js';
-import { setToken } from '../Config/passport.js';
+import db from '../../Database/db.js';
+import { setToken } from '../../Config/passport.js';
 import { saveUsertoDB, getUser } from './authHelpers.js';
-import firebaseAdmin from '../Config/firebase.js';
+import firebaseAdmin from '../../Config/firebase.js';
 
 export const SignUp = async (req, res) => {
   let token = req.body.token;

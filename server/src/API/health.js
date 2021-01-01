@@ -2,7 +2,7 @@ import express from 'express';
 const router = express.Router();
 
 import { requireAuth } from '../Config/passport.js';
-import { _healthCheck, privateRoute, failHealthCheck } from '../Services/health.js';
+import { _healthCheck, privateRoute, failHealthCheck } from '../Services/utils/health.js';
 
 router.get('/fail-health', failHealthCheck);
 

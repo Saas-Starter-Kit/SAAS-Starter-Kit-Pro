@@ -1,5 +1,5 @@
-import stripe from '../Config/stripe.js';
-import db from '../Database/db.js';
+import stripe from '../../Config/stripe.js';
+import db from '../../Database/db.js';
 
 export const CreateCustomer = async (req, res) => {
   let email = req.body.email;

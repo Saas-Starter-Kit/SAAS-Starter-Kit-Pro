@@ -1,4 +1,4 @@
-import db from '../Database/db.js';
+import db from '../../Database/db.js';
 
 export const getTodos = async (req, res) => {
   let author = req.query.author;

@@ -2,7 +2,7 @@ import express from 'express';
 const router = express.Router();
 
 import { asyncHandler } from '../Utils/asyncErrorHandler.js';
-import { updateEmail, updateUsername, Login, SignUp } from '../Services/authentication.js';
+import { updateEmail, updateUsername, Login, SignUp } from '../Services/auth/authentication.js';
 
 //sign in or sign up user then send jwt token
 router.post('/signup', asyncHandler(SignUp));

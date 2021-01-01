@@ -1,4 +1,4 @@
-import stripe from '../Config/stripe.js';
+import stripe from '../../Config/stripe.js';
 
 export const CreateSetupIntent = async (req, res) => {
   let customer_id = req.body.customer.stripeCustomerKey;
