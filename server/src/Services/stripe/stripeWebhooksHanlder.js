@@ -13,9 +13,23 @@ export const WebHookHandler = async (req, res) => {
   console.log(event.type);
 
   switch (event.type) {
-    case 'payment_intent.created':
-      const paymentIntent = event.data.object;
-      console.log('PaymentIntent was successful!');
+    case 'invoice.payment_failed':
+      //send email notification
+      break;
+    case 'invoice.invoice.payment_action_required ':
+      //send email notification
+      break;
+    case 'customer.subscription.trial_will_end':
+      //send email notification
+      break;
+    case 'customer.subscription.past_due':
+      //send email notification
+      break;
+    case 'customer.subscription.unpaid':
+      //send email notification
+      break;
+    case 'customer.subscription.canceled':
+      //send email notification
       break;
     default:
       console.log(`Unhandled event type ${event.type}`);
