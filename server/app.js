@@ -15,8 +15,12 @@ import auth from './src/API/authRoutes.js';
 import todoApi from './src/API/todos.js';
 import healthApi from './src/API/health.js';
 import stripeApi from './src/API/stripe.js';
+import stripeWebhook from './src/API/stripeWebhooks.js';
 
 const app = express();
+
+//stripe webhooks must be called before bodyparser middleware
+app.use('/stripe', stripeWebhook);
 
 //Middleware
 app.use(cors());

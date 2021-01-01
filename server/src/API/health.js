@@ -4,10 +4,12 @@ const router = express.Router();
 import { requireAuth } from '../Config/passport.js';
 import { _healthCheck, privateRoute, failHealthCheck } from '../Services/utils/health.js';
 
-router.get('/fail-health', failHealthCheck);
+import { asyncHandler } from '../Utils/asyncErrorHandler.js';
+
+router.get('/fail-health', asyncHandler(failHealthCheck));
 
 //Example of authenticated route
-router.get('/private', requireAuth, privateRoute);
+router.get('/private', requireAuth, asyncHandler(privateRoute));
 
 /* 
     DO NOT MODIFY, '/health' is used by AWS Fargate 
@@ -15,6 +17,6 @@ router.get('/private', requireAuth, privateRoute);
     launch a new container. 
 */
 
-router.get('/health', _healthCheck);
+router.get('/health', asyncHandler(_healthCheck));
 
 export default router;
