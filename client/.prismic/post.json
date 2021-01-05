@@ -26,12 +26,12 @@
         "label": "date"
       }
     },
-    "realated_article1": {
+    "related_article1": {
       "type": "Link",
       "config": {
         "select": "document",
         "customtypes": ["post"],
-        "label": "realated_article1"
+        "label": "related_article1"
       }
     },
     "related_article2": {

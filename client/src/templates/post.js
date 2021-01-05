@@ -12,10 +12,15 @@ const Post = ({ data }) => {
   const author = data.prismicPost.data.author.text;
   const date = moment(data.prismicPost.data.date).format('MMM Do YY');
   const title = data.prismicPost.data.title.text;
+  //const hero_image =
   const body = data.prismicPost.data.body;
-  const tags = data.prismicPost.tags;
 
-  console.log(tags);
+  const tags = data.prismicPost.tags;
+  const related_article1 = data.prismicPost.data.related_article1;
+  const related_article2 = data.prismicPost.data.related_article2;
+  const related_articles = [related_article1, related_article2];
+
+  console.log(related_articles);
 
   console.log(data.prismicPost.data);
   return (
@@ -36,8 +41,62 @@ export const pageQuery = graphql`
       uid
       tags
       data {
+        title {
+          text
+        }
+        date
         author {
           text
+        }
+        hero_image {
+          thumbnails {
+            Table {
+              url
+            }
+            desktop {
+              url
+            }
+            mobile {
+              url
+            }
+            thumbnail {
+              url
+            }
+          }
+        }
+        related_article1 {
+          document {
+            ... on PrismicPost {
+              id
+              data {
+                hero_image {
+                  url
+                }
+                title {
+                  text
+                }
+                date
+              }
+            }
+          }
+          tags
+        }
+        related_article2 {
+          document {
+            ... on PrismicPost {
+              id
+              data {
+                hero_image {
+                  url
+                }
+                title {
+                  text
+                }
+                date
+              }
+            }
+          }
+          tags
         }
         body {
           ... on PrismicPostBodyCode {
@@ -67,10 +126,28 @@ export const pageQuery = graphql`
             }
             slice_type
           }
-        }
-        date
-        title {
-          text
+          ... on PrismicPostBodyFullwidthimage {
+            id
+            primary {
+              image {
+                thumbnails {
+                  Table {
+                    url
+                  }
+                  desktop {
+                    url
+                  }
+                  mobile {
+                    url
+                  }
+                  thumbnail {
+                    url
+                  }
+                }
+              }
+            }
+            slice_type
+          }
         }
       }
     }

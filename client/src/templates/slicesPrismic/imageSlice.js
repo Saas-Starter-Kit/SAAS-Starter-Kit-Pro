@@ -2,13 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 //import Img from 'gatsby-image';
 
-const Content = styled.div`
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
-`;
-
-const Image = ({ input }) => (
-  <Content>{/*<Img fluid={input.primary.image.localFile.childImageSharp.fluid} />*/}</Content>
-);
+const Image = ({ slice }) => <div>{console.log(slice)}</div>;
 
 export default Image;
