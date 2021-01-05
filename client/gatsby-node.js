@@ -21,7 +21,7 @@ exports.createPages = async ({ graphql, actions }) => {
   }
 
   const templatePost = path.resolve('src/templates/post.js');
-  console.log(pages);
+
   pages.data.allPrismicPost.edges.forEach((edge) => {
     createPage({
       path: `/blog/${edge.node.uid}`,
@@ -50,7 +50,7 @@ exports.createPages = async ({ graphql, actions }) => {
   }
 
   const templateDocs = path.resolve('src/templates/docs.js');
-  console.log(pages);
+
   docs.data.allPrismicDocs.edges.forEach((edge) => {
     createPage({
       path: `/docs/${edge.node.uid}`,
