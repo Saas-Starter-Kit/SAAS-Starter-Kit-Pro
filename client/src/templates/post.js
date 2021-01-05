@@ -13,6 +13,9 @@ const Post = ({ data }) => {
   const date = moment(data.prismicPost.data.date).format('MMM Do YY');
   const title = data.prismicPost.data.title.text;
   const body = data.prismicPost.data.body;
+  const tags = data.prismicPost.tags;
+
+  console.log(tags);
 
   console.log(data.prismicPost.data);
   return (
@@ -31,6 +34,7 @@ export const pageQuery = graphql`
   query PostBySlug($uid: String!) {
     prismicPost(uid: { eq: $uid }) {
       uid
+      tags
       data {
         author {
           text
