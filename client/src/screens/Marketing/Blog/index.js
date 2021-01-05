@@ -15,21 +15,19 @@ const Blog = () => {
 
   const blogLinks = edges;
 
-  //const featuredArticle = 'Featured Article Title';
-  //const findFeaturedArticle = edges.filter();
+  let featuredArticle = edges.filter((edge) => edge.node.tags.includes('featured'));
+  featuredArticle = featuredArticle[0];
 
-  //const topArticles = [];
-  //const findTopArticles = edges.filter();
+  let topArticles = edges.filter((edge) => edge.node.tags.includes('top article'));
+  console.log(topArticles);
 
   return (
     <Wrapper>
       <div>
         <h3>Featured:</h3>
-        {/*hardcode*/}
       </div>
       <div>
         <h3>Top Articles:</h3>
-        {/*hardcode*/}
       </div>
       <h3>Recent Articles</h3>
       {blogLinks.map((blogLink) => (
@@ -50,11 +48,32 @@ const staticQuery = graphql`
       edges {
         node {
           uid
+          tags
           data {
             title {
               text
             }
             date
+            hero_image {
+              thumbnails {
+                Table {
+                  alt
+                  url
+                }
+                desktop {
+                  url
+                  alt
+                }
+                mobile {
+                  alt
+                  url
+                }
+                thumbnail {
+                  alt
+                  url
+                }
+              }
+            }
           }
         }
       }
