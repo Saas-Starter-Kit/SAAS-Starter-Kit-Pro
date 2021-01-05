@@ -1,15 +1,14 @@
-const postQuery = `{
-  allPrismicPost {
+const docsQuery = `{
+  allPrismicDocs {
     edges {
       node {
         uid
-        tags
         data {
           title {
             text
           }
           body {
-            ... on PrismicPostBodyContent {
+            ... on PrismicDocsBodyContent {
               id
               primary {
                 content {
@@ -26,25 +25,32 @@ const postQuery = `{
 
 const transformToAlgoliaRecord = ({ node }) => {
   let uid = node.uid;
-  let tags = node.tags;
   let title = node.data.title.text;
 
-  let body = node.data.body[2];
+  // This is to handle empty objects that are returned by the query
+  let contentItems = [];
+  const addContentItemstoArray = (item) => {
+    if (item.id) {
+      contentItems.push(item.primary.content.text);
+    }
+  };
 
-  console.log(body);
+  let content = node.data.body;
+  content.map((item) => addContentItemstoArray(item));
+
+  console.log(contentItems);
 
   return {
     objectID: uid,
-    ...tags,
     title,
-    body
+    contentItems
   };
 };
 
 const queries = [
   {
-    query: postQuery,
-    transformer: ({ data }) => data.allPrismicPost.edges.map(transformToAlgoliaRecord),
+    query: docsQuery,
+    transformer: ({ data }) => data.allPrismicDocs.edges.map(transformToAlgoliaRecord),
     indexName: 'ssk_test',
     settings: { attributesToSnippet: [`excerpt:30`] }
   }

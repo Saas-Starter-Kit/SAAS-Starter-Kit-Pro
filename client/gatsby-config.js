@@ -1,4 +1,4 @@
-const queries = require('./src/services/algolia');
+const queries = require('./src/utils/algoliaQuery');
 require('dotenv').config();
 
 module.exports = {
