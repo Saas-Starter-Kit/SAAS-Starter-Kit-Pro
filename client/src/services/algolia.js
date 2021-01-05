@@ -27,12 +27,17 @@ const postQuery = `{
 const transformToAlgoliaRecord = ({ node }) => {
   let uid = node.uid;
   let tags = node.tags;
+  let title = node.data.title.text;
 
-  console.log(node.data);
+  let body = node.data.body[2];
+
+  console.log(body);
 
   return {
     objectID: uid,
-    ...tags
+    ...tags,
+    title,
+    body
   };
 };
 
@@ -40,7 +45,8 @@ const queries = [
   {
     query: postQuery,
     transformer: ({ data }) => data.allPrismicPost.edges.map(transformToAlgoliaRecord),
-    indexName: 'ssk_test'
+    indexName: 'ssk_test',
+    settings: { attributesToSnippet: [`excerpt:30`] }
   }
 ];
 

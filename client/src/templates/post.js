@@ -20,9 +20,6 @@ const Post = ({ data }) => {
   const related_article2 = data.prismicPost.data.related_article2;
   const related_articles = [related_article1, related_article2];
 
-  console.log(hero_image);
-
-  console.log(data.prismicPost.data);
   return (
     <Wrapper>
       <h1>{title}</h1>
