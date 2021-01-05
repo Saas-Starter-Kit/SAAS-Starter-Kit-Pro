@@ -22,9 +22,6 @@ const SearchBox = ({ currentRefinement, refine }) => {
           onChange={(event) => refine(event.currentTarget.value)}
         />
       </form>
-      <div>
-        <FcSearch />
-      </div>
     </div>
   );
 };
