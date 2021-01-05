@@ -12,7 +12,7 @@ const Post = ({ data }) => {
   const author = data.prismicPost.data.author.text;
   const date = moment(data.prismicPost.data.date).format('MMM Do YY');
   const title = data.prismicPost.data.title.text;
-  //const hero_image =
+  const hero_image = data.prismicPost.data.hero_image;
   const body = data.prismicPost.data.body;
 
   const tags = data.prismicPost.tags;
@@ -20,7 +20,7 @@ const Post = ({ data }) => {
   const related_article2 = data.prismicPost.data.related_article2;
   const related_articles = [related_article1, related_article2];
 
-  console.log(related_articles);
+  console.log(hero_image);
 
   console.log(data.prismicPost.data);
   return (
@@ -51,15 +51,19 @@ export const pageQuery = graphql`
         hero_image {
           thumbnails {
             Table {
+              alt
               url
             }
             desktop {
+              alt
               url
             }
             mobile {
+              alt
               url
             }
             thumbnail {
+              alt
               url
             }
           }
@@ -70,6 +74,7 @@ export const pageQuery = graphql`
               id
               data {
                 hero_image {
+                  alt
                   url
                 }
                 title {
@@ -87,6 +92,7 @@ export const pageQuery = graphql`
               id
               data {
                 hero_image {
+                  alt
                   url
                 }
                 title {
@@ -131,16 +137,12 @@ export const pageQuery = graphql`
             primary {
               image {
                 thumbnails {
-                  Table {
-                    url
-                  }
                   desktop {
                     url
+                    alt
                   }
                   mobile {
-                    url
-                  }
-                  thumbnail {
+                    alt
                     url
                   }
                 }

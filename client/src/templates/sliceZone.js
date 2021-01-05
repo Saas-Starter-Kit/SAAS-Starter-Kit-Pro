@@ -18,7 +18,7 @@ const SliceZone = ({ body }) => {
         return <BodyContent key={slice.id} slice={slice} />;
       case 'code':
         return <CodeBlock key={slice.id} slice={slice} />;
-      case 'image':
+      case 'fullwidthimage':
         return <Image key={slice.id} slice={slice} />;
       case 'quote':
         return <Quote key={slice.id} slice={slice} />;
