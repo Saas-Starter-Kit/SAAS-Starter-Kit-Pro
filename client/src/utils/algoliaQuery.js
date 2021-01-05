@@ -38,8 +38,6 @@ const transformToAlgoliaRecord = ({ node }) => {
   let content = node.data.body;
   content.map((item) => addContentItemstoArray(item));
 
-  console.log(contentItems);
-
   return {
     objectID: uid,
     title,

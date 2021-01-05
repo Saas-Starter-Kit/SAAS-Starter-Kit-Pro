@@ -29,6 +29,8 @@
     "react-headroom": "^3.1.0",
     "react-helmet": "^6.1.0",
     "react-icons": "^4.1.0",
+    "react-instantsearch": "^6.8.2",
+    "react-instantsearch-dom": "^6.8.2",
     "react-syntax-highlighter": "^15.4.3",
     "react-tooltip": "^4.2.11",
     "styled-components": "^5.2.1",

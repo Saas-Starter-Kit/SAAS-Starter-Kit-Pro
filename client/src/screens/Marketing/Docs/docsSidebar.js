@@ -2,6 +2,7 @@ import React from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 import { Link } from 'gatsby';
 import styled from 'styled-components';
+import Search from './algoliaSearch';
 
 const Wrapper = styled.div`
   display: flex;
@@ -21,6 +22,7 @@ const DocsSidebar = () => {
       {docsLinks.map((docLink) => (
         <Link to={`/docs/${docLink.node.uid}`}>{docLink.node.data.title.text}</Link>
       ))}
+      <Search />
     </Wrapper>
   );
 };
