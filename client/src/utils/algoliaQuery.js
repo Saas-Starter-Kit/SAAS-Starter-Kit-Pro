@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const docsQuery = `{
   allPrismicDocs {
     edges {
@@ -49,7 +51,7 @@ const queries = [
   {
     query: docsQuery,
     transformer: ({ data }) => data.allPrismicDocs.edges.map(transformToAlgoliaRecord),
-    indexName: 'ssk_test',
+    indexName: process.env.GATSBY_ALGOLIA_INDEX_NAME,
     settings: { attributesToSnippet: [`excerpt:30`] }
   }
 ];
