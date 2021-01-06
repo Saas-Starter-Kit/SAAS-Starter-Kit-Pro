@@ -3,6 +3,7 @@ import { graphql } from 'gatsby';
 import styled from 'styled-components';
 import moment from 'moment';
 import SliceZone from './sliceZone';
+import Disqus from '../services/disqus'
 
 const Wrapper = styled.div`
   margin: 3rem 7rem;
