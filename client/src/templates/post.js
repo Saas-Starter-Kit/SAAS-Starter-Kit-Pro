@@ -3,7 +3,7 @@ import { graphql } from 'gatsby';
 import styled from 'styled-components';
 import moment from 'moment';
 import SliceZone from './sliceZone';
-import Disqus from '../services/disqus'
+import Disqus from '../services/disqus';
 
 const Wrapper = styled.div`
   margin: 3rem 7rem;
@@ -16,6 +16,9 @@ const Post = ({ data }) => {
   const hero_image = data.prismicPost.data.hero_image;
   const body = data.prismicPost.data.body;
 
+  const pageUid = data.prismicPost.uid;
+  const siteUrl = data.site.siteMetadata.siteUrl;
+
   const tags = data.prismicPost.tags;
   const related_article1 = data.prismicPost.data.related_article1;
   const related_article2 = data.prismicPost.data.related_article2;
@@ -27,6 +30,7 @@ const Post = ({ data }) => {
       <h2>{author}</h2>
       <h3>{date}</h3>
       <SliceZone body={body} />
+      <Disqus url={`${siteUrl + '/' + pageUid}`} identifier={pageUid} title={title} />
     </Wrapper>
   );
 };
@@ -35,6 +39,11 @@ export default Post;
 
 export const pageQuery = graphql`
   query PostBySlug($uid: String!) {
+    site {
+      siteMetadata {
+        siteUrl
+      }
+    }
     prismicPost(uid: { eq: $uid }) {
       uid
       tags
