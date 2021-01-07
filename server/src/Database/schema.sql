@@ -1,4 +1,7 @@
+CREATE TABLE app (
+  app_id SERIAL PRIMARY KEY,
 
+);
 
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,
