@@ -64,3 +64,8 @@ SendInBlue Email Marketing
 link to SendInBlue tutorial
 
 Registar Domain Name with GoDaddy
+
+### Env Var
+
+When adding new env var make sure to add it to the Fargate AWS class otherwise
+it will not work in production if you are using the provided AWS infrastructure.

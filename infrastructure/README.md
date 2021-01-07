@@ -10,9 +10,9 @@ Make sure to have an IAM with Admin priviledges configured with AWS CLI
 
 https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html
 
-Then run `cdk synth` to synthesize the configuration into a cloudformation template
+Then run `cdk synth` to synthesize the configuration into a cloudformation template.
 
-Then `cdk deploy` To deploy the entire infastruture to your AWS account
+Then `cdk deploy` To deploy the entire infastruture to your AWS account.
 
 **_IMPORTANT_**
 

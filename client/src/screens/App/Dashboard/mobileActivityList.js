@@ -1,16 +1,16 @@
-import React from "react"
-import styled from "styled-components"
-import { colors, breakpoints } from "../../../styles/theme"
-import Button from "./button"
-import Chevron from "../../../components/Admin/svgs/chevron"
-import Cash from "../../../components/Admin/svgs/cash"
+import React from 'react';
+import styled from 'styled-components';
+import { colors, breakpoints } from '../../../styles/theme';
+import Button from './button';
+import Chevron from '../../../components/App/svgs/chevron';
+import Cash from '../../../components/App/svgs/cash';
 
 const Wrapper = styled.div`
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
   @media (min-width: ${breakpoints.small}) {
     display: none;
   }
-`
+`;
 
 const List = styled.ul`
   margin-top: 0.5rem;
@@ -19,7 +19,7 @@ const List = styled.ul`
   @media (min-width: ${breakpoints.small}) {
     display: none;
   }
-`
+`;
 
 const Card = styled.a`
   background-color: ${colors.white};
@@ -28,12 +28,12 @@ const Card = styled.a`
   &:hover {
     background-color: ${colors.coolGray50};
   }
-`
+`;
 
 const TextWrapper1 = styled.div`
   display: flex;
   align-items: center;
-`
+`;
 
 const TextWrapper2 = styled.div`
   flex: 1 1 0%;
@@ -41,7 +41,7 @@ const TextWrapper2 = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-`
+`;
 
 const Text = styled.div`
   color: ${colors.coolGray500};
@@ -50,18 +50,18 @@ const Text = styled.div`
   text-overflow: ellipsis;
   white-space: nowrap;
   padding-left: 12px;
-`
+`;
 
 const Title = styled.p`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-`
+`;
 
 const Number = styled.span`
   color: ${colors.coolGray900};
   font-weight: 500;
-`
+`;
 
 const Nav = styled.nav`
   background-color: ${colors.white};
@@ -70,17 +70,17 @@ const Nav = styled.nav`
   align-items: center;
   justify-content: space-between;
   border-top: 1px solid ${colors.coolGray200};
-`
+`;
 
 const ButtonsWrapper = styled.div`
   flex: 1 1 0%;
   display: flex;
   justify-content: space-between;
-`
+`;
 
 const StyledButton = styled(Button)`
   margin-left: 0.75rem;
-`
+`;
 
 const MobileActivityList = () => (
   <Wrapper>
@@ -110,6 +110,6 @@ const MobileActivityList = () => (
       </ButtonsWrapper>
     </Nav>
   </Wrapper>
-)
+);
 
-export default MobileActivityList
+export default MobileActivityList;

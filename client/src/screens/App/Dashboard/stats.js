@@ -1,16 +1,16 @@
-import React from "react"
-import styled, { css } from "styled-components"
-import { colors, breakpoints } from "../../../styles/theme"
-import StatColumn from "./statColumn"
-import ArrowUp from "../../../components/Admin/svgs/arrowUp"
-import ArrowDown from "../../../components/Admin/svgs/arrowDown"
+import React from 'react';
+import styled, { css } from 'styled-components';
+import { colors, breakpoints } from '../../../styles/theme';
+import StatColumn from './statColumn';
+import ArrowUp from '../../../components/App/svgs/arrowUp';
+import ArrowDown from '../../../components/App/svgs/arrowDown';
 
 const Title = styled.h3`
   font-size: 1.125rem;
   line-height: 1.5rem;
   font-weight: 500;
   color: ${colors.gray900};
-`
+`;
 
 const Card = styled.div`
   background-color: ${colors.white};
@@ -23,7 +23,7 @@ const Card = styled.div`
   @media (min-width: ${breakpoints.medium}) {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
-`
+`;
 
 const BorderDiv = styled.div`
   @media (min-width: ${breakpoints.medium}) {
@@ -32,24 +32,24 @@ const BorderDiv = styled.div`
   @media (max-width: ${breakpoints.medium}) {
     border-top: 1px solid ${colors.gray200};
   }
-`
+`;
 
 const arrowStyles = css`
   margin-left: -0.25rem;
   margin-right: 0.125rem;
   flex-shrink: 0;
   align-self: center;
-`
+`;
 
 const StyledArrowUp = styled(ArrowUp)`
   color: ${colors.green500};
   ${arrowStyles}
-`
+`;
 
 const StyledArrowDown = styled(ArrowDown)`
   color: ${colors.red500};
   ${arrowStyles}
-`
+`;
 
 const Stats = () => (
   <React.Fragment>
@@ -93,6 +93,6 @@ const Stats = () => (
       </BorderDiv>
     </Card>
   </React.Fragment>
-)
+);
 
-export default Stats
+export default Stats;

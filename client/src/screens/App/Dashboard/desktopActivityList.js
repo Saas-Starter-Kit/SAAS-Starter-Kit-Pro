@@ -1,8 +1,8 @@
-import React from "react"
-import styled from "styled-components"
-import Button from "./button"
-import { colors, breakpoints } from "../../../styles/theme"
-import Cash from "../../../components/Admin/svgs/cash"
+import React from 'react';
+import styled from 'styled-components';
+import Button from './button';
+import { colors, breakpoints } from '../../../styles/theme';
+import Cash from '../../../components/App/svgs/cash';
 
 const Wrapper = styled.div`
   display: none;
@@ -16,11 +16,11 @@ const Wrapper = styled.div`
   overflow-x: auto;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
   overflow: hidden;
-`
+`;
 
 const Table = styled.table`
   min-width: 100%;
-`
+`;
 
 const ThBase = styled.th`
   padding: 0.75rem 1.5rem;
@@ -31,15 +31,15 @@ const ThBase = styled.th`
   text-transform: uppercase;
   color: ${colors.coolGray500};
   letter-spacing: 0.05em;
-`
+`;
 
 const StyledTh1 = styled(ThBase)`
   text-align: left;
-`
+`;
 
 const StyledTh2 = styled(ThBase)`
   text-align: right;
-`
+`;
 
 const StyledTh3 = styled(ThBase)`
   text-align: left;
@@ -47,33 +47,33 @@ const StyledTh3 = styled(ThBase)`
   @media (min-width: ${breakpoints.medium}) {
     display: block;
   }
-`
+`;
 
 const TableBody = styled.tbody`
   background-color: ${colors.white};
-`
+`;
 
 const TdBase = styled.td`
   padding: 1rem 1.5rem;
   white-space: nowrap;
   font-size: 0.875rem;
   line-height: 1.25rem;
-`
+`;
 
 const StyledTd1 = styled(TdBase)`
   color: ${colors.gray900};
   max-width: 0rem;
   width: 100%;
-`
+`;
 
 const TransactionName = styled.div`
   display: flex;
-`
+`;
 
 const StyledTd2 = styled(TdBase)`
   color: ${colors.coolGray500};
   text-align: right;
-`
+`;
 
 const StyledTd3 = styled(TdBase)`
   color: ${colors.coolGray500};
@@ -81,7 +81,7 @@ const StyledTd3 = styled(TdBase)`
   @media (min-width: ${breakpoints.medium}) {
     display: block;
   }
-`
+`;
 
 const PaymentButton = styled.a`
   display: inline-flex;
@@ -90,7 +90,7 @@ const PaymentButton = styled.a`
   white-space: nowrap;
   font-size: 0.875rem;
   line-height: 1.25rem;
-`
+`;
 
 const Title = styled.p`
   color: ${colors.coolGray500};
@@ -101,11 +101,11 @@ const Title = styled.p`
   ${PaymentButton}:hover {
     color: ${colors.gray900};
   }
-  transition-property: background-color, border-color, color, fill, stroke,
-    opacity, box-shadow, transform;
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow,
+    transform;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
-`
+`;
 
 const Status = styled.span`
   display: inline-flex;
@@ -118,12 +118,12 @@ const Status = styled.span`
   background-color: ${colors.green100};
   color: ${colors.green800};
   text-transform: capitalize;
-`
+`;
 
 const Number = styled.span`
   color: ${colors.gray900};
   font-weight: 500;
-`
+`;
 
 const Nav = styled.nav`
   background-color: ${colors.white};
@@ -132,28 +132,28 @@ const Nav = styled.nav`
   align-items: center;
   justify-content: space-between;
   border-top: 1px solid ${colors.coolGray200};
-`
+`;
 
 const NavText = styled.p`
   font-size: 0.875rem;
   line-height: 1.25rem;
   color: ${colors.coolGray700};
-`
+`;
 
 const Span = styled.span`
   font-weight: 500;
   padding: 0 3px;
-`
+`;
 
 const ButtonsWrapper = styled.div`
   flex: 1 1 0%;
   display: flex;
   justify-content: flex-end;
-`
+`;
 
 const StyledButton = styled(Button)`
   margin-left: 0.75rem;
-`
+`;
 
 const DesktopActivityList = () => (
   <Wrapper>
@@ -203,6 +203,6 @@ const DesktopActivityList = () => (
       </ButtonsWrapper>
     </Nav>
   </Wrapper>
-)
+);
 
-export default DesktopActivityList
+export default DesktopActivityList;
