@@ -2,6 +2,23 @@ import React from 'react';
 import axios from '../../../services/axios';
 
 const Dashboard = () => {
+  const getApps = async (event) => {
+    event.preventDefault();
+    console.log(event.target.title.value);
+    let name = event.target.name.value;
+
+    let data = {
+      name
+    };
+
+    const result = await axios.get(`/api/get/app`, data).catch((err) => {
+      //  fetchFailure(err);
+      console.log(err);
+    });
+
+    console.log(result);
+  };
+
   const postApp = async (event) => {
     event.preventDefault();
     console.log(event.target.title.value);
@@ -17,6 +34,9 @@ const Dashboard = () => {
     });
 
     console.log(result);
+
+    //returning ID
+    //createRole
   };
 
   return (
@@ -27,6 +47,7 @@ const Dashboard = () => {
         <input type="text" name="name" />
         <button type="submit">Save</button>
       </form>
+      <h2>My Apps:</h2>
     </div>
   );
 };

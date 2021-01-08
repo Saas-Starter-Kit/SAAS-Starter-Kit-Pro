@@ -3,7 +3,7 @@ import db from '../../Database/db.js';
 export const getApp = async (req, res) => {
   let author = req.query.author;
 
-  let text = `SELECT * FROM TODOS WHERE author=$1`;
+  let text = `SELECT * FROM app WHERE author=$1`;
   let values = [author];
 
   let queryResult = await db.query(text, values);
@@ -16,7 +16,8 @@ export const postApp = async (req, res) => {
   console.log(req.body);
 
   let text = `INSERT INTO app(app_name)
-              VALUES ($1)`;
+              VALUES ($1)
+              RETURNING app_id`;
   let values = [name];
 
   let queryResult = await db.query(text, values);

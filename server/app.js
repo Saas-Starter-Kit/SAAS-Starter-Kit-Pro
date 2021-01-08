@@ -11,12 +11,13 @@ import morgan from 'morgan';
 import { errorHandler } from './src/Utils/errorHandler.js';
 import { unhandledRejectionHandler } from './src/Utils/unhandledRejectionHandler.js';
 
-import auth from './src/API/authRoutes.js';
+import auth from './src/API/auth.js';
 import todoApi from './src/API/todos.js';
 import healthApi from './src/API/health.js';
 import stripeApi from './src/API/stripe.js';
 import stripeWebhook from './src/API/stripeWebhooks.js';
 import appApi from './src/API/app.js';
+import roleApi from './src/API/roles.js';
 
 const app = express();
 
@@ -36,6 +37,7 @@ app.use('/stripe', stripeApi);
 app.use('/auth', auth);
 app.use('/api', todoApi);
 app.use('/api', appApi);
+app.use('/api', roleApi);
 
 // error handling
 app.use(errorHandler);
