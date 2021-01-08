@@ -53,7 +53,7 @@ const AvatarDropDownMobile = ({ avatarMenuHandler }) => {
   return (
     <Wrapper role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
       <ItemWrapper>
-        <Link to="/app/settings">
+        <Link to="/user/settings">
           <MobileDropdownItem onClick={avatarMenuHandler} title="Account Settings" />
         </Link>
       </ItemWrapper>
