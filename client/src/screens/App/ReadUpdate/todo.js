@@ -1,11 +1,12 @@
-import React from "react"
-import styled from "styled-components"
-import { colors } from "../../../styles/theme"
+import React from 'react';
+import styled from 'styled-components';
+import Can from '../../../services/casl';
+import { colors } from '../../../styles/theme';
 
 const Wrapper = styled.div`
   padding-top: 1rem;
   padding-bottom: 1rem;
-`
+`;
 
 const Button = styled.button`
   padding: 0.5rem 1rem;
@@ -26,61 +27,61 @@ const Button = styled.button`
   &:active {
     background-color: ${colors.indigo600};
   }
-  transition-property: background-color, border-color, color, fill, stroke,
-    opacity, box-shadow, transform;
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow,
+    transform;
   transition-duration: 150ms;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-`
+`;
 
 const ButtonsWrapper = styled.div`
   display: flex;
   padding-bottom: 1rem;
-`
+`;
 
 const EditButton = styled(Button)`
   background-color: ${colors.indigo600};
-`
+`;
 
 const DeleteButton = styled(Button)`
   background-color: ${colors.red500};
   margin-left: 1rem;
-`
+`;
 
 const Form = styled.form`
   background-color: ${colors.gray50};
   padding: 0.5rem;
   border-radius: 0.25rem;
-`
+`;
 
 const TitleWrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 1rem;
-`
+`;
 
 const Label = styled.label`
   padding-bottom: 0.5rem;
-`
+`;
 
 const Input = styled.input`
   padding: 0.25rem;
-`
+`;
 
 const DescriptionWrapper = styled.div`
   display: flex;
   flex-direction: column;
-`
+`;
 
 const TextArea = styled.textarea`
   height: 6rem;
   padding: 0.25rem;
-`
+`;
 
 const FormButtonsWrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 1rem;
-`
+`;
 
 const SendButton = styled.button`
   margin-top: 1rem;
@@ -94,7 +95,7 @@ const SendButton = styled.button`
   font-weight: 500;
   text-align: center;
   cursor: pointer;
-`
+`;
 
 const Todo = ({
   todo,
@@ -107,32 +108,26 @@ const Todo = ({
   editTodo,
   deleteTodo,
   putTodo,
-  setEdit,
+  setEdit
 }) => (
   <Wrapper>
     <h4>{todo.title}</h4>
     <p>{todo.description}</p>
     <ButtonsWrapper>
-      <EditButton onClick={() => editTodo(todo)}>Edit</EditButton>
+      <Can I="delete" a="User">
+        <EditButton onClick={() => editTodo(todo)}>Edit</EditButton>
+      </Can>
       <DeleteButton onClick={() => deleteTodo(todo)}>Delete</DeleteButton>
     </ButtonsWrapper>
     {isEditting && todo.todo_id === editTodoID && (
-      <Form onSubmit={event => putTodo(event, todo)}>
+      <Form onSubmit={(event) => putTodo(event, todo)}>
         <TitleWrapper>
           <Label>Title:</Label>
-          <Input
-            onChange={handleEditTitleChange}
-            value={editTitle}
-            name="title"
-          />
+          <Input onChange={handleEditTitleChange} value={editTitle} name="title" />
         </TitleWrapper>
         <DescriptionWrapper>
           <Label>Description:</Label>
-          <TextArea
-            onChange={handleEditDescChange}
-            value={editDescription}
-            name="description"
-          />
+          <TextArea onChange={handleEditDescChange} value={editDescription} name="description" />
         </DescriptionWrapper>
         <FormButtonsWrapper>
           <SendButton type="submit">Send</SendButton>
@@ -142,6 +137,6 @@ const Todo = ({
     )}
     <hr />
   </Wrapper>
-)
+);
 
-export default Todo
+export default Todo;

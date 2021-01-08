@@ -1,6 +1,14 @@
 CREATE TABLE app (
   app_id SERIAL PRIMARY KEY,
+  app_name VARCHAR
+);
 
+CREATE TABLE roles (
+  role_id SERIAL PRIMARY KEY,
+  app_id INT REFERENCES app(app_id),
+  user_id INT REFERENCES users(id),
+  is_admin BOOLEAN,
+  is_user BOOLEAN,
 );
 
 CREATE TABLE users (
