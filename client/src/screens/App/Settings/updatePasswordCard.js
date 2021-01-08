@@ -61,7 +61,7 @@ const UpdatePasswordCard = () => {
       <Paragraph>Please Reset Password on Login Page</Paragraph>
       <Button
         onClick={() => {
-          navigate('/login');
+          navigate('/auth/login');
         }}
       >
         Go to Login

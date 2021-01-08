@@ -103,7 +103,7 @@ const HeroSection = () => (
         Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo.
         Elit sunt amet fugiat veniam occaecat fugiat aliqua.
       </Paragraph>
-      <Link to="/login">
+      <Link to="/auth/login">
         <StyledButton type="primary">Get started &#8594;</StyledButton>
       </Link>
     </HeroTextContainer>

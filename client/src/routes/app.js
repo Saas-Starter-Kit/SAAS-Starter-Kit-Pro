@@ -1,8 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { Router } from '@reach/router';
 import { navigate } from 'gatsby';
-//import Login from '../screens/Admin/Auth/login';
-//import SignUp from '../screens/Admin/Auth/signup';
+
 import Dashboard from '../screens/App/Dashboard';
 import Settings from '../screens/App/Settings';
 import Create from '../screens/App/Create';
@@ -18,7 +17,7 @@ const Routes = () => {
 
   const PrivateRoute = ({ component: Component, location, ...rest }) => {
     if (!isTokenValid()) {
-      navigate('/login');
+      navigate('/auth/login');
       return null;
     } else {
       return <Component {...rest} />;
@@ -29,8 +28,6 @@ const Routes = () => {
     <Layout>
       <Router>
         {/*<PrivateRoute path='/app' component={Dashboard} />*/}
-        {/*<SignUp path="/signup" />*/}
-        {/*<Login path="/login" />*/}
         <Dashboard path="/app" />
         <Settings path="/app/settings" />
         <Create path="/app/create" />

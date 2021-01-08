@@ -279,7 +279,7 @@ const Header = () => {
         </Nav>
         <ButtonWrapper>
           <ButtonSpan>
-            <Link to="/login">
+            <Link to="/auth/login">
               <Button>Sign-In</Button>
             </Link>
           </ButtonSpan>

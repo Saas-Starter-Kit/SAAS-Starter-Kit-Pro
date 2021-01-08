@@ -249,7 +249,7 @@ const Login = () => {
             </RememberMeWrapper>
 
             <ForgotPassword>
-              <Link to="/passwordreset"> Forgot your password?</Link>
+              <Link to="/auth/passwordreset"> Forgot your password?</Link>
             </ForgotPassword>
           </ForgotPasswordWrapper>
 

@@ -1,9 +1,9 @@
-import React, { useContext } from "react"
-import { Link, navigate } from "gatsby"
-import styled, { keyframes } from "styled-components"
-import AuthContext from "../../../utils/authContext"
-import { colors } from "../../../styles/theme"
-import DropdownItem from "./dropdownItem"
+import React, { useContext } from 'react';
+import { Link, navigate } from 'gatsby';
+import styled, { keyframes } from 'styled-components';
+import AuthContext from '../../../utils/authContext';
+import { colors } from '../../../styles/theme';
+import DropdownItem from './dropdownItem';
 
 const menuScale = keyframes`
   from {
@@ -14,7 +14,7 @@ const menuScale = keyframes`
     opacity: 1;
     transform: scale(1);
   }
-`
+`;
 
 const Wrapper = styled.div`
   animation: ${menuScale} 0.3s ease-out forwards;
@@ -27,37 +27,32 @@ const Wrapper = styled.div`
   top: 7rem;
   left: 2rem;
   border-radius: 0.375rem;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
-    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
   width: max-content;
   border-radius: 0.375rem;
   background-color: ${colors.white};
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
-`
+`;
 
 const ItemWrapper = styled.div`
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
-`
+`;
 
 const Border = styled.div`
   border-top: 1px solid ${colors.gray100};
-`
+`;
 
 const AvatarDropDown = ({ avatarMenuHandler }) => {
-  const { LogOut } = useContext(AuthContext)
+  const { LogOut } = useContext(AuthContext);
 
   const signOut = () => {
-    LogOut()
-    setTimeout(() => navigate("/login"), 200)
-  }
+    LogOut();
+    setTimeout(() => navigate('/auth/login'), 200);
+  };
 
   return (
-    <Wrapper
-      role="menu"
-      aria-orientation="vertical"
-      aria-labelledby="options-menu"
-    >
+    <Wrapper role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
       <ItemWrapper>
         <Link to="/app/settings">
           <DropdownItem onClick={avatarMenuHandler} title="Account Settings" />
@@ -69,7 +64,7 @@ const AvatarDropDown = ({ avatarMenuHandler }) => {
         <DropdownItem onClick={signOut} title="Logout" />
       </ItemWrapper>
     </Wrapper>
-  )
-}
+  );
+};
 
-export default AvatarDropDown
+export default AvatarDropDown;

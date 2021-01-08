@@ -206,7 +206,7 @@ const MobileMenu = ({ mobileMenuHandler }) => (
     </div>
     <ButtonWrapper1>
       <ButtonWrapper2>
-        <Link to="/login">
+        <Link to="/auth/login">
           <Button>Sign up</Button>
         </Link>
       </ButtonWrapper2>

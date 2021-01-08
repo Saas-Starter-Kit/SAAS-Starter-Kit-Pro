@@ -1,9 +1,9 @@
-import React, { useContext } from "react"
-import { navigate, Link } from "gatsby"
-import styled, { keyframes } from "styled-components"
-import AuthContext from "../../../utils/authContext"
-import { colors } from "../../../styles/theme"
-import MobileDropdownItem from "./mobileDropdownItem"
+import React, { useContext } from 'react';
+import { navigate, Link } from 'gatsby';
+import styled, { keyframes } from 'styled-components';
+import AuthContext from '../../../utils/authContext';
+import { colors } from '../../../styles/theme';
+import MobileDropdownItem from './mobileDropdownItem';
 
 const menuScale = keyframes`
   from {
@@ -14,7 +14,7 @@ const menuScale = keyframes`
     opacity: 1;
     transform: scale(1);
   }
-`
+`;
 
 const Wrapper = styled.div`
   animation: ${menuScale} 0.3s ease-out forwards;
@@ -27,42 +27,34 @@ const Wrapper = styled.div`
   top: 4rem;
   right: 0;
   border-radius: 0.375rem;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
-    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
   width: max-content;
   border-radius: 0.375rem;
   background-color: ${colors.white};
-`
+`;
 
 const ItemWrapper = styled.div`
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
-`
+`;
 
 const Border = styled.div`
   border-top: 1px solid ${colors.gray100};
-`
+`;
 
 const AvatarDropDownMobile = ({ avatarMenuHandler }) => {
-  const { LogOut } = useContext(AuthContext)
+  const { LogOut } = useContext(AuthContext);
 
   const signOut = () => {
-    LogOut()
-    setTimeout(() => navigate("/login"), 200)
-  }
+    LogOut();
+    setTimeout(() => navigate('/auth/login'), 200);
+  };
 
   return (
-    <Wrapper
-      role="menu"
-      aria-orientation="vertical"
-      aria-labelledby="options-menu"
-    >
+    <Wrapper role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
       <ItemWrapper>
         <Link to="/app/settings">
-          <MobileDropdownItem
-            onClick={avatarMenuHandler}
-            title="Account Settings"
-          />
+          <MobileDropdownItem onClick={avatarMenuHandler} title="Account Settings" />
         </Link>
       </ItemWrapper>
       <Border />
@@ -71,7 +63,7 @@ const AvatarDropDownMobile = ({ avatarMenuHandler }) => {
         <MobileDropdownItem onClick={signOut} title="Logout" />
       </ItemWrapper>
     </Wrapper>
-  )
-}
+  );
+};
 
-export default AvatarDropDownMobile
+export default AvatarDropDownMobile;

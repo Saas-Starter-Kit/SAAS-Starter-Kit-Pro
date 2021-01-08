@@ -1,10 +1,9 @@
 import React, { useContext, useEffect } from 'react';
 import { Router } from '@reach/router';
 import { navigate } from 'gatsby';
-import Login from '../screens/App/Auth/login';
-import SignUp from '../screens/App/Auth/signup';
-import PasswordReset from '../screens/App/Auth/passwordReset';
-//import Purchase from '.'
+import Login from '../screens/User/Auth/login';
+import SignUp from '../screens/User/Auth/signup';
+import PasswordReset from '../screens/User/Auth/passwordReset';
 
 const Routes = () => {
   //check token expires time on private routes
@@ -15,7 +14,7 @@ const Routes = () => {
 
   const PrivateRoute = ({ component: Component, location, ...rest }) => {
     if (!isTokenValid()) {
-      navigate('/login');
+      navigate('/auth/login');
       return null;
     } else {
       return <Component {...rest} />;

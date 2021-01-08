@@ -99,7 +99,7 @@ const Settings = () => {
         fetchFailure(err);
       });
 
-    navigate('/login');
+    navigate('/auth/login');
   };
 
   const updateEmail = async (event) => {
@@ -115,7 +115,7 @@ const Settings = () => {
       fetchFailure(error);
     });
 
-    navigate('/login');
+    navigate('/auth/login');
   };
 
   /* 
