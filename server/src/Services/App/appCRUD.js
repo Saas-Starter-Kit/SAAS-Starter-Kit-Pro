@@ -11,15 +11,13 @@ export const getApp = async (req, res) => {
 };
 
 export const postApp = async (req, res) => {
-  let title = req.body.title;
-  let description = req.body.description;
-  let author = req.body.author;
+  let name = req.body.name;
 
   console.log(req.body);
 
-  let text = `INSERT INTO todos(title, description, author)
-              VALUES ($1, $2, $3)`;
-  let values = [title, description, author];
+  let text = `INSERT INTO app(app_name)
+              VALUES ($1)`;
+  let values = [name];
 
   let queryResult = await db.query(text, values);
   res.send(queryResult.rows);

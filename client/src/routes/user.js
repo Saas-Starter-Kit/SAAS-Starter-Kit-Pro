@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { Router } from '@reach/router';
 import { navigate } from 'gatsby';
 import Settings from '../screens/User/Settings';
+import Dashboard from '../screens/User/Dashboard';
 
 const Routes = () => {
   //check token expires time on private routes
@@ -22,6 +23,7 @@ const Routes = () => {
   return (
     <Router>
       <Settings path="/user/settings" />
+      <Dashboard path="/user/dashboard" />
     </Router>
   );
 };
