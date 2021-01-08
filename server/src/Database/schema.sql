@@ -8,12 +8,12 @@ CREATE TABLE roles (
   app_id INT REFERENCES app(app_id),
   user_id INT REFERENCES users(id),
   is_admin BOOLEAN,
-  is_user BOOLEAN,
+  is_user BOOLEAN
 );
 
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,
-  username VARCHAR(255),
+  username VARCHAR(255) UNIQUE,
   email VARCHAR(255) UNIQUE,
   stripe_customer_id VARCHAR,
   firebase_user_id VARCHAR,
