@@ -12,6 +12,12 @@ export const WebHookHandler = async (req, res) => {
 
   console.log(event.type);
 
+  /* 
+      There are many reasons why a customer payment might fail
+      it is best to notify the customer and handle it on a  
+      case by case basis rather than programatically. 
+  */
+
   switch (event.type) {
     case 'invoice.payment_failed':
       //send email notification
