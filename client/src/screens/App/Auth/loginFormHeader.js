@@ -43,7 +43,7 @@ const LoginFormHeader = () => (
     <Image src="https://tailwindui.com/img/logos/v1/workflow-mark-on-white.svg" alt="Workflow" />
     <Title>Sign-In to Your Account</Title>
     <AltText>
-      <Link to="/signup">Dont have an Account? Sign-Up here</Link>
+      <Link to="/auth/signup">Dont have an Account? Sign-Up here</Link>
     </AltText>
   </Wrapper>
 );

@@ -16,6 +16,10 @@ module.exports = {
       options: { prefixes: [`/app/*`] }
     },
     {
+      resolve: `gatsby-plugin-create-client-paths`,
+      options: { prefixes: [`/auth/*`] }
+    },
+    {
       resolve: `gatsby-source-prismic`,
       options: {
         repositoryName: `test1qwer`,

@@ -1,8 +1,9 @@
 import React, { useContext, useEffect } from 'react';
 import { Router } from '@reach/router';
 import { navigate } from 'gatsby';
-//import Login from '../screens/Admin/Auth/login';
-//import SignUp from '../screens/Admin/Auth/signup';
+import Login from '../screens/App/Auth/login';
+import SignUp from '../screens/App/Auth/signup';
+import PasswordReset from '../screens/App/Auth/passwordReset';
 //import Purchase from '.'
 
 const Routes = () => {
@@ -22,13 +23,11 @@ const Routes = () => {
   };
 
   return (
-    <Layout>
-      <Router>
-        {/*<PrivateRoute path='/app' component={Dashboard} />*/}
-        {/*<SignUp path="/signup" />*/}
-        {/*<Login path="/login" />*/}
-      </Router>
-    </Layout>
+    <Router>
+      <SignUp path="/auth/signup" />
+      <Login path="/auth/login" />
+      <PasswordReset path="/auth/passwordreset" />
+    </Router>
   );
 };
 
