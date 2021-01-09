@@ -42,7 +42,6 @@ const Layout = ({ children, location }) => {
   const [isSidebar, toggleSidebar] = useState(true);
   const sidebarHandler = () => (isSidebar ? toggleSidebar(false) : toggleSidebar(true));
 
-  console.log(location);
   let splitPath = location.pathname.split('/');
   const app_id = splitPath[2];
 

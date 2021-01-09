@@ -14,7 +14,6 @@ const Routes = ({ location }) => {
     return new Date().getTime() < expiresAt;
   };
 
-  console.log(location);
   const PrivateRoute = ({ component: Component, location, ...rest }) => {
     if (!isTokenValid()) {
       navigate('/auth/login');
@@ -27,10 +26,6 @@ const Routes = ({ location }) => {
   return (
     <Layout location={location}>
       <Router>
-        {/*<PrivateRoute path='/app' component={Dashboard} />*/}
-        {/*<Dashboard path="/app" />
-        <Create path="/app/create" />
-        <ReadUpdate path="/app/readupdate" />*/}
         <Dashboard path="/app/:id/dashboard" />
         <Create path="/app/:id/create" />
         <ReadUpdate path="/app/:id/readupdate" />
