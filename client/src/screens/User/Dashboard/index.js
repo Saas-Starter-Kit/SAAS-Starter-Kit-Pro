@@ -72,7 +72,7 @@ const Dashboard = () => {
       {apps &&
         apps.map((app) => (
           <div key={app.app_id}>
-            <Link to="/app" state={{ app }}>
+            <Link to={`/app/${app.app_id}/dashboard`} state={{ app }}>
               {app.app_name}
             </Link>
           </div>

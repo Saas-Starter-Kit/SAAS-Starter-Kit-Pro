@@ -1,17 +1,17 @@
-import React, { useState } from "react"
-import styled from "styled-components"
-import SidebarDesktop from "../Navigation/sidebarDesktop"
-import SidebarMobile from "../Navigation/sidebarMobile"
-import SidebarIcons from "../Navigation/sidebarIcons"
-import MobileHeader from "../Navigation/mobileHeader"
-import { colors } from "../../../styles/theme"
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import SidebarDesktop from '../Navigation/sidebarDesktop';
+import SidebarMobile from '../Navigation/sidebarMobile';
+import SidebarIcons from '../Navigation/sidebarIcons';
+import MobileHeader from '../Navigation/mobileHeader';
+import { colors } from '../../../styles/theme';
 
 const Wrapper = styled.div`
   background-color: ${colors.gray100};
   overflow: hidden;
   display: flex;
   height: 100vh;
-`
+`;
 
 const Content = styled.div`
   display: flex;
@@ -19,7 +19,7 @@ const Content = styled.div`
   width: 0;
   flex: 1 1 0%;
   overflow: hidden;
-`
+`;
 
 const Main = styled.main`
   flex: 1 1 0%;
@@ -29,23 +29,22 @@ const Main = styled.main`
     outline: 2px solid transparent;
     outline-offset: 2px;
   }
-`
+`;
 
 const ContentWrapper = styled.div`
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
   margin-left: 3.5rem;
   margin-right: 3.5rem;
-`
+`;
 
-const Layout = ({ children }) => {
-  const [isSidebar, toggleSidebar] = useState(true)
-  const sidebarHandler = () =>
-    isSidebar ? toggleSidebar(false) : toggleSidebar(true)
+const Layout = ({ children, location }) => {
+  const [isSidebar, toggleSidebar] = useState(true);
+  const sidebarHandler = () => (isSidebar ? toggleSidebar(false) : toggleSidebar(true));
 
-  const [mobileMenu, toggleMobileMenu] = useState(false)
-  const mobileMenuHandler = () =>
-    mobileMenu ? toggleMobileMenu(false) : toggleMobileMenu(true)
+  console.log(location);
+  const [mobileMenu, toggleMobileMenu] = useState(false);
+  const mobileMenuHandler = () => (mobileMenu ? toggleMobileMenu(false) : toggleMobileMenu(true));
 
   return (
     <Wrapper>
@@ -63,7 +62,7 @@ const Layout = ({ children }) => {
         </Main>
       </Content>
     </Wrapper>
-  )
-}
+  );
+};
 
-export default Layout
+export default Layout;

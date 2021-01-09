@@ -1,12 +1,12 @@
-import React from "react"
-import styled, { keyframes } from "styled-components"
-import { BiArrowFromRight } from "react-icons/bi"
-import Avatar from "../Avatar/avatarSidebarFull"
-import { colors, breakpoints } from "../../../styles/theme"
-import SidebarItem from "./sidebarItem"
-import Home from "../svgs/home"
-import Persons from "../svgs/persons"
-import Folder from "../svgs/folder"
+import React from 'react';
+import styled, { keyframes } from 'styled-components';
+import { BiArrowFromRight } from 'react-icons/bi';
+import Avatar from '../Avatar/avatarSidebarFull';
+import { colors, breakpoints } from '../../../styles/theme';
+import SidebarItem from './sidebarItem';
+import Home from '../svgs/home';
+import Persons from '../svgs/persons';
+import Folder from '../svgs/folder';
 
 const Wrapper1 = styled.div`
   display: none;
@@ -14,12 +14,12 @@ const Wrapper1 = styled.div`
     display: flex;
     flex-shrink: 0;
   }
-`
+`;
 
 const Wrapper2 = styled.div`
   display: flex;
   flex-direction: column;
-`
+`;
 
 const growSideBar = keyframes`
 from {
@@ -27,17 +27,17 @@ from {
 }
 to {
   width: 14rem;
-}`
+}`;
 
 const SidebarWrapper1 = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1 1 0%;
-  background-color: ${props => props.theme.primary};
+  background-color: ${(props) => props.theme.primary};
   width: 14rem;
   overflow: hidden;
   animation: ${growSideBar} 0.3s ease-out forwards;
-`
+`;
 
 const SidebarWrapper2 = styled.div`
   flex: 1 1 0%;
@@ -46,25 +46,25 @@ const SidebarWrapper2 = styled.div`
   padding-top: 1.25rem;
   padding-bottom: 1rem;
   overflow-y: auto;
-`
+`;
 
 const LogoWrapper = styled.div`
   display: flex;
   padding-left: 1.5rem;
-`
+`;
 
 const Logo = styled.img`
   height: 2rem;
   width: auto;
-`
+`;
 
 const Nav = styled.nav`
   margin-top: 2rem;
   flex: 1 1 0%;
   padding-left: 0.5rem;
   padding-right: 0.5rem;
-  background-color: ${props => props.theme.primary};
-`
+  background-color: ${(props) => props.theme.primary};
+`;
 
 const fadeInRight = keyframes`
 from {
@@ -74,7 +74,7 @@ from {
 to {
   opacity: 1;
   transform: translateX(0);
-}`
+}`;
 
 const StyledArrow = styled(BiArrowFromRight)`
   width: 1.5rem;
@@ -83,15 +83,16 @@ const StyledArrow = styled(BiArrowFromRight)`
   top: 2rem;
   left: 13rem;
   color: ${colors.white};
-  background-color: ${props => props.theme.primary};
+  background-color: ${(props) => props.theme.primary};
   border-radius: 0.5rem;
   cursor: pointer;
   animation: ${fadeInRight} 0.7s ease-in forwards;
-`
+`;
 
-const SidebarDesktop = ({ sidebarHandler }) => (
+const SidebarDesktop = ({ sidebarHandler, location }) => (
   <Wrapper1>
     <Wrapper2>
+      {console.log(location)}
       <SidebarWrapper1>
         <SidebarWrapper2>
           <LogoWrapper>
@@ -100,11 +101,7 @@ const SidebarDesktop = ({ sidebarHandler }) => (
           <Avatar />
           <Nav>
             <SidebarItem link="/app" title="Dashboard" svg={<Home />} />
-            <SidebarItem
-              link="/app/readupdate"
-              title="Read Update"
-              svg={<Persons />}
-            />
+            <SidebarItem link="/app/readupdate" title="Read Update" svg={<Persons />} />
             <SidebarItem link="/app/create" title="Create" svg={<Folder />} />
           </Nav>
         </SidebarWrapper2>
@@ -114,6 +111,6 @@ const SidebarDesktop = ({ sidebarHandler }) => (
       </div>
     </Wrapper2>
   </Wrapper1>
-)
+);
 
-export default SidebarDesktop
+export default SidebarDesktop;

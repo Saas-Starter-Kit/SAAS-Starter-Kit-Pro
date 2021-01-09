@@ -7,13 +7,14 @@ import Create from '../screens/App/Create';
 import ReadUpdate from '../screens/App/ReadUpdate';
 import Layout from '../components/App/AppLayout';
 
-const Routes = () => {
+const Routes = ({ location }) => {
   //check token expires time on private routes
   const isTokenValid = () => {
     let expiresAt = JSON.parse(localStorage.getItem('expiresIn'));
     return new Date().getTime() < expiresAt;
   };
 
+  console.log(location);
   const PrivateRoute = ({ component: Component, location, ...rest }) => {
     if (!isTokenValid()) {
       navigate('/auth/login');
@@ -24,12 +25,15 @@ const Routes = () => {
   };
 
   return (
-    <Layout>
+    <Layout location={location}>
       <Router>
         {/*<PrivateRoute path='/app' component={Dashboard} />*/}
-        <Dashboard path="/app/" />
+        {/*<Dashboard path="/app" />
         <Create path="/app/create" />
-        <ReadUpdate path="/app/readupdate" />
+        <ReadUpdate path="/app/readupdate" />*/}
+        <Dashboard path="/app/:id/dashboard" />
+        <Create path="/app/:id/create" />
+        <ReadUpdate path="/app/:id/readupdate" />
       </Router>
     </Layout>
   );
