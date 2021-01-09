@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Router } from '@reach/router';
 import { navigate } from 'gatsby';
+import defineAbilityFor from '../utils/caslAbility';
 
 import Dashboard from '../screens/App/Dashboard';
 import Create from '../screens/App/Create';
@@ -11,6 +12,7 @@ import axios from '../services/axios';
 
 const Routes = ({ location }) => {
   const [apps, setApps] = useState();
+
   //check token expires time on private routes
   const isTokenValid = () => {
     let expiresAt = JSON.parse(localStorage.getItem('expiresIn'));
@@ -43,7 +45,8 @@ const Routes = ({ location }) => {
       //navigate to forbiden page
     }
 
-    setApps(result.data);
+    let user = result.data[0];
+    //defineAbilityFor(user);
   };
 
   let splitPath = location.pathname.split('/');
