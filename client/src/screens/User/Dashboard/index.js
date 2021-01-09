@@ -1,24 +1,24 @@
 import React, { useState } from 'react';
 import axios from '../../../services/axios';
+import { Link } from 'gatsby';
 
 const Dashboard = () => {
-  const [apps, setApps] = useState([]);
+  const [apps, setApps] = useState();
 
   const getApps = async () => {
-    let user_id = 56;
-    let app_id = 8;
+    let user_id = 1;
 
-    let data = {
-      user_id,
-      app_id
+    let params = {
+      user_id
     };
 
-    const result = await axios.get(`/api/get/app`, data).catch((err) => {
+    const result = await axios.get(`/api/get/app`, { params }).catch((err) => {
       //  fetchFailure(err);
       console.log(err);
     });
 
     console.log(result);
+    setApps(result.data);
   };
 
   const postApp = async (event) => {
@@ -40,7 +40,7 @@ const Dashboard = () => {
     //returning ID
     //createRole
     let app_id = result.data[0].app_id;
-    let user_id = 56;
+    let user_id = 1;
     let is_admin = true;
     let is_user = false;
 
@@ -69,6 +69,14 @@ const Dashboard = () => {
       </form>
       <h2>My Apps:</h2>
       <button onClick={getApps}>Get Apps</button>
+      {apps &&
+        apps.map((app) => (
+          <div key={app.app_id}>
+            <Link to="/app" state={{ app }}>
+              {app.app_name}
+            </Link>
+          </div>
+        ))}
     </div>
   );
 };

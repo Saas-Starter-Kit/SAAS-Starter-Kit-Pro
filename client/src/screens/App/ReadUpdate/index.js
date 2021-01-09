@@ -58,9 +58,9 @@ const ReadUpdate = () => {
     }
   };
 
-  useEffect(() => {
-    if (authState) fetchTodos();
-  }, [authState]);
+  //useEffect(() => {
+  //  if (authState) fetchTodos();
+  //}, [authState]);
 
   const deleteTodo = async (todo) => {
     fetchInit();

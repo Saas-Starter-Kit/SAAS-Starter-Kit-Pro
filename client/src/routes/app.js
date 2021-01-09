@@ -27,7 +27,7 @@ const Routes = () => {
     <Layout>
       <Router>
         {/*<PrivateRoute path='/app' component={Dashboard} />*/}
-        <Dashboard path="/app" />
+        <Dashboard path="/app/" />
         <Create path="/app/create" />
         <ReadUpdate path="/app/readupdate" />
       </Router>

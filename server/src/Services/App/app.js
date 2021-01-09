@@ -2,29 +2,24 @@ import db from '../../Database/db.js';
 
 export const getApp = async (req, res) => {
   let user_id = req.query.user_id;
-  let app_id = req.query.app_id;
 
-  //let text = `SELECT * FROM app WHERE user_id=$1`;
+  console.log(user_id);
 
   let text = `
       SELECT
+        a.app_id,
         a.app_name,
         r.user_id,
         r.is_admin, 
-        r.is_user,
-        t.todo_id, 
-        t.title,
-        t.description,
-        t.author
+        r.is_user
       FROM
         app a
       INNER JOIN roles r 
           ON r.app_id = a.app_id
-      INNER JOIN todos t 
-          ON r.app_id = t.app_id
+      WHERE r.user_id=$1
   `;
 
-  let values = [user_id, app_id];
+  let values = [user_id];
 
   let queryResult = await db.query(text, values);
   res.send(queryResult.rows);
