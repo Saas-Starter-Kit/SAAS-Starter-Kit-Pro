@@ -1,6 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 import { colors, breakpoints } from "../../../styles/theme"
+import ChartBar from '../../../assets/images/icons/chart-bar.svg'
 
 const Container = styled.div`
   background-color: ${props => props.theme.backgroundLanding};
@@ -148,7 +149,7 @@ const LandingFeatures = () => (
           <ListItem>
             <Item>
               <ImageWrapper>
-                <MenuImg src="/icons/chart-bar.svg" alt="chart bar" />
+                <MenuImg src={ChartBar} alt="chart bar" />
               </ImageWrapper>
               <TextWrapper>
                 <SmallHeader>Sub Feature 1</SmallHeader>
@@ -163,7 +164,7 @@ const LandingFeatures = () => (
           <ListItem>
             <Item>
               <ImageWrapper>
-                <MenuImg src="/icons/chart-bar.svg" alt="chart bar" />
+                <MenuImg src={ChartBar} alt="chart bar" />
               </ImageWrapper>
               <TextWrapper>
                 <SmallHeader>Sub Feature 2</SmallHeader>
@@ -195,7 +196,7 @@ const LandingFeatures = () => (
           <ListItem>
             <Item>
               <ImageWrapper>
-                <MenuImg src="/icons/chart-bar.svg" alt="chart bar" />
+                <MenuImg src={ChartBar} alt="chart bar" />
               </ImageWrapper>
               <TextWrapper>
                 <SmallHeader>Sub Feature 1</SmallHeader>
@@ -210,7 +211,7 @@ const LandingFeatures = () => (
           <ListItem>
             <Item>
               <ImageWrapper>
-                <MenuImg src="/icons/chart-bar.svg" alt="chart bar" />
+                <MenuImg src={ChartBar} alt="chart bar" />
               </ImageWrapper>
               <TextWrapper>
                 <SmallHeader>Sub Feature 2</SmallHeader>

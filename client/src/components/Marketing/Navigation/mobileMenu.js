@@ -2,6 +2,9 @@ import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import { Link } from 'gatsby';
 import { colors, breakpoints } from '../../../styles/theme';
+import SmallLogo from '../../../assets/images/logo/small_logo.svg';
+import Close from '../../../assets/images/icons/close.svg';
+import ViewGrid from '../../../assets/images/icons/view-grid.svg';
 
 const menuUp = keyframes`
   from {
@@ -120,6 +123,7 @@ const MenuImg = styled.img`
   height: 2rem;
   width: 2rem;
   color: white;
+  margin-right: 0 !important;
 `;
 
 const Title = styled.div`
@@ -175,10 +179,10 @@ const Button = styled.div`
 const MobileMenu = ({ mobileMenuHandler }) => (
   <Wrapper>
     <Header>
-      <LogoImage src="/logo/small_logo.svg" alt="Workflow" />
+      <LogoImage src={SmallLogo} alt="Workflow" />
       <CloseButtonWrapper>
         <CloseButton onClick={mobileMenuHandler} type="button">
-          <CloseImage src="/icons/close.svg" alt="menu icon" />
+          <CloseImage src={Close} alt="menu icon" />
         </CloseButton>
       </CloseButtonWrapper>
     </Header>
@@ -188,7 +192,7 @@ const MobileMenu = ({ mobileMenuHandler }) => (
           <Item>
             <MenuImageWrapper>
               {/*<!-- Heroicon name: view-grid -->*/}
-              <MenuImg src="/icons/view-grid.svg" alt="click" />
+              <MenuImg src={ViewGrid} alt="click" />
             </MenuImageWrapper>
             <Title>Pricing</Title>
           </Item>
@@ -197,7 +201,7 @@ const MobileMenu = ({ mobileMenuHandler }) => (
           <Item>
             <MenuImageWrapper>
               {/*<!-- Heroicon name: view-grid -->*/}
-              <MenuImg src="/icons/view-grid.svg" alt="click" />
+              <MenuImg src={ViewGrid} alt="click" />
             </MenuImageWrapper>
             <Title>App</Title>
           </Item>

@@ -7,6 +7,7 @@ import SidebarItem from './sidebarItem';
 import Home from '../svgs/home';
 import Persons from '../svgs/persons';
 import Folder from '../svgs/folder';
+import LargeLogo from '../../../assets/images/logo/large_logo.svg'
 
 const Wrapper1 = styled.div`
   display: none;
@@ -95,7 +96,7 @@ const SidebarDesktop = ({ sidebarHandler, app_id }) => (
       <SidebarWrapper1>
         <SidebarWrapper2>
           <LogoWrapper>
-            <Logo src="/logo/large_logo.svg" alt="Workflow" />
+            <Logo src={LargeLogo} alt="Workflow" />
           </LogoWrapper>
           <Avatar />
           <Nav>

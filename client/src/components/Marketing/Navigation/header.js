@@ -6,6 +6,9 @@ import { Link } from 'gatsby';
 import { colors, breakpoints } from '../../../styles/theme';
 import FlyoutMenu from './flyoutMenu';
 import MobileMenu from './mobileMenu';
+import SmallLogo from '../../../assets/images/logo/small_logo.svg';
+import MenuImageSrc from '../../../assets/images/icons/menu.svg';
+import ChevronDown from '../../../assets/images/icons/chevron-down.svg';
 
 const Container1 = styled.div`
   position: relative;
@@ -246,12 +249,12 @@ const Header = () => {
       <Container2>
         <LogoWrapper>
           <Link to="/">
-            <Logo src="/logo/small_logo.svg" alt="Logo" />
+            <Logo src={SmallLogo} alt="Logo" />
           </Link>
         </LogoWrapper>
         <MenuWrapper ref={refMobile}>
           <MenuButton onClick={mobileMenuHandler}>
-            <MenuImage src="/icons/menu.svg" alt="menu" />
+            <MenuImage src={MenuImageSrc} alt="menu" />
           </MenuButton>
           {mobileMenu ? <MobileMenu mobileMenuHandler={mobileMenuHandler} /> : null}
         </MenuWrapper>
@@ -260,7 +263,7 @@ const Header = () => {
             <SolutionsWrapper ref={ref}>
             <SolutionsButton onClick={menuHandler} type='button'>
               <span>Solutions</span>
-              <Chevron src='/icons/chevron-down.svg' alt='down arrow' />
+              <Chevron src={ChevronDown} alt='down arrow' />
             </SolutionsButton>
             {menu ? (
               <FlyoutMenuWrapper>
