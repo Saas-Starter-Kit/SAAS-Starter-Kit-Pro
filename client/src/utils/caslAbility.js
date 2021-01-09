@@ -1,8 +1,15 @@
 import { AbilityBuilder, Ability } from '@casl/ability';
 
-const { can, cannot, build } = new AbilityBuilder(Ability);
+export default function defineAbilityFor(user) {
+  const { can, cannot, build } = new AbilityBuilder(Ability);
 
-can('read', 'Post');
-cannot('delete', 'Post', { published: true });
+  if (user.isAdmin) {
+    can('manage', 'all'); // read-write access to everything
+  } else {
+    can('read', 'all'); // read-only access to everything
+  }
 
-export default build();
+  cannot('delete', 'Post');
+
+  return build();
+}

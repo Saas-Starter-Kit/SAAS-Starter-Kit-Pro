@@ -1,14 +1,26 @@
 import db from '../../Database/db.js';
 
 export const getRole = async (req, res) => {
-  let name = req.body.name;
+  let user_id = req.query.user_id;
+  let app_id = req.query.app_id;
 
-  console.log(req.body);
+  console.log(user_id);
 
-  let text = `INSERT INTO app(app_name)
-              VALUES ($1)
-              RETURNING app_id`;
-  let values = [name];
+  let text = `
+      SELECT
+        a.app_id,
+        a.app_name,
+        r.user_id,
+        r.is_admin, 
+        r.is_user
+      FROM
+        app a
+      INNER JOIN roles r 
+          ON r.app_id = a.app_id
+      WHERE r.user_id=$1 AND r.app_id=$2
+  `;
+
+  let values = [user_id, app_id];
 
   let queryResult = await db.query(text, values);
   res.send(queryResult.rows);
