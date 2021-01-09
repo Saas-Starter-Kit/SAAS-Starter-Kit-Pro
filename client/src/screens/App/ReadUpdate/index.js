@@ -23,7 +23,7 @@ const Card = styled.div`
   padding: 1rem;
 `;
 
-const ReadUpdate = () => {
+const ReadUpdate = ({ app_id }) => {
   const { authState } = useContext(AuthContext);
   const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
   const { isLoading } = apiState;
@@ -40,8 +40,7 @@ const ReadUpdate = () => {
   const fetchTodos = async () => {
     fetchInit();
     if (user) {
-      let author = user.username;
-      let params = { author };
+      let params = { app_id };
 
       let result = await axios
         .get(`/api/get/todos`, {
@@ -58,9 +57,9 @@ const ReadUpdate = () => {
     }
   };
 
-  //useEffect(() => {
-  //  if (authState) fetchTodos();
-  //}, [authState]);
+  useEffect(() => {
+    if (authState) fetchTodos();
+  }, [authState]);
 
   const deleteTodo = async (todo) => {
     fetchInit();

@@ -85,11 +85,13 @@ const Button = styled.button`
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 `;
 
-const CreateTask = () => {
+const CreateTask = ({ app_id }) => {
   const [formTitle, setTitle] = useState('');
   const [formDescription, setDescription] = useState('');
   const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
   const { isLoading } = apiState;
+
+  console.log(app_id);
 
   const context = useContext(AuthContext);
   const { authState } = context;
@@ -101,7 +103,7 @@ const CreateTask = () => {
     let author = user ? user.username : 'Guest';
     let title = event.target.title.value;
     let description = event.target.description.value;
-    let data = { title, description, author };
+    let data = { title, description, author, app_id };
 
     await axios.post(`/api/post/todo`, data).catch((err) => {
       fetchFailure(err);

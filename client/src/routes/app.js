@@ -33,9 +33,9 @@ const Routes = ({ location }) => {
     <Layout app_id={app_id}>
       <Router>
         {/*<PrivateRoute path="/app/:id/dashboard" component={Dashboard} />*/}
-        <Dashboard path="/app/:id/dashboard" />
-        <Create path="/app/:id/create" />
-        <ReadUpdate path="/app/:id/readupdate" />
+        <Dashboard app_id={app_id} path="/app/:id/dashboard" />
+        <Create app_id={app_id} path="/app/:id/create" />
+        <ReadUpdate app_id={app_id} path="/app/:id/readupdate" />
       </Router>
     </Layout>
   );

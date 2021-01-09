@@ -114,9 +114,7 @@ const Todo = ({
     <h4>{todo.title}</h4>
     <p>{todo.description}</p>
     <ButtonsWrapper>
-      <Can I="delete" a="User">
-        <EditButton onClick={() => editTodo(todo)}>Edit</EditButton>
-      </Can>
+      <EditButton onClick={() => editTodo(todo)}>Edit</EditButton>
       <DeleteButton onClick={() => deleteTodo(todo)}>Delete</DeleteButton>
     </ButtonsWrapper>
     {isEditting && todo.todo_id === editTodoID && (
