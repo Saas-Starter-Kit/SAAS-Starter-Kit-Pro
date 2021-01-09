@@ -1,6 +1,6 @@
-import React from "react"
-import styled from "styled-components"
-import { colors, breakpoints } from "../../../styles/theme"
+import React from 'react';
+import styled from 'styled-components';
+import { colors, breakpoints } from '../../../../styles/theme';
 
 const Wrapper = styled.div`
   display: flex;
@@ -12,7 +12,7 @@ const Wrapper = styled.div`
     width: 100%;
     max-width: 28rem;
   }
-`
+`;
 
 const Title = styled.h2`
   padding-right: 2rem;
@@ -22,12 +22,12 @@ const Title = styled.h2`
   text-align: center;
   font-weight: 400;
   font-size: 1.5rem;
-`
+`;
 
 const ResetSuccess = () => (
   <Wrapper>
     <Title>A Reset Link Has been Sent to your Email</Title>
   </Wrapper>
-)
+);
 
-export default ResetSuccess
+export default ResetSuccess;

@@ -1,9 +1,11 @@
 import React, { useContext, useEffect } from 'react';
 import { Router } from '@reach/router';
 import { navigate } from 'gatsby';
-import Login from '../screens/User/Auth/login';
-import SignUp from '../screens/User/Auth/signup';
-import PasswordReset from '../screens/User/Auth/passwordReset';
+//import Login from '../screens/User/Auth/login';
+//import SignUp from '../screens/User/Auth/signup';
+//import PasswordReset from '../screens/User/Auth/passwordReset';
+
+import { SignUp, Login, PasswordReset } from '../screens/User/Auth';
 
 const Routes = () => {
   //check token expires time on private routes

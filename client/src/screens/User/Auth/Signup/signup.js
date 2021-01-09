@@ -1,15 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
-
 import styled from 'styled-components';
 import { Formik } from 'formik';
-import { Link } from 'gatsby';
-import AuthContext from '../../../utils/authContext';
-import ApiContext from '../../../utils/apiContext';
-import { ValidSchema, Authentication } from './helpers';
-
-import LoadingOverlay from '../../../components/Common/loadingOverlay';
-import { colors, breakpoints, fieldStyles } from '../../../styles/theme';
-import LoginFormHeader from './loginFormHeader';
+import AuthContext from '../../../../utils/authContext';
+import ApiContext from '../../../../utils/apiContext';
+import { ValidSchema, Authentication } from '../helpers';
+import LoadingOverlay from '../../../../components/Common/loadingOverlay';
+import { colors, breakpoints, fieldStyles } from '../../../../styles/theme';
+import SignUpFormHeader from './signupFormHeader';
 import GoogleButton from 'react-google-button';
 
 const Wrapper = styled.div`
@@ -108,32 +105,6 @@ const Card = styled.div`
   }
 `;
 
-const ForgotPasswordWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  padding-top: 0.3rem;
-  padding-bottom: 0.3rem;
-`;
-
-const ForgotPassword = styled.div`
-  text-decoration: underline;
-  color: blue;
-  font-size: 0.875rem;
-  font-weight: 500;
-  cursor: pointer;
-`;
-
-const RememberMeWrapper = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const RememberMeLabel = styled.label`
-  margin-left: 0.1rem;
-  font-size: 0.925rem;
-  color: ${colors.coolGray900};
-`;
-
 const ErrorText = styled.div`
   color: red;
   font-size: 0.8em;
@@ -150,7 +121,7 @@ const StyledOrContinueWithText = styled.p`
   text-align: center;
   border-bottom: 1px solid #000;
   line-height: 0.1em;
-  margin-top: 2rem;
+  margin-top: 1rem;
 `;
 
 const StyledSpan = styled.span`
@@ -158,11 +129,12 @@ const StyledSpan = styled.span`
   padding: 0 0.7rem;
 `;
 
-const Login = () => {
+const Signup = () => {
   const { firebase, LogIn, LogOut } = useContext(AuthContext);
   const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
   const { isLoading } = apiState;
-  const isLogin = true;
+
+  const isLogin = false;
 
   useEffect(() => {
     return () => fetchSuccess();
@@ -176,7 +148,7 @@ const Login = () => {
 
     let authRes = await firebase
       .auth()
-      .signInWithEmailAndPassword(email, password)
+      .createUserWithEmailAndPassword(email, password)
       .catch((error) => {
         fetchFailure(error);
       });
@@ -189,6 +161,7 @@ const Login = () => {
     fetchInit();
     let provider = new firebase.auth.GoogleAuthProvider();
 
+    //wait for firebase to confirm signup
     let authRes = await firebase
       .auth()
       .signInWithPopup(provider)
@@ -202,7 +175,7 @@ const Login = () => {
   return (
     <Wrapper>
       {isLoading && <LoadingOverlay />}
-      <LoginFormHeader />
+      <SignUpFormHeader />
       <CardWrapper>
         <Card>
           <Formik
@@ -237,21 +210,11 @@ const Login = () => {
                 </InputWrapper>
                 {errors.password && touched.password && <ErrorText>{errors.password}</ErrorText>}
                 <ButtonWrapper>
-                  <Button type="submit">Signin</Button>
+                  <Button type="submit">SignUp</Button>
                 </ButtonWrapper>
               </form>
             )}
           </Formik>
-          <ForgotPasswordWrapper>
-            <RememberMeWrapper>
-              <input id="remember_me" name="remember_me" type="checkbox" />
-              <RememberMeLabel htmlFor="remember_me">Remember me</RememberMeLabel>
-            </RememberMeWrapper>
-
-            <ForgotPassword>
-              <Link to="/auth/passwordreset"> Forgot your password?</Link>
-            </ForgotPassword>
-          </ForgotPasswordWrapper>
 
           <StyledOrContinueWithText>
             <StyledSpan>Or Continue With</StyledSpan>
@@ -259,7 +222,7 @@ const Login = () => {
 
           <StyledGoogleButton
             style={{ width: '100%' }}
-            label="Login with Google"
+            label="Sign-Up with Google"
             onClick={GoogleSignin}
           />
         </Card>
@@ -268,4 +231,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Signup;
