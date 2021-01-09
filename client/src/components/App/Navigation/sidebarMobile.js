@@ -1,12 +1,12 @@
-import React, { useRef } from "react"
-import styled, { keyframes } from "styled-components"
-import useOutsideClick from "../../../hooks/useOutsideClick"
-import { colors, breakpoints } from "../../../styles/theme"
-import MobileSidebarItem from "./mobileSidebarItem"
-import Cross from "../svgs/cross"
-import Home from "../svgs/home"
-import Persons from "../svgs/persons"
-import Folder from "../svgs/folder"
+import React, { useRef } from 'react';
+import styled, { keyframes } from 'styled-components';
+import useOutsideClick from '../../../hooks/useOutsideClick';
+import { colors, breakpoints } from '../../../styles/theme';
+import MobileSidebarItem from './mobileSidebarItem';
+import Cross from '../svgs/cross';
+import Home from '../svgs/home';
+import Persons from '../svgs/persons';
+import Folder from '../svgs/folder';
 
 const Wrapper = styled.div`
   position: fixed;
@@ -19,7 +19,7 @@ const Wrapper = styled.div`
   @media (min-width: ${breakpoints.medium}) {
     display: none;
   }
-`
+`;
 
 const FixedDiv = styled.div`
   position: fixed;
@@ -27,7 +27,7 @@ const FixedDiv = styled.div`
   right: 0;
   bottom: 0;
   left: 0;
-`
+`;
 
 const AbsoluteDiv = styled.div`
   position: absolute;
@@ -40,7 +40,7 @@ const AbsoluteDiv = styled.div`
   transition-property: opacity;
   transition-duration: 300ms;
   transition-timing-function: linear;
-`
+`;
 
 const showMobileSidebar = keyframes`
   from {
@@ -51,7 +51,7 @@ const showMobileSidebar = keyframes`
     transform: scaleX(100%);
     transform-origin: left center;
   }
-`
+`;
 
 const Wrapper3 = styled.div`
   animation: ${showMobileSidebar} 0.5s ease-in-out;
@@ -61,8 +61,8 @@ const Wrapper3 = styled.div`
   flex-direction: column;
   max-width: 20rem;
   width: 100%;
-  background-color: ${props => props.theme.primary};
-`
+  background-color: ${(props) => props.theme.primary};
+`;
 
 const Sidebar = styled.div`
   flex: 1 1 0%;
@@ -70,7 +70,7 @@ const Sidebar = styled.div`
   padding-top: 1.25rem;
   padding-bottom: 1rem;
   overflow-y: auto;
-`
+`;
 
 const ButtonWrapper = styled.div`
   position: absolute;
@@ -78,7 +78,7 @@ const ButtonWrapper = styled.div`
   right: 0;
   margin-right: -3.5rem;
   padding: 0.25rem;
-`
+`;
 
 const Button = styled.div`
   display: flex;
@@ -92,7 +92,7 @@ const Button = styled.div`
     outline: 2px solid transparent;
     outline-offset: 2px;
   }
-`
+`;
 
 const LogoWrapper = styled.div`
   flex-shrink: 0;
@@ -100,26 +100,26 @@ const LogoWrapper = styled.div`
   align-items: center;
   padding-left: 1rem;
   padding-right: 1rem;
-`
+`;
 
 const Logo = styled.img`
   height: 2rem;
   width: auto;
-`
+`;
 
 const Nav = styled.nav`
   margin-top: 1.25rem;
   padding-left: 0.5rem;
   padding-right: 0.5rem;
-`
+`;
 
 const ShrinkDiv = styled.div`
   flex-shrink: 0;
-`
+`;
 
-const SidebarMobile = ({ toggleMobileMenu }) => {
-  const ref = useRef()
-  useOutsideClick(ref, () => toggleMobileMenu(false))
+const SidebarMobile = ({ toggleMobileMenu, app_id }) => {
+  const ref = useRef();
+  useOutsideClick(ref, () => toggleMobileMenu(false));
 
   return (
     <Wrapper>
@@ -128,10 +128,7 @@ const SidebarMobile = ({ toggleMobileMenu }) => {
       </FixedDiv>
       <Wrapper3 ref={ref}>
         <ButtonWrapper>
-          <Button
-            onClick={() => toggleMobileMenu(false)}
-            aria-label="Close sidebar"
-          >
+          <Button onClick={() => toggleMobileMenu(false)} aria-label="Close sidebar">
             <Cross />
           </Button>
         </ButtonWrapper>
@@ -141,19 +138,19 @@ const SidebarMobile = ({ toggleMobileMenu }) => {
           </LogoWrapper>
           <Nav>
             <MobileSidebarItem
-              link="/app"
+              link={`/app/${app_id}/dashboard`}
               toggleMenu={() => toggleMobileMenu(false)}
               svg={<Home />}
               title="Dashboard"
             />
             <MobileSidebarItem
-              link="/app/readupdate"
+              link={`/app/${app_id}/readupdate`}
               toggleMenu={() => toggleMobileMenu(false)}
               svg={<Persons />}
               title="Read Update"
             />
             <MobileSidebarItem
-              link="/app/create"
+              link={`/app/${app_id}/create`}
               toggleMenu={() => toggleMobileMenu(false)}
               svg={<Folder />}
               title="Create"
@@ -164,7 +161,7 @@ const SidebarMobile = ({ toggleMobileMenu }) => {
       {/*<!-- Force sidebar to shrink to fit close icon -->*/}
       <ShrinkDiv />
     </Wrapper>
-  )
-}
+  );
+};
 
-export default SidebarMobile
+export default SidebarMobile;

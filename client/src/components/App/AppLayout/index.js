@@ -43,19 +43,22 @@ const Layout = ({ children, location }) => {
   const sidebarHandler = () => (isSidebar ? toggleSidebar(false) : toggleSidebar(true));
 
   console.log(location);
+  let splitPath = location.pathname.split('/');
+  const app_id = splitPath[2];
+
   const [mobileMenu, toggleMobileMenu] = useState(false);
   const mobileMenuHandler = () => (mobileMenu ? toggleMobileMenu(false) : toggleMobileMenu(true));
 
   return (
     <Wrapper>
       {isSidebar ? (
-        <SidebarDesktop sidebarHandler={sidebarHandler} />
+        <SidebarDesktop app_id={app_id} sidebarHandler={sidebarHandler} />
       ) : (
-        <SidebarIcons sidebarHandler={sidebarHandler} />
+        <SidebarIcons app_id={app_id} sidebarHandler={sidebarHandler} />
       )}
       <Content>
         <MobileHeader mobileMenuHandler={mobileMenuHandler} />
-        {mobileMenu && <SidebarMobile toggleMobileMenu={toggleMobileMenu} />}
+        {mobileMenu && <SidebarMobile app_id={app_id} toggleMobileMenu={toggleMobileMenu} />}
         <Main tabindex="0">
           {/*App Screens Here*/}
           <ContentWrapper>{children}</ContentWrapper>

@@ -89,10 +89,9 @@ const StyledArrow = styled(BiArrowFromRight)`
   animation: ${fadeInRight} 0.7s ease-in forwards;
 `;
 
-const SidebarDesktop = ({ sidebarHandler, location }) => (
+const SidebarDesktop = ({ sidebarHandler, app_id }) => (
   <Wrapper1>
     <Wrapper2>
-      {console.log(location)}
       <SidebarWrapper1>
         <SidebarWrapper2>
           <LogoWrapper>
@@ -100,9 +99,9 @@ const SidebarDesktop = ({ sidebarHandler, location }) => (
           </LogoWrapper>
           <Avatar />
           <Nav>
-            <SidebarItem link="/app" title="Dashboard" svg={<Home />} />
-            <SidebarItem link="/app/readupdate" title="Read Update" svg={<Persons />} />
-            <SidebarItem link="/app/create" title="Create" svg={<Folder />} />
+            <SidebarItem link={`/app/${app_id}/dashboard`} title="Dashboard" svg={<Home />} />
+            <SidebarItem link={`/app/${app_id}/readupdate`} title="Read Update" svg={<Persons />} />
+            <SidebarItem link={`/app/${app_id}/create`} title="Create" svg={<Folder />} />
           </Nav>
         </SidebarWrapper2>
       </SidebarWrapper1>
