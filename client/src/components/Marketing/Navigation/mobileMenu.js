@@ -86,6 +86,7 @@ const Nav = styled.nav`
   grid-template-columns: repeat(1, minmax(0, 1fr));
   grid-gap: 1.75rem;
   gap: 1.75rem;
+  margin-left: 1rem;
 `;
 
 const Item = styled.div`

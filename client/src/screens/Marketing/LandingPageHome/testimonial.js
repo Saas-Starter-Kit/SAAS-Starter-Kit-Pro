@@ -33,6 +33,7 @@ const QuoteWrapper = styled.div`
 
 const FooterWrapper = styled.div`
   margin-top: 2rem;
+  text-align: center;
   @media (min-width: ${breakpoints.medium}) {
     display: flex;
     align-items: center;
