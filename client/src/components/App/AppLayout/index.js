@@ -38,12 +38,9 @@ const ContentWrapper = styled.div`
   margin-right: 3.5rem;
 `;
 
-const Layout = ({ children, location }) => {
+const Layout = ({ children, app_id }) => {
   const [isSidebar, toggleSidebar] = useState(true);
   const sidebarHandler = () => (isSidebar ? toggleSidebar(false) : toggleSidebar(true));
-
-  let splitPath = location.pathname.split('/');
-  const app_id = splitPath[2];
 
   const [mobileMenu, toggleMobileMenu] = useState(false);
   const mobileMenuHandler = () => (mobileMenu ? toggleMobileMenu(false) : toggleMobileMenu(true));
