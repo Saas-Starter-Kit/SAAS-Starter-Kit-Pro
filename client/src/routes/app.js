@@ -23,9 +23,9 @@ const Routes = ({ location }) => {
   //set as state in useEffect, set app_id as dependency
   //define rules
 
-  useEffect(() => {
-    if (app_id) getRole();
-  }, [app_id]);
+  //useEffect(() => {
+  //  if (app_id) getRole();
+  //}, [app_id]);
 
   const getRole = async () => {
     let user_id = 1;
