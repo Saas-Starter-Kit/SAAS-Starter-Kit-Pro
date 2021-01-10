@@ -8,8 +8,35 @@ import { PrimaryButton } from '../buttons/PrimaryButton';
 import { SecondaryButton } from '../buttons/SecondaryButton';
 import Particles from './particles';
 
+import BannerBackground from './bannerObjects/bannerBackground.jpg';
 import BannerObject1 from './bannerObjects/bannerObject1.png';
 import BannerObject2 from './bannerObjects/bannerObject2.png';
+
+const Wrapper = styled.section`
+  padding-top: 210px;
+  padding-bottom: 160px;
+  background-image: url(${BannerBackground});
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  @media (max-width: ${breakpoints.large}) {
+    padding-top: 180px;
+    padding-bottom: 60px;
+    min-height: auto;
+  }
+  @media (max-width: ${breakpoints.medium}) {
+    padding-top: 130px;
+    padding-bottom: 20px;
+    min-height: auto;
+  }
+  @media only screen and (max-width: ${breakpoints.extraSmall}) {
+    background: none;
+  }
+`;
 
 const Container1 = styled.div`
   margin-left: auto;
@@ -38,6 +65,8 @@ const Container2 = styled.div`
   align-items: center;
   margin-left: -15px;
   margin-right: -15px;
+  position: relative;
+  z-index: 1;
 `;
 
 const Container3 = styled.div`
@@ -58,10 +87,13 @@ const DiscountLabel = styled.div`
   display: inline-block;
   border-radius: 65px;
   border: 1px solid ${colors.athensGray};
-  padding: 7px 25px;
   box-shadow: 0px 7px 25px 0px rgba(22, 53, 76, 0.05);
   margin-bottom: 30px;
   background-color: ${colors.white};
+  padding: 7px 15px;
+  @media (min-width: ${breakpoints.medium}) {
+    padding: 7px 25px;
+  }
 `;
 
 const Amount = styled.span`
@@ -110,7 +142,9 @@ const Description = styled.p`
 
 const ButtonWrapper = styled.div`
   margin-top: 40px;
-  margin-bottom: 30px;
+  @media (max-width: ${breakpoints.medium}) {
+    margin-bottom: 30px;
+  }
 `;
 
 const BannerImageContainer1 = styled.div`
@@ -135,11 +169,6 @@ const DashboardWrapper = styled.div`
   position: absolute;
   top: 0;
   right: 0;
-  .chatObject {
-    position: absolute;
-    top: 20px;
-    left: 120px;
-  }
 `;
 
 const Image = styled.img`
@@ -149,7 +178,7 @@ const Image = styled.img`
 `;
 
 const Banner = () => (
-  <React.Fragment>
+  <Wrapper>
     <Particles />
     <Container1>
       <Container2>
@@ -179,7 +208,7 @@ const Banner = () => (
         </DashboardWrapper>
       </BannerImageContainer2>
     </BannerImageContainer1>
-  </React.Fragment>
+  </Wrapper>
 );
 
 export default Banner;

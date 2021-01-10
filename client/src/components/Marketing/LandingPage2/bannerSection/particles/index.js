@@ -1,7 +1,7 @@
 import React from 'react';
 import Particles from 'react-particles-js';
 import styled from 'styled-components';
-
+import { landingPage2Breakpoints as breakpoints } from '../../../../../styles/theme';
 import Particle1 from './particleObjects/particle-1.png';
 import Particle2 from './particleObjects/particle-2.png';
 import Particle3 from './particleObjects/particle-3.png';
@@ -16,7 +16,7 @@ const StyledParticles = styled(Particles)`
   top: 0;
   left: 0;
   overflow: hidden;
-  @media only screen and (max-width: 480px) {
+  @media only screen and (max-width: ${breakpoints.extraSmall}) {
     width: 100%;
   }
 `;
