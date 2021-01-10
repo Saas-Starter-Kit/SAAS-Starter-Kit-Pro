@@ -1,17 +1,19 @@
 import { AbilityBuilder, Ability } from '@casl/ability';
 
-const roleRules = (can, cannot, role) => {
+const roleRules = (can, role) => {
   if (role.is_admin) {
+    //admin has global priviledges
     can('manage', 'all');
   } else if (role.is_user) {
-    cannot('read', 'post');
+    can('read', 'post');
+    can('read', 'article', ['title', 'description']);
   }
 };
 
 export const defineRulesFor = (role) => {
-  const { can, cannot, rules } = new AbilityBuilder(Ability);
+  const { can, rules } = new AbilityBuilder(Ability);
 
-  roleRules(can, cannot, role);
+  roleRules(can, role);
 
   return rules;
 };
@@ -23,9 +25,9 @@ export const buildAbilityFor = (role) => {
 };
 
 export const updateRole = (ability, role) => {
-  const { can, cannot, rules } = new AbilityBuilder();
+  const { can, rules } = new AbilityBuilder();
 
-  roleRules(can, cannot, role);
+  roleRules(can, role);
 
   ability.update(rules);
 };

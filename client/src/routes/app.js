@@ -61,12 +61,12 @@ const Routes = ({ location }) => {
       is_admin: true
     };
 
-    let role = {
-      is_user: user.is_user,
-      is_admin: user.is_admin
-    };
+    //let role = {
+    //  is_user: user.is_user,
+    //  is_admin: user.is_admin
+    //};
 
-    updateRole(ability, role);
+    updateRole(ability, userRole);
   };
 
   let splitPath = location.pathname.split('/');
