@@ -6,6 +6,7 @@ import {
 } from '../../../../styles/theme';
 import { PrimaryButton } from '../buttons/PrimaryButton';
 import { SecondaryButton } from '../buttons/SecondaryButton';
+import Particles from './particles';
 
 import BannerObject1 from './bannerObjects/bannerObject1.png';
 import BannerObject2 from './bannerObjects/bannerObject2.png';
@@ -149,6 +150,7 @@ const Image = styled.img`
 
 const Banner = () => (
   <React.Fragment>
+    <Particles />
     <Container1>
       <Container2>
         <Container3>
