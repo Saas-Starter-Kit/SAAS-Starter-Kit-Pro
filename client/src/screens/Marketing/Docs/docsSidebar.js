@@ -14,31 +14,21 @@ const DocsSidebar = () => {
   const data = useStaticQuery(staticQuery);
   const { allPrismicDocs } = data;
   const { edges } = allPrismicDocs;
-  console.log(edges);
 
-  //const docsLinks = edges;
-
-  console.log(_.groupby(edges, (edge) => edge.node.data.group.text));
   const groupedDocs = _.groupby(edges, (edge) => edge.node.data.group.text);
-
-  let newObj = Object.entries(groupedDocs);
-  //console.log(newObj);
+  const groupedDocsArr = Object.entries(groupedDocs);
 
   return (
     <Wrapper>
-      {/*{docsLinks.map((docLink) => (
-        <Link to={`/docs/${docLink.node.uid}`}>{docLink.node.data.title.text}</Link>
-      ))}*/}
-      {/*{groupedDocs.map((doc) => {
-        console.log(doc);
-      })}*/}
-      {newObj.map((obj) => (
-        <>
-          <div>{obj[0]}</div>
-          {obj[1].map((item) => (
-            <div>{item.node.data.title.text} </div>
+      {groupedDocsArr.map((docGroup) => (
+        <div>
+          <div>{docGroup[0]}</div>
+          {docGroup[1].map((doc) => (
+            <div>
+              <Link to={`/docs/${doc.node.uid}`}>{doc.node.data.title.text}</Link>
+            </div>
           ))}
-        </>
+        </div>
       ))}
       <Search />
     </Wrapper>
