@@ -74,5 +74,5 @@ AWS CDK is an advanced tool that requires expert AWS knowledge. It is not recomm
 to modify the code without the prerequisite knowledge, even though it is written in typescript
 which most web developers are fimiliar with. Improper modifications can lead to exposing
 huge security holes, accidently creating expensive AWS resources, or breaking the infrastructure.
-An assoiate level AWS certification or higher is a good baseline to have for working
+An associate level AWS certification or higher is a good baseline to have for working
 effectively with this tool.
