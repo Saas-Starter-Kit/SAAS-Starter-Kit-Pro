@@ -155,6 +155,12 @@ const SidebarMobile = ({ toggleMobileMenu, app_id }) => {
               svg={<Folder />}
               title="Create"
             />
+            <MobileSidebarItem
+              link={`/app/${app_id}/permissions`}
+              toggleMenu={() => toggleMobileMenu(false)}
+              svg={<Folder />}
+              title="Permissions"
+            />
           </Nav>
         </Sidebar>
       </Wrapper3>

@@ -102,6 +102,7 @@ const SidebarDesktop = ({ sidebarHandler, app_id }) => (
             <SidebarItem link={`/app/${app_id}/dashboard`} title="Dashboard" svg={<Home />} />
             <SidebarItem link={`/app/${app_id}/readupdate`} title="Read Update" svg={<Persons />} />
             <SidebarItem link={`/app/${app_id}/create`} title="Create" svg={<Folder />} />
+            <SidebarItem link={`/app/${app_id}/permissions`} title="Permissions" svg={<Folder />} />
           </Nav>
         </SidebarWrapper2>
       </SidebarWrapper1>

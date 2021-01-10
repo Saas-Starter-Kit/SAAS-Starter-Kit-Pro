@@ -107,7 +107,14 @@ const SidebarIcons = ({ sidebarHandler, app_id }) => (
           link={`/app/${app_id}/readupdate`}
           svg={<Persons />}
         />
+
         <SidebarItem id="Create" title="Create" link={`/app/${app_id}/create`} svg={<Folder />} />
+        <SidebarItem
+          id="Permissions"
+          title="Permissions"
+          link={`/app/${app_id}/permissions`}
+          svg={<Persons />}
+        />
       </Nav>
     </SidebarWrapper>
     <div onClick={sidebarHandler}>

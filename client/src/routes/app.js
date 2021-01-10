@@ -3,12 +3,13 @@ import { Router } from '@reach/router';
 import { navigate } from 'gatsby';
 
 import CaslContext from '../utils/caslContext';
+import { updateRole } from '../utils/caslAbility';
 
 import Dashboard from '../screens/App/Dashboard';
 import Create from '../screens/App/Create';
 import ReadUpdate from '../screens/App/ReadUpdate';
+import Permissions from '../screens/App/Permissions';
 import Layout from '../components/App/AppLayout';
-import { updateRole } from '../utils/caslAbility';
 
 import axios from '../services/axios';
 
@@ -49,6 +50,17 @@ const Routes = ({ location }) => {
     }
 
     let user = result.data[0];
+
+    let userRole = {
+      is_user: true,
+      is_admin: false
+    };
+
+    let adminRole = {
+      is_user: false,
+      is_admin: true
+    };
+
     let role = {
       is_user: user.is_user,
       is_admin: user.is_admin
@@ -79,6 +91,7 @@ const Routes = ({ location }) => {
         <Dashboard app_id={app_id} path="/app/:id/dashboard" />
         <Create app_id={app_id} path="/app/:id/create" />
         <ReadUpdate app_id={app_id} path="/app/:id/readupdate" />
+        <Permissions app_id={app_id} path="/app/:id/permissions" />
       </Router>
     </Layout>
   );

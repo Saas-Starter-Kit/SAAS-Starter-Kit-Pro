@@ -6,7 +6,6 @@ import { colors } from '../../../styles/theme';
 import Todo from './todo';
 import { Empty, Spin } from 'antd';
 import axios from '../../../services/axios';
-import Can from '../../../services/casl';
 
 const StyledMain = styled.div`
   display: flex;
@@ -122,9 +121,7 @@ const ReadUpdate = ({ app_id }) => {
 
   return (
     <StyledMain>
-      <Can I="read" a="post">
-        <Title>Todos: </Title>
-      </Can>
+      <Title>Todos: </Title>
       <Card>
         <Spin tip="Loading..." spinning={isLoading}>
           {!todos.length == 0 ? (
