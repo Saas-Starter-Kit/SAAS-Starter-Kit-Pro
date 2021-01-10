@@ -115,7 +115,13 @@ const Todo = ({
     <p>{todo.description}</p>
     <ButtonsWrapper>
       <EditButton onClick={() => editTodo(todo)}>Edit</EditButton>
-      <DeleteButton onClick={() => deleteTodo(todo)}>Delete</DeleteButton>
+      <Can I="delete" a="Post" passThrough>
+        {(allowed) => (
+          <DeleteButton disabled={!allowed} onClick={() => deleteTodo(todo)}>
+            Delete
+          </DeleteButton>
+        )}
+      </Can>
     </ButtonsWrapper>
     {isEditting && todo.todo_id === editTodoID && (
       <Form onSubmit={(event) => putTodo(event, todo)}>

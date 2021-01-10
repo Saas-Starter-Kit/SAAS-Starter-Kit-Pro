@@ -122,7 +122,9 @@ const ReadUpdate = ({ app_id }) => {
 
   return (
     <StyledMain>
-      <Title>Todos: </Title>
+      <Can I="read" a="post">
+        <Title>Todos: </Title>
+      </Can>
       <Card>
         <Spin tip="Loading..." spinning={isLoading}>
           {!todos.length == 0 ? (

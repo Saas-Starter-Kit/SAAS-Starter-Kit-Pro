@@ -1,17 +1,20 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Router } from '@reach/router';
 import { navigate } from 'gatsby';
-import defineAbilityFor from '../utils/caslAbility';
+
+import CaslContext from '../utils/caslContext';
 
 import Dashboard from '../screens/App/Dashboard';
 import Create from '../screens/App/Create';
 import ReadUpdate from '../screens/App/ReadUpdate';
 import Layout from '../components/App/AppLayout';
+import { updateRole } from '../utils/caslAbility';
 
 import axios from '../services/axios';
 
 const Routes = ({ location }) => {
   const [apps, setApps] = useState();
+  const ability = useContext(CaslContext);
 
   //check token expires time on private routes
   const isTokenValid = () => {
@@ -23,9 +26,9 @@ const Routes = ({ location }) => {
   //set as state in useEffect, set app_id as dependency
   //define rules
 
-  //useEffect(() => {
-  //  if (app_id) getRole();
-  //}, [app_id]);
+  useEffect(() => {
+    if (app_id) getRole();
+  }, [app_id]);
 
   const getRole = async () => {
     let user_id = 1;
@@ -36,7 +39,7 @@ const Routes = ({ location }) => {
     };
 
     const result = await axios.get(`/api/get/role`, { params }).catch((err) => {
-      //  fetchFailure(err);
+      //fetchFailure(err);
       console.log(err);
     });
 
@@ -46,7 +49,12 @@ const Routes = ({ location }) => {
     }
 
     let user = result.data[0];
-    //defineAbilityFor(user);
+    let role = {
+      is_user: user.is_user,
+      is_admin: user.is_admin
+    };
+
+    updateRole(ability, role);
   };
 
   let splitPath = location.pathname.split('/');

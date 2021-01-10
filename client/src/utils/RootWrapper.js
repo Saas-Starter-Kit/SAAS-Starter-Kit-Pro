@@ -9,7 +9,7 @@ import { apiReducer, initialStateApi } from '../store/reducers/apiReducer';
 import { Fetch_failure, Fetch_init, Fetch_success } from '../store/actions/actions';
 
 import CaslContext from './caslContext';
-import ability from './caslAbility';
+import { ability } from './caslAbility';
 
 import { firebaseApp as firebase } from '../services/firebase';
 import { ThemeProvider } from 'styled-components';
