@@ -1,8 +1,9 @@
 import Email from 'email-templates';
 import nodemailer from 'nodemailer';
 
-/* Use this transport to test emails without sending them 
-    to real email addresses
+/* 
+   Use this transport to test emails without sending them 
+   to real email addresses
 */
 
 const transporter = nodemailer.createTransport({
@@ -18,7 +19,7 @@ const transporter = nodemailer.createTransport({
 export const email = new Email({
   send: true,
   transport: transporter,
-  preview: false,
+  preview: false, // to preview emails in your own browser
   views: {
     options: {
       extension: 'hbs'
@@ -29,7 +30,7 @@ export const email = new Email({
 export const sendEmail = () => {
   email
     .send({
-      template: 'password',
+      template: 'welcome',
       message: {
         to: 'john@snow.com'
       },

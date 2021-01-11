@@ -3,9 +3,9 @@ const router = express.Router();
 
 import { requireAuth } from '../Config/passport.js';
 import { _healthCheck, privateRoute, failHealthCheck } from '../Services/utils/health.js';
+import { sendEmail } from '../Services/utils/emailTest.js';
 
 import { asyncHandler } from '../Utils/asyncErrorHandler.js';
-import { sendEmail } from '../Config/email.js';
 
 /* Health Routes */
 

@@ -52,6 +52,8 @@ export const CreateSubscription = async (req, res) => {
 
     await db.query(text, values);
 
+    //send email confirm for subscription creation
+
     res.send(subscription);
   } else {
     //if subscription fails send error message
@@ -81,6 +83,7 @@ export const CancelSubscription = async (req, res) => {
 
     await db.query(text, values);
 
+    //cancel subscription confirm
     res
       .status(200)
       .send({ type: 'Request Successful', message: 'Subscription Successfully Canceled' });

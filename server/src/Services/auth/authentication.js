@@ -29,6 +29,7 @@ export const SignUp = async (req, res) => {
   let userId = databaseQuery.rows[0].id;
 
   console.log(userId);
+  //send email to confirm signup
 
   res.send({ token: setToken(userId) });
 };
