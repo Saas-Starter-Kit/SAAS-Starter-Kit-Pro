@@ -1,6 +1,10 @@
 import Email from 'email-templates';
 import nodemailer from 'nodemailer';
 
+/* Use this transport to test emails without sending them 
+    to real email addresses
+*/
+
 const transporter = nodemailer.createTransport({
   host: 'smtp.mailtrap.io',
   port: 465,
