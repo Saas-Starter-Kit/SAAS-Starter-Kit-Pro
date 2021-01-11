@@ -15,7 +15,8 @@ export const WebHookHandler = async (req, res) => {
   /* 
       There are many reasons why a customer payment might fail
       it is best to notify the customer and handle it on a  
-      case by case basis rather than programatically. 
+      case by case basis rather than delete their subscription
+      programatically. 
   */
 
   switch (event.type) {

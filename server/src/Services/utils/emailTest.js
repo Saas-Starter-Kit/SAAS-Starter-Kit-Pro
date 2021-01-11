@@ -7,7 +7,8 @@ import nodemailer from 'nodemailer';
 */
 
 const transporter = nodemailer.createTransport({
-  host: 'smtp.mailtrap.io',
+  //host: 'smtp.mailtrap.io',
+  host: 'localhost',
   port: 465,
   secure: false,
   auth: {
@@ -30,7 +31,7 @@ export const email = new Email({
 export const sendEmail = () => {
   email
     .send({
-      template: 'account activation',
+      template: 'trial expired',
       message: {
         to: 'john@snow.com'
       },
