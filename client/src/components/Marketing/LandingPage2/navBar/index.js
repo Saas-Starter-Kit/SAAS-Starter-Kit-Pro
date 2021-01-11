@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Sticky from 'react-stickynode';
 import Scrollspy from 'react-scrollspy';
 import AnchorLink from 'react-anchor-link-smooth-scroll';
 import styled from 'styled-components';
@@ -15,13 +16,20 @@ import '../../../../assets/css/flaticon.css';
 const MENU_ITEMS = ['Home', 'Service', 'Feature', 'Pricing', 'Testimonial', 'FAQ'];
 
 const Container1 = styled.div`
-  min-height: 70px;
+  position: fixed;
   display: block;
-  min-height: 56px;
+  top: 0;
+  left: 0;
+  width: 100%;
+  transition: 0.35s ease-in-out;
 `;
 
 const Container2 = styled.div`
-  padding: 30px;
+  display: block;
+`;
+
+const Container3 = styled.div`
+  padding: 0px 30px;
   margin-left: auto;
   margin-right: auto;
   width: 100%;
@@ -39,7 +47,7 @@ const Container2 = styled.div`
   }
 `;
 
-const Container3 = styled.div`
+const Container4 = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -188,40 +196,44 @@ const NavBar = () => {
     </li>
   ));
   return (
-    <Container1>
-      <Container2>
-        <Container3>
-          <Link>
-            <Image src={Logo} alt="Agency" />
-          </Link>
-          <DesktopScrollspy items={MENU_ITEMS}>{menuItems}</DesktopScrollspy>
-          <RcDrawer
-            width="420px"
-            placement="right"
-            open={isMobileMenuOpen}
-            onClose={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            handler={false}
-            level={null}
-          >
-            <DrawerClose
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              role="button"
-              tabIndex="0"
-              onKeyPress={() => {}}
-            />
-            <MobileScrollSpy items={MENU_ITEMS}>{menuItems}</MobileScrollSpy>
-          </RcDrawer>
-          <DrawerHandler
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            role="button"
-            tabIndex="0"
-            onKeyPress={() => {}}
-          >
-            <BurgerIcon />
-          </DrawerHandler>
-        </Container3>
-      </Container2>
-    </Container1>
+    <Sticky top={0} innerZ={9999}>
+      <Container1>
+        <Container2>
+          <Container3>
+            <Container4>
+              <Link>
+                <Image src={Logo} alt="Agency" />
+              </Link>
+              <DesktopScrollspy items={MENU_ITEMS}>{menuItems}</DesktopScrollspy>
+              <RcDrawer
+                width="420px"
+                placement="right"
+                open={isMobileMenuOpen}
+                onClose={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                handler={false}
+                level={null}
+              >
+                <DrawerClose
+                  onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                  role="button"
+                  tabIndex="0"
+                  onKeyPress={() => {}}
+                />
+                <MobileScrollSpy items={MENU_ITEMS}>{menuItems}</MobileScrollSpy>
+              </RcDrawer>
+              <DrawerHandler
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                role="button"
+                tabIndex="0"
+                onKeyPress={() => {}}
+              >
+                <BurgerIcon />
+              </DrawerHandler>
+            </Container4>
+          </Container3>
+        </Container2>
+      </Container1>
+    </Sticky>
   );
 };
 

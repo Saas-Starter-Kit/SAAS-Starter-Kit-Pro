@@ -39,6 +39,7 @@
     "react-instantsearch-dom": "^6.8.2",
     "react-particles-js": "^3.4.1",
     "react-scrollspy": "^3.4.3",
+    "react-stickynode": "^3.0.4",
     "react-syntax-highlighter": "^15.4.3",
     "react-tooltip": "^4.2.11",
     "styled-components": "^5.2.1",

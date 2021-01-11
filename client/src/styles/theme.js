@@ -173,4 +173,14 @@ export const LandingPage2GlobalStyle = createGlobalStyle`
     }
   }
 }
+
+  .sticky-outer-wrapper.active > .sticky-inner-wrapper > div {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    transition: 0.35s ease-in-out;
+    padding: 15px 0;
+    background-color: ${landingPage2Colors.white};
+  }
+  .sticky-outer-wrapper > .sticky-inner-wrapper > div {
+    padding: 30px 0;
+  }
 `;
