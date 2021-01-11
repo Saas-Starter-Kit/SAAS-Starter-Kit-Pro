@@ -1,4 +1,4 @@
-import { css } from 'styled-components';
+import { createGlobalStyle, css } from 'styled-components';
 
 export const theme = {
   primary: '#42389D',
@@ -105,4 +105,72 @@ export const fieldStyles = css`
     font-size: 0.875rem;
   }
   line-height: 1.25rem;
+`;
+
+// I couldn't find any other ways to target the rc-drawer
+export const LandingPage2GlobalStyle = createGlobalStyle`
+.drawer-content-wrapper {
+  @media (max-width: ${landingPage2Breakpoints.medium}) {
+    width: 300px !important;
+  }
+  .drawer-content {
+    padding: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    @media (max-width: ${landingPage2Breakpoints.medium}) {
+      padding: 50px 40px 30px 40px;
+    }
+    ul {
+      padding-inline-start: 0px;
+      margin-bottom: 40px;
+      flex-grow: 1;
+      @media (max-width: ${landingPage2Breakpoints.medium}) {
+        margin-bottom: 30px;
+      }
+      li {
+        margin-bottom: 35px;
+        @media (max-width: ${landingPage2Breakpoints.medium}) {
+          margin-bottom: 25px;
+        }
+        a {
+          font-size: 20px;
+          font-weight: 400;
+          line-height: 20px;
+          position: relative;
+          transition: 0.15s ease-in-out;
+          @media (max-width: ${landingPage2Breakpoints.medium}) {
+            font-size: 18px;
+          }
+          &:hover {
+            color: ${landingPage2Colors.cinnabar};
+          }
+          &:before {
+            content: '';
+            width: 7px;
+            height: 7px;
+            background: ${landingPage2Colors.cinnabar};
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: -15px;
+            transform: translateY(-50%);
+            opacity: 0;
+          }
+        }
+        &.is-current {
+          a {
+            color: ${landingPage2Colors.cinnabar};
+            &:before {
+              opacity: 1;
+            }
+          }
+        }
+      }
+    }
+    .navbar_drawer_button button {
+      width: 100%;
+    }
+  }
+}
 `;
