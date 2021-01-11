@@ -19,7 +19,7 @@ const transporter = nodemailer.createTransport({
 export const email = new Email({
   send: true,
   transport: transporter,
-  preview: false, // to preview emails in your own browser
+  preview: true, // to preview emails in your own browser
   views: {
     options: {
       extension: 'hbs'
@@ -30,7 +30,7 @@ export const email = new Email({
 export const sendEmail = () => {
   email
     .send({
-      template: 'welcome',
+      template: 'account activation',
       message: {
         to: 'john@snow.com'
       },
