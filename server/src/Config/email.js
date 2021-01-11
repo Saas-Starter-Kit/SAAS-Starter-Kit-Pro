@@ -25,7 +25,7 @@ export const email = new Email({
 export const sendEmail = () => {
   email
     .send({
-      template: 'password',
+      template: 'account activation',
       message: {
         to: 'john@snow.com'
       },
