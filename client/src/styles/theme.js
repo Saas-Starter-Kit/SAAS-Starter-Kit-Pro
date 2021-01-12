@@ -51,7 +51,8 @@ export const landingPage2Colors = {
   brightGray: '#343D48CC',
   royalBlue: '#5167DB',
   royalBlue20: 'rgba(82, 104, 219, 0.2)',
-  white: '#FFFFFF'
+  white: '#FFFFFF',
+  feijo: '#93D26E'
 };
 
 export const breakpoints = {
