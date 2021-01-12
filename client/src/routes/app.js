@@ -17,7 +17,7 @@ const Routes = ({ location }) => {
   const app_id = splitPath[2];
 
   useEffect(() => {
-    if (app_id) getRole(app_id, ability);
+    //if (app_id) getRole(app_id, ability);
   }, [app_id]);
 
   return (

@@ -36,17 +36,17 @@ export const getRole = async (app_id, ability) => {
 
   console.log(result);
   if (result.data.length == 0) {
-    //navigate to forbiden page
+    //navigate to 403 page
   }
 
   let user = result.data[0];
 
-  //let role = {
-  //  is_user: user.is_user,
-  //  is_admin: user.is_admin
-  //};
+  let role = {
+    is_user: user.is_user,
+    is_admin: user.is_admin
+  };
 
-  updateRole(ability, adminRole);
+  updateRole(ability, role);
 };
 
 //Use for Local testing, subsitute in for the role variable in getRole()

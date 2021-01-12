@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Can from '../../../services/casl';
+import { updateRole } from '../../../utils/caslAbility';
+import CaslContext from '../../../utils/caslContext';
 
 const Permissions = () => {
+  const ability = useContext(CaslContext);
+
   return (
     <div>
+      <h2>Your Current Role is </h2>
       <Can I="read" a="admin post">
         <p>Only Admin can see Text</p>
       </Can>
