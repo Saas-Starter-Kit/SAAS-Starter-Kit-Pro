@@ -31,13 +31,12 @@ export const email = new Email({
 export const sendEmail = () => {
   email
     .send({
-      template: 'trial expired',
+      template: 'order confirm',
       message: {
         to: 'john@snow.com'
       },
       locals: {
-        fname: 'John',
-        lname: 'Snow'
+        name: 'John Snow'
       }
     })
     .then(() => console.log('email has been sent!'));
