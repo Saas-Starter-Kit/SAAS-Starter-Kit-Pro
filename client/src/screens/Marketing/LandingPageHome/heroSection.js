@@ -2,6 +2,7 @@ import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import { Link } from 'gatsby';
 import { colors, breakpoints } from '../../../styles/theme';
+import StepUp from '../../../assets/images/illustrations/undraw_stepping_up_g6oo.svg';
 
 const Container = styled.div`
   display: grid;
@@ -109,7 +110,7 @@ const HeroSection = () => (
     </HeroTextContainer>
 
     <ImageContainer>
-      <Image src="/illustrations/undraw_stepping_up_g6oo.svg" alt="Step Up" />
+      <Image src={StepUp} alt="Step Up" />
     </ImageContainer>
   </Container>
 );

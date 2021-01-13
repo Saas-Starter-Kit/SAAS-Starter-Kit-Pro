@@ -7,6 +7,7 @@ import { colors, breakpoints } from '../../../styles/theme';
 import Home from '../svgs/home';
 import Persons from '../svgs/persons';
 import Folder from '../svgs/folder';
+import SmallLogo from '../../../assets/images/logo/small_logo.svg'
 
 const Wrapper = styled.div`
   display: none;
@@ -91,7 +92,7 @@ const SidebarIcons = ({ sidebarHandler, app_id }) => (
     {/*<!-- Sidebar component, swap this element with another sidebar if you like -->*/}
     <SidebarWrapper>
       <LogoWrapper>
-        <Logo src="/logo/small_logo.svg" alt="Workflow" />
+        <Logo src={SmallLogo} alt="Workflow" />
       </LogoWrapper>
       <Nav>
         <Avatar />

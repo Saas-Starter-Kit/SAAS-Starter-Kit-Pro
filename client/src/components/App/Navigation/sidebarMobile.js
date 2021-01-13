@@ -7,6 +7,7 @@ import Cross from '../svgs/cross';
 import Home from '../svgs/home';
 import Persons from '../svgs/persons';
 import Folder from '../svgs/folder';
+import LargeLogo from '../../../assets/images/logo/large_logo.svg';
 
 const Wrapper = styled.div`
   position: fixed;
@@ -134,7 +135,7 @@ const SidebarMobile = ({ toggleMobileMenu, app_id }) => {
         </ButtonWrapper>
         <Sidebar>
           <LogoWrapper>
-            <Logo src="/logo/large_logo.svg" alt="Workflow" />
+            <Logo src={LargeLogo} alt="Workflow" />
           </LogoWrapper>
           <Nav>
             <MobileSidebarItem

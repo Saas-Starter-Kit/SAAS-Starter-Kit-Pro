@@ -2,6 +2,10 @@ import React from "react"
 import styled from "styled-components"
 import { Link } from "gatsby"
 import { colors, breakpoints, transform } from "../../../styles/theme"
+import ChartBar from '../../../assets/images/icons/chart-bar.svg'
+import CursorClick from '../../../assets/images/icons/cursor-click.svg'
+import ShieldCheck from '../../../assets/images/icons/shield-check.svg'
+import ViewGrid from '../../../assets/images/icons/view-grid.svg'
 
 const Container1 = styled.div`
   position: absolute;
@@ -114,7 +118,7 @@ const FlyoutMenu = () => (
           <Link href="#">
             <Item>
               <MenuImageWrapper>
-                <MenuImg src="/icons/chart-bar.svg" alt="chart bar" />
+                <MenuImg src={ChartBar} alt="chart bar" />
               </MenuImageWrapper>
               <TextWrapper>
                 <Title>Analytics</Title>
@@ -128,7 +132,7 @@ const FlyoutMenu = () => (
           <Link href="#">
             <Item>
               <MenuImageWrapper>
-                <MenuImg src="/icons/cursor-click.svg" alt="click" />
+                <MenuImg src={CursorClick} alt="click" />
               </MenuImageWrapper>
               <TextWrapper>
                 <Title>Engagement</Title>
@@ -141,7 +145,7 @@ const FlyoutMenu = () => (
           <Link href="#">
             <Item>
               <MenuImageWrapper>
-                <MenuImg src="/icons/shield-check.svg" alt="click" />
+                <MenuImg src={ShieldCheck} alt="click" />
               </MenuImageWrapper>
               <TextWrapper>
                 <Title>Security</Title>
@@ -154,7 +158,7 @@ const FlyoutMenu = () => (
           <Link href="#">
             <Item>
               <MenuImageWrapper>
-                <MenuImg src="/icons/view-grid.svg" alt="click" />
+                <MenuImg src={ViewGrid} alt="click" />
               </MenuImageWrapper>
               <TextWrapper>
                 <Title>Integrations</Title>

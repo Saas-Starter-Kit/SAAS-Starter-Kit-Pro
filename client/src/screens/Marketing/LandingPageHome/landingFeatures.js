@@ -1,6 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 import { colors, breakpoints } from "../../../styles/theme"
+import ChartBar from '../../../assets/images/icons/chart-bar.svg'
 
 const Container = styled.div`
   background-color: ${props => props.theme.backgroundLanding};
@@ -21,10 +22,10 @@ const LargeHeader = styled.h4`
   font-size: 1.5rem;
   line-height: 2rem;
   font-weight: 800;
-  line-height: 2rem;
+  text-align: center;
   @media (min-width: ${breakpoints.small}) {
     font-size: 1.875rem;
-    font-size: 1.875rem;
+    text-align: left;
   }
 `
 
@@ -32,6 +33,10 @@ const LargeParagraph = styled.p`
   margin-top: 0.75rem;
   font-size: 1.125rem;
   line-height: 1.75rem;
+  text-align: center;
+  @media (min-width: ${breakpoints.small}) {
+    text-align: left;
+  }
 `
 
 const TextWrapper = styled.div`
@@ -59,7 +64,10 @@ const MenuImg = styled.img`
 `
 
 const FeatureImage = styled.img`
-  width: 90%;
+  width: 100%;
+  @media (min-width: ${breakpoints.large}) {
+    width: 90%;
+  }
   margin-left: auto;
   margin-right: auto;
 `
@@ -100,6 +108,10 @@ const FeatureWrapper2b = styled.div`
 
 const List = styled.ul`
   margin-top: 2.5rem;
+  margin-left: -1rem;
+  @media (min-width: ${breakpoints.small}) {
+    margin-left: 0;
+  }
 `
 
 const ListItem = styled.li`
@@ -137,7 +149,7 @@ const LandingFeatures = () => (
           <ListItem>
             <Item>
               <ImageWrapper>
-                <MenuImg src="/icons/chart-bar.svg" alt="chart bar" />
+                <MenuImg src={ChartBar} alt="chart bar" />
               </ImageWrapper>
               <TextWrapper>
                 <SmallHeader>Sub Feature 1</SmallHeader>
@@ -152,7 +164,7 @@ const LandingFeatures = () => (
           <ListItem>
             <Item>
               <ImageWrapper>
-                <MenuImg src="/icons/chart-bar.svg" alt="chart bar" />
+                <MenuImg src={ChartBar} alt="chart bar" />
               </ImageWrapper>
               <TextWrapper>
                 <SmallHeader>Sub Feature 2</SmallHeader>
@@ -184,7 +196,7 @@ const LandingFeatures = () => (
           <ListItem>
             <Item>
               <ImageWrapper>
-                <MenuImg src="/icons/chart-bar.svg" alt="chart bar" />
+                <MenuImg src={ChartBar} alt="chart bar" />
               </ImageWrapper>
               <TextWrapper>
                 <SmallHeader>Sub Feature 1</SmallHeader>
@@ -199,7 +211,7 @@ const LandingFeatures = () => (
           <ListItem>
             <Item>
               <ImageWrapper>
-                <MenuImg src="/icons/chart-bar.svg" alt="chart bar" />
+                <MenuImg src={ChartBar} alt="chart bar" />
               </ImageWrapper>
               <TextWrapper>
                 <SmallHeader>Sub Feature 2</SmallHeader>

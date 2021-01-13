@@ -3,6 +3,7 @@ import { Link } from "gatsby"
 import styled from "styled-components"
 import SocialBarFooter from "./socialBarFooter"
 import { colors } from "../../../styles/theme"
+import WaveFooter from '../../../assets/images/illustrations/waveFooter.svg'
 
 const Wrapper = styled.div`
   background-color: ${colors.blue800};
@@ -51,7 +52,7 @@ const Footer = () => {
   return (
     <Wrapper>
       <IMGContainer>
-        <img src="/illustrations/waveFooter.svg" alt="wave" />
+        <img src={WaveFooter} alt="wave" />
       </IMGContainer>
       <SocialBarFooter />
       <Container>
