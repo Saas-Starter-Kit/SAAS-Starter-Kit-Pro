@@ -67,7 +67,8 @@ export const landingPage2Breakpoints = {
   small: '575px',
   medium: '768px',
   large: '990px',
-  extraLarge: '1440px'
+  extraLarge: '1220px',
+  xxl: '1440px'
 };
 
 export const transform = css`

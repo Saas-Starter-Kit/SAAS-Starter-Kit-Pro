@@ -47,7 +47,7 @@ const Container1 = styled.div`
     max-width: 970px;
     width: 100%;
   }
-  @media (min-width: 1220px) {
+  @media (min-width: ${breakpoints.extraLarge}) {
     max-width: 1170px;
     width: 100%;
   }
@@ -126,7 +126,7 @@ const IconWrapper = styled.div`
     width: 75px;
     height: 75px;
   }
-  @media (min-width: ${breakpoints.extraLarge}) {
+  @media (min-width: ${breakpoints.xxl}) {
     width: 84px;
     height: 84px;
   }
@@ -141,7 +141,7 @@ const IconWrapper = styled.div`
   }
   overflow: hidden;
   margin-bottom: 20px;
-  @media (min-width: ${breakpoints.extraLarge}) {
+  @media (min-width: ${breakpoints.xxl}) {
     margin-bottom: 30px;
   }
   position: relative;
@@ -179,7 +179,7 @@ const Header = styled.h2`
   }
   margin-top: 2rem;
   margin-bottom: 10px;
-  @media (min-width: ${breakpoints.extraLarge}) {
+  @media (min-width: ${breakpoints.xxl}) {
     margin-bottom: 20px;
   }
 `;

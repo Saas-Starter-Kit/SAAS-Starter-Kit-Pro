@@ -41,7 +41,7 @@ const Container3 = styled.div`
     max-width: 970px;
     width: 100%;
   }
-  @media (min-width: 1220px) {
+  @media (min-width: ${breakpoints.extraLarge}) {
     max-width: 1170px;
     width: 100%;
   }
