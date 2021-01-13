@@ -8,10 +8,10 @@ import 'rc-drawer/assets/index.css';
 import {
   landingPage2Breakpoints as breakpoints,
   landingPage2Colors as colors
-} from '../../../../styles/theme';
-import Logo from './navBarObjects/logo.png';
-import BurgerIcon from './BurgerIcon';
-import '../../../../assets/css/flaticon.css';
+} from '../../../styles/theme';
+import Logo from '../../../assets/images/logo/large_logo.svg';
+import BurgerIcon from '../svgs/BurgerIcon';
+import '../../../assets/css/flaticon.css';
 
 const MENU_ITEMS = ['Home', 'Service', 'Feature', 'Pricing', 'Testimonial', 'FAQ'];
 
@@ -65,8 +65,12 @@ const Link = styled.a`
 
 const Image = styled.img`
   display: block;
-  max-width: 130px;
   height: auto;
+  width: 8rem;
+  padding: 0.4rem;
+  border-radius: 1rem;
+  max-width: 130px;
+  background-color: black;
   @media (min-width: ${breakpoints.large}) {
     margin-right: 166px;
   }

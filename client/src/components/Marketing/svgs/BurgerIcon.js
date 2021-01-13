@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import {
   landingPage2Colors as colors,
   landingPage2Breakpoints as breakpoints
-} from '../../../../styles/theme';
+} from '../../../styles/theme';
 
 const Wrapper = styled.div`
   @media (min-width: ${breakpoints.large}) {

@@ -1,7 +1,7 @@
 import React from 'react';
-import NavBar from '../../../components/Marketing/Navigation/navBar';
-import Banner from './bannerSection';
-import Services from './Services';
+import NavBar from '../../../components/Marketing/Navigation/header2';
+import Banner from './banner';
+import Services from './services';
 import HowItWorks from './howItWorks';
 import { LandingPage2GlobalStyle as GlobalStyle } from '../../../styles/theme';
 

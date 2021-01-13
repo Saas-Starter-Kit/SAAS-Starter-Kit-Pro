@@ -3,10 +3,10 @@ import styled from 'styled-components';
 import {
   landingPage2Breakpoints as breakpoints,
   landingPage2Colors as colors
-} from '../../../../styles/theme';
-import Background from './images/background.png';
-import MainImage from './images/mainImage.png';
-import { PrimaryButton } from '../../../../components/Common/buttons/PrimaryButton';
+} from '../../../styles/theme';
+import Background from '../../../assets/images/LandingPage2/howItWorks/background.png';
+import MainImage from '../../../assets/images/LandingPage2/howItWorks/mainImage.png';
+import { PrimaryButton } from '../../../components/Common/buttons/PrimaryButton';
 
 const Container = styled.section`
   min-height: 630px;

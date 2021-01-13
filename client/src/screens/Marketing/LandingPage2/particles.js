@@ -1,13 +1,13 @@
 import React from 'react';
 import Particles from 'react-particles-js';
 import styled from 'styled-components';
-import { landingPage2Breakpoints as breakpoints } from '../../../../../styles/theme';
-import Particle1 from './particleObjects/particle-1.png';
-import Particle2 from './particleObjects/particle-2.png';
-import Particle3 from './particleObjects/particle-3.png';
-import Particle4 from './particleObjects/particle-4.png';
-import Particle5 from './particleObjects/particle-5.png';
-import Particle6 from './particleObjects/particle-6.png';
+import { landingPage2Breakpoints as breakpoints } from '../../../styles/theme';
+import Particle1 from '../../../assets/images/LandingPage2/particles/particle-1.png';
+import Particle2 from '../../../assets/images/LandingPage2/particles/particle-2.png';
+import Particle3 from '../../../assets/images/LandingPage2/particles/particle-3.png';
+import Particle4 from '../../../assets/images/LandingPage2/particles/particle-4.png';
+import Particle5 from '../../../assets/images/LandingPage2/particles/particle-5.png';
+import Particle6 from '../../../assets/images/LandingPage2/particles/particle-6.png';
 
 const StyledParticles = styled(Particles)`
   position: absolute;

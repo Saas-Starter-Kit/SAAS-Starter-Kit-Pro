@@ -109,7 +109,7 @@ export const fieldStyles = css`
   line-height: 1.25rem;
 `;
 
-// I couldn't find any other ways to target the rc-drawer
+// Create global styles for Landing page 2
 export const LandingPage2GlobalStyle = createGlobalStyle`
 .drawer-content-wrapper {
   @media (max-width: ${landingPage2Breakpoints.medium}) {

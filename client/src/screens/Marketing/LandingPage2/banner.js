@@ -3,14 +3,14 @@ import styled from 'styled-components';
 import {
   landingPage2Colors as colors,
   landingPage2Breakpoints as breakpoints
-} from '../../../../styles/theme';
-import { PrimaryButton } from '../../../../components/Common/buttons/PrimaryButton';
-import { SecondaryButton } from '../../../../components/Common/buttons/SecondaryButton';
+} from '../../../styles/theme';
+import { PrimaryButton } from '../../../components/Common/buttons/PrimaryButton';
+import { SecondaryButton } from '../../../components/Common/buttons/SecondaryButton';
 import Particles from './particles';
 
-import BannerBackground from './bannerObjects/bannerBackground.jpg';
-import BannerObject1 from './bannerObjects/bannerObject1.png';
-import BannerObject2 from './bannerObjects/bannerObject2.png';
+import BannerBackground from '../../../assets/images/LandingPage2/bannerObjects/bannerBackground.jpg';
+import BannerObject1 from '../../../assets/images/LandingPage2/bannerObjects/bannerObject1.png';
+import BannerObject2 from '../../../assets/images/LandingPage2/bannerObjects/bannerObject2.png';
 
 const Wrapper = styled.section`
   padding-top: 210px;
