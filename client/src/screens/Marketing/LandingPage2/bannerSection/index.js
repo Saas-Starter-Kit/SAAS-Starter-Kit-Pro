@@ -4,8 +4,8 @@ import {
   landingPage2Colors as colors,
   landingPage2Breakpoints as breakpoints
 } from '../../../../styles/theme';
-import { PrimaryButton } from '../buttons/PrimaryButton';
-import { SecondaryButton } from '../buttons/SecondaryButton';
+import { PrimaryButton } from '../../../../components/Common/buttons/PrimaryButton';
+import { SecondaryButton } from '../../../../components/Common/buttons/SecondaryButton';
 import Particles from './particles';
 
 import BannerBackground from './bannerObjects/bannerBackground.jpg';

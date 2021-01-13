@@ -6,7 +6,7 @@ import {
 } from '../../../../styles/theme';
 import Background from './images/background.png';
 import MainImage from './images/mainImage.png';
-import { PrimaryButton } from '../buttons/PrimaryButton';
+import { PrimaryButton } from '../../../../components/Common/buttons/PrimaryButton';
 
 const Container = styled.section`
   min-height: 630px;

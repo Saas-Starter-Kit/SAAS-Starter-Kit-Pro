@@ -1,5 +1,5 @@
 import React from 'react';
-import Landing from '../screens/Marketing/LandingPageHome';
+import Landing from '../screens/Marketing/LandingPage1';
 import '../styles/globals.css';
 import 'antd/dist/antd.css';
 

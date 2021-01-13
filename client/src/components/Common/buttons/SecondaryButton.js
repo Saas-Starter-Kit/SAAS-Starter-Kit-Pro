@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { ButtonBase } from './ButtonBase';
-import { landingPage2Colors as colors } from '../../../../styles/theme';
+import { landingPage2Colors as colors } from '../../../styles/theme';
 
 export const SecondaryButton = styled(ButtonBase)`
   color: ${colors.royalBlue};
