@@ -1,5 +1,8 @@
 import React, { useState, useReducer, useEffect } from 'react';
 
+import '../styles/globals.css';
+import 'antd/dist/antd.css';
+
 import AuthContext from './authContext';
 import { authReducer, initialStateAuth } from '../store/reducers/authReducer';
 import { Login, Logout } from '../store/actions/actions';

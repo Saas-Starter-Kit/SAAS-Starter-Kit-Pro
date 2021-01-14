@@ -7,7 +7,7 @@ import RcDrawer from 'rc-drawer';
 import 'rc-drawer/assets/index.css';
 import { breakpoints, colors } from '../../../styles/theme';
 import Logo from '../../../assets/images/logo/large_logo.svg';
-import BurgerIcon from '../svgs/BurgerIcon';
+import BurgerIcon from '../../../components/Marketing/svgs/BurgerIcon';
 import '../../../assets/css/flaticon.css';
 
 const MENU_ITEMS = ['Home', 'Service', 'Feature', 'Pricing', 'Testimonial', 'FAQ'];

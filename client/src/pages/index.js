@@ -1,8 +1,11 @@
 import React from 'react';
 import Landing from '../screens/Marketing/LandingPage1';
-import '../styles/globals.css';
-import 'antd/dist/antd.css';
+import Layout from '../components/Marketing/Layout';
 
 export default function Home() {
-  return <Landing />;
+  return (
+    <Layout>
+      <Landing />
+    </Layout>
+  );
 }

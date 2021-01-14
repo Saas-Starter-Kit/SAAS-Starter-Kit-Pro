@@ -1,5 +1,5 @@
 import React from 'react';
-import NavBar from '../../../components/Marketing/Navigation/header2';
+import NavBar from './nav';
 import Banner from './banner';
 import Services from './services';
 import HowItWorks from './howItWorks';
