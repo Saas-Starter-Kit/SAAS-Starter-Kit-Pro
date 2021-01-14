@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from 'antd';
 import moment from 'moment';
 import styled from 'styled-components';
-import { colors, breakpoints, fieldStyles } from '../../../styles/theme';
+import { colors, breakpoints, fieldStyles } from '../../../../styles/theme';
 
 const Card = styled.div`
   background-color: ${colors.white};

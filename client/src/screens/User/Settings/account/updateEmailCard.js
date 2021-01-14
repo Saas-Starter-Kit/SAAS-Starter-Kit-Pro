@@ -1,5 +1,5 @@
 import React from 'react';
-import { colors, breakpoints, fieldStyles } from '../../../styles/theme';
+import { colors, breakpoints, fieldStyles } from '../../../../styles/theme';
 import styled from 'styled-components';
 
 const Card = styled.div`

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import styled from 'styled-components';
-import { colors, breakpoints, fieldStyles } from '../../../styles/theme';
+import { colors, breakpoints, fieldStyles } from '../../../../styles/theme';
 import ModalCardDelete from './deleteCardConfirmModal';
 
 const Card = styled.div`

@@ -1,5 +1,6 @@
 import React from 'react';
-import { colors, breakpoints, fieldStyles } from '../../../styles/theme';
+import { navigate } from 'gatsby';
+import { colors, breakpoints, fieldStyles } from '../../../../styles/theme';
 import styled from 'styled-components';
 
 const Card = styled.div`
@@ -16,27 +17,6 @@ const Card = styled.div`
 
 const Paragraph = styled.p`
   font-weight: 700;
-`;
-
-const SectionTitle = styled.h2`
-  font-size: 1.25rem;
-  padding-top: 1.5rem;
-`;
-
-const Form = styled.form`
-  padding-bottom: 1.5rem;
-`;
-
-const Label = styled.label`
-  display: block;
-  font-weight: 500;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-  color: ${colors.gray700};
-`;
-
-const Input = styled.input`
-  ${fieldStyles}
 `;
 
 const Button = styled.button`
@@ -69,29 +49,25 @@ const Button = styled.button`
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 `;
 
-const UpdateUsernameCard = ({ handleUsernameChange, isEmail, username, updateUsername }) => {
+const SectionTitle = styled.h2`
+  font-size: 1.25rem;
+  padding-top: 1.5rem;
+`;
+
+const UpdatePasswordCard = () => {
   return (
     <Card>
-      {!isEmail ? (
-        <Paragraph>Username Changes Only Available for Email Signups</Paragraph>
-      ) : (
-        <Paragraph>Username Changes will reqire Sign-in</Paragraph>
-      )}
-      <SectionTitle>Update Username</SectionTitle>
-      <Form>
-        <Label htmlFor="title">Username:</Label>
-        <Input
-          onChange={handleUsernameChange}
-          value={username}
-          type="text"
-          disabled={isEmail ? false : true}
-        />
-        <Button onClick={updateUsername} disabled={isEmail ? false : true}>
-          Save
-        </Button>
-      </Form>
+      <SectionTitle>Update Password</SectionTitle>
+      <Paragraph>Please Reset Password on Login Page</Paragraph>
+      <Button
+        onClick={() => {
+          navigate('/auth/login');
+        }}
+      >
+        Go to Login
+      </Button>
     </Card>
   );
 };
 
-export default UpdateUsernameCard;
+export default UpdatePasswordCard;

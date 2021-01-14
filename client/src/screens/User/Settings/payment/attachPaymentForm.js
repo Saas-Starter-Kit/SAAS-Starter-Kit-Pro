@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 
-import AuthContext from '../../../utils/authContext';
-import ApiContext from '../../../utils/apiContext';
-import { colors, breakpoints } from '../../../styles/theme';
+import AuthContext from '../../../../utils/authContext';
+import ApiContext from '../../../../utils/apiContext';
+import { colors, breakpoints } from '../../../../styles/theme';
 import styled from 'styled-components';
 
 import { Spin } from 'antd';
-import axios from '../../../services/axios';
+import axios from '../../../../services/axios';
 
 const ButtonWrapper = styled.div`
   padding-top: 2rem;

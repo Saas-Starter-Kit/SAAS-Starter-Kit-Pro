@@ -2,17 +2,16 @@ import React, { useState, useContext, useEffect } from 'react';
 
 import { navigate } from 'gatsby';
 
-import AuthContext from '../../../utils/authContext';
-import ApiContext from '../../../utils/apiContext';
+import AuthContext from '../../../../utils/authContext';
+import ApiContext from '../../../../utils/apiContext';
+import axios from '../../../../services/axios';
 
-import LoadingOverlay from '../../../components/Common/loadingOverlay';
+import LoadingOverlay from '../../../../components/Common/loadingOverlay';
 import styled from 'styled-components';
 
 import UpdateUsernameCard from './updateUsernameCard';
 import UpdateEmailCard from './updateEmailCard';
 import UpdatePasswordCard from './updatePasswordCard';
-
-import axios from '../../../services/axios';
 
 const Wrapper = styled.div``;
 
@@ -20,7 +19,7 @@ const Title = styled.h1`
   font-size: 1.5rem;
 `;
 
-const Settings = () => {
+const AccountSettings = () => {
   const { firebase, authState } = useContext(AuthContext);
   const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
   const { isLoading } = apiState;
@@ -129,4 +128,4 @@ const Settings = () => {
   );
 };
 
-export default Settings;
+export default AccountSettings;
