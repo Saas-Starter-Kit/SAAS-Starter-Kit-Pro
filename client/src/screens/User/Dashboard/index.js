@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import axios from '../../../services/axios';
-import { Link } from 'gatsby';
+import { Link } from '@reach/router';
 
 const Card = styled.div`
   display: flex;
@@ -76,6 +76,9 @@ const Dashboard = () => {
         <input type="text" name="name" />
         <button type="submit">Save</button>
       </form>
+      <Link to="/user/settings/account">Account</Link>
+      <Link to="/user/settings/payment">Account</Link>
+      <Link to="/user/settings/subscription">Account</Link>
       <h2>My Apps:</h2>
       <button onClick={getApps}>Get Apps</button>
       {apps &&
