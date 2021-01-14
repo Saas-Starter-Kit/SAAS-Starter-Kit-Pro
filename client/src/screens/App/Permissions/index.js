@@ -1,21 +1,21 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Can from '../../../services/casl';
 import { updateRole } from '../../../utils/caslAbility';
 import CaslContext from '../../../utils/caslContext';
 
+const userRole = {
+  is_user: true,
+  is_admin: false
+};
+
+const adminRole = {
+  is_user: false,
+  is_admin: true
+};
+
 const Permissions = () => {
   const ability = useContext(CaslContext);
   const [isAdmin, setAdmin] = useState(true);
-
-  const userRole = {
-    is_user: true,
-    is_admin: false
-  };
-
-  const adminRole = {
-    is_user: false,
-    is_admin: true
-  };
 
   const roleHandler = () => {
     if (isAdmin) {
@@ -27,10 +27,15 @@ const Permissions = () => {
     }
   };
 
+  useEffect(() => {
+    updateRole(ability, adminRole);
+  }, []);
+
   return (
     <div>
       <h2>Your Current Role is:</h2>
       {isAdmin ? <p>Admin</p> : <p>User</p>}
+      <div>Click Below to Change Current Role:</div>
       <button onClick={roleHandler}> Change </button>
       <Can I="read" a="admin post">
         <p>Only Admin can see Text</p>
