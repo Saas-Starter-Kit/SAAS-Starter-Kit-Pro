@@ -1,4 +1,4 @@
-import { createGlobalStyle, css } from 'styled-components';
+import { css } from 'styled-components';
 
 export const theme = {
   primary: '#42389D',
@@ -10,6 +10,8 @@ export const colors = {
   blue300: '#A4CAFE',
   blue800: '#1E429F',
   blue900: '#233876',
+  royalBlue: '#5167DB',
+  royalBlue20: 'rgba(82, 104, 219, 0.2)',
   coolGray50: '#F8FAFC',
   coolGray100: '#F1F5F9',
   coolGray200: '#E2E8F0',
@@ -41,18 +43,9 @@ export const colors = {
   red100: '#FDE8E8',
   red500: '#F05252',
   red800: '#9B1C1C',
-  white: '#FFFFFF'
-};
-
-export const landingPage2Colors = {
-  athensGray: '#F1F4F6',
-  cinnabar: '#EB4D4B',
-  firefly: '#0F2137',
-  brightGray: '#343D48CC',
-  royalBlue: '#5167DB',
-  royalBlue20: 'rgba(82, 104, 219, 0.2)',
   white: '#FFFFFF',
-  feijo: '#93D26E'
+  cinnabar: '#EB4D4B',
+  firefly: '#0F2137'
 };
 
 export const breakpoints = {
@@ -60,15 +53,6 @@ export const breakpoints = {
   medium: '768px',
   large: '1024px',
   extraLarge: '1280px'
-};
-
-export const landingPage2Breakpoints = {
-  extraSmall: '480px',
-  small: '575px',
-  medium: '768px',
-  large: '990px',
-  extraLarge: '1220px',
-  xxl: '1440px'
 };
 
 export const transform = css`
@@ -107,82 +91,4 @@ export const fieldStyles = css`
     font-size: 0.875rem;
   }
   line-height: 1.25rem;
-`;
-
-// Create global styles for Landing page 2
-export const LandingPage2GlobalStyle = createGlobalStyle`
-.drawer-content-wrapper {
-  @media (max-width: ${landingPage2Breakpoints.medium}) {
-    width: 300px !important;
-  }
-  .drawer-content {
-    padding: 60px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    @media (max-width: ${landingPage2Breakpoints.medium}) {
-      padding: 50px 40px 30px 40px;
-    }
-    ul {
-      padding-inline-start: 0px;
-      margin-bottom: 40px;
-      flex-grow: 1;
-      @media (max-width: ${landingPage2Breakpoints.medium}) {
-        margin-bottom: 30px;
-      }
-      li {
-        margin-bottom: 35px;
-        @media (max-width: ${landingPage2Breakpoints.medium}) {
-          margin-bottom: 25px;
-        }
-        a {
-          font-size: 20px;
-          font-weight: 400;
-          line-height: 20px;
-          position: relative;
-          transition: 0.15s ease-in-out;
-          @media (max-width: ${landingPage2Breakpoints.medium}) {
-            font-size: 18px;
-          }
-          &:hover {
-            color: ${landingPage2Colors.cinnabar};
-          }
-          &:before {
-            content: '';
-            width: 7px;
-            height: 7px;
-            background: ${landingPage2Colors.cinnabar};
-            border-radius: 50%;
-            position: absolute;
-            top: 50%;
-            left: -15px;
-            transform: translateY(-50%);
-            opacity: 0;
-          }
-        }
-        &.is-current {
-          a {
-            color: ${landingPage2Colors.cinnabar};
-            &:before {
-              opacity: 1;
-            }
-          }
-        }
-      }
-    }
-    .navbar_drawer_button button {
-      width: 100%;
-    }
-  }
-}
-
-  .sticky-outer-wrapper.active > .sticky-inner-wrapper > div {
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-    transition: 0.35s ease-in-out;
-    padding: 15px 0;
-    background-color: ${landingPage2Colors.white};
-  }
-  .sticky-outer-wrapper > .sticky-inner-wrapper > div {
-    padding: 30px 0;
-  }
 `;

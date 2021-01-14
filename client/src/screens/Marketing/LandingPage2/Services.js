@@ -1,10 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import '../../../assets/css/flaticon.css';
-import {
-  landingPage2Breakpoints as breakpoints,
-  landingPage2Colors as colors
-} from '../../../styles/theme';
+import { breakpoints, colors } from '../../../styles/theme';
 
 const SERVICES = [
   {

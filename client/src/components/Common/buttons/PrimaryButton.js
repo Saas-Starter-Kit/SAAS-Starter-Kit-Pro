@@ -1,9 +1,6 @@
 import styled from 'styled-components';
 import { ButtonBase } from './ButtonBase';
-import {
-  landingPage2Colors as colors,
-  landingPage2Breakpoints as breakpoints
-} from '../../../styles/theme';
+import { colors, breakpoints } from '../../../styles/theme';
 
 export const PrimaryButton = styled(ButtonBase)`
   color: ${colors.white};

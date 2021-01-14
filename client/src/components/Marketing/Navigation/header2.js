@@ -5,10 +5,7 @@ import AnchorLink from 'react-anchor-link-smooth-scroll';
 import styled from 'styled-components';
 import RcDrawer from 'rc-drawer';
 import 'rc-drawer/assets/index.css';
-import {
-  landingPage2Breakpoints as breakpoints,
-  landingPage2Colors as colors
-} from '../../../styles/theme';
+import { breakpoints, colors } from '../../../styles/theme';
 import Logo from '../../../assets/images/logo/large_logo.svg';
 import BurgerIcon from '../svgs/BurgerIcon';
 import '../../../assets/css/flaticon.css';

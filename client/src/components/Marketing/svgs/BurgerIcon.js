@@ -1,9 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import {
-  landingPage2Colors as colors,
-  landingPage2Breakpoints as breakpoints
-} from '../../../styles/theme';
+import { breakpoints } from '../../../styles/theme';
 
 const Wrapper = styled.div`
   @media (min-width: ${breakpoints.large}) {
@@ -23,7 +20,7 @@ const Wrapper = styled.div`
     height: 2px;
     margin: 4px 0;
     float: right;
-    background-color: ${colors.cinnabar};
+    background-color: #eb4d4b;
     transition: all 0.3s ease;
     &:first-child {
       margin-top: 0;

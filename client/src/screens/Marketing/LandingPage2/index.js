@@ -3,7 +3,7 @@ import NavBar from '../../../components/Marketing/Navigation/header2';
 import Banner from './banner';
 import Services from './services';
 import HowItWorks from './howItWorks';
-import { LandingPage2GlobalStyle as GlobalStyle } from '../../../styles/theme';
+import { GlobalStyle } from './styles';
 
 const LandingPage2 = () => (
   <React.Fragment>

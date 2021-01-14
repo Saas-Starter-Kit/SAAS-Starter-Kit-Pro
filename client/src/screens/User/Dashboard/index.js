@@ -1,6 +1,15 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
 import axios from '../../../services/axios';
 import { Link } from 'gatsby';
+
+const Card = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  border: 1px solid black;
+  max-width: 14rem;
+`;
 
 const Dashboard = () => {
   const [apps, setApps] = useState();
@@ -71,11 +80,13 @@ const Dashboard = () => {
       <button onClick={getApps}>Get Apps</button>
       {apps &&
         apps.map((app) => (
-          <div key={app.app_id}>
+          <Card key={app.app_id}>
             <Link to={`/app/${app.app_id}/dashboard`} state={{ app }}>
               {app.app_name}
             </Link>
-          </div>
+            <button>Delete App</button>
+            <button>Invite</button>
+          </Card>
         ))}
     </div>
   );
