@@ -77,8 +77,8 @@ const Dashboard = () => {
         <button type="submit">Save</button>
       </form>
       <Link to="/user/settings/account">Account</Link>
-      <Link to="/user/settings/payment">Account</Link>
-      <Link to="/user/settings/subscription">Account</Link>
+      <Link to="/user/settings/payment">Payment</Link>
+      <Link to="/user/settings/subscription">Subscription</Link>
       <h2>My Apps:</h2>
       <button onClick={getApps}>Get Apps</button>
       {apps &&

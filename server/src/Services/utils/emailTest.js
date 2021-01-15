@@ -1,5 +1,6 @@
 import Email from 'email-templates';
 import nodemailer from 'nodemailer';
+import path from 'path';
 
 /* 
    Use this transport to test emails without sending them 
@@ -31,7 +32,7 @@ export const email = new Email({
 export const sendEmail = () => {
   email
     .send({
-      template: 'order confirm',
+      template: 'account',
       message: {
         to: 'john@snow.com'
       },

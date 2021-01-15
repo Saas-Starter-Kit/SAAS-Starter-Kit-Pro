@@ -1,8 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { Router } from '@reach/router';
-import Settings from '../screens/User/Settings';
 import { AccountSettings, PaymentSettings, SubscriptionSettings } from '../screens/User/Settings';
-import Dashboard from '../screens/User/Dashboard';
+import Profile from '../screens/User/Profile';
 
 const Routes = () => {
   return (
@@ -10,8 +9,7 @@ const Routes = () => {
       <AccountSettings path="/user/settings/account" />
       <PaymentSettings path="/user/settings/payment" />
       <SubscriptionSettings path="/user/settings/subscription" />
-      <Settings path="/user/settings" />
-      <Dashboard path="/user/dashboard" />
+      <Profile path="/user/profile" />
     </Router>
   );
 };
