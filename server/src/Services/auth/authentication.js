@@ -28,6 +28,8 @@ export const SignUp = async (req, res) => {
 
   let userId = databaseQuery.rows[0].id;
 
+  //add email to sendinblue
+
   console.log(userId);
   //send email to confirm signup
 

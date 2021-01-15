@@ -5,9 +5,13 @@ import { navigate } from 'gatsby';
 import * as Yup from 'yup';
 import axios from '../../../services/axios';
 
-//valid format for setting an email and password
+//valid format for setting an email, username and password
 export const ValidSchema = Yup.object().shape({
-  email: Yup.string().email('Invalid email').required('Required'),
+  email: Yup.string().email('Invalid email').required('Email Required'),
+  username: Yup.string()
+    .min(3, 'Name must be at least 3 Characters')
+    .max(50, 'Name Too Long')
+    .required('Name Required'),
   password: Yup.string()
     .min(3, 'Password must be at least 3 Characters')
     .max(50, 'Password Too Long')
@@ -15,8 +19,22 @@ export const ValidSchema = Yup.object().shape({
 });
 
 //Save user information to our own db and and create stripe customer
-export const Authentication = async (authRes, LogIn, isLogin, firebase, fetchFailure) => {
+export const Authentication = async (authRes, LogIn, isLogin, firebase, fetchFailure, name) => {
   console.log(authRes);
+
+  // If user signed up with email, then set their display name
+  const isEmailSignup = authRes.additionalUserInfo.providerId === 'password';
+  if (isEmailSignup && name) {
+    let curUser = firebase.auth().currentUser;
+
+    await curUser
+      .updateProfile({
+        displayName: name
+      })
+      .catch((err) => {
+        fetchFailure(err);
+      });
+  }
 
   //Get Auth id token from Firebase
   let token = await firebase
@@ -28,7 +46,7 @@ export const Authentication = async (authRes, LogIn, isLogin, firebase, fetchFai
 
   //server firebase authentication, returns jwt token
   let authServerRes;
-  let username = authRes.user.displayName ? authRes.user.displayName : authRes.user.email;
+  let username = authRes.user.displayName ? authRes.user.displayName : name;
   let email = authRes.user.email;
 
   if (isLogin) {
@@ -78,19 +96,16 @@ export const Authentication = async (authRes, LogIn, isLogin, firebase, fetchFai
     stripeServerRes = authServerRes;
   }
 
-  console.log(stripeServerRes);
-
-  ////save user data to React context
-  LogintoContext(userId, authRes, stripeServerRes, LogIn);
+  LogintoContext(userId, authRes, stripeServerRes, LogIn, name);
 };
 
 //Save user Info to Context
-export const LogintoContext = async (user_id, authRes, stripeKey, LogIn) => {
+export const LogintoContext = async (user_id, authRes, stripeKey, LogIn, name) => {
   console.log(authRes);
   console.log(stripeKey);
 
   let email = authRes.user.email;
-  let username = authRes.user.displayName ? authRes.user.displayName : authRes.user.email;
+  let username = authRes.user.displayName ? authRes.user.displayName : name;
   let id = user_id;
   let photo = authRes.user.photoURL;
   let provider = authRes.user.providerData[0].providerId;

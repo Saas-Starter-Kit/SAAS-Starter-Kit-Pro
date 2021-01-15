@@ -145,6 +145,7 @@ const Signup = () => {
 
     let email = values.email;
     let password = values.password;
+    let username = values.username;
 
     let authRes = await firebase
       .auth()
@@ -153,7 +154,7 @@ const Signup = () => {
         fetchFailure(error);
       });
 
-    Authentication(authRes, LogIn, isLogin, firebase, fetchFailure);
+    Authentication(authRes, LogIn, isLogin, firebase, fetchFailure, username);
   };
 
   //Google OAuth2 Signin
@@ -180,7 +181,7 @@ const Signup = () => {
         <Card>
           <Formik
             validationSchema={ValidSchema}
-            initialValues={{ email: '', password: '' }}
+            initialValues={{ email: '', password: '', username: '' }}
             onSubmit={handleSubmit}
           >
             {({ values, errors, touched, handleChange, handleBlur, handleSubmit }) => (
@@ -197,6 +198,18 @@ const Signup = () => {
                   />
                 </InputWrapper>
                 {errors.email && touched.email && <ErrorText>{errors.email}</ErrorText>}
+                <Label htmlFor="username">First Name:</Label>
+                <InputWrapper>
+                  <Input
+                    type="name"
+                    name="username"
+                    id="username"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.username}
+                  />
+                </InputWrapper>
+                {errors.username && touched.username && <ErrorText>{errors.username}</ErrorText>}
                 <Label htmlFor="password">Password:</Label>
                 <InputWrapper>
                   <Input

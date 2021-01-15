@@ -1,8 +1,14 @@
 import Email from 'email-templates';
 import nodemailer from 'nodemailer';
 
+/* 
+   Use this transport to test emails without sending them 
+   to real email addresses
+*/
+
 const transporter = nodemailer.createTransport({
-  host: 'smtp.mailtrap.io',
+  //host: 'smtp.mailtrap.io',
+  host: 'localhost',
   port: 465,
   secure: false,
   auth: {
@@ -14,7 +20,7 @@ const transporter = nodemailer.createTransport({
 export const email = new Email({
   send: true,
   transport: transporter,
-  preview: false,
+  preview: true, // to preview emails in your own browser
   views: {
     options: {
       extension: 'hbs'
@@ -22,16 +28,15 @@ export const email = new Email({
   }
 });
 
-export const sendEmail = () => {
+export const sendEmail = (template, to) => {
   email
     .send({
-      template: 'account',
+      template: 'support',
       message: {
         to: 'john@snow.com'
       },
       locals: {
-        fname: 'John',
-        lname: 'Snow'
+        name: 'John Snow'
       }
     })
     .then(() => console.log('email has been sent!'));
