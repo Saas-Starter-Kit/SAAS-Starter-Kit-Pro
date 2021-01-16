@@ -18,24 +18,6 @@ export const ValidSchema = Yup.object().shape({
     .required('Password Required')
 });
 
-const isValidToken = (token, fetchFailure) => {
-  //decode jwt token recieved from server
-  let validToken;
-  try {
-    validToken = jwt_decode(token);
-  } catch {
-    console.log('JWT token decode failed');
-    let error = {
-      type: 'Authentication Failed',
-      message: 'Authentication Failed, please try again or contact Support'
-    };
-
-    fetchFailure(error);
-  }
-
-  return validToken;
-};
-
 export const LoginAuth = async (authRes, LogIn, firebase, fetchFailure) => {
   console.log(authRes);
 
@@ -111,11 +93,34 @@ export const SignupAuth = async (authRes, LogIn, firebase, fetchFailure, name) =
     fetchFailure(err);
   });
 
-  LogintoContext(userId, authRes, stripeServerRes, LogIn);
+  let isSignup = true;
+
+  //Send Verification Email
+  //  const url = data.site.siteMetadata.siteUrl;
+  const url = 'http://localhost:8000';
+  //  const email = authState.user.email;
+  const email2 = 'iqbal125@yahoo.com';
+
+  const actionCodeSettings = {
+    url: `${url}/?email=${email2}`
+  };
+
+  await firebase
+    .auth()
+    .currentUser.sendEmailVerification(actionCodeSettings)
+    .then(function () {
+      // Verification email sent.
+      console.log('llllll');
+    })
+    .catch(function (error) {
+      // Error occurred. Inspect error.code.
+    });
+
+  LogintoContext(userId, authRes, stripeServerRes, LogIn, isSignup);
 };
 
 //Save user Info to Context
-export const LogintoContext = async (user_id, authRes, stripeKey, LogIn) => {
+export const LogintoContext = async (user_id, authRes, stripeKey, LogIn, isSignup) => {
   console.log(authRes);
   //console.log(stripeKey);
 
@@ -138,5 +143,28 @@ export const LogintoContext = async (user_id, authRes, stripeKey, LogIn) => {
   console.log(user);
 
   await LogIn(user);
-  //setTimeout(() => navigate('/app'), 200);
+  if (isSignup) {
+    //navigate to email confirm
+    navigate('/auth/emailconfirm');
+  } else {
+    navigate('/user/profile');
+  }
+};
+
+const isValidToken = (token, fetchFailure) => {
+  //decode jwt token recieved from server
+  let validToken;
+  try {
+    validToken = jwt_decode(token);
+  } catch {
+    console.log('JWT token decode failed');
+    let error = {
+      type: 'Authentication Failed',
+      message: 'Authentication Failed, please try again or contact Support'
+    };
+
+    fetchFailure(error);
+  }
+
+  return validToken;
 };
