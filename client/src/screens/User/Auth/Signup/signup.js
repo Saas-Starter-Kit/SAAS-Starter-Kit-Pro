@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Formik } from 'formik';
 import AuthContext from '../../../../utils/authContext';
 import ApiContext from '../../../../utils/apiContext';
-import { ValidSchema, Authentication } from '../helpers';
+import { ValidSchema, SignupAuth } from '../helpers';
 import LoadingOverlay from '../../../../components/Common/loadingOverlay';
 import { colors, breakpoints, fieldStyles } from '../../../../styles/theme';
 import SignUpFormHeader from './signupFormHeader';
@@ -134,8 +134,6 @@ const Signup = () => {
   const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
   const { isLoading } = apiState;
 
-  const isLogin = false;
-
   useEffect(() => {
     return () => fetchSuccess();
   }, []);
@@ -154,7 +152,7 @@ const Signup = () => {
         fetchFailure(error);
       });
 
-    Authentication(authRes, LogIn, isLogin, firebase, fetchFailure, username);
+    SignupAuth(authRes, LogIn, firebase, fetchFailure, username);
   };
 
   //Google OAuth2 Signin
@@ -170,7 +168,7 @@ const Signup = () => {
         fetchFailure(error);
       });
 
-    Authentication(authRes, LogIn, isLogin, firebase, fetchFailure);
+    SignupAuth(authRes, LogIn, firebase, fetchFailure);
   };
 
   return (
@@ -198,10 +196,10 @@ const Signup = () => {
                   />
                 </InputWrapper>
                 {errors.email && touched.email && <ErrorText>{errors.email}</ErrorText>}
-                <Label htmlFor="username">First Name:</Label>
+                <Label htmlFor="username">First and Last Name:</Label>
                 <InputWrapper>
                   <Input
-                    type="name"
+                    type="text"
                     name="username"
                     id="username"
                     onChange={handleChange}

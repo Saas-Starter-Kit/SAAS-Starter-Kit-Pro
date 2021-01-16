@@ -31,7 +31,7 @@ export const email = new Email({
 export const sendEmail = () => {
   email
     .send({
-      template: 'support',
+      template: 'account',
       message: {
         to: 'john@snow.com'
       },

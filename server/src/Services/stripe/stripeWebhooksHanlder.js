@@ -12,31 +12,25 @@ export const WebHookHandler = async (req, res) => {
 
   console.log(event.type);
 
-  /* 
-      There are many reasons why a customer payment might fail
-      it is best to notify the customer and handle it on a  
-      case by case basis rather than delete their subscription
-      programatically. 
-  */
-
   switch (event.type) {
     case 'invoice.payment_failed':
       //send email notification
+      //ask to fix
       break;
-    case 'invoice.invoice.payment_action_required ':
+    case 'invoice.payment_action_required ':
       //send email notification
       break;
     case 'customer.subscription.trial_will_end':
       //send email notification
+      //link to payment page
       break;
     case 'customer.subscription.past_due':
       //send email notification
+      //cancel subscription
       break;
     case 'customer.subscription.unpaid':
       //send email notification
-      break;
-    case 'customer.subscription.canceled':
-      //send email notification
+      //cancel subscription
       break;
     default:
       console.log(`Unhandled event type ${event.type}`);

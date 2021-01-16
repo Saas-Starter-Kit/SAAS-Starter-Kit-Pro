@@ -5,7 +5,7 @@ import { Formik } from 'formik';
 import { Link } from 'gatsby';
 import AuthContext from '../../../../utils/authContext';
 import ApiContext from '../../../../utils/apiContext';
-import { ValidSchema, Authentication } from '../helpers';
+import { ValidSchema, LoginAuth } from '../helpers';
 
 import LoadingOverlay from '../../../../components/Common/loadingOverlay';
 import { colors, breakpoints, fieldStyles } from '../../../../styles/theme';
@@ -162,7 +162,6 @@ const Login = () => {
   const { firebase, LogIn, LogOut } = useContext(AuthContext);
   const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
   const { isLoading } = apiState;
-  const isLogin = true;
 
   useEffect(() => {
     return () => fetchSuccess();
@@ -170,6 +169,7 @@ const Login = () => {
 
   const handleSubmit = async (values) => {
     fetchInit();
+    console.log(values);
 
     let email = values.email;
     let password = values.password;
@@ -181,7 +181,7 @@ const Login = () => {
         fetchFailure(error);
       });
 
-    Authentication(authRes, LogIn, isLogin, firebase, fetchFailure);
+    LoginAuth(authRes, LogIn, firebase, fetchFailure);
   };
 
   //Google OAuth2 Signin
@@ -196,7 +196,7 @@ const Login = () => {
         fetchFailure(error);
       });
 
-    Authentication(authRes, LogIn, isLogin, firebase, fetchFailure);
+    LoginAuth(authRes, LogIn, firebase, fetchFailure);
   };
 
   return (
@@ -205,11 +205,7 @@ const Login = () => {
       <LoginFormHeader />
       <CardWrapper>
         <Card>
-          <Formik
-            validationSchema={ValidSchema}
-            initialValues={{ email: '', password: '' }}
-            onSubmit={handleSubmit}
-          >
+          <Formik initialValues={{ email: '', password: '' }} onSubmit={handleSubmit}>
             {({ values, errors, touched, handleChange, handleBlur, handleSubmit }) => (
               <form onSubmit={handleSubmit}>
                 <Label htmlFor="email">Email:</Label>

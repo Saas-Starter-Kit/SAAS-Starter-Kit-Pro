@@ -1,4 +1,4 @@
-CREATE TABLE app (
+CREATE TABLE apps (
   app_id SERIAL PRIMARY KEY,
   app_name VARCHAR
 );

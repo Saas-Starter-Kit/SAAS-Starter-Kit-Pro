@@ -83,7 +83,7 @@ export const CancelSubscription = async (req, res) => {
 
     await db.query(text, values);
 
-    //cancel subscription confirm
+    //cancel subscription confirm email
     res
       .status(200)
       .send({ type: 'Request Successful', message: 'Subscription Successfully Canceled' });

@@ -18,57 +18,11 @@ export const ValidSchema = Yup.object().shape({
     .required('Password Required')
 });
 
-//Save user information to our own db and and create stripe customer
-export const Authentication = async (authRes, LogIn, isLogin, firebase, fetchFailure, name) => {
-  console.log(authRes);
-
-  // If user signed up with email, then set their display name
-  const isEmailSignup = authRes.additionalUserInfo.providerId === 'password';
-  if (isEmailSignup && name) {
-    let curUser = firebase.auth().currentUser;
-
-    await curUser
-      .updateProfile({
-        displayName: name
-      })
-      .catch((err) => {
-        fetchFailure(err);
-      });
-  }
-
-  //Get Auth id token from Firebase
-  let token = await firebase
-    .auth()
-    .currentUser.getIdToken()
-    .catch((err) => {
-      fetchFailure(err);
-    });
-
-  //server firebase authentication, returns jwt token
-  let authServerRes;
-  let username = authRes.user.displayName ? authRes.user.displayName : name;
-  let email = authRes.user.email;
-
-  if (isLogin) {
-    let data = { email, token };
-
-    authServerRes = await axios.post(`/auth/login`, data).catch((err) => {
-      fetchFailure(err);
-    });
-  } else {
-    let data = { email, username, token };
-
-    authServerRes = await axios.post(`/auth/signup`, data).catch((err) => {
-      fetchFailure(err);
-    });
-
-    console.log(authServerRes);
-  }
-
+const isValidToken = (token, fetchFailure) => {
   //decode jwt token recieved from server
   let validToken;
   try {
-    validToken = jwt_decode(authServerRes.data.token);
+    validToken = jwt_decode(token);
   } catch {
     console.log('JWT token decode failed');
     let error = {
@@ -79,39 +33,98 @@ export const Authentication = async (authRes, LogIn, isLogin, firebase, fetchFai
     fetchFailure(error);
   }
 
+  return validToken;
+};
+
+export const LoginAuth = async (authRes, LogIn, firebase, fetchFailure) => {
+  console.log(authRes);
+
+  //Get Auth id token from Firebase
+  let token = await firebase
+    .auth()
+    .currentUser.getIdToken()
+    .catch((err) => {
+      fetchFailure(err);
+    });
+
+  //server firebase authentication, returns jwt token
+  let email = authRes.user.email;
+  let data = { email, token };
+  let authServerRes = await axios.post(`/auth/login`, data).catch((err) => {
+    fetchFailure(err);
+  });
+
+  let validToken = isValidToken(authServerRes.data.token, fetchFailure);
   let userId = validToken.user;
 
   console.log(userId);
 
-  let stripeServerRes;
-  console.log(authServerRes);
-  if (!isLogin) {
-    let data = { userId, email };
-    //create stripe customer based on our own server user id
-    stripeServerRes = await axios.post('/stripe/create-customer', data).catch((err) => {
-      fetchFailure(err);
-    });
-  } else {
-    //for login, stripe customer key is returned from our own db during server auth
-    stripeServerRes = authServerRes;
+  LogintoContext(userId, authRes, authServerRes, LogIn);
+};
+
+export const SignupAuth = async (authRes, LogIn, firebase, fetchFailure, name) => {
+  console.log(authRes);
+
+  // If user signed up with email, then set their display name
+  const isEmailSignup = authRes.additionalUserInfo.providerId === 'password';
+  if (isEmailSignup && name) {
+    let curUser = await firebase.auth().currentUser;
+
+    await curUser
+      .updateProfile({
+        displayName: name
+      })
+      .catch((err) => {
+        fetchFailure(err);
+      });
   }
 
-  LogintoContext(userId, authRes, stripeServerRes, LogIn, name);
+  //Set authRes to current user to account for
+  //updating username with email signup
+  authRes = { user: await firebase.auth().currentUser };
+
+  //Get Auth id token from Firebase
+  let token = await firebase
+    .auth()
+    .currentUser.getIdToken()
+    .catch((err) => {
+      fetchFailure(err);
+    });
+
+  //server firebase authentication, returns jwt token
+  let username = authRes.user.displayName;
+  let email = authRes.user.email;
+
+  let authData = { email, username, token };
+  let authServerRes = await axios.post(`/auth/signup`, authData).catch((err) => {
+    fetchFailure(err);
+  });
+
+  console.log(authServerRes);
+
+  let validToken = isValidToken(authServerRes.data.token, fetchFailure);
+  let userId = validToken.user;
+
+  let stripeApiData = { userId, email };
+  //create stripe customer based on our own server user id
+  let stripeServerRes = await axios.post('/stripe/create-customer', stripeApiData).catch((err) => {
+    fetchFailure(err);
+  });
+
+  LogintoContext(userId, authRes, stripeServerRes, LogIn);
 };
 
 //Save user Info to Context
-export const LogintoContext = async (user_id, authRes, stripeKey, LogIn, name) => {
+export const LogintoContext = async (user_id, authRes, stripeKey, LogIn) => {
   console.log(authRes);
-  console.log(stripeKey);
+  //console.log(stripeKey);
 
   let email = authRes.user.email;
-  let username = authRes.user.displayName ? authRes.user.displayName : name;
+  let username = authRes.user.displayName;
   let id = user_id;
   let photo = authRes.user.photoURL;
   let provider = authRes.user.providerData[0].providerId;
   let stripeCustomerKey = stripeKey.data.stripe_customer_id;
-
-  console.log(stripeCustomerKey);
 
   let user = {
     email,
@@ -122,6 +135,8 @@ export const LogintoContext = async (user_id, authRes, stripeKey, LogIn, name) =
     stripeCustomerKey
   };
 
+  console.log(user);
+
   await LogIn(user);
-  setTimeout(() => navigate('/app'), 200);
+  //setTimeout(() => navigate('/app'), 200);
 };

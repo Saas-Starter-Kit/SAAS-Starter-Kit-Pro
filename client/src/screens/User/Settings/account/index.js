@@ -19,12 +19,12 @@ const Title = styled.h1`
   font-size: 1.5rem;
 `;
 
-const AccountSettings = () => {
+const AccountSettings = async () => {
   const { firebase, authState } = useContext(AuthContext);
   const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
   const { isLoading } = apiState;
 
-  const curUser = firebase.auth().currentUser;
+  const curUser = await firebase.auth().currentUser;
 
   //user state
   const [id, setId] = useState();
