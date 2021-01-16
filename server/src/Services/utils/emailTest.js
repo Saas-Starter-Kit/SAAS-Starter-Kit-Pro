@@ -29,15 +29,13 @@ export const email = new Email({
 });
 
 export const sendEmail = () => {
-  email
-    .send({
-      template: 'account',
-      message: {
-        to: 'john@snow.com'
-      },
-      locals: {
-        name: 'John Snow'
-      }
-    })
-    .then(() => console.log('email has been sent!'));
+  email.send({
+    template: 'empty',
+    message: {
+      to: 'john@snow.com'
+    },
+    locals: {
+      name: 'John Snow'
+    }
+  }).catch(err => console.log(err))
 };

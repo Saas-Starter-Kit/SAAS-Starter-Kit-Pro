@@ -2,8 +2,8 @@ import Email from 'email-templates';
 import nodemailer from 'nodemailer';
 
 /* 
-   Use this transport to test emails without sending them 
-   to real email addresses
+  Use mailtrap for testing and switch to 
+  sendinblue when going live.
 */
 
 const transporter = nodemailer.createTransport({
@@ -28,16 +28,14 @@ export const email = new Email({
   }
 });
 
-export const sendEmail = (template, to) => {
+export const sendEmail = (template, toEmail, locals) => {
   email
     .send({
-      template: 'support',
+      template: template,
       message: {
-        to: 'john@snow.com'
+        to: toEmail
       },
-      locals: {
-        name: 'John Snow'
-      }
+      locals
     })
     .then(() => console.log('email has been sent!'));
 };
