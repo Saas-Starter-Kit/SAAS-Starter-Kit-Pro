@@ -1,11 +1,13 @@
 import { SibContactsApi } from '../../Config/sendinblue.js';
 
 export const CreateContact = (req, res) => {
-  //save sendinblue id to db
-
   const FIRSTNAME = 'John';
   const email = 'iqbal133fgf5fff@yahoo.com';
-  const listId = 5;
+
+  const FIRSTNAME = req.body.firstName;
+  const email = req.body.email;
+
+  const listId = process.env.SendInBlue_ListId;
 
   let createContact = {
     attributes: {
@@ -16,8 +18,6 @@ export const CreateContact = (req, res) => {
   };
 
   SibContactsApi.createContact(createContact).then((res) => console.log(res));
-
-  //save sendinblue id to own db
 };
 
 //update email when user updates email

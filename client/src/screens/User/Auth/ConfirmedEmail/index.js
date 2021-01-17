@@ -18,6 +18,7 @@ const ConfirmedEmail = ({ location }) => {
   const provider = queryParams[4];
   const usernameRaw = queryParams[3].split('&')[0];
   const name = usernameRaw.split('%20');
+  const firstName = name[0];
   const username = `${name[0]} ${name[1]}`;
   const photo = null;
 
@@ -46,8 +47,6 @@ const ConfirmedEmail = ({ location }) => {
     setStripeKey(stripeServerRes.data.stripe_customer_id);
     console.log(stripeServerRes);
     //save email to sendinblue
-
-    //Send welcome email
 
     //Login to context
     await LogIn(user);
