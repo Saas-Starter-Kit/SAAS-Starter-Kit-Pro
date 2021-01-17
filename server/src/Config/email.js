@@ -6,7 +6,15 @@ import nodemailer from 'nodemailer';
   sendinblue when going live.
 */
 
-const transporter = nodemailer.createTransport({
+const prodTransporter = nodemailer.createTransport({
+  service: 'SendinBlue',
+  auth: {
+    user: process.env.SendInBlue_User,
+    pass: process.env.SendInBlue_Password
+  }
+});
+
+const devTransporter = nodemailer.createTransport({
   //host: 'smtp.mailtrap.io',
   host: 'localhost',
   port: 465,
@@ -19,7 +27,7 @@ const transporter = nodemailer.createTransport({
 
 export const email = new Email({
   send: true,
-  transport: transporter,
+  transport: devTransporter, // change to prodTransporter when going live
   preview: true, // to preview emails in your own browser
   views: {
     options: {

@@ -5,19 +5,6 @@ import { navigate } from 'gatsby';
 import * as Yup from 'yup';
 import axios from '../../../services/axios';
 
-//valid format for setting an email, username and password
-export const ValidSchema = Yup.object().shape({
-  email: Yup.string().email('Invalid email').required('Email Required'),
-  username: Yup.string()
-    .min(3, 'Name must be at least 3 Characters')
-    .max(50, 'Name Too Long')
-    .required('Name Required'),
-  password: Yup.string()
-    .min(3, 'Password must be at least 3 Characters')
-    .max(50, 'Password Too Long')
-    .required('Password Required')
-});
-
 export const LoginAuth = async (authRes, LogIn, firebase, fetchFailure) => {
   console.log(authRes);
 
@@ -42,6 +29,33 @@ export const LoginAuth = async (authRes, LogIn, firebase, fetchFailure) => {
   console.log(userId);
 
   LogintoContext(userId, authRes, authServerRes, LogIn);
+};
+
+//Save user Info to Context
+export const LogintoContext = async (user_id, authRes, stripeKey, LogIn) => {
+  console.log(authRes);
+
+  let email = authRes.user.email;
+  let username = authRes.user.displayName;
+  let id = user_id;
+  let photo = authRes.user.photoURL;
+  let provider = authRes.user.providerData[0].providerId;
+  let stripeCustomerKey = stripeKey.data.stripe_customer_id;
+
+  let user = {
+    email,
+    username,
+    id,
+    photo,
+    provider,
+    stripeCustomerKey
+  };
+
+  console.log(user);
+
+  await LogIn(user);
+
+  navigate('/user/profile');
 };
 
 export const SignupAuth = async (authRes, firebase, fetchFailure, name, domainUrl) => {
@@ -101,32 +115,18 @@ export const SignupAuth = async (authRes, firebase, fetchFailure, name, domainUr
   navigate('/auth/emailconfirm');
 };
 
-//Save user Info to Context
-export const LogintoContext = async (user_id, authRes, stripeKey, LogIn) => {
-  console.log(authRes);
-
-  let email = authRes.user.email;
-  let username = authRes.user.displayName;
-  let id = user_id;
-  let photo = authRes.user.photoURL;
-  let provider = authRes.user.providerData[0].providerId;
-  let stripeCustomerKey = stripeKey.data.stripe_customer_id;
-
-  let user = {
-    email,
-    username,
-    id,
-    photo,
-    provider,
-    stripeCustomerKey
-  };
-
-  console.log(user);
-
-  await LogIn(user);
-
-  navigate('/user/profile');
-};
+//valid format for setting an email, username and password
+export const ValidSchema = Yup.object().shape({
+  email: Yup.string().email('Invalid email').required('Email Required'),
+  username: Yup.string()
+    .min(3, 'Name must be at least 3 Characters')
+    .max(50, 'Name Too Long')
+    .required('Name Required'),
+  password: Yup.string()
+    .min(3, 'Password must be at least 3 Characters')
+    .max(50, 'Password Too Long')
+    .required('Password Required')
+});
 
 const isValidToken = (token, fetchFailure) => {
   //decode jwt token recieved from server

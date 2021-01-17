@@ -47,6 +47,8 @@ const ConfirmedEmail = ({ location }) => {
     console.log(stripeServerRes);
     //save email to sendinblue
 
+    //Send welcome email
+
     //Login to context
     await LogIn(user);
     navigate('/user/profile');

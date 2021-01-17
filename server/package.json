@@ -22,6 +22,7 @@
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
     "pg": "^8.5.1",
+    "sib-api-v3-sdk": "^8.1.1",
     "stripe": "^8.129.0"
   },
   "type": "module",
