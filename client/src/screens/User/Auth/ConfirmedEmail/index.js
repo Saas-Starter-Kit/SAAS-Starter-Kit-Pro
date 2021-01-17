@@ -21,9 +21,12 @@ const ConfirmedEmail = ({ location }) => {
   const username = `${name[0]} ${name[1]}`;
   const photo = null;
 
-  console.log(username);
-
   const user = { email, username, id, photo, provider, stripeKey };
+  console.log(user);
+
+  useEffect(() => {
+    //fetchSuccess
+  }, []);
 
   useEffect(() => {
     //if (queryParams) createValidUser();
@@ -31,6 +34,7 @@ const ConfirmedEmail = ({ location }) => {
 
   //after verified email, the user info is saved to stripe and sendinblue
   const createValidUser = async () => {
+    //fetchInit
     let userId = id;
     let stripeApiData = { userId, email };
     let stripeServerRes = await axios

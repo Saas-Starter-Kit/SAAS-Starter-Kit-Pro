@@ -137,10 +137,6 @@ const Signup = () => {
   const data = useStaticQuery(staticQuery);
   const domainUrl = data.site.siteMetadata.siteUrl;
 
-  console.log(domainUrl);
-
-  console.log(data);
-
   useEffect(() => {
     return () => fetchSuccess();
   }, []);

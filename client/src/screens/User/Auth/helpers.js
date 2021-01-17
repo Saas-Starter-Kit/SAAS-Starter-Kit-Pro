@@ -88,8 +88,6 @@ export const SignupAuth = async (authRes, firebase, fetchFailure, name, domainUr
   let validToken = isValidToken(authServerRes.data.token, fetchFailure);
   let userId = validToken.user;
 
-  //Send Verification Email
-
   // the url the user is redirected after email verify
   const baseUrl = `${domainUrl}/auth/confirmedemail`;
   let provider = authRes.user.providerData[0].providerId;
@@ -97,6 +95,7 @@ export const SignupAuth = async (authRes, firebase, fetchFailure, name, domainUr
   const redirectUrl = `${baseUrl}/?email=${email}&userId=${userId}&username=${username}&provider=${provider}`;
   let verifyEmailData = { email, redirectUrl };
 
+  //Send Verification Email
   await axios.post('/auth/verify-email', verifyEmailData).catch((err) => fetchFailure(err));
 
   navigate('/auth/emailconfirm');
