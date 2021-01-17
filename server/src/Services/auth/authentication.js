@@ -60,6 +60,10 @@ export const Login = async (req, res) => {
   res.send({ token: setToken(user_id), stripe_customer_id });
 };
 
+export const verifyEmail = () => {
+  //send verificatoin email
+};
+
 export const updateUsername = async (req, res) => {
   let id = req.body.id;
   let username = req.body.username;

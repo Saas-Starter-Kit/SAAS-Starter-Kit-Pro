@@ -8,6 +8,7 @@ import LoadingOverlay from '../../../../components/Common/loadingOverlay';
 import { colors, breakpoints, fieldStyles } from '../../../../styles/theme';
 import SignUpFormHeader from './signupFormHeader';
 import GoogleButton from 'react-google-button';
+import { useStaticQuery, graphql } from 'gatsby';
 
 const Wrapper = styled.div`
   background-color: ${colors.gray50};
@@ -133,6 +134,10 @@ const Signup = () => {
   const { firebase, LogIn, LogOut } = useContext(AuthContext);
   const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
   const { isLoading } = apiState;
+  const data = useStaticQuery(staticQuery);
+  //  const url = data.site.siteMetadata.siteUrl;
+
+  console.log(data);
 
   useEffect(() => {
     return () => fetchSuccess();
@@ -243,3 +248,13 @@ const Signup = () => {
 };
 
 export default Signup;
+
+const staticQuery = graphql`
+  query MyQuery {
+    site {
+      siteMetadata {
+        siteUrl
+      }
+    }
+  }
+`;

@@ -84,45 +84,38 @@ export const SignupAuth = async (authRes, LogIn, firebase, fetchFailure, name) =
 
   console.log(authServerRes);
 
+  //extract jwt token from jwt token
   let validToken = isValidToken(authServerRes.data.token, fetchFailure);
   let userId = validToken.user;
 
-  let stripeApiData = { userId, email };
-  //create stripe customer based on our own server user id
-  let stripeServerRes = await axios.post('/stripe/create-customer', stripeApiData).catch((err) => {
-    fetchFailure(err);
-  });
-
-  let isSignup = true;
-
   //Send Verification Email
-  //  const url = data.site.siteMetadata.siteUrl;
-  const url = 'http://localhost:8000';
-  //  const email = authState.user.email;
-  const email2 = 'iqbal125@yahoo.com';
 
-  const actionCodeSettings = {
-    url: `${url}/?email=${email2}`
+  // the url the user is redirected after email verify
+  const baseUrl = 'http://localhost:8000/auth/confirmedemail';
+  const email2 = 'iqbal125@yahoo.com';
+  let provider = authRes.user.providerData[0].providerId;
+
+  const redirectUrl = {
+    url: `${baseUrl}/?email=${email2}&userId=${userId}&username=${username}&provider=${provider}`
   };
 
-  await firebase
-    .auth()
-    .currentUser.sendEmailVerification(actionCodeSettings)
-    .then(function () {
-      // Verification email sent.
-      console.log('llllll');
-    })
-    .catch(function (error) {
-      // Error occurred. Inspect error.code.
-    });
+  //await firebase
+  //  .auth()
+  //  .currentUser.sendEmailVerification(actionCodeSettings)
+  //  .then(function () {
+  //    // Verification email sent.
+  //    console.log('llllll');
+  //  })
+  //  .catch(function (error) {
+  //    // Error occurred. Inspect error.code.
+  //  });
 
-  LogintoContext(userId, authRes, stripeServerRes, LogIn, isSignup);
+  navigate('/auth/emailconfirm');
 };
 
 //Save user Info to Context
-export const LogintoContext = async (user_id, authRes, stripeKey, LogIn, isSignup) => {
+export const LogintoContext = async (user_id, authRes, stripeKey, LogIn) => {
   console.log(authRes);
-  //console.log(stripeKey);
 
   let email = authRes.user.email;
   let username = authRes.user.displayName;
@@ -143,12 +136,8 @@ export const LogintoContext = async (user_id, authRes, stripeKey, LogIn, isSignu
   console.log(user);
 
   await LogIn(user);
-  if (isSignup) {
-    //navigate to email confirm
-    navigate('/auth/emailconfirm');
-  } else {
-    navigate('/user/profile');
-  }
+
+  navigate('/user/profile');
 };
 
 const isValidToken = (token, fetchFailure) => {
