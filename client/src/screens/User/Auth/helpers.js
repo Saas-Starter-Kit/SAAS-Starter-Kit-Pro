@@ -44,7 +44,7 @@ export const LoginAuth = async (authRes, LogIn, firebase, fetchFailure) => {
   LogintoContext(userId, authRes, authServerRes, LogIn);
 };
 
-export const SignupAuth = async (authRes, LogIn, firebase, fetchFailure, name) => {
+export const SignupAuth = async (authRes, firebase, fetchFailure, name, domainUrl) => {
   console.log(authRes);
 
   // If user signed up with email, then set their display name
@@ -91,7 +91,7 @@ export const SignupAuth = async (authRes, LogIn, firebase, fetchFailure, name) =
   //Send Verification Email
 
   // the url the user is redirected after email verify
-  const baseUrl = 'http://localhost:8000/auth/confirmedemail';
+  const baseUrl = `${domainUrl}/auth/confirmedemail`;
   let provider = authRes.user.providerData[0].providerId;
 
   const redirectUrl = `${baseUrl}/?email=${email}&userId=${userId}&username=${username}&provider=${provider}`;

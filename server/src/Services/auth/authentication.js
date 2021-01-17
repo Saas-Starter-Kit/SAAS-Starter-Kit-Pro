@@ -5,8 +5,8 @@ import firebaseAdmin from '../../Config/firebase.js';
 import { sendEmail } from '../../Config/email.js';
 
 export const verifyEmail = (req, res) => {
-  //let email = req.body.email;
   let email = req.body.email;
+  //remove spaces from url
   let redirectUrl = encodeURI(req.body.redirectUrl);
 
   console.log(redirectUrl, email);

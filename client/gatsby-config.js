@@ -5,7 +5,7 @@ module.exports = {
   siteMetadata: {
     defaultTitle: `Gatsby SAAS Starter`,
     defaultDescription: `A starter for a minimal SAAS app`,
-    siteUrl: `https://example.com`,
+    siteUrl: `http://localhost:8000`,
     defaultImage: './src/images/favicon.ico'
   },
   plugins: [

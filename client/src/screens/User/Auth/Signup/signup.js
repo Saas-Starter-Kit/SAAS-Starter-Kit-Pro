@@ -135,7 +135,9 @@ const Signup = () => {
   const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
   const { isLoading } = apiState;
   const data = useStaticQuery(staticQuery);
-  //  const url = data.site.siteMetadata.siteUrl;
+  const domainUrl = data.site.siteMetadata.siteUrl;
+
+  console.log(domainUrl);
 
   console.log(data);
 
@@ -157,7 +159,7 @@ const Signup = () => {
         fetchFailure(error);
       });
 
-    SignupAuth(authRes, LogIn, firebase, fetchFailure, username);
+    SignupAuth(authRes, firebase, fetchFailure, username, domainUrl);
   };
 
   //Google OAuth2 Signin
@@ -173,7 +175,7 @@ const Signup = () => {
         fetchFailure(error);
       });
 
-    SignupAuth(authRes, LogIn, firebase, fetchFailure);
+    SignupAuth(authRes, firebase, fetchFailure, null, domainUrl);
   };
 
   return (
