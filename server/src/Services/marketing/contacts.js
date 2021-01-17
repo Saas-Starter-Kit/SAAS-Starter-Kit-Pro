@@ -1,15 +1,13 @@
 import { SibContactsApi } from '../../Config/sendinblue.js';
+import { sendEmail } from '../../Config/email.js';
 
-export const CreateContact = (req, res) => {
-  const FIRSTNAME = 'John';
-  const email = 'iqbal133fgf5fff@yahoo.com';
-
+export const CreateContact = async (req, res) => {
   const FIRSTNAME = req.body.firstName;
   const email = req.body.email;
 
-  const listId = process.env.SendInBlue_ListId;
+  const listId = parseInt(process.env.SendInBlue_ListId);
 
-  let createContact = {
+  const contact = {
     attributes: {
       FIRSTNAME
     },
@@ -17,7 +15,14 @@ export const CreateContact = (req, res) => {
     email
   };
 
-  SibContactsApi.createContact(createContact).then((res) => console.log(res));
+  await SibContactsApi.createContact(contact);
+
+  //send welcome email
+  let template = 'welcome';
+  let locals = { FIRSTNAME };
+
+  //send verificatoin email
+  await sendEmail(email, template, locals);
 };
 
 //update email when user updates email

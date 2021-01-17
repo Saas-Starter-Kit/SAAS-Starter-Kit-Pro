@@ -30,7 +30,7 @@ const ConfirmedEmail = ({ location }) => {
   }, []);
 
   useEffect(() => {
-    //if (queryParams) createValidUser();
+    if (queryParams) createValidUser();
   }, []);
 
   //after verified email, the user info is saved to stripe and sendinblue
@@ -45,8 +45,12 @@ const ConfirmedEmail = ({ location }) => {
       });
 
     setStripeKey(stripeServerRes.data.stripe_customer_id);
-    console.log(stripeServerRes);
+
     //save email to sendinblue
+    let sibData = { email, firstName };
+    await axios.post('/api/post/contact', sibData).catch((err) => {
+      //fetchFailure(err);
+    });
 
     //Login to context
     await LogIn(user);

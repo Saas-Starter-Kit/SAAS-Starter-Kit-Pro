@@ -4,7 +4,7 @@ import { saveUsertoDB, getUser } from './authHelpers.js';
 import firebaseAdmin from '../../Config/firebase.js';
 import { sendEmail } from '../../Config/email.js';
 
-export const verifyEmail = (req, res) => {
+export const verifyEmail = async (req, res) => {
   let email = req.body.email;
   //remove spaces from url
   let redirectUrl = encodeURI(req.body.redirectUrl);
@@ -16,7 +16,8 @@ export const verifyEmail = (req, res) => {
   console.log(redirectUrl, email, locals);
 
   //send verificatoin email
-  sendEmail(email, template, locals);
+  await sendEmail(email, template, locals);
+  res.status(200).send('Email Successfully Sent');
 };
 
 export const SignUp = async (req, res) => {
