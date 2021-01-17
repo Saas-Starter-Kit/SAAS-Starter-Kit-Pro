@@ -92,23 +92,12 @@ export const SignupAuth = async (authRes, LogIn, firebase, fetchFailure, name) =
 
   // the url the user is redirected after email verify
   const baseUrl = 'http://localhost:8000/auth/confirmedemail';
-  const email2 = 'iqbal125@yahoo.com';
   let provider = authRes.user.providerData[0].providerId;
 
-  const redirectUrl = {
-    url: `${baseUrl}/?email=${email2}&userId=${userId}&username=${username}&provider=${provider}`
-  };
+  const redirectUrl = `${baseUrl}/?email=${email}&userId=${userId}&username=${username}&provider=${provider}`;
+  let verifyEmailData = { email, redirectUrl };
 
-  //await firebase
-  //  .auth()
-  //  .currentUser.sendEmailVerification(actionCodeSettings)
-  //  .then(function () {
-  //    // Verification email sent.
-  //    console.log('llllll');
-  //  })
-  //  .catch(function (error) {
-  //    // Error occurred. Inspect error.code.
-  //  });
+  await axios.post('/auth/verify-email', verifyEmailData).catch((err) => fetchFailure(err));
 
   navigate('/auth/emailconfirm');
 };

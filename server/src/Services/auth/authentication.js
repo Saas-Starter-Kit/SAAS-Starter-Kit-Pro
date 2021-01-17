@@ -2,6 +2,22 @@ import db from '../../Database/db.js';
 import { setToken } from '../../Config/passport.js';
 import { saveUsertoDB, getUser } from './authHelpers.js';
 import firebaseAdmin from '../../Config/firebase.js';
+import { sendEmail } from '../../Config/email.js';
+
+export const verifyEmail = (req, res) => {
+  //let email = req.body.email;
+  let email = req.body.email;
+  let redirectUrl = encodeURI(req.body.redirectUrl);
+
+  console.log(redirectUrl, email);
+  let template = 'verify email';
+  let locals = { redirectUrl };
+
+  console.log(redirectUrl, email, locals);
+
+  //send verificatoin email
+  sendEmail(email, template, locals);
+};
 
 export const SignUp = async (req, res) => {
   let token = req.body.token;
@@ -58,10 +74,6 @@ export const Login = async (req, res) => {
   let stripe_customer_id = user.rows[0].stripe_customer_id;
 
   res.send({ token: setToken(user_id), stripe_customer_id });
-};
-
-export const verifyEmail = () => {
-  //send verificatoin email
 };
 
 export const updateUsername = async (req, res) => {

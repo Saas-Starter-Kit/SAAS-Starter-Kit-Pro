@@ -28,14 +28,12 @@ export const email = new Email({
   }
 });
 
-export const sendEmail = (template, toEmail, locals) => {
-  email
-    .send({
-      template: template,
-      message: {
-        to: toEmail
-      },
-      locals
-    })
-    .then(() => console.log('email has been sent!'));
+export const sendEmail = async (toEmail, template, locals) => {
+  await email.send({
+    template: template,
+    message: {
+      to: toEmail
+    },
+    locals
+  });
 };
