@@ -1,23 +1,10 @@
 import SibApiV3Sdk from 'sib-api-v3-sdk';
 
 const defaultClient = SibApiV3Sdk.ApiClient.instance;
+const apiKey = defaultClient.authentications['api-key'];
 
-// Configure API key authorization: api-key
-var apiKey = defaultClient.authentications['api-key'];
-apiKey.apiKey = 'ADD-YOUR-API-KEY-HERE';
+apiKey.apiKey = process.env.SendInBlue_API_KEY;
 
-var apiInstance = new SibApiV3Sdk.SMTPApi();
+export const SibContactsApi = new SibApiV3Sdk.ContactsApi();
 
-const sendinblue = (sendSmtpEmail) => {
-  apiInstance.sendTransacEmail(sendSmtpEmail).then(
-    function (data) {
-      return true;
-    },
-    function (error) {
-      console.error(error);
-      return false;
-    }
-  );
-};
-
-module.exports = sendinblue;
+export const SibListsApi = new SibApiV3Sdk.ListsApi();
