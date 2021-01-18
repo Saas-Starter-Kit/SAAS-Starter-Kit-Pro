@@ -75,10 +75,6 @@ export const SignupAuth = async (authRes, firebase, fetchFailure, name, domainUr
       });
   }
 
-  //Set authRes to current user to account for
-  //updating username with email signup
-  authRes = { user: await firebase.auth().currentUser };
-
   //Get Auth id token from Firebase
   let token = await firebase
     .auth()
@@ -88,7 +84,7 @@ export const SignupAuth = async (authRes, firebase, fetchFailure, name, domainUr
     });
 
   //server firebase authentication, returns jwt token
-  let username = authRes.user.displayName;
+  let username = authRes.user.displayName ? authRes.user.displayName : name;
   let email = authRes.user.email;
 
   let authData = { email, username, token };
@@ -96,16 +92,15 @@ export const SignupAuth = async (authRes, firebase, fetchFailure, name, domainUr
     fetchFailure(err);
   });
 
-  console.log(authServerRes);
-
-  //extract jwt token from jwt token
+  //extract user id from jwt token
   let validToken = isValidToken(authServerRes.data.token, fetchFailure);
   let userId = validToken.user;
 
-  // the url the user is redirected after email verify
+  // the url the user is redirected to after email verify
   const baseUrl = `${domainUrl}/auth/confirmedemail`;
   let provider = authRes.user.providerData[0].providerId;
 
+  //save user info to url for later extraction
   const redirectUrl = `${baseUrl}/?email=${email}&userId=${userId}&username=${username}&provider=${provider}`;
   let verifyEmailData = { email, redirectUrl };
 

@@ -19,17 +19,15 @@ const Title = styled.h1`
   font-size: 1.5rem;
 `;
 
-const AccountSettings = async () => {
+const AccountSettings = () => {
   const { firebase, authState } = useContext(AuthContext);
   const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
   const { isLoading } = apiState;
 
-  const curUser = await firebase.auth().currentUser;
-
   //user state
   const [id, setId] = useState();
-  const [email, setEmail] = useState();
-  const [username, setUsername] = useState();
+  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [isEmail, setIsEmail] = useState();
 
   useEffect(() => {
@@ -46,11 +44,13 @@ const AccountSettings = async () => {
       Auth Methods
   */
 
-  const setUser = () => {
+  let curUser;
+  const setUser = async () => {
     let userEmail = authState.user.email;
     let displayName = authState.user.username;
     let id = authState.user.id;
     let isEmail = authState.user.provider === 'password';
+    curUser = await firebase.auth().currentUser;
 
     setId(id);
     setEmail(userEmail);
@@ -108,7 +108,7 @@ const AccountSettings = async () => {
   };
 
   return (
-    <Wrapper>
+    <div>
       <Title>Account Settings</Title>
       {isLoading && <LoadingOverlay />}
       <UpdateUsernameCard
@@ -124,7 +124,7 @@ const AccountSettings = async () => {
         updateEmail={updateEmail}
       />
       <UpdatePasswordCard />
-    </Wrapper>
+    </div>
   );
 };
 
