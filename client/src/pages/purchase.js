@@ -1,6 +1,6 @@
 import React from 'react';
-import Purchase from '../screens/User/Purchase';
+import Purchase from '../routes/purchase';
 
-export default function LoginPage() {
+export default function PurchasePage() {
   return <Purchase />;
 }

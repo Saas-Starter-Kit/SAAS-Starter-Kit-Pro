@@ -49,7 +49,7 @@ export const getRole = async (app_id, ability) => {
   updateRole(ability, role);
 };
 
-//Use for Local testing, subsitute in for the role variable in getRole()
+//Use for Local testing, subsitute in for the role variable in updateRole()
 const userRole = {
   is_user: true,
   is_admin: false

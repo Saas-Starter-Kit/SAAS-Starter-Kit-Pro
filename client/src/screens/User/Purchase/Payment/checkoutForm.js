@@ -1,17 +1,17 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 
-import AuthContext from '../../../utils/authContext';
-import ApiContext from '../../../utils/apiContext';
+import AuthContext from '../../../../utils/authContext';
+import ApiContext from '../../../../utils/apiContext';
 
-import { colors, breakpoints } from '../../../styles/theme';
+import { colors, breakpoints } from '../../../../styles/theme';
 import styled from 'styled-components';
 
-import LoadingOverlay from '../../../components/Common/loadingOverlay';
+import LoadingOverlay from '../../../../components/Common/loadingOverlay';
 import ConfirmSub from './confirmSubscription';
 import PlanCard from './planCard';
 
-import axios from '../../../services/axios';
+import axios from '../../../../services/axios';
 
 const Wrapper = styled.div`
   background-color: ${colors.gray50};
