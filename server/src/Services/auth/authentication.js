@@ -6,16 +6,14 @@ import { sendEmail } from '../../Config/email.js';
 
 export const verifyEmail = async (req, res) => {
   let email = req.body.email;
+  let username = req.body.username;
   //remove spaces from url
   let redirectUrl = encodeURI(req.body.redirectUrl);
 
-  console.log(redirectUrl, email);
   let template = 'verify email';
-  let locals = { redirectUrl };
+  let locals = { redirectUrl, username };
 
-  console.log(redirectUrl, email, locals);
-
-  //send verificatoin email
+  //send verification email
   await sendEmail(email, template, locals);
   res.status(200).send('Email Successfully Sent');
 };
@@ -27,7 +25,6 @@ export const SignUp = async (req, res) => {
 
   //First Check if User exists
   let userExists = await getUser(email);
-  console.log(userExists);
 
   //If user exists send error message, otherwise continue code
   if (userExists.rows.length !== 0) {
@@ -44,8 +41,6 @@ export const SignUp = async (req, res) => {
   let databaseQuery = await saveUsertoDB(email, username, firebaseId);
 
   let userId = databaseQuery.rows[0].id;
-
-  console.log(userId);
 
   res.send({ token: setToken(userId) });
 };

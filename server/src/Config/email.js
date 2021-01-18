@@ -16,7 +16,7 @@ const prodTransporter = nodemailer.createTransport({
 
 const devTransporter = nodemailer.createTransport({
   host: 'smtp.mailtrap.io',
-  //host: 'localhost',
+  //host: 'localhost', will cause error but show email preview
   port: 465,
   secure: false,
   auth: {

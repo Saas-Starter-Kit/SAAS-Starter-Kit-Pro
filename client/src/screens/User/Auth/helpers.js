@@ -63,6 +63,7 @@ export const SignupAuth = async (authRes, firebase, fetchFailure, name, domainUr
 
   // If user signed up with email, then set their display name
   const isEmailSignup = authRes.additionalUserInfo.providerId === 'password';
+  console.log(isEmailSignup);
   if (isEmailSignup && name) {
     let curUser = await firebase.auth().currentUser;
 
@@ -87,6 +88,9 @@ export const SignupAuth = async (authRes, firebase, fetchFailure, name, domainUr
   let username = authRes.user.displayName ? authRes.user.displayName : name;
   let email = authRes.user.email;
 
+  console.log(username);
+  console.log(authRes.user.displayName);
+
   let authData = { email, username, token };
   let authServerRes = await axios.post(`/auth/signup`, authData).catch((err) => {
     fetchFailure(err);
@@ -102,7 +106,7 @@ export const SignupAuth = async (authRes, firebase, fetchFailure, name, domainUr
 
   //save user info to url for later extraction
   const redirectUrl = `${baseUrl}/?email=${email}&userId=${userId}&username=${username}&provider=${provider}`;
-  let verifyEmailData = { email, redirectUrl };
+  let verifyEmailData = { email, redirectUrl, username };
 
   //Send Verification Email
   await axios.post('/auth/verify-email', verifyEmailData).catch((err) => fetchFailure(err));
