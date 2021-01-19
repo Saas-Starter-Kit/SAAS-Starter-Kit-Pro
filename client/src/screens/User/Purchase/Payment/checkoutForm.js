@@ -6,8 +6,13 @@ import ApiContext from '../../../../utils/apiContext';
 
 import { colors, breakpoints } from '../../../../styles/theme';
 import styled from 'styled-components';
-
+import { FaRegCreditCard } from 'react-icons/fa';
 import LoadingOverlay from '../../../../components/Common/loadingOverlay';
+
+import visa from '../../../../assets/images/credit card icons/visa.png';
+import discover from '../../../../assets/images/credit card icons/discover.png';
+import mastercard from '../../../../assets/images/credit card icons/mastercard.png';
+import american_express from '../../../../assets/images/credit card icons/american_express.png';
 
 import { Steps } from 'antd';
 import {
@@ -17,8 +22,8 @@ import {
   CheckCircleOutlined
 } from '@ant-design/icons';
 
-import PlanCard from './planCard';
 import axios from '../../../../services/axios';
+import { navigate } from 'gatsby';
 
 const { Step } = Steps;
 
@@ -100,59 +105,87 @@ const Card = styled.div`
   }
 `;
 
+const StyledCardDisplayWrapper = styled.div`
+  border: 1px solid black;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  margin-bottom: 1rem;
+  cursor: pointer;
+`;
+
+const StyledCardDisplay = styled.div`
+  border: 1px solid black;
+  border-radius: 1rem;
+  padding: 0.5rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  margin: 1rem;
+`;
+
 const CheckoutForm = ({ location }) => {
   const { authState } = useContext(AuthContext);
   const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
   const { isLoading } = apiState;
-
-  console.log(location);
-  //let Plan = location ? location.state.plan : null;
-  //console.log(Plan);
-
-  const premium_plan = process.env.GATSBY_STRIPE_PREMIUM_PLAN;
-  const basic_plan = process.env.GATSBY_STRIPE_BASIC_PLAN;
-  const free_plan = process.env.GATSBY_STRIPE_BASIC_PLAN;
-
-  const [setupIntentState, setSetupIntent] = useState();
-  const [isSuccess, setSuccess] = useState(false);
-  const [plan, setPlan] = useState(free_plan);
-  const [isBasicActive, setBasicActive] = useState(true);
-
-  const setPremium = () => {
-    setPlan(premium_plan);
-    setBasicActive(false);
-  };
-
-  const setBasic = () => {
-    setPlan(basic_plan);
-    setBasicActive(true);
-  };
+  const [plan, setPlan] = useState();
+  const [price, setPrice] = useState();
+  const [planType, setPlanType] = useState();
+  const [paymentMethod, setPaymentMethod] = useState();
+  const [payCards, setPayCards] = useState([]);
 
   const stripe = useStripe();
   const elements = useElements();
 
-  const createSetupIntent = async () => {
-    let data = { customer: authState.user };
+  console.log(authState);
 
+  useEffect(() => {
+    if (location.state) {
+      let Plan = location.state.plan;
+      let Price = location.state.price;
+      let PlanType = location.state.planType;
+      setPlan(Plan);
+      setPrice(Price);
+      setPlanType(PlanType);
+    } else {
+      navigate('/purchase/plan');
+    }
+  }, [location]);
+
+  useEffect(() => {
+    return () => fetchSuccess();
+  }, []);
+
+  useEffect(() => {
+    if (authState.user) getWallet();
+  }, [authState]);
+
+  const getWallet = async () => {
+    //get customers list of available payment methods
+    let params = {
+      customer: authState.user.stripeCustomerKey
+    };
+
+    let wallet = await axios.get('/stripe/get-wallet', { params }).catch((err) => {
+      fetchFailure(err);
+    });
+
+    const cards = wallet.data.data;
+    setPayCards(cards);
+    setIcons(cards);
+    console.log(cards);
+  };
+
+  const addPaymentMethod = async (event) => {
+    event.preventDefault();
+
+    let data = { customer: authState.user };
+    //get stripe client secret
     const result = await axios.post('/stripe/wallet', data).catch((err) => {
       fetchFailure(err);
     });
 
-    setSetupIntent(result.data);
-  };
-
-  useEffect(() => {
-    if (authState.user) createSetupIntent();
-  }, [authState]);
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    fetchInit();
-
     const cardElement = elements.getElement(CardElement);
 
+    //validate customer card
     const { setupIntent, error } = await stripe
-      .confirmCardSetup(setupIntentState.client_secret, {
+      .confirmCardSetup(result.data.client_secret, {
         payment_method: { card: cardElement }
       })
       .catch((err) => {
@@ -169,20 +202,43 @@ const CheckoutForm = ({ location }) => {
       fetchFailure(error);
     }
 
-    let payment_method = setupIntent.payment_method;
+    console.log(setupIntent.payment_method);
+    getWallet();
+    setPaymentMethod(setupIntent.payment_method);
+  };
+
+  const setIcons = (brand) => {
+    switch (brand) {
+      case 'visa':
+        return <img src={visa} alt="" />;
+      case 'amex':
+        return <img src={american_express} alt="" />;
+      case 'discover':
+        return <img src={discover} alt="" />;
+      case 'mastercard':
+        return <img src={mastercard} alt="" />;
+      default:
+        return <FaRegCreditCard />;
+    }
+  };
+
+  const createSubscription = async () => {
+    fetchInit();
+
+    let payment_method = paymentMethod;
     let customer = authState.user;
     let planSelect = plan;
 
     let data = { payment_method, customer, planSelect };
 
+    //create subscription
     let result = await axios.post('/stripe/create-subscription', data).catch((err) => {
       fetchFailure(err);
     });
 
     console.log(result);
     if (result.data.status === 'active' || result.data.status === 'trialing') {
-      fetchSuccess();
-      setSuccess(true);
+      navigate('/purchase/confirm');
     } else {
       let error = {
         type: 'Stripe Confirmation Error',
@@ -201,14 +257,30 @@ const CheckoutForm = ({ location }) => {
         <Step status="process" title="Payment" icon={<LoadingOutlined />} />
         <Step status="wait" title="Done" icon={<CheckCircleOutlined />} />
       </Steps>
+      <div>
+        <h3>Purchasing {planType} Plan</h3>
+        <p>{price}/month </p>
+        <Button disabled={!paymentMethod} onClick={createSubscription}>
+          Confirm
+        </Button>
+      </div>
+      <h2>Please Choose Payment Method</h2>
+      {payCards.map((item) => (
+        <StyledCardDisplayWrapper>
+          <StyledCardDisplay onClick={() => setPaymentMethod(item.id)} key={item.id}>
+            {setIcons(item.card.brand)}
+            {item.card.brand} **** **** **** {item.card.last4} expires {item.card.exp_month}/
+            {item.card.exp_year}
+          </StyledCardDisplay>
+        </StyledCardDisplayWrapper>
+      ))}
       <CardWrapper>
-        <PlanCard setBasic={setBasic} setPremium={setPremium} isBasicActive={isBasicActive} />
         <Card>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={addPaymentMethod}>
             <CardElement />
             <ButtonWrapper>
-              <Button type="submit" disabled={!stripe && !setupIntentState}>
-                Pay
+              <Button type="submit" disabled={!stripe}>
+                Add Card
               </Button>
             </ButtonWrapper>
           </form>
