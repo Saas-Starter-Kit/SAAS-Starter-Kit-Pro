@@ -57,7 +57,9 @@ const ConfirmedEmail = ({ location }) => {
   return (
     <div>
       <div>Thank You for confirming your email, your account is setup and ready to use</div>
-      <div>Click here to navigate to the checkout page</div>
+      <div>Click here to navigate to the app as a free tier user</div>
+      <button onClick={() => navigate('/user/dashboard')}>Submit</button>
+      <div>Click here to upgrade your account</div>
       <button onClick={() => navigate('/purchase/payment')}>Submit</button>
     </div>
   );

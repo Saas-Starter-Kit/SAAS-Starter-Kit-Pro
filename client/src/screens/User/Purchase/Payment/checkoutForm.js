@@ -14,8 +14,7 @@ import {
   UserOutlined,
   SolutionOutlined,
   LoadingOutlined,
-  CheckCircleOutlined,
-  CreditCardOutlined
+  CheckCircleOutlined
 } from '@ant-design/icons';
 
 import PlanCard from './planCard';
