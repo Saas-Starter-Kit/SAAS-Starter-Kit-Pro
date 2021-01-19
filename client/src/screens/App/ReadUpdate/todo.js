@@ -2,35 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import Can from '../../../services/casl';
 import { colors } from '../../../styles/theme';
+import Button from '../../../components/Common/buttons/OriginalButton';
 
 const Wrapper = styled.div`
   padding-top: 1rem;
   padding-bottom: 1rem;
-`;
-
-const Button = styled.button`
-  padding: 0.5rem 1rem;
-  border: 1px solid transparent;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-  font-weight: 500;
-  border-radius: 0.375rem;
-  color: ${colors.white};
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  &:focus {
-    outline: 2px solid transparent;
-    outline-offset: 2px;
-  }
-  &:hover {
-    background-color: ${colors.indigo500};
-  }
-  &:active {
-    background-color: ${colors.indigo600};
-  }
-  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow,
-    transform;
-  transition-duration: 150ms;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 `;
 
 const ButtonsWrapper = styled.div`
@@ -38,12 +14,7 @@ const ButtonsWrapper = styled.div`
   padding-bottom: 1rem;
 `;
 
-const EditButton = styled(Button)`
-  background-color: ${colors.indigo600};
-`;
-
 const DeleteButton = styled(Button)`
-  background-color: ${colors.red500};
   margin-left: 1rem;
 `;
 
@@ -114,10 +85,25 @@ const Todo = ({
     <h4>{todo.title}</h4>
     <p>{todo.description}</p>
     <ButtonsWrapper>
-      <EditButton onClick={() => editTodo(todo)}>Edit</EditButton>
+      <Button
+        onClick={() => editTodo(todo)}
+        backgroundColor={colors.indigo600}
+        textColor={colors.white}
+        hoverBackgroundColor={colors.indigo500}
+        activeBackgroundColor={colors.indigo600}
+      >
+        Edit
+      </Button>
       <Can I="delete" a="Post" passThrough>
         {(allowed) => (
-          <DeleteButton disabled={!allowed} onClick={() => deleteTodo(todo)}>
+          <DeleteButton
+            disabled={!allowed}
+            onClick={() => deleteTodo(todo)}
+            backgroundColor={colors.red500}
+            textColor={colors.white}
+            hoverBackgroundColor={colors.indigo500}
+            activeBackgroundColor={colors.indigo600}
+          >
             Delete
           </DeleteButton>
         )}
