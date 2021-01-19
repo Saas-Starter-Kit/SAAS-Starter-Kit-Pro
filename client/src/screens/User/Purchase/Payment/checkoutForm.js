@@ -9,9 +9,19 @@ import styled from 'styled-components';
 
 import LoadingOverlay from '../../../../components/Common/loadingOverlay';
 
-import PlanCard from './planCard';
+import { Steps } from 'antd';
+import {
+  UserOutlined,
+  SolutionOutlined,
+  LoadingOutlined,
+  CheckCircleOutlined,
+  CreditCardOutlined
+} from '@ant-design/icons';
 
+import PlanCard from './planCard';
 import axios from '../../../../services/axios';
+
+const { Step } = Steps;
 
 const Wrapper = styled.div`
   background-color: ${colors.gray50};
@@ -97,8 +107,8 @@ const CheckoutForm = ({ location }) => {
   const { isLoading } = apiState;
 
   console.log(location);
-  let Plan = location.state.plan;
-  console.log(Plan);
+  //let Plan = location ? location.state.plan : null;
+  //console.log(Plan);
 
   const premium_plan = process.env.GATSBY_STRIPE_PREMIUM_PLAN;
   const basic_plan = process.env.GATSBY_STRIPE_BASIC_PLAN;
@@ -186,7 +196,12 @@ const CheckoutForm = ({ location }) => {
   return (
     <Wrapper>
       {isLoading && <LoadingOverlay />}
-
+      <Steps>
+        <Step status="finish" title="Login" icon={<UserOutlined />} />
+        <Step status="finish" title="Plan" icon={<SolutionOutlined />} />
+        <Step status="process" title="Payment" icon={<LoadingOutlined />} />
+        <Step status="wait" title="Done" icon={<CheckCircleOutlined />} />
+      </Steps>
       <CardWrapper>
         <PlanCard setBasic={setBasic} setPremium={setPremium} isBasicActive={isBasicActive} />
         <Card>

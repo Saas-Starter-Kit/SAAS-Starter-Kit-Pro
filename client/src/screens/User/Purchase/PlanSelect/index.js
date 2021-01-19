@@ -1,8 +1,15 @@
 import React, { useState } from 'react';
 import { Link } from 'gatsby';
 import { Steps } from 'antd';
+import {
+  UserOutlined,
+  SolutionOutlined,
+  LoadingOutlined,
+  CheckCircleOutlined,
+  CreditCardOutlined
+} from '@ant-design/icons';
+
 const { Step } = Steps;
-import { UserOutlined, SolutionOutlined, LoadingOutlined, SmileOutlined } from '@ant-design/icons';
 
 const PlanSelect = () => {
   const premium_plan = process.env.GATSBY_STRIPE_PREMIUM_PLAN;
@@ -19,9 +26,9 @@ const PlanSelect = () => {
       <div style={{ width: '80%' }}>
         <Steps>
           <Step status="finish" title="Login" icon={<UserOutlined />} />
-          <Step status="finish" title="Verification" icon={<SolutionOutlined />} />
-          <Step status="process" title="Pay" icon={<LoadingOutlined />} />
-          <Step status="wait" title="Done" icon={<SmileOutlined />} />
+          <Step status="process" title="Plan" icon={<LoadingOutlined />} />
+          <Step status="wait" title="Payment" icon={<CreditCardOutlined />} />
+          <Step status="wait" title="Done" icon={<CheckCircleOutlined />} />
         </Steps>
       </div>
       <div onClick={() => setPlan(free_plan)}>Free</div>

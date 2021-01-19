@@ -2,6 +2,15 @@ import React from 'react';
 import styled from 'styled-components';
 import { colors, breakpoints } from '../../../../styles/theme';
 import { Link } from 'gatsby';
+import { Steps } from 'antd';
+import {
+  UserOutlined,
+  SolutionOutlined,
+  CheckCircleOutlined,
+  CreditCardOutlined
+} from '@ant-design/icons';
+
+const { Step } = Steps;
 
 const Wrapper = styled.div`
   display: flex;
@@ -37,6 +46,12 @@ const Text = styled.h2`
 
 const ConfirmSub = () => (
   <Wrapper>
+    <Steps>
+      <Step status="finish" title="Login" icon={<UserOutlined />} />
+      <Step status="finish" title="Plan" icon={<SolutionOutlined />} />
+      <Step status="finish" title="Payment" icon={<CreditCardOutlined />} />
+      <Step status="finish" title="Done" icon={<CheckCircleOutlined />} />
+    </Steps>
     <Title>Your Subscription Has Been Confirmed!</Title>
     <Text>
       <Link to="/app"> Click Here to Navigate to the App</Link>
