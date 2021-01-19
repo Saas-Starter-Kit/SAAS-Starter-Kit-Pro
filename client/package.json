@@ -3,6 +3,7 @@
   "description": "A saas starter",
   "author": "Moe Iqbal",
   "dependencies": {
+    "@ant-design/icons": "^4.3.0",
     "@casl/ability": "^5.1.2",
     "@casl/react": "^2.2.1",
     "@stripe/react-stripe-js": "^1.1.2",

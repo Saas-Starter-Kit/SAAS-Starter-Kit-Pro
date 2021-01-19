@@ -8,7 +8,7 @@ import { colors, breakpoints } from '../../../../styles/theme';
 import styled from 'styled-components';
 
 import LoadingOverlay from '../../../../components/Common/loadingOverlay';
-import ConfirmSub from './confirmSubscription';
+
 import PlanCard from './planCard';
 
 import axios from '../../../../services/axios';
@@ -186,23 +186,20 @@ const CheckoutForm = ({ location }) => {
   return (
     <Wrapper>
       {isLoading && <LoadingOverlay />}
-      {!isSuccess ? (
-        <CardWrapper>
-          <PlanCard setBasic={setBasic} setPremium={setPremium} isBasicActive={isBasicActive} />
-          <Card>
-            <form onSubmit={handleSubmit}>
-              <CardElement />
-              <ButtonWrapper>
-                <Button type="submit" disabled={!stripe && !setupIntentState}>
-                  Pay
-                </Button>
-              </ButtonWrapper>
-            </form>
-          </Card>
-        </CardWrapper>
-      ) : (
-        <ConfirmSub />
-      )}
+
+      <CardWrapper>
+        <PlanCard setBasic={setBasic} setPremium={setPremium} isBasicActive={isBasicActive} />
+        <Card>
+          <form onSubmit={handleSubmit}>
+            <CardElement />
+            <ButtonWrapper>
+              <Button type="submit" disabled={!stripe && !setupIntentState}>
+                Pay
+              </Button>
+            </ButtonWrapper>
+          </form>
+        </Card>
+      </CardWrapper>
     </Wrapper>
   );
 };
