@@ -98,10 +98,11 @@ const CheckoutForm = () => {
 
   const premium_plan = process.env.GATSBY_STRIPE_PREMIUM_PLAN;
   const basic_plan = process.env.GATSBY_STRIPE_BASIC_PLAN;
+  const free_plan = process.env.GATSBY_STRIPE_BASIC_PLAN;
 
   const [setupIntentState, setSetupIntent] = useState();
   const [isSuccess, setSuccess] = useState(false);
-  const [plan, setPlan] = useState(basic_plan);
+  const [plan, setPlan] = useState(free_plan);
   const [isBasicActive, setBasicActive] = useState(true);
 
   const setPremium = () => {

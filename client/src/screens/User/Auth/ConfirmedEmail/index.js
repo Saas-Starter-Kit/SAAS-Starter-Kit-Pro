@@ -9,8 +9,6 @@ const ConfirmedEmail = ({ location }) => {
 
   //api context
 
-  console.log(location);
-
   //extract query params
   const queryParams = location.search.split('=');
   const email = queryParams[1].split('&')[0];
@@ -54,12 +52,13 @@ const ConfirmedEmail = ({ location }) => {
 
     //Login to context
     await LogIn(user);
-    navigate('/user/profile');
   };
 
   return (
     <div>
       <div>Thank You for confirming your email, your account is setup and ready to use</div>
+      <div>Click here to navigate to the checkout page</div>
+      <button onClick={() => navigate('/purchase/payment')}>Submit</button>
     </div>
   );
 };
