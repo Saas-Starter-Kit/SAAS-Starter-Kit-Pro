@@ -3,38 +3,25 @@ import styled from 'styled-components';
 import AuthContext from '../../../utils/authContext';
 import ApiContext from '../../../utils/apiContext';
 
-import { colors, breakpoints, fieldStyles } from '../../../styles/theme';
+import { colors } from '../../../styles/theme';
 import { Spin } from 'antd';
 import axios from '../../../services/axios';
 import Button from '../../../components/Common/buttons/OriginalButton';
 import Card from '../../../components/Common/Card';
+import FieldLabel from '../../../components/Common/forms/FieldLabel';
+import TextArea from '../../../components/Common/forms/TextArea';
+import TextInput from '../../../components/Common/forms/TextInput';
 
 const Title = styled.h1`
   font-size: 1.25rem;
-`;
-
-const Label = styled.label`
-  display: block;
-  font-weight: 500;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-  color: ${colors.gray700};
 `;
 
 const InputWrapper = styled.div`
   padding: 1.5rem;
 `;
 
-const Input = styled.input`
-  ${fieldStyles}
-`;
-
 const TextAreaWrapper = styled.div`
   padding: 0 1.5rem;
-`;
-
-const TextArea = styled.textarea`
-  ${fieldStyles}
 `;
 
 const ButtonWrapper = styled.div`
@@ -84,11 +71,11 @@ const CreateTask = ({ app_id }) => {
         <Card>
           <Spin tip="Loading..." spinning={isLoading}>
             <InputWrapper>
-              <Label htmlFor="title">Title</Label>
-              <Input onChange={handleTitleChange} value={formTitle} name="title" />
+              <FieldLabel htmlFor="title">Title</FieldLabel>
+              <TextInput onChange={handleTitleChange} value={formTitle} name="title" />
             </InputWrapper>
             <TextAreaWrapper>
-              <Label htmlFor="description">Description</Label>
+              <FieldLabel htmlFor="description">Description</FieldLabel>
               <TextArea onChange={handleDescChange} value={formDescription} name="description" />
             </TextAreaWrapper>
             <ButtonWrapper>

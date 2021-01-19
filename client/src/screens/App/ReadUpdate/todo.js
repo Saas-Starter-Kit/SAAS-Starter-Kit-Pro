@@ -3,6 +3,10 @@ import styled from 'styled-components';
 import Can from '../../../services/casl';
 import { colors } from '../../../styles/theme';
 import Button from '../../../components/Common/buttons/OriginalButton';
+import Card from '../../../components/Common/Card';
+import FieldLabel from '../../../components/Common/forms/FieldLabel';
+import TextArea from '../../../components/Common/forms/TextArea';
+import TextInput from '../../../components/Common/forms/TextInput';
 
 const Wrapper = styled.div`
   padding-top: 1rem;
@@ -18,24 +22,10 @@ const DeleteButton = styled(Button)`
   margin-left: 1rem;
 `;
 
-const Form = styled.form`
-  background-color: ${colors.gray50};
-  padding: 0.5rem;
-  border-radius: 0.25rem;
-`;
-
 const TitleWrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 1rem;
-`;
-
-const Label = styled.label`
-  padding-bottom: 0.5rem;
-`;
-
-const Input = styled.input`
-  padding: 0.25rem;
 `;
 
 const DescriptionWrapper = styled.div`
@@ -43,29 +33,12 @@ const DescriptionWrapper = styled.div`
   flex-direction: column;
 `;
 
-const TextArea = styled.textarea`
-  height: 6rem;
-  padding: 0.25rem;
-`;
-
 const FormButtonsWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 1rem;
+  padding: 1rem 0;
 `;
 
-const SendButton = styled.button`
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  align-self: center;
-  width: 50%;
-  padding: 0.5rem 1rem;
-  background-color: blue;
-  color: ${colors.white};
-  border: none;
-  font-weight: 500;
-  text-align: center;
-  cursor: pointer;
+const CancelButton = styled(Button)`
+  margin-left: 1rem;
 `;
 
 const Todo = ({
@@ -110,20 +83,38 @@ const Todo = ({
       </Can>
     </ButtonsWrapper>
     {isEditting && todo.todo_id === editTodoID && (
-      <Form onSubmit={(event) => putTodo(event, todo)}>
-        <TitleWrapper>
-          <Label>Title:</Label>
-          <Input onChange={handleEditTitleChange} value={editTitle} name="title" />
-        </TitleWrapper>
-        <DescriptionWrapper>
-          <Label>Description:</Label>
-          <TextArea onChange={handleEditDescChange} value={editDescription} name="description" />
-        </DescriptionWrapper>
-        <FormButtonsWrapper>
-          <SendButton type="submit">Send</SendButton>
-          <button onClick={() => setEdit(false)}>Cancel</button>
-        </FormButtonsWrapper>
-      </Form>
+      <form onSubmit={(event) => putTodo(event, todo)}>
+        <Card>
+          <TitleWrapper>
+            <FieldLabel>Title</FieldLabel>
+            <TextInput onChange={handleEditTitleChange} value={editTitle} name="title" />
+          </TitleWrapper>
+          <DescriptionWrapper>
+            <FieldLabel>Description</FieldLabel>
+            <TextArea onChange={handleEditDescChange} value={editDescription} name="description" />
+          </DescriptionWrapper>
+          <FormButtonsWrapper>
+            <Button
+              type="submit"
+              backgroundColor={colors.indigo600}
+              textColor={colors.white}
+              hoverBackgroundColor={colors.indigo500}
+              activeBackgroundColor={colors.indigo600}
+            >
+              Send
+            </Button>
+            <CancelButton
+              onClick={() => setEdit(false)}
+              backgroundColor={colors.red500}
+              textColor={colors.white}
+              hoverBackgroundColor={colors.indigo500}
+              activeBackgroundColor={colors.indigo600}
+            >
+              Cancel
+            </CancelButton>
+          </FormButtonsWrapper>
+        </Card>
+      </form>
     )}
     <hr />
   </Wrapper>
