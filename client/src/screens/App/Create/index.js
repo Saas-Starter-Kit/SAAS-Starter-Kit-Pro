@@ -7,23 +7,7 @@ import { colors, breakpoints, fieldStyles } from '../../../styles/theme';
 import { Spin } from 'antd';
 import axios from '../../../services/axios';
 import Button from '../../../components/Common/buttons/OriginalButton';
-
-const Wrapper = styled.div`
-  padding: 1.5;
-  background-color: ${colors.white};
-  margin-top: 1.25rem;
-  width: 100%;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-  overflow: hidden;
-  @media (min-width: ${breakpoints.small}) {
-    border-radius: 0.375rem;
-    padding: 1.5rem;
-  }
-
-  @media (min-width: ${breakpoints.large}) {
-    width: 75%;
-  }
-`;
+import Card from '../../../components/Common/Card';
 
 const Title = styled.h1`
   font-size: 1.25rem;
@@ -97,7 +81,7 @@ const CreateTask = ({ app_id }) => {
     <div>
       <Title>Create Todo</Title>
       <form onSubmit={postTodo}>
-        <Wrapper>
+        <Card>
           <Spin tip="Loading..." spinning={isLoading}>
             <InputWrapper>
               <Label htmlFor="title">Title</Label>
@@ -118,7 +102,7 @@ const CreateTask = ({ app_id }) => {
               </Button>
             </ButtonWrapper>
           </Spin>
-        </Wrapper>
+        </Card>
       </form>
     </div>
   );
