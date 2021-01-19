@@ -3,10 +3,10 @@ import CheckoutForm from './checkoutForm';
 import stripeConfig from '../../../../services/stripe';
 import { Elements } from '@stripe/react-stripe-js';
 
-const Purchase = () => {
+const Purchase = ({ location }) => {
   return (
     <Elements stripe={stripeConfig}>
-      <CheckoutForm />
+      <CheckoutForm location={location} />
     </Elements>
   );
 };

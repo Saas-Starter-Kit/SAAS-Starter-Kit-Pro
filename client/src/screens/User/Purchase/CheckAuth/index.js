@@ -12,7 +12,7 @@ const CheckAuth = () => {
       <Link to="/auth/login" state={{ isPaymentFlow: true }}>
         Login
       </Link>
-      <Link to="/auth/signup"> Signup</Link>
+      <Link to="/auth/signup">Signup</Link>
     </div>
   );
 };

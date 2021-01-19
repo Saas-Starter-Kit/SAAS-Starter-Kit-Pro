@@ -91,10 +91,14 @@ const Card = styled.div`
   }
 `;
 
-const CheckoutForm = () => {
+const CheckoutForm = ({ location }) => {
   const { authState } = useContext(AuthContext);
   const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
   const { isLoading } = apiState;
+
+  console.log(location);
+  let Plan = location.state.plan;
+  console.log(Plan);
 
   const premium_plan = process.env.GATSBY_STRIPE_PREMIUM_PLAN;
   const basic_plan = process.env.GATSBY_STRIPE_BASIC_PLAN;
