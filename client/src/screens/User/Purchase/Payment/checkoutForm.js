@@ -162,6 +162,8 @@ const CheckoutForm = ({ location }) => {
       customer: authState.user.stripeCustomerKey
     };
 
+    console.log(authState);
+
     let wallet = await axios.get('/stripe/get-wallet', { params }).catch((err) => {
       fetchFailure(err);
     });

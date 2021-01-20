@@ -16,26 +16,15 @@ const Card = styled.div`
   }
 `;
 
-const PaymentInformationCard = ({ subscriptionState }) => {
+const UpgradeSubscription = ({ getSubscription, subscriptionState }) => {
   return (
     <Card>
       <h2>Payment Information</h2>
+      <button onClick={getSubscription}>Retrieve Payment Information</button>
       {subscriptionState ? (
         <div>
-          <div>Billing Period Start</div>
-          <p>{moment(subscriptionState.current_period_start * 1000).format('MMM Do YYYY')}</p>
           <div>Next Payment</div>
           <p>{moment(subscriptionState.current_period_end * 1000).format('MMM Do YYYY')}</p>
-          <div>Member Since</div>
-          <p>{moment(subscriptionState.created * 1000).format('MMM Do YYYY')}</p>
-          {subscriptionState.status == 'trialing' && (
-            <div>
-              <div>Trial start</div>
-              <p>{moment(subscriptionState.trial_start * 1000).format('MMM Do YYYY')}</p>
-              <div>Trial End</div>
-              <p>{moment(subscriptionState.trial_end * 1000).format('MMM Do YYYY')}</p>
-            </div>
-          )}
         </div>
       ) : (
         <div>No Subscription Found</div>
@@ -44,4 +33,4 @@ const PaymentInformationCard = ({ subscriptionState }) => {
   );
 };
 
-export default PaymentInformationCard;
+export default UpgradeSubscription;

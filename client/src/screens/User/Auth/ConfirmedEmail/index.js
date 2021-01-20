@@ -31,7 +31,7 @@ const ConfirmedEmail = ({ location }) => {
     if (queryParams) createValidUser();
   }, []);
 
-  //after verified email, the user info is saved to stripe and sendinblue
+  //after verified email, the user info is saved to stripe
   const createValidUser = async () => {
     //fetchInit
     let userId = id;
@@ -44,7 +44,7 @@ const ConfirmedEmail = ({ location }) => {
 
     setStripeKey(stripeServerRes.data.stripe_customer_id);
 
-    //save email to sendinblue
+    //save verified email to sendinblue
     let sibData = { email, firstName };
     await axios.post('/api/post/contact', sibData).catch((err) => {
       //fetchFailure(err);

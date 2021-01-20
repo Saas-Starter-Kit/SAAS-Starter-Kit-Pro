@@ -2,6 +2,12 @@ import stripe from '../../Config/stripe.js';
 import db from '../../Database/db.js';
 import { getUser } from '../auth/authHelpers.js';
 
+export const UpdateSubscription = async (req, res) => {
+  let subscriptionId = req.body.subscription_id;
+
+  const subscription = await stripe.subscriptions.update('sub_IYmeUsSFhbsXDl');
+};
+
 export const GetSubscription = async (req, res) => {
   let email = req.query.email;
 
@@ -25,7 +31,7 @@ export const CreateSubscription = async (req, res) => {
   let customer_id = req.body.customer.stripeCustomerKey;
   let payment_method = req.body.payment_method;
   let email = req.body.customer.email;
-  let plan = req.body.planSelect;
+  let price = req.body.planSelect;
 
   // Attach the  payment method to the customer
   await stripe.paymentMethods.attach(payment_method, { customer: customer_id });
@@ -37,8 +43,8 @@ export const CreateSubscription = async (req, res) => {
 
   const subscription = await stripe.subscriptions.create({
     customer: customer_id,
-    items: [{ plan }],
-    expand: ['latest_invoice.payment_intent'],
+    items: [{ price }],
+    default_payment_method: payment_method,
     trial_period_days: 14
   });
 

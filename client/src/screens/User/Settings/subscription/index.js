@@ -36,6 +36,7 @@ const SubscriptionSettings = () => {
   useEffect(() => {
     if (authState.user) {
       setUser();
+      getSubscription();
     }
   }, [authState]);
 
@@ -99,11 +100,8 @@ const SubscriptionSettings = () => {
     <Wrapper>
       <Title>Account Settings</Title>
       {isLoading && <LoadingOverlay />}
-
-      <PaymentInformationCard
-        getSubscription={getSubscription}
-        subscriptionState={subscriptionState}
-      />
+      {console.log(subscriptionState)}
+      <PaymentInformationCard subscriptionState={subscriptionState} />
       <CancelSubscriptionCard
         setModalSub={setModalSub}
         isModalSub={isModalSub}
