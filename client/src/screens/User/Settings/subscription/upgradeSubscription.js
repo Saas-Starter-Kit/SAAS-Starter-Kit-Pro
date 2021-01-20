@@ -1,6 +1,5 @@
 import React from 'react';
-import { Button } from 'antd';
-import moment from 'moment';
+import { Link } from 'gatsby';
 import styled from 'styled-components';
 import { colors, breakpoints, fieldStyles } from '../../../../styles/theme';
 
@@ -16,19 +15,22 @@ const Card = styled.div`
   }
 `;
 
-const UpgradeSubscription = ({ getSubscription, subscriptionState }) => {
+const UpgradeSubscription = ({ subscriptionState }) => {
+  console.log(subscriptionState);
+  const subscription_id = subscriptionState.id;
+  const currentPlan = subscriptionState.plan.id;
+  const subscription_item = subscriptionState.items.data[0].id;
+  const isUpgradeFlow = true;
+
   return (
     <Card>
-      <h2>Payment Information</h2>
-      <button onClick={getSubscription}>Retrieve Payment Information</button>
-      {subscriptionState ? (
-        <div>
-          <div>Next Payment</div>
-          <p>{moment(subscriptionState.current_period_end * 1000).format('MMM Do YYYY')}</p>
-        </div>
-      ) : (
-        <div>No Subscription Found</div>
-      )}
+      <div>Click Here to change plans</div>
+      <Link
+        to="/purchase/plan"
+        state={{ subscription_id, currentPlan, isUpgradeFlow, subscription_item }}
+      >
+        Submit
+      </Link>
     </Card>
   );
 };

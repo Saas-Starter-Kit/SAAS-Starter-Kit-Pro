@@ -129,17 +129,27 @@ const CheckoutForm = ({ location }) => {
   const [planType, setPlanType] = useState();
   const [paymentMethod, setPaymentMethod] = useState();
   const [payCards, setPayCards] = useState([]);
+  const [isUpgradeFlow, setUpgradeFlow] = useState();
+  const [subscription_id, setSubscriptionId] = useState();
+  const [subscription_item, setSubscriptionItem] = useState();
 
   const stripe = useStripe();
   const elements = useElements();
 
-  console.log(authState);
+  console.log(location);
 
   useEffect(() => {
     if (location.state) {
       let Plan = location.state.plan;
       let Price = location.state.price;
       let PlanType = location.state.planType;
+      let isUpgradeFlow = location.state.isUpgradeFlow;
+      let subscription_id = location.state.subscription_id;
+      let subscription_item = location.state.subscription_item;
+
+      setUpgradeFlow(isUpgradeFlow);
+      setSubscriptionItem(subscription_item);
+      setSubscriptionId(subscription_id);
       setPlan(Plan);
       setPrice(Price);
       setPlanType(PlanType);
@@ -224,6 +234,23 @@ const CheckoutForm = ({ location }) => {
     }
   };
 
+  const updateSubscription = async () => {
+    fetchInit();
+
+    let subscriptionId = subscription_id;
+    let planSelect = plan;
+    let payment_method = paymentMethod;
+    let subscriptionItem = subscription_item;
+
+    let data = { subscriptionId, planSelect, payment_method, subscriptionItem };
+    let result = await axios.put('/stripe/update-subscription', data).catch((err) => {
+      fetchFailure(err);
+    });
+
+    console.log(result);
+    //navigate subscription update confirm
+  };
+
   const createSubscription = async () => {
     fetchInit();
 
@@ -260,9 +287,14 @@ const CheckoutForm = ({ location }) => {
         <Step status="wait" title="Done" icon={<CheckCircleOutlined />} />
       </Steps>
       <div>
-        <h3>Purchasing {planType} Plan</h3>
+        <h3>
+          {isUpgradeFlow ? <span>Changing to</span> : <span>Purchasing</span>} {planType} Plan
+        </h3>
         <p>{price}/month </p>
-        <Button disabled={!paymentMethod} onClick={createSubscription}>
+        <Button
+          disabled={!paymentMethod}
+          onClick={isUpgradeFlow ? updateSubscription : createSubscription}
+        >
           Confirm
         </Button>
       </div>

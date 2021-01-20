@@ -10,7 +10,7 @@ import styled from 'styled-components';
 
 import CancelSubscriptionCard from './cancelSubscirptionCard';
 import PaymentInformationCard from './paymentInformationCard';
-
+import UpgradeSubscription from './upgradeSubscription';
 import axios from '../../../../services/axios';
 
 const Wrapper = styled.div``;
@@ -20,6 +20,15 @@ const Title = styled.h1`
 `;
 
 const SubscriptionSettings = () => {
+  const premium_plan = process.env.GATSBY_STRIPE_PREMIUM_PLAN;
+  const basic_plan = process.env.GATSBY_STRIPE_BASIC_PLAN;
+
+  const premium_price = process.env.GATSBY_STRIPE_PREMIUM_PLAN_PRICE;
+  const basic_price = process.env.GATSBY_STRIPE_BASIC_PLAN_PRICE;
+
+  const premium_type = process.env.GATSBY_STRIPE_PREMIUM_PLAN_TYPE;
+  const basic_type = process.env.GATSBY_STRIPE_BASIC_PLAN_TYPE;
+
   const { firebase, authState } = useContext(AuthContext);
   const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
   const { isLoading } = apiState;
@@ -29,6 +38,9 @@ const SubscriptionSettings = () => {
   //stripe payment state
   const [subscriptionState, setSubscription] = useState();
   const [stripeCustomerId, setStripeId] = useState();
+  const [plan, setPlan] = useState();
+  const [planType, setPlanType] = useState();
+  const [price, setPrice] = useState();
 
   //user state
   const [id, setId] = useState();
@@ -39,6 +51,12 @@ const SubscriptionSettings = () => {
       getSubscription();
     }
   }, [authState]);
+
+  useEffect(() => {
+    if (subscriptionState) {
+      setCurrentSubscription();
+    }
+  }, [subscriptionState]);
 
   useEffect(() => {
     return () => fetchSuccess();
@@ -92,16 +110,32 @@ const SubscriptionSettings = () => {
       Helper Methods
   */
 
+  const setCurrentSubscription = () => {
+    if (subscriptionState.plan.id == premium_plan) {
+      setPlan(premium_plan);
+      setPrice(premium_price);
+      setPlanType(premium_type);
+    } else if (subscriptionState.plan.id == basic_plan) {
+      setPlan(basic_plan);
+      setPrice(basic_price);
+      setPlanType(basic_type);
+    }
+  };
+
   const handleModalSubCancel = () => {
     setModalSub(false);
   };
 
   return (
     <Wrapper>
-      <Title>Account Settings</Title>
+      <Title>Subscription Settings</Title>
       {isLoading && <LoadingOverlay />}
-      {console.log(subscriptionState)}
-      <PaymentInformationCard subscriptionState={subscriptionState} />
+      <PaymentInformationCard
+        planType={planType}
+        price={price}
+        subscriptionState={subscriptionState}
+      />
+      {subscriptionState && <UpgradeSubscription subscriptionState={subscriptionState} />}
       <CancelSubscriptionCard
         setModalSub={setModalSub}
         isModalSub={isModalSub}

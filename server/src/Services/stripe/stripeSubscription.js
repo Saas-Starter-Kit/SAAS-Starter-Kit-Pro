@@ -3,9 +3,26 @@ import db from '../../Database/db.js';
 import { getUser } from '../auth/authHelpers.js';
 
 export const UpdateSubscription = async (req, res) => {
-  let subscriptionId = req.body.subscription_id;
+  let subscription_id = req.body.subscriptionId;
+  let payment_method = req.body.payment_method;
+  let price = req.body.planSelect;
+  let id = req.body.subscriptionItem;
 
-  const subscription = await stripe.subscriptions.update('sub_IYmeUsSFhbsXDl');
+  console.log(subscription_id, payment_method, price, id);
+  const subscription = await stripe.subscriptions.update(subscription_id, {
+    default_payment_method: payment_method,
+    items: [{ id, price }]
+  });
+
+  console.log(subscription);
+  res.status(200).send(subscription);
+
+  //send confirm email
+
+  //update sub id in db ?
+
+  //optionally add a field to the database for different membership tiers
+  //see createSubscription() as an example
 };
 
 export const GetSubscription = async (req, res) => {

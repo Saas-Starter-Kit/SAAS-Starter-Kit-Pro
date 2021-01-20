@@ -1,8 +1,8 @@
 import React from 'react';
-import { Button } from 'antd';
 import moment from 'moment';
 import styled from 'styled-components';
 import { colors, breakpoints, fieldStyles } from '../../../../styles/theme';
+import { Link } from 'gatsby';
 
 const Card = styled.div`
   background-color: ${colors.white};
@@ -16,12 +16,16 @@ const Card = styled.div`
   }
 `;
 
-const PaymentInformationCard = ({ subscriptionState }) => {
+const PaymentInformationCard = ({ subscriptionState, price, planType }) => {
   return (
     <Card>
       <h2>Payment Information</h2>
       {subscriptionState ? (
         <div>
+          <div>Current Plan</div>
+          <p>
+            {planType} Plan at ${price}/month
+          </p>
           <div>Billing Period Start</div>
           <p>{moment(subscriptionState.current_period_start * 1000).format('MMM Do YYYY')}</p>
           <div>Next Payment</div>
@@ -38,7 +42,11 @@ const PaymentInformationCard = ({ subscriptionState }) => {
           )}
         </div>
       ) : (
-        <div>No Subscription Found</div>
+        <div>
+          <div>No Subscription Found</div>
+          <div>Click Here to add subscription</div>
+          <Link to="/purchase/plan">Submit</Link>
+        </div>
       )}
     </Card>
   );

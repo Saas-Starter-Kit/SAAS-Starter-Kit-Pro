@@ -15,7 +15,8 @@ import {
 import {
   CancelSubscription,
   GetSubscription,
-  CreateSubscription
+  CreateSubscription,
+  UpdateSubscription
 } from '../Services/stripe/stripeSubscription.js';
 
 /* Helper Routes */
@@ -33,6 +34,8 @@ router.get('/get-subscription', asyncHandler(GetSubscription));
 router.post('/create-subscription', asyncHandler(CreateSubscription));
 
 router.post('/cancel-subscription', asyncHandler(CancelSubscription));
+
+router.put('/update-subscription', asyncHandler(UpdateSubscription));
 
 /* Customer Routes */
 router.post('/create-customer', asyncHandler(CreateCustomer));
