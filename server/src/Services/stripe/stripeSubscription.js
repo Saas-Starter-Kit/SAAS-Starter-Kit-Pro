@@ -31,9 +31,9 @@ export const GetSubscription = async (req, res) => {
   //check if user exists
   const user = await getUser(email);
 
-  //If subscription not found send error message
+  //If subscription not found send non-error message
   if (!user.rows[0].subscription_id) {
-    res.status(400).send({ type: 'Failed Request', message: 'Subscription Not Found' });
+    res.status(200).send({ type: 'No Subscription', message: 'Subscription Not Found' });
     return;
   }
 
@@ -53,7 +53,7 @@ export const CreateSubscription = async (req, res) => {
   // Attach the  payment method to the customer
   await stripe.paymentMethods.attach(payment_method, { customer: customer_id });
 
-  // Set it as the default payment method
+  // Set it as the default payment method for the customer account
   await stripe.customers.update(customer_id, {
     invoice_settings: { default_payment_method: payment_method }
   });

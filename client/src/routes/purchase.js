@@ -10,11 +10,12 @@ const Routes = ({ location }) => {
   console.log(location);
   return (
     <Router>
-      <CheckAuth path="/purchase" />
+      <CheckAuth path="/purchase/checkauth" />
       <Payment location={location} path="/purchase/payment" />
       <PlanSelect path="/purchase/plan" />
       <ConfirmSub path="/purchase/confirm" />
       <SubscriptionExists path="/purchase/subcriptionexists" />
+      <CheckAuth path="/purchase" />
     </Router>
   );
 };

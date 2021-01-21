@@ -301,8 +301,8 @@ const CheckoutForm = ({ location }) => {
       </div>
       <h2>Please Choose Payment Method</h2>
       {payCards.map((item) => (
-        <StyledCardDisplayWrapper>
-          <StyledCardDisplay onClick={() => setPaymentMethod(item.id)} key={item.id}>
+        <StyledCardDisplayWrapper key={item.id}>
+          <StyledCardDisplay onClick={() => setPaymentMethod(item.id)}>
             {setIcons(item.card.brand)}
             {item.card.brand} **** **** **** {item.card.last4} expires {item.card.exp_month}/
             {item.card.exp_year}

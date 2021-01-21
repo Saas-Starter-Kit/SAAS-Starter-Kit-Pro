@@ -6,6 +6,7 @@ import Dashboard from '../screens/User/Dashboard';
 const Routes = () => {
   return (
     <Router>
+      <Dashboard path="/user/dashboard" />
       <AccountSettings path="/user/settings/account" />
       <PaymentSettings path="/user/settings/payment" />
       <SubscriptionSettings path="/user/settings/subscription" />

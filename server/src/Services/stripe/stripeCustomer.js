@@ -5,10 +5,12 @@ export const CreateCustomer = async (req, res) => {
   let email = req.body.email;
   let userId = req.body.userId;
 
-  check if stripe customer already exists
+  //check if stripe customer already exists
   const existingCustomers = await stripe.customers.list({
     email
   });
+
+  console.log(existingCustomers);
 
   if (existingCustomers.data.length != 0) {
     res.status(400).send({ type: 'Failed Sign Up', message: 'User Already Exists' });

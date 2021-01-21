@@ -67,7 +67,7 @@ const ConfirmedEmail = ({ location }) => {
       <div>Click here to navigate to the app as a free tier user</div>
       <button onClick={() => navigate('/user/dashboard')}>Submit</button>
       <div>Click here to add a subscription your account</div>
-      <button onClick={() => navigate('/purchase/payment')}>Submit</button>
+      <button onClick={() => navigate('/purchase/plan')}>Submit</button>
     </div>
   );
 };

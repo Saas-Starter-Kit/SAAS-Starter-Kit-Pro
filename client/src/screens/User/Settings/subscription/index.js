@@ -85,7 +85,7 @@ const SubscriptionSettings = () => {
       fetchFailure(err);
     });
 
-    setSubscription(subscription.data);
+    if (subscription.data.plan.id) setSubscription(subscription.data);
   };
 
   const cancelSubscription = async () => {
@@ -129,6 +129,7 @@ const SubscriptionSettings = () => {
   return (
     <Wrapper>
       <Title>Subscription Settings</Title>
+      {console.log(subscriptionState)}
       {isLoading && <LoadingOverlay />}
       <PaymentInformationCard
         planType={planType}
