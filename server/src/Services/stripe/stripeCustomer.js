@@ -5,7 +5,7 @@ export const CreateCustomer = async (req, res) => {
   let email = req.body.email;
   let userId = req.body.userId;
 
-  //check if stripe customer already exists
+  check if stripe customer already exists
   const existingCustomers = await stripe.customers.list({
     email
   });

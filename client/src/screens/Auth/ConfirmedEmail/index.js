@@ -7,7 +7,6 @@ import { navigate } from 'gatsby';
 
 const ConfirmedEmail = ({ location }) => {
   const { authState, firebase, LogIn } = useContext(AuthContext);
-  const [stripeCustomerKey, setStripeKey] = useState('');
   const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
   const { isLoading } = apiState;
 
@@ -22,7 +21,7 @@ const ConfirmedEmail = ({ location }) => {
   const username = `${name[0]} ${name[1]}`;
   const photo = null;
 
-  const user = { email, username, id, photo, provider, stripeCustomerKey };
+  let user = { email, username, id, photo, provider };
 
   useEffect(() => {
     return () => fetchSuccess();
@@ -44,13 +43,15 @@ const ConfirmedEmail = ({ location }) => {
         console.log(err);
       });
 
-    setStripeKey(stripeServerRes.data.stripe_customer_id);
-
     //save verified email to sendinblue
     let sibData = { email, firstName };
     await axios.post('/api/post/contact', sibData).catch((err) => {
       //fetchFailure(err);
     });
+
+    let stripeCustomerKey = { stripeCustomerKey: stripeServerRes.data.stripe_customer_id };
+
+    user = { ...user, ...stripeCustomerKey };
 
     console.log(user);
 
