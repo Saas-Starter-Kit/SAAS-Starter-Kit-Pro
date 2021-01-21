@@ -54,7 +54,8 @@ const ConfirmSub = () => (
     </Steps>
     <Title>Your Subscription Has Been Confirmed!</Title>
     <Text>
-      <Link to="/app"> Click Here to Navigate to the App</Link>
+      <h1>Please sign in again to complete the process</h1>
+      {/*<Link to="/app"> Click Here to Navigate to the App</Link>*/}
     </Text>
   </Wrapper>
 );

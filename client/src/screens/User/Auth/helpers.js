@@ -5,7 +5,7 @@ import { navigate } from 'gatsby';
 import * as Yup from 'yup';
 import axios from '../../../services/axios';
 
-export const LoginAuth = async (authRes, LogIn, firebase, fetchFailure) => {
+export const LoginAuth = async (authRes, LogIn, firebase, fetchFailure, isPaymentFlow) => {
   console.log(authRes);
 
   //Get Auth id token from Firebase
@@ -26,13 +26,13 @@ export const LoginAuth = async (authRes, LogIn, firebase, fetchFailure) => {
   let validToken = isValidToken(authServerRes.data.token, fetchFailure);
   let userId = validToken.user;
 
-  console.log(userId);
+  console.log(authServerRes);
 
-  LogintoContext(userId, authRes, authServerRes, LogIn);
+  LogintoContext(userId, authRes, authServerRes, LogIn, isPaymentFlow);
 };
 
 //Save user Info to Context
-export const LogintoContext = async (user_id, authRes, stripeKey, LogIn) => {
+export const LogintoContext = async (user_id, authRes, authServerRes, LogIn, isPaymentFlow) => {
   console.log(authRes);
 
   let email = authRes.user.email;
@@ -40,7 +40,8 @@ export const LogintoContext = async (user_id, authRes, stripeKey, LogIn) => {
   let id = user_id;
   let photo = authRes.user.photoURL;
   let provider = authRes.user.providerData[0].providerId;
-  let stripeCustomerKey = stripeKey.data.stripe_customer_id;
+  let stripeCustomerKey = authServerRes.data.stripe_customer_id;
+  let subscription_id = authServerRes.data.subscription_id;
 
   let user = {
     email,
@@ -48,14 +49,19 @@ export const LogintoContext = async (user_id, authRes, stripeKey, LogIn) => {
     id,
     photo,
     provider,
-    stripeCustomerKey
+    stripeCustomerKey,
+    subscription_id
   };
 
   console.log(user);
 
   await LogIn(user);
 
-  navigate('/user/profile');
+  if (isPaymentFlow) {
+    navigate('/purchase/plan');
+  } else {
+    navigate('/user/dashboard');
+  }
 };
 
 export const SignupAuth = async (authRes, firebase, fetchFailure, name, domainUrl) => {

@@ -158,19 +158,23 @@ const StyledSpan = styled.span`
   padding: 0 0.7rem;
 `;
 
-const Login = () => {
+const Login = ({ location }) => {
   const { firebase, LogIn, LogOut } = useContext(AuthContext);
   const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
   const { isLoading } = apiState;
+  let isPaymentFlow;
+  console.log(location);
 
   useEffect(() => {
     return () => fetchSuccess();
   }, []);
 
+  useEffect(() => {
+    if (location.state) isPaymentFlow = location.state.isPaymentFlow;
+  }, [location]);
+
   const handleSubmit = async (values) => {
     fetchInit();
-    console.log(values);
-
     let email = values.email;
     let password = values.password;
 
@@ -181,7 +185,7 @@ const Login = () => {
         fetchFailure(error);
       });
 
-    LoginAuth(authRes, LogIn, firebase, fetchFailure);
+    LoginAuth(authRes, LogIn, firebase, fetchFailure, isPaymentFlow);
   };
 
   //Google OAuth2 Signin
@@ -196,7 +200,7 @@ const Login = () => {
         fetchFailure(error);
       });
 
-    LoginAuth(authRes, LogIn, firebase, fetchFailure);
+    LoginAuth(authRes, LogIn, firebase, fetchFailure, isPaymentFlow);
   };
 
   return (

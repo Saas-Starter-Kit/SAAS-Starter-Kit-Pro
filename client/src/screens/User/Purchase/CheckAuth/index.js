@@ -13,9 +13,16 @@ const { Step } = Steps;
 
 const CheckAuth = () => {
   const { authState } = useContext(AuthContext);
+  console.log(authState);
 
   useEffect(() => {
-    //if (authState.isAuthenticated) navigate('/purchase/plan');
+    if (authState.user) {
+      if (!authState.user.subscription_id) {
+        navigate('/purchase/subcriptionexists');
+      }
+    } else if (authState.isAuthenticated) {
+      navigate('/purchase/plan');
+    }
   }, [authState]);
 
   return (

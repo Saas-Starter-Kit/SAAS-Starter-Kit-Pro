@@ -248,7 +248,7 @@ const CheckoutForm = ({ location }) => {
     });
 
     console.log(result);
-    //navigate subscription update confirm
+    navigate('/purchase/confirm');
   };
 
   const createSubscription = async () => {
