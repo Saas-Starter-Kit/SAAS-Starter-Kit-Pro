@@ -2,8 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import ScrollBar from 'react-perfect-scrollbar';
 import 'react-perfect-scrollbar/dist/css/styles.css';
-import { Layout, Menu } from 'antd';
-import { HomeOutlined, UserOutlined, FolderOutlined } from '@ant-design/icons';
+import { Layout, Menu, Switch } from 'antd';
+import { HomeOutlined, UserOutlined, FolderOutlined, BulbOutlined } from '@ant-design/icons';
 import { Link } from 'gatsby';
 import LargeLogo from '../../Common/LargeLogo';
 import { THEMES } from '../AppLayout';
@@ -36,6 +36,16 @@ const getMenus = (app_id) => [
   }
 ];
 
+const StyledSider = styled(Layout.Sider)`
+  box-shadow: fade(${colors.doveGray}, 10%) 0 0 28px 0;
+  z-index: 10;
+  .ant-layout-sider-children {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+`;
+
 const LogoWrapper = styled.div`
   display: flex;
   justify-content: center;
@@ -65,10 +75,8 @@ const SidebarItems = styled.div`
     }
   }
 
-  :global {
-    .ant-menu-inline {
-      border-right: none;
-    }
+  .ant-menu-inline {
+    border-right: none;
   }
 `;
 
@@ -80,11 +88,42 @@ const ItemWrapper = styled.div`
   font-size: 13px;
 `;
 
+const Footer = styled.div`
+  width: 100%;
+  height: 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px;
+  overflow: hidden;
+  transition: all 0.3s;
+
+  span {
+    white-space: nowrap;
+    overflow: hidden;
+    font-size: 12px;
+  }
+
+  .anticon {
+    min-width: 14px;
+    margin-right: 4px;
+    font-size: 14px;
+  }
+`;
+
+const Bulb = styled(BulbOutlined)`
+  color: ${colors.doveGray};
+`;
+
+const Span = styled.span`
+  color: ${colors.doveGray};
+`;
+
 const SidebarDesktop = ({ theme, toggleTheme, app_id, location }) => {
   const menus = getMenus(app_id);
   const selectedKey = menus.find((menu) => menu.route === location.pathname);
   return (
-    <Layout.Sider
+    <StyledSider
       width={256}
       theme={theme}
       breakpoint="lg"
@@ -114,7 +153,19 @@ const SidebarDesktop = ({ theme, toggleTheme, app_id, location }) => {
           </Menu>
         </ScrollBar>
       </SidebarItems>
-    </Layout.Sider>
+      <Footer>
+        <span>
+          <Bulb />
+          <Span theme={theme}>Switch Theme</Span>
+        </span>
+        <Switch
+          onChange={toggleTheme}
+          defaultChecked={theme === THEMES.DARK}
+          checkedChildren={'Dark'}
+          unCheckedChildren={'Light'}
+        />
+      </Footer>
+    </StyledSider>
   );
 };
 

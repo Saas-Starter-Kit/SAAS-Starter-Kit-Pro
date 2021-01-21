@@ -51,6 +51,8 @@ const Layout = ({ children, app_id, location }) => {
   const mobileMenuHandler = () => (mobileMenu ? toggleMobileMenu(false) : toggleMobileMenu(true));
 
   const [theme, setTheme] = useState(THEMES.LIGHT);
+  const themeHandler = () =>
+    theme === THEMES.LIGHT ? setTheme(THEMES.DARK) : setTheme(THEMES.LIGHT);
 
   return (
     <Wrapper>
@@ -59,9 +61,7 @@ const Layout = ({ children, app_id, location }) => {
           app_id={app_id}
           sidebarHandler={sidebarHandler}
           theme={theme}
-          toggleTheme={() => {
-            theme === THEMES.LIGHT ? setTheme(THEMES.DARK) : setTheme(THEMES.LIGHT);
-          }}
+          toggleTheme={themeHandler}
           location={location}
         />
       ) : (
