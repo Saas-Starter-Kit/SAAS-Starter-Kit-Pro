@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import styled from 'styled-components';
 import { colors, breakpoints } from '../../../styles/theme';
-import { Link } from 'gatsby';
+import AuthContext from '../../../utils/authContext';
+import { Link, navigate } from 'gatsby';
 import { Steps } from 'antd';
 import {
   UserOutlined,
@@ -44,21 +45,36 @@ const Text = styled.h2`
   font-size: 1.2rem;
 `;
 
-const ConfirmSub = () => (
-  <Wrapper>
-    <Steps>
-      <Step status="finish" title="Login" icon={<UserOutlined />} />
-      <Step status="finish" title="Plan" icon={<SolutionOutlined />} />
-      <Step status="finish" title="Payment" icon={<CreditCardOutlined />} />
-      <Step status="finish" title="Done" icon={<CheckCircleOutlined />} />
-    </Steps>
-    <Title>Your Subscription Has Been Confirmed!</Title>
-    <Text>
-      <h1>Please sign in again to complete the process</h1>
-      {/*logout*/}
-      {/*<Link to="/app"> Click Here to Navigate to the App</Link>*/}
-    </Text>
-  </Wrapper>
-);
+const ConfirmSub = () => {
+  const { LogOut } = useContext(AuthContext);
+
+  const LogoutUser = () => {
+    setTimeout(() => LogOut(), 3800);
+    setTimeout(() => navigate('/auth/login'), 4200);
+  };
+
+  useEffect(() => {
+    LogoutUser();
+  }, []);
+
+  return (
+    <Wrapper>
+      <Steps>
+        <Step status="finish" title="Login" icon={<UserOutlined />} />
+        <Step status="finish" title="Plan" icon={<SolutionOutlined />} />
+        <Step status="finish" title="Payment" icon={<CreditCardOutlined />} />
+        <Step status="finish" title="Done" icon={<CheckCircleOutlined />} />
+      </Steps>
+      <Title>Your Subscription Has Been Confirmed!</Title>
+      <Text>
+        <h1>Please sign in again to complete the process</h1>
+        <div>
+          Click below to navigate to the login screen or wait 4 seconds for automatic redirect
+        </div>
+        <button onClick={LogoutUser}>Click Here</button>
+      </Text>
+    </Wrapper>
+  );
+};
 
 export default ConfirmSub;

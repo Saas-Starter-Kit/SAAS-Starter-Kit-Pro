@@ -53,8 +53,11 @@ export const LogintoContext = async (user_id, authRes, authServerRes, LogIn, isP
 
   await LogIn(user);
 
-  if (isPaymentFlow) {
+  //if is payment flow navigate to correct route
+  if (isPaymentFlow && !subscription_id) {
     navigate('/purchase/plan');
+  } else if (isPaymentFlow && subscription_id) {
+    navigate('/purchase/subcriptionexists');
   } else {
     navigate('/user/dashboard');
   }
