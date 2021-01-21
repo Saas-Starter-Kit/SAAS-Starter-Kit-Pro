@@ -11,8 +11,7 @@ export const getRole = async (req, res) => {
         a.app_id,
         a.app_name,
         r.user_id,
-        r.is_admin, 
-        r.is_user
+        r.role
       FROM
         app a
       INNER JOIN roles r 
@@ -29,12 +28,12 @@ export const getRole = async (req, res) => {
 export const postRole = async (req, res) => {
   let app_id = req.body.app_id;
   let user_id = req.body.user_id;
-  let is_admin = req.body.is_admin;
-  let is_user = req.body.is_user;
+  let role = req.body.role;
+  console.log(app_id, user_id, role);
 
-  let text = `INSERT INTO roles(app_id, user_id, is_admin, is_user)
-              VALUES ($1, $2, $3, $4)`;
-  let values = [app_id, user_id, is_admin, is_user];
+  let text = `INSERT INTO roles(app_id, user_id, role)
+              VALUES ($1, $2, $3)`;
+  let values = [app_id, user_id, role];
 
   let queryResult = await db.query(text, values);
   res.send(queryResult.rows);

@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
+import AuthContext from '../../../utils/authContext';
 import axios from '../../../services/axios';
-import { Link } from '@reach/router';
+import { Link } from 'gatsby';
 
 const Card = styled.div`
   display: flex;
@@ -12,10 +13,18 @@ const Card = styled.div`
 `;
 
 const Dashboard = () => {
+  const { authState } = useContext(AuthContext);
   const [apps, setApps] = useState();
 
+  console.log(authState);
+  useEffect(() => {
+    if (authState.user) {
+      getApps();
+    }
+  }, [authState]);
+
   const getApps = async () => {
-    let user_id = 1;
+    let user_id = authState.user.id;
 
     let params = {
       user_id
@@ -47,17 +56,15 @@ const Dashboard = () => {
     console.log(result);
 
     //returning ID
-    //createRole
+    //createRole extract out
     let app_id = result.data[0].app_id;
-    let user_id = 1;
-    let is_admin = true;
-    let is_user = false;
+    let user_id = authState.user.id;
+    let role = 'admin';
 
     let data2 = {
       app_id,
       user_id,
-      is_admin,
-      is_user
+      role
     };
 
     const result2 = await axios.post(`/api/post/role`, data2).catch((err) => {

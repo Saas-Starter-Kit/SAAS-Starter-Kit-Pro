@@ -10,8 +10,7 @@ export const getApp = async (req, res) => {
         a.app_id,
         a.app_name,
         r.user_id,
-        r.is_admin, 
-        r.is_user
+        r.role
       FROM
         app a
       INNER JOIN roles r 
@@ -34,20 +33,6 @@ export const postApp = async (req, res) => {
               VALUES ($1)
               RETURNING app_id`;
   let values = [name];
-
-  let queryResult = await db.query(text, values);
-  res.send(queryResult.rows);
-};
-
-export const putApp = async (req, res) => {
-  let title = req.body.title;
-  let description = req.body.description;
-  let author = req.body.author;
-  let todo_id = req.body.todo_id;
-
-  let text = `UPDATE todos SET title= $1, description=$2, author=$3
-              WHERE todo_id = $4`;
-  let values = [title, description, author, todo_id];
 
   let queryResult = await db.query(text, values);
   res.send(queryResult.rows);

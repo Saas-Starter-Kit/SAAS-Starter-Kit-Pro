@@ -3,16 +3,6 @@ import Can from '../../../services/casl';
 import { updateRole } from '../../../utils/caslAbility';
 import CaslContext from '../../../utils/caslContext';
 
-const userRole = {
-  is_user: true,
-  is_admin: false
-};
-
-const adminRole = {
-  is_user: false,
-  is_admin: true
-};
-
 const Permissions = () => {
   const ability = useContext(CaslContext);
   const [isAdmin, setAdmin] = useState(true);
@@ -20,15 +10,15 @@ const Permissions = () => {
   const roleHandler = () => {
     if (isAdmin) {
       setAdmin(false);
-      updateRole(ability, userRole);
+      updateRole(ability, 'user');
     } else {
       setAdmin(true);
-      updateRole(ability, adminRole);
+      updateRole(ability, 'admin');
     }
   };
 
   useEffect(() => {
-    updateRole(ability, adminRole);
+    updateRole(ability, 'admin');
   }, []);
 
   return (

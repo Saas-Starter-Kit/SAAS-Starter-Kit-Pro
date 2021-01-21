@@ -21,8 +21,8 @@ export const PrivateRoute = ({ component: Component, location, app_id, ...rest }
   }
 };
 
-export const getRole = async (app_id, ability) => {
-  let user_id = 1;
+export const getRole = async (app_id, ability, authState) => {
+  let user_id = authState.user.id;
 
   let params = {
     user_id,
@@ -39,23 +39,11 @@ export const getRole = async (app_id, ability) => {
     //navigate to 403 page
   }
 
-  let user = result.data[0];
-
-  let role = {
-    is_user: user.is_user,
-    is_admin: user.is_admin
-  };
+  let role = result.data[0];
 
   updateRole(ability, role);
 };
 
-//Use for Local testing, subsitute in for the role variable in updateRole()
-const userRole = {
-  is_user: true,
-  is_admin: false
-};
-
-const adminRole = {
-  is_user: false,
-  is_admin: true
-};
+//Use for Local testing of permissions, subsitute in for the role variable in updateRole()
+//let userRole= 'user'
+//let adminRole = 'admin'

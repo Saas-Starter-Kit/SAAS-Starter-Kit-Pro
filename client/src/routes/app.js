@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Router } from '@reach/router';
 
+import AuthContext from '../utils/authContext';
 import CaslContext from '../utils/caslContext';
 import { getRole } from './helpers';
 
@@ -13,12 +14,13 @@ import Layout from '../components/App/AppLayout';
 const Routes = ({ location }) => {
   const [apps, setApps] = useState();
   const ability = useContext(CaslContext);
+  const { authState } = useContext(AuthContext);
   const splitPath = location.pathname.split('/');
   const app_id = splitPath[2];
 
   useEffect(() => {
-    //if (app_id) getRole(app_id, ability);
-  }, [app_id]);
+    if (authState.user) getRole(app_id, ability, authState);
+  }, [authState]);
 
   return (
     <Layout app_id={app_id}>
