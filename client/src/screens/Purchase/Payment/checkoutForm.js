@@ -162,8 +162,10 @@ const CheckoutForm = ({ location }) => {
   }, []);
 
   useEffect(() => {
-    if (authState.user) getWallet();
+    //if (authState.user) getWallet();
   }, [authState]);
+
+  console.log(authState.user);
 
   const getWallet = async () => {
     //get customers list of available payment methods

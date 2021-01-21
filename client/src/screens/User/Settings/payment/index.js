@@ -58,7 +58,6 @@ const PaymentSettings = () => {
     let id = authState.user.id;
 
     setId(id);
-
     setStripeId(stripeCustomerId);
   };
 

@@ -5,8 +5,8 @@ import { SignUp, Login, PasswordReset, EmailConfirm, ConfirmedEmail } from '../s
 const Routes = ({ location }) => {
   return (
     <Router>
+      <Login location={location} path="/auth" />
       <SignUp path="/auth/signup" />
-      <Login location={location} path="/auth/login" />
       <PasswordReset path="/auth/passwordreset" />
       <EmailConfirm path="/auth/emailconfirm" />
       <ConfirmedEmail location={location} path="/auth/confirmedemail" />

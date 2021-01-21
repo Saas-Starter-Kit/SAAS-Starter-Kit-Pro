@@ -1,14 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react';
 import AuthContext from '../../../utils/authContext';
+import ApiContext from '../../../utils/apiContext';
 import axios from '../../../services/axios';
-
+import LoadingOverlay from '../../../components/Common/loadingOverlay';
 import { navigate } from 'gatsby';
 
 const ConfirmedEmail = ({ location }) => {
   const { authState, firebase, LogIn } = useContext(AuthContext);
-  const [stripeKey, setStripeKey] = useState('');
-
-  //api context
+  const [stripeCustomerKey, setStripeKey] = useState('');
+  const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
+  const { isLoading } = apiState;
 
   //extract query params
   const queryParams = location.search.split('=');
@@ -21,26 +22,26 @@ const ConfirmedEmail = ({ location }) => {
   const username = `${name[0]} ${name[1]}`;
   const photo = null;
 
-  const user = { email, username, id, photo, provider, stripeKey };
-  console.log(user);
+  const user = { email, username, id, photo, provider, stripeCustomerKey };
 
   useEffect(() => {
-    //fetchSuccess
+    return () => fetchSuccess();
   }, []);
 
   useEffect(() => {
-    if (queryParams) createValidUser();
+    createValidUser();
   }, []);
 
   //after verified email, the user info is saved to stripe
   const createValidUser = async () => {
-    //fetchInit
+    fetchInit();
     let userId = id;
     let stripeApiData = { userId, email };
     let stripeServerRes = await axios
       .post('/stripe/create-customer', stripeApiData)
       .catch((err) => {
         //fetchFailure(err);
+        console.log(err);
       });
 
     setStripeKey(stripeServerRes.data.stripe_customer_id);
@@ -51,16 +52,20 @@ const ConfirmedEmail = ({ location }) => {
       //fetchFailure(err);
     });
 
+    console.log(user);
+
     //Login to context
     await LogIn(user);
+    fetchSuccess();
   };
 
   return (
     <div>
+      {isLoading && <LoadingOverlay />}
       <div>Thank You for confirming your email, your account is setup and ready to use</div>
       <div>Click here to navigate to the app as a free tier user</div>
       <button onClick={() => navigate('/user/dashboard')}>Submit</button>
-      <div>Click here to upgrade your account</div>
+      <div>Click here to add a subscription your account</div>
       <button onClick={() => navigate('/purchase/payment')}>Submit</button>
     </div>
   );

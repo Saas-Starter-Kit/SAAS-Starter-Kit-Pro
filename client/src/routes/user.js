@@ -9,7 +9,7 @@ const Routes = () => {
       <AccountSettings path="/user/settings/account" />
       <PaymentSettings path="/user/settings/payment" />
       <SubscriptionSettings path="/user/settings/subscription" />
-      <Dashboard path="/user/dashboard" />
+      <Dashboard path="/user" />
     </Router>
   );
 };
