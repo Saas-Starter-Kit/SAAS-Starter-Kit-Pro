@@ -3,7 +3,7 @@
   "description": "A saas starter",
   "author": "Moe Iqbal",
   "dependencies": {
-    "@ant-design/icons": "^4.3.0",
+    "@ant-design/icons": "^4.4.0",
     "@casl/ability": "^5.1.2",
     "@casl/react": "^2.2.1",
     "@stripe/react-stripe-js": "^1.1.2",
@@ -39,6 +39,7 @@
     "react-instantsearch": "^6.8.2",
     "react-instantsearch-dom": "^6.8.2",
     "react-particles-js": "^3.4.1",
+    "react-perfect-scrollbar": "^1.5.8",
     "react-scrollspy": "^3.4.3",
     "react-stickynode": "^3.0.4",
     "react-syntax-highlighter": "^15.4.3",

@@ -6,6 +6,11 @@ import SidebarIcons from '../Navigation/sidebarIcons';
 import MobileHeader from '../Navigation/mobileHeader';
 import { colors } from '../../../styles/theme';
 
+export const THEMES = {
+  LIGHT: 'light',
+  DARK: 'dark'
+};
+
 const Wrapper = styled.div`
   background-color: ${colors.gray100};
   overflow: hidden;
@@ -38,17 +43,27 @@ const ContentWrapper = styled.div`
   margin-right: 3.5rem;
 `;
 
-const Layout = ({ children, app_id }) => {
+const Layout = ({ children, app_id, location }) => {
   const [isSidebar, toggleSidebar] = useState(true);
   const sidebarHandler = () => (isSidebar ? toggleSidebar(false) : toggleSidebar(true));
 
   const [mobileMenu, toggleMobileMenu] = useState(false);
   const mobileMenuHandler = () => (mobileMenu ? toggleMobileMenu(false) : toggleMobileMenu(true));
 
+  const [theme, setTheme] = useState(THEMES.LIGHT);
+
   return (
     <Wrapper>
       {isSidebar ? (
-        <SidebarDesktop app_id={app_id} sidebarHandler={sidebarHandler} />
+        <SidebarDesktop
+          app_id={app_id}
+          sidebarHandler={sidebarHandler}
+          theme={theme}
+          toggleTheme={() => {
+            theme === THEMES.LIGHT ? setTheme(THEMES.DARK) : setTheme(THEMES.LIGHT);
+          }}
+          location={location}
+        />
       ) : (
         <SidebarIcons app_id={app_id} sidebarHandler={sidebarHandler} />
       )}
