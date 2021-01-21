@@ -1,17 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
-import { colors, breakpoints } from '../../../../styles/theme';
-import { Link } from 'gatsby';
+import { colors, breakpoints } from '../../../styles/theme';
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin-top: -7rem;
   @media (min-width: ${breakpoints.small}) {
     margin-left: auto;
     margin-right: auto;
     width: 100%;
-    max-width: 32rem;
+    max-width: 28rem;
   }
 `;
 
@@ -31,22 +31,11 @@ const Title = styled.h2`
   line-height: 2.25rem;
 `;
 
-const AltText = styled.div`
-  text-align: center;
-  margin-top: -1rem;
-  margin-bottom: 2rem;
-  color: ${colors.gray500};
-`;
-
-const SignupFormHeader = () => (
+const ResetFormHeader = () => (
   <Wrapper>
     <Image src="https://tailwindui.com/img/logos/v1/workflow-mark-on-white.svg" alt="Workflow" />
-    <Title>Sign-Up for an Account</Title>
-
-    <AltText>
-      <Link to="/auth/login">Already Have an Account? Login here</Link>
-    </AltText>
+    <Title>Enter In Email to reset Password</Title>
   </Wrapper>
 );
 
-export default SignupFormHeader;
+export default ResetFormHeader;

@@ -1,6 +1,6 @@
 import React, { useEffect, useContext } from 'react';
 import { Link, navigate } from 'gatsby';
-import AuthContext from '../../../../utils/authContext';
+import AuthContext from '../../../utils/authContext';
 import { Steps } from 'antd';
 import {
   SolutionOutlined,

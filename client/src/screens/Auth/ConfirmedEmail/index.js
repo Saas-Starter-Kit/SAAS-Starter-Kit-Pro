@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
-import AuthContext from '../../../../utils/authContext';
-import axios from '../../../../services/axios';
+import AuthContext from '../../../utils/authContext';
+import axios from '../../../services/axios';
+
 import { navigate } from 'gatsby';
 
 const ConfirmedEmail = ({ location }) => {

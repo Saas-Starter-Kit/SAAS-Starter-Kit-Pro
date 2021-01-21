@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Formik } from 'formik';
-import AuthContext from '../../../../utils/authContext';
-import ApiContext from '../../../../utils/apiContext';
+import AuthContext from '../../../utils/authContext';
+import ApiContext from '../../../utils/apiContext';
 import { ValidSchema, SignupAuth } from '../helpers';
-import LoadingOverlay from '../../../../components/Common/loadingOverlay';
-import { colors, breakpoints, fieldStyles } from '../../../../styles/theme';
+import LoadingOverlay from '../../../components/Common/loadingOverlay';
+import { colors, breakpoints, fieldStyles } from '../../../styles/theme';
 import SignUpFormHeader from './signupFormHeader';
 import GoogleButton from 'react-google-button';
 import { useStaticQuery, graphql } from 'gatsby';

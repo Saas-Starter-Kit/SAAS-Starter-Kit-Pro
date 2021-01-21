@@ -1,9 +1,7 @@
-import { useContext } from 'react';
-import apiContext from '../../../utils/apiContext';
 import jwt_decode from 'jwt-decode';
 import { navigate } from 'gatsby';
 import * as Yup from 'yup';
-import axios from '../../../services/axios';
+import axios from '../../services/axios';
 
 export const LoginAuth = async (authRes, LogIn, firebase, fetchFailure, isPaymentFlow) => {
   console.log(authRes);
@@ -52,8 +50,6 @@ export const LogintoContext = async (user_id, authRes, authServerRes, LogIn, isP
     stripeCustomerKey,
     subscription_id
   };
-
-  console.log(user);
 
   await LogIn(user);
 

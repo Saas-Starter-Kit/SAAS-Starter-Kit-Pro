@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'gatsby';
 import styled from 'styled-components';
-import { colors } from '../../../../styles/theme';
+import { colors } from '../../../styles/theme';
 import { Steps } from 'antd';
 import {
   UserOutlined,

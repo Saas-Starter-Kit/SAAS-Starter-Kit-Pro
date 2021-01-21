@@ -3,12 +3,12 @@ import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Formik } from 'formik';
 import { Link } from 'gatsby';
-import AuthContext from '../../../../utils/authContext';
-import ApiContext from '../../../../utils/apiContext';
+import AuthContext from '../../../utils/authContext';
+import ApiContext from '../../../utils/apiContext';
 import { ValidSchema, LoginAuth } from '../helpers';
 
-import LoadingOverlay from '../../../../components/Common/loadingOverlay';
-import { colors, breakpoints, fieldStyles } from '../../../../styles/theme';
+import LoadingOverlay from '../../../components/Common/loadingOverlay';
+import { colors, breakpoints, fieldStyles } from '../../../styles/theme';
 import LoginFormHeader from './loginFormHeader';
 import GoogleButton from 'react-google-button';
 

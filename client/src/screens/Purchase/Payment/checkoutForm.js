@@ -1,18 +1,20 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 
-import AuthContext from '../../../../utils/authContext';
-import ApiContext from '../../../../utils/apiContext';
+import AuthContext from '../../../utils/authContext';
+import ApiContext from '../../../utils/apiContext';
 
-import { colors, breakpoints } from '../../../../styles/theme';
+import { colors, breakpoints } from '../../../styles/theme';
 import styled from 'styled-components';
 import { FaRegCreditCard } from 'react-icons/fa';
-import LoadingOverlay from '../../../../components/Common/loadingOverlay';
+import LoadingOverlay from '../../../components/Common/loadingOverlay';
+import axios from '../../../services/axios';
+import { navigate } from 'gatsby';
 
-import visa from '../../../../assets/images/credit card icons/visa.png';
-import discover from '../../../../assets/images/credit card icons/discover.png';
-import mastercard from '../../../../assets/images/credit card icons/mastercard.png';
-import american_express from '../../../../assets/images/credit card icons/american_express.png';
+import visa from '../../../assets/images/credit card icons/visa.png';
+import discover from '../../../assets/images/credit card icons/discover.png';
+import mastercard from '../../../assets/images/credit card icons/mastercard.png';
+import american_express from '../../../assets/images/credit card icons/american_express.png';
 
 import { Steps } from 'antd';
 import {
@@ -21,9 +23,6 @@ import {
   LoadingOutlined,
   CheckCircleOutlined
 } from '@ant-design/icons';
-
-import axios from '../../../../services/axios';
-import { navigate } from 'gatsby';
 
 const { Step } = Steps;
 

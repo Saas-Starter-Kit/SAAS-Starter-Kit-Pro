@@ -1,6 +1,6 @@
 import React from 'react';
 import CheckoutForm from './checkoutForm';
-import stripeConfig from '../../../../services/stripe';
+import stripeConfig from '../../../services/stripe';
 import { Elements } from '@stripe/react-stripe-js';
 
 const Purchase = ({ location }) => {

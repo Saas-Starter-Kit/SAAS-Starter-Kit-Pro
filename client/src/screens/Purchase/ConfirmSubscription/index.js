@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { colors, breakpoints } from '../../../../styles/theme';
+import { colors, breakpoints } from '../../../styles/theme';
 import { Link } from 'gatsby';
 import { Steps } from 'antd';
 import {
