@@ -2,8 +2,7 @@ import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 import AuthContext from '../../../utils/authContext';
 import ApiContext from '../../../utils/apiContext';
-import Can from '../../../services/casl';
-import CaslContext from '../../../utils/caslContext';
+
 import { colors, breakpoints, fieldStyles } from '../../../styles/theme';
 import { Spin } from 'antd';
 import axios from '../../../services/axios';
@@ -87,14 +86,10 @@ const Button = styled.button`
 `;
 
 const CreateTask = ({ app_id }) => {
-  const ability = useContext(CaslContext);
   const [formTitle, setTitle] = useState('');
   const [formDescription, setDescription] = useState('');
   const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
   const { isLoading } = apiState;
-
-  console.log(app_id);
-
   const context = useContext(AuthContext);
   const { authState } = context;
   const { user } = authState;

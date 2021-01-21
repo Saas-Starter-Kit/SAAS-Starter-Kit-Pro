@@ -3,8 +3,6 @@ import db from '../../Database/db.js';
 export const getApp = async (req, res) => {
   let user_id = req.query.user_id;
 
-  console.log(user_id);
-
   let text = `
       SELECT
         a.app_id,

@@ -12,7 +12,6 @@ import Permissions from '../screens/App/Permissions';
 import Layout from '../components/App/AppLayout';
 
 const Routes = ({ location }) => {
-  const [apps, setApps] = useState();
   const ability = useContext(CaslContext);
   const { authState } = useContext(AuthContext);
   const splitPath = location.pathname.split('/');
