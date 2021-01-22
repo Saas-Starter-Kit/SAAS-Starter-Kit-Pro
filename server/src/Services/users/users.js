@@ -1,4 +1,5 @@
 import db from '../../Database/db.js';
+import { sendEmail } from '../../Config/email.js';
 
 export const GetAppUsers = async (req, res) => {
   //let app_id = req.query.app_id;
@@ -8,7 +9,7 @@ export const GetAppUsers = async (req, res) => {
       SELECT
         r.role_id,
         r.role,
-        u.id,
+        r.user_id,
         u.username,
         u.email
       FROM

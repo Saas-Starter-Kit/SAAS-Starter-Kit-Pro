@@ -18,7 +18,7 @@ const Permissions = () => {
   };
 
   useEffect(() => {
-    updateRole(ability, 'admin');
+    setTimeout(() => updateRole(ability, 'admin'), 100);
   }, []);
 
   return (

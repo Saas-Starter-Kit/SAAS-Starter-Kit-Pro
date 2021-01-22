@@ -21,9 +21,7 @@ export const defineRulesFor = (role) => {
 };
 
 export const buildAbilityFor = (role) => {
-  return new Ability(defineRulesFor(role), {
-    detectSubjectType: (object) => (object ? object.constructor : null)
-  });
+  return new Ability(defineRulesFor(role));
 };
 
 export const updateRole = (ability, role) => {
