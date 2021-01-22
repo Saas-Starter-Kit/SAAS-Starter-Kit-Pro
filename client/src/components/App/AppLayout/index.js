@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import SidebarDesktop from '../Navigation/sidebarDesktop';
 import SidebarMobile from '../Navigation/sidebarMobile';
-import SidebarIcons from '../Navigation/sidebarIcons';
 import MobileHeader from '../Navigation/mobileHeader';
 import { colors } from '../../../styles/theme';
 
@@ -43,10 +42,7 @@ const ContentWrapper = styled.div`
   margin-right: 3.5rem;
 `;
 
-const Layout = ({ children, app_id, location }) => {
-  const [isSidebar, toggleSidebar] = useState(true);
-  const sidebarHandler = () => (isSidebar ? toggleSidebar(false) : toggleSidebar(true));
-
+const Layout = ({ children, app_id, location, showSidebarDesktop }) => {
   const [mobileMenu, toggleMobileMenu] = useState(false);
   const mobileMenuHandler = () => (mobileMenu ? toggleMobileMenu(false) : toggleMobileMenu(true));
 
@@ -56,16 +52,13 @@ const Layout = ({ children, app_id, location }) => {
 
   return (
     <Wrapper>
-      {isSidebar ? (
+      {showSidebarDesktop && (
         <SidebarDesktop
           app_id={app_id}
-          sidebarHandler={sidebarHandler}
           theme={theme}
           toggleTheme={themeHandler}
           location={location}
         />
-      ) : (
-        <SidebarIcons app_id={app_id} sidebarHandler={sidebarHandler} />
       )}
       <Content>
         <MobileHeader mobileMenuHandler={mobileMenuHandler} />
