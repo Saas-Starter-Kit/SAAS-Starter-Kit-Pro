@@ -9,6 +9,7 @@ import Dashboard from '../screens/App/Dashboard';
 import Create from '../screens/App/Create';
 import ReadUpdate from '../screens/App/ReadUpdate';
 import Permissions from '../screens/App/Permissions';
+import Users from '../screens/App/Users';
 import Layout from '../components/App/AppLayout';
 
 const Routes = ({ location }) => {
@@ -29,6 +30,7 @@ const Routes = ({ location }) => {
         <Create app_id={app_id} path="/app/:id/create" />
         <ReadUpdate app_id={app_id} path="/app/:id/readupdate" />
         <Permissions app_id={app_id} path="/app/:id/permissions" />
+        <Users app_id={app_id} path="/app/:id/users" />
       </Router>
     </Layout>
   );

@@ -1,6 +1,8 @@
 import { SibContactsApi } from '../../Config/sendinblue.js';
 import { sendEmail } from '../../Config/email.js';
 
+/* Save signed up user's email to sendinblue */
+
 export const CreateContact = async (req, res) => {
   const FIRSTNAME = req.body.firstName;
   const email = req.body.email;
@@ -21,7 +23,7 @@ export const CreateContact = async (req, res) => {
   let template = 'welcome';
   let locals = { FIRSTNAME };
 
-  //send verificatoin email
+  //send verification email
   await sendEmail(email, template, locals);
 };
 

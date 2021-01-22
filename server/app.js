@@ -18,7 +18,7 @@ import stripeApi from './src/API/stripe.js';
 import stripeWebhook from './src/API/stripeWebhooks.js';
 import appApi from './src/API/app.js';
 import roleApi from './src/API/roles.js';
-import marketingApi from './src/API/marketing.js';
+import usersApi from './src/API/users.js';
 
 const app = express();
 
@@ -39,7 +39,7 @@ app.use('/auth', auth);
 app.use('/api', todoApi);
 app.use('/api', appApi);
 app.use('/api', roleApi);
-app.use('/api', marketingApi);
+app.use('/api', usersApi);
 
 // error handling
 app.use(errorHandler);

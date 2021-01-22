@@ -48,6 +48,15 @@ const Permissions = () => {
         <div>User can't see this field</div>
         <div>3,212</div>
       </Can>
+
+      <br />
+      <div>
+        Admin has all permissions by default, but can be explicitly denied certain permissions
+      </div>
+      <Can I="read" a="user" field="password">
+        <div>User can see, but admin cant see</div>
+        <div>UserPassWord123</div>
+      </Can>
     </div>
   );
 };
