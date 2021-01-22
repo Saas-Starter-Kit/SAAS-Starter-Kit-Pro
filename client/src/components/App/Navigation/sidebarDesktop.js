@@ -7,7 +7,7 @@ import { HomeOutlined, UserOutlined, FolderOutlined, BulbOutlined } from '@ant-d
 import { Link } from 'gatsby';
 import LargeLogo from '../../Common/LargeLogo';
 import { THEMES } from '../AppLayout';
-import { colors } from '../../../styles/theme';
+import { colors, breakpoints } from '../../../styles/theme';
 
 const getMenus = (app_id) => [
   {
@@ -37,6 +37,10 @@ const getMenus = (app_id) => [
 ];
 
 const StyledSider = styled(Layout.Sider)`
+  display: none;
+  @media (min-width: ${breakpoints.medium}) {
+    display: initial;
+  }
   box-shadow: fade(${colors.doveGray}, 10%) 0 0 28px 0;
   z-index: 10;
   .ant-layout-sider-children {
