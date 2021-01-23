@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import moment from 'moment';
 import SidebarDesktop from '../Navigation/sidebarDesktop';
 import SidebarMobile from '../Navigation/sidebarMobile';
 import MobileHeader from '../Navigation/mobileHeader';
+import Header from '../Navigation/header';
 import { colors } from '../../../styles/theme';
 
 export const THEMES = {
@@ -36,10 +38,14 @@ const Main = styled.main`
 `;
 
 const ContentWrapper = styled.div`
-  margin-top: 1.5rem;
+  margin-top: calc(1.5rem + 72px);
   margin-bottom: 1.5rem;
   margin-left: 3.5rem;
   margin-right: 3.5rem;
+  .ant-popover-inner-content {
+    padding: 0px;
+    background-color: ${colors.white};
+  }
 `;
 
 const Layout = ({ children, app_id, location, showSidebarDesktop }) => {
@@ -61,11 +67,19 @@ const Layout = ({ children, app_id, location, showSidebarDesktop }) => {
         />
       )}
       <Content>
+        <Header
+          collapsed
+          username="guest"
+          notifications={[
+            { date: moment.now(), title: 'Hey there' },
+            { date: moment.now(), title: 'Welcome!' }
+          ]}
+        />
         <MobileHeader mobileMenuHandler={mobileMenuHandler} />
         {mobileMenu && <SidebarMobile app_id={app_id} toggleMobileMenu={toggleMobileMenu} />}
         <Main tabindex="0">
           {/*App Screens Here*/}
-          <ContentWrapper>{children}</ContentWrapper>
+          <ContentWrapper id="primaryLayout">{children}</ContentWrapper>
         </Main>
       </Content>
     </Wrapper>

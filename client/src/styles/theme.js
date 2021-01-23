@@ -47,7 +47,12 @@ export const colors = {
   white: '#FFFFFF',
   cinnabar: '#EB4D4B',
   firefly: '#0F2137',
-  doveGray: '#666666'
+  doveGray: '#666666',
+  dodgerBlue: '#1890FF',
+  whisper: '#F9F9FC',
+  dustyGray: '#999999',
+  silver: '#CCCCCC',
+  cadetBlue: '#B2B0C7'
 };
 
 export const breakpoints = {
