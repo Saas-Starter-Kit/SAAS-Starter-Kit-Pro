@@ -1,5 +1,6 @@
 import db from '../../Database/db.js';
 import { sendEmail } from '../../Config/email.js';
+import { getUser } from '../auth/authHelpers.js';
 
 export const GetAppUsers = async (req, res) => {
   //let app_id = req.query.app_id;
@@ -25,26 +26,34 @@ export const GetAppUsers = async (req, res) => {
   res.send(queryResult.rows);
 };
 
-export const InviteUsers = async (req, res) => {
-  //let app_id = req.query.app_id;
+export const InviteUser = async (req, res) => {
+  let senderEmail = req.body.inviterEmail;
+  let inviterDisplayName = req.body.inviterDisplayName;
+  let inviteRecipient = req.body.inviteRecipient;
+  let domainUrl = req.body.domainUrl;
   let app_id = 7;
+  let isSignup;
 
-  let text = `
-      SELECT
-        r.role_id,
-        r.role,
-        u.id,
-        u.username,
-        u.email
-      FROM
-        roles r
-      INNER JOIN users u 
-        ON r.user_id = u.id
-      WHERE r.app_id=$1
-  `;
+  console.log(senderEmail, inviterDisplayName, inviteRecipient);
 
-  let values = [app_id];
+  //check user exists
+  let userExists = await getUser(inviteRecipient);
 
-  let queryResult = await db.query(text, values);
-  res.send(queryResult.rows);
+  //If user doesnt exist, require sign up process
+  if (userExists.rows.length !== 0) {
+    isSignup = false;
+  } else {
+    isSignup = true;
+  }
+
+  //let redirectedUrl = `${domainUrl}/?app_id=${app_id}&inviterEmail=${inviterEmail}&inviteRecipient=${inviteRecipient}&inviterDisplayName=${inviterDisplayName}`;
+
+  let redirectUrl = `${domainUrl}/auth/login/?app_id=${app_id}&isInviteFlow=${true}`;
+
+  //send email with url containing all the vars
+  let template = 'invite';
+  let locals = { inviterDisplayName, senderEmail, redirectUrl };
+
+  await sendEmail(inviteRecipient, template, locals);
+  res.status(200).send({ type: 'Success', message: 'Invite successfully sent' });
 };

@@ -163,7 +163,18 @@ const Login = ({ location }) => {
   const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
   const { isLoading } = apiState;
   let isPaymentFlow;
-  console.log(location);
+  let app_id;
+  let isInviteFlow;
+
+  //extract data from query params
+  useEffect(() => {
+    if (location.search) {
+      const queryParams = location.search.split('=');
+      app_id = queryParams[1].split('&')[0];
+      isInviteFlow = queryParams[2];
+      console.log(app_id, isInviteFlow);
+    }
+  }, [location]);
 
   useEffect(() => {
     return () => fetchSuccess();
@@ -185,7 +196,7 @@ const Login = ({ location }) => {
         fetchFailure(error);
       });
 
-    LoginAuth(authRes, LogIn, firebase, fetchFailure, isPaymentFlow);
+    LoginAuth(authRes, LogIn, firebase, fetchFailure, isPaymentFlow, isInviteFlow, app_id);
   };
 
   //Google OAuth2 Signin
@@ -200,13 +211,14 @@ const Login = ({ location }) => {
         fetchFailure(error);
       });
 
-    LoginAuth(authRes, LogIn, firebase, fetchFailure, isPaymentFlow);
+    LoginAuth(authRes, LogIn, firebase, fetchFailure, isPaymentFlow, isInviteFlow, app_id);
   };
 
   return (
     <Wrapper>
       {isLoading && <LoadingOverlay />}
       <LoginFormHeader />
+
       <CardWrapper>
         <Card>
           <Formik initialValues={{ email: '', password: '' }} onSubmit={handleSubmit}>

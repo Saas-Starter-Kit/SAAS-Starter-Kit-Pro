@@ -3,9 +3,16 @@ import { navigate } from 'gatsby';
 import * as Yup from 'yup';
 import axios from '../../services/axios';
 
-export const LoginAuth = async (authRes, LogIn, firebase, fetchFailure, isPaymentFlow) => {
-  console.log(authRes);
-
+export const LoginAuth = async (
+  authRes,
+  LogIn,
+  firebase,
+  fetchFailure,
+  isPaymentFlow,
+  isInviteFlow,
+  app_id
+) => {
+  console.log(isInviteFlow, app_id);
   //Get Auth id token from Firebase
   let token = await firebase
     .auth()
@@ -24,15 +31,11 @@ export const LoginAuth = async (authRes, LogIn, firebase, fetchFailure, isPaymen
   let validToken = isValidToken(authServerRes.data.token, fetchFailure);
   let userId = validToken.user;
 
-  console.log(authServerRes);
-
   LogintoContext(userId, authRes, authServerRes, LogIn, isPaymentFlow);
 };
 
 //Save user Info to Context
 export const LogintoContext = async (user_id, authRes, authServerRes, LogIn, isPaymentFlow) => {
-  console.log(authRes);
-
   let email = authRes.user.email;
   let username = authRes.user.displayName;
   let id = user_id;
@@ -53,7 +56,7 @@ export const LogintoContext = async (user_id, authRes, authServerRes, LogIn, isP
 
   await LogIn(user);
 
-  //if is payment flow navigate to correct route
+  //navigate to correct route based on flow
   if (isPaymentFlow && !subscription_id) {
     navigate('/purchase/plan');
   } else if (isPaymentFlow && subscription_id) {
@@ -64,8 +67,6 @@ export const LogintoContext = async (user_id, authRes, authServerRes, LogIn, isP
 };
 
 export const SignupAuth = async (authRes, firebase, fetchFailure, name, domainUrl) => {
-  console.log(authRes);
-
   // If user signed up with email, then set their display name
   const isEmailSignup = authRes.additionalUserInfo.providerId === 'password';
   console.log(isEmailSignup);
@@ -92,9 +93,6 @@ export const SignupAuth = async (authRes, firebase, fetchFailure, name, domainUr
   //server firebase authentication, returns jwt token
   let username = authRes.user.displayName ? authRes.user.displayName : name;
   let email = authRes.user.email;
-
-  console.log(username);
-  console.log(authRes.user.displayName);
 
   let authData = { email, username, token };
   let authServerRes = await axios.post(`/auth/signup`, authData).catch((err) => {

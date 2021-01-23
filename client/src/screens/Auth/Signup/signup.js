@@ -248,7 +248,7 @@ const Signup = () => {
 export default Signup;
 
 const staticQuery = graphql`
-  query MyQuery {
+  query GetDomainSignup {
     site {
       siteMetadata {
         siteUrl

@@ -12,7 +12,6 @@ const Title = styled.h1`
 
 const Dashboard = ({ location }) => (
   <>
-    {console.log(location)}
     <Title>Dashboard</Title>
     <Stats />
     <ActivityList />
