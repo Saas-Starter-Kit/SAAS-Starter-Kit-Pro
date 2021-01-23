@@ -31,11 +31,19 @@ export const LoginAuth = async (
   let validToken = isValidToken(authServerRes.data.token, fetchFailure);
   let userId = validToken.user;
 
-  LogintoContext(userId, authRes, authServerRes, LogIn, isPaymentFlow);
+  LogintoContext(userId, authRes, authServerRes, LogIn, isPaymentFlow, isInviteFlow, app_id);
 };
 
 //Save user Info to Context
-export const LogintoContext = async (user_id, authRes, authServerRes, LogIn, isPaymentFlow) => {
+export const LogintoContext = async (
+  user_id,
+  authRes,
+  authServerRes,
+  LogIn,
+  isPaymentFlow,
+  isInviteFlow,
+  app_id
+) => {
   let email = authRes.user.email;
   let username = authRes.user.displayName;
   let id = user_id;
@@ -54,6 +62,8 @@ export const LogintoContext = async (user_id, authRes, authServerRes, LogIn, isP
     subscription_id
   };
 
+  console.log(isInviteFlow);
+
   await LogIn(user);
 
   //navigate to correct route based on flow
@@ -61,12 +71,22 @@ export const LogintoContext = async (user_id, authRes, authServerRes, LogIn, isP
     navigate('/purchase/plan');
   } else if (isPaymentFlow && subscription_id) {
     navigate('/purchase/subcriptionexists');
+  } else if (isInviteFlow) {
+    navigate(`/user/confirmedinvite/${app_id}`);
   } else {
     navigate('/user/dashboard');
   }
 };
 
-export const SignupAuth = async (authRes, firebase, fetchFailure, name, domainUrl) => {
+export const SignupAuth = async (
+  authRes,
+  firebase,
+  fetchFailure,
+  name,
+  domainUrl,
+  isInviteFlow,
+  app_id
+) => {
   // If user signed up with email, then set their display name
   const isEmailSignup = authRes.additionalUserInfo.providerId === 'password';
   console.log(isEmailSignup);
@@ -108,7 +128,7 @@ export const SignupAuth = async (authRes, firebase, fetchFailure, name, domainUr
   let provider = authRes.user.providerData[0].providerId;
 
   //save user info to url for later extraction
-  const redirectUrl = `${baseUrl}/?email=${email}&userId=${userId}&username=${username}&provider=${provider}`;
+  const redirectUrl = `${baseUrl}/?email=${email}&userId=${userId}&username=${username}&provider=${provider}&isInviteFlow=${isInviteFlow}&app_id=${app_id}`;
   let verifyEmailData = { email, redirectUrl, username };
 
   //Send Verification Email

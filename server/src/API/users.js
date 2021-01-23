@@ -8,7 +8,7 @@ const router = express.Router();
 router.post('/post/contact', CreateContact);
 
 /* Get all users associated with an app */
-router.get('/get/users', GetAppUsers);
+router.get('/get/app-users', GetAppUsers);
 
 /* Invite a user to the app */
 router.post('/users/invite', InviteUser);

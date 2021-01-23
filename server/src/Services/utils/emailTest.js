@@ -2,8 +2,7 @@ import Email from 'email-templates';
 import nodemailer from 'nodemailer';
 
 /* 
-   Use this transport to test emails without sending them 
-   to real email addresses
+   Use this transport to test email templates
 */
 
 const transporter = nodemailer.createTransport({
@@ -32,10 +31,10 @@ export const sendEmail = () => {
   email.send({
     template: 'empty',
     message: {
-      to: 'john@snow.com'
+      to: 'john@smith.com'
     },
     locals: {
-      name: 'John Snow'
+      name: 'John Smith'
     }
-  }).catch(err => console.log(err))
+  });
 };

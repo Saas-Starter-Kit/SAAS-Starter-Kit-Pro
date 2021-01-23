@@ -10,10 +10,9 @@ export const CreateCustomer = async (req, res) => {
     email
   });
 
-  console.log(existingCustomers);
-
+  //if stripe customer exists send error message
   if (existingCustomers.data.length != 0) {
-    res.status(400).send({ type: 'Failed Sign Up', message: 'User Already Exists' });
+    res.status(400).send({ type: 'Failed Stripe Sign Up', message: 'User Already Exists' });
     return;
   }
 

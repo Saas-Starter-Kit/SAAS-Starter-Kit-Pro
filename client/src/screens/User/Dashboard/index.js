@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import AuthContext from '../../../utils/authContext';
+import ApiContext from '../../../utils/apiContext';
 import axios from '../../../services/axios';
 import { Link } from 'gatsby';
 
@@ -14,9 +15,10 @@ const Card = styled.div`
 
 const Dashboard = () => {
   const { authState } = useContext(AuthContext);
+  const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
+  const { isLoading } = apiState;
   const [apps, setApps] = useState();
 
-  console.log(authState);
   useEffect(() => {
     if (authState.user) {
       getApps();
@@ -52,27 +54,28 @@ const Dashboard = () => {
       //  fetchFailure(err);
       console.log(err);
     });
-
     console.log(result);
 
-    //returning ID
-    //createRole extract out
+    createRole(result);
+  };
+
+  const createRole = async (result) => {
     let app_id = result.data[0].app_id;
     let user_id = authState.user.id;
     let role = 'admin';
 
-    let data2 = {
+    let data = {
       app_id,
       user_id,
       role
     };
 
-    const result2 = await axios.post(`/api/post/role`, data2).catch((err) => {
-      //  fetchFailure(err);
+    const roleResult = await axios.post(`/api/post/role`, data).catch((err) => {
+      fetchFailure(err);
       console.log(err);
     });
 
-    console.log(result2);
+    console.log(roleResult);
   };
 
   return (

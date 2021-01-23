@@ -130,12 +130,23 @@ const StyledSpan = styled.span`
   padding: 0 0.7rem;
 `;
 
-const Signup = () => {
+const Signup = ({ location }) => {
   const { firebase, LogIn, LogOut } = useContext(AuthContext);
   const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
   const { isLoading } = apiState;
+  const [appId, setAppId] = useState();
+  const [isInviteFlow, setInviteFlow] = useState();
   const data = useStaticQuery(staticQuery);
   const domainUrl = data.site.siteMetadata.siteUrl;
+
+  //extract data from query params
+  useEffect(() => {
+    if (location.search) {
+      const queryParams = location.search.split('=');
+      setAppId(queryParams[1].split('&')[0]);
+      setInviteFlow(queryParams[2]);
+    }
+  }, [location]);
 
   useEffect(() => {
     return () => fetchSuccess();
@@ -155,7 +166,7 @@ const Signup = () => {
         fetchFailure(error);
       });
 
-    SignupAuth(authRes, firebase, fetchFailure, username, domainUrl);
+    SignupAuth(authRes, firebase, fetchFailure, username, domainUrl, isInviteFlow, appId);
   };
 
   //Google OAuth2 Signin
@@ -171,7 +182,7 @@ const Signup = () => {
         fetchFailure(error);
       });
 
-    SignupAuth(authRes, firebase, fetchFailure, null, domainUrl);
+    SignupAuth(authRes, firebase, fetchFailure, null, domainUrl, isInviteFlow, appId);
   };
 
   return (

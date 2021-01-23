@@ -160,19 +160,18 @@ const StyledSpan = styled.span`
 
 const Login = ({ location }) => {
   const { firebase, LogIn, LogOut } = useContext(AuthContext);
+  const [appId, setAppId] = useState();
+  const [isInviteFlow, setInviteFlow] = useState();
   const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
   const { isLoading } = apiState;
   let isPaymentFlow;
-  let app_id;
-  let isInviteFlow;
 
   //extract data from query params
   useEffect(() => {
     if (location.search) {
       const queryParams = location.search.split('=');
-      app_id = queryParams[1].split('&')[0];
-      isInviteFlow = queryParams[2];
-      console.log(app_id, isInviteFlow);
+      setAppId(queryParams[1].split('&')[0]);
+      setInviteFlow(queryParams[2]);
     }
   }, [location]);
 
@@ -196,7 +195,7 @@ const Login = ({ location }) => {
         fetchFailure(error);
       });
 
-    LoginAuth(authRes, LogIn, firebase, fetchFailure, isPaymentFlow, isInviteFlow, app_id);
+    LoginAuth(authRes, LogIn, firebase, fetchFailure, isPaymentFlow, isInviteFlow, appId);
   };
 
   //Google OAuth2 Signin
@@ -211,7 +210,7 @@ const Login = ({ location }) => {
         fetchFailure(error);
       });
 
-    LoginAuth(authRes, LogIn, firebase, fetchFailure, isPaymentFlow, isInviteFlow, app_id);
+    LoginAuth(authRes, LogIn, firebase, fetchFailure, isPaymentFlow, isInviteFlow, appId);
   };
 
   return (

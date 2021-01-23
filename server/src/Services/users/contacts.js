@@ -23,8 +23,8 @@ export const CreateContact = async (req, res) => {
   let template = 'welcome';
   let locals = { FIRSTNAME };
 
-  //send verification email
   await sendEmail(email, template, locals);
+  res.status(200).send('Email saved to Sendinblue');
 };
 
 //update email when user updates email

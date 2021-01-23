@@ -4,8 +4,6 @@ export const getRole = async (req, res) => {
   let user_id = req.query.user_id;
   let app_id = req.query.app_id;
 
-  console.log(user_id);
-
   let text = `
       SELECT
         a.app_id,
@@ -31,10 +29,29 @@ export const postRole = async (req, res) => {
   let role = req.body.role;
   console.log(app_id, user_id, role);
 
+  const isRoleExists = await checkRoleExists(app_id, user_id);
+  //If role exists for app send error message
+  if (isRoleExists.rows.length !== 0) {
+    res
+      .status(400)
+      .send({ type: 'Failed to Create Role', message: 'User already has role in this app' });
+    return;
+  }
+
   let text = `INSERT INTO roles(app_id, user_id, role)
               VALUES ($1, $2, $3)`;
   let values = [app_id, user_id, role];
 
   let queryResult = await db.query(text, values);
   res.send(queryResult.rows);
+};
+
+const checkRoleExists = async (app_id, user_id) => {
+  let text = `SELECT * FROM roles
+              WHERE app_id=$1 AND user_id=$2`;
+  let values = [app_id, user_id];
+
+  let queryResult = await db.query(text, values);
+
+  return queryResult;
 };

@@ -6,7 +6,7 @@ const Routes = ({ location }) => {
   return (
     <Router>
       <Login location={location} path="/auth/login" />
-      <SignUp path="/auth/signup" />
+      <SignUp location={location} path="/auth/signup" />
       <PasswordReset path="/auth/passwordreset" />
       <EmailConfirm path="/auth/emailconfirm" />
       <ConfirmedEmail location={location} path="/auth/confirmedemail" />
