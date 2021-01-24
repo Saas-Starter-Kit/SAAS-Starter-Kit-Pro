@@ -54,7 +54,8 @@ export const colors = {
   silver: '#CCCCCC',
   cadetBlue: '#B2B0C7',
   midnight: '#001529',
-  gallery: '#F0F0F0'
+  gallery: '#F0F0F0',
+  lilyWhite: '#E6F7FF'
 };
 
 export const breakpoints = {

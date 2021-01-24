@@ -44,7 +44,7 @@ const ContentWrapper = styled.div`
   margin-right: 3.5rem;
   .ant-popover-inner-content {
     padding: 0px;
-    background-color: ${({ theme }) => (theme === THEMES.LIGHT ? colors.white : colors.midnight)};
+    background-color: ${({ theme }) => (theme === THEMES.DARK ? colors.midnight : colors.white)};
   }
 `;
 
@@ -95,7 +95,7 @@ const Layout = ({ children, app_id, location }) => {
           theme={theme}
         />
         {showMobileMenu && (
-          <SidebarMobile app_id={app_id} toggleMobileMenu={toggleShowMobileMenu} />
+          <SidebarMobile app_id={app_id} toggleMobileMenu={toggleShowMobileMenu} theme={theme} />
         )}
         <Main tabindex="0">
           {/*App Screens Here*/}

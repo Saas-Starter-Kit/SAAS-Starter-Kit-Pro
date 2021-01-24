@@ -144,7 +144,7 @@ const SidebarDesktop = ({ theme, toggleTheme, app_id, location, collapsed }) => 
         {collapsed ? (
           <StyledSmallLogo />
         ) : (
-          <StyledLargeLogo textColor={theme === THEMES.LIGHT ? colors.indigo400 : colors.white} />
+          <StyledLargeLogo textColor={theme === THEMES.DARK ? colors.white : colors.indigo400} />
         )}
       </LogoWrapper>
       <SidebarItems>
@@ -156,7 +156,7 @@ const SidebarDesktop = ({ theme, toggleTheme, app_id, location, collapsed }) => 
         >
           <Menu mode="inline" theme={theme} selectedKeys={[selectedKey && selectedKey.id]}>
             {menus.map(({ id, route, icon, name }) => (
-              <Menu.Item key={id}>
+              <Menu.Item key={id} title={name}>
                 <StyledLink to={route || '#'}>
                   <div>{icon}</div>
                   {!collapsed && <ItemWrapper>{name}</ItemWrapper>}

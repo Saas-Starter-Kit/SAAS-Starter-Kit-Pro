@@ -48,8 +48,7 @@ const LayoutHeader = styled(Layout.Header)`
 
     & > .ant-menu-submenu:hover {
       color: ${colors.dodgerBlue};
-      background-color: ${({ theme }) =>
-        theme === THEMES.LIGHT ? colors.whisper : colors.firefly};
+      background-color: ${({ theme }) => (theme === THEMES.DARK ? colors.firefly : colors.whisper)};
     }
   }
 
@@ -97,7 +96,7 @@ const Button = styled.div`
 
   &:hover {
     color: ${colors.dodgerBlue};
-    background-color: ${({ theme }) => (theme === THEMES.LIGHT ? colors.whisper : colors.firefly)};
+    background-color: ${({ theme }) => (theme === THEMES.DARK ? colors.firefly : colors.whisper)};
   }
 `;
 
@@ -135,9 +134,9 @@ const ClearButton = styled.div`
   height: 48px;
   line-height: 48px;
   cursor: pointer;
-  color: ${({ theme }) => (theme === THEMES.LIGHT ? colors.doveGray : colors.silver)};
+  color: ${({ theme }) => (theme === THEMES.DARK ? colors.silver : colors.doveGray)};
   &:hover {
-    background-color: ${({ theme }) => (theme === THEMES.LIGHT ? colors.whisper : colors.firefly)};
+    background-color: ${({ theme }) => (theme === THEMES.DARK ? colors.firefly : colors.whisper)};
   }
 `;
 
@@ -146,7 +145,7 @@ const NotificationItem = styled(List.Item)`
   padding: 12px 24px;
   cursor: pointer;
   &:hover {
-    background-color: ${({ theme }) => (theme === THEMES.LIGHT ? colors.whisper : colors.firefly)};
+    background-color: ${({ theme }) => (theme === THEMES.DARK ? colors.firefly : colors.whisper)};
   }
 `;
 
@@ -179,10 +178,10 @@ const IconFont = styled(IoNotificationsOutline)`
 
 const ListItemMeta = styled(List.Item.Meta)`
   h4 {
-    color: ${({ theme }) => (theme === THEMES.LIGHT ? colors.doveGray : colors.silver)};
+    color: ${({ theme }) => (theme === THEMES.DARK ? colors.silver : colors.doveGray)};
   }
   div.ant-list-item-meta-description {
-    color: ${({ theme }) => (theme === THEMES.LIGHT ? colors.doveGray : colors.whisper)};
+    color: ${({ theme }) => (theme === THEMES.DARK ? colors.whisper : colors.doveGray)};
   }
 `;
 
