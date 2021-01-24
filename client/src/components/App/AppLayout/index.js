@@ -44,7 +44,7 @@ const ContentWrapper = styled.div`
   margin-right: 3.5rem;
   .ant-popover-inner-content {
     padding: 0px;
-    background-color: ${colors.white};
+    background-color: ${({ theme }) => (theme === THEMES.LIGHT ? colors.white : colors.midnight)};
   }
 `;
 
@@ -92,13 +92,16 @@ const Layout = ({ children, app_id, location }) => {
             { date: moment.now(), title: 'Welcome!' }
           ]}
           onCollapseChange={handleCollapseChange}
+          theme={theme}
         />
         {showMobileMenu && (
           <SidebarMobile app_id={app_id} toggleMobileMenu={toggleShowMobileMenu} />
         )}
         <Main tabindex="0">
           {/*App Screens Here*/}
-          <ContentWrapper id="primaryLayout">{children}</ContentWrapper>
+          <ContentWrapper theme={theme} id="primaryLayout">
+            {children}
+          </ContentWrapper>
         </Main>
       </Content>
     </Wrapper>

@@ -10,6 +10,7 @@ import {
 } from '@ant-design/icons';
 import { IoNotificationsOutline } from 'react-icons/io5';
 import { breakpoints, colors } from '../../../styles/theme';
+import { THEMES } from '../AppLayout';
 
 const { SubMenu } = Menu;
 
@@ -47,7 +48,8 @@ const LayoutHeader = styled(Layout.Header)`
 
     & > .ant-menu-submenu:hover {
       color: ${colors.dodgerBlue};
-      background-color: ${colors.whisper};
+      background-color: ${({ theme }) =>
+        theme === THEMES.LIGHT ? colors.whisper : colors.firefly};
     }
   }
 
@@ -76,6 +78,11 @@ const LayoutHeader = styled(Layout.Header)`
   .ant-menu-horizontal > .ant-menu-submenu:hover {
     border-bottom: none;
   }
+  ${({ theme }) =>
+    theme === THEMES.DARK &&
+    css`
+      background-color: ${colors.midnight};
+    `}
 `;
 
 const Button = styled.div`
@@ -86,11 +93,11 @@ const Button = styled.div`
   font-size: 18px;
   cursor: pointer;
   transition: all 0.3s ease-out;
-  color: ${colors.doveGray};
+  color: ${({ theme }) => (theme === THEMES.DARK ? colors.white : colors.doveGray)};
 
   &:hover {
     color: ${colors.dodgerBlue};
-    background-color: ${colors.whisper};
+    background-color: ${({ theme }) => (theme === THEMES.LIGHT ? colors.whisper : colors.firefly)};
   }
 `;
 
@@ -128,9 +135,9 @@ const ClearButton = styled.div`
   height: 48px;
   line-height: 48px;
   cursor: pointer;
-  color: ${colors.doveGray};
+  color: ${({ theme }) => (theme === THEMES.LIGHT ? colors.doveGray : colors.silver)};
   &:hover {
-    background-color: ${colors.whisper};
+    background-color: ${({ theme }) => (theme === THEMES.LIGHT ? colors.whisper : colors.firefly)};
   }
 `;
 
@@ -139,7 +146,7 @@ const NotificationItem = styled(List.Item)`
   padding: 12px 24px;
   cursor: pointer;
   &:hover {
-    background-color: ${colors.whisper};
+    background-color: ${({ theme }) => (theme === THEMES.LIGHT ? colors.whisper : colors.firefly)};
   }
 `;
 
@@ -172,7 +179,10 @@ const IconFont = styled(IoNotificationsOutline)`
 
 const ListItemMeta = styled(List.Item.Meta)`
   h4 {
-    color: ${colors.doveGray};
+    color: ${({ theme }) => (theme === THEMES.LIGHT ? colors.doveGray : colors.silver)};
+  }
+  div.ant-list-item-meta-description {
+    color: ${({ theme }) => (theme === THEMES.LIGHT ? colors.doveGray : colors.whisper)};
   }
 `;
 
@@ -182,12 +192,13 @@ const Header = ({
   collapsed,
   notifications,
   onCollapseChange,
-  onAllNotificationsRead
+  onAllNotificationsRead,
+  theme
 }) => {
   const handleClickMenu = () => {};
   return (
-    <LayoutHeader id="layoutHeader" collapsed={collapsed}>
-      <Button onClick={onCollapseChange}>
+    <LayoutHeader id="layoutHeader" collapsed={collapsed} theme={theme}>
+      <Button onClick={onCollapseChange} theme={theme}>
         {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
       </Button>
       <RightContainer>
@@ -205,14 +216,20 @@ const Header = ({
                   emptyText: 'You have viewed all notifications.'
                 }}
                 renderItem={(item) => (
-                  <NotificationItem>
-                    <ListItemMeta title={item.title} description={moment(item.date).fromNow()} />
+                  <NotificationItem theme={theme}>
+                    <ListItemMeta
+                      title={item.title}
+                      description={moment(item.date).fromNow()}
+                      theme={theme}
+                    />
                     <StyledRightOutlined />
                   </NotificationItem>
                 )}
               />
               {notifications.length ? (
-                <ClearButton onClick={onAllNotificationsRead}>Clear notifications</ClearButton>
+                <ClearButton onClick={onAllNotificationsRead} theme={theme}>
+                  Clear notifications
+                </ClearButton>
               ) : null}
             </Notification>
           }
@@ -221,7 +238,7 @@ const Header = ({
             <IconFont />
           </IconButton>
         </StyledPopover>
-        <Menu key="user" mode="horizontal" onClick={handleClickMenu}>
+        <Menu key="user" mode="horizontal" onClick={handleClickMenu} theme={theme}>
           <SubMenu
             title={
               <React.Fragment>
