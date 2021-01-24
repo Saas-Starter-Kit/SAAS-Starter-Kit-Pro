@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import moment from 'moment';
 import SidebarDesktop from '../Navigation/sidebarDesktop';
 import SidebarMobile from '../Navigation/sidebarMobile';
-import MobileHeader from '../Navigation/mobileHeader';
 import Header from '../Navigation/header';
-import { colors } from '../../../styles/theme';
+import { colors, breakpoints } from '../../../styles/theme';
+import useWindowSize from '../../../hooks/useWindowSize';
 
 export const THEMES = {
   LIGHT: 'light',
@@ -48,9 +48,25 @@ const ContentWrapper = styled.div`
   }
 `;
 
-const Layout = ({ children, app_id, location, showSidebarDesktop }) => {
-  const [mobileMenu, toggleMobileMenu] = useState(false);
-  const mobileMenuHandler = () => (mobileMenu ? toggleMobileMenu(false) : toggleMobileMenu(true));
+const Layout = ({ children, app_id, location }) => {
+  // ant d's Menu.Item within sidebarDesktop causes an extra re-render after mobileMenu has been set to true
+  // meaning that it stops the mobile sidebar from ever showing. Not sure why this happens, so working around
+  // this by not rendering the sidebar for mobile screens
+  const windowSize = useWindowSize();
+  const breakpoint = breakpoints.medium.substring(0, breakpoints.medium.length - 2);
+  const isMobile = windowSize.width <= breakpoint;
+
+  const [showMobileMenu, toggleShowMobileMenu] = useState(false);
+  const mobileMenuHandler = () =>
+    showMobileMenu ? toggleShowMobileMenu(false) : toggleShowMobileMenu(true);
+
+  const [isDesktopMenuCollapsed, toggleIsDesktopMenuCollapsed] = useState(false);
+  const desktopMenuHandler = () =>
+    isDesktopMenuCollapsed
+      ? toggleIsDesktopMenuCollapsed(false)
+      : toggleIsDesktopMenuCollapsed(true);
+
+  const handleCollapseChange = isMobile ? mobileMenuHandler : desktopMenuHandler;
 
   const [theme, setTheme] = useState(THEMES.LIGHT);
   const themeHandler = () =>
@@ -58,25 +74,28 @@ const Layout = ({ children, app_id, location, showSidebarDesktop }) => {
 
   return (
     <Wrapper>
-      {showSidebarDesktop && (
+      {!isMobile && (
         <SidebarDesktop
           app_id={app_id}
           theme={theme}
           toggleTheme={themeHandler}
           location={location}
+          collapsed={isDesktopMenuCollapsed}
         />
       )}
       <Content>
         <Header
-          collapsed
+          collapsed={isDesktopMenuCollapsed}
           username="guest"
           notifications={[
             { date: moment.now(), title: 'Hey there' },
             { date: moment.now(), title: 'Welcome!' }
           ]}
+          onCollapseChange={handleCollapseChange}
         />
-        <MobileHeader mobileMenuHandler={mobileMenuHandler} />
-        {mobileMenu && <SidebarMobile app_id={app_id} toggleMobileMenu={toggleMobileMenu} />}
+        {showMobileMenu && (
+          <SidebarMobile app_id={app_id} toggleMobileMenu={toggleShowMobileMenu} />
+        )}
         <Main tabindex="0">
           {/*App Screens Here*/}
           <ContentWrapper id="primaryLayout">{children}</ContentWrapper>

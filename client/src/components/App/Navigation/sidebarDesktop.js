@@ -6,6 +6,7 @@ import { Layout, Menu, Switch } from 'antd';
 import { HomeOutlined, UserOutlined, FolderOutlined, BulbOutlined } from '@ant-design/icons';
 import { Link } from 'gatsby';
 import LargeLogo from '../../Common/LargeLogo';
+import SmallLogo from '../../Common/SmallLogo';
 import { THEMES } from '../AppLayout';
 import { colors, breakpoints } from '../../../styles/theme';
 
@@ -59,8 +60,12 @@ const LogoWrapper = styled.div`
   box-shadow: 0 1px 9px -3px rgba(0, 0, 0, 0.2);
 `;
 
-const Logo = styled(LargeLogo)`
+const StyledLargeLogo = styled(LargeLogo)`
   width: 150px;
+`;
+
+const StyledSmallLogo = styled(SmallLogo)`
+  width: 36px;
 `;
 
 const SidebarItems = styled.div`
@@ -123,7 +128,7 @@ const Span = styled.span`
   color: ${colors.doveGray};
 `;
 
-const SidebarDesktop = ({ theme, toggleTheme, app_id, location }) => {
+const SidebarDesktop = ({ theme, toggleTheme, app_id, location, collapsed }) => {
   const menus = getMenus(app_id);
   const selectedKey = menus.find((menu) => menu.route === location.pathname);
   return (
@@ -133,10 +138,14 @@ const SidebarDesktop = ({ theme, toggleTheme, app_id, location }) => {
       breakpoint="lg"
       trigger={null}
       collapsible
-      collapsed={false}
+      collapsed={collapsed}
     >
       <LogoWrapper>
-        <Logo textColor={theme === THEMES.LIGHT ? colors.indigo400 : colors.white} />
+        {collapsed ? (
+          <StyledSmallLogo />
+        ) : (
+          <StyledLargeLogo textColor={theme === THEMES.LIGHT ? colors.indigo400 : colors.white} />
+        )}
       </LogoWrapper>
       <SidebarItems>
         <ScrollBar
@@ -150,25 +159,27 @@ const SidebarDesktop = ({ theme, toggleTheme, app_id, location }) => {
               <Menu.Item key={id}>
                 <StyledLink to={route || '#'}>
                   <div>{icon}</div>
-                  <ItemWrapper>{name}</ItemWrapper>
+                  {!collapsed && <ItemWrapper>{name}</ItemWrapper>}
                 </StyledLink>
               </Menu.Item>
             ))}
           </Menu>
         </ScrollBar>
       </SidebarItems>
-      <Footer>
-        <span>
-          <Bulb />
-          <Span theme={theme}>Switch Theme</Span>
-        </span>
-        <Switch
-          onChange={toggleTheme}
-          defaultChecked={theme === THEMES.DARK}
-          checkedChildren={'Dark'}
-          unCheckedChildren={'Light'}
-        />
-      </Footer>
+      {!collapsed && (
+        <Footer>
+          <span>
+            <Bulb />
+            <Span theme={theme}>Switch Theme</Span>
+          </span>
+          <Switch
+            onChange={toggleTheme}
+            defaultChecked={theme === THEMES.DARK}
+            checkedChildren={'Dark'}
+            unCheckedChildren={'Light'}
+          />
+        </Footer>
+      )}
     </StyledSider>
   );
 };

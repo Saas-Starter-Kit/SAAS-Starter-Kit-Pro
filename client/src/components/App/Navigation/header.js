@@ -35,7 +35,7 @@ const LayoutHeader = styled(Layout.Header)`
   ${({ collapsed }) =>
     collapsed &&
     css`
-      width: ~'calc(100% - 80px)';
+      width: calc(100% - 80px);
     `}
 
   .ant-menu-submenu-title {
