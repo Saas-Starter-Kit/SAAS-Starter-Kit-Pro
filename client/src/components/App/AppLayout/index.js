@@ -95,7 +95,12 @@ const Layout = ({ children, app_id, location }) => {
           theme={theme}
         />
         {showMobileMenu && (
-          <SidebarMobile app_id={app_id} toggleMobileMenu={toggleShowMobileMenu} theme={theme} />
+          <SidebarMobile
+            app_id={app_id}
+            toggleMobileMenu={toggleShowMobileMenu}
+            theme={theme}
+            toggleTheme={themeHandler}
+          />
         )}
         <Main tabindex="0">
           {/*App Screens Here*/}

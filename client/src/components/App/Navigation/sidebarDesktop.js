@@ -175,8 +175,8 @@ const SidebarDesktop = ({ theme, toggleTheme, app_id, location, collapsed }) => 
           <Switch
             onChange={toggleTheme}
             defaultChecked={theme === THEMES.DARK}
-            checkedChildren={'Dark'}
-            unCheckedChildren={'Light'}
+            checkedChildren='Dark'
+            unCheckedChildren='Light'
           />
         </Footer>
       )}

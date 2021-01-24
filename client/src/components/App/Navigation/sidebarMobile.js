@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import styled, { keyframes } from 'styled-components';
-import { HomeOutlined, UserOutlined, FolderOutlined } from '@ant-design/icons';
+import { Switch } from 'antd';
+import { HomeOutlined, UserOutlined, FolderOutlined, BulbOutlined } from '@ant-design/icons';
 import useOutsideClick from '../../../hooks/useOutsideClick';
 import { colors, breakpoints } from '../../../styles/theme';
 import MobileSidebarItem from './mobileSidebarItem';
@@ -116,7 +117,47 @@ const ShrinkDiv = styled.div`
   flex-shrink: 0;
 `;
 
-const SidebarMobile = ({ toggleMobileMenu, app_id, theme }) => {
+const Wrapper4 = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-between;
+  height: calc(100% - 55px);
+  overflow: hidden;
+`;
+
+const Footer = styled.div`
+  width: 100%;
+  height: 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px;
+  overflow: hidden;
+  transition: all 0.3s;
+
+  span {
+    white-space: nowrap;
+    overflow: hidden;
+    font-size: 12px;
+  }
+
+  .anticon {
+    min-width: 14px;
+    margin-right: 4px;
+    font-size: 14px;
+  }
+`;
+
+const Bulb = styled(BulbOutlined)`
+  color: ${colors.doveGray};
+`;
+
+const Span = styled.span`
+  color: ${colors.doveGray};
+`;
+
+const SidebarMobile = ({ toggleMobileMenu, app_id, theme, toggleTheme }) => {
   const ref = useRef();
   useOutsideClick(ref, () => toggleMobileMenu(false));
 
@@ -138,36 +179,50 @@ const SidebarMobile = ({ toggleMobileMenu, app_id, theme }) => {
               alt="Workflow"
             />
           </LogoWrapper>
-          <Nav>
-            <MobileSidebarItem
-              theme={theme}
-              link={`/app/${app_id}/dashboard`}
-              toggleMenu={() => toggleMobileMenu(false)}
-              svg={<HomeOutlined />}
-              title="Dashboard"
-            />
-            <MobileSidebarItem
-              theme={theme}
-              link={`/app/${app_id}/readupdate`}
-              toggleMenu={() => toggleMobileMenu(false)}
-              svg={<UserOutlined />}
-              title="Read Update"
-            />
-            <MobileSidebarItem
-              theme={theme}
-              link={`/app/${app_id}/create`}
-              toggleMenu={() => toggleMobileMenu(false)}
-              svg={<FolderOutlined />}
-              title="Create"
-            />
-            <MobileSidebarItem
-              theme={theme}
-              link={`/app/${app_id}/permissions`}
-              toggleMenu={() => toggleMobileMenu(false)}
-              svg={<FolderOutlined />}
-              title="Permissions"
-            />
-          </Nav>
+          <Wrapper4>
+            <Nav>
+              <MobileSidebarItem
+                theme={theme}
+                link={`/app/${app_id}/dashboard`}
+                toggleMenu={() => toggleMobileMenu(false)}
+                svg={<HomeOutlined />}
+                title="Dashboard"
+              />
+              <MobileSidebarItem
+                theme={theme}
+                link={`/app/${app_id}/readupdate`}
+                toggleMenu={() => toggleMobileMenu(false)}
+                svg={<UserOutlined />}
+                title="Read Update"
+              />
+              <MobileSidebarItem
+                theme={theme}
+                link={`/app/${app_id}/create`}
+                toggleMenu={() => toggleMobileMenu(false)}
+                svg={<FolderOutlined />}
+                title="Create"
+              />
+              <MobileSidebarItem
+                theme={theme}
+                link={`/app/${app_id}/permissions`}
+                toggleMenu={() => toggleMobileMenu(false)}
+                svg={<FolderOutlined />}
+                title="Permissions"
+              />
+            </Nav>
+            <Footer>
+              <span>
+                <Bulb />
+                <Span theme={theme}>Switch Theme</Span>
+              </span>
+              <Switch
+                onChange={toggleTheme}
+                defaultChecked={theme === THEMES.DARK}
+                checkedChildren="Dark"
+                unCheckedChildren="Light"
+              />
+            </Footer>
+          </Wrapper4>
         </Sidebar>
       </Wrapper3>
       {/*<!-- Force sidebar to shrink to fit close icon -->*/}
