@@ -5,8 +5,8 @@ import 'react-perfect-scrollbar/dist/css/styles.css';
 import { Layout, Menu, Switch } from 'antd';
 import { HomeOutlined, UserOutlined, FolderOutlined, BulbOutlined } from '@ant-design/icons';
 import { Link } from 'gatsby';
-import LargeLogo from '../../Common/LargeLogo';
-import SmallLogo from '../../Common/SmallLogo';
+import LargeLogo from '../../Common/svgs/LargeLogo';
+import SmallLogo from '../../Common/svgs/SmallLogo';
 import { THEMES } from '../AppLayout';
 import { colors, breakpoints } from '../../../styles/theme';
 
@@ -148,12 +148,7 @@ const SidebarDesktop = ({ theme, toggleTheme, app_id, location, collapsed }) => 
         )}
       </LogoWrapper>
       <SidebarItems>
-        <ScrollBar
-          options={{
-            // Disabled horizontal scrolling, https://github.com/utatti/perfect-scrollbar#options
-            suppressScrollX: true
-          }}
-        >
+        <ScrollBar options={{ suppressScrollX: true }}>
           <Menu mode="inline" theme={theme} selectedKeys={[selectedKey && selectedKey.id]}>
             {menus.map(({ id, route, icon, name }) => (
               <Menu.Item key={id} title={name}>

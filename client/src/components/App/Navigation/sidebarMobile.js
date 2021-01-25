@@ -6,7 +6,7 @@ import useOutsideClick from '../../../hooks/useOutsideClick';
 import { colors, breakpoints } from '../../../styles/theme';
 import MobileSidebarItem from './mobileSidebarItem';
 import Cross from '../svgs/cross';
-import LargeLogo from '../../Common/LargeLogo';
+import LargeLogo from '../../Common/svgs/LargeLogo';
 import { THEMES } from '../AppLayout';
 
 const Wrapper = styled.div`
