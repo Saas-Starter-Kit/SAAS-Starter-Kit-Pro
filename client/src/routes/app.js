@@ -19,7 +19,7 @@ const Routes = ({ location }) => {
   const app_id = splitPath[2];
 
   useEffect(() => {
-    if (authState.user) getRole(app_id, ability, authState);
+    //if (authState.user) getRole(app_id, ability, authState);
   }, [authState]);
 
   return (

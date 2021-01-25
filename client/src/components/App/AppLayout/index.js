@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import moment from 'moment';
 import SidebarDesktop from '../Navigation/sidebarDesktop';
 import SidebarMobile from '../Navigation/sidebarMobile';
-import Header from '../Navigation/header';
+import AppHeader from '../Navigation/appHeader';
 import { colors, breakpoints } from '../../../styles/theme';
 import useWindowSize from '../../../hooks/useWindowSize';
 
@@ -84,7 +84,7 @@ const Layout = ({ children, app_id, location }) => {
         />
       )}
       <Content>
-        <Header
+        <AppHeader
           collapsed={isDesktopMenuCollapsed}
           username="guest"
           notifications={[

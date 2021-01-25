@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import Can from '../../../services/casl';
 import { colors } from '../../../styles/theme';
 import Button from '../../../components/Common/buttons/OriginalButton';
 import Card from '../../../components/Common/Card';
@@ -67,20 +66,16 @@ const Todo = ({
       >
         Edit
       </Button>
-      <Can I="delete" a="Post" passThrough>
-        {(allowed) => (
-          <DeleteButton
-            disabled={!allowed}
-            onClick={() => deleteTodo(todo)}
-            backgroundColor={colors.red500}
-            textColor={colors.white}
-            hoverBackgroundColor={colors.indigo500}
-            activeBackgroundColor={colors.indigo600}
-          >
-            Delete
-          </DeleteButton>
-        )}
-      </Can>
+
+      <DeleteButton
+        onClick={() => deleteTodo(todo)}
+        backgroundColor={colors.red500}
+        textColor={colors.white}
+        hoverBackgroundColor={colors.indigo500}
+        activeBackgroundColor={colors.indigo600}
+      >
+        Delete
+      </DeleteButton>
     </ButtonsWrapper>
     {isEditting && todo.todo_id === editTodoID && (
       <form onSubmit={(event) => putTodo(event, todo)}>

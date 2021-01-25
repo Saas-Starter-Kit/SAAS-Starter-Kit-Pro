@@ -8,6 +8,7 @@ import ApiContext from '../../../utils/apiContext';
 import { colors, breakpoints, fieldStyles } from '../../../styles/theme';
 import * as Yup from 'yup';
 import Can from '../../../services/casl';
+import LoadingOverlay from '../../../components/Common/loadingOverlay';
 
 const ValidSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Email Required')
@@ -106,7 +107,6 @@ const Users = ({ app_id }) => {
       fetchFailure(err);
     });
 
-    console.log(result);
     setUsers(result.data);
     fetchSuccess();
   };
@@ -116,7 +116,7 @@ const Users = ({ app_id }) => {
   return (
     <div>
       <div>Users</div>
-
+      {isLoading && <LoadingOverlay />}
       <Formik validationSchema={ValidSchema} initialValues={{ email: '' }} onSubmit={handleSubmit}>
         {({ values, errors, touched, handleChange, handleBlur, handleSubmit }) => (
           <form onSubmit={handleSubmit}>

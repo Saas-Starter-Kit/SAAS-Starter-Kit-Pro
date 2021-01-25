@@ -1,4 +1,4 @@
-import React from 'React';
+import React from 'react';
 import styled, { css } from 'styled-components';
 import moment from 'moment';
 import { Menu, Layout, Avatar, Popover, Badge, List } from 'antd';
@@ -84,7 +84,7 @@ const LayoutHeader = styled(Layout.Header)`
     `}
 `;
 
-const Button = styled.div`
+const CollapseButton = styled.div`
   width: 72px;
   height: 72px;
   line-height: 72px;
@@ -185,7 +185,7 @@ const ListItemMeta = styled(List.Item.Meta)`
   }
 `;
 
-const Header = ({
+const AppHeader = ({
   avatar,
   username,
   collapsed,
@@ -197,9 +197,9 @@ const Header = ({
   const handleClickMenu = () => {};
   return (
     <LayoutHeader id="layoutHeader" collapsed={collapsed} theme={theme}>
-      <Button onClick={onCollapseChange} theme={theme}>
+      <CollapseButton onClick={onCollapseChange} theme={theme}>
         {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-      </Button>
+      </CollapseButton>
       <RightContainer>
         <StyledPopover
           placement="bottomRight"
@@ -255,4 +255,4 @@ const Header = ({
   );
 };
 
-export default Header;
+export default AppHeader;

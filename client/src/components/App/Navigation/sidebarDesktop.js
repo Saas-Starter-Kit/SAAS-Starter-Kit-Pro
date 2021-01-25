@@ -69,7 +69,7 @@ const StyledSmallLogo = styled(SmallLogo)`
 `;
 
 const SidebarItems = styled.div`
-  height: ~'calc(100vh - 120px)';
+  height: 'calc(100vh - 120px)';
   overflow-x: hidden;
   flex: 1;
   padding: 24px 0;
@@ -94,7 +94,7 @@ const StyledLink = styled(Link)`
 `;
 
 const ItemWrapper = styled.div`
-  font-size: 13px;
+  /*font-size: 13px;*/
 `;
 
 const Footer = styled.div`
@@ -175,8 +175,8 @@ const SidebarDesktop = ({ theme, toggleTheme, app_id, location, collapsed }) => 
           <Switch
             onChange={toggleTheme}
             defaultChecked={theme === THEMES.DARK}
-            checkedChildren='Dark'
-            unCheckedChildren='Light'
+            checkedChildren="Dark"
+            unCheckedChildren="Light"
           />
         </Footer>
       )}
