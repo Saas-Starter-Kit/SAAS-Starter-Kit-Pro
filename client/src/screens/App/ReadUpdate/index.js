@@ -2,10 +2,10 @@ import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import AuthContext from '../../../utils/authContext';
 import ApiContext from '../../../utils/apiContext';
-import { colors } from '../../../styles/theme';
 import Todo from './todo';
 import { Empty, Spin } from 'antd';
 import axios from '../../../services/axios';
+import Card from '../../../components/Common/Card';
 
 const StyledMain = styled.div`
   display: flex;
@@ -15,12 +15,6 @@ const StyledMain = styled.div`
 
 const Title = styled.h1`
   font-size: 1.25rem;
-`;
-
-const Card = styled.div`
-  background-color: ${colors.white};
-  border-radius: 0.375rem;
-  padding: 1rem;
 `;
 
 const todosDummy = [

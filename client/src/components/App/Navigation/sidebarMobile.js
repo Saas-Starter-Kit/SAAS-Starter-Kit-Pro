@@ -1,13 +1,13 @@
 import React, { useRef } from 'react';
 import styled, { keyframes } from 'styled-components';
+import { Switch } from 'antd';
+import { HomeOutlined, UserOutlined, FolderOutlined, BulbOutlined } from '@ant-design/icons';
 import useOutsideClick from '../../../hooks/useOutsideClick';
 import { colors, breakpoints } from '../../../styles/theme';
 import MobileSidebarItem from './mobileSidebarItem';
 import Cross from '../svgs/cross';
-import Home from '../svgs/home';
-import Persons from '../svgs/persons';
-import Folder from '../svgs/folder';
-import LargeLogo from '../../../assets/images/logo/large_logo.svg';
+import LargeLogo from '../../Common/LargeLogo';
+import { THEMES } from '../AppLayout';
 
 const Wrapper = styled.div`
   position: fixed;
@@ -60,15 +60,14 @@ const Wrapper3 = styled.div`
   flex: 1 1 0%;
   display: flex;
   flex-direction: column;
-  max-width: 20rem;
+  max-width: 256px;
   width: 100%;
-  background-color: ${(props) => props.theme.primary};
+  background-color: ${({ theme }) => (theme === THEMES.DARK ? colors.midnight : colors.white)};
 `;
 
 const Sidebar = styled.div`
   flex: 1 1 0%;
   height: 0;
-  padding-top: 1.25rem;
   padding-bottom: 1rem;
   overflow-y: auto;
 `;
@@ -99,26 +98,66 @@ const LogoWrapper = styled.div`
   flex-shrink: 0;
   display: flex;
   align-items: center;
+  justify-content: center;
   padding-left: 1rem;
   padding-right: 1rem;
+  box-shadow: 0 1px 9px -3px rgba(0, 0, 0, 0.2);
+  height: 72px;
 `;
 
-const Logo = styled.img`
-  height: 2rem;
-  width: auto;
+const StyledLogo = styled(LargeLogo)`
+  width: 150px;
 `;
 
 const Nav = styled.nav`
-  margin-top: 1.25rem;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
+  padding: 24px 0;
 `;
 
 const ShrinkDiv = styled.div`
   flex-shrink: 0;
 `;
 
-const SidebarMobile = ({ toggleMobileMenu, app_id }) => {
+const Wrapper4 = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-between;
+  height: calc(100% - 55px);
+  overflow: hidden;
+`;
+
+const Footer = styled.div`
+  width: 100%;
+  height: 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px;
+  overflow: hidden;
+  transition: all 0.3s;
+
+  span {
+    white-space: nowrap;
+    overflow: hidden;
+    font-size: 12px;
+  }
+
+  .anticon {
+    min-width: 14px;
+    margin-right: 4px;
+    font-size: 14px;
+  }
+`;
+
+const Bulb = styled(BulbOutlined)`
+  color: ${colors.doveGray};
+`;
+
+const Span = styled.span`
+  color: ${colors.doveGray};
+`;
+
+const SidebarMobile = ({ toggleMobileMenu, app_id, theme, toggleTheme }) => {
   const ref = useRef();
   useOutsideClick(ref, () => toggleMobileMenu(false));
 
@@ -127,7 +166,7 @@ const SidebarMobile = ({ toggleMobileMenu, app_id }) => {
       <FixedDiv>
         <AbsoluteDiv />
       </FixedDiv>
-      <Wrapper3 ref={ref}>
+      <Wrapper3 ref={ref} theme={theme}>
         <ButtonWrapper>
           <Button onClick={() => toggleMobileMenu(false)} aria-label="Close sidebar">
             <Cross />
@@ -135,34 +174,55 @@ const SidebarMobile = ({ toggleMobileMenu, app_id }) => {
         </ButtonWrapper>
         <Sidebar>
           <LogoWrapper>
-            <Logo src={LargeLogo} alt="Workflow" />
+            <StyledLogo
+              textColor={theme === THEMES.DARK ? colors.white : colors.indigo400}
+              alt="Workflow"
+            />
           </LogoWrapper>
-          <Nav>
-            <MobileSidebarItem
-              link={`/app/${app_id}/dashboard`}
-              toggleMenu={() => toggleMobileMenu(false)}
-              svg={<Home />}
-              title="Dashboard"
-            />
-            <MobileSidebarItem
-              link={`/app/${app_id}/readupdate`}
-              toggleMenu={() => toggleMobileMenu(false)}
-              svg={<Persons />}
-              title="Read Update"
-            />
-            <MobileSidebarItem
-              link={`/app/${app_id}/create`}
-              toggleMenu={() => toggleMobileMenu(false)}
-              svg={<Folder />}
-              title="Create"
-            />
-            <MobileSidebarItem
-              link={`/app/${app_id}/permissions`}
-              toggleMenu={() => toggleMobileMenu(false)}
-              svg={<Folder />}
-              title="Permissions"
-            />
-          </Nav>
+          <Wrapper4>
+            <Nav>
+              <MobileSidebarItem
+                theme={theme}
+                link={`/app/${app_id}/dashboard`}
+                toggleMenu={() => toggleMobileMenu(false)}
+                svg={<HomeOutlined />}
+                title="Dashboard"
+              />
+              <MobileSidebarItem
+                theme={theme}
+                link={`/app/${app_id}/readupdate`}
+                toggleMenu={() => toggleMobileMenu(false)}
+                svg={<UserOutlined />}
+                title="Read Update"
+              />
+              <MobileSidebarItem
+                theme={theme}
+                link={`/app/${app_id}/create`}
+                toggleMenu={() => toggleMobileMenu(false)}
+                svg={<FolderOutlined />}
+                title="Create"
+              />
+              <MobileSidebarItem
+                theme={theme}
+                link={`/app/${app_id}/permissions`}
+                toggleMenu={() => toggleMobileMenu(false)}
+                svg={<FolderOutlined />}
+                title="Permissions"
+              />
+            </Nav>
+            <Footer>
+              <span>
+                <Bulb />
+                <Span theme={theme}>Switch Theme</Span>
+              </span>
+              <Switch
+                onChange={toggleTheme}
+                defaultChecked={theme === THEMES.DARK}
+                checkedChildren="Dark"
+                unCheckedChildren="Light"
+              />
+            </Footer>
+          </Wrapper4>
         </Sidebar>
       </Wrapper3>
       {/*<!-- Force sidebar to shrink to fit close icon -->*/}

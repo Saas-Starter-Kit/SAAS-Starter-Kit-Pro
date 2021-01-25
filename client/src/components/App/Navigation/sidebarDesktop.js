@@ -1,117 +1,187 @@
 import React from 'react';
-import styled, { keyframes } from 'styled-components';
-import { BiArrowFromRight } from 'react-icons/bi';
-import Avatar from '../Avatar/avatarSidebarFull';
+import styled from 'styled-components';
+import ScrollBar from 'react-perfect-scrollbar';
+import 'react-perfect-scrollbar/dist/css/styles.css';
+import { Layout, Menu, Switch } from 'antd';
+import { HomeOutlined, UserOutlined, FolderOutlined, BulbOutlined } from '@ant-design/icons';
+import { Link } from 'gatsby';
+import LargeLogo from '../../Common/LargeLogo';
+import SmallLogo from '../../Common/SmallLogo';
+import { THEMES } from '../AppLayout';
 import { colors, breakpoints } from '../../../styles/theme';
-import SidebarItem from './sidebarItem';
-import Home from '../svgs/home';
-import Persons from '../svgs/persons';
-import Folder from '../svgs/folder';
-import LargeLogo from '../../../assets/images/logo/large_logo.svg'
 
-const Wrapper1 = styled.div`
+const getMenus = (app_id) => [
+  {
+    id: '1',
+    name: 'Dashboard',
+    route: `/app/${app_id}/dashboard`,
+    icon: <HomeOutlined />
+  },
+  {
+    id: '2',
+    name: 'Read Update',
+    route: `/app/${app_id}/readupdate`,
+    icon: <UserOutlined />
+  },
+  {
+    id: '3',
+    name: 'Create',
+    route: `/app/${app_id}/create`,
+    icon: <FolderOutlined />
+  },
+  {
+    id: '4',
+    name: 'Permissions',
+    route: `/app/${app_id}/permissions`,
+    icon: <FolderOutlined />
+  }
+];
+
+const StyledSider = styled(Layout.Sider)`
   display: none;
   @media (min-width: ${breakpoints.medium}) {
-    display: flex;
-    flex-shrink: 0;
+    display: initial;
   }
-`;
-
-const Wrapper2 = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const growSideBar = keyframes`
-from {
-  width: 5.2rem;
-}
-to {
-  width: 14rem;
-}`;
-
-const SidebarWrapper1 = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex: 1 1 0%;
-  background-color: ${(props) => props.theme.primary};
-  width: 14rem;
-  overflow: hidden;
-  animation: ${growSideBar} 0.3s ease-out forwards;
-`;
-
-const SidebarWrapper2 = styled.div`
-  flex: 1 1 0%;
-  display: flex;
-  flex-direction: column;
-  padding-top: 1.25rem;
-  padding-bottom: 1rem;
-  overflow-y: auto;
+  box-shadow: fade(${colors.doveGray}, 10%) 0 0 28px 0;
+  z-index: 10;
+  .ant-layout-sider-children {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
 `;
 
 const LogoWrapper = styled.div`
   display: flex;
-  padding-left: 1.5rem;
+  justify-content: center;
+  align-items: center;
+  padding: 0 24px;
+  height: 72px;
+  box-shadow: 0 1px 9px -3px rgba(0, 0, 0, 0.2);
 `;
 
-const Logo = styled.img`
-  height: 2rem;
-  width: auto;
+const StyledLargeLogo = styled(LargeLogo)`
+  width: 150px;
 `;
 
-const Nav = styled.nav`
-  margin-top: 2rem;
-  flex: 1 1 0%;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
-  background-color: ${(props) => props.theme.primary};
+const StyledSmallLogo = styled(SmallLogo)`
+  width: 36px;
 `;
 
-const fadeInRight = keyframes`
-from {
-  opacity: 0;
-  transform: translateX(-1.5rem);
-}
-to {
-  opacity: 1;
-  transform: translateX(0);
-}`;
+const SidebarItems = styled.div`
+  height: ~'calc(100vh - 120px)';
+  overflow-x: hidden;
+  flex: 1;
+  padding: 24px 0;
 
-const StyledArrow = styled(BiArrowFromRight)`
-  width: 1.5rem;
-  height: 1.5rem;
-  position: absolute;
-  top: 2rem;
-  left: 13rem;
-  color: ${colors.white};
-  background-color: ${(props) => props.theme.primary};
-  border-radius: 0.5rem;
-  cursor: pointer;
-  animation: ${fadeInRight} 0.7s ease-in forwards;
+  &::-webkit-scrollbar-thumb {
+    background-color: transparent;
+  }
+
+  &:hover {
+    &::-webkit-scrollbar-thumb {
+      background-color: rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  .ant-menu-inline {
+    border-right: none;
+  }
 `;
 
-const SidebarDesktop = ({ sidebarHandler, app_id }) => (
-  <Wrapper1>
-    <Wrapper2>
-      <SidebarWrapper1>
-        <SidebarWrapper2>
-          <LogoWrapper>
-            <Logo src={LargeLogo} alt="Workflow" />
-          </LogoWrapper>
-          <Avatar />
-          <Nav>
-            <SidebarItem link={`/app/${app_id}/dashboard`} title="Dashboard" svg={<Home />} />
-            <SidebarItem link={`/app/${app_id}/readupdate`} title="Read Update" svg={<Persons />} />
-            <SidebarItem link={`/app/${app_id}/create`} title="Create" svg={<Folder />} />
-            <SidebarItem link={`/app/${app_id}/permissions`} title="Permissions" svg={<Folder />} />
-          </Nav>
-        </SidebarWrapper2>
-      </SidebarWrapper1>
-      <div onClick={sidebarHandler}>
-        <StyledArrow />
-      </div>
-    </Wrapper2>
-  </Wrapper1>
-);
+const StyledLink = styled(Link)`
+  display: flex;
+`;
+
+const ItemWrapper = styled.div`
+  font-size: 13px;
+`;
+
+const Footer = styled.div`
+  width: 100%;
+  height: 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px;
+  overflow: hidden;
+  transition: all 0.3s;
+
+  span {
+    white-space: nowrap;
+    overflow: hidden;
+    font-size: 12px;
+  }
+
+  .anticon {
+    min-width: 14px;
+    margin-right: 4px;
+    font-size: 14px;
+  }
+`;
+
+const Bulb = styled(BulbOutlined)`
+  color: ${colors.doveGray};
+`;
+
+const Span = styled.span`
+  color: ${colors.doveGray};
+`;
+
+const SidebarDesktop = ({ theme, toggleTheme, app_id, location, collapsed }) => {
+  const menus = getMenus(app_id);
+  const selectedKey = menus.find((menu) => menu.route === location.pathname);
+  return (
+    <StyledSider
+      width={256}
+      theme={theme}
+      breakpoint="lg"
+      trigger={null}
+      collapsible
+      collapsed={collapsed}
+    >
+      <LogoWrapper>
+        {collapsed ? (
+          <StyledSmallLogo />
+        ) : (
+          <StyledLargeLogo textColor={theme === THEMES.DARK ? colors.white : colors.indigo400} />
+        )}
+      </LogoWrapper>
+      <SidebarItems>
+        <ScrollBar
+          options={{
+            // Disabled horizontal scrolling, https://github.com/utatti/perfect-scrollbar#options
+            suppressScrollX: true
+          }}
+        >
+          <Menu mode="inline" theme={theme} selectedKeys={[selectedKey && selectedKey.id]}>
+            {menus.map(({ id, route, icon, name }) => (
+              <Menu.Item key={id} title={name}>
+                <StyledLink to={route || '#'}>
+                  <div>{icon}</div>
+                  {!collapsed && <ItemWrapper>{name}</ItemWrapper>}
+                </StyledLink>
+              </Menu.Item>
+            ))}
+          </Menu>
+        </ScrollBar>
+      </SidebarItems>
+      {!collapsed && (
+        <Footer>
+          <span>
+            <Bulb />
+            <Span theme={theme}>Switch Theme</Span>
+          </span>
+          <Switch
+            onChange={toggleTheme}
+            defaultChecked={theme === THEMES.DARK}
+            checkedChildren='Dark'
+            unCheckedChildren='Light'
+          />
+        </Footer>
+      )}
+    </StyledSider>
+  );
+};
 
 export default SidebarDesktop;

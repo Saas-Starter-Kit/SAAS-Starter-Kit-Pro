@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Router } from '@reach/router';
 
 import AuthContext from '../utils/authContext';
@@ -23,7 +23,7 @@ const Routes = ({ location }) => {
   }, [authState]);
 
   return (
-    <Layout app_id={app_id}>
+    <Layout app_id={app_id} location={location}>
       <Router>
         {/*<PrivateRoute path="/app/:id/dashboard" component={Dashboard} app_id={app_id} />*/}
         <Dashboard app_id={app_id} path="/app/:id/dashboard" />
