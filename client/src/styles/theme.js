@@ -3,7 +3,7 @@ import { css } from 'styled-components';
 export const theme = {
   primary: '#42389D',
   primaryHover: '#5145CD',
-  backgroundLanding: 'lightblue'
+  backgroundLanding: '#F8FAFC'
 };
 
 export const colors = {

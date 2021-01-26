@@ -9,6 +9,7 @@ import Dashboard from '../screens/App/Dashboard';
 import Create from '../screens/App/Create';
 import ReadUpdate from '../screens/App/ReadUpdate';
 import Permissions from '../screens/App/Permissions';
+import Onboarding from '../screens/App/Onboarding';
 import Users from '../screens/App/Users';
 import Layout from '../components/App/AppLayout';
 
@@ -31,6 +32,7 @@ const Routes = ({ location }) => {
         <ReadUpdate app_id={app_id} path="/app/:id/readupdate" />
         <Permissions app_id={app_id} path="/app/:id/permissions" />
         <Users app_id={app_id} path="/app/:id/users" />
+        <Onboarding app_id={app_id} path="/app/:id/onboarding" />
       </Router>
     </Layout>
   );

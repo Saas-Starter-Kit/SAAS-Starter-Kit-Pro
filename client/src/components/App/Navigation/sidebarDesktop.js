@@ -34,6 +34,18 @@ const getMenus = (app_id) => [
     name: 'Permissions',
     route: `/app/${app_id}/permissions`,
     icon: <FolderOutlined />
+  },
+  {
+    id: '5',
+    name: 'Users',
+    route: `/app/${app_id}/users`,
+    icon: <FolderOutlined />
+  },
+  {
+    id: '6',
+    name: 'Onboarding',
+    route: `/app/${app_id}/onboarding`,
+    icon: <FolderOutlined />
   }
 ];
 

@@ -1,6 +1,6 @@
 {
   "name": "saas-starter-kit",
-  "description": "A saas starter",
+  "description": "A saas starter and admin panel for React and Nodejs",
   "author": "Moe Iqbal",
   "dependencies": {
     "@ant-design/icons": "^4.4.0",
@@ -38,6 +38,7 @@
     "react-icons": "^4.1.0",
     "react-instantsearch": "^6.8.2",
     "react-instantsearch-dom": "^6.8.2",
+    "react-joyride": "^2.3.0",
     "react-particles-js": "^3.4.1",
     "react-perfect-scrollbar": "^1.5.8",
     "react-scrollspy": "^3.4.3",
