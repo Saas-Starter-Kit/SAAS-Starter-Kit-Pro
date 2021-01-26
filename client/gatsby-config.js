@@ -30,7 +30,7 @@ module.exports = {
     {
       resolve: `gatsby-source-prismic`,
       options: {
-        repositoryName: `test1qwer`,
+        repositoryName: process.env.GATSBY_PRISMIC_REPO_NAME,
         schemas: {
           post: require('./.prismic/post.json'),
           docs: require('./.prismic/docs.json')
