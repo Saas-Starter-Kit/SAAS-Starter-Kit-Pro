@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const Axios = axios.create({
-  baseURL: 'http://localhost',
+  baseURL: process.env.GATSBY_SERVER_URL,
   timeout: 15000
 });
 
