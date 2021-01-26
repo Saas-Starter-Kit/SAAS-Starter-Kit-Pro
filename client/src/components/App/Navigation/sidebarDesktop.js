@@ -46,6 +46,12 @@ const getMenus = (app_id) => [
     name: 'Onboarding',
     route: `/app/${app_id}/onboarding`,
     icon: <FolderOutlined />
+  },
+  {
+    id: '7',
+    name: 'Machine Learning',
+    route: `/app/${app_id}/machinelearning`,
+    icon: <FolderOutlined />
   }
 ];
 

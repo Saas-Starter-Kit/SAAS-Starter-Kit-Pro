@@ -209,6 +209,27 @@ const SidebarMobile = ({ toggleMobileMenu, app_id, theme, toggleTheme }) => {
                 svg={<FolderOutlined />}
                 title="Permissions"
               />
+              <MobileSidebarItem
+                theme={theme}
+                link={`/app/${app_id}/users`}
+                toggleMenu={() => toggleMobileMenu(false)}
+                svg={<FolderOutlined />}
+                title="Users"
+              />
+              <MobileSidebarItem
+                theme={theme}
+                link={`/app/${app_id}/onboarding`}
+                toggleMenu={() => toggleMobileMenu(false)}
+                svg={<FolderOutlined />}
+                title="Onboarding"
+              />
+              <MobileSidebarItem
+                theme={theme}
+                link={`/app/${app_id}/machinelearning`}
+                toggleMenu={() => toggleMobileMenu(false)}
+                svg={<FolderOutlined />}
+                title="Machine Learning"
+              />
             </Nav>
             <Footer>
               <span>

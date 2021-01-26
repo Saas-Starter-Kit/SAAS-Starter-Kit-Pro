@@ -12,6 +12,7 @@ import Permissions from '../screens/App/Permissions';
 import Onboarding from '../screens/App/Onboarding';
 import Users from '../screens/App/Users';
 import Layout from '../components/App/AppLayout';
+import MachineLearning from '../screens/App/Machine Learning';
 
 const Routes = ({ location }) => {
   const ability = useContext(CaslContext);
@@ -33,6 +34,7 @@ const Routes = ({ location }) => {
         <Permissions app_id={app_id} path="/app/:id/permissions" />
         <Users app_id={app_id} path="/app/:id/users" />
         <Onboarding app_id={app_id} path="/app/:id/onboarding" />
+        <MachineLearning app_id={app_id} path="/app/:id/machinelearning" />
       </Router>
     </Layout>
   );
