@@ -17,7 +17,7 @@ const MachineLearning = () => {
       }
     };
 
-    //ml algo only cares about values not keys
+    //set values for ml algorithm
     let data = qs.stringify({
       value1: event.target.bedrooms.value,
       value2: event.target.bathrooms.value,
@@ -34,10 +34,8 @@ const MachineLearning = () => {
       value13: event.target.renovate.value
     });
 
-    console.log(data);
-
     let result = await axios.post(mlServerUrl, data, headers).catch((err) => console.log(err));
-    console.log(result.data.prediction[0]);
+
     setPrediction(result.data.prediction[0]);
   };
 

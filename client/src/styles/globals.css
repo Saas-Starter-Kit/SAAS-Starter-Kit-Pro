@@ -1,4 +1,5 @@
 @import './headerStyles.css';
+@import './normalize.css';
 
 html,
 body {
