@@ -1,16 +1,17 @@
 import React, { useContext, useEffect, useState } from 'react';
-
 import styled from 'styled-components';
 import { Formik } from 'formik';
 import { Link } from 'gatsby';
+import { useLocation } from '@reach/router';
+import GoogleButton from 'react-google-button';
+
 import AuthContext from '../../../utils/authContext';
 import ApiContext from '../../../utils/apiContext';
-import { ValidSchema, LoginAuth } from '../helpers';
+import { LoginAuth } from '../helpers';
+import { colors, breakpoints, fieldStyles } from '../../../styles/theme';
 
 import LoadingOverlay from '../../../components/Common/loadingOverlay';
-import { colors, breakpoints, fieldStyles } from '../../../styles/theme';
 import LoginFormHeader from './loginFormHeader';
-import GoogleButton from 'react-google-button';
 
 const Wrapper = styled.div`
   background-color: ${colors.gray50};
@@ -158,13 +159,14 @@ const StyledSpan = styled.span`
   padding: 0 0.7rem;
 `;
 
-const Login = ({ location }) => {
+const Login = () => {
+  const location = useLocation();
   const { firebase, LogIn, LogOut } = useContext(AuthContext);
-  const [appId, setAppId] = useState();
-  const [isInviteFlow, setInviteFlow] = useState();
   const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
   const { isLoading } = apiState;
-  let isPaymentFlow;
+  const [appId, setAppId] = useState();
+  const [isInviteFlow, setInviteFlow] = useState();
+  const [isPaymentFlow, setPaymentFlow] = useState();
 
   //extract data from query params
   useEffect(() => {
@@ -180,7 +182,7 @@ const Login = ({ location }) => {
   }, []);
 
   useEffect(() => {
-    if (location.state) isPaymentFlow = location.state.isPaymentFlow;
+    if (location.state) setPaymentFlow(location.state.isPaymentFlow);
   }, [location]);
 
   const handleSubmit = async (values) => {

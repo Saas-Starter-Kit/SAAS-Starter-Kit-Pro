@@ -6,6 +6,7 @@ import LoadingOverlay from '../../../components/Common/loadingOverlay';
 import { colors, breakpoints, fieldStyles } from '../../../styles/theme';
 import ResetFormHeader from './resetFormHeader';
 import ResetSuccess from './resetSuccessMessage';
+import ApiContext from '../../../utils/apiContext';
 
 const Wrapper = styled.div`
   background-color: ${colors.gray50};
@@ -103,52 +104,37 @@ const Card = styled.div`
   }
 `;
 
-const ErrorResponse = styled.div`
-  font-size: 0.9rem;
-  color: red;
-  font-weight: 100;
-  margin-bottom: 1rem;
-`;
-
 const PasswordReset = () => {
-  const [isLoading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
   const { firebase, LogIn, LogOut } = useContext(AuthContext);
-  const [resMessage, setResMessage] = useState('');
+  const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
+  const { isLoading } = apiState;
+  const [success, setSuccess] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setLoading(true);
+    fetchInit();
 
     let email = event.target.email.value;
 
-    let res = await firebase
+    await firebase
       .auth()
       .sendPasswordResetEmail(email)
-      .then(() => {
-        setLoading(false);
-        setSuccess(true);
-      })
-      .catch((error) => {
-        setLoading(false);
-        setResMessage(error.message);
-        return;
+      .catch((err) => {
+        fetchFailure(err);
       });
 
-    if (!res) {
-      setLoading(false);
-    }
+    setSuccess(true);
+    fetchSuccess();
   };
 
   return (
     <Wrapper>
       {isLoading && <LoadingOverlay />}
       {!success ? (
-        <>
+        <div>
           <ResetFormHeader />
           <CardWrapper>
             <Card>
-              <ErrorResponse>{resMessage}</ErrorResponse>
               <form onSubmit={handleSubmit}>
                 <Label htmlFor="email">Email:</Label>
                 <InputWrapper>
@@ -160,7 +146,7 @@ const PasswordReset = () => {
               </form>
             </Card>
           </CardWrapper>
-        </>
+        </div>
       ) : (
         <ResetSuccess />
       )}

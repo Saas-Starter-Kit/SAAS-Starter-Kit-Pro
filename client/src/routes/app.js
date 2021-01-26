@@ -1,20 +1,22 @@
 import React, { useContext, useEffect } from 'react';
 import { Router } from '@reach/router';
+import { useLocation } from '@reach/router';
 
 import AuthContext from '../utils/authContext';
 import CaslContext from '../utils/caslContext';
 import { getRole } from './helpers';
 
+import Layout from '../components/App/AppLayout';
 import Dashboard from '../screens/App/Dashboard';
 import Create from '../screens/App/Create';
 import ReadUpdate from '../screens/App/ReadUpdate';
 import Permissions from '../screens/App/Permissions';
 import Onboarding from '../screens/App/Onboarding';
 import Users from '../screens/App/Users';
-import Layout from '../components/App/AppLayout';
 import MachineLearning from '../screens/App/Machine Learning';
 
-const Routes = ({ location }) => {
+const Routes = () => {
+  const location = useLocation();
   const ability = useContext(CaslContext);
   const { authState } = useContext(AuthContext);
   const splitPath = location.pathname.split('/');
@@ -25,7 +27,7 @@ const Routes = ({ location }) => {
   }, [authState]);
 
   return (
-    <Layout app_id={app_id} location={location}>
+    <Layout app_id={app_id}>
       <Router>
         {/*<PrivateRoute path="/app/:id/dashboard" component={Dashboard} app_id={app_id} />*/}
         <Dashboard app_id={app_id} path="/app/:id/dashboard" />

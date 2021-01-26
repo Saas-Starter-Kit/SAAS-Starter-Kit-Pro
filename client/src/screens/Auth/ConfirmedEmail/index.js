@@ -1,11 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { Link } from 'gatsby';
+import { useLocation } from '@reach/router';
+
 import AuthContext from '../../../utils/authContext';
 import ApiContext from '../../../utils/apiContext';
 import axios from '../../../services/axios';
-import LoadingOverlay from '../../../components/Common/loadingOverlay';
-import { Link } from 'gatsby';
 
-const ConfirmedEmail = ({ location }) => {
+import LoadingOverlay from '../../../components/Common/loadingOverlay';
+
+const ConfirmedEmail = () => {
+  const location = useLocation();
   const { authState, firebase, LogIn } = useContext(AuthContext);
   const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
   const { isLoading } = apiState;

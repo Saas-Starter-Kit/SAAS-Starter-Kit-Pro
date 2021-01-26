@@ -1,14 +1,17 @@
 import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Formik } from 'formik';
+import GoogleButton from 'react-google-button';
+import { useStaticQuery, graphql } from 'gatsby';
+import { useLocation } from '@reach/router';
+
 import AuthContext from '../../../utils/authContext';
 import ApiContext from '../../../utils/apiContext';
 import { ValidSchema, SignupAuth } from '../helpers';
-import LoadingOverlay from '../../../components/Common/loadingOverlay';
 import { colors, breakpoints, fieldStyles } from '../../../styles/theme';
+
+import LoadingOverlay from '../../../components/Common/loadingOverlay';
 import SignUpFormHeader from './signupFormHeader';
-import GoogleButton from 'react-google-button';
-import { useStaticQuery, graphql } from 'gatsby';
 
 const Wrapper = styled.div`
   background-color: ${colors.gray50};
@@ -130,14 +133,15 @@ const StyledSpan = styled.span`
   padding: 0 0.7rem;
 `;
 
-const Signup = ({ location }) => {
+const Signup = () => {
+  const location = useLocation();
+  const data = useStaticQuery(staticQuery);
+  const domainUrl = data.site.siteMetadata.siteUrl;
   const { firebase, LogIn, LogOut } = useContext(AuthContext);
   const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
   const { isLoading } = apiState;
   const [appId, setAppId] = useState();
   const [isInviteFlow, setInviteFlow] = useState();
-  const data = useStaticQuery(staticQuery);
-  const domainUrl = data.site.siteMetadata.siteUrl;
 
   //extract data from query params
   useEffect(() => {

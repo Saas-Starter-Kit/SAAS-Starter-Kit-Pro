@@ -1,16 +1,20 @@
 import React, { useContext, useEffect } from 'react';
+import { Link } from 'gatsby';
+import { useLocation } from '@reach/router';
+
 import AuthContext from '../../../utils/authContext';
 import ApiContext from '../../../utils/apiContext';
 import axios from '../../../services/axios';
-import LoadingOverlay from '../../../components/Common/loadingOverlay';
-import { Link } from 'gatsby';
 
-const ConfirmedInvite = ({ location }) => {
+import LoadingOverlay from '../../../components/Common/loadingOverlay';
+
+const ConfirmedInvite = () => {
+  const location = useLocation();
+  const splitPath = location.pathname.split('/');
+  const app_id = splitPath[3];
   const { authState } = useContext(AuthContext);
   const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
   const { isLoading } = apiState;
-  const splitPath = location.pathname.split('/');
-  const app_id = splitPath[3];
 
   useEffect(() => {
     if (authState.user) createRole();

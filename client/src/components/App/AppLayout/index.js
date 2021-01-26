@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import moment from 'moment';
+import { useLocation } from '@reach/router';
+
+import { colors, breakpoints } from '../../../styles/theme';
+import useWindowSize from '../../../hooks/useWindowSize';
+
 import SidebarDesktop from '../Navigation/sidebarDesktop';
 import SidebarMobile from '../Navigation/sidebarMobile';
 import AppHeader from '../Navigation/appHeader';
-import { colors, breakpoints } from '../../../styles/theme';
-import useWindowSize from '../../../hooks/useWindowSize';
 
 export const THEMES = {
   LIGHT: 'light',
@@ -48,7 +51,9 @@ const ContentWrapper = styled.div`
   }
 `;
 
-const Layout = ({ children, app_id, location }) => {
+const Layout = ({ children, app_id }) => {
+  const location = useLocation();
+
   // ant d's Menu.Item within sidebarDesktop causes an extra re-render after mobileMenu has been set to true
   // meaning that it stops the mobile sidebar from ever showing. Not sure why this happens, so working around
   // this by not rendering the sidebar for mobile screens

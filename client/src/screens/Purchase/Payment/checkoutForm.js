@@ -1,16 +1,16 @@
 import React, { useState, useEffect, useContext } from 'react';
+import styled from 'styled-components';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import { useLocation } from '@reach/router';
+import { FaRegCreditCard } from 'react-icons/fa';
+import { navigate } from 'gatsby';
 
 import AuthContext from '../../../utils/authContext';
 import ApiContext from '../../../utils/apiContext';
-
-import { colors, breakpoints } from '../../../styles/theme';
-import styled from 'styled-components';
-import { FaRegCreditCard } from 'react-icons/fa';
-import LoadingOverlay from '../../../components/Common/loadingOverlay';
 import axios from '../../../services/axios';
-import { navigate } from 'gatsby';
+import { colors, breakpoints } from '../../../styles/theme';
 
+import LoadingOverlay from '../../../components/Common/loadingOverlay';
 import visa from '../../../assets/images/credit card icons/visa.png';
 import discover from '../../../assets/images/credit card icons/discover.png';
 import mastercard from '../../../assets/images/credit card icons/mastercard.png';
@@ -119,7 +119,8 @@ const StyledCardDisplay = styled.div`
   margin: 1rem;
 `;
 
-const CheckoutForm = ({ location }) => {
+const CheckoutForm = () => {
+  const location = useLocation();
   const { authState } = useContext(AuthContext);
   const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
   const { isLoading } = apiState;

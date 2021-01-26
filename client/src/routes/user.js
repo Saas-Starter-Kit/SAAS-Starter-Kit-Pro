@@ -4,11 +4,11 @@ import { AccountSettings, PaymentSettings, SubscriptionSettings } from '../scree
 import Dashboard from '../screens/User/Dashboard';
 import ConfirmedInvite from '../screens/User/ConfirmedInvite';
 
-const Routes = ({ location }) => {
+const Routes = () => {
   return (
     <Router>
       <Dashboard path="/user/dashboard" />
-      <ConfirmedInvite location={location} path="/user/confirmedinvite/:id" />
+      <ConfirmedInvite path="/user/confirmedinvite/:id" />
       <AccountSettings path="/user/settings/account" />
       <PaymentSettings path="/user/settings/payment" />
       <SubscriptionSettings path="/user/settings/subscription" />
