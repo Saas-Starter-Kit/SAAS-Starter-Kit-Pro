@@ -12,7 +12,6 @@ export const LoginAuth = async (
   isInviteFlow,
   app_id
 ) => {
-  console.log(isInviteFlow, app_id);
   //Get Auth id token from Firebase
   let token = await firebase
     .auth()
@@ -31,22 +30,8 @@ export const LoginAuth = async (
   let validToken = isValidToken(authServerRes.data.token, fetchFailure);
   let userId = validToken.user;
 
-  LogintoContext(userId, authRes, authServerRes, LogIn, isPaymentFlow, isInviteFlow, app_id);
-};
-
-//Save user Info to Context
-export const LogintoContext = async (
-  user_id,
-  authRes,
-  authServerRes,
-  LogIn,
-  isPaymentFlow,
-  isInviteFlow,
-  app_id
-) => {
-  let email = authRes.user.email;
   let username = authRes.user.displayName;
-  let id = user_id;
+  let id = userId;
   let photo = authRes.user.photoURL;
   let provider = authRes.user.providerData[0].providerId;
   let stripeCustomerKey = authServerRes.data.stripe_customer_id;
