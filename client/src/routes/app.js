@@ -7,13 +7,16 @@ import CaslContext from '../utils/caslContext';
 import { getRole } from './helpers';
 
 import Layout from '../components/App/AppLayout';
-import Dashboard from '../screens/App/Dashboard';
-import Create from '../screens/App/Create';
-import ReadUpdate from '../screens/App/ReadUpdate';
-import Permissions from '../screens/App/Permissions';
-import Onboarding from '../screens/App/Onboarding';
-import Users from '../screens/App/Users';
-import MachineLearning from '../screens/App/Machine Learning';
+
+import {
+  Create,
+  Dashboard,
+  ReadUpdate,
+  Permissions,
+  Onboarding,
+  Users,
+  MachineLearning
+} from '../screens/App';
 
 const Routes = () => {
   const location = useLocation();

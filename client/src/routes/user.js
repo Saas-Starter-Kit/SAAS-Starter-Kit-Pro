@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { Router } from '@reach/router';
+
 import { AccountSettings, PaymentSettings, SubscriptionSettings } from '../screens/User/Settings';
 import Dashboard from '../screens/User/Dashboard';
 import ConfirmedInvite from '../screens/User/ConfirmedInvite';

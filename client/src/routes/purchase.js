@@ -1,11 +1,13 @@
 import React, { useContext, useEffect } from 'react';
 import { Router } from '@reach/router';
 
-import Payment from '../screens/Purchase/Payment';
-import CheckAuth from '../screens/Purchase/CheckAuth';
-import PlanSelect from '../screens/Purchase/PlanSelect';
-import ConfirmSub from '../screens/Purchase/ConfirmSubscription';
-import SubscriptionExists from '../screens/Purchase/SubscriptionExists';
+import {
+  Payment,
+  CheckAuth,
+  PlanSelect,
+  ConfirmSub,
+  SubscriptionExists
+} from '../screens/Purchase';
 
 const Routes = () => {
   return (
