@@ -17,11 +17,11 @@ const CheckAuth = () => {
 
   useEffect(() => {
     if (authState.user) {
-      if (!authState.user.subscription_id) {
+      if (authState.user.subscription_id) {
         navigate('/purchase/subcriptionexists');
+      } else if (authState.isAuthenticated) {
+        navigate('/purchase/plan');
       }
-    } else if (authState.isAuthenticated) {
-      navigate('/purchase/plan');
     }
   }, [authState]);
 

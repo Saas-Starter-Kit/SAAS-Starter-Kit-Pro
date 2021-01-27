@@ -85,7 +85,7 @@ const SubscriptionSettings = () => {
       fetchFailure(err);
     });
 
-    if (subscription.data.plan.id) setSubscription(subscription.data);
+    if (subscription.data.plan) setSubscription(subscription.data);
   };
 
   const cancelSubscription = async () => {
@@ -103,7 +103,7 @@ const SubscriptionSettings = () => {
     fetchSuccess(true, subscriptionCancel);
     //replace with antd success message
     setModalSub(false);
-    navigate('/login');
+    navigate('/auth/login');
   };
 
   /* 
