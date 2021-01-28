@@ -6,6 +6,7 @@ import DocsSidebar from '../screens/Marketing/Docs/docsSidebar';
 
 const Wrapper = styled.div`
   display: flex;
+  height: 100%;
 `;
 
 const Sidebar = styled.div`
