@@ -69,6 +69,7 @@ const DocsSidebar = () => {
     <Container>
       <StyledLayout>
         <StyledSider>
+          <Search />
           <StyledMenu mode="inline" selectedKeys={[selectedKey]} defaultOpenKeys={[openKey]}>
             {groupedDocsArr.map((docGroup) =>
               docGroup[0] ? (
@@ -87,7 +88,6 @@ const DocsSidebar = () => {
                 ))
               )
             )}
-            <Search />
           </StyledMenu>
         </StyledSider>
       </StyledLayout>
