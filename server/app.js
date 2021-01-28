@@ -11,6 +11,9 @@ import morgan from 'morgan';
 import { errorHandler } from './src/Utils/errorHandler.js';
 import { unhandledRejectionHandler } from './src/Utils/unhandledRejectionHandler.js';
 
+//initialize sentry
+import './src/Config/sentry.js';
+
 import auth from './src/API/auth.js';
 import todoApi from './src/API/todos.js';
 import healthApi from './src/API/health.js';
