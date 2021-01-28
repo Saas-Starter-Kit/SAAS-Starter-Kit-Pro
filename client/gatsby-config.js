@@ -28,6 +28,12 @@ module.exports = {
       options: { prefixes: [`/purchase/*`] }
     },
     {
+      resolve: `gatsby-plugin-google-gtag`,
+      options: {
+        trackingIds: [process.env.GATSBY_GOOGLE_ANALYTICS_ID]
+      }
+    },
+    {
       resolve: `gatsby-source-prismic`,
       options: {
         repositoryName: process.env.GATSBY_PRISMIC_REPO_NAME,

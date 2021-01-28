@@ -2,6 +2,7 @@ import jwt_decode from 'jwt-decode';
 import { navigate } from 'gatsby';
 import * as Yup from 'yup';
 import axios from '../../services/axios';
+import { setAnalyticsUserId, sendEventToAnalytics } from '../../services/analytics';
 
 export const LoginAuth = async (
   authRes,
@@ -49,6 +50,15 @@ export const LoginAuth = async (
 
   console.log(isInviteFlow);
 
+  //save event and user id to Google Analytics
+  let parameters = {
+    method: 'Email'
+  };
+
+  sendEventToAnalytics('login', parameters);
+  setAnalyticsUserId(id);
+
+  //save user info to React context
   await LogIn(user);
 
   //navigate to correct route based on flow

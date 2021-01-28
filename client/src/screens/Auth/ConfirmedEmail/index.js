@@ -5,6 +5,7 @@ import { useLocation } from '@reach/router';
 import AuthContext from '../../../utils/authContext';
 import ApiContext from '../../../utils/apiContext';
 import axios from '../../../services/axios';
+import { setAnalyticsUserId, sendEventToAnalytics } from '../../../services/analytics';
 
 import LoadingOverlay from '../../../components/Common/loadingOverlay';
 
@@ -61,7 +62,13 @@ const ConfirmedEmail = () => {
 
     user = { ...user, ...stripeCustomerKey };
 
-    console.log(user);
+    //save event and user id to Google Analytics
+    let parameters = {
+      method: 'Email'
+    };
+
+    sendEventToAnalytics('signup', parameters);
+    setAnalyticsUserId(id);
 
     //Login to context
     await LogIn(user);

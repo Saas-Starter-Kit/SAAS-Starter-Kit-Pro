@@ -1,11 +1,13 @@
 import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
+import { Spin } from 'antd';
+
 import AuthContext from '../../../utils/authContext';
 import ApiContext from '../../../utils/apiContext';
-
 import { colors } from '../../../styles/theme';
-import { Spin } from 'antd';
 import axios from '../../../services/axios';
+import { sendEventToAnalytics } from '../../../services/analytics';
+
 import Button from '../../../components/Common/buttons/OriginalButton';
 import Card from '../../../components/Common/Card';
 import FieldLabel from '../../../components/Common/forms/FieldLabel';
@@ -50,6 +52,14 @@ const CreateTask = ({ app_id }) => {
     await axios.post(`/api/post/todo`, data).catch((err) => {
       fetchFailure(err);
     });
+
+    //send event data to Google Analytics
+    let eventType = 'submit_form';
+    let parameters = {
+      description: 'user created todo'
+    };
+
+    sendEventToAnalytics(eventType, parameters);
 
     setTitle('');
     setDescription('');
