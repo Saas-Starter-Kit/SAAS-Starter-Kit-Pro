@@ -56,7 +56,11 @@ export const colors = {
   midnight: '#001529',
   gallery: '#F0F0F0',
   lilyWhite: '#E6F7FF',
-  alabaster: '#FAFAFA'
+  alabaster: '#FAFAFA',
+  athensGray: '#F7F7F8',
+  opaqueViolet: '#15094080',
+  lavenderBlush: '#FCEEF0',
+  roman: '#DB5461'
 };
 
 export const breakpoints = {
