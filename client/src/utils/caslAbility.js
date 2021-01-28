@@ -32,6 +32,6 @@ export const updateRole = (ability, role) => {
   ability.update(rules);
 };
 
-let defaultRole = 'user';
+let defaultRole = null;
 
 export const ability = buildAbilityFor(defaultRole);
