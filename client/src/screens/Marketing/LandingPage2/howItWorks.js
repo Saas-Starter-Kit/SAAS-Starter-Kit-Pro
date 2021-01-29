@@ -87,6 +87,7 @@ const fadeInRight = keyframes`
 `;
 
 const ImageMain = styled.img`
+  opacity: ${(props) => (props.isVisible ? 1 : 0)};
   max-width: 100%;
   height: auto;
   animation: ${(props) => (props.isVisible ? fadeInRight : null)} 0.8s ease-in forwards;

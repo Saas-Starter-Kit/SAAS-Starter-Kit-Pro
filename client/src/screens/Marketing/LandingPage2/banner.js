@@ -78,10 +78,9 @@ const Title = styled.h2`
   letter-spacing: -0.025em;
   line-height: 1;
   margin-bottom: 1rem;
-  font-size: 1.25rem;
+  font-size: 2rem;
   @media (min-width: ${breakpoints.small}) {
-    margin-bottom: 1.75rem;
-    font-size: 1.75rem;
+    margin-bottom: 1.8rem;
   }
   @media (min-width: ${breakpoints.medium}) {
     font-size: 2rem;
