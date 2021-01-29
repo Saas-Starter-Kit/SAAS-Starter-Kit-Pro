@@ -44,6 +44,7 @@ const CreateTask = ({ app_id }) => {
   const postTodo = async (event) => {
     event.preventDefault();
     fetchInit();
+
     let author = user ? user.username : 'Guest';
     let title = event.target.title.value;
     let description = event.target.description.value;
