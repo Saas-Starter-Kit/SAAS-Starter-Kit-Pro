@@ -51,4 +51,36 @@
   width: 100%;
 }
 
-/* Header Link Styles End */
+/* Mobile Header Link Styles used in Landing Page 2 */
+
+.header_link_mobile {
+  margin-left: 2.5rem;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+  text-decoration: none;
+  cursor: pointer;
+  position: relative;
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: black;
+}
+
+.header_link_mobile:hover {
+  margin-left: 2.5rem;
+  text-decoration: none;
+  cursor: pointer;
+  position: relative;
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #eb4d4b;
+}
+
+.header_link_active_mobile {
+  margin-left: 2.5rem;
+  text-decoration: none;
+  cursor: pointer;
+  position: relative;
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #eb4d4b;
+}

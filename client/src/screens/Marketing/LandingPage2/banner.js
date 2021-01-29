@@ -1,24 +1,17 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { colors, breakpoints } from '../../../styles/theme';
 import { PrimaryButton } from '../../../components/Common/buttons/PrimaryButton';
 import { SecondaryButton } from '../../../components/Common/buttons/SecondaryButton';
 import Particles from './particles';
-import BannerBackground from './images/bannerObjects/bannerBackground.jpg';
 import BannerObject1 from './images/bannerObjects/bannerObject1.png';
 import BannerObject2 from './images/bannerObjects/bannerObject2.png';
 
 const Wrapper = styled.section`
-  padding-top: 210px;
-  padding-bottom: 160px;
-  background-image: url(${BannerBackground});
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  min-height: 100vh;
+  padding-top: 12rem;
+  padding-bottom: 5rem;
+  margin-bottom: 5rem;
   position: relative;
-  overflow: hidden;
   @media (max-width: ${breakpoints.large}) {
     padding-top: 180px;
     padding-bottom: 60px;
@@ -39,8 +32,8 @@ const Container1 = styled.div`
   margin-right: auto;
   width: 100%;
   max-width: none;
-  padding-left: 30px;
-  padding-right: 30px;
+  padding-left: 2rem;
+  padding-right: 1rem;
   @media (min-width: ${breakpoints.medium}) {
     max-width: 750px;
     width: 100%;
@@ -66,7 +59,7 @@ const Container2 = styled.div`
 `;
 
 const Container3 = styled.div`
-  padding: 0 15px;
+  padding: 0 1rem;
   width: 100%;
   @media (min-width: ${breakpoints.small}) {
     width: 70%;
@@ -79,78 +72,50 @@ const Container3 = styled.div`
   }
 `;
 
-const DiscountLabel = styled.div`
-  display: inline-block;
-  border-radius: 65px;
-  border: 1px solid ${colors.athensGray};
-  box-shadow: 0px 7px 25px 0px rgba(22, 53, 76, 0.05);
-  margin-bottom: 30px;
-  background-color: ${colors.white};
-  padding: 7px 15px;
-  @media (min-width: ${breakpoints.medium}) {
-    padding: 7px 25px;
-  }
-`;
-
-const Amount = styled.span`
-  font-size: 14px;
-  color: ${colors.cinnabar};
-  font-weight: 700;
-  margin-bottom: 0;
-  margin-right: 0.4em;
-`;
-
-const Frequency = styled.span`
-  color: ${colors.firefly};
-  font-weight: 500;
-  margin-bottom: 0;
-  font-size: 13px;
-  @media (min-width: ${breakpoints.small}) {
-    font-size: 14px;
-  }
-`;
-
 const Title = styled.h2`
   color: ${colors.firefly};
   font-weight: 700;
   letter-spacing: -0.025em;
-  line-height: 1.5;
-  margin-bottom: 20px;
-  font-size: 22px;
+  line-height: 1;
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
   @media (min-width: ${breakpoints.small}) {
-    margin-bottom: 25px;
-    font-size: 34px;
+    margin-bottom: 1.75rem;
+    font-size: 1.75rem;
   }
   @media (min-width: ${breakpoints.medium}) {
-    font-size: 34px;
+    font-size: 2rem;
+    margin-top: -4rem;
   }
   @media (min-width: ${breakpoints.large}) {
-    font-size: 55px;
+    font-size: 3.25rem;
   }
 `;
 
 const Description = styled.p`
-  font-size: 16px;
-  color: ${colors.brightGray};
+  font-size: 1rem;
   line-height: 1.75;
-  margin-bottom: 0;
 `;
 
 const ButtonWrapper = styled.div`
-  margin-top: 40px;
+  margin-top: 2.1rem;
   @media (max-width: ${breakpoints.medium}) {
-    margin-bottom: 30px;
+    margin-bottom: 2rem;
   }
 `;
 
 const BannerImageContainer1 = styled.div`
   position: absolute;
+  margin-top: 5rem;
   width: 50%;
   height: 100%;
   top: 0;
   right: 0;
   display: flex;
   align-items: center;
+  @media (max-width: ${breakpoints.large}) {
+    margin-top: 4rem;
+  }
   @media (max-width: ${breakpoints.medium}) {
     display: none;
   }
@@ -167,10 +132,28 @@ const DashboardWrapper = styled.div`
   right: 0;
 `;
 
-const Image = styled.img`
+const fadeInLeft = keyframes`
+  from {
+    opacity: 0;
+    transform: translateX(1.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+`;
+
+const ImageBackground = styled.img`
   display: block;
   max-width: 100%;
   height: auto;
+`;
+
+const ImageOverlay = styled.img`
+  display: block;
+  max-width: 100%;
+  height: auto;
+  animation: ${fadeInLeft} 0.8s ease-in forwards;
 `;
 
 const Banner = () => (
@@ -179,10 +162,6 @@ const Banner = () => (
     <Container1>
       <Container2>
         <Container3>
-          <DiscountLabel>
-            <Amount>25% Discount</Amount>
-            <Frequency>on every first project</Frequency>
-          </DiscountLabel>
           <Title>Ultimate Platform to monitor your best workflow.</Title>
           <Description>
             We help to create SaaS product that are innovative, differentiated with a superb User
@@ -198,9 +177,9 @@ const Banner = () => (
     </Container1>
     <BannerImageContainer1>
       <BannerImageContainer2>
-        <Image src={BannerObject1} alt="BannerObject1" />
+        <ImageBackground src={BannerObject1} alt="BannerObject1" />
         <DashboardWrapper>
-          <Image src={BannerObject2} alt="BannerObject2" />
+          <ImageOverlay src={BannerObject2} alt="BannerObject2" />
         </DashboardWrapper>
       </BannerImageContainer2>
     </BannerImageContainer1>

@@ -84,7 +84,7 @@ const Permissions = () => {
       </Can>
       <div>
         <Spin tip="Loading..." spinning={isLoading}>
-          <p>Permissions Also Need to be Setup Server Side</p>
+          <div>Permissions Also Need to be Setup Server Side</div>
           <div>Click below to make an api request that only admin can access</div>
           <button onClick={apiPermission}>Submit</button>
           <p>{privateData}</p>

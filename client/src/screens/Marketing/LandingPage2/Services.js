@@ -1,12 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-import '../../../assets/css/flaticon.css';
+import './assets/css/flaticon.css';
 import { breakpoints, colors } from '../../../styles/theme';
+import { FcCandleSticks } from 'react-icons/fc';
 
 const SERVICES = [
   {
     id: 1,
-    icon: 'flaticon-creative',
+    icon: FcCandleSticks,
     color1: 'rgba(236, 0, 140, 0.75)',
     color2: 'rgba(255, 103, 103, 0.75)',
     title: 'Powerful Features',
@@ -15,7 +16,7 @@ const SERVICES = [
   },
   {
     id: 2,
-    icon: 'flaticon-briefing',
+    icon: FcCandleSticks,
     color1: 'rgba(110, 72, 170, 0.75)',
     color2: 'rgba(192, 91, 210, 0.75)',
     title: 'Easy Invoicing',
@@ -24,7 +25,7 @@ const SERVICES = [
   },
   {
     id: 3,
-    icon: 'flaticon-flask',
+    icon: FcCandleSticks,
     color1: 'rgba(241, 39, 17, 0.7)',
     color2: 'rgba(245, 175, 25, 0.7)',
     title: 'Easy To Use',
@@ -48,12 +49,12 @@ const Container1 = styled.div`
     max-width: 1170px;
     width: 100%;
   }
-  padding: 80px 30px 180px;
+  padding: 5rem 2rem 10rem;
   @media (max-width: ${breakpoints.medium}) {
-    padding: 60px 30px 30px;
+    padding: 4rem 2rem 2rem;
   }
   @media (max-width: ${breakpoints.large}) {
-    padding: 60px 30px 60px;
+    padding: 4rem 2rem 4rem;
   }
 `;
 
@@ -64,33 +65,32 @@ const Container2 = styled.div`
 `;
 
 const TitleWrapper = styled.div`
-  margin-bottom: 40px;
+  margin-bottom: 3rem;
   @media (min-width: ${breakpoints.large}) {
-    margin-bottom: 80px;
+    margin-bottom: 5rem;
   }
 `;
 
 const Label = styled.span`
   display: block;
   text-align: center;
-  font-size: 14px;
+  font-size: 0.9rem;
   letter-spacing: 0.15em;
   font-weight: 700;
   color: ${colors.royalBlue};
-  margin-bottom: 10px;
+  margin-bottom: 0.6rem;
 `;
 
 const Title = styled.h2`
   text-align: center;
-  line-height: 28px;
-  font-size: 20px;
+  line-height: 1.7rem;
+  font-size: 1.4rem;
   @media (min-width: ${breakpoints.small}) {
-    font-size: 24px;
+    font-size: 2rem;
   }
   font-weight: 500;
   color: ${colors.firefly};
   letter-spacing: -0.025em;
-  margin-bottom: 0px;
 `;
 
 const ServiceWrapper = styled.div`
@@ -117,41 +117,41 @@ const ServiceWrapper = styled.div`
 const IconWrapper = styled.div`
   background: linear-gradient(-60deg, ${({ color1 }) => color1}, ${({ color2 }) => color2});
   flex-shrink: 0;
-  width: 70px;
-  height: 70px;
+  width: 5rem;
+  height: 5rem;
   @media (min-width: ${breakpoints.medium}) {
-    width: 75px;
-    height: 75px;
+    width: 5rem;
+    height: 5rem;
   }
   @media (min-width: ${breakpoints.xxl}) {
-    width: 84px;
-    height: 84px;
+    width: 5.5rem;
+    height: 5.5rem;
   }
   border-radius: 50%;
   color: ${colors.white};
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 32px;
+  font-size: 2rem;
   @media (min-width: ${breakpoints.medium}) {
-    font-size: 36px;
+    font-size: 2.1rem;
   }
   overflow: hidden;
-  margin-bottom: 20px;
+  margin-bottom: 1.4rem;
   @media (min-width: ${breakpoints.xxl}) {
-    margin-bottom: 30px;
+    margin-bottom: 2rem;
   }
   position: relative;
-  border-bottom-left-radius: 6px;
+  border-bottom-left-radius: 0.4rem;
   .flaticon-flask {
     &:before {
-      margin-left: 8px;
+      margin-left: 0.6rem;
     }
   }
   &:before,
   &:after {
     content: '';
-    width: 28px;
+    width: 1.8rem;
     height: calc(100% + 30px);
     position: absolute;
   }
@@ -170,19 +170,19 @@ const Header = styled.h2`
   font-weight: 400;
   color: ${colors.firefly};
   line-height: 1.5;
-  font-size: 18px;
+  font-size: 1.025rem;
   @media (min-width: ${breakpoints.small}) {
-    font-size: 20px;
+    font-size: 1.6rem;
   }
   margin-top: 2rem;
-  margin-bottom: 10px;
+  margin-bottom: 0.7rem;
   @media (min-width: ${breakpoints.xxl}) {
-    margin-bottom: 20px;
+    margin-bottom: 1.4rem;
   }
 `;
 
 const Description = styled.p`
-  font-size: 15px;
+  font-size: 0.9rem;
   line-height: 1.75;
   color: ${colors.brightGray};
 `;
@@ -197,7 +197,7 @@ const Services = () => (
       {SERVICES.map(({ id, icon, color1, color2, title, description }) => (
         <ServiceWrapper key={id}>
           <IconWrapper color1={color1} color2={color2}>
-            <i className={icon} />
+            {icon()}
           </IconWrapper>
           <Header>{title}</Header>
           <Description>{description}</Description>

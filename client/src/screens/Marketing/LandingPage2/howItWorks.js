@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { useRef, useState, useEffect } from 'react';
+import styled, { keyframes } from 'styled-components';
 import { breakpoints, colors } from '../../../styles/theme';
 import Background from './images/howItWorks/background.png';
 import MainImage from './images/howItWorks/mainImage.png';
@@ -75,6 +75,23 @@ const Image = styled.img`
   height: auto;
 `;
 
+const fadeInRight = keyframes`
+  from {
+    opacity: 0;
+    transform: translateX(-2rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+`;
+
+const ImageMain = styled.img`
+  max-width: 100%;
+  height: auto;
+  animation: ${(props) => (props.isVisible ? fadeInRight : null)} 0.8s ease-in forwards;
+`;
+
 const ContentContainer1 = styled.div`
   margin-left: auto;
   margin-right: auto;
@@ -136,27 +153,60 @@ const Description = styled.p`
   }
 `;
 
-const HowItWorks = () => (
-  <Container>
-    <ImagesContainer>
-      <BackgroundContainer>
-        <Image src={Background} />
-      </BackgroundContainer>
-      <MainImageContainer>
-        <Image src={MainImage} />
-      </MainImageContainer>
-    </ImagesContainer>
-    <ContentContainer1>
-      <ContentContainer2>
-        <Header>Make your website growth with next level visitors</Header>
-        <Description>
-          For Enhanced performance we use LiteSpeed Web Server, HTTP/2, PHP7. We make your website
-          faster, which will help you to increase search ranking!
-        </Description>
-        <PrimaryButton>HOW IT WORKS</PrimaryButton>
-      </ContentContainer2>
-    </ContentContainer1>
-  </Container>
-);
+const HowItWorks = () => {
+  const intersectTarget = useRef(null);
+  const [isVisible, setTarget] = useState(false);
+
+  useEffect(() => {
+    const opts = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.5
+    };
+
+    const callback = (list) => {
+      list.forEach((entry) => {
+        let intersectingContainer = entry.target.className.includes('image');
+
+        if (entry.isIntersecting && intersectingContainer) {
+          setTarget(true);
+          console.log(isVisible);
+        }
+      });
+    };
+
+    const observerScroll = new IntersectionObserver(callback, opts);
+
+    observerScroll.observe(intersectTarget.current);
+  }, []);
+
+  return (
+    <Container>
+      <ImagesContainer>
+        <BackgroundContainer>
+          <Image src={Background} />
+        </BackgroundContainer>
+        <MainImageContainer>
+          <ImageMain
+            isVisible={isVisible}
+            ref={intersectTarget}
+            className="image"
+            src={MainImage}
+          />
+        </MainImageContainer>
+      </ImagesContainer>
+      <ContentContainer1>
+        <ContentContainer2>
+          <Header>Make your website growth with next level visitors</Header>
+          <Description>
+            For Enhanced performance we use LiteSpeed Web Server, HTTP/2, PHP7. We make your website
+            faster, which will help you to increase search ranking!
+          </Description>
+          <PrimaryButton>HOW IT WORKS</PrimaryButton>
+        </ContentContainer2>
+      </ContentContainer1>
+    </Container>
+  );
+};
 
 export default HowItWorks;

@@ -1,4 +1,4 @@
-//this is a boilerplate to test new permissions
+//this is a boilerplate to demonstrate how to use permissions
 
 export const Permissions = async (req, res) => {
   if (!req.ability.can('read', 'admin', 'password')) {
