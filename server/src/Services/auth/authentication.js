@@ -86,7 +86,7 @@ export const updateUsername = async (req, res) => {
   let queryResult = await db.query(text, values);
 
   if (queryResult.rows.length === 0) {
-    res.send(500).send({
+    res.status(500).send({
       type: 'Database Logic Error',
       message: 'Update Failed, please try again or cantact support'
     });
@@ -107,7 +107,7 @@ export const updateEmail = async (req, res) => {
   let queryResult = await db.query(text, values);
 
   if (queryResult.rows.length === 0) {
-    res.send(500).send({
+    res.status(500).send({
       type: 'Database Logic Error',
       message: 'Update Failed, please try again or cantact support'
     });

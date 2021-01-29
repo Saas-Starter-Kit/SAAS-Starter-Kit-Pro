@@ -10,13 +10,14 @@ import morgan from 'morgan';
 
 import { errorHandler } from './src/Utils/errorHandler.js';
 import { unhandledRejectionHandler } from './src/Utils/unhandledRejectionHandler.js';
+import { permissionsMiddleware } from './src/Config/permissions.js';
 
 //initialize sentry
 import './src/Config/sentry.js';
 
 import auth from './src/API/auth.js';
 import todoApi from './src/API/todos.js';
-import healthApi from './src/API/health.js';
+import utilsApi from './src/API/utils.js';
 import stripeApi from './src/API/stripe.js';
 import stripeWebhook from './src/API/stripeWebhooks.js';
 import appApi from './src/API/app.js';
@@ -34,9 +35,10 @@ app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(passport.initialize());
+app.use(permissionsMiddleware);
 
 //API routes
-app.use('/', healthApi);
+app.use('/', utilsApi);
 app.use('/stripe', stripeApi);
 app.use('/auth', auth);
 app.use('/api', todoApi);
