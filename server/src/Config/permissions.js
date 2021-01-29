@@ -33,16 +33,3 @@ export const permissionsMiddleware = (req, _, next) => {
   req.ability = defineAbilityFor(role);
   next();
 };
-
-export const checkPermissions = (ability, res, action, subject, fields) => {
-  try {
-    if (!ability.can(action, subject, fields)) {
-      return res
-        .status(403)
-        .send({ type: '403 Forbidden', message: 'User does not have access to this resource' });
-    }
-  } catch (err) {
-    console.log(err);
-  }
-  return;
-};
