@@ -120,7 +120,11 @@ const NavBar = () => {
               </Link>
 
               <Nav>
-                <Link className="header_link" activeClassName="header_active_link" to="/pricing">
+                <Link
+                  className="header_link"
+                  activeClassName="header_active_link"
+                  to="/pricing/pricing2"
+                >
                   Pricing
                 </Link>
 

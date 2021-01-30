@@ -11,12 +11,17 @@ const Permissions = () => {
   const ability = useContext(CaslContext);
   const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
   const { isLoading } = apiState;
-
+  const [isClient, setClient] = useState(false);
   const [privateData, setPrivateData] = useState();
   const [isAdmin, setAdmin] = useState(true);
 
+  //meant to address React hydration issue
   useEffect(() => {
-    setTimeout(() => updateRole(ability, 'admin'), 100);
+    setClient(true);
+  }, []);
+
+  useEffect(() => {
+    updateRole(ability, 'admin');
   }, []);
 
   const apiPermission = async () => {
@@ -48,48 +53,52 @@ const Permissions = () => {
 
   return (
     <div>
-      <h2>Your Current Role is:</h2>
-      {isAdmin ? <p>Admin</p> : <p>User</p>}
-      <div>Click Below to Change Current Role:</div>
-      <button onClick={roleHandler}> Change </button>
-      <Can I="read" a="admin post">
-        <p>Only Admin can see Text</p>
-      </Can>
-      <Can I="read" a="post">
-        <p>User and Admin can see Text</p>
-      </Can>
-      <p>Render Button but make it disabled for non-admins</p>
-      <Can I="create" a="Post" passThrough>
-        {(allowed) => <button disabled={!allowed}>Save</button>}
-      </Can>
-      <p>The optional third prop "field" allows for more fine grained control</p>
-      <Can I="read" a="article" field="title">
-        <div>Title</div>
-      </Can>
-      <Can I="read" a="article" field="description">
-        <div>Description</div>
-      </Can>
-      <Can I="read" a="article" field="total views">
-        <div>User can't see this field</div>
-        <div>3,212</div>
-      </Can>
+      {isClient && (
+        <div>
+          <h2>Your Current Role is:</h2>
+          {isAdmin ? <p>Admin</p> : <p>User</p>}
+          <div>Click Below to Change Current Role:</div>
+          <button onClick={roleHandler}> Change </button>
+          <Can I="read" a="admin post">
+            <p>Only Admin can see Text</p>
+          </Can>
+          <Can I="read" a="post">
+            <p>User and Admin can see Text</p>
+          </Can>
+          <p>Render Button but make it disabled for non-admins</p>
+          <Can I="create" a="Post" passThrough>
+            {(allowed) => <button disabled={!allowed}>Save</button>}
+          </Can>
+          <p>The optional third prop "field" allows for more fine grained control</p>
+          <Can I="read" a="article" field="title">
+            <div>Title</div>
+          </Can>
+          <Can I="read" a="article" field="description">
+            <div>Description</div>
+          </Can>
+          <Can I="read" a="article" field="total views">
+            <div>User can't see this field</div>
+            <div>3,212</div>
+          </Can>
 
-      <br />
-      <div>
-        Admin has all permissions by default, but can be explicitly denied certain permissions
-      </div>
-      <Can I="read" a="user" field="password">
-        <div>User can see, but admin cant see</div>
-        <div>UserPassWord123</div>
-      </Can>
-      <div>
-        <Spin tip="Loading..." spinning={isLoading}>
-          <div>Permissions Also Need to be Setup Server Side</div>
-          <div>Click below to make an api request that only admin can access</div>
-          <button onClick={apiPermission}>Submit</button>
-          <p>{privateData}</p>
-        </Spin>
-      </div>
+          <br />
+          <div>
+            Admin has all permissions by default, but can be explicitly denied certain permissions
+          </div>
+          <Can I="read" a="user" field="password">
+            <div>User can see, but admin cant see</div>
+            <div>UserPassWord123</div>
+          </Can>
+          <div>
+            <Spin tip="Loading..." spinning={isLoading}>
+              <div>Permissions Also Need to be Setup Server Side</div>
+              <div>Click below to make an api request that only admin can access</div>
+              <button onClick={apiPermission}>Submit</button>
+              <p>{privateData}</p>
+            </Spin>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

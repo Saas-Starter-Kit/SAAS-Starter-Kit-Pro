@@ -259,20 +259,19 @@ const Header = () => {
           {mobileMenu ? <MobileMenu mobileMenuHandler={mobileMenuHandler} /> : null}
         </MenuWrapper>
         <Nav>
-          {/* Uncomment for Flyout Menu
-            <SolutionsWrapper ref={ref}>
-            <SolutionsButton onClick={menuHandler} type='button'>
+          <SolutionsWrapper ref={ref}>
+            <SolutionsButton onClick={menuHandler} type="button">
               <span>Solutions</span>
-              <Chevron src={ChevronDown} alt='down arrow' />
+              <Chevron src={ChevronDown} alt="down arrow" />
             </SolutionsButton>
             {menu ? (
               <FlyoutMenuWrapper>
                 <FlyoutMenu />
               </FlyoutMenuWrapper>
             ) : null}
-          </SolutionsWrapper>*/}
+          </SolutionsWrapper>
 
-          <Link className="header_link" activeClassName="header_active_link" to="/pricing">
+          <Link className="header_link" activeClassName="header_active_link" to="/pricing/pricing1">
             Pricing
           </Link>
 
