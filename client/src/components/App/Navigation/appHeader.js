@@ -7,7 +7,9 @@ import {
   RightOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined,
-  UserOutlined
+  UserOutlined,
+  SettingOutlined,
+  LogoutOutlined
 } from '@ant-design/icons';
 import { IoNotificationsOutline } from 'react-icons/io5';
 
@@ -257,13 +259,13 @@ const AppHeader = ({
             <Menu.Item disabled key="Loggedin">
               Logged in as {username}
             </Menu.Item>
-            <Menu.Item key="user">
+            <Menu.Item icon={<UserOutlined />} key="user">
               <Link to="/user/dashboard">User Dashboard</Link>
             </Menu.Item>
-            <Menu.Item key="settings">
+            <Menu.Item icon={<SettingOutlined />} key="settings">
               <Link to="/user/settings/account">Settings</Link>
             </Menu.Item>
-            <Menu.Item onClick={logout} key="SignOut">
+            <Menu.Item icon={<LogoutOutlined />} onClick={logout} key="SignOut">
               Sign out
             </Menu.Item>
           </SubMenu>
