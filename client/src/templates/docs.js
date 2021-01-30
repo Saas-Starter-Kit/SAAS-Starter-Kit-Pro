@@ -6,10 +6,16 @@ import DocsSidebar from '../screens/Marketing/Docs/docsSidebar';
 
 const Wrapper = styled.div`
   display: flex;
+  height: 100%;
 `;
 
 const Sidebar = styled.div`
-  width: 30%;
+  width: 200px;
+`;
+
+const Content = styled.div`
+  width: calc(100% - 200px);
+  padding: 1rem 3vw;
 `;
 
 const Docs = ({ data }) => {
@@ -21,12 +27,12 @@ const Docs = ({ data }) => {
       <Sidebar>
         <DocsSidebar />
       </Sidebar>
-      <div>
+      <Content>
         <h1>{title}</h1>
         <div style={{ borderRadius: '3rem' }}>
           <SliceZone body={body} />
         </div>
-      </div>
+      </Content>
     </Wrapper>
   );
 };
