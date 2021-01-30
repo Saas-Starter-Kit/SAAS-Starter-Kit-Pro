@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { InstantSearch } from 'react-instantsearch-dom';
 import { connectSearchBox } from 'react-instantsearch/connectors';
 import { Drawer } from 'antd';
@@ -64,6 +64,14 @@ const Input = styled.input`
 
 const SearchBox = ({ currentRefinement, refine }) => {
   const [showDrawer, setShowDrawer] = useState(false);
+  const input = useRef();
+  useEffect(() => {
+    if (input && input.current) {
+      setTimeout(() => {
+        input.current.focus();
+      }, 1);
+    }
+  }, [showDrawer]);
   return (
     <Container>
       <LogoContainer>
@@ -83,6 +91,7 @@ const SearchBox = ({ currentRefinement, refine }) => {
             <SearchContainer>
               <FiSearch size={18} color={colors.gray600} />
               <Input
+                ref={input}
                 type="search"
                 placeholder="Search..."
                 value={currentRefinement}
