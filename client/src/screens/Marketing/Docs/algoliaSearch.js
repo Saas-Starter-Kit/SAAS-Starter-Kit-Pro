@@ -80,28 +80,26 @@ const SearchBox = ({ currentRefinement, refine }) => {
           <StyledFiSearch size={20} onClick={() => setShowDrawer(!showDrawer)} />
         </IconContainer>
       </LogoContainer>
-      {showDrawer && (
-        <StyledDrawer
-          placement="right"
-          onClose={() => setShowDrawer(false)}
-          visible={showDrawer}
-          closeIcon={<StyledFiArrowRight size={18} />}
-        >
-          <form noValidate action="" role="search">
-            <SearchContainer>
-              <FiSearch size={18} color={colors.gray600} />
-              <Input
-                ref={input}
-                type="search"
-                placeholder="Search..."
-                value={currentRefinement}
-                onChange={(event) => refine(event.currentTarget.value)}
-              />
-            </SearchContainer>
-          </form>
-          <Results />
-        </StyledDrawer>
-      )}
+      <StyledDrawer
+        placement="right"
+        onClose={() => setShowDrawer(false)}
+        visible={showDrawer}
+        closeIcon={<StyledFiArrowRight size={18} />}
+      >
+        <form noValidate action="" role="search">
+          <SearchContainer>
+            <FiSearch size={18} color={colors.gray600} />
+            <Input
+              ref={input}
+              type="search"
+              placeholder="Search..."
+              value={currentRefinement}
+              onChange={(event) => refine(event.currentTarget.value)}
+            />
+          </SearchContainer>
+        </form>
+        <Results />
+      </StyledDrawer>
     </Container>
   );
 };
