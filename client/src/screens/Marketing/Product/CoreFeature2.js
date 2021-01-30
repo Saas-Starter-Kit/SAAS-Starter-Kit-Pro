@@ -21,13 +21,13 @@ const Wrapper = styled.div`
 const Container = styled.div`
   margin-left: auto;
   margin-right: auto;
-  margin-top: -10rem;
   padding: 4rem 1rem 4rem 1rem;
   @media (min-width: ${breakpoints.small}) {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
   }
   @media (min-width: ${breakpoints.large}) {
+    margin-top: -10rem;
     padding: 6rem 2rem 6rem 2rem;
     max-width: 1280px;
   }
