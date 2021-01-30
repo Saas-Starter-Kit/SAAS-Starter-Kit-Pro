@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { connectHits } from 'react-instantsearch-dom';
 import { connectSearchBox } from 'react-instantsearch/connectors';
+
 import SearchList from './SearchList';
 import { AiOutlineFileSearch } from 'react-icons/ai';
 import { colors } from '../../../styles/theme';

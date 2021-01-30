@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import { Layout, Menu } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import 'antd/dist/antd.css';
+
 import Search from './algoliaSearch';
 import { colors } from '../../../styles/theme';
 
@@ -28,7 +29,7 @@ const StyledLayout = styled(Layout)`
 `;
 
 const StyledSider = styled(Sider)`
-  width: 200px;
+  width: 16rem;
 `;
 
 const StyledMenu = styled(Menu)`

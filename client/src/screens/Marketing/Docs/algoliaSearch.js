@@ -65,6 +65,7 @@ const Input = styled.input`
 const SearchBox = ({ currentRefinement, refine }) => {
   const [showDrawer, setShowDrawer] = useState(false);
   const input = useRef();
+
   useEffect(() => {
     if (input && input.current) {
       setTimeout(() => {
@@ -72,6 +73,7 @@ const SearchBox = ({ currentRefinement, refine }) => {
       }, 1);
     }
   }, [showDrawer]);
+
   return (
     <Container>
       <LogoContainer>

@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled, { css } from 'styled-components';
+import { Link, navigate } from 'gatsby';
 import moment from 'moment';
 import { Menu, Layout, Avatar, Popover, Badge, List } from 'antd';
 import {
@@ -9,6 +10,8 @@ import {
   UserOutlined
 } from '@ant-design/icons';
 import { IoNotificationsOutline } from 'react-icons/io5';
+
+import AuthContext from '../../../utils/authContext';
 import { breakpoints, colors } from '../../../styles/theme';
 import { THEMES } from '../AppLayout';
 
@@ -115,17 +118,17 @@ const StyledPopover = styled(Popover)`
   }
 `;
 
-const Greeting = styled.span`
-  color: ${colors.dustyGray};
-  margin-right: 4px;
+const StyledAvatar = styled(Avatar)`
+  margin-left: 1rem;
+  margin-bottom: 0.5rem;
 `;
 
-const StyledAvatar = styled(Avatar)`
-  margin-left: 8px;
+const AvatarWrapper = styled.div`
+  margin-right: 1rem;
 `;
 
 const Notification = styled.div`
-  padding: 24px 0;
+  padding: 1rem;
   width: 320px;
 `;
 
@@ -142,7 +145,7 @@ const ClearButton = styled.div`
 
 const NotificationItem = styled(List.Item)`
   transition: all 0.3s;
-  padding: 12px 24px;
+  padding: 1rem;
   cursor: pointer;
   &:hover {
     background-color: ${({ theme }) => (theme === THEMES.DARK ? colors.firefly : colors.whisper)};
@@ -194,7 +197,13 @@ const AppHeader = ({
   onAllNotificationsRead,
   theme
 }) => {
-  const handleClickMenu = () => {};
+  const { LogOut } = useContext(AuthContext);
+
+  const logout = () => {
+    LogOut();
+    navigate('/auth/login');
+  };
+
   return (
     <LayoutHeader id="layoutHeader" collapsed={collapsed} theme={theme}>
       <CollapseButton onClick={onCollapseChange} theme={theme}>
@@ -237,17 +246,26 @@ const AppHeader = ({
             <IconFont />
           </IconButton>
         </StyledPopover>
-        <Menu key="user" mode="horizontal" onClick={handleClickMenu} theme={theme}>
+        <Menu key="user" mode="horizontal" theme={theme}>
           <SubMenu
             title={
-              <React.Fragment>
-                <Greeting>Hi,</Greeting>
-                <span>{username}</span>
+              <AvatarWrapper>
                 {avatar ? <StyledAvatar src={avatar} /> : <StyledAvatar icon={<UserOutlined />} />}
-              </React.Fragment>
+              </AvatarWrapper>
             }
           >
-            <Menu.Item key="SignOut">Sign out</Menu.Item>
+            <Menu.Item disabled key="Loggedin">
+              Logged in as {username}
+            </Menu.Item>
+            <Menu.Item key="user">
+              <Link to="/user/dashboard">User Dashboard</Link>
+            </Menu.Item>
+            <Menu.Item key="settings">
+              <Link to="/user/settings/account">Settings</Link>
+            </Menu.Item>
+            <Menu.Item onClick={logout} key="SignOut">
+              Sign out
+            </Menu.Item>
           </SubMenu>
         </Menu>
       </RightContainer>

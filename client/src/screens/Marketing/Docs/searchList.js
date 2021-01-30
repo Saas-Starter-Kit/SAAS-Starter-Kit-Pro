@@ -14,7 +14,7 @@ const Paragraph = styled.p`
 `;
 
 const SearchList = ({ hit }) => {
-  const excerpt = hit.contentItems[0].substring(0, 20);
+  const excerpt = hit.contentItems[0].substring(0, 90);
   console.log(hit);
 
   return (

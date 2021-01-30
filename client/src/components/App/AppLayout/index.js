@@ -54,9 +54,7 @@ const ContentWrapper = styled.div`
 const Layout = ({ children, app_id }) => {
   const location = useLocation();
 
-  // ant d's Menu.Item within sidebarDesktop causes an extra re-render after mobileMenu has been set to true
-  // meaning that it stops the mobile sidebar from ever showing. Not sure why this happens, so working around
-  // this by not rendering the sidebar for mobile screens
+  //handle antd sidebar rerender issue
   const windowSize = useWindowSize();
   const breakpoint = breakpoints.medium.substring(0, breakpoints.medium.length - 2);
   const isMobile = windowSize.width <= breakpoint;
