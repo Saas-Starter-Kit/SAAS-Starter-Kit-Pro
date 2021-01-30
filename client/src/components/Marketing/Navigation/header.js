@@ -244,6 +244,7 @@ const Header = () => {
 
   useOutsideClick(ref, () => toggleMenu(false));
   useOutsideClick(refMobile, () => toggleMobileMenu(false));
+
   return (
     <Container1>
       <Container2>
@@ -261,7 +262,7 @@ const Header = () => {
         <Nav>
           <SolutionsWrapper ref={ref}>
             <SolutionsButton onClick={menuHandler} type="button">
-              <span>Solutions</span>
+              Solutions
               <Chevron src={ChevronDown} alt="down arrow" />
             </SolutionsButton>
             {menu ? (

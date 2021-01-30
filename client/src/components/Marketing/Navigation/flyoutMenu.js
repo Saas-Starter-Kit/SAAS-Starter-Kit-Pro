@@ -1,11 +1,11 @@
-import React from "react"
-import styled from "styled-components"
-import { Link } from "gatsby"
-import { colors, breakpoints, transform } from "../../../styles/theme"
-import ChartBar from '../../../assets/images/icons/chart-bar.svg'
-import CursorClick from '../../../assets/images/icons/cursor-click.svg'
-import ShieldCheck from '../../../assets/images/icons/shield-check.svg'
-import ViewGrid from '../../../assets/images/icons/view-grid.svg'
+import React from 'react';
+import styled from 'styled-components';
+import { Link } from 'gatsby';
+import { colors, breakpoints, transform } from '../../../styles/theme';
+import ChartBar from '../../../assets/images/icons/chart-bar.svg';
+import CursorClick from '../../../assets/images/icons/cursor-click.svg';
+import ShieldCheck from '../../../assets/images/icons/shield-check.svg';
+import ViewGrid from '../../../assets/images/icons/view-grid.svg';
 
 const Container1 = styled.div`
   position: absolute;
@@ -22,19 +22,16 @@ const Container1 = styled.div`
     left: 50%;
     --transform-translate-x: -50%;
   }
-`
+`;
 
 const Container2 = styled.div`
   border-radius: 0.5rem;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
-    0 4px 6px -2px rgba(0, 0, 0, 0.05);
-`
+`;
 
 const Container3 = styled.div`
   border-radius: 0.5rem;
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
   overflow: hidden;
-`
+`;
 
 const Container4 = styled.div`
   z-index: 20;
@@ -52,13 +49,13 @@ const Container4 = styled.div`
   @media (min-width: ${breakpoints.large}) {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-`
+`;
 
 const MenuImg = styled.img`
   height: 2rem;
   width: 2rem;
   color: white;
-`
+`;
 
 const Item = styled.div`
   margin: -0.75rem;
@@ -70,11 +67,7 @@ const Item = styled.div`
   &:hover {
     background-color: ${colors.gray50};
   }
-  transition-property: background-color, border-color, color, fill, stroke,
-    opacity, box-shadow, transform;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-`
+`;
 
 const MenuImageWrapper = styled.div`
   flex-shrink: 0;
@@ -90,25 +83,25 @@ const MenuImageWrapper = styled.div`
     height: 3rem;
     width: 3rem;
   }
-`
+`;
 
 const TextWrapper = styled.div`
   margin-top: 0.25rem;
   margin-left: 1rem;
-`
+`;
 
 const Title = styled.p`
   font-size: 1rem;
   line-height: 1.5rem;
   font-weight: 500;
   color: ${colors.gray900};
-`
+`;
 
 const Description = styled.p`
   font-size: 0.875rem;
   line-height: 1.25rem;
   color: ${colors.gray500};
-`
+`;
 
 const FlyoutMenu = () => (
   <Container1>
@@ -123,8 +116,7 @@ const FlyoutMenu = () => (
               <TextWrapper>
                 <Title>Analytics</Title>
                 <Description>
-                  Get a better understanding of where your traffic is coming
-                  from.
+                  Get a better understanding of where your traffic is coming from.
                 </Description>
               </TextWrapper>
             </Item>
@@ -149,9 +141,7 @@ const FlyoutMenu = () => (
               </MenuImageWrapper>
               <TextWrapper>
                 <Title>Security</Title>
-                <Description>
-                  Your customers data will be safe and secure.
-                </Description>
+                <Description>Your customers data will be safe and secure.</Description>
               </TextWrapper>
             </Item>
           </Link>
@@ -162,9 +152,7 @@ const FlyoutMenu = () => (
               </MenuImageWrapper>
               <TextWrapper>
                 <Title>Integrations</Title>
-                <Description>
-                  Connect with third-party tools that you’re already using.
-                </Description>
+                <Description>Connect with third-party tools that you’re already using.</Description>
               </TextWrapper>
             </Item>
           </Link>
@@ -172,6 +160,6 @@ const FlyoutMenu = () => (
       </Container3>
     </Container2>
   </Container1>
-)
+);
 
-export default FlyoutMenu
+export default FlyoutMenu;
