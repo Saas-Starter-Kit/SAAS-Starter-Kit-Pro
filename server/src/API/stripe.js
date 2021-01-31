@@ -9,7 +9,8 @@ import {
   CreateSetupIntent,
   GetWallet,
   AttachPaymentMethod,
-  RemovePaymentMethod
+  RemovePaymentMethod,
+  CreatePaymentIntent
 } from '../Services/stripe/stripeHelpers.js';
 
 import {
@@ -27,6 +28,8 @@ router.post('/wallet', asyncHandler(CreateSetupIntent));
 router.post('/remove-payment', asyncHandler(RemovePaymentMethod));
 
 router.post('/attach-payment', asyncHandler(AttachPaymentMethod));
+
+router.get('/payment-intent', asyncHandler(CreatePaymentIntent));
 
 /* Subscription Routes */
 router.get('/get-subscription', asyncHandler(GetSubscription));

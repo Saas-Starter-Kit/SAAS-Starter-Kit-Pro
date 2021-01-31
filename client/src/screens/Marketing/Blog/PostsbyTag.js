@@ -16,8 +16,6 @@ const PostsbyTag = () => {
   const { edges } = allPrismicPost;
   const tag = location.search.split('=')[1];
 
-  console.log(tag);
-
   let Posts = edges.filter((edge) => edge.node.tags.includes(tag));
 
   return (
