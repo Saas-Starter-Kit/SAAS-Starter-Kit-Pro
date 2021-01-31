@@ -2,53 +2,41 @@ import React from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 import { Link } from 'gatsby';
 import styled from 'styled-components';
+import { useLocation } from '@reach/router';
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
 `;
 
-const Blog = () => {
+const PostsbyTag = () => {
   const data = useStaticQuery(staticQuery);
+  const location = useLocation();
   const { allPrismicPost } = data;
   const { edges } = allPrismicPost;
+  const tag = location.search.split('=')[1];
 
-  const blogLinks = edges;
+  console.log(tag);
 
-  let featuredArticle = edges.filter((edge) => edge.node.tags.includes('featured'));
-  featuredArticle = featuredArticle[0];
-
-  console.log(blogLinks);
-
-  let topArticles = edges.filter((edge) => edge.node.tags.includes('top article'));
-  console.log(topArticles);
+  let Posts = edges.filter((edge) => edge.node.tags.includes(tag));
 
   return (
     <Wrapper>
-      <div>
-        <h3>Featured:</h3>
-      </div>
-      <div>
-        <h3>Top Articles:</h3>
-      </div>
-      <h3>Recent Articles</h3>
-      {blogLinks.map((blogLink) => (
+      <h3>Showing Results for tag: {tag}</h3>
+      {Posts.map((post) => (
         <div>
-          <Link to={`/blog/${blogLink.node.uid}`}>{blogLink.node.data.title.text}</Link>
-          <p>{blogLink.node.data.date}</p>
-          {blogLink.node.tags.map((tag) => (
-            <Link to={`/tag/?tag=${tag}`}>{tag}</Link>
-          ))}
+          <Link to={`/blog/${post.node.uid}`}>{post.node.data.title.text}</Link>
+          <p>{post.node.data.date}</p>
         </div>
       ))}
     </Wrapper>
   );
 };
 
-export default Blog;
+export default PostsbyTag;
 
 const staticQuery = graphql`
-  query BlogAll {
+  query PostsbyTag {
     allPrismicPost {
       edges {
         node {
