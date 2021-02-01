@@ -1,6 +1,9 @@
 const queries = require('./src/utils/algoliaQuery');
 require('dotenv').config();
 
+//disable sentry for development
+const sentryDSN = process.env.NODE_ENV == 'development' ? '' : process.env.GATSBY_SENTRY_DNS;
+
 module.exports = {
   siteMetadata: {
     defaultTitle: `Gatsby SAAS Starter`,
@@ -43,13 +46,13 @@ module.exports = {
         }
       }
     },
-    //{
-    //  resolve: '@sentry/gatsby',
-    //  options: {
-    //    dsn: process.env.GATSBY_SENTRY_DNS,
-    //    sampleRate: 1
-    //  }
-    //},
+    {
+      resolve: '@sentry/gatsby',
+      options: {
+        dsn: sentryDSN,
+        sampleRate: 1
+      }
+    },
     {
       resolve: `gatsby-plugin-algolia`,
       options: {
