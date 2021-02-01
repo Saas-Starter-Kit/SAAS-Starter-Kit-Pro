@@ -43,13 +43,13 @@ module.exports = {
         }
       }
     },
-    {
-      resolve: '@sentry/gatsby',
-      options: {
-        dsn: process.env.GATSBY_SENTRY_DNS,
-        sampleRate: 1
-      }
-    },
+    //{
+    //  resolve: '@sentry/gatsby',
+    //  options: {
+    //    dsn: process.env.GATSBY_SENTRY_DNS,
+    //    sampleRate: 1
+    //  }
+    //},
     {
       resolve: `gatsby-plugin-algolia`,
       options: {

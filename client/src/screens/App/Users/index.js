@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Formik } from 'formik';
 import { useStaticQuery, graphql } from 'gatsby';
@@ -89,9 +89,7 @@ const Users = ({ app_id }) => {
     let inviterDisplayName = authState.user.username;
     let inviteRecipient = values.email;
 
-    console.log(inviteRecipient);
-
-    let data = { domainUrl, inviteRecipient, inviterEmail, inviterDisplayName };
+    let data = { domainUrl, inviteRecipient, inviterEmail, inviterDisplayName, app_id };
     await axios.post('/api/users/invite', data).catch((err) => {
       fetchFailure(err);
     });
@@ -102,8 +100,8 @@ const Users = ({ app_id }) => {
   const getAppUsers = async () => {
     fetchInit();
 
-    let data = { app_id };
-    let result = await axios.get('/api/get/app-users', data).catch((err) => {
+    let params = { app_id };
+    let result = await axios.get('/api/get/app-users', { params }).catch((err) => {
       fetchFailure(err);
     });
 
@@ -111,7 +109,16 @@ const Users = ({ app_id }) => {
     fetchSuccess();
   };
 
-  const removeUserRole = () => {};
+  const removeUserRole = async (role_id) => {
+    let params = { role_id };
+
+    let result = await axios.delete('/api/delete/role', { params }).catch((err) => {
+      fetchFailure(err);
+    });
+
+    //confirm delete
+    console.log(result);
+  };
 
   return (
     <div>
@@ -147,9 +154,12 @@ const Users = ({ app_id }) => {
               <div>
                 <div>Email: {user.email}</div>
                 <div>Role: {user.role}</div>
+                {console.log(user)}
                 <div>Username: {user.username}</div>
-                <Can I="edit" a="role">
-                  <button onClick={removeUserRole}>Remove</button>
+                <Can I="delete" a="role">
+                  {user.role == 'user' && (
+                    <button onClick={() => removeUserRole(user.role_id)}>Remove</button>
+                  )}
                 </Can>
               </div>
             ))}

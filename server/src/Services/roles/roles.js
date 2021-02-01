@@ -46,6 +46,17 @@ export const postRole = async (req, res) => {
   res.send(queryResult.rows);
 };
 
+export const deleteRole = async (req, res) => {
+  let role_id = req.body.role_id;
+  console.log(role_id);
+
+  let text = `DELETE FROM roles WHERE role_id=$1`;
+  let values = [role_id];
+
+  let queryResult = await db.query(text, values);
+  res.send(queryResult.rows);
+};
+
 const checkRoleExists = async (app_id, user_id) => {
   let text = `SELECT * FROM roles
               WHERE app_id=$1 AND user_id=$2`;

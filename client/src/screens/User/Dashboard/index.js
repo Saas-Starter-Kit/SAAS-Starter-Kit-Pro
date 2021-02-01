@@ -18,6 +18,7 @@ const Dashboard = () => {
   const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
   const { isLoading } = apiState;
   const [apps, setApps] = useState();
+  const [userApps, setUserApps] = useState();
 
   useEffect(() => {
     if (authState.user) {
@@ -33,12 +34,15 @@ const Dashboard = () => {
     };
 
     const result = await axios.get(`/api/get/app`, { params }).catch((err) => {
-      //  fetchFailure(err);
-      console.log(err);
+      fetchFailure(err);
     });
 
+    let adminApps = result.data.filter((item) => item.role == 'admin');
+    let userApps = result.data.filter((item) => item.role == 'user');
+
     console.log(result);
-    setApps(result.data);
+    setApps(adminApps);
+    setUserApps(userApps);
   };
 
   const postApp = async (event) => {
@@ -78,6 +82,8 @@ const Dashboard = () => {
     console.log(roleResult);
   };
 
+  const deleteApp = () => {};
+
   return (
     <div>
       <h1>Dashboard</h1>
@@ -91,16 +97,28 @@ const Dashboard = () => {
       <Link to="/user/settings/subscription">Subscription</Link>
       <h2>My Apps:</h2>
       <button onClick={getApps}>Get Apps</button>
-      {apps &&
-        apps.map((app) => (
-          <Card key={app.app_id}>
-            <Link to={`/app/${app.app_id}/dashboard`} state={{ app }}>
-              {app.app_name}
-            </Link>
-            <button>Delete App</button>
-            <button>Invite</button>
-          </Card>
-        ))}
+      <div>
+        {apps &&
+          apps.map((app) => (
+            <Card key={app.app_id}>
+              <Link to={`/app/${app.app_id}/dashboard`} state={{ app }}>
+                {app.app_name}
+              </Link>
+              <button onClick={() => deleteApp(app.app_id)}>Delete App</button>
+            </Card>
+          ))}
+      </div>
+      <div>
+        <h2>User Apps:</h2>
+        {userApps &&
+          userApps.map((app) => (
+            <Card key={app.app_id}>
+              <Link to={`/app/${app.app_id}/dashboard`} state={{ app }}>
+                {app.app_name}
+              </Link>
+            </Card>
+          ))}
+      </div>
     </div>
   );
 };

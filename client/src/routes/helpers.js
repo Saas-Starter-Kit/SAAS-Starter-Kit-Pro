@@ -39,7 +39,9 @@ export const getRole = async (app_id, ability, authState) => {
     //navigate to 403 page
   }
 
-  let role = result.data[0];
+  let role = result.data[0].role;
+
+  console.log(role);
 
   updateRole(ability, role);
 };

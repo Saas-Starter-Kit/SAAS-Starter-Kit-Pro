@@ -50,13 +50,15 @@ export const LoginAuth = async (
 
   console.log(isInviteFlow);
 
-  //save event and user id to Google Analytics
-  let parameters = {
-    method: 'Email'
-  };
+  if (!process.env.GATSBY_ENV == 'development') {
+    //save event and user id to Google Analytics
+    let parameters = {
+      method: 'Email'
+    };
 
-  sendEventToAnalytics('login', parameters);
-  setAnalyticsUserId(id);
+    sendEventToAnalytics('login', parameters);
+    setAnalyticsUserId(id);
+  }
 
   //save user info to React context
   await LogIn(user);

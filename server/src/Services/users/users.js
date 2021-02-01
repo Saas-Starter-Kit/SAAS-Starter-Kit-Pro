@@ -4,6 +4,7 @@ import { getUser } from '../auth/authHelpers.js';
 
 export const GetAppUsers = async (req, res) => {
   let app_id = req.query.app_id;
+  console.log(app_id);
 
   let text = `
       SELECT
@@ -30,7 +31,7 @@ export const InviteUser = async (req, res) => {
   let inviterDisplayName = req.body.inviterDisplayName;
   let inviteRecipient = req.body.inviteRecipient;
   let domainUrl = req.body.domainUrl;
-  let app_id = 7;
+  let app_id = req.body.app_id;
   let isSignup;
   let redirectUrl;
 

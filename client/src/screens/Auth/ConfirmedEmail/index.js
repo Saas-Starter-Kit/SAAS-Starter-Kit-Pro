@@ -11,7 +11,7 @@ import LoadingOverlay from '../../../components/Common/loadingOverlay';
 
 const ConfirmedEmail = () => {
   const location = useLocation();
-  const { authState, firebase, LogIn } = useContext(AuthContext);
+  const { LogIn } = useContext(AuthContext);
   const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
   const { isLoading } = apiState;
 
@@ -35,10 +35,15 @@ const ConfirmedEmail = () => {
     return () => fetchSuccess();
   }, []);
 
+  console.log(typeof isInviteFlow);
+
   useEffect(() => {
     createValidUser();
-    if (isInviteFlow) createRole();
   }, [location]);
+
+  useEffect(() => {
+    if (!isInviteFlow == 'undefined') createRole();
+  }, [isInviteFlow]);
 
   const createValidUser = async () => {
     fetchInit();
@@ -62,16 +67,18 @@ const ConfirmedEmail = () => {
 
     user = { ...user, ...stripeCustomerKey };
 
-    //save event and user id to Google Analytics
-    let parameters = {
-      method: 'Email'
-    };
+    if (!process.env.GATSBY_ENV == 'development') {
+      //save event and user id to Google Analytics
+      let parameters = {
+        method: 'Email'
+      };
 
-    sendEventToAnalytics('signup', parameters);
-    setAnalyticsUserId(id);
-
+      sendEventToAnalytics('signup', parameters);
+      setAnalyticsUserId(id);
+    }
     //Login to context
     await LogIn(user);
+
     fetchSuccess();
   };
 
@@ -99,7 +106,7 @@ const ConfirmedEmail = () => {
     <div>
       {isLoading && <LoadingOverlay />}
       <div>Thank You for confirming your email, your account is setup and ready to use</div>
-      {isInviteFlow && (
+      {!isInviteFlow == 'undefined' && (
         <div>
           <div>Click below to navigate to the app your were invited to</div>
           <Link to={`/app/${app_id}/dashboard`}>Go to App</Link>
