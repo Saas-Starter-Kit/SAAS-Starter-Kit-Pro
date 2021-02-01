@@ -10,7 +10,7 @@ export const getApp = async (req, res) => {
         r.user_id,
         r.role
       FROM
-        app a
+        apps a
       INNER JOIN roles r 
           ON r.app_id = a.app_id
       WHERE r.user_id=$1
@@ -27,7 +27,7 @@ export const postApp = async (req, res) => {
 
   console.log(req.body);
 
-  let text = `INSERT INTO app(app_name)
+  let text = `INSERT INTO apps(app_name)
               VALUES ($1)
               RETURNING app_id`;
   let values = [name];
@@ -44,7 +44,7 @@ export const deleteApp = async (req, res) => {
   let roleText = `DELETE FROM roles WHERE app_id=$1`;
   let roleValues = [app_id];
 
-  let appText = `DELETE FROM app WHERE app_id=$1`;
+  let appText = `DELETE FROM apps WHERE app_id=$1`;
   let appValues = [app_id];
 
   let queryResultRole = await db.query(roleText, roleValues);

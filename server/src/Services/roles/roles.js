@@ -11,7 +11,7 @@ export const getRole = async (req, res) => {
         r.user_id,
         r.role
       FROM
-        app a
+        apps a
       INNER JOIN roles r 
           ON r.app_id = a.app_id
       WHERE r.user_id=$1 AND r.app_id=$2
