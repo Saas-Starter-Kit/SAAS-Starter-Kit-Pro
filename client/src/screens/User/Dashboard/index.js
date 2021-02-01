@@ -1,9 +1,13 @@
 import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
+import { Link } from 'gatsby';
+
 import AuthContext from '../../../utils/authContext';
 import ApiContext from '../../../utils/apiContext';
 import axios from '../../../services/axios';
-import { Link } from 'gatsby';
+
+import LoadingOverlay from '../../../components/Common/loadingOverlay';
+import DeleteAppModal from './DeleteAppModal';
 
 const Card = styled.div`
   display: flex;
@@ -19,6 +23,8 @@ const Dashboard = () => {
   const { isLoading } = apiState;
   const [apps, setApps] = useState();
   const [userApps, setUserApps] = useState();
+  const [isModal, setModal] = useState(false);
+  const [deleteAppId, setDeleteAppId] = useState();
 
   useEffect(() => {
     if (authState.user) {
@@ -47,6 +53,7 @@ const Dashboard = () => {
 
   const postApp = async (event) => {
     event.preventDefault();
+    fetchInit();
     console.log(event.target.title.value);
     let name = event.target.name.value;
 
@@ -55,8 +62,7 @@ const Dashboard = () => {
     };
 
     const result = await axios.post(`/api/post/app`, data).catch((err) => {
-      //  fetchFailure(err);
-      console.log(err);
+      fetchFailure(err);
     });
     console.log(result);
 
@@ -79,17 +85,33 @@ const Dashboard = () => {
     });
 
     console.log(roleResult);
+    getApps();
+    fetchSuccess();
   };
 
-  const deleteApp = async (app_id) => {
-    let params = { app_id };
+  const deleteApp = async () => {
+    setModal(false);
+    fetchInit();
+    let params = { app_id: deleteAppId };
     let result = await axios.delete('/api/delete/app', { params });
 
+    getApps();
+    fetchSuccess();
     console.log(result);
+  };
+
+  const handleModalCancel = () => {
+    setModal(false);
+  };
+
+  const handleDeleteAppModal = (app_id) => {
+    setDeleteAppId(app_id);
+    setModal(true);
   };
 
   return (
     <div>
+      {isLoading && <LoadingOverlay />}
       <h1>Dashboard</h1>
       <h2>Create App</h2>
       <form onSubmit={postApp}>
@@ -108,7 +130,7 @@ const Dashboard = () => {
               <Link to={`/app/${app.app_id}/dashboard`} state={{ app }}>
                 {app.app_name}
               </Link>
-              <button onClick={() => deleteApp(app.app_id)}>Delete App</button>
+              <button onClick={() => handleDeleteAppModal(app.app_id)}>Delete App</button>
             </Card>
           ))}
       </div>
@@ -123,6 +145,11 @@ const Dashboard = () => {
             </Card>
           ))}
       </div>
+      <DeleteAppModal
+        handleModalCancel={handleModalCancel}
+        isModal={isModal}
+        deleteApp={deleteApp}
+      />
     </div>
   );
 };
