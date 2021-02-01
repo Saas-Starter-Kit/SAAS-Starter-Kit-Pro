@@ -37,12 +37,19 @@ export const postApp = async (req, res) => {
 };
 
 export const deleteApp = async (req, res) => {
-  let todo_id = req.body.todo_id;
+  let app_id = req.query.app_id;
 
-  let text = `DELETE FROM todos 
-              WHERE todo_id=$1`;
-  let values = [todo_id];
+  console.log(app_id);
 
-  let queryResult = await db.query(text, values);
-  res.send(queryResult.rows);
+  let roleText = `DELETE FROM roles WHERE app_id=$1`;
+  let roleValues = [app_id];
+
+  let appText = `DELETE FROM app WHERE app_id=$1`;
+  let appValues = [app_id];
+
+  let queryResultRole = await db.query(roleText, roleValues);
+
+  let queryResultApp = await db.query(appText, appValues);
+
+  res.send({ role: queryResultRole.rows, app: queryResultApp });
 };

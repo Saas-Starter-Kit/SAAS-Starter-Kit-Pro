@@ -47,8 +47,9 @@ export const postRole = async (req, res) => {
 };
 
 export const deleteRole = async (req, res) => {
-  let role_id = req.body.role_id;
+  let role_id = req.query.role_id;
   console.log(role_id);
+  console.log(req.query);
 
   let text = `DELETE FROM roles WHERE role_id=$1`;
   let values = [role_id];

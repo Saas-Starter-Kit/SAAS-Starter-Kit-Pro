@@ -76,13 +76,17 @@ const Dashboard = () => {
 
     const roleResult = await axios.post(`/api/post/role`, data).catch((err) => {
       fetchFailure(err);
-      console.log(err);
     });
 
     console.log(roleResult);
   };
 
-  const deleteApp = () => {};
+  const deleteApp = async (app_id) => {
+    let params = { app_id };
+    let result = await axios.delete('/api/delete/app', { params });
+
+    console.log(result);
+  };
 
   return (
     <div>
