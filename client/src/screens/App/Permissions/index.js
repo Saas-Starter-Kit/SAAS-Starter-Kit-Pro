@@ -24,16 +24,30 @@ const Permissions = () => {
     updateRole(ability, 'admin');
   }, []);
 
-  const apiPermission = async () => {
+  const apiPermission = async (event) => {
+    event.preventDefault();
     fetchInit();
-    //api for permission routes expect role object with request
-    let role = isAdmin ? 'admin' : 'user';
-    let data = { role };
 
-    //set role in query param for get requests
-    let result = await axios.post('/permissions', data).catch((err) => {
+    //api for permission routes
+    let role = isAdmin ? 'admin' : 'user';
+    let userAction = event.target.userAction.value;
+    let subject = event.target.subject.value;
+
+    let data = { role, userAction, subject };
+
+    //role, userAction and subject object keys are expected
+    //for permission api requests
+    let result = await axios.post('/private/permissions', data).catch((err) => {
       fetchFailure(err);
     });
+
+    //get request with permissions
+    //let params = { role, userAction, subject };
+
+    //set role in query param for get requests
+    //let result = await axios.get('/private/permissions', {params}).catch((err) => {
+    //  fetchFailure(err);
+    //});
 
     console.log(result);
     setPrivateData(result.data);
@@ -92,8 +106,18 @@ const Permissions = () => {
           <div>
             <Spin tip="Loading..." spinning={isLoading}>
               <div>Permissions Also Need to be Setup Server Side</div>
-              <div>Click below to make an api request that only admin can access</div>
-              <button onClick={apiPermission}>Submit</button>
+              <div>Click below to make an api request with permissions check.</div>
+              <div>
+                User actions and subjects are the same ones defined in roleRules() in
+                /utils/caslAbility.js. The roleRules() should match in the server.
+              </div>
+              <form onSubmit={apiPermission}>
+                <label htmlFor="userAction">User Action</label>
+                <input type="text" name="userAction" placeholder="read" />
+                <label htmlFor="subject">Subject</label>
+                <input type="text" name="subject" placeholder="password" />
+                <button>Submit</button>
+              </form>
               <p>{privateData}</p>
             </Spin>
           </div>
