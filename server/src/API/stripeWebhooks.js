@@ -2,7 +2,7 @@ import express from 'express';
 const router = express.Router();
 import bodyParser from 'body-parser';
 
-import { asyncHandler } from '../Utils/asyncErrorHandler.js';
+import { asyncHandler } from '../Middleware/asyncErrorHandler.js';
 import { WebHookHandler } from '../Services/stripe/stripeWebhooksHanlder.js';
 
 /* Webhook Routes */

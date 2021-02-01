@@ -1,7 +1,7 @@
 import express from 'express';
 const router = express.Router();
 
-import { asyncHandler } from '../Utils/asyncErrorHandler.js';
+import { asyncHandler } from '../Middleware/asyncErrorHandler.js';
 
 import { CreateCustomer } from '../Services/stripe/stripeCustomer.js';
 

@@ -31,6 +31,8 @@ export const LoginAuth = async (
   let validToken = isValidToken(authServerRes.data.token, fetchFailure);
   let userId = validToken.user;
 
+  console.log(authServerRes);
+
   let username = authRes.user.displayName;
   let id = userId;
   let photo = authRes.user.photoURL;

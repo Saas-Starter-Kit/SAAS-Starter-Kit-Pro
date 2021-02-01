@@ -1,11 +1,12 @@
 import express from 'express';
 const router = express.Router();
 
-import { requireAuth } from '../Config/passport.js';
 import { _healthCheck, privateRoute, failHealthCheck } from '../Services/utils/health.js';
 import { sendEmail } from '../Services/utils/emailTest.js';
-import { asyncHandler } from '../Utils/asyncErrorHandler.js';
-import { requirePermissions } from '../Config/permissions.js';
+
+import { asyncHandler } from '../Middleware/asyncErrorHandler.js';
+import { requirePermissions } from '../Middleware/permissions.js';
+import { requireAuth } from '../Middleware/auth.js';
 
 //intentionally fail health check for development/testing
 router.get('/fail-health', asyncHandler(failHealthCheck));

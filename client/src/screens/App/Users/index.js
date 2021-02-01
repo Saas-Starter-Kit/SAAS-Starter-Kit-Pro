@@ -2,13 +2,14 @@ import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Formik } from 'formik';
 import { useStaticQuery, graphql } from 'gatsby';
+import * as Yup from 'yup';
+import { Spin } from 'antd';
+
 import axios from '../../../services/axios';
 import AuthContext from '../../../utils/authContext';
 import ApiContext from '../../../utils/apiContext';
 import { colors, breakpoints, fieldStyles } from '../../../styles/theme';
-import * as Yup from 'yup';
 import Can from '../../../services/casl';
-import LoadingOverlay from '../../../components/Common/loadingOverlay';
 
 const ValidSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Email Required')
@@ -123,48 +124,53 @@ const Users = ({ app_id }) => {
   return (
     <div>
       <div>Users</div>
-      {isLoading && <LoadingOverlay />}
-      <Formik validationSchema={ValidSchema} initialValues={{ email: '' }} onSubmit={handleSubmit}>
-        {({ values, errors, touched, handleChange, handleBlur, handleSubmit }) => (
-          <form onSubmit={handleSubmit}>
-            <Label htmlFor="email">Email:</Label>
-            <InputWrapper>
-              <Input
-                type="email"
-                name="email"
-                id="email"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.email}
-              />
-            </InputWrapper>
-            {errors.email && touched.email && <ErrorText>{errors.email}</ErrorText>}
+      <Spin tip="Loading..." spinning={isLoading}>
+        <Formik
+          validationSchema={ValidSchema}
+          initialValues={{ email: '' }}
+          onSubmit={handleSubmit}
+        >
+          {({ values, errors, touched, handleChange, handleBlur, handleSubmit }) => (
+            <form onSubmit={handleSubmit}>
+              <Label htmlFor="email">Email:</Label>
+              <InputWrapper>
+                <Input
+                  type="email"
+                  name="email"
+                  id="email"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.email}
+                />
+              </InputWrapper>
+              {errors.email && touched.email && <ErrorText>{errors.email}</ErrorText>}
 
-            <ButtonWrapper>
-              <Button type="submit">Submit </Button>
-            </ButtonWrapper>
-          </form>
-        )}
-      </Formik>
-      <div>
-        <Button onClick={getAppUsers}>Get App Users</Button>
+              <ButtonWrapper>
+                <Button type="submit">Submit </Button>
+              </ButtonWrapper>
+            </form>
+          )}
+        </Formik>
         <div>
-          {appUsers &&
-            appUsers.map((user) => (
-              <div>
-                <div>Email: {user.email}</div>
-                <div>Role: {user.role}</div>
-                {console.log(user)}
-                <div>Username: {user.username}</div>
-                <Can I="delete" a="role">
-                  {user.role == 'user' && (
-                    <button onClick={() => removeUserRole(user.role_id)}>Remove</button>
-                  )}
-                </Can>
-              </div>
-            ))}
+          <Button onClick={getAppUsers}>Get App Users</Button>
+          <div>
+            {appUsers &&
+              appUsers.map((user) => (
+                <div>
+                  <div>Email: {user.email}</div>
+                  <div>Role: {user.role}</div>
+                  {console.log(user)}
+                  <div>Username: {user.username}</div>
+                  <Can I="delete" a="role">
+                    {user.role == 'user' && (
+                      <button onClick={() => removeUserRole(user.role_id)}>Remove</button>
+                    )}
+                  </Can>
+                </div>
+              ))}
+          </div>
         </div>
-      </div>
+      </Spin>
     </div>
   );
 };

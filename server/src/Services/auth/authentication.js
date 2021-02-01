@@ -1,5 +1,5 @@
 import db from '../../Database/db.js';
-import { setToken } from '../../Config/passport.js';
+import { setToken } from '../../Middleware/auth.js';
 import { saveUsertoDB, getUser } from './authHelpers.js';
 import firebaseAdmin from '../../Config/firebase.js';
 import { sendEmail } from '../../Config/email.js';

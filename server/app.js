@@ -5,12 +5,11 @@ import './src/Config/stripe.js';
 
 import cors from 'cors';
 import bodyParser from 'body-parser';
-import passport from 'passport';
 import morgan from 'morgan';
 
-import { errorHandler } from './src/Utils/errorHandler.js';
-import { unhandledRejectionHandler } from './src/Utils/unhandledRejectionHandler.js';
-import { permissionsMiddleware } from './src/Config/permissions.js';
+import { errorHandler } from './src/Middleware/errorHandler.js';
+import { unhandledRejectionHandler } from './src/Middleware/unhandledRejectionHandler.js';
+import { permissionsMiddleware } from './src/Middleware/permissions.js';
 
 //initialize sentry
 import './src/Config/sentry.js';
@@ -34,7 +33,6 @@ app.use(cors());
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(passport.initialize());
 app.use(permissionsMiddleware);
 
 //API routes

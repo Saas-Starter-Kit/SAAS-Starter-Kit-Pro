@@ -167,7 +167,7 @@ const IconButton = styled(Badge)`
   align-items: center;
   border-radius: 24px;
   cursor: pointer;
-
+  margin-right: 0.5rem;
   & + .iconButton {
     margin-left: 8px;
   }
