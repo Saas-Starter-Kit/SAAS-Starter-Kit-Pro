@@ -6,7 +6,7 @@ export const WebHookHandler = async (req, res) => {
   console.log(req.body);
 
   const sig = req.headers['stripe-signature'];
-  let endpointSecret = 'whsec_vw5NKlrUS9QM5d62zq1QdVz8C6s0bgnn';
+  let endpointSecret = process.env.STRIPE_WEBHOOK_SECRET;
 
   let event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
 
@@ -16,21 +16,26 @@ export const WebHookHandler = async (req, res) => {
     case 'invoice.payment_failed':
       //send email notification
       //ask to fix
+      console.log(event);
       break;
-    case 'invoice.payment_action_required ':
+    case 'invoice.payment_action_required':
       //send email notification
+      console.log(event);
       break;
     case 'customer.subscription.trial_will_end':
       //send email notification
       //link to payment page
+      console.log(event);
       break;
     case 'customer.subscription.past_due':
       //send email notification
       //cancel subscription
+      console.log(event);
       break;
     case 'customer.subscription.unpaid':
       //send email notification
       //cancel subscription
+      console.log(event);
       break;
     default:
       console.log(`Unhandled event type ${event.type}`);
