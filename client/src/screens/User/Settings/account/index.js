@@ -18,7 +18,7 @@ const Title = styled.h1`
 `;
 
 const AccountSettings = () => {
-  const { firebase, authState } = useContext(AuthContext);
+  const { authState } = useContext(AuthContext);
   const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
   const { isLoading } = apiState;
 
@@ -65,7 +65,7 @@ const AccountSettings = () => {
       fetchFailure(err);
     });
 
-    //navigate('/auth/login');
+    navigate('/auth/login');
   };
 
   const updateEmail = async (event) => {
@@ -78,7 +78,7 @@ const AccountSettings = () => {
       fetchFailure(err);
     });
 
-    //navigate('/auth/login');
+    navigate('/auth/login');
   };
 
   /* 

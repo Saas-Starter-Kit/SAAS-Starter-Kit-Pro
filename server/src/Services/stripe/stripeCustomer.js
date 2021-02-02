@@ -37,3 +37,7 @@ export const CreateCustomer = async (req, res) => {
 
   res.send({ stripe: queryResult.rows[0], token });
 };
+
+export const UpdateCustomer = async (stripe_id, email) => {
+  await stripe.customers.update(stripe_id, { email });
+};

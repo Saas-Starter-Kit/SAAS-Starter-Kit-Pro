@@ -4,6 +4,7 @@ import { saveUsertoDB, getUser } from './authHelpers.js';
 import firebaseAdmin from '../../Config/firebase.js';
 import { sendEmail } from '../../Config/email.js';
 import { UpdateContact } from '../users/contacts.js';
+import { UpdateCustomer } from '../stripe/stripeCustomer.js';
 
 export const verifyEmail = async (req, res) => {
   let email = req.body.email;
@@ -103,7 +104,7 @@ export const updateEmail = async (req, res) => {
 
   let user = await getUser(oldEmail);
   let uid = user.rows[0].firebase_user_id;
-  console.log(user, uid);
+  let stripe_id = user.rows[0].stripe_customer_id;
 
   firebaseAdmin.auth().updateUser(uid, {
     email
@@ -115,6 +116,7 @@ export const updateEmail = async (req, res) => {
 
   let queryResult = await db.query(text, values);
 
-  //await UpdateContact(email, oldEmail);
+  await UpdateCustomer(stripe_id, email);
+  await UpdateContact(email, oldEmail);
   res.send(queryResult);
 };
