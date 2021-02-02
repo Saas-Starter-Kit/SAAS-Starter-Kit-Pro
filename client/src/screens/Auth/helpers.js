@@ -30,6 +30,7 @@ export const LoginAuth = async (
 
   let validToken = isValidToken(authServerRes.data.token, fetchFailure);
   let userId = validToken.user;
+  let jwt_token = authServerRes.data.token;
 
   console.log(authServerRes);
 
@@ -47,10 +48,11 @@ export const LoginAuth = async (
     photo,
     provider,
     stripeCustomerKey,
-    subscription_id
+    subscription_id,
+    jwt_token
   };
 
-  console.log(isInviteFlow);
+  console.log(user);
 
   if (!process.env.NODE_ENV == 'development') {
     //save event and user id to Google Analytics

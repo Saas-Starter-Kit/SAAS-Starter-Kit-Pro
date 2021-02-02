@@ -57,15 +57,18 @@ const ConfirmedEmail = () => {
         fetchFailure(err);
       });
 
+    console.log(stripeServerRes);
+
     //save verified email to sendinblue
     let sibData = { email, firstName };
     await axios.post('/api/post/contact', sibData).catch((err) => {
       fetchFailure(err);
     });
 
-    let stripeCustomerKey = { stripeCustomerKey: stripeServerRes.data.stripe_customer_id };
+    let stripeCustomerKey = { stripeCustomerKey: stripeServerRes.data.stripe.stripe_customer_id };
+    let jwt_token = { token: stripeServerRes.data.token };
 
-    user = { ...user, ...stripeCustomerKey };
+    user = { ...user, ...stripeCustomerKey, ...jwt_token };
 
     if (!process.env.NODE_ENV == 'development') {
       //save event and user id to Google Analytics
@@ -76,6 +79,9 @@ const ConfirmedEmail = () => {
       sendEventToAnalytics('signup', parameters);
       setAnalyticsUserId(id);
     }
+
+    console.log(user);
+
     //Login to context
     await LogIn(user);
 

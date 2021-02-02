@@ -84,16 +84,16 @@ export const updateUsername = async (req, res) => {
   let values = [username, id];
 
   let queryResult = await db.query(text, values);
+  console.log(queryResult);
 
   if (queryResult.rows.length === 0) {
     res.status(500).send({
       type: 'Database Logic Error',
-      message: 'Update Failed, please try again or cantact support'
+      message: 'Update Failed, please try again or contact support'
     });
+  } else {
+    res.send(queryResult.rows);
   }
-
-  console.log(queryResult);
-  res.send(queryResult.rows);
 };
 
 export const updateEmail = async (req, res) => {
@@ -109,10 +109,9 @@ export const updateEmail = async (req, res) => {
   if (queryResult.rows.length === 0) {
     res.status(500).send({
       type: 'Database Logic Error',
-      message: 'Update Failed, please try again or cantact support'
+      message: 'Update Failed, please try again or contact support'
     });
+  } else {
+    res.send(queryResult);
   }
-
-  console.log(queryResult);
-  res.send(queryResult);
 };
