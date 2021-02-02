@@ -3,16 +3,19 @@ import { Spin } from 'antd';
 
 import { updateRole } from '../../../utils/caslAbility';
 import CaslContext from '../../../utils/caslContext';
+import AuthContext from '../../../utils/authContext';
 import ApiContext from '../../../utils/apiContext';
 import axios from '../../../services/axios';
 import Can from '../../../services/casl';
 
 const Permissions = () => {
   const ability = useContext(CaslContext);
+  const { authState } = useContext(AuthContext);
   const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
   const { isLoading } = apiState;
   const [isClient, setClient] = useState(false);
   const [privateData, setPrivateData] = useState();
+  const [privateJWTData, setPrivateJWTData] = useState();
   const [isAdmin, setAdmin] = useState(true);
 
   //meant to address React hydration issue
@@ -45,7 +48,7 @@ const Permissions = () => {
     //let params = { role, userAction, subject };
 
     //set role in query param for get requests
-    //let result = await axios.get('/private/permissions', {params}).catch((err) => {
+    //let result = await axios.get('/private/permissions', { params }).catch((err) => {
     //  fetchFailure(err);
     //});
 
@@ -53,6 +56,20 @@ const Permissions = () => {
     setPrivateData(result.data);
 
     fetchSuccess();
+  };
+
+  const apiJWTAuth = async () => {
+    let token = authState.user.jwt_token;
+    const headers = { Authorization: `Bearer ${token}` };
+    let result = await axios.get('/private/auth', { headers }).catch((err) => {
+      fetchFailure(err);
+    });
+
+    setPrivateJWTData(result.data);
+
+    //for post or put requests, headers go after body data
+    //const data = { data: 'data' };
+    //let result = await axios.post('/private/auth', data, { headers });
   };
 
   const roleHandler = () => {
@@ -119,6 +136,16 @@ const Permissions = () => {
                 <button>Submit</button>
               </form>
               <p>{privateData}</p>
+            </Spin>
+          </div>
+          <div>
+            <Spin tip="Loading..." spinning={isLoading}>
+              <div>
+                Api requests with JWT tokens can also be made together or seperately from
+                permissions. see server/src/API/utils.js for an example
+              </div>
+              <button onClick={apiJWTAuth}>Submit</button>
+              <p>{privateJWTData}</p>
             </Spin>
           </div>
         </div>
