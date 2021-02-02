@@ -242,8 +242,9 @@ const CheckoutForm = () => {
     let planSelect = plan;
     let payment_method = paymentMethod;
     let subscriptionItem = subscription_item;
+    let email = authState.user.email;
 
-    let data = { subscriptionId, planSelect, payment_method, subscriptionItem };
+    let data = { subscriptionId, planSelect, payment_method, subscriptionItem, planType, email };
     let result = await axios.put('/stripe/update-subscription', data).catch((err) => {
       fetchFailure(err);
     });
@@ -300,7 +301,7 @@ const CheckoutForm = () => {
         </Button>
       </div>
       <h2>Please Choose Payment Method</h2>
-      {payCards ? (
+      {!payCards.length == 0 ? (
         payCards.map((item) => (
           <StyledCardDisplayWrapper key={item.id}>
             <StyledCardDisplay onClick={() => setPaymentMethod(item.id)}>
@@ -311,7 +312,9 @@ const CheckoutForm = () => {
           </StyledCardDisplayWrapper>
         ))
       ) : (
-        <p>No Payment Methods Found</p>
+        <div>
+          <p>No Payment Methods Found</p>
+        </div>
       )}
       <CardWrapper>
         <Card>

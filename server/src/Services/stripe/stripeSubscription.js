@@ -2,22 +2,28 @@ import stripe from '../../Config/stripe.js';
 import db from '../../Database/db.js';
 import { getUser } from '../auth/authHelpers.js';
 import { sendEmail } from '../../Config/email.js';
+import moment from 'moment';
 
 export const UpdateSubscription = async (req, res) => {
   let subscription_id = req.body.subscriptionId;
   let payment_method = req.body.payment_method;
   let price = req.body.planSelect;
   let id = req.body.subscriptionItem;
+  let planType = req.body.planType;
+  let email = req.body.email;
 
   const subscription = await stripe.subscriptions.update(subscription_id, {
     default_payment_method: payment_method,
     items: [{ id, price }]
   });
 
-  console.log(subscription);
-  res.status(200).send(subscription);
-
   //send confirm email
+  let amount = subscription.plan.amount_decimal * 0.01;
+  let template = 'update subscription';
+  let locals = { amount, planType };
+  await sendEmail(email, template, locals);
+
+  res.status(200).send(subscription);
 
   //optionally add a field to the database for different membership tiers
   //see createSubscription() as an example
@@ -74,12 +80,13 @@ export const CreateSubscription = async (req, res) => {
     await db.query(text, values);
 
     //send email confirm for subscription creation
-    //let template = 'verify email';
-    //let locals = {};
+    let amount = subscription.plan.amount * 0.01;
+    let start_date = moment(subscription.created * 1000).format('MMM Do YYYY');
+    let trial_end = moment(subscription.trial_end * 1000).format('MMM Do YYYY');
 
-    //send verification email
-    //await sendEmail(email, template, locals);
-    console.log(subscription);
+    let template = 'start subscription';
+    let locals = { amount, start_date, trial_end };
+    await sendEmail(email, template, locals);
 
     res.send(subscription);
   } else {
@@ -111,6 +118,9 @@ export const CancelSubscription = async (req, res) => {
     await db.query(text, values);
 
     //cancel subscription confirm email
+    let template = 'cancel subscription';
+    await sendEmail(email, template);
+
     res
       .status(200)
       .send({ type: 'Request Successful', message: 'Subscription Successfully Canceled' });
