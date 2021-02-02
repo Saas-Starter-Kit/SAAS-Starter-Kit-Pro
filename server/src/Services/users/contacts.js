@@ -17,7 +17,7 @@ export const CreateContact = async (req, res) => {
     email
   };
 
-  await SibContactsApi.createContact(contact);
+  await SibContactsApi.createContact(contact).catch((err) => console.log(err));
 
   //send welcome email
   let template = 'welcome';
@@ -28,3 +28,14 @@ export const CreateContact = async (req, res) => {
 };
 
 //update email when user updates email
+//called in Services/auth/authentication.js updateEmail()
+export const UpdateContact = async (email, oldEmail) => {
+  const updateContact = {
+    attributes: {
+      Email: email
+    }
+  };
+
+  await SibContactsApi.updateContact(oldEmail, updateContact).catch((err) => console.log(err));
+  return;
+};

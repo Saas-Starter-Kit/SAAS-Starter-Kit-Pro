@@ -20,7 +20,7 @@ const ConfirmedEmail = () => {
   console.log(queryParams);
   const email = queryParams[1].split('&')[0];
   const id = queryParams[2].split('&')[0];
-  const provider = queryParams[4];
+  const provider = queryParams[4].split('&')[0];
   const usernameRaw = queryParams[3].split('&')[0];
   const name = usernameRaw.split('%20');
   const firstName = name[0];

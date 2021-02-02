@@ -3,6 +3,7 @@ import { setToken } from '../../Middleware/auth.js';
 import { saveUsertoDB, getUser } from './authHelpers.js';
 import firebaseAdmin from '../../Config/firebase.js';
 import { sendEmail } from '../../Config/email.js';
+import { UpdateContact } from '../users/contacts.js';
 
 export const verifyEmail = async (req, res) => {
   let email = req.body.email;
@@ -85,19 +86,21 @@ export const updateUsername = async (req, res) => {
 
   let queryResult = await db.query(text, values);
 
-  if (queryResult.rows.length === 0) {
-    res.status(500).send({
-      type: 'Database Logic Error',
-      message: 'Update Failed, please try again or contact support'
-    });
-  } else {
-    res.send(queryResult.rows);
-  }
+  res.send(queryResult.rows);
 };
 
 export const updateEmail = async (req, res) => {
   let id = req.body.id;
   let email = req.body.email;
+  let oldEmail = req.body.oldEmail;
+
+  let user = await getUser(oldEmail);
+  let uid = user.rows[0].firebase_user_id;
+  console.log(user, uid);
+
+  firebaseAdmin.auth().updateUser(uid, {
+    email
+  });
 
   let text = `UPDATE users SET email=$1
               WHERE id = $2`;
@@ -105,12 +108,6 @@ export const updateEmail = async (req, res) => {
 
   let queryResult = await db.query(text, values);
 
-  if (queryResult.rows.length === 0) {
-    res.status(500).send({
-      type: 'Database Logic Error',
-      message: 'Update Failed, please try again or contact support'
-    });
-  } else {
-    res.send(queryResult);
-  }
+  //await UpdateContact(email, oldEmail);
+  res.send(queryResult);
 };

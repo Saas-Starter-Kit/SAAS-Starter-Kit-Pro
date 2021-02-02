@@ -13,8 +13,6 @@ import UpdateUsernameCard from './updateUsernameCard';
 import UpdateEmailCard from './updateEmailCard';
 import UpdatePasswordCard from './updatePasswordCard';
 
-const Wrapper = styled.div``;
-
 const Title = styled.h1`
   font-size: 1.5rem;
 `;
@@ -44,13 +42,11 @@ const AccountSettings = () => {
       Auth Methods
   */
 
-  let curUser;
   const setUser = async () => {
     let userEmail = authState.user.email;
     let displayName = authState.user.username;
     let id = authState.user.id;
     let isEmail = authState.user.provider === 'password';
-    curUser = await firebase.auth().currentUser;
 
     setId(id);
     setEmail(userEmail);
@@ -68,31 +64,20 @@ const AccountSettings = () => {
       fetchFailure(err);
     });
 
-    await curUser
-      .updateProfile({
-        displayName: username
-      })
-      .catch((err) => {
-        fetchFailure(err);
-      });
-
-    navigate('/auth/login');
+    //navigate('/auth/login');
   };
 
   const updateEmail = async (event) => {
     event.preventDefault();
     fetchInit();
+    let oldEmail = authState.user.email;
 
-    const data = { id, email };
+    const data = { id, email, oldEmail };
     await axios.put(`/auth/put/email`, data).catch((err) => {
       fetchFailure(err);
     });
 
-    await curUser.updateEmail(email).catch((error) => {
-      fetchFailure(error);
-    });
-
-    navigate('/auth/login');
+    //navigate('/auth/login');
   };
 
   /* 
