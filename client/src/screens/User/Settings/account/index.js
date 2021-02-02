@@ -57,8 +57,9 @@ const AccountSettings = () => {
   const updateUsername = async (event) => {
     event.preventDefault();
     fetchInit();
+    let curEmail = authState.user.email;
 
-    const data = { id, username };
+    const data = { id, username, curEmail };
 
     await axios.put(`/auth/put/username`, data).catch((err) => {
       fetchFailure(err);

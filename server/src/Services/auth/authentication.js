@@ -77,8 +77,15 @@ export const Login = async (req, res) => {
 export const updateUsername = async (req, res) => {
   let id = req.body.id;
   let username = req.body.username;
+  let email = req.body.curEmail;
 
-  console.log(id, username);
+  let user = await getUser(email);
+  let uid = user.rows[0].firebase_user_id;
+  console.log(user, uid);
+
+  firebaseAdmin.auth().updateUser(uid, {
+    displayName: username
+  });
 
   let text = `UPDATE users SET username=$1
               WHERE id = $2`;
