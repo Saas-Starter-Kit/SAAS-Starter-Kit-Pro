@@ -1,6 +1,7 @@
 import stripe from '../../Config/stripe.js';
 import db from '../../Database/db.js';
 import { getUser } from '../auth/authHelpers.js';
+import { sendEmail } from '../../Config/email.js';
 
 export const UpdateSubscription = async (req, res) => {
   let subscription_id = req.body.subscriptionId;
@@ -76,6 +77,12 @@ export const CreateSubscription = async (req, res) => {
     await db.query(text, values);
 
     //send email confirm for subscription creation
+    //let template = 'verify email';
+    //let locals = {};
+
+    //send verification email
+    //await sendEmail(email, template, locals);
+    console.log(subscription);
 
     res.send(subscription);
   } else {

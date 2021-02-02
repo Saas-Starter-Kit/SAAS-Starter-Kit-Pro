@@ -121,8 +121,7 @@ const CheckoutForm = () => {
     let result = await axios.get('/stripe/payment-intent').catch((err) => {
       fetchFailure(err);
     });
-    console.log(result);
-    console.log();
+
     setSecret(result.data.client_secret);
   };
 
@@ -147,6 +146,16 @@ const CheckoutForm = () => {
     } else {
       if (result.paymentIntent.status === 'succeeded') {
         console.log(result);
+        //api request to endpoint
+        let data = {
+          receipt_email,
+          amount: result.paymentIntent.amount
+        };
+
+        await axios.post('/stripe/one-time-pay', data).catch((err) => {
+          fetchFailure(err);
+        });
+
         navigate('/confirmpayment');
       } else {
         let error = {

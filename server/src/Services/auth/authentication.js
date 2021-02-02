@@ -84,7 +84,6 @@ export const updateUsername = async (req, res) => {
   let values = [username, id];
 
   let queryResult = await db.query(text, values);
-  console.log(queryResult);
 
   if (queryResult.rows.length === 0) {
     res.status(500).send({
