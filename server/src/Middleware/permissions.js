@@ -1,3 +1,5 @@
+import { defineAbilityFor } from '../Config/permissions.js';
+
 export const requirePermissions = (req, res, next) => {
   let userAction = req.body.userAction || req.query.userAction;
   let subject = req.body.subject || req.query.subject;
