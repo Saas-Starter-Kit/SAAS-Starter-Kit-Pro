@@ -1,6 +1,11 @@
 import React, { useEffect, useContext } from 'react';
 import { Link, navigate } from 'gatsby';
+
 import AuthContext from '../../../utils/authContext';
+import ApiContext from '../../../utils/apiContext';
+
+import LoadingOverlay from '../../../components/Common/loadingOverlay';
+
 import { Steps } from 'antd';
 import {
   SolutionOutlined,
@@ -13,20 +18,27 @@ const { Step } = Steps;
 
 const CheckAuth = () => {
   const { authState } = useContext(AuthContext);
-  console.log(authState);
+  const { fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
+  const { isLoading } = apiState;
 
   useEffect(() => {
+    return () => fetchSuccess();
+  }, []);
+
+  useEffect(() => {
+    fetchInit();
     if (authState.user) {
       if (authState.user.subscription_id) {
-        navigate('/purchase/subcriptionexists');
+        setTimeout(() => navigate('/purchase/subcriptionexists'), 300);
       } else if (authState.isAuthenticated) {
-        navigate('/purchase/plan');
+        setTimeout(() => navigate('/purchase/plan'), 300);
       }
     }
   }, [authState]);
 
   return (
     <div>
+      {isLoading && <LoadingOverlay />}
       <div style={{ width: '80%' }}>
         <Steps>
           <Step status="process" title="Login" icon={<LoadingOutlined />} />

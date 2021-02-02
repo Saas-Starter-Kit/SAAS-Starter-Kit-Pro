@@ -9,7 +9,6 @@ export const UpdateSubscription = async (req, res) => {
   let price = req.body.planSelect;
   let id = req.body.subscriptionItem;
 
-  console.log(subscription_id, payment_method, price, id);
   const subscription = await stripe.subscriptions.update(subscription_id, {
     default_payment_method: payment_method,
     items: [{ id, price }]
@@ -19,8 +18,6 @@ export const UpdateSubscription = async (req, res) => {
   res.status(200).send(subscription);
 
   //send confirm email
-
-  //update sub id in db ?
 
   //optionally add a field to the database for different membership tiers
   //see createSubscription() as an example

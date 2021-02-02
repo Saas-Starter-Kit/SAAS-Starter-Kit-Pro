@@ -49,8 +49,8 @@ const ConfirmSub = () => {
   const { LogOut } = useContext(AuthContext);
 
   const LogoutUser = () => {
-    setTimeout(() => LogOut(), 3800);
-    setTimeout(() => navigate('/auth/login'), 4200);
+    LogOut();
+    setTimeout(() => navigate('/auth/login'), 8000);
   };
 
   useEffect(() => {
@@ -69,9 +69,9 @@ const ConfirmSub = () => {
       <Text>
         <h1>Please sign in again to complete the process</h1>
         <div>
-          Click below to navigate to the login screen or wait 4 seconds for automatic redirect
+          Click below to navigate to the login screen or wait 8 seconds for automatic redirect
         </div>
-        <button onClick={LogoutUser}>Click Here</button>
+        <button onClick={() => navigate('/auth/login')}>Click Here</button>
       </Text>
     </Wrapper>
   );

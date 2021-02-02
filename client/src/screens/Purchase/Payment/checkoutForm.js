@@ -300,15 +300,19 @@ const CheckoutForm = () => {
         </Button>
       </div>
       <h2>Please Choose Payment Method</h2>
-      {payCards.map((item) => (
-        <StyledCardDisplayWrapper key={item.id}>
-          <StyledCardDisplay onClick={() => setPaymentMethod(item.id)}>
-            {setIcons(item.card.brand)}
-            {item.card.brand} **** **** **** {item.card.last4} expires {item.card.exp_month}/
-            {item.card.exp_year}
-          </StyledCardDisplay>
-        </StyledCardDisplayWrapper>
-      ))}
+      {payCards ? (
+        payCards.map((item) => (
+          <StyledCardDisplayWrapper key={item.id}>
+            <StyledCardDisplay onClick={() => setPaymentMethod(item.id)}>
+              {setIcons(item.card.brand)}
+              {item.card.brand} **** **** **** {item.card.last4} expires {item.card.exp_month}/
+              {item.card.exp_year}
+            </StyledCardDisplay>
+          </StyledCardDisplayWrapper>
+        ))
+      ) : (
+        <p>No Payment Methods Found</p>
+      )}
       <CardWrapper>
         <Card>
           <form onSubmit={addPaymentMethod}>
