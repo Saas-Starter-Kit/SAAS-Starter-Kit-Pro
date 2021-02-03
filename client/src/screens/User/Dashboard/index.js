@@ -54,7 +54,7 @@ const Dashboard = () => {
   const postApp = async (event) => {
     event.preventDefault();
     fetchInit();
-    console.log(event.target.title.value);
+
     let name = event.target.name.value;
 
     let data = {
@@ -64,7 +64,6 @@ const Dashboard = () => {
     const result = await axios.post(`/api/post/app`, data).catch((err) => {
       fetchFailure(err);
     });
-    console.log(result);
 
     createRole(result);
   };
@@ -93,11 +92,11 @@ const Dashboard = () => {
     setModal(false);
     fetchInit();
     let params = { app_id: deleteAppId };
-    let result = await axios.delete('/api/delete/app', { params });
+
+    await axios.delete('/api/delete/app', { params });
 
     getApps();
     fetchSuccess();
-    console.log(result);
   };
 
   const handleModalCancel = () => {
