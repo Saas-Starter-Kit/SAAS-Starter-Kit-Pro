@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import moment from 'moment';
 import { useLocation } from '@reach/router';
 
+import AuthContext from '../../../utils/authContext';
 import { colors, breakpoints } from '../../../styles/theme';
 import useWindowSize from '../../../hooks/useWindowSize';
 
@@ -53,6 +54,7 @@ const ContentWrapper = styled.div`
 
 const Layout = ({ children, app_id }) => {
   const location = useLocation();
+  const { authState } = useContext(AuthContext);
 
   //handle antd sidebar rerender issue
   const windowSize = useWindowSize();
@@ -60,10 +62,17 @@ const Layout = ({ children, app_id }) => {
   const isMobile = windowSize.width <= breakpoint;
 
   const [showMobileMenu, toggleShowMobileMenu] = useState(false);
+  const [username, setUsername] = useState('');
+  const [theme, setTheme] = useState(THEMES.LIGHT);
+  const [isDesktopMenuCollapsed, toggleIsDesktopMenuCollapsed] = useState(false);
+
+  useEffect(() => {
+    if (authState.user) setUsername(authState.user.username);
+  }, [authState]);
+
   const mobileMenuHandler = () =>
     showMobileMenu ? toggleShowMobileMenu(false) : toggleShowMobileMenu(true);
 
-  const [isDesktopMenuCollapsed, toggleIsDesktopMenuCollapsed] = useState(false);
   const desktopMenuHandler = () =>
     isDesktopMenuCollapsed
       ? toggleIsDesktopMenuCollapsed(false)
@@ -71,7 +80,6 @@ const Layout = ({ children, app_id }) => {
 
   const handleCollapseChange = isMobile ? mobileMenuHandler : desktopMenuHandler;
 
-  const [theme, setTheme] = useState(THEMES.LIGHT);
   const themeHandler = () =>
     theme === THEMES.LIGHT ? setTheme(THEMES.DARK) : setTheme(THEMES.LIGHT);
 
@@ -89,7 +97,7 @@ const Layout = ({ children, app_id }) => {
       <Content>
         <AppHeader
           collapsed={isDesktopMenuCollapsed}
-          username="guest"
+          username={username}
           notifications={[
             { date: moment.now(), title: 'Hey there' },
             { date: moment.now(), title: 'Welcome!' }
