@@ -1,11 +1,12 @@
 import React from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
-import { Link } from 'gatsby';
 import styled from 'styled-components';
+import RecentlyPublished from './recentlyPublished';
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  font-family: 'Inter', sans-serif;
 `;
 
 const Blog = () => {
@@ -15,32 +16,23 @@ const Blog = () => {
 
   const blogLinks = edges;
 
-  let featuredArticle = edges.filter((edge) => edge.node.tags.includes('featured'));
-  featuredArticle = featuredArticle[0];
+  // let featuredArticle = edges.filter((edge) => edge.node.tags.includes('featured'));
+  // featuredArticle = featuredArticle[0];
 
-  console.log(blogLinks);
+  // console.log(blogLinks);
 
-  let topArticles = edges.filter((edge) => edge.node.tags.includes('top article'));
-  console.log(topArticles);
+  // let topArticles = edges.filter((edge) => edge.node.tags.includes('top article'));
+  // console.log(topArticles);
 
   return (
     <Wrapper>
-      <div>
+      {/* <div>
         <h3>Featured:</h3>
       </div>
       <div>
         <h3>Top Articles:</h3>
-      </div>
-      <h3>Recent Articles</h3>
-      {blogLinks.map((blogLink) => (
-        <div>
-          <Link to={`/blog/${blogLink.node.uid}`}>{blogLink.node.data.title.text}</Link>
-          <p>{blogLink.node.data.date}</p>
-          {blogLink.node.tags.map((tag) => (
-            <Link to={`/tag/?tag=${tag}`}>{tag}</Link>
-          ))}
-        </div>
-      ))}
+      </div> */}
+      <RecentlyPublished blogLinks={blogLinks} />
     </Wrapper>
   );
 };

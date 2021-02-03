@@ -38,7 +38,7 @@ const StyledMenu = styled(Menu)`
 
 const StyledSubMenu = styled(SubMenu)`
   .ant-menu-sub {
-    background-color: ${colors.alabaster};
+    background-color: ${colors.alabaster1};
   }
 `;
 
