@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { Spin } from 'antd';
+import { message } from 'antd';
 import { navigate } from 'gatsby';
 import styled from 'styled-components';
 
@@ -94,16 +94,14 @@ const SubscriptionSettings = () => {
       email: authState.user.email
     };
 
-    const subscriptionCancel = await axios
-      .post('/stripe/cancel-subscription', data)
-      .catch((err) => {
-        fetchFailure(err);
-      });
+    await axios.post('/stripe/cancel-subscription', data).catch((err) => {
+      fetchFailure(err);
+    });
 
     fetchSuccess();
-    //replace with antd success message
     setModalSub(false);
-    navigate('/auth/login');
+    message.success('Subscription Canceled');
+    setTimeout(() => navigate('/auth/login'), 500);
   };
 
   /* 
@@ -131,6 +129,7 @@ const SubscriptionSettings = () => {
       <Title>Subscription Settings</Title>
       {isLoading && <LoadingOverlay />}
       {!subscriptionState && <NullSubscriptionCard />}
+
       {subscriptionState && (
         <PaymentInformationCard
           planType={planType}
@@ -138,6 +137,7 @@ const SubscriptionSettings = () => {
           subscriptionState={subscriptionState}
         />
       )}
+
       {subscriptionState && <UpgradeSubscription subscriptionState={subscriptionState} />}
       {subscriptionState && (
         <CancelSubscriptionCard

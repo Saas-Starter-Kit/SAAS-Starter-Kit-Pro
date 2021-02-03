@@ -4,6 +4,7 @@ import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import { useLocation } from '@reach/router';
 import { FaRegCreditCard } from 'react-icons/fa';
 import { navigate } from 'gatsby';
+import { Spin } from 'antd';
 
 import AuthContext from '../../../utils/authContext';
 import ApiContext from '../../../utils/apiContext';
@@ -123,6 +124,7 @@ const CheckoutForm = () => {
   const { authState } = useContext(AuthContext);
   const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
   const { isLoading } = apiState;
+  const [loadingSpin, setLoadingSpin] = useState(false);
   const [plan, setPlan] = useState();
   const [price, setPrice] = useState();
   const [planType, setPlanType] = useState();
@@ -162,12 +164,13 @@ const CheckoutForm = () => {
   }, []);
 
   useEffect(() => {
-    //if (authState.user) getWallet();
+    if (authState.user) getWallet();
   }, [authState]);
 
   console.log(authState.user);
 
   const getWallet = async () => {
+    setLoadingSpin(true);
     //get customers list of available payment methods
     let params = {
       customer: authState.user.stripeCustomerKey
@@ -182,11 +185,12 @@ const CheckoutForm = () => {
     const cards = wallet.data.data;
     setPayCards(cards);
     setIcons(cards);
-    console.log(cards);
+    setLoadingSpin(false);
   };
 
   const addPaymentMethod = async (event) => {
     event.preventDefault();
+    fetchInit();
 
     let data = { customer: authState.user };
     //get stripe client secret
@@ -215,9 +219,9 @@ const CheckoutForm = () => {
       fetchFailure(error);
     }
 
-    console.log(setupIntent.payment_method);
     getWallet();
     setPaymentMethod(setupIntent.payment_method);
+    fetchSuccess();
   };
 
   const setIcons = (brand) => {
@@ -300,22 +304,24 @@ const CheckoutForm = () => {
           Confirm
         </Button>
       </div>
-      <h2>Please Choose Payment Method</h2>
-      {!payCards.length == 0 ? (
-        payCards.map((item) => (
-          <StyledCardDisplayWrapper key={item.id}>
-            <StyledCardDisplay onClick={() => setPaymentMethod(item.id)}>
-              {setIcons(item.card.brand)}
-              {item.card.brand} **** **** **** {item.card.last4} expires {item.card.exp_month}/
-              {item.card.exp_year}
-            </StyledCardDisplay>
-          </StyledCardDisplayWrapper>
-        ))
-      ) : (
-        <div>
-          <p>No Payment Methods Found</p>
-        </div>
-      )}
+      <Spin tip="Loading" spinning={loadingSpin}>
+        <h2>Please Choose Payment Method</h2>
+        {!payCards.length == 0 ? (
+          payCards.map((item) => (
+            <StyledCardDisplayWrapper key={item.id}>
+              <StyledCardDisplay onClick={() => setPaymentMethod(item.id)}>
+                {setIcons(item.card.brand)}
+                {item.card.brand} **** **** **** {item.card.last4} expires {item.card.exp_month}/
+                {item.card.exp_year}
+              </StyledCardDisplay>
+            </StyledCardDisplayWrapper>
+          ))
+        ) : (
+          <div>
+            <p>No Payment Methods Found</p>
+          </div>
+        )}
+      </Spin>
       <CardWrapper>
         <Card>
           <form onSubmit={addPaymentMethod}>
