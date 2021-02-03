@@ -26,7 +26,6 @@ const CheckAuth = () => {
   }, []);
 
   useEffect(() => {
-    fetchInit();
     if (authState.user) {
       if (authState.user.subscription_id) {
         setTimeout(() => navigate('/purchase/subcriptionexists'), 300);

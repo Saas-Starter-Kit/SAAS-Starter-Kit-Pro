@@ -29,7 +29,7 @@ const SubscriptionSettings = () => {
   const premium_type = process.env.GATSBY_STRIPE_PREMIUM_PLAN_TYPE;
   const basic_type = process.env.GATSBY_STRIPE_BASIC_PLAN_TYPE;
 
-  const { firebase, authState } = useContext(AuthContext);
+  const { firebase, authState, LogOut } = useContext(AuthContext);
   const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
   const { isLoading } = apiState;
 
@@ -98,8 +98,8 @@ const SubscriptionSettings = () => {
       fetchFailure(err);
     });
 
-    fetchSuccess();
     setModalSub(false);
+    LogOut();
     message.success('Subscription Canceled');
     setTimeout(() => navigate('/auth/login'), 500);
   };
