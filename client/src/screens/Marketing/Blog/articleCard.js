@@ -71,6 +71,7 @@ const ArticleCard = ({ title, date, imageSrc, uid, tags }) => (
       <TagWrapper>
         {tags.map((tag) => (
           <Tag
+            key={uid.concat(tag)}
             onClick={(e) => {
               e.stopPropagation();
               navigate(`/tag/?tag=${tag}`);

@@ -5,8 +5,6 @@ import { BaseCard } from './cards';
 import Tag from './tag';
 import Title from './sectionTitle';
 
-const Wrapper = styled.div``;
-
 const Card = styled(BaseCard)`
   display: flex;
   flex-flow: wrap;
@@ -23,14 +21,14 @@ const StyledTitle = styled(Title)`
 `;
 
 const TagsSection = ({ tags }) => (
-  <Wrapper>
+  <React.Fragment>
     <StyledTitle>Tags</StyledTitle>
     <Card>
-      {tags.map((tag) => (
-        <Tag>{`#${tag}`}</Tag>
+      {tags.map((tag, index) => (
+        <Tag key={tag.concat(index)}>{`#${tag}`}</Tag>
       ))}
     </Card>
-  </Wrapper>
+  </React.Fragment>
 );
 
 export default TagsSection;

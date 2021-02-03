@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { colors, breakpoints } from '../../../styles/theme';
 import RecentlyPublished from './recentlyPublished';
 import Featured from './featured';
+import TopArticles from './topArticles';
 import TagsSection from './tagsSection';
 
 const Wrapper = styled.div`
@@ -60,6 +61,7 @@ const Blog = () => {
             <RecentlyPublished blogLinks={blogLinks} />
           </FirstColumn>
           <SecondColumn>
+            <TopArticles articles={topArticles} />
             <TagsSection tags={uniqueTags} />
           </SecondColumn>
         </Columns>

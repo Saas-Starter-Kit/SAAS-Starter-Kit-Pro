@@ -63,7 +63,8 @@ export const colors = {
   lavenderBlush: '#FCEEF0',
   roman: '#DB5461',
   slateGray: '#718096',
-  cadetBlue: '#A0AEC0'
+  cadetBlue: '#A0AEC0',
+  cornflowerBlue: '#667EEA'
 };
 
 export const breakpoints = {

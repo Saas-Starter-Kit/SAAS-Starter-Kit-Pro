@@ -30,6 +30,7 @@ const RecentlyPublished = ({ blogLinks }) => (
     <StyledTitle>Recently Published</StyledTitle>
     {blogLinks.map(({ node: { data, tags, uid } }) => (
       <ArticleCard
+        key={uid.concat(data.title.text)}
         title={data.title.text}
         date={moment(data.date).format('MMMM DD, YYYY')}
         imageSrc={data.hero_image.thumbnails.thumbnail.url}
