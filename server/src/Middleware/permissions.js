@@ -16,7 +16,7 @@ export const requirePermissions = (req, res, next) => {
   }
 };
 
-export const permissionsMiddleware = (req, _, next) => {
+export const createPermissions = (req, _, next) => {
   let role = req.body.role || req.query.role || null;
   req.ability = defineAbilityFor(role);
   next();

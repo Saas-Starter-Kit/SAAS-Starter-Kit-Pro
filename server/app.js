@@ -9,7 +9,7 @@ import morgan from 'morgan';
 
 import { errorHandler } from './src/Middleware/errorHandler.js';
 import { unhandledRejectionHandler } from './src/Middleware/unhandledRejectionHandler.js';
-import { permissionsMiddleware } from './src/Middleware/permissions.js';
+import { createPermissions } from './src/Middleware/permissions.js';
 
 //initialize sentry
 import './src/Config/sentry.js';
@@ -33,7 +33,7 @@ app.use(cors());
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(permissionsMiddleware);
+app.use(createPermissions);
 
 //API routes
 app.use('/', utilsApi);
