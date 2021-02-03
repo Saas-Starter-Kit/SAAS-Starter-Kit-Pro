@@ -13,9 +13,6 @@ const ImageWrapper = styled.picture`
   position: relative;
   margin: 0.5rem 0 0.5rem 0.5rem;
   flex-basis: 40%;
-  min-height: 10rem;
-  max-height: 290px;
-  height: 100%;
 `;
 
 const Image = styled.img`

@@ -5,20 +5,30 @@ import { colors, breakpoints } from '../../../styles/theme';
 import AnimatedCard from './AnimatedCard';
 
 const Wrapper = styled.div`
-  padding: 2rem 2rem 4rem;
+  padding: 2rem 0 4rem;
+  max-width: ${breakpoints.large};
+  margin-left: auto;
+  margin-right: auto;
+  @media (max-width: ${breakpoints.medium}) {
+    padding: 2rem 2rem 4rem;
+  }
 `;
 
 const Title = styled.h2`
   color: ${colors.gray800};
-  margin-bottom: 3.5rem;
+  margin-left: 1rem;
   line-height: 1.5715;
   font-weight: 700;
+  margin-bottom: 2rem;
+  @media (min-width: ${breakpoints.medium}) {
+    margin-bottom: 3.5rem;
+  }
 `;
 
 const Card = styled(AnimatedCard)`
   display: flex;
   flex-direction: column;
-  @media (min-width: ${breakpoints.large}) {
+  @media (min-width: ${breakpoints.medium}) {
     flex-direction: row;
   }
 `;
@@ -27,20 +37,21 @@ const ImageWrapper = styled.picture`
   position: relative;
   margin: 0.5rem 0 0.5rem 0.5rem;
   flex-basis: 40%;
-  min-height: 10rem;
-  max-height: 290px;
-  height: 100%;
 `;
 
 const Image = styled.img`
-  border-radius: 0.5rem;
-  width: 100%;
-  height: 100%;
+  object-fit: cover;
   object-position: center center;
-  position: absolute;
+  border-radius: 0.5rem;
   top: 0px;
   left: 0px;
-  object-fit: cover;
+  @media (max-width: ${breakpoints.medium}) {
+    width: 100%;
+  }
+  @media (min-width: ${breakpoints.medium}) {
+    height: 100%;
+    position: absolute;
+  }
 `;
 
 const TextWrapper = styled.div`
