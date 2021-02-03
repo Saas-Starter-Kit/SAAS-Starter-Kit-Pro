@@ -97,6 +97,7 @@ const AccountSettings = () => {
     <div>
       <Title>Account Settings</Title>
       {isLoading && <LoadingOverlay />}
+
       <UpdateUsernameCard
         isEmail={isEmail}
         handleUsernameChange={handleUsernameChange}

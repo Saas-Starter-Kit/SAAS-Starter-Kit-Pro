@@ -67,6 +67,14 @@ const DangerButton = styled(Button)`
   margin-bottom: 0.5rem;
 `;
 
+const SuccessResponse = styled.div`
+  font-size: 0.9rem;
+  color: green;
+  font-weight: 100;
+  margin-bottom: 1rem;
+  margin-top: -3rem;
+`;
+
 const UpdatePaymentCard = ({
   payCards,
   paymentRemoved,
@@ -78,9 +86,6 @@ const UpdatePaymentCard = ({
 }) => {
   return (
     <Card>
-      {/*{isLoading && <LoadingOverlay />}*/}
-      {/*<Paragraph>{resPayMessage}</Paragraph>*/}
-
       <SectionTitle>Update Payment</SectionTitle>
       {!paymentRemoved ? (
         payCards.map((item) => (
@@ -100,8 +105,7 @@ const UpdatePaymentCard = ({
           </StyledCardDisplayWrapper>
         ))
       ) : (
-        //<SuccessResponse>Payment Removed Successfully</SuccessResponse>
-        <p>Success </p>
+        <SuccessResponse>Payment method Removed Successfully</SuccessResponse>
       )}
       <ModalCardDelete
         isModalCard={isModalCard}

@@ -1,9 +1,9 @@
 import React, { useState, useContext, useEffect } from 'react';
+import { Spin } from 'antd';
 
 import AuthContext from '../../../../utils/authContext';
 import ApiContext from '../../../../utils/apiContext';
 
-import LoadingOverlay from '../../../../components/Common/loadingOverlay';
 import styled from 'styled-components';
 
 import UpdatePaymentCard from './updatePaymentCard';
@@ -81,6 +81,7 @@ const PaymentSettings = () => {
   };
 
   const getWallet = async () => {
+    fetchInit();
     let params = {
       customer: stripeCustomerId
     };
@@ -91,6 +92,7 @@ const PaymentSettings = () => {
     console.log(wallet);
     const cards = wallet.data.data;
     setPayCards(cards);
+    fetchSuccess();
   };
 
   /* 
@@ -104,16 +106,17 @@ const PaymentSettings = () => {
   return (
     <Wrapper>
       <Title>Account Settings</Title>
-      {isLoading && <LoadingOverlay />}
-      <UpdatePaymentCard
-        payCards={payCards}
-        paymentRemoved={paymentRemoved}
-        isModalCard={isModalCard}
-        handleModalCardCancel={handleModalCardCancel}
-        deletePaymentMethod={deletePaymentMethod}
-        setDeletePaymentId={setDeletePaymentId}
-        setModalCard={setModalCard}
-      />
+      <Spin tip="Loading..." spinning={isLoading}>
+        <UpdatePaymentCard
+          payCards={payCards}
+          paymentRemoved={paymentRemoved}
+          isModalCard={isModalCard}
+          handleModalCardCancel={handleModalCardCancel}
+          deletePaymentMethod={deletePaymentMethod}
+          setDeletePaymentId={setDeletePaymentId}
+          setModalCard={setModalCard}
+        />
+      </Spin>
       <AttachPaymentFormWrapper />
     </Wrapper>
   );

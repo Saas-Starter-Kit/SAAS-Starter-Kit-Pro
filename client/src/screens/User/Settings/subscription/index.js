@@ -1,17 +1,17 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Spin } from 'antd';
 import { navigate } from 'gatsby';
+import styled from 'styled-components';
 
 import AuthContext from '../../../../utils/authContext';
 import ApiContext from '../../../../utils/apiContext';
+import axios from '../../../../services/axios';
 
 import LoadingOverlay from '../../../../components/Common/loadingOverlay';
-import styled from 'styled-components';
-
+import NullSubscriptionCard from './NullSubscriptionCard';
 import CancelSubscriptionCard from './cancelSubscirptionCard';
 import PaymentInformationCard from './paymentInformationCard';
 import UpgradeSubscription from './upgradeSubscription';
-import axios from '../../../../services/axios';
 
 const Wrapper = styled.div``;
 
@@ -100,7 +100,7 @@ const SubscriptionSettings = () => {
         fetchFailure(err);
       });
 
-    fetchSuccess(true, subscriptionCancel);
+    fetchSuccess();
     //replace with antd success message
     setModalSub(false);
     navigate('/auth/login');
@@ -129,20 +129,24 @@ const SubscriptionSettings = () => {
   return (
     <Wrapper>
       <Title>Subscription Settings</Title>
-      {console.log(subscriptionState)}
       {isLoading && <LoadingOverlay />}
-      <PaymentInformationCard
-        planType={planType}
-        price={price}
-        subscriptionState={subscriptionState}
-      />
+      {!subscriptionState && <NullSubscriptionCard />}
+      {subscriptionState && (
+        <PaymentInformationCard
+          planType={planType}
+          price={price}
+          subscriptionState={subscriptionState}
+        />
+      )}
       {subscriptionState && <UpgradeSubscription subscriptionState={subscriptionState} />}
-      <CancelSubscriptionCard
-        setModalSub={setModalSub}
-        isModalSub={isModalSub}
-        handleModalSubCancel={handleModalSubCancel}
-        cancelSubscription={cancelSubscription}
-      />
+      {subscriptionState && (
+        <CancelSubscriptionCard
+          setModalSub={setModalSub}
+          isModalSub={isModalSub}
+          handleModalSubCancel={handleModalSubCancel}
+          cancelSubscription={cancelSubscription}
+        />
+      )}
     </Wrapper>
   );
 };

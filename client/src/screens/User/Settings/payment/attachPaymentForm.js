@@ -133,7 +133,7 @@ const AttachPaymentForm = () => {
         <Header>Add a Payment Method</Header>
         <SuccessResponse>{successMessage}</SuccessResponse>
         {!successMessage && (
-          <>
+          <div>
             <form onSubmit={handleSubmit}>
               <CardElement />
               <ButtonWrapper>
@@ -143,7 +143,7 @@ const AttachPaymentForm = () => {
               </ButtonWrapper>
             </form>
             <p>Adding a card will make it the default payment method</p>
-          </>
+          </div>
         )}
       </Spin>
     </Card>
