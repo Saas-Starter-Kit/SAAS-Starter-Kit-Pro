@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'gatsby';
+import { navigate } from 'gatsby';
 import styled from 'styled-components';
 import moment from 'moment';
 import { colors } from '../../../styles/theme';
@@ -87,7 +87,7 @@ const TagWrapper = styled.div`
   }
 `;
 
-const Tag = styled(Link)`
+const Tag = styled.div`
   font-size: 10px;
   white-space: nowrap;
   border-radius: 0.5rem;
@@ -104,7 +104,7 @@ const Tag = styled(Link)`
   }
 `;
 
-const ArticleTitle = styled(Link)`
+const ArticleTitle = styled.div`
   color: ${colors.gray800};
   &:hover {
     color: ${colors.gray800};
@@ -126,17 +126,28 @@ const RecentlyPublished = ({ blogLinks }) => (
     {blogLinks.map(({ node: { data, tags, uid } }) => {
       const date = moment(data.date).format('MMMM DD, YYYY');
       return (
-        <Card>
+        <Card
+          onClick={() => {
+            navigate(`/blog/${uid}`);
+          }}
+        >
           <ImageWrapper>
             <Image src={data.hero_image.thumbnails.thumbnail.url} />
           </ImageWrapper>
           <TextWrapper>
             <TagWrapper>
               {tags.map((tag) => (
-                <Tag to={`/tag/?tag=${tag}`}>{tag}</Tag>
+                <Tag
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    navigate(`/tag/?tag=${tag}`);
+                  }}
+                >
+                  {tag}
+                </Tag>
               ))}
             </TagWrapper>
-            <ArticleTitle to={`/blog/${uid}`}>{data.title.text}</ArticleTitle>
+            <ArticleTitle>{data.title.text}</ArticleTitle>
             <Date>{date}</Date>
           </TextWrapper>
         </Card>
