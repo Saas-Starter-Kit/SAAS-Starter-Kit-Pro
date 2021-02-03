@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
-import { Spin } from 'antd';
+import { Spin, message } from 'antd';
 
 import AuthContext from '../../../utils/authContext';
 import ApiContext from '../../../utils/apiContext';
@@ -60,10 +60,13 @@ const CreateTask = ({ app_id }) => {
       description: 'user created todo'
     };
 
-    sendEventToAnalytics(eventType, parameters);
+    if (!process.env.NODE_ENV == 'development') {
+      sendEventToAnalytics(eventType, parameters);
+    }
 
     setTitle('');
     setDescription('');
+    message.success('Todo Created');
     fetchSuccess();
   };
 
