@@ -1,9 +1,14 @@
 import styled from 'styled-components';
+import { colors } from '../../../styles/theme';
 
-const AnimatedCard = styled.article`
+export const BaseCard = styled.article`
+  background-color: ${colors.white};
   border-radius: 1rem;
   margin: 0.5rem;
   box-shadow: 1px 1px 5px 0 rgb(1 1 1 / 5%);
+`;
+
+export const AnimatedCard = styled(BaseCard)`
   cursor: pointer;
   transition: transform 250ms ease, box-shadow 250ms ease, color 250ms ease;
   transition-property: transform, box-shadow, color;
@@ -12,11 +17,8 @@ const AnimatedCard = styled.article`
   transition-delay: 0s, 0s, 0s;
   -webkit-transition: -webkit-transform 250ms ease, box-shadow 250ms ease, color 250ms ease;
   -webkit-transition: transform 250ms ease, box-shadow 250ms ease, color 250ms ease;
-
   &:hover {
     transform: translateY(-0.25rem);
     box-shadow: 0px 2px 4px rgb(46 41 51 / 8%), 0px 5px 10px rgb(71 63 79 / 16%);
   }
 `;
-
-export default AnimatedCard;

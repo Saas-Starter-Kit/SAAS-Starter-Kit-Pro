@@ -2,7 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { navigate } from 'gatsby';
 import { colors, breakpoints } from '../../../styles/theme';
-import AnimatedCard from './AnimatedCard';
+import { AnimatedCard } from './cards';
+import Title from './sectionTitle';
 
 const Wrapper = styled.div`
   padding: 2rem 0 4rem;
@@ -14,15 +15,9 @@ const Wrapper = styled.div`
   }
 `;
 
-const Title = styled.h2`
+const StyledTitle = styled(Title)`
   color: ${colors.gray800};
   margin-left: 1rem;
-  line-height: 1.5715;
-  font-weight: 700;
-  margin-bottom: 2rem;
-  @media (min-width: ${breakpoints.medium}) {
-    margin-bottom: 3.5rem;
-  }
 `;
 
 const Card = styled(AnimatedCard)`
@@ -86,7 +81,7 @@ const Featured = ({
   }
 }) => (
   <Wrapper>
-    <Title>Featured Article</Title>
+    <StyledTitle>Featured Article</StyledTitle>
     <Card
       onClick={() => {
         navigate(`/blog/${uid}`);

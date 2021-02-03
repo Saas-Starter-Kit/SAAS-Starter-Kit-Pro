@@ -1,28 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
 import moment from 'moment';
-import { colors, breakpoints } from '../../../styles/theme';
+import { colors } from '../../../styles/theme';
 import ArticleCard from './articleCard';
+import Title from './sectionTitle';
 
-const Wrapper1 = styled.div`
-  background-color: ${colors.alabaster2};
-`;
-
-const Wrapper2 = styled.div`
-  padding: 4rem 2rem 0;
+const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  max-width: ${breakpoints.large};
-  margin-left: auto;
-  margin-right: auto;
 `;
 
-const Title = styled.h2`
+const StyledTitle = styled(Title)`
   color: ${colors.gray800};
-  margin-bottom: 3.5rem;
-  line-height: 1.5715;
-  font-weight: 700;
   &:before {
     margin-right: calc(2rem - 5px);
     content: '';
@@ -36,20 +26,18 @@ const Title = styled.h2`
 `;
 
 const RecentlyPublished = ({ blogLinks }) => (
-  <Wrapper1>
-    <Wrapper2>
-      <Title>Recently Published</Title>
-      {blogLinks.map(({ node: { data, tags, uid } }) => (
-        <ArticleCard
-          title={data.title.text}
-          date={moment(data.date).format('MMMM DD, YYYY')}
-          imageSrc={data.hero_image.thumbnails.thumbnail.url}
-          uid={uid}
-          tags={tags}
-        />
-      ))}
-    </Wrapper2>
-  </Wrapper1>
+  <Wrapper>
+    <StyledTitle>Recently Published</StyledTitle>
+    {blogLinks.map(({ node: { data, tags, uid } }) => (
+      <ArticleCard
+        title={data.title.text}
+        date={moment(data.date).format('MMMM DD, YYYY')}
+        imageSrc={data.hero_image.thumbnails.thumbnail.url}
+        uid={uid}
+        tags={tags}
+      />
+    ))}
+  </Wrapper>
 );
 
 export default RecentlyPublished;

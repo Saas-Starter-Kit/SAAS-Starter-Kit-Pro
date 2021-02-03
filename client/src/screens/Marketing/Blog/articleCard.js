@@ -2,7 +2,8 @@ import React from 'react';
 import { navigate } from 'gatsby';
 import styled from 'styled-components';
 import { colors } from '../../../styles/theme';
-import AnimatedCard from './AnimatedCard';
+import { AnimatedCard } from './cards';
+import Tag from './tag';
 
 const Card = styled(AnimatedCard)`
   background-color: ${colors.white};
@@ -38,23 +39,6 @@ const TagWrapper = styled.div`
   margin-bottom: 1rem;
   * {
     margin-right: 0.5rem;
-  }
-`;
-
-const Tag = styled.div`
-  font-size: 10px;
-  white-space: nowrap;
-  border-radius: 0.5rem;
-  font-weight: 600;
-  text-decoration: none;
-  vertical-align: middle;
-  padding: 0.225rem 0.9rem;
-  line-height: 1.3rem;
-  background-color: ${colors.gray200};
-  color: ${colors.slateGray};
-  &:hover {
-    color: ${colors.gray200};
-    background-color: ${colors.slateGray};
   }
 `;
 
