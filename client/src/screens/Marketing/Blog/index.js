@@ -2,11 +2,13 @@ import React from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 import styled from 'styled-components';
 import RecentlyPublished from './recentlyPublished';
+import Featured from './featured';
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   font-family: 'Inter', sans-serif;
+  letter-spacing: 0.03em;
 `;
 
 const Blog = () => {
@@ -16,22 +18,14 @@ const Blog = () => {
 
   const blogLinks = edges;
 
-  // let featuredArticle = edges.filter((edge) => edge.node.tags.includes('featured'));
-  // featuredArticle = featuredArticle[0];
+  let featuredArticle = edges.filter((edge) => edge.node.tags.includes('featured'));
+  featuredArticle = featuredArticle[0];
 
-  // console.log(blogLinks);
-
-  // let topArticles = edges.filter((edge) => edge.node.tags.includes('top article'));
-  // console.log(topArticles);
+  let topArticles = edges.filter((edge) => edge.node.tags.includes('top article'));
 
   return (
     <Wrapper>
-      {/* <div>
-        <h3>Featured:</h3>
-      </div>
-      <div>
-        <h3>Top Articles:</h3>
-      </div> */}
+      <Featured article={featuredArticle} />
       <RecentlyPublished blogLinks={blogLinks} />
     </Wrapper>
   );

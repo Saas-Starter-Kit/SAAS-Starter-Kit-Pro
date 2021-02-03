@@ -6,9 +6,7 @@ import ArticleCard from './articleCard';
 
 const Wrapper = styled.div`
   background-color: ${colors.alabaster2};
-  padding: 0 2rem;
-  padding-top: 2rem;
-  letter-spacing: 0.03em;
+  padding: 4rem 2rem 0;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
