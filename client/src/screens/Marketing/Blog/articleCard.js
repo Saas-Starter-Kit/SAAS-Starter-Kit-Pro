@@ -14,6 +14,7 @@ const ImageWrapper = styled.picture`
   position: relative;
   margin: 0.5rem 0 0.5rem 0.5rem;
   flex-basis: 40%;
+  min-height: 200px;
 `;
 
 const Image = styled.img`
@@ -30,6 +31,7 @@ const Image = styled.img`
 const TextWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   padding: 2rem;
   flex-basis: 60%;
 `;
