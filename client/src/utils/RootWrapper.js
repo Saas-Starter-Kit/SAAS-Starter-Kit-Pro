@@ -18,6 +18,8 @@ import { firebaseApp as firebase } from '../services/firebase';
 import { ThemeProvider } from 'styled-components';
 import { theme } from '../styles/theme';
 
+import { silentAuth } from './helpers';
+
 const RootWrapper = ({ children }) => {
   const [authState, dispatchAuth] = useReducer(authReducer, initialStateAuth);
   const [apiState, dispatchApi] = useReducer(apiReducer, initialStateApi);
@@ -45,21 +47,8 @@ const RootWrapper = ({ children }) => {
   };
 
   useEffect(() => {
-    silentAuth();
+    silentAuth(LogIn, LogOut);
   }, []); // eslint-disable-line
-
-  const silentAuth = () => {
-    let user, expiresAt;
-
-    user = JSON.parse(localStorage.getItem('user'));
-    expiresAt = JSON.parse(localStorage.getItem('expiresIn'));
-
-    if (user && new Date().getTime() < expiresAt) {
-      LogIn(user);
-    } else if (!user || new Date().getTime() > expiresAt) {
-      LogOut();
-    }
-  };
 
   return (
     <AuthContext.Provider value={{ authState, LogIn, LogOut, firebase }}>
