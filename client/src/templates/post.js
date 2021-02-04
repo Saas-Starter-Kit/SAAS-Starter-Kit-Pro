@@ -94,7 +94,7 @@ const FirstColumn = styled.div`
 `;
 
 const SecondColumn = styled.div`
-  padding-left: 4rem;
+  padding-left: 3rem;
   flex-basis: 33%;
   @media (max-width: ${breakpoints.medium}) {
     display: none;
