@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { navigate } from 'gatsby';
 import { colors } from '../../../styles/theme';
 import { BaseCard } from './cards';
 import Tag from './tag';
@@ -25,7 +26,12 @@ const TagsSection = ({ tags }) => (
     <StyledTitle>Tags</StyledTitle>
     <Card>
       {tags.map((tag, index) => (
-        <Tag key={tag.concat(index)}>{`#${tag}`}</Tag>
+        <Tag
+          key={tag.concat(index)}
+          onClick={(e) => {
+            navigate(`/tag/?tag=${tag}`);
+          }}
+        >{`#${tag}`}</Tag>
       ))}
     </Card>
   </React.Fragment>

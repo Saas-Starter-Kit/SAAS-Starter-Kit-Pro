@@ -16,6 +16,7 @@ const Tag = styled.div`
     color: ${colors.gray200};
     background-color: ${colors.slateGray};
   }
+  cursor: pointer;
 `;
 
 export default Tag;
