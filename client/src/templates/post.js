@@ -6,6 +6,8 @@ import { colors, breakpoints } from '../styles/theme';
 import SliceZone from './sliceZone';
 import Disqus from '../services/disqus';
 import { BaseCard } from '../screens/Marketing/Blog/cards';
+import RelatedArticles from '../screens/Marketing/Blog/relatedArticles';
+import TagsSection from '../screens/Marketing/Blog/tagsSection';
 
 const Wrapper1 = styled.div`
   background-color: ${colors.alabaster2};
@@ -43,8 +45,27 @@ const Bold = styled.span`
 
 const Image = styled.img``;
 
-const ContentWrapper = styled.div`
+const CardContentWrapper = styled.div`
   padding: 2rem;
+`;
+
+const ContentWrapper = styled.div`
+  display: flex;
+`;
+
+const FirstColumn = styled.div`
+  flex-basis: 66%;
+  @media (max-width: ${breakpoints.medium}) {
+    flex-basis: 100%;
+  }
+`;
+
+const SecondColumn = styled.div`
+  padding-left: 4rem;
+  flex-basis: 33%;
+  @media (max-width: ${breakpoints.medium}) {
+    display: none;
+  }
 `;
 
 const Post = ({ data }) => {
@@ -71,13 +92,21 @@ const Post = ({ data }) => {
             By <Bold>{author}</Bold> ・ {date}
           </Subtitle>
         </TitleWrapper>
-        <BaseCard>
-          <Image src={hero_image.thumbnails.desktop.url} />
-          <ContentWrapper>
-            <SliceZone body={body} />
-            <Disqus url={`${siteUrl + '/' + pageUid}`} identifier={pageUid} title={title} />
-          </ContentWrapper>
-        </BaseCard>
+        <ContentWrapper>
+          <FirstColumn>
+            <BaseCard>
+              <Image src={hero_image.thumbnails.desktop.url} />
+              <CardContentWrapper>
+                <SliceZone body={body} />
+                <Disqus url={`${siteUrl + '/' + pageUid}`} identifier={pageUid} title={title} />
+              </CardContentWrapper>
+            </BaseCard>
+          </FirstColumn>
+          <SecondColumn>
+            <RelatedArticles articles={related_articles} />
+            <TagsSection tags={tags} />
+          </SecondColumn>
+        </ContentWrapper>
       </Wrapper2>
     </Wrapper1>
   );

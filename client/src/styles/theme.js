@@ -64,7 +64,8 @@ export const colors = {
   roman: '#DB5461',
   slateGray: '#718096',
   cadetBlue: '#A0AEC0',
-  cornflowerBlue: '#667EEA'
+  cornflowerBlue: '#667EEA',
+  sail: '#A3BFFA'
 };
 
 export const breakpoints = {
