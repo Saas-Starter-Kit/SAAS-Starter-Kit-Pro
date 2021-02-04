@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { colors } from '../../../styles/theme';
 
-export const BaseCard = styled.article`
+export const BaseCard = styled.div`
   background-color: ${colors.white};
   border-radius: 1rem;
   margin: 0.5rem;
