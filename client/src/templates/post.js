@@ -1,6 +1,6 @@
 import React from 'react';
 import { graphql } from 'gatsby';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import moment from 'moment';
 import { colors, breakpoints } from '../styles/theme';
 import SliceZone from './sliceZone';
@@ -21,8 +21,25 @@ const Wrapper2 = styled.div`
   padding: 2rem;
 `;
 
+const fadeInDown = keyframes`
+  0% {
+    opacity: 0;
+    transform: translate3d(0,-20%,0);
+  }
+  100% {
+    opacity: 1;
+    transform: translateZ(0);
+  }
+`;
+
 const TitleWrapper = styled.div`
   padding: 0 0.6rem;
+
+  animation-name: ${fadeInDown};
+  animation-duration: 1000ms;
+  animation-delay: 0ms;
+  animation-iteration-count: 1;
+  opacity: 1;
 `;
 
 const Title = styled.h1`
@@ -43,14 +60,30 @@ const Bold = styled.span`
   font-weight: bold;
 `;
 
-const Image = styled.img``;
-
 const CardContentWrapper = styled.div`
   padding: 2rem;
 `;
 
+const fadeInUp = keyframes`
+  0% {
+    opacity: 0;
+    transform: translate3d(0,20%,0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateZ(0);
+  }
+`;
+
 const ContentWrapper = styled.div`
   display: flex;
+
+  animation-name: ${fadeInUp};
+  animation-duration: 1000ms;
+  animation-delay: 0ms;
+  animation-iteration-count: 1;
+  opacity: 1;
 `;
 
 const FirstColumn = styled.div`
@@ -95,7 +128,7 @@ const Post = ({ data }) => {
         <ContentWrapper>
           <FirstColumn>
             <BaseCard>
-              <Image src={hero_image.thumbnails.desktop.url} />
+              <img src={hero_image.thumbnails.desktop.url} />
               <CardContentWrapper>
                 <SliceZone body={body} />
                 <Disqus url={`${siteUrl + '/' + pageUid}`} identifier={pageUid} title={title} />
