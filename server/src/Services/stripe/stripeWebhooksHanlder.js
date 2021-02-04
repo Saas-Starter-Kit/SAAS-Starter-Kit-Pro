@@ -2,15 +2,10 @@
 import stripe from '../../Config/stripe.js';
 
 export const WebHookHandler = async (req, res) => {
-  //  console.log(req);
-  console.log(req.body);
-
   const sig = req.headers['stripe-signature'];
   let endpointSecret = process.env.STRIPE_WEBHOOK_SECRET;
 
   let event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
-
-  console.log(event.type);
 
   switch (event.type) {
     case 'invoice.payment_failed':

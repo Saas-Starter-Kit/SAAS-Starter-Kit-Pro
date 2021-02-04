@@ -1,8 +1,11 @@
 import stripe from '../../Config/stripe.js';
-import db from '../../Database/db.js';
 import { getUser } from '../../Model/sql/auth/authentication.js';
 import { sendEmail } from '../../Config/email.js';
 import moment from 'moment';
+import {
+  cancelSubscriptionModel,
+  createSubscriptionModel
+} from '../../Model/sql/stripe/stripeSubscription.js';
 
 export const UpdateSubscription = async (req, res) => {
   let subscription_id = req.body.subscriptionId;
@@ -36,12 +39,12 @@ export const GetSubscription = async (req, res) => {
   const user = await getUser(email);
 
   //If subscription not found send non-error message
-  if (!user.rows[0].subscription_id) {
+  if (!user.subscription_id) {
     res.status(200).send({ type: 'No Subscription', message: 'Subscription Not Found' });
     return;
   }
 
-  let subscription_id = user.rows[0].subscription_id;
+  let subscription_id = user.subscription_id;
 
   const subscription = await stripe.subscriptions.retrieve(subscription_id);
 
@@ -69,21 +72,16 @@ export const CreateSubscription = async (req, res) => {
     trial_period_days: 14
   });
 
-  let subscritionId = subscription.id;
+  let subscriptionId = subscription.id;
 
   if (subscription.status === 'succeeded' || subscription.status === 'trialing') {
     //update db to users subscription
-    let text = `UPDATE users SET is_paid_member=$1, subscription_id=$3
-                WHERE email = $2`;
-    let values = ['true', email, subscritionId];
-
-    await db.query(text, values);
+    createSubscriptionModel(email, subscriptionId);
 
     //send email confirm for subscription creation
     let amount = subscription.plan.amount * 0.01;
     let start_date = moment(subscription.created * 1000).format('MMM Do YYYY');
     let trial_end = moment(subscription.trial_end * 1000).format('MMM Do YYYY');
-
     let template = 'start subscription';
     let locals = { amount, start_date, trial_end };
     await sendEmail(email, template, locals);
@@ -104,18 +102,14 @@ export const CancelSubscription = async (req, res) => {
   //check if user exists
   const user = await getUser(email);
 
-  console.log(user.rows[0].subscription_id);
-  let subscription_id = user.rows[0].subscription_id;
+  let subscription_id = user.subscription_id;
 
   //delete subscription and send back response
   const subscription = await stripe.subscriptions.del(subscription_id);
 
   if (subscription.status === 'canceled') {
-    let text = `UPDATE users SET is_paid_member=$1, subscription_id=$2
-               WHERE email=$3`;
-    let values = ['false', '', email];
-
-    await db.query(text, values);
+    //update our own db for canceled subscription
+    await cancelSubscriptionModel(email);
 
     //cancel subscription confirm email
     let template = 'cancel subscription';

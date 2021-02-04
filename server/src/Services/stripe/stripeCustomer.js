@@ -1,6 +1,6 @@
 import stripe from '../../Config/stripe.js';
-import db from '../../Database/db.js';
 import { setToken } from '../../Middleware/auth.js';
+import { createCustomerModel } from '../../Model/sql/stripe/stripeCustomer.js';
 
 export const CreateCustomer = async (req, res) => {
   let email = req.body.email;
@@ -24,18 +24,13 @@ export const CreateCustomer = async (req, res) => {
     }
   });
 
-  let text = `UPDATE users SET stripe_customer_id=$1 
-              WHERE email=$2
-              RETURNING stripe_customer_id`;
-  let values = [customer.id, email];
-
-  //save stripe customer id to database
-  let queryResult = await db.query(text, values);
+  //save stripe id to our own db
+  let result = await createCustomerModel(customer, email);
 
   //send jwt token for user auth requests
   let token = setToken(userId);
 
-  res.send({ stripe: queryResult.rows[0], token });
+  res.send({ stripe: result, token });
 };
 
 export const UpdateCustomer = async (stripe_id, email) => {
