@@ -6,6 +6,7 @@ export const BaseCard = styled.article`
   border-radius: 1rem;
   margin: 0.5rem;
   box-shadow: 1px 1px 5px 0 rgb(1 1 1 / 5%);
+  overflow: hidden;
 `;
 
 export const AnimatedCard = styled(BaseCard)`

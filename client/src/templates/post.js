@@ -41,7 +41,9 @@ const Bold = styled.span`
   font-weight: bold;
 `;
 
-const StyledCard = styled(BaseCard)`
+const Image = styled.img``;
+
+const ContentWrapper = styled.div`
   padding: 2rem;
 `;
 
@@ -69,10 +71,13 @@ const Post = ({ data }) => {
             By <Bold>{author}</Bold> ・ {date}
           </Subtitle>
         </TitleWrapper>
-        <StyledCard>
-          <SliceZone body={body} />
-          <Disqus url={`${siteUrl + '/' + pageUid}`} identifier={pageUid} title={title} />
-        </StyledCard>
+        <BaseCard>
+          <Image src={hero_image.thumbnails.desktop.url} />
+          <ContentWrapper>
+            <SliceZone body={body} />
+            <Disqus url={`${siteUrl + '/' + pageUid}`} identifier={pageUid} title={title} />
+          </ContentWrapper>
+        </BaseCard>
       </Wrapper2>
     </Wrapper1>
   );
