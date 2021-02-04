@@ -1,12 +1,104 @@
 import React from 'react';
 import { graphql } from 'gatsby';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import moment from 'moment';
+import { colors, breakpoints } from '../styles/theme';
 import SliceZone from './sliceZone';
 import Disqus from '../services/disqus';
+import { BaseCard } from '../screens/Marketing/Blog/cards';
+import RelatedArticles from '../screens/Marketing/Blog/relatedArticles';
+import TagsSection from '../screens/Marketing/Blog/tagsSection';
 
-const Wrapper = styled.div`
-  margin: 3rem 7rem;
+const Wrapper1 = styled.div`
+  background-color: ${colors.alabaster2};
+  padding: 2rem 0 4rem;
+`;
+
+const Wrapper2 = styled.div`
+  max-width: ${breakpoints.large};
+  margin-left: auto;
+  margin-right: auto;
+  padding: 2rem;
+`;
+
+const fadeInDown = keyframes`
+  0% {
+    opacity: 0;
+    transform: translate3d(0,-20%,0);
+  }
+  100% {
+    opacity: 1;
+    transform: translateZ(0);
+  }
+`;
+
+const TitleWrapper = styled.div`
+  padding: 0 0.6rem;
+
+  animation-name: ${fadeInDown};
+  animation-duration: 1000ms;
+  animation-delay: 0ms;
+  animation-iteration-count: 1;
+  opacity: 1;
+`;
+
+const Title = styled.h1`
+  font-size: 3rem;
+  color: ${colors.gray800};
+  line-height: 1.3;
+  font-weight: 900;
+`;
+
+const Subtitle = styled.div`
+  color: ${colors.slateGray};
+  font-size: 1rem;
+  font-weight: normal;
+  padding-bottom: 2rem;
+`;
+
+const Bold = styled.span`
+  font-weight: bold;
+`;
+
+const CardContentWrapper = styled.div`
+  padding: 2rem;
+`;
+
+const fadeInUp = keyframes`
+  0% {
+    opacity: 0;
+    transform: translate3d(0,20%,0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateZ(0);
+  }
+`;
+
+const ContentWrapper = styled.div`
+  display: flex;
+
+  animation-name: ${fadeInUp};
+  animation-duration: 1000ms;
+  animation-delay: 0ms;
+  animation-iteration-count: 1;
+  opacity: 1;
+`;
+
+const FirstColumn = styled.div`
+  flex-basis: 66%;
+  @media (max-width: ${breakpoints.medium}) {
+    flex-basis: 100%;
+  }
+`;
+
+const SecondColumn = styled.div`
+  padding-left: 3rem;
+  flex-basis: 33%;
+  @media (max-width: ${breakpoints.medium}) {
+    display: none;
+  }
 `;
 
 const Post = ({ data }) => {
@@ -25,13 +117,31 @@ const Post = ({ data }) => {
   const related_articles = [related_article1, related_article2];
 
   return (
-    <Wrapper>
-      <h1>{title}</h1>
-      <h2>{author}</h2>
-      <h3>{date}</h3>
-      <SliceZone body={body} />
-      <Disqus url={`${siteUrl + '/' + pageUid}`} identifier={pageUid} title={title} />
-    </Wrapper>
+    <Wrapper1>
+      <Wrapper2>
+        <TitleWrapper>
+          <Title>{title}</Title>
+          <Subtitle>
+            By <Bold>{author}</Bold> ・ {date}
+          </Subtitle>
+        </TitleWrapper>
+        <ContentWrapper>
+          <FirstColumn>
+            <BaseCard>
+              <img src={hero_image.thumbnails.desktop.url} />
+              <CardContentWrapper>
+                <SliceZone body={body} />
+                <Disqus url={`${siteUrl + '/' + pageUid}`} identifier={pageUid} title={title} />
+              </CardContentWrapper>
+            </BaseCard>
+          </FirstColumn>
+          <SecondColumn>
+            <RelatedArticles articles={related_articles} />
+            <TagsSection tags={tags} />
+          </SecondColumn>
+        </ContentWrapper>
+      </Wrapper2>
+    </Wrapper1>
   );
 };
 
