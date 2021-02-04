@@ -75,7 +75,7 @@ const ReadUpdate = ({ app_id }) => {
         fetchFailure(err);
       });
     setEdit(false);
-    //Save data to context to limit api calls
+
     setTimeout(() => fetchTodos(), 300);
     fetchSuccess();
   };
