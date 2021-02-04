@@ -35,14 +35,14 @@ const ConfirmedEmail = () => {
     return () => fetchSuccess();
   }, []);
 
-  console.log(typeof isInviteFlow);
+  console.log(isInviteFlow);
 
   useEffect(() => {
     createValidUser();
   }, [location]);
 
   useEffect(() => {
-    if (!isInviteFlow == 'undefined') createRole();
+    if (isInviteFlow == 'true') createRole();
   }, [isInviteFlow]);
 
   const createValidUser = async () => {
@@ -112,7 +112,7 @@ const ConfirmedEmail = () => {
     <div>
       {isLoading && <LoadingOverlay />}
       <div>Thank You for confirming your email, your account is setup and ready to use</div>
-      {!isInviteFlow == 'undefined' && (
+      {isInviteFlow == 'true' && (
         <div>
           <div>Click below to navigate to the app your were invited to</div>
           <Link to={`/app/${app_id}/dashboard`}>Go to App</Link>

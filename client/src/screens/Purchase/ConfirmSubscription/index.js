@@ -47,13 +47,8 @@ const Text = styled.h2`
 const ConfirmSub = () => {
   const { LogOut } = useContext(AuthContext);
 
-  const LogoutUser = () => {
-    LogOut();
-    setTimeout(() => navigate('/auth/login'), 8000);
-  };
-
   useEffect(() => {
-    LogoutUser();
+    LogOut();
   }, []);
 
   return (
@@ -66,9 +61,7 @@ const ConfirmSub = () => {
       </Steps>
       <Title>Your Subscription Has Been Confirmed!</Title>
       <Text>Please sign in again to complete the process</Text>
-      <Text>
-        Click below to navigate to the login screen or wait 8 seconds for automatic redirect
-      </Text>
+      <Text>Click below to navigate to the login screen</Text>
       <button onClick={() => navigate('/auth/login')}>Click Here</button>
     </Wrapper>
   );

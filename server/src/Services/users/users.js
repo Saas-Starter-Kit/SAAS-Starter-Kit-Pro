@@ -19,19 +19,17 @@ export const InviteUser = async (req, res) => {
   let isSignup;
   let redirectUrl;
 
-  console.log(senderEmail, inviterDisplayName, inviteRecipient);
-
   //check user exists
   let userExists = await getUser(inviteRecipient);
 
   //If user doesnt exist, require sign up process,
   //if not use login flow
   if (!userExists) {
-    redirectUrl = `${domainUrl}/auth/login/?app_id=${app_id}&isInviteFlow=${true}`;
-    isSignup = false;
-  } else {
     redirectUrl = `${domainUrl}/auth/signup/?app_id=${app_id}&isInviteFlow=${true}`;
     isSignup = true;
+  } else {
+    redirectUrl = `${domainUrl}/auth/login/?app_id=${app_id}&isInviteFlow=${true}`;
+    isSignup = false;
   }
 
   //send email with url containing all the variables

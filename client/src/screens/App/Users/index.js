@@ -124,6 +124,7 @@ const Users = ({ app_id }) => {
   return (
     <div>
       <div>Users</div>
+      <div>Invite User</div>
       <Spin tip="Loading..." spinning={isLoading}>
         <Formik
           validationSchema={ValidSchema}
