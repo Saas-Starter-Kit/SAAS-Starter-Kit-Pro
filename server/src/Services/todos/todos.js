@@ -1,13 +1,16 @@
-import db from '../../Database/db.js';
+import {
+  postTodoModel,
+  getTodosModel,
+  putTodoModel,
+  deleteTodoModel
+} from '../../Model/sql/todos/todos.js';
 
 export const getTodos = async (req, res) => {
   let app_id = req.query.app_id;
 
-  let text = `SELECT * FROM TODOS WHERE app_id=$1`;
-  let values = [app_id];
+  let result = getTodosModel(app_id);
 
-  let queryResult = await db.query(text, values);
-  res.send(queryResult.rows);
+  res.status(200).send(result);
 };
 
 export const postTodo = async (req, res) => {
@@ -16,14 +19,9 @@ export const postTodo = async (req, res) => {
   let author = req.body.author;
   let app_id = req.body.app_id;
 
-  console.log(req.body);
+  let result = postTodoModel(title, description, author, app_id);
 
-  let text = `INSERT INTO todos(title, description, author, app_id)
-              VALUES ($1, $2, $3, $4)`;
-  let values = [title, description, author, app_id];
-
-  let queryResult = await db.query(text, values);
-  res.send(queryResult.rows);
+  res.status(200).send(result);
 };
 
 export const putTodo = async (req, res) => {
@@ -32,21 +30,15 @@ export const putTodo = async (req, res) => {
   let author = req.body.author;
   let todo_id = req.body.todo_id;
 
-  let text = `UPDATE todos SET title= $1, description=$2, author=$3
-              WHERE todo_id = $4`;
-  let values = [title, description, author, todo_id];
+  putTodoModel(title, description, author, todo_id);
 
-  let queryResult = await db.query(text, values);
-  res.send(queryResult.rows);
+  res.status(200).send(queryResult);
 };
 
 export const deleteTodo = async (req, res) => {
   let todo_id = req.body.todo_id;
 
-  let text = `DELETE FROM todos 
-              WHERE todo_id=$1`;
-  let values = [todo_id];
+  let result = deleteTodoModel(todo_id);
 
-  let queryResult = await db.query(text, values);
-  res.send(queryResult.rows);
+  res.status(200).send(result);
 };
