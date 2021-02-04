@@ -69,7 +69,8 @@ const Dashboard = () => {
   };
 
   const createRole = async (result) => {
-    let app_id = result.data[0].app_id;
+    console.log(result);
+    let app_id = result.data.app_id;
     let user_id = authState.user.id;
     let role = 'admin';
 

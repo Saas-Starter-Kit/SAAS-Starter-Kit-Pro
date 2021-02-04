@@ -27,7 +27,7 @@ export const CreateContact = async (req, res) => {
   res.status(200).send('Email saved to Sendinblue');
 };
 
-//update email when user updates email
+//update sib email when user updates account email
 //called in Services/auth/authentication.js updateEmail()
 export const UpdateContact = async (email, oldEmail) => {
   const updateContact = {

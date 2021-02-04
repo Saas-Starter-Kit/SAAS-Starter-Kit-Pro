@@ -1,10 +1,15 @@
 import db from '../../Database/db.js';
 import { setToken } from '../../Middleware/auth.js';
-import { saveUsertoDB, getUser } from './authHelpers.js';
 import firebaseAdmin from '../../Config/firebase.js';
 import { sendEmail } from '../../Config/email.js';
 import { UpdateContact } from '../users/contacts.js';
 import { UpdateCustomer } from '../stripe/stripeCustomer.js';
+import {
+  saveUsertoDB,
+  getUser,
+  updateUsernameModel,
+  updateEmailModel
+} from '../../Model/sql/auth/authentication.js';
 
 export const verifyEmail = async (req, res) => {
   let email = req.body.email;
@@ -29,7 +34,7 @@ export const SignUp = async (req, res) => {
   let userExists = await getUser(email);
 
   //If user exists send error message, otherwise continue code
-  if (userExists.rows.length !== 0) {
+  if (userExists) {
     res.status(400).send({ type: 'Failed Sign Up', message: 'User Already Exists' });
     return;
   }
@@ -40,9 +45,9 @@ export const SignUp = async (req, res) => {
   let firebaseId = decodedToken.user_id;
 
   //save user firebase info to our own db, and get unique user database id
-  let databaseQuery = await saveUsertoDB(email, username, firebaseId);
+  let result = await saveUsertoDB(email, username, firebaseId);
 
-  let userId = databaseQuery.rows[0].id;
+  let userId = result.id;
 
   res.send({ token: setToken(userId) });
 };
@@ -56,21 +61,20 @@ export const Login = async (req, res) => {
 
   let firebaseId = decodedToken.user_id;
 
-  console.log(firebaseId);
   //Check if User exists
   let user = await getUser(email);
 
   //If user not found send error message
-  if (user.rows.length === 0) {
+  if (!user) {
     //delete user from firebase
     await firebaseAdmin.auth().deleteUser(firebaseId);
     res.status(400).send({ type: 'Failed Login', message: 'User Does Not Exists' });
     return;
   }
 
-  let user_id = user.rows[0].id;
-  let stripe_customer_id = user.rows[0].stripe_customer_id;
-  let subscription_id = user.rows[0].subscription_id;
+  let user_id = user.id;
+  let stripe_customer_id = user.stripe_customer_id;
+  let subscription_id = user.subscription_id;
 
   res.send({ token: setToken(user_id), stripe_customer_id, subscription_id });
 };
@@ -81,20 +85,16 @@ export const updateUsername = async (req, res) => {
   let email = req.body.curEmail;
 
   let user = await getUser(email);
-  let uid = user.rows[0].firebase_user_id;
+  let uid = user.firebase_user_id;
   console.log(user, uid);
 
   firebaseAdmin.auth().updateUser(uid, {
     displayName: username
   });
 
-  let text = `UPDATE users SET username=$1
-              WHERE id = $2`;
-  let values = [username, id];
+  await updateUsernameModel(username, id);
 
-  let queryResult = await db.query(text, values);
-
-  res.send(queryResult.rows);
+  res.status(200).send('Update Successful');
 };
 
 export const updateEmail = async (req, res) => {
@@ -103,20 +103,16 @@ export const updateEmail = async (req, res) => {
   let oldEmail = req.body.oldEmail;
 
   let user = await getUser(oldEmail);
-  let uid = user.rows[0].firebase_user_id;
-  let stripe_id = user.rows[0].stripe_customer_id;
+  let uid = user.firebase_user_id;
+  let stripe_id = user.stripe_customer_id;
 
   firebaseAdmin.auth().updateUser(uid, {
     email
   });
 
-  let text = `UPDATE users SET email=$1
-              WHERE id = $2`;
-  let values = [email, id];
-
-  let queryResult = await db.query(text, values);
-
+  await updateEmailModel(email, id);
   await UpdateCustomer(stripe_id, email);
   await UpdateContact(email, oldEmail);
-  res.send(queryResult);
+
+  res.status(200).send('Update Successful');
 };

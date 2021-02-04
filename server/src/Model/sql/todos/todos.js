@@ -5,8 +5,9 @@ export const postTodoModel = async (title, description, author, app_id) => {
               VALUES ($1, $2, $3, $4)`;
   let values = [title, description, author, app_id];
 
-  let queryResult = await db.query(text, values);
-  return queryResult.rows;
+  await db.query(text, values);
+
+  return;
 };
 
 export const getTodosModel = async (app_id) => {
@@ -23,18 +24,17 @@ export const putTodoModel = async (title, description, author, todo_id) => {
               WHERE todo_id = $4`;
   let values = [title, description, author, todo_id];
 
-  let queryResult = await db.query(text, values);
+  await db.query(text, values);
 
-  return queryResult.rows;
+  return;
 };
 
 export const deleteTodoModel = async (todo_id) => {
   let text = `DELETE FROM todos 
               WHERE todo_id=$1`;
-
   let values = [todo_id];
 
-  let queryResult = await db.query(text, values);
+  await db.query(text, values);
 
-  return queryResult.rows;
+  return;
 };

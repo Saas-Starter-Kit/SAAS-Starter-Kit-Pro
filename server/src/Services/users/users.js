@@ -1,10 +1,9 @@
 import db from '../../Database/db.js';
 import { sendEmail } from '../../Config/email.js';
-import { getUser } from '../auth/authHelpers.js';
+import { getUser } from '../../Model/sql/auth/authentication.js';
 
 export const GetAppUsers = async (req, res) => {
   let app_id = req.query.app_id;
-  console.log(app_id);
 
   let text = `
       SELECT

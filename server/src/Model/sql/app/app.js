@@ -26,9 +26,9 @@ export const postAppModel = async (name) => {
               RETURNING app_id`;
   let values = [name];
 
-  await db.query(text, values);
+  let queryResult = await db.query(text, values);
 
-  return;
+  return queryResult.rows[0];
 };
 
 export const deleteAppModel = async (app_id) => {

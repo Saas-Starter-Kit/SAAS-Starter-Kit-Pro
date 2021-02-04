@@ -1,6 +1,6 @@
 import stripe from '../../Config/stripe.js';
 import db from '../../Database/db.js';
-import { getUser } from '../auth/authHelpers.js';
+import { getUser } from '../../Model/sql/auth/authentication.js';
 import { sendEmail } from '../../Config/email.js';
 import moment from 'moment';
 

@@ -11,9 +11,9 @@ export const getApp = async (req, res) => {
 export const postApp = async (req, res) => {
   let name = req.body.name;
 
-  await postAppModel(name);
+  let result = await postAppModel(name);
 
-  res.status(200).send('Post Successful');
+  res.status(200).send(result);
 };
 
 export const deleteApp = async (req, res) => {
