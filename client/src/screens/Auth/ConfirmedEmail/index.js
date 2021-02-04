@@ -80,8 +80,6 @@ const ConfirmedEmail = () => {
       setAnalyticsUserId(id);
     }
 
-    console.log(user);
-
     //Login to context
     await LogIn(user);
 

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Formik } from 'formik';
 import { useStaticQuery, graphql } from 'gatsby';
 import * as Yup from 'yup';
-import { Spin } from 'antd';
+import { Spin, message } from 'antd';
 
 import axios from '../../../services/axios';
 import AuthContext from '../../../utils/authContext';
@@ -113,12 +113,12 @@ const Users = ({ app_id }) => {
   const removeUserRole = async (role_id) => {
     let params = { role_id };
 
-    let result = await axios.delete('/api/delete/role', { params }).catch((err) => {
+    await axios.delete('/api/delete/role', { params }).catch((err) => {
       fetchFailure(err);
     });
 
-    //confirm delete
-    console.log(result);
+    getAppUsers();
+    message.success('User Removed');
   };
 
   return (

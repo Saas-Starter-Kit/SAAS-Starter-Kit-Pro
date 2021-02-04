@@ -41,7 +41,7 @@ export const postRoleModel = async (app_id, user_id, role) => {
   return;
 };
 
-export const deleteRole = async (role_id) => {
+export const deleteRoleModel = async (role_id) => {
   let text = `DELETE FROM roles WHERE role_id=$1`;
   let values = [role_id];
 
