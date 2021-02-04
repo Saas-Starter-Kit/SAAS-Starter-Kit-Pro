@@ -55,6 +55,12 @@ const ArticleTitle = styled.div`
   text-decoration: none;
 `;
 
+const Author = styled.div`
+  color: ${colors.cadetBlue};
+  font-size: 12px;
+  font-weight: 700;
+`;
+
 const Date = styled.div`
   color: ${colors.cadetBlue};
   font-size: 12px;
@@ -84,6 +90,7 @@ const ArticleCard = ({ title, date, imageSrc, uid, tags }) => (
         ))}
       </TagWrapper>
       <ArticleTitle>{title}</ArticleTitle>
+      <Author>ADD AUTHOR HERE</Author>
       <Date>{date}</Date>
     </TextWrapper>
   </Card>
