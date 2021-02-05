@@ -8,7 +8,7 @@ import {
   getUser,
   updateUsernameModel,
   updateEmailModel
-} from '../../Model/sql/auth/authentication.js';
+} from '../../Model/mongo/auth/authentication.js';
 
 export const verifyEmail = async (req, res) => {
   let email = req.body.email;
@@ -32,6 +32,8 @@ export const SignUp = async (req, res) => {
   //First Check if User exists
   let userExists = await getUser(email);
 
+  console.log(userExists);
+
   //If user exists send error message, otherwise continue code
   if (userExists) {
     res.status(400).send({ type: 'Failed Sign Up', message: 'User Already Exists' });
@@ -45,6 +47,7 @@ export const SignUp = async (req, res) => {
 
   //save user firebase info to our own db, and get unique user database id
   let result = await saveUsertoDB(email, username, firebaseId);
+  console.log(result);
 
   let userId = result.id;
 

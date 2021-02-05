@@ -1,4 +1,6 @@
-import { Schema, model } from 'mongoose';
+import mongoose from 'mongoose';
+
+const Schema = mongoose.Schema;
 
 const appsSchema = new Schema({
   app_name: String
@@ -26,7 +28,7 @@ const todosSchema = new Schema({
   app_id: { type: Schema.Types.ObjectId, ref: 'Apps' }
 });
 
-export const Apps = model('Apps', appsSchema);
-export const Roles = model('Roles', rolesSchema);
-export const Users = model('Users', usersSchema);
-export const Todos = model('Todos', todosSchema);
+export const Apps = mongoose.model('Apps', appsSchema);
+export const Roles = mongoose.model('Roles', rolesSchema);
+export const Users = mongoose.model('Users', usersSchema);
+export const Todos = mongoose.model('Todos', todosSchema);

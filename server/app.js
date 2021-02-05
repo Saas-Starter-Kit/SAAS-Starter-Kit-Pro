@@ -2,6 +2,8 @@ import express from 'express';
 
 import './src/Config/dotenv.js';
 import './src/Config/stripe.js';
+import './src/Database/mongo/db.js';
+import './src/Database/sql/db.js';
 
 import cors from 'cors';
 import bodyParser from 'body-parser';
