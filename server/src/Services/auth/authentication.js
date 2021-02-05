@@ -8,7 +8,7 @@ import {
   getUser,
   updateUsernameModel,
   updateEmailModel
-} from '../../Model/mongo/auth/authentication.js';
+} from '../../Model/sql/auth/authentication.js';
 
 export const verifyEmail = async (req, res) => {
   let email = req.body.email;

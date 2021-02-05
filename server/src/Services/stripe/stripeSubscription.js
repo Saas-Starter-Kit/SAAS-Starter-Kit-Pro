@@ -1,5 +1,5 @@
 import stripe from '../../Config/stripe.js';
-import { getUser } from '../../Model/mongo/auth/authentication.js';
+import { getUser } from '../../Model/sql/auth/authentication.js';
 import { sendEmail } from '../../Config/email.js';
 import moment from 'moment';
 import {
