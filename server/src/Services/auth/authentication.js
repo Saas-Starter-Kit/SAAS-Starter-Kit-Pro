@@ -1,4 +1,3 @@
-import db from '../../Database/db.js';
 import { setToken } from '../../Middleware/auth.js';
 import firebaseAdmin from '../../Config/firebase.js';
 import { sendEmail } from '../../Config/email.js';

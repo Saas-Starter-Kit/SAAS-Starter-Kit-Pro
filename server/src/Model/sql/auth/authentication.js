@@ -1,4 +1,4 @@
-import db from '../../../Database/db.js';
+import db from '../../../Database/sql/db.js';
 
 export const getUser = async (email) => {
   //check if email exists

@@ -1,4 +1,4 @@
-import db from '../../../Database/db.js';
+import db from '../../../Database/sql/db.js';
 
 export const createSubscriptionModel = async (email, subscriptionId) => {
   let text = `UPDATE users SET is_paid_member=$1, subscription_id=$3

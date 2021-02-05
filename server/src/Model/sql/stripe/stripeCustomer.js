@@ -1,4 +1,4 @@
-import db from '../../../Database/db.js';
+import db from '../../../Database/sql/db.js';
 
 export const createCustomerModel = async (customer, email) => {
   let text = `UPDATE users SET stripe_customer_id=$1 

@@ -1,4 +1,4 @@
-import db from '../../../Database/db.js';
+import db from '../../../Database/sql/db.js';
 
 export const checkRoleExists = async (app_id, user_id) => {
   let text = `SELECT * FROM roles

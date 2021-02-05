@@ -1,4 +1,4 @@
-import db from '../../../Database/db.js';
+import db from '../../../Database/sql/db.js';
 
 export const postTodoModel = async (title, description, author, app_id) => {
   let text = `INSERT INTO todos(title, description, author, app_id)
