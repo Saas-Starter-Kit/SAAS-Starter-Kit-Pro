@@ -11,7 +11,7 @@ export const postTodoModel = async (title, description, author, app_id) => {
 };
 
 export const getTodosModel = async (app_id) => {
-  let text = `SELECT * FROM TODOS WHERE app_id=$1`;
+  let text = `SELECT * FROM todos WHERE app_id=$1`;
   let values = [app_id];
 
   let queryResult = await db.query(text, values);
