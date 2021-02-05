@@ -6,7 +6,8 @@ export const postModelTodo = async (title, description, author, app_id) => {
 };
 
 export const getTodosModel = async (app_id) => {
-  Todos.findOne({ app_id });
+  let todos = await Todos.find({ app_id });
+  return todos;
 };
 
 export const putTodoModel = async (title, description, author, todo_id) => {

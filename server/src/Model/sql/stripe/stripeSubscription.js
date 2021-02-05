@@ -16,4 +16,6 @@ export const cancelSubscriptionModel = async (email) => {
   let values = ['false', '', email];
 
   await db.query(text, values);
+
+  return;
 };

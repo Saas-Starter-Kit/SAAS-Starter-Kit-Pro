@@ -50,6 +50,7 @@ export const SignUp = async (req, res) => {
   console.log(result);
 
   let userId = result.id;
+  console.log(userId);
 
   res.send({ token: setToken(userId) });
 };

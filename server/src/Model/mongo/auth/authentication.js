@@ -8,7 +8,6 @@ export const getUser = async (email) => {
 export const saveUsertoDB = async (email, username, firebaseId) => {
   let user = new Users({ email, username, fiebase_user_id: firebaseId });
   let id = user.save();
-  console.log(id);
   return id;
 };
 
