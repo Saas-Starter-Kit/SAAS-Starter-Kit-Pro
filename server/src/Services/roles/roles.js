@@ -3,7 +3,7 @@ import {
   checkRoleExists,
   postRoleModel,
   deleteRoleModel
-} from '../../Model/sql/roles/roles.js';
+} from '../../Model/mongo/roles/roles.js';
 
 export const getRole = async (req, res) => {
   let user_id = req.query.user_id;

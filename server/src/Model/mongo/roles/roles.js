@@ -14,9 +14,9 @@ export const getRoleModel = async (app_id, user_id) => {
 };
 
 export const postRoleModel = async (app_id, user_id, role) => {
-  let role = new Roles({ app_id, user_id, role });
+  let userRole = new Roles({ app_id, user_id, role });
 
-  console.log(role);
+  console.log(userRole);
 };
 
 export const deleteRoleModel = async (role_id) => {

@@ -1,6 +1,6 @@
 import { Todos } from '../../../Database/mongo/models.js';
 
-export const postModelTodo = async (title, description, author, app_id) => {
+export const postTodoModel = async (title, description, author, app_id) => {
   let todo = new Todos({ title, description, author, app_id });
   todo.save();
 };

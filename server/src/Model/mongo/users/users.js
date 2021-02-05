@@ -1,4 +1,4 @@
-import { Users, Roles } from '../../../Database/mongo/models';
+import { Users, Roles } from '../../../Database/mongo/models.js';
 
 export const getAppUsersModel = (app_id) => {
   let role = Roles.findOne({ app_id });
