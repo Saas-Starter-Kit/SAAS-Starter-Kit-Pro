@@ -2,7 +2,7 @@ import { AbilityBuilder, Ability } from '@casl/ability';
 
 const roleRules = (can, role, cannot) => {
   if (role === 'admin') {
-    //admin has global priviledges
+    //admin has global privileges
     can('manage', 'all');
     cannot('read', 'user', 'password');
   } else if (role === 'user') {
