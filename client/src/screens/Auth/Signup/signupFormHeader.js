@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { colors, breakpoints } from '../../../styles/theme';
 import { Link } from 'gatsby';
+import Title from '../../../components/Auth/title';
 
 const Wrapper = styled.div`
   display: flex;
@@ -15,22 +16,6 @@ const Wrapper = styled.div`
   }
 `;
 
-const Image = styled.img`
-  height: 3rem;
-  width: auto;
-`;
-
-const Title = styled.h2`
-  padding-right: 2rem;
-  padding-left: 2rem;
-  margin-top: 1.5rem;
-  color: ${colors.gray900};
-  text-align: center;
-  font-weight: 800;
-  font-size: 1.875rem;
-  line-height: 2.25rem;
-`;
-
 const AltText = styled.div`
   text-align: center;
   margin-top: -1rem;
@@ -40,9 +25,7 @@ const AltText = styled.div`
 
 const SignupFormHeader = () => (
   <Wrapper>
-    <Image src="https://tailwindui.com/img/logos/v1/workflow-mark-on-white.svg" alt="Workflow" />
     <Title>Sign-Up for an Account</Title>
-
     <AltText>
       <Link to="/auth/login">Already Have an Account? Login here</Link>
     </AltText>

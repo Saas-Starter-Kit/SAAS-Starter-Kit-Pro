@@ -8,7 +8,7 @@ import { colors } from '../../../styles/theme';
 import axios from '../../../services/axios';
 import { sendEventToAnalytics } from '../../../services/analytics';
 
-import Button from '../../../components/Common/buttons/OriginalButton';
+import Button from '../../../components/Common/buttons/AltButton1';
 import Card from '../../../components/Common/Card';
 import FieldLabel from '../../../components/Common/forms/FieldLabel';
 import TextArea from '../../../components/Common/forms/TextArea';
