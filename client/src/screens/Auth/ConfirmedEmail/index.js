@@ -1,13 +1,44 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'gatsby';
 import { useLocation } from '@reach/router';
+import styled from 'styled-components';
 
 import AuthContext from '../../../utils/authContext';
 import ApiContext from '../../../utils/apiContext';
 import axios from '../../../services/axios';
 import { setAnalyticsUserId, sendEventToAnalytics } from '../../../services/analytics';
+import { colors, breakpoints, fieldStyles } from '../../../styles/theme';
 
+import Title from '../../../components/Auth/title';
+import AuthCard from '../../../components/Auth/authCard';
 import LoadingOverlay from '../../../components/Common/loadingOverlay';
+
+const Wrapper = styled.div`
+  background-color: ${colors.gray50};
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  @media (min-width: ${breakpoints.small}) {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+  @media (min-width: ${breakpoints.large}) {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+`;
+
+const TextWrapper = styled.div`
+  text-align: center;
+  font-size: 1.075rem;
+`;
+
+const CardText = styled.div`
+  font-size: 1.075rem;
+  font-weight: 500;
+  padding-top: 1.5rem;
+`;
 
 const ConfirmedEmail = () => {
   const location = useLocation();
@@ -38,11 +69,11 @@ const ConfirmedEmail = () => {
   console.log(isInviteFlow);
 
   useEffect(() => {
-    createValidUser();
+    //createValidUser();
   }, [location]);
 
   useEffect(() => {
-    if (isInviteFlow == 'true') createRole();
+    //if (isInviteFlow == 'true') createRole();
   }, [isInviteFlow]);
 
   const createValidUser = async () => {
@@ -107,20 +138,28 @@ const ConfirmedEmail = () => {
   };
 
   return (
-    <div>
+    <Wrapper>
       {isLoading && <LoadingOverlay />}
-      <div>Thank You for confirming your email, your account is setup and ready to use</div>
-      {isInviteFlow == 'true' && (
-        <div>
-          <div>Click below to navigate to the app your were invited to</div>
-          <Link to={`/app/${app_id}/dashboard`}>Go to App</Link>
-        </div>
-      )}
-      <div>Click here to navigate to the user dashboard as a free tier user</div>
-      <Link to="/user/dashboard">Go to Dashboard</Link>
-      <div>Click here to add a subscription your account</div>
-      <Link to="/purchase/plan">Upgrade Plan</Link>
-    </div>
+      <Title>Thank You for confirming your email, your account is setup and ready to use</Title>
+      <AuthCard>
+        {isInviteFlow == 'true' && (
+          <>
+            <CardText>Click below to navigate to the app your were invited to</CardText>
+            <TextWrapper>
+              <Link to={`/app/${app_id}/dashboard`}>Go to App</Link>
+            </TextWrapper>
+          </>
+        )}
+        <CardText>Click here to navigate to the user dashboard as a free tier user</CardText>
+        <TextWrapper>
+          <Link to="/user/dashboard">Go to Dashboard</Link>
+        </TextWrapper>
+        <CardText>Click here to add a subscription your account</CardText>
+        <TextWrapper>
+          <Link to="/purchase/plan">Upgrade Plan</Link>
+        </TextWrapper>
+      </AuthCard>
+    </Wrapper>
   );
 };
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import { colors, breakpoints, fieldStyles } from '../../../styles/theme';
 
 const EmailConfirm = () => {
   return (

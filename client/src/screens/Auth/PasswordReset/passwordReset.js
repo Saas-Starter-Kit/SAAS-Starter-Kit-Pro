@@ -16,7 +16,7 @@ import InputWrapper from '../../../components/Common/forms/TextInputWrapper';
 
 const Wrapper = styled.div`
   background-color: ${colors.gray50};
-  min-height: 100vh;
+  min-height: 80vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
