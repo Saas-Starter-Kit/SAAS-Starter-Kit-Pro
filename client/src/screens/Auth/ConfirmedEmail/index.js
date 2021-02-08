@@ -66,8 +66,6 @@ const ConfirmedEmail = () => {
     return () => fetchSuccess();
   }, []);
 
-  console.log(isInviteFlow);
-
   useEffect(() => {
     //createValidUser();
   }, [location]);
