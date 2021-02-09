@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'gatsby';
 import styled from 'styled-components';
-import { colors } from '../../../styles/theme';
+import { colors, breakpoints } from '../../../styles/theme';
 
 const CardsWrapper = styled.div`
   display: flex;
   justify-content: space-around;
+  @media (max-width: ${breakpoints.small}) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 const FeaturesWrapper = styled.div`
