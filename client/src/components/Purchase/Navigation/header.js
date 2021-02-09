@@ -4,6 +4,7 @@ import { useLocation } from '@reach/router';
 
 import { Steps } from 'antd';
 import {
+  UserOutlined,
   SolutionOutlined,
   LoadingOutlined,
   CheckCircleOutlined,
@@ -12,7 +13,12 @@ import {
 
 const { Step } = Steps;
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  margin: 1rem;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+`;
 
 const Header = () => {
   const location = useLocation();
@@ -65,9 +71,21 @@ const Header = () => {
   return (
     <Wrapper>
       <Steps>
-        <Step status={loginStatus} title="Login" icon={<LoadingOutlined />} />
-        <Step status={planStatus} title="Plan" icon={<SolutionOutlined />} />
-        <Step status={paymentStatus} title="Payment" icon={<CreditCardOutlined />} />
+        <Step
+          status={loginStatus}
+          title="Login"
+          icon={pageName == 'checkauth' ? <LoadingOutlined /> : <UserOutlined />}
+        />
+        <Step
+          status={planStatus}
+          title="Plan"
+          icon={pageName == 'plan' ? <LoadingOutlined /> : <SolutionOutlined />}
+        />
+        <Step
+          status={paymentStatus}
+          title="Payment"
+          icon={pageName == 'payment' ? <LoadingOutlined /> : <CreditCardOutlined />}
+        />
         <Step status={confirmStatus} title="Done" icon={<CheckCircleOutlined />} />
       </Steps>
     </Wrapper>

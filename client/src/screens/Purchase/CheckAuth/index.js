@@ -44,7 +44,7 @@ const CheckAuth = () => {
   useEffect(() => {
     //if (authState.user) {
     //  if (authState.user.subscription_id) {
-    //    navigate('/purchase/subcriptionexists');
+    //    navigate('/subscriptionexists');
     //  } else if (authState.isAuthenticated) {
     //    navigate('/purchase/plan');
     //  }

@@ -22,7 +22,6 @@ const Routes = () => {
         <Payment path="/purchase/payment" />
         <PlanSelect path="/purchase/plan" />
         <ConfirmSub path="/purchase/confirm" />
-        <SubscriptionExists path="/purchase/subcriptionexists" />
         <CheckAuth path="/purchase" />
       </Router>
     </Layout>

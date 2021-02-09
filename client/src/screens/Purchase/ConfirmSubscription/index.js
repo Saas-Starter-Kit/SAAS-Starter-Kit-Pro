@@ -1,17 +1,8 @@
 import React, { useContext, useEffect } from 'react';
 import styled from 'styled-components';
-import { colors, breakpoints } from '../../../styles/theme';
+import { breakpoints } from '../../../styles/theme';
 import AuthContext from '../../../utils/authContext';
 import { navigate } from 'gatsby';
-import { Steps } from 'antd';
-import {
-  UserOutlined,
-  SolutionOutlined,
-  CheckCircleOutlined,
-  CreditCardOutlined
-} from '@ant-design/icons';
-
-const { Step } = Steps;
 
 const Wrapper = styled.div`
   display: flex;
