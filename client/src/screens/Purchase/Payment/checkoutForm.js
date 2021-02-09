@@ -137,8 +137,6 @@ const CheckoutForm = () => {
   const stripe = useStripe();
   const elements = useElements();
 
-  console.log(location);
-
   useEffect(() => {
     if (location.state) {
       let Plan = location.state.plan;
@@ -167,16 +165,12 @@ const CheckoutForm = () => {
     if (authState.user) getWallet();
   }, [authState]);
 
-  console.log(authState.user);
-
   const getWallet = async () => {
     setLoadingSpin(true);
     //get customers list of available payment methods
     let params = {
       customer: authState.user.stripeCustomerKey
     };
-
-    console.log(authState);
 
     let wallet = await axios.get('/stripe/get-wallet', { params }).catch((err) => {
       fetchFailure(err);
@@ -249,11 +243,11 @@ const CheckoutForm = () => {
     let email = authState.user.email;
 
     let data = { subscriptionId, planSelect, payment_method, subscriptionItem, planType, email };
-    let result = await axios.put('/stripe/update-subscription', data).catch((err) => {
+
+    await axios.put('/stripe/update-subscription', data).catch((err) => {
       fetchFailure(err);
     });
 
-    console.log(result);
     navigate('/purchase/confirm');
   };
 
@@ -271,7 +265,6 @@ const CheckoutForm = () => {
       fetchFailure(err);
     });
 
-    console.log(result);
     if (result.data.status === 'active' || result.data.status === 'trialing') {
       navigate('/purchase/confirm');
     } else {

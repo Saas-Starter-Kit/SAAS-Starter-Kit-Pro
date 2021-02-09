@@ -96,7 +96,6 @@ const PlanSelect = ({ location }) => {
   const [currentPlan, setCurrentPlan] = useState();
   const [subscription_id, setSubscriptionId] = useState();
   const [subscription_item, setSubscriptionItem] = useState();
-  console.log(location);
 
   useEffect(() => {
     if (location.state) {

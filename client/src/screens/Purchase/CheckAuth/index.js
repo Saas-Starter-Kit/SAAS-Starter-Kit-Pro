@@ -7,16 +7,6 @@ import { breakpoints } from '../../../styles/theme';
 
 import Card from '../../../components/Purchase/purchaseCard';
 
-import { Steps } from 'antd';
-import {
-  SolutionOutlined,
-  LoadingOutlined,
-  CheckCircleOutlined,
-  CreditCardOutlined
-} from '@ant-design/icons';
-
-const { Step } = Steps;
-
 const CardWrapper = styled.div`
   margin-top: 3rem;
   width: 38rem;
@@ -42,13 +32,13 @@ const CheckAuth = () => {
   const { authState } = useContext(AuthContext);
 
   useEffect(() => {
-    //if (authState.user) {
-    //  if (authState.user.subscription_id) {
-    //    navigate('/subscriptionexists');
-    //  } else if (authState.isAuthenticated) {
-    //    navigate('/purchase/plan');
-    //  }
-    //}
+    if (authState.user) {
+      if (authState.user.subscription_id) {
+        navigate('/subscriptionexists');
+      } else if (authState.isAuthenticated) {
+        navigate('/purchase/plan');
+      }
+    }
   }, [authState]);
 
   return (
