@@ -1,10 +1,11 @@
 import React, { useEffect, useContext } from 'react';
 import { Link, navigate } from 'gatsby';
+import styled from 'styled-components';
 
 import AuthContext from '../../../utils/authContext';
-import ApiContext from '../../../utils/apiContext';
+import { breakpoints } from '../../../styles/theme';
 
-import LoadingOverlay from '../../../components/Common/loadingOverlay';
+import Card from '../../../components/Purchase/purchaseCard';
 
 import { Steps } from 'antd';
 import {
@@ -16,28 +17,42 @@ import {
 
 const { Step } = Steps;
 
+const CardWrapper = styled.div`
+  margin-top: 3rem;
+  width: 38rem;
+  margin-right: auto;
+  margin-left: auto;
+  text-align: center;
+  @media (max-width: ${breakpoints.small}) {
+    width: 90%;
+  }
+`;
+
+const StyledHeader = styled.h1`
+  padding-bottom: 2rem;
+`;
+
+const StyledSection = styled.div`
+  margin-bottom: 1.2rem;
+  font-size: 1.4rem;
+  font-weight: 500;
+`;
+
 const CheckAuth = () => {
   const { authState } = useContext(AuthContext);
-  const { fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
-  const { isLoading } = apiState;
 
   useEffect(() => {
-    return () => fetchSuccess();
-  }, []);
-
-  useEffect(() => {
-    if (authState.user) {
-      if (authState.user.subscription_id) {
-        setTimeout(() => navigate('/purchase/subcriptionexists'), 300);
-      } else if (authState.isAuthenticated) {
-        setTimeout(() => navigate('/purchase/plan'), 300);
-      }
-    }
+    //if (authState.user) {
+    //  if (authState.user.subscription_id) {
+    //    navigate('/purchase/subcriptionexists');
+    //  } else if (authState.isAuthenticated) {
+    //    navigate('/purchase/plan');
+    //  }
+    //}
   }, [authState]);
 
   return (
     <div>
-      {isLoading && <LoadingOverlay />}
       <div style={{ width: '80%' }}>
         <Steps>
           <Step status="process" title="Login" icon={<LoadingOutlined />} />
@@ -46,13 +61,21 @@ const CheckAuth = () => {
           <Step status="wait" title="Done" icon={<CheckCircleOutlined />} />
         </Steps>
       </div>
-      <h1>Please Sign-in or Sign-up to continue</h1>
-      <h2>Already Have an account? login below</h2>
-      <Link to="/auth/login" state={{ isPaymentFlow: true }}>
-        Login
-      </Link>
-      <h2>Need to create an account? click below</h2>
-      <Link to="/auth/signup">Signup</Link>
+      <CardWrapper>
+        <Card>
+          <StyledHeader>Please Sign-in or Sign-up to continue</StyledHeader>
+          <StyledSection>
+            <div>Already Have an account? login below</div>
+            <Link to="/auth/login" state={{ isPaymentFlow: true }}>
+              Login
+            </Link>
+          </StyledSection>
+          <StyledSection>
+            <div>Need to create an account? click below</div>
+            <Link to="/auth/signup">Signup</Link>
+          </StyledSection>
+        </Card>
+      </CardWrapper>
     </div>
   );
 };
