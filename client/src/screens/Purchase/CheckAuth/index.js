@@ -53,14 +53,6 @@ const CheckAuth = () => {
 
   return (
     <div>
-      <div style={{ width: '80%' }}>
-        <Steps>
-          <Step status="process" title="Login" icon={<LoadingOutlined />} />
-          <Step status="wait" title="Plan" icon={<SolutionOutlined />} />
-          <Step status="wait" title="Payment" icon={<CreditCardOutlined />} />
-          <Step status="wait" title="Done" icon={<CheckCircleOutlined />} />
-        </Steps>
-      </div>
       <CardWrapper>
         <Card>
           <StyledHeader>Please Sign-in or Sign-up to continue</StyledHeader>

@@ -286,12 +286,6 @@ const CheckoutForm = () => {
   return (
     <Wrapper>
       {isLoading && <LoadingOverlay />}
-      <Steps>
-        <Step status="finish" title="Login" icon={<UserOutlined />} />
-        <Step status="finish" title="Plan" icon={<SolutionOutlined />} />
-        <Step status="process" title="Payment" icon={<LoadingOutlined />} />
-        <Step status="wait" title="Done" icon={<CheckCircleOutlined />} />
-      </Steps>
       <div>
         <h3>
           {isUpgradeFlow ? <span>Changing to</span> : <span>Purchasing</span>} {planType} Plan

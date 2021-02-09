@@ -101,14 +101,6 @@ const PlanSelect = ({ location }) => {
 
   return (
     <div>
-      <div style={{ width: '80%' }}>
-        <Steps>
-          <Step status="finish" title="Login" icon={<UserOutlined />} />
-          <Step status="process" title="Plan" icon={<LoadingOutlined />} />
-          <Step status="wait" title="Payment" icon={<CreditCardOutlined />} />
-          <Step status="wait" title="Done" icon={<CheckCircleOutlined />} />
-        </Steps>
-      </div>
       <PurchaseHeader>Buy SAAS Pro Now</PurchaseHeader>
       <PurchaseText>Main Benefit of product</PurchaseText>
       <Plan

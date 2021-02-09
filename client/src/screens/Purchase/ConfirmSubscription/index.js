@@ -53,12 +53,6 @@ const ConfirmSub = () => {
 
   return (
     <Wrapper>
-      <Steps>
-        <Step status="finish" title="Login" icon={<UserOutlined />} />
-        <Step status="finish" title="Plan" icon={<SolutionOutlined />} />
-        <Step status="finish" title="Payment" icon={<CreditCardOutlined />} />
-        <Step status="finish" title="Done" icon={<CheckCircleOutlined />} />
-      </Steps>
       <Title>Your Subscription Has Been Confirmed!</Title>
       <Text>Please sign in again to complete the process</Text>
       <Text>Click below to navigate to the login screen</Text>
