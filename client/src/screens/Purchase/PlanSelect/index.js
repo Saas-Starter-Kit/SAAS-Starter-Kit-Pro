@@ -2,25 +2,50 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'gatsby';
 import styled from 'styled-components';
 import { colors } from '../../../styles/theme';
-import { Steps } from 'antd';
-import {
-  UserOutlined,
-  LoadingOutlined,
-  CheckCircleOutlined,
-  CreditCardOutlined,
-  CloudUploadOutlined
-} from '@ant-design/icons';
 
-const { Step } = Steps;
+const CardsWrapper = styled.div`
+  display: flex;
+  justify-content: space-around;
+`;
 
-const Plan = styled.div`
-  border: 1px solid blue;
+const FeaturesWrapper = styled.div`
+  margin-top: 1rem;
+  padding: 0.2rem;
+`;
+
+const Feature = styled.div`
+  padding-bottom: 0.2rem;
+`;
+
+const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
+`;
+
+const PlanButton = styled.button`
+  padding: 0.5rem 1rem;
+  font-size: 1.3rem;
+  font-weight: 500;
+  width: 11rem;
+  background-color: blue;
+  color: white;
+  cursor: pointer;
+`;
+
+const PlanCard = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 16rem;
   padding: 2rem;
-  background-color: ${(props) => (props.isActive ? 'lightblue' : 'white')};
+  background-color: white;
+  border: ${(props) => (props.isActive ? 'solid 1px black' : '')};
   cursor: pointer;
   margin-bottom: 1rem;
+  border-radius: 0.3rem;
   &:hover {
-    background-color: lightblue;
+    border: solid 1px black;
     opacity: 85%;
   }
 `;
@@ -103,30 +128,49 @@ const PlanSelect = ({ location }) => {
     <div>
       <PurchaseHeader>Buy SAAS Pro Now</PurchaseHeader>
       <PurchaseText>Main Benefit of product</PurchaseText>
-      <Plan
-        isActive={plan == basic_plan}
-        onClick={() => selectPlan(basic_plan, basic_price, basic_type)}
-      >
-        <PlanHeader>Basic Plan</PlanHeader>
-        {isUpgradeFlow && currentPlan == basic_plan && <div>Current Plan</div>}
-        <PlanPrice>${basic_price}/month</PlanPrice>
-      </Plan>
-      <Plan
-        isActive={plan == premium_plan}
-        onClick={() => selectPlan(premium_plan, premium_price, premium_type)}
-      >
-        <PlanHeader>Premium Plan</PlanHeader>
-        {isUpgradeFlow && currentPlan == premium_plan && <div>Current Plan</div>}
-        <PlanPrice>${premium_price}/month</PlanPrice>
-      </Plan>
-
-      <Link
-        disabled={plan == currentPlan}
-        to="/purchase/payment"
-        state={{ plan, price, planType, subscription_id, isUpgradeFlow, subscription_item }}
-      >
-        Submit
-      </Link>
+      <CardsWrapper>
+        <PlanCard
+          isActive={plan == basic_plan}
+          onClick={() => selectPlan(basic_plan, basic_price, basic_type)}
+        >
+          <PlanHeader>Basic Plan</PlanHeader>
+          {isUpgradeFlow && currentPlan == basic_plan && <div>Current Plan</div>}
+          <PlanPrice>${basic_price}/month</PlanPrice>
+          <FeaturesWrapper>
+            <Feature>Feature 1</Feature>
+            <hr />
+            <Feature>Feature 2</Feature>
+            <hr />
+            <Feature>Feature 3</Feature>
+            <hr />
+          </FeaturesWrapper>
+        </PlanCard>
+        <PlanCard
+          isActive={plan == premium_plan}
+          onClick={() => selectPlan(premium_plan, premium_price, premium_type)}
+        >
+          <PlanHeader>Premium Plan</PlanHeader>
+          {isUpgradeFlow && currentPlan == premium_plan && <div>Current Plan</div>}
+          <PlanPrice>${premium_price}/month</PlanPrice>
+          <FeaturesWrapper>
+            <Feature>Feature 1</Feature>
+            <hr />
+            <Feature>Feature 2</Feature>
+            <hr />
+            <Feature>Feature 3</Feature>
+            <hr />
+          </FeaturesWrapper>
+        </PlanCard>
+      </CardsWrapper>
+      <ButtonWrapper>
+        <Link
+          disabled={plan == currentPlan}
+          to="/purchase/payment"
+          state={{ plan, price, planType, subscription_id, isUpgradeFlow, subscription_item }}
+        >
+          <PlanButton>Submit</PlanButton>
+        </Link>
+      </ButtonWrapper>
     </div>
   );
 };

@@ -1,18 +1,9 @@
-import React, { useContext, useEffect } from 'react';
+import React from 'react';
 import { Router } from '@reach/router';
 
 import Layout from '../components/Purchase/Layout';
 
-import {
-  Payment,
-  CheckAuth,
-  PlanSelect,
-  ConfirmSub,
-  SubscriptionExists
-} from '../screens/Purchase';
-
-//useLocation to check pathname and then useEffect to update state
-//each icon has own status state.
+import { Payment, CheckAuth, PlanSelect, ConfirmSub } from '../screens/Purchase';
 
 const Routes = () => {
   return (
