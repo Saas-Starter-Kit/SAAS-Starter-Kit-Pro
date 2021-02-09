@@ -20,21 +20,21 @@ export const ValidSchema = Yup.object().shape({
     .required('Name Required')
 });
 
-const CardWrapper = styled.div`
-  padding-left: 2rem;
-  padding-right: 2rem;
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  background-color: ${colors.coolGray50};
+  min-height: 100vh;
+`;
 
-  @media (min-width: ${breakpoints.small}) {
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 2rem;
-    padding-right: 2rem;
-    width: 100%;
-    max-width: 28rem;
-  }
+const ElementWrapper = styled.div`
+  margin-top: 3rem;
 `;
 
 const Card = styled.div`
+  width: 34rem;
+  height: max-content;
+  margin-top: 2rem;
   background-color: ${colors.white};
   padding: 2rem 1rem;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
@@ -68,6 +68,7 @@ const ButtonWrapper = styled.div`
   padding-bottom: 1rem;
   background-color: ${colors.white};
   text-align: left;
+  margin-top: 1rem;
 `;
 
 const Button = styled.button`
@@ -168,7 +169,7 @@ const CheckoutForm = () => {
   };
 
   return (
-    <CardWrapper>
+    <Wrapper>
       {isLoading && <LoadingOverlay />}
       <Card>
         <h2>Purchasing Item</h2>
@@ -203,17 +204,19 @@ const CheckoutForm = () => {
                 />
               </InputWrapper>
               {errors.username && touched.username && <ErrorText>{errors.username}</ErrorText>}
-              <CardElement />
-              <ButtonWrapper>
-                <Button disabled={!stripe || !elements || !clientSecret} type="submit">
-                  Submit
-                </Button>
-              </ButtonWrapper>
+              <ElementWrapper>
+                <CardElement />
+                <ButtonWrapper>
+                  <Button disabled={!stripe || !elements || !clientSecret} type="submit">
+                    Submit
+                  </Button>
+                </ButtonWrapper>
+              </ElementWrapper>
             </form>
           )}
         </Formik>
       </Card>
-    </CardWrapper>
+    </Wrapper>
   );
 };
 
