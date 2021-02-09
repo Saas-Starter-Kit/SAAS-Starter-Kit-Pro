@@ -17,29 +17,43 @@ import discover from '../../../assets/images/credit card icons/discover.png';
 import mastercard from '../../../assets/images/credit card icons/mastercard.png';
 import american_express from '../../../assets/images/credit card icons/american_express.png';
 
-import { Steps } from 'antd';
-import {
-  UserOutlined,
-  SolutionOutlined,
-  LoadingOutlined,
-  CheckCircleOutlined
-} from '@ant-design/icons';
-
-const { Step } = Steps;
-
 const Wrapper = styled.div`
+  display: flex;
   background-color: ${colors.gray50};
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+  margin-top: 2rem;
 
-  @media (min-width: ${breakpoints.small}) {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+  @media (max-width: ${breakpoints.small}) {
+    flex-direction: column;
+    align-items: center;
   }
-  @media (min-width: ${breakpoints.large}) {
-    padding-left: 2rem;
-    padding-right: 2rem;
+`;
+
+const PaymentConfirm = styled.div`
+  background-color: white;
+  width: 30%;
+  margin-right: 2rem;
+  margin-left: 1rem;
+  height: max-content;
+  padding: 1rem;
+  padding-bottom: 2rem;
+  @media (max-width: ${breakpoints.small}) {
+    flex-direction: column;
+    margin: 1rem;
+    width: 90%;
+  }
+`;
+
+const PaymentInfo = styled.div`
+  background-color: white;
+  margin-left: 2rem;
+  margin-right: 1rem;
+  width: 70%;
+  height: max-content;
+  padding: 1rem;
+  @media (max-width: ${breakpoints.small}) {
+    margin: 1rem;
+    width: 90%;
   }
 `;
 
@@ -77,20 +91,6 @@ const Button = styled.button`
     transform;
   transition-duration: 150ms;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-`;
-
-const CardWrapper = styled.div`
-  padding-left: 2rem;
-  padding-right: 2rem;
-  max-width: 36rem;
-
-  @media (min-width: ${breakpoints.small}) {
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 2rem;
-    padding-right: 2rem;
-    width: 100%;
-  }
 `;
 
 const Card = styled.div`
@@ -286,37 +286,26 @@ const CheckoutForm = () => {
   return (
     <Wrapper>
       {isLoading && <LoadingOverlay />}
-      <div>
-        <h3>
-          {isUpgradeFlow ? <span>Changing to</span> : <span>Purchasing</span>} {planType} Plan
-        </h3>
-        <p>{price}/month </p>
-        <Button
-          disabled={!paymentMethod}
-          onClick={isUpgradeFlow ? updateSubscription : createSubscription}
-        >
-          Confirm
-        </Button>
-      </div>
-      <Spin tip="Loading" spinning={loadingSpin}>
-        <h2>Please Choose Payment Method</h2>
-        {!payCards.length == 0 ? (
-          payCards.map((item) => (
-            <StyledCardDisplayWrapper key={item.id}>
-              <StyledCardDisplay onClick={() => setPaymentMethod(item.id)}>
-                {setIcons(item.card.brand)}
-                {item.card.brand} **** **** **** {item.card.last4} expires {item.card.exp_month}/
-                {item.card.exp_year}
-              </StyledCardDisplay>
-            </StyledCardDisplayWrapper>
-          ))
-        ) : (
-          <div>
-            <p>No Payment Methods Found</p>
-          </div>
-        )}
-      </Spin>
-      <CardWrapper>
+      <PaymentInfo>
+        <Spin tip="Loading" spinning={loadingSpin}>
+          <h2>Please Choose Payment Method</h2>
+          {!payCards.length == 0 ? (
+            payCards.map((item) => (
+              <StyledCardDisplayWrapper key={item.id}>
+                <StyledCardDisplay onClick={() => setPaymentMethod(item.id)}>
+                  {setIcons(item.card.brand)}
+                  {item.card.brand} **** **** **** {item.card.last4} expires {item.card.exp_month}/
+                  {item.card.exp_year}
+                </StyledCardDisplay>
+              </StyledCardDisplayWrapper>
+            ))
+          ) : (
+            <div>
+              <p>No Payment Methods Found</p>
+            </div>
+          )}
+        </Spin>
+
         <Card>
           <form onSubmit={addPaymentMethod}>
             <CardElement />
@@ -327,7 +316,19 @@ const CheckoutForm = () => {
             </ButtonWrapper>
           </form>
         </Card>
-      </CardWrapper>
+      </PaymentInfo>
+      <PaymentConfirm>
+        <h3>
+          {isUpgradeFlow ? <span>Changing to</span> : <span>Purchasing</span>} {planType} Plan
+        </h3>
+        <p>${price}/month </p>
+        <Button
+          disabled={!paymentMethod}
+          onClick={isUpgradeFlow ? updateSubscription : createSubscription}
+        >
+          Confirm
+        </Button>
+      </PaymentConfirm>
     </Wrapper>
   );
 };
