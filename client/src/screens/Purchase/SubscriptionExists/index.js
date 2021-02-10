@@ -1,23 +1,23 @@
 import React, { useContext, useEffect } from 'react';
 import styled from 'styled-components';
-import { breakpoints } from '../../../styles/theme';
+import { breakpoints, colors } from '../../../styles/theme';
 import AuthContext from '../../../utils/authContext';
 import { navigate } from 'gatsby';
 
 const Wrapper = styled.div`
-  margin-top: 2rem;
-  text-align: center;
-  @media (min-width: ${breakpoints.small}) {
-    margin-left: auto;
-    margin-right: auto;
-    width: 100%;
-    max-width: 28rem;
-  }
+  background-color: ${colors.coolGray50};
+  height: 100vh;
+  padding-top: 2rem;
 `;
 
 const Card = styled.div`
+  text-align: center;
   background-color: white;
   padding: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  max-width: 28rem;
 `;
 
 const Title = styled.h2`

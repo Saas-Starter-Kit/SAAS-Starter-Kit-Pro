@@ -16,7 +16,6 @@ const Card = styled.div`
 `;
 
 const UpgradeSubscription = ({ subscriptionState }) => {
-  console.log(subscriptionState);
   const subscription_id = subscriptionState.id;
   const currentPlan = subscriptionState.plan.id;
   const subscription_item = subscriptionState.items.data[0].id;
