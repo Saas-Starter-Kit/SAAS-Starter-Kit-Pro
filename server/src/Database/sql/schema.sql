@@ -28,4 +28,3 @@ CREATE TABLE todos (
   app_id INT REFERENCES apps(app_id)
 );
 
-

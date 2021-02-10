@@ -1,4 +1,4 @@
-import { Button, notification, Space } from 'antd';
+import { notification } from 'antd';
 
 const errorNotification = (errorType, errorMessage) => {
   let errorTitle = errorType ? errorType : 'Error Detected';
@@ -11,9 +11,6 @@ const errorNotification = (errorType, errorMessage) => {
     description: errorDescription,
     duration: 10
   });
-
-  console.log(errorMessage);
-  console.log(errorType);
 };
 
 export default errorNotification;
