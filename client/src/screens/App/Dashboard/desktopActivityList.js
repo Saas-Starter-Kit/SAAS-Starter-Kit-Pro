@@ -10,7 +10,6 @@ const Wrapper = styled.div`
     display: block;
   }
   margin-top: 0.5rem;
-
   vertical-align: middle;
   min-width: 100%;
   overflow-x: auto;

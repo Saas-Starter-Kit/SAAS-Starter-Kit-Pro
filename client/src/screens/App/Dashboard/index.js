@@ -10,12 +10,12 @@ const Title = styled.h1`
   font-size: 1.5rem;
 `;
 
-const Dashboard = ({ location }) => (
-  <>
+const Dashboard = () => (
+  <div>
     <Title>Dashboard</Title>
     <Stats />
     <ActivityList />
-  </>
+  </div>
 );
 
 export default Dashboard;

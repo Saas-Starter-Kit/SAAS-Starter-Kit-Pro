@@ -151,7 +151,7 @@ const SidebarDesktop = ({ theme, toggleTheme, app_id, location, collapsed }) => 
   const selectedKey = menus.find((menu) => menu.route === location.pathname);
   return (
     <StyledSider
-      width={256}
+      width={200}
       theme={theme}
       breakpoint="lg"
       trigger={null}

@@ -25,24 +25,13 @@ const LayoutHeader = styled(Layout.Header)`
   }
   padding: 0;
   box-shadow: 4px 4px 40px 0 rgba(0, 0, 0, 0.05);
-  position: relative;
   display: flex;
   justify-content: space-between;
   height: 72px;
   z-index: 9;
   align-items: center;
   background-color: ${colors.white};
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: calc(100% - 256px);
-  z-index: 29;
   transition: width 0.2s;
-  ${({ collapsed }) =>
-    collapsed &&
-    css`
-      width: calc(100% - 80px);
-    `}
 
   .ant-menu-submenu-title {
     height: 72px;
@@ -207,71 +196,77 @@ const AppHeader = ({
   };
 
   return (
-    <LayoutHeader id="layoutHeader" collapsed={collapsed} theme={theme}>
-      <CollapseButton onClick={onCollapseChange} theme={theme}>
-        {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-      </CollapseButton>
-      <RightContainer>
-        <StyledPopover
-          placement="bottomRight"
-          trigger="click"
-          key="notifications"
-          getPopupContainer={() => document.querySelector('#primaryLayout')}
-          content={
-            <Notification>
-              <List
-                itemLayout="horizontal"
-                dataSource={notifications}
-                locale={{
-                  emptyText: 'You have viewed all notifications.'
-                }}
-                renderItem={(item) => (
-                  <NotificationItem theme={theme}>
-                    <ListItemMeta
-                      title={item.title}
-                      description={moment(item.date).fromNow()}
-                      theme={theme}
-                    />
-                    <StyledRightOutlined />
-                  </NotificationItem>
-                )}
-              />
-              {notifications.length ? (
-                <ClearButton onClick={onAllNotificationsRead} theme={theme}>
-                  Clear notifications
-                </ClearButton>
-              ) : null}
-            </Notification>
-          }
-        >
-          <IconButton count={notifications.length} offset={[-10, 10]}>
-            <IconFont />
-          </IconButton>
-        </StyledPopover>
-        <Menu key="user" mode="horizontal" theme={theme}>
-          <SubMenu
-            title={
-              <AvatarWrapper>
-                {avatar ? <StyledAvatar src={avatar} /> : <StyledAvatar icon={<UserOutlined />} />}
-              </AvatarWrapper>
+    <div>
+      <LayoutHeader id="layoutHeader" collapsed={collapsed} theme={theme}>
+        <CollapseButton onClick={onCollapseChange} theme={theme}>
+          {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+        </CollapseButton>
+        <RightContainer>
+          <StyledPopover
+            placement="bottomRight"
+            trigger="click"
+            key="notifications"
+            getPopupContainer={() => document.querySelector('#primaryLayout')}
+            content={
+              <Notification>
+                <List
+                  itemLayout="horizontal"
+                  dataSource={notifications}
+                  locale={{
+                    emptyText: 'You have viewed all notifications.'
+                  }}
+                  renderItem={(item) => (
+                    <NotificationItem theme={theme}>
+                      <ListItemMeta
+                        title={item.title}
+                        description={moment(item.date).fromNow()}
+                        theme={theme}
+                      />
+                      <StyledRightOutlined />
+                    </NotificationItem>
+                  )}
+                />
+                {notifications.length ? (
+                  <ClearButton onClick={onAllNotificationsRead} theme={theme}>
+                    Clear notifications
+                  </ClearButton>
+                ) : null}
+              </Notification>
             }
           >
-            <Menu.Item disabled key="Loggedin">
-              Logged in as {username}
-            </Menu.Item>
-            <Menu.Item icon={<UserOutlined />} key="user">
-              <Link to="/user/dashboard">User Dashboard</Link>
-            </Menu.Item>
-            <Menu.Item icon={<SettingOutlined />} key="settings">
-              <Link to="/user/settings/account">Settings</Link>
-            </Menu.Item>
-            <Menu.Item icon={<LogoutOutlined />} onClick={logout} key="SignOut">
-              Sign out
-            </Menu.Item>
-          </SubMenu>
-        </Menu>
-      </RightContainer>
-    </LayoutHeader>
+            <IconButton count={notifications.length} offset={[-10, 10]}>
+              <IconFont />
+            </IconButton>
+          </StyledPopover>
+          <Menu key="user" mode="horizontal" theme={theme}>
+            <SubMenu
+              title={
+                <AvatarWrapper>
+                  {avatar ? (
+                    <StyledAvatar src={avatar} />
+                  ) : (
+                    <StyledAvatar icon={<UserOutlined />} />
+                  )}
+                </AvatarWrapper>
+              }
+            >
+              <Menu.Item disabled key="Loggedin">
+                Logged in as {username}
+              </Menu.Item>
+              <Menu.Item icon={<UserOutlined />} key="user">
+                <Link to="/user/dashboard">User Dashboard</Link>
+              </Menu.Item>
+              <Menu.Item icon={<SettingOutlined />} key="settings">
+                <Link to="/user/settings/account">Settings</Link>
+              </Menu.Item>
+              <Menu.Item icon={<LogoutOutlined />} onClick={logout} key="SignOut">
+                Sign out
+              </Menu.Item>
+            </SubMenu>
+          </Menu>
+        </RightContainer>
+      </LayoutHeader>
+    </div>
   );
 };
 

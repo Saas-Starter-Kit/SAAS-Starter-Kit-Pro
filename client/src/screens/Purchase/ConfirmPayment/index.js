@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import styled from 'styled-components';
-import { breakpoints, colors } from '../../../styles/theme';
+import { colors } from '../../../styles/theme';
 import AuthContext from '../../../utils/authContext';
 
 const Wrapper = styled.div`

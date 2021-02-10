@@ -42,8 +42,8 @@ const Main = styled.main`
 `;
 
 const ContentWrapper = styled.div`
-  margin-top: calc(1.5rem + 72px);
-  margin-bottom: 1.5rem;
+  margin-top: 1.5rem;
+  /*margin-bottom: 1.5rem;*/
   margin-left: 3.5rem;
   margin-right: 3.5rem;
   .ant-popover-inner-content {
