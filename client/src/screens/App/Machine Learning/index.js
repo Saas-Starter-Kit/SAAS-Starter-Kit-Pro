@@ -1,6 +1,23 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import qs from 'qs';
+import styled from 'styled-components';
+
+import { colors } from '../../../styles/theme';
+
+import Button from '../../../components/Common/buttons/AltButton1';
+import Card from '../../../components/Common/Card';
+import FieldLabel from '../../../components/Common/forms/FieldLabel';
+import TextInput from '../../../components/Common/forms/TextInput';
+
+const InputWrapper = styled.div`
+  padding-top: 1.5rem;
+`;
+
+const ButtonWrapper = styled.div`
+  padding-top: 1.5rem;
+  text-align: left;
+`;
 
 const mlServerUrl = 'http://127.0.0.1:5000/machine-learning';
 
@@ -40,42 +57,67 @@ const MachineLearning = () => {
   };
 
   return (
-    <div>
-      <div>Fill out the form below to get a ML house price prediction</div>
-      <div>Your Predicted house price is</div>
-      <div>{prediction}</div>
+    <Card>
+      <h2>Fill out the form below to get a ML house price prediction</h2>
+      <h3>Your Predicted house price is: {prediction}</h3>
       <form onSubmit={mlAnalysis}>
-        <div>Bedrooms</div>
-        <input name="bedrooms" type="number" />
-        <div>Bathrooms</div>
-        <input name="bathrooms" type="number" />
-        <div>Square Foot Living, number around 2000</div>
-        <input name="sqlive" type="number" />
-        <div>Square Foot Lot, number around 15,000</div>
-        <input name="sqlot" type="number" />
-        <div>Number of floors</div>
-        <input name="floors" type="number" />
-        <div>Water front, 0 or 1</div>
-        <input name="water" type="number" />
-        <div>Number of views, 0 to 4</div>
-        <input name="views" type="number" />
-        <div>Condition, number from 1 to 5</div>
-        <input name="condition" type="number" />
-        <div>Grade, number from 1 to 13</div>
-        <input name="grade" type="number" />
-        <div>Square foot above, number around 1800</div>
-        <input name="sqabove" type="number" />
-        <div>Square foot basement, number around 300</div>
-        <input name="basement" type="number" />
-        <div>Year built, year around 1970</div>
-        <input name="built" type="number" />
-        <div>Year renovated, year around 1980</div>
-        <input name="renovate" type="number" />
-        <div>
-          <button type="submit">Predict</button>
-        </div>
+        <InputWrapper>
+          <FieldLabel>Bedrooms</FieldLabel>
+          <TextInput name="bedrooms" type="number" />
+        </InputWrapper>
+        <InputWrapper>
+          <FieldLabel>Bathrooms</FieldLabel>
+          <TextInput name="bathrooms" type="number" />
+        </InputWrapper>
+        <InputWrapper>
+          <FieldLabel>Square Foot Living, number around 2000</FieldLabel>
+          <TextInput name="sqlive" type="number" />
+        </InputWrapper>
+        <InputWrapper>
+          <FieldLabel>Square Foot Lot, number around 15,000</FieldLabel>
+          <TextInput name="sqlot" type="number" />
+        </InputWrapper>
+        <InputWrapper>
+          <FieldLabel>Number of floors</FieldLabel>
+          <TextInput name="floors" type="number" />
+        </InputWrapper>
+        <InputWrapper>
+          <FieldLabel>Water front, 0 or 1</FieldLabel>
+          <TextInput name="water" type="number" />
+        </InputWrapper>
+        <InputWrapper>
+          <FieldLabel>Number of views, 0 to 4</FieldLabel>
+          <TextInput name="views" type="number" />
+        </InputWrapper>
+        <InputWrapper>
+          <FieldLabel>Condition, number from 1 to 5</FieldLabel>
+          <TextInput name="condition" type="number" />
+        </InputWrapper>
+        <InputWrapper>
+          <FieldLabel>Grade, number from 1 to 13</FieldLabel>
+          <TextInput name="grade" type="number" />
+        </InputWrapper>
+        <InputWrapper>
+          <FieldLabel>Square foot above, number around 1800</FieldLabel>
+          <TextInput name="sqabove" type="number" />
+        </InputWrapper>
+        <InputWrapper>
+          <FieldLabel>Square foot basement, number around 300</FieldLabel>
+          <TextInput name="basement" type="number" />
+        </InputWrapper>
+        <InputWrapper>
+          <FieldLabel>Year built, year around 1970</FieldLabel>
+          <TextInput name="built" type="number" />
+        </InputWrapper>
+        <InputWrapper>
+          <FieldLabel>Year renovated, year around 1980</FieldLabel>
+          <TextInput name="renovate" type="number" />
+        </InputWrapper>
+        <ButtonWrapper>
+          <Button type="submit">Predict</Button>
+        </ButtonWrapper>
       </form>
-    </div>
+    </Card>
   );
 };
 

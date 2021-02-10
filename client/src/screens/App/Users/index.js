@@ -8,8 +8,6 @@ import { Spin, message } from 'antd';
 import axios from '../../../services/axios';
 import AuthContext from '../../../utils/authContext';
 import ApiContext from '../../../utils/apiContext';
-import { colors, breakpoints, fieldStyles } from '../../../styles/theme';
-import Can from '../../../services/casl';
 
 import Button from '../../../components/Common/buttons/AltButton1';
 import Card from '../../../components/Common/Card';
@@ -123,11 +121,9 @@ const Users = ({ app_id }) => {
                   <div>Role: {user.role}</div>
                   {console.log(user)}
                   <div>Username: {user.username}</div>
-                  <Can I="delete" a="role">
-                    {user.role == 'user' && (
-                      <button onClick={() => removeUserRole(user.role_id)}>Remove</button>
-                    )}
-                  </Can>
+                  {user.role == 'user' && (
+                    <button onClick={() => removeUserRole(user.role_id)}>Remove</button>
+                  )}
                 </div>
               ))}
           </div>
