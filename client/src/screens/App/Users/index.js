@@ -11,69 +11,25 @@ import ApiContext from '../../../utils/apiContext';
 import { colors, breakpoints, fieldStyles } from '../../../styles/theme';
 import Can from '../../../services/casl';
 
+import Button from '../../../components/Common/buttons/AltButton1';
+import Card from '../../../components/Common/Card';
+import FieldLabel from '../../../components/Common/forms/FieldLabel';
+import TextInput from '../../../components/Common/forms/TextInput';
+import ErrorText from '../../../components/Common/errorText';
+
 const ValidSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Email Required')
 });
-
-const Label = styled.label`
-  display: block;
-  font-weight: 500;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-  color: ${colors.gray700};
-  padding-top: 0.5rem;
-`;
 
 const InputWrapper = styled.div`
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
 `;
 
-const Input = styled.input`
-  ${fieldStyles}
-`;
-
 const ButtonWrapper = styled.div`
   padding-top: 1rem;
   padding-bottom: 1rem;
-  background-color: ${colors.white};
   text-align: left;
-`;
-
-const Button = styled.button`
-  padding: 0.5rem 1rem;
-  font-weight: 500;
-  width: 100%;
-  color: ${colors.white};
-  background-color: ${colors.indigo600};
-  border: 1px solid transparent;
-  border-radius: 0.375rem;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-  cursor: pointer;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  &:hover {
-    background-color: ${colors.indigo500};
-  }
-  &:focus {
-    box-shadow: 0 0 0 3px rgba(164, 202, 254, 0.45);
-    outline: 2px solid transparent;
-    outline-offset: 2px;
-  }
-  &:active {
-    background-color: ${colors.indigo600};
-  }
-  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow,
-    transform;
-  transition-duration: 150ms;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-`;
-
-const ErrorText = styled.div`
-  color: red;
-  font-size: 0.8em;
-  margin-bottom: 0.5em;
-  margin-top: -0.2rem;
 `;
 
 const Users = ({ app_id }) => {
@@ -123,37 +79,42 @@ const Users = ({ app_id }) => {
 
   return (
     <div>
-      <div>Users</div>
-      <div>Invite User</div>
-      <Spin tip="Loading..." spinning={isLoading}>
-        <Formik
-          validationSchema={ValidSchema}
-          initialValues={{ email: '' }}
-          onSubmit={handleSubmit}
-        >
-          {({ values, errors, touched, handleChange, handleBlur, handleSubmit }) => (
-            <form onSubmit={handleSubmit}>
-              <Label htmlFor="email">Email:</Label>
-              <InputWrapper>
-                <Input
-                  type="email"
-                  name="email"
-                  id="email"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.email}
-                />
-              </InputWrapper>
-              {errors.email && touched.email && <ErrorText>{errors.email}</ErrorText>}
+      <h1>Users</h1>
+      <Card>
+        <Spin tip="Loading..." spinning={isLoading}>
+          <h2>Invite User</h2>
+          <Formik
+            validationSchema={ValidSchema}
+            initialValues={{ email: '' }}
+            onSubmit={handleSubmit}
+          >
+            {({ values, errors, touched, handleChange, handleBlur, handleSubmit }) => (
+              <form onSubmit={handleSubmit}>
+                <FieldLabel htmlFor="email">Email:</FieldLabel>
+                <InputWrapper>
+                  <TextInput
+                    type="email"
+                    name="email"
+                    id="email"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.email}
+                  />
+                </InputWrapper>
+                {errors.email && touched.email && <ErrorText>{errors.email}</ErrorText>}
 
-              <ButtonWrapper>
-                <Button type="submit">Submit </Button>
-              </ButtonWrapper>
-            </form>
-          )}
-        </Formik>
-        <div>
-          <Button onClick={getAppUsers}>Get App Users</Button>
+                <ButtonWrapper>
+                  <Button type="submit">Submit </Button>
+                </ButtonWrapper>
+              </form>
+            )}
+          </Formik>
+        </Spin>
+      </Card>
+      <Card>
+        <Spin tip="Loading..." spinning={isLoading}>
+          <h2>Get App Users</h2>
+          <Button onClick={getAppUsers}>Submit</Button>
           <div>
             {appUsers &&
               appUsers.map((user) => (
@@ -170,8 +131,8 @@ const Users = ({ app_id }) => {
                 </div>
               ))}
           </div>
-        </div>
-      </Spin>
+        </Spin>
+      </Card>
     </div>
   );
 };

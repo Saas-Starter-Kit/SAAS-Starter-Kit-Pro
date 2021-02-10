@@ -7,9 +7,9 @@ import AuthContext from '../../../utils/authContext';
 import ApiContext from '../../../utils/apiContext';
 import { ValidSchema, SignupAuth } from '../helpers';
 
+import ErrorText from '../../../components/Common/errorText';
 import InputWrapper from '../../../components/Common/forms/TextInputWrapper';
 import Button from '../../../components/Auth/Buttons/authButton';
-import ErrorText from '../../../components/Auth/errorText';
 import AuthCard from '../../../components/Auth/authCard';
 import Label from '../../../components/Auth/authFormLabel';
 import Input from '../../../components/Common/forms/TextInput';

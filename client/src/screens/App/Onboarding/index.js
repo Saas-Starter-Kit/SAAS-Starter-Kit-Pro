@@ -32,6 +32,7 @@ const steps = [
 const Onboarding = () => {
   return (
     <div>
+      <h1>Onboarding</h1>
       <div>
         <Joyride
           steps={steps}
@@ -54,7 +55,7 @@ const Onboarding = () => {
           }}
         />
       </div>
-      <div>Onboarding</div>
+
       <StyledStep className="step-1">Step 1</StyledStep>
       <StyledStepAlt className="step-2">Step 2</StyledStepAlt>
       <StyledStep className="step-3">Step 3</StyledStep>

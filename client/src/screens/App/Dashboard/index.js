@@ -12,9 +12,11 @@ const Title = styled.h1`
 
 const Dashboard = () => (
   <div>
-    <Title>Dashboard</Title>
-    <Stats />
-    <ActivityList />
+    <div>
+      <Title>Dashboard</Title>
+      <Stats />
+      <ActivityList />
+    </div>{' '}
   </div>
 );
 

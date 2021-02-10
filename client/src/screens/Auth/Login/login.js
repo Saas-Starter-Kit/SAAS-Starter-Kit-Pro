@@ -9,9 +9,9 @@ import ApiContext from '../../../utils/apiContext';
 import { LoginAuth } from '../helpers';
 import { colors, breakpoints, fieldStyles } from '../../../styles/theme';
 
+import ErrorText from '../../../components/Common/errorText';
 import InputWrapper from '../../../components/Common/forms/TextInputWrapper';
 import Button from '../../../components/Auth/Buttons/authButton';
-import ErrorText from '../../../components/Auth/errorText';
 import Label from '../../../components/Auth/authFormLabel';
 import Input from '../../../components/Common/forms/TextInput';
 import ContinueWith from '../../../components/Auth/continueWith';

@@ -54,13 +54,12 @@ const CreateTask = ({ app_id }) => {
       fetchFailure(err);
     });
 
-    //send event data to Google Analytics
-    let eventType = 'submit_form';
-    let parameters = {
-      description: 'user created todo'
-    };
-
     if (!process.env.NODE_ENV == 'development') {
+      //send event data to Google Analytics
+      let eventType = 'submit_form';
+      let parameters = {
+        description: 'user created todo'
+      };
       sendEventToAnalytics(eventType, parameters);
     }
 

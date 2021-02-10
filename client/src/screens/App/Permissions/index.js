@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Spin } from 'antd';
+import styled from 'styled-components';
 
 import { updateRole } from '../../../utils/caslAbility';
 import CaslContext from '../../../utils/caslContext';
@@ -7,6 +8,16 @@ import AuthContext from '../../../utils/authContext';
 import ApiContext from '../../../utils/apiContext';
 import axios from '../../../services/axios';
 import Can from '../../../services/casl';
+
+import Button from '../../../components/Common/buttons/AltButton1';
+import Card from '../../../components/Common/Card';
+import FieldLabel from '../../../components/Common/forms/FieldLabel';
+import TextInput from '../../../components/Common/forms/TextInput';
+
+const InputWrapper = styled.div`
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+`;
 
 const Permissions = () => {
   const ability = useContext(CaslContext);
@@ -86,41 +97,47 @@ const Permissions = () => {
     <div>
       {isClient && (
         <div>
-          <h2>Your Current Role is:</h2>
-          {isAdmin ? <p>Admin</p> : <p>User</p>}
-          <div>Click Below to Change Current Role:</div>
-          <button onClick={roleHandler}> Change </button>
-          <Can I="read" a="admin post">
-            <p>Only Admin can see Text</p>
-          </Can>
-          <Can I="read" a="post">
-            <p>User and Admin can see Text</p>
-          </Can>
-          <p>Render Button but make it disabled for non-admins</p>
-          <Can I="create" a="Post" passThrough>
-            {(allowed) => <button disabled={!allowed}>Save</button>}
-          </Can>
-          <p>The optional third prop "field" allows for more fine grained control</p>
-          <Can I="read" a="article" field="title">
-            <div>Title</div>
-          </Can>
-          <Can I="read" a="article" field="description">
-            <div>Description</div>
-          </Can>
-          <Can I="read" a="article" field="total views">
-            <div>User can't see this field</div>
-            <div>3,212</div>
-          </Can>
+          <Card>
+            <h2>Your Current Role is:</h2>
+            {isAdmin ? <p>Admin</p> : <p>User</p>}
+            <div>Click Below to Change Current Role:</div>
+            <Button onClick={roleHandler}> Change </Button>
+          </Card>
+          <Card>
+            <Can I="read" a="admin post">
+              <p>Only Admin can see Text</p>
+            </Can>
+            <Can I="read" a="post">
+              <p>User and Admin can see Text</p>
+            </Can>
+            <p>Render Button but make it disabled for non-admins</p>
+            <Can I="create" a="Post" passThrough>
+              {(allowed) => <Button disabled={!allowed}>Save</Button>}
+            </Can>
+          </Card>
+          <Card>
+            <p>The optional third prop "field" allows for more fine grained control</p>
+            <Can I="read" a="article" field="title">
+              <div>Title</div>
+            </Can>
+            <Can I="read" a="article" field="description">
+              <div>Description</div>
+            </Can>
+            <Can I="read" a="article" field="admin">
+              <div>User can't see this field</div>
+            </Can>
+          </Card>
 
-          <br />
-          <div>
-            Admin has all permissions by default, but can be explicitly denied certain permissions
-          </div>
-          <Can I="read" a="user" field="password">
-            <div>User can see, but admin cant see</div>
-            <div>UserPassWord123</div>
-          </Can>
-          <div>
+          <Card>
+            <div>
+              Admin has all permissions by default, but can be explicitly denied certain permissions
+            </div>
+            <div>User can see, but admin cant see the below element</div>
+            <Can I="read" a="user" field="password">
+              <div>UserPassWord123</div>
+            </Can>
+          </Card>
+          <Card>
             <Spin tip="Loading..." spinning={isLoading}>
               <div>Permissions Also Need to be Setup Server Side</div>
               <div>Click below to make an api request with permissions check.</div>
@@ -129,25 +146,29 @@ const Permissions = () => {
                 /utils/caslAbility.js. The roleRules() should match in the server.
               </div>
               <form onSubmit={apiPermission}>
-                <label htmlFor="userAction">User Action</label>
-                <input type="text" name="userAction" placeholder="read" />
-                <label htmlFor="subject">Subject</label>
-                <input type="text" name="subject" placeholder="password" />
-                <button>Submit</button>
+                <InputWrapper>
+                  <FieldLabel htmlFor="userAction">User Action</FieldLabel>
+                  <TextInput type="text" name="userAction" placeholder="read" />
+                </InputWrapper>
+                <InputWrapper>
+                  <FieldLabel htmlFor="subject">Subject</FieldLabel>
+                  <TextInput type="text" name="subject" placeholder="password" />
+                </InputWrapper>
+                <Button>Submit</Button>
               </form>
               <p>{privateData}</p>
             </Spin>
-          </div>
-          <div>
+          </Card>
+          <Card>
             <Spin tip="Loading..." spinning={isLoading}>
               <div>
                 Api requests with JWT tokens can also be made together or seperately from
                 permissions. see server/src/API/utils.js for an example
               </div>
-              <button onClick={apiJWTAuth}>Submit</button>
+              <Button onClick={apiJWTAuth}>Submit</Button>
               <p>{privateJWTData}</p>
             </Spin>
-          </div>
+          </Card>
         </div>
       )}
     </div>

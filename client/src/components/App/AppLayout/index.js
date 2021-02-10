@@ -26,9 +26,8 @@ const Wrapper = styled.div`
 const Content = styled.div`
   display: flex;
   flex-direction: column;
-  width: 0;
+  /*width: 0;*/
   flex: 1 1 0%;
-  overflow: hidden;
 `;
 
 const Main = styled.main`
@@ -42,8 +41,8 @@ const Main = styled.main`
 `;
 
 const ContentWrapper = styled.div`
-  margin-top: 1.5rem;
-  /*margin-bottom: 1.5rem;*/
+  padding-top: 1.5rem;
+  margin-bottom: 1.5rem;
   margin-left: 3.5rem;
   margin-right: 3.5rem;
   .ant-popover-inner-content {
