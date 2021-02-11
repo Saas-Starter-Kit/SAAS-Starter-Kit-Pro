@@ -29,7 +29,7 @@ const DeleteAppModal = ({ isModal, handleModalCancel, deleteApp }) => {
       title="Deleting App"
       onCancel={handleModalCancel}
       footer={[
-        <DangerButton onClick={deleteApp}>Delete App?</DangerButton>,
+        <DangerButton onClick={deleteApp}>Delete App</DangerButton>,
         <CancelDangerButton onClick={handleModalCancel}>Cancel</CancelDangerButton>
       ]}
     >

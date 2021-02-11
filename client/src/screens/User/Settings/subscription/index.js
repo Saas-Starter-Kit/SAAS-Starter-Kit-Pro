@@ -1,12 +1,13 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { message } from 'antd';
-import { navigate } from 'gatsby';
+import { navigate, Link } from 'gatsby';
 import styled from 'styled-components';
 
 import AuthContext from '../../../../utils/authContext';
 import ApiContext from '../../../../utils/apiContext';
 import axios from '../../../../services/axios';
 
+import SettingsHeader from '../../../../components/User/Navigation/settingsHeader';
 import LoadingOverlay from '../../../../components/Common/loadingOverlay';
 import NullSubscriptionCard from './NullSubscriptionCard';
 import CancelSubscriptionCard from './cancelSubscirptionCard';
@@ -126,6 +127,8 @@ const SubscriptionSettings = () => {
 
   return (
     <Wrapper>
+      <SettingsHeader />
+
       <Title>Subscription Settings</Title>
       {isLoading && <LoadingOverlay />}
       {!subscriptionState && <NullSubscriptionCard />}

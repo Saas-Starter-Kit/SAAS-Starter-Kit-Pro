@@ -1,15 +1,14 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Spin } from 'antd';
+import styled from 'styled-components';
 
 import AuthContext from '../../../../utils/authContext';
 import ApiContext from '../../../../utils/apiContext';
+import axios from '../../../../services/axios';
 
-import styled from 'styled-components';
-
+import SettingsHeader from '../../../../components/User/Navigation/settingsHeader';
 import UpdatePaymentCard from './updatePaymentCard';
 import AttachPaymentFormWrapper from './attachPaymentFormWrapper';
-
-import axios from '../../../../services/axios';
 
 const Wrapper = styled.div``;
 
@@ -105,7 +104,9 @@ const PaymentSettings = () => {
 
   return (
     <Wrapper>
-      <Title>Account Settings</Title>
+      <SettingsHeader />
+
+      <Title>Payment Settings</Title>
       <Spin tip="Loading..." spinning={isLoading}>
         <UpdatePaymentCard
           payCards={payCards}

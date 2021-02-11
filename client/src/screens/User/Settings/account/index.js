@@ -9,6 +9,7 @@ import axios from '../../../../services/axios';
 import LoadingOverlay from '../../../../components/Common/loadingOverlay';
 import styled from 'styled-components';
 
+import SettingsHeader from '../../../../components/User/Navigation/settingsHeader';
 import UpdateUsernameCard from './updateUsernameCard';
 import UpdateEmailCard from './updateEmailCard';
 import UpdatePasswordCard from './updatePasswordCard';
@@ -95,9 +96,9 @@ const AccountSettings = () => {
 
   return (
     <div>
+      <SettingsHeader />
       <Title>Account Settings</Title>
       {isLoading && <LoadingOverlay />}
-
       <UpdateUsernameCard
         isEmail={isEmail}
         handleUsernameChange={handleUsernameChange}
