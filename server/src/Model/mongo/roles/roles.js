@@ -51,11 +51,11 @@ export const getRoleModel = async (app_id, user_id) => {
 };
 
 export const postRoleModel = async (app_id, user_id, role) => {
-  let userRole = new Roles({ app_id, user_id, role });
+  let userRole = new Roles({ app_id: objectId(app_id), user_id: objectId(user_id), role });
   await userRole.save();
   return userRole
 };
 
 export const deleteRoleModel = async (role_id) => {
-  await Roles.findByIdAndDelete(role_id);
+  await Roles.findByIdAndDelete({ _id: objectId(role_id) });
 };
