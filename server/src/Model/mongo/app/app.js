@@ -6,17 +6,16 @@ export const getAppModel = async (user_id) => {
   try {
     const allData = await Roles.aggregate([
       {
-        $lookup:
-        {
-          from: "apps",
-          localField: "app_id",
-          foreignField: "_id",
-          as: "appInfo"
+        $lookup: {
+          from: 'apps',
+          localField: 'app_id',
+          foreignField: '_id',
+          as: 'appInfo'
         }
       },
       {
         $match: {
-          "user_id": objectId(user_id)
+          user_id: objectId(user_id)
         }
       }
     ]);
@@ -25,19 +24,18 @@ export const getAppModel = async (user_id) => {
       const filterData = allData.map((thread) => {
         return {
           app_id: thread.app_id,
-          app_name: (thread.appInfo && thread.appInfo.length) ? thread.appInfo[0].app_name : '',
+          app_name: thread.appInfo && thread.appInfo.length ? thread.appInfo[0].app_name : '',
           role: thread.role,
-          user_id: thread.user_id,
-        }
-      })
-      return filterData
+          user_id: thread.user_id
+        };
+      });
+      return filterData;
     } else {
-      return []
+      return [];
     }
   } catch (e) {
-    throw new Error(e)
+    throw new Error(e);
   }
-
 };
 
 export const postAppModel = async (name) => {
@@ -46,12 +44,12 @@ export const postAppModel = async (name) => {
     await app.save();
     return app._id;
   } else {
-    return ''
+    return '';
   }
 };
 
 export const deleteAppModel = async (app_id) => {
-  console.log('app_id', app_id)
+  console.log('app_id', app_id);
   await Roles.findOneAndDelete({ app_id: objectId(app_id) });
   await Todos.findOneAndDelete({ app_id: objectId(app_id) });
   await Apps.findOneAndDelete({ _id: objectId(app_id) });

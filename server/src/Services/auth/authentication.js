@@ -45,10 +45,8 @@ export const SignUp = async (req, res) => {
 
   //save user firebase info to our own db, and get unique user database id
   let result = await saveUsertoDB(email, username, firebaseId);
-  console.log(result);
 
   let userId = result.id;
-  console.log(userId);
 
   res.send({ token: setToken(userId) });
 };
@@ -97,7 +95,7 @@ export const updateUsername = async (req, res, next) => {
 
     res.status(200).send('Update Successful');
   } catch (e) {
-    next(e)
+    next(e);
   }
 };
 
@@ -121,6 +119,6 @@ export const updateEmail = async (req, res, next) => {
 
     res.status(200).send('Update Successful');
   } catch (e) {
-    next(e)
+    next(e);
   }
 };

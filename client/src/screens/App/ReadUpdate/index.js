@@ -29,7 +29,7 @@ const ReadUpdate = ({ app_id }) => {
   const { isLoading } = apiState;
   const { user } = authState;
 
-  const [todos, setTodos] = useState(todosDummy);
+  const [todos, setTodos] = useState([]);
 
   //Edit Todo state and form state
   const [isEditting, setEdit] = useState(false);
@@ -58,18 +58,18 @@ const ReadUpdate = ({ app_id }) => {
     }
   };
 
-  //useEffect(() => {
-  //  if (authState) fetchTodos();
-  //}, [authState]);
+  useEffect(() => {
+    if (authState) fetchTodos();
+  }, [authState]);
 
   const deleteTodo = async (todo) => {
     fetchInit();
     let todo_id = todo.todo_id;
 
-    let data = { todo_id };
+    let params = { todo_id };
     await axios
       .delete(`/api/delete/todo`, {
-        data
+        params
       })
       .catch((err) => {
         fetchFailure(err);

@@ -110,6 +110,8 @@ const Dashboard = () => {
       fetchFailure(err);
     });
 
+    console.log(result);
+
     let adminApps = result.data.filter((item) => item.role == 'admin');
     let userApps = result.data.filter((item) => item.role == 'user');
 

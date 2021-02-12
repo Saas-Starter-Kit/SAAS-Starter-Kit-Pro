@@ -67,11 +67,11 @@ const ConfirmedEmail = () => {
   }, []);
 
   useEffect(() => {
-    //createValidUser();
+    createValidUser();
   }, [location]);
 
   useEffect(() => {
-    //if (isInviteFlow == 'true') createRole();
+    if (isInviteFlow == 'true') createRole();
   }, [isInviteFlow]);
 
   const createValidUser = async () => {

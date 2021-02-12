@@ -1,6 +1,5 @@
 import { sendEmail } from '../../Config/email.js';
 import { getUser } from '../../Model/mongo/auth/authentication.js';
-// import { getAppUsersModel } from '../../Model/mongo/users/users.js';
 import { getAppUsersModel } from '../../Model/mongo/users/users.js';
 
 export const GetAppUsers = async (req, res, next) => {
@@ -8,10 +7,10 @@ export const GetAppUsers = async (req, res, next) => {
     let app_id = req.query.app_id;
 
     let result = await getAppUsersModel(app_id);
-  
+
     res.status(200).send(result);
   } catch (e) {
-    next(e)
+    next(e);
   }
 };
 
