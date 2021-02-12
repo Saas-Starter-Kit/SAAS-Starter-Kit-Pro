@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { graphql } from 'gatsby';
 import styled, { keyframes } from 'styled-components';
+import { Drawer } from 'antd';
 
 import { colors, breakpoints } from '../styles/theme';
 import Menu from '../components/Marketing/svgs/BurgerIcon';
@@ -58,7 +59,11 @@ const Docs = ({ data }) => {
 
   return (
     <Wrapper>
-      <MobileSideBar>{showMobileMenu && <DocsSidebar />}</MobileSideBar>
+      <Drawer placement="left" onClose={() => toggleShowMobileMenu(false)} visible={showMobileMenu}>
+        <MobileSideBar>
+          {showMobileMenu && <DocsSidebar mobileMenuHandler={mobileMenuHandler} />}
+        </MobileSideBar>
+      </Drawer>
       <Sidebar>
         <DocsSidebar />
       </Sidebar>
