@@ -1,7 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import styled from 'styled-components';
 import { breakpoints, colors } from '../../../styles/theme';
-import AuthContext from '../../../utils/authContext';
 import { navigate } from 'gatsby';
 
 const Wrapper = styled.div`
@@ -52,12 +51,6 @@ const Text = styled.h2`
 `;
 
 const SubscriptionExists = () => {
-  const { LogOut } = useContext(AuthContext);
-
-  useEffect(() => {
-    LogOut();
-  }, []);
-
   return (
     <Wrapper>
       <Card>
