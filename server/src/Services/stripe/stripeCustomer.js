@@ -1,6 +1,6 @@
 import stripe from '../../Config/stripe.js';
 import { setToken } from '../../Middleware/auth.js';
-import { createCustomerModel } from '../../Model/sql/stripe/stripeCustomer.js';
+import { createCustomerModel } from '../../Model/mongo/stripe/stripeCustomer.js';
 
 export const CreateCustomer = async (req, res) => {
   let email = req.body.email;

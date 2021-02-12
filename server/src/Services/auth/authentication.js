@@ -8,7 +8,7 @@ import {
   getUser,
   updateUsernameModel,
   updateEmailModel
-} from '../../Model/sql/auth/authentication.js';
+} from '../../Model/mongo/auth/authentication.js';
 
 export const verifyEmail = async (req, res) => {
   let email = req.body.email;
@@ -32,7 +32,7 @@ export const SignUp = async (req, res) => {
   //First Check if User exists
   let userExists = await getUser(email);
 
-  console.log(userExists);
+  console.log('userExists', userExists);
 
   //If user exists send error message, otherwise continue code
   if (userExists) {

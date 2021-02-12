@@ -1,6 +1,6 @@
 import { sendEmail } from '../../Config/email.js';
-import { getUser } from '../../Model/sql/auth/authentication.js';
-// import { getAppUsersModel } from '../../Model/sql/users/users.js';
+import { getUser } from '../../Model/mongo/auth/authentication.js';
+// import { getAppUsersModel } from '../../Model/mongo/users/users.js';
 import { getAppUsersModel } from '../../Model/mongo/users/users.js';
 
 export const GetAppUsers = async (req, res, next) => {
