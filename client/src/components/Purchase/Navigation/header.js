@@ -31,7 +31,7 @@ const Header = () => {
 
   useEffect(() => {
     setSteps();
-  }, []);
+  });
 
   const setSteps = () => {
     switch (pageName) {
