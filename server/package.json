@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node --experimental-json-modules ./app.js",
-    "test": "mocha  --experimental-json-modules ./src/test/stripe.test.js"
+    "test": "mocha  --experimental-json-modules ./src/test/todos.test.js"
   },
   "dependencies": {
     "@casl/ability": "^5.2.2",
