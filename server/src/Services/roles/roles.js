@@ -47,9 +47,13 @@ export const deleteRole = async (req, res, next) => {
   try {
     let role_id = req.query.role_id;
 
-    await deleteRoleModel(role_id);
+    if (role_id) {
+      await deleteRoleModel(role_id);
 
-    res.status(200).send('Delete Successful');
+      res.status(200).send('Delete Successful');
+    } else {
+      throw new Error('RoleId required to delete the role')
+    }
   } catch (e) {
     next(e)
   }
