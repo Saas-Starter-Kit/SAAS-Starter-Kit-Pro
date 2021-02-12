@@ -72,6 +72,8 @@ const Nav = styled.nav`
   display: none;
   @media (min-width: ${breakpoints.medium}) {
     display: flex;
+    justify-content: center;
+    flex-basis: 60%;
   }
 `;
 
