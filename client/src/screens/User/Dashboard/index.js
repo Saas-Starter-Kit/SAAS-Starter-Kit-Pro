@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import { Link } from 'gatsby';
+import { Empty } from 'antd';
 
 import AuthContext from '../../../utils/authContext';
 import ApiContext from '../../../utils/apiContext';
@@ -88,8 +89,7 @@ const Dashboard = () => {
   const { authState } = useContext(AuthContext);
   const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
   const { isLoading } = apiState;
-  const [apps, setApps] = useState();
-  const [userApps, setUserApps] = useState();
+  const [apps, setApps] = useState([]);
   const [isModal, setModal] = useState(false);
   const [deleteAppId, setDeleteAppId] = useState();
 
@@ -111,10 +111,8 @@ const Dashboard = () => {
     });
 
     let adminApps = result.data.filter((item) => item.role == 'admin');
-    let userApps = result.data.filter((item) => item.role == 'user');
 
     setApps(adminApps);
-    setUserApps(userApps);
   };
 
   const postApp = async (event) => {
@@ -181,7 +179,7 @@ const Dashboard = () => {
         <AppsSection>
           <h2>My Apps:</h2>
           <AppsWrapper>
-            {apps &&
+            {!apps.length == 0 ? (
               apps.map((app) => (
                 <StyledCard key={app.app_id}>
                   <Link to={`/app/${app.app_id}/dashboard`} state={{ app }}>
@@ -192,7 +190,10 @@ const Dashboard = () => {
                     Delete App
                   </DeleteButton>
                 </StyledCard>
-              ))}
+              ))
+            ) : (
+              <Empty />
+            )}
           </AppsWrapper>
         </AppsSection>
         <CreateAppWrapper>

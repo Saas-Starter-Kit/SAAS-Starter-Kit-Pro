@@ -50,7 +50,6 @@ const ReadUpdate = ({ app_id }) => {
           fetchFailure(err);
         });
       setTodos(result.data);
-      console.log(result.data);
       fetchSuccess();
     } else {
       //show dummy data
@@ -58,9 +57,9 @@ const ReadUpdate = ({ app_id }) => {
     }
   };
 
-  //useEffect(() => {
-  //  if (authState) fetchTodos();
-  //}, [authState]);
+  useEffect(() => {
+    if (authState) fetchTodos();
+  }, [authState]);
 
   const deleteTodo = async (todo) => {
     fetchInit();
