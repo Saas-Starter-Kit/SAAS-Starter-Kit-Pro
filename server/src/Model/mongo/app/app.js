@@ -51,7 +51,7 @@ export const postAppModel = async (name) => {
 };
 
 export const deleteAppModel = async (app_id) => {
-  await Roles.findOneAndDelete({ app_id });
-  await Todos.findOneAndDelete({ app_id });
-  await Apps.findOneAndDelete({ app_id });
+  await Roles.findOneAndDelete({ app_id: objectId(app_id) });
+  await Todos.findOneAndDelete({ app_id: objectId(app_id) });
+  await Apps.findOneAndDelete({ _id: objectId(app_id) });
 };
