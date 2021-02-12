@@ -117,7 +117,7 @@ const ContentContainer2 = styled.div`
     width: 100%;
     margin-left: 0px;
   }
-  @media (min-width: ${breakpoints.medium}) {
+  @media (min-width: 769px) {
     width: 45%;
     margin-left: 58%;
   }

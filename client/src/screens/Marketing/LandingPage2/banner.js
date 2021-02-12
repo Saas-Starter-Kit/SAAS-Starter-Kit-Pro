@@ -34,6 +34,9 @@ const Container1 = styled.div`
   max-width: none;
   padding-left: 2rem;
   padding-right: 1rem;
+  @media (min-width: 767px) and (max-width: 769px) {
+    margin-top: 2rem;
+  }
   @media (min-width: ${breakpoints.medium}) {
     max-width: 750px;
     width: 100%;
@@ -64,6 +67,7 @@ const Container3 = styled.div`
   @media (min-width: ${breakpoints.small}) {
     width: 70%;
   }
+
   @media (min-width: ${breakpoints.medium}) {
     width: 50%;
   }
@@ -115,7 +119,7 @@ const BannerImageContainer1 = styled.div`
   @media (max-width: ${breakpoints.large}) {
     margin-top: 4rem;
   }
-  @media (max-width: ${breakpoints.medium}) {
+  @media (max-width: 767px) {
     display: none;
   }
 `;
