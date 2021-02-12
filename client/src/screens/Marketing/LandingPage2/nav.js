@@ -67,7 +67,11 @@ const Image = styled.img`
 `;
 
 const Nav = styled.nav`
-  display: flex;
+  display: none;
+  @media (min-width: ${breakpoints.medium}) {
+    display: flex;
+    margin-right: 4rem;
+  }
 `;
 
 const NavMobile = styled.div`
@@ -101,7 +105,7 @@ const DrawerClose = styled.div`
 
 const DrawerHandler = styled.div`
   display: inline-block;
-  @media (min-width: ${breakpoints.large}) {
+  @media (min-width: ${breakpoints.medium}) {
     display: none !important;
   }
 `;

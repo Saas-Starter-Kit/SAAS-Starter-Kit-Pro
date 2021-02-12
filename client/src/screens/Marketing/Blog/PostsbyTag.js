@@ -1,12 +1,21 @@
 import React from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
-import { Link } from 'gatsby';
 import styled from 'styled-components';
 import { useLocation } from '@reach/router';
+import moment from 'moment';
+
+import ArticleCard from './articleCard';
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  max-width: 34rem;
+  margin: 1rem;
+  padding-bottom: 3rem;
+`;
+
+const StyledHeader = styled.h3`
+  margin-left: 1rem;
 `;
 
 const PostsbyTag = () => {
@@ -20,12 +29,16 @@ const PostsbyTag = () => {
 
   return (
     <Wrapper>
-      <h3>Showing Results for tag: {tag}</h3>
-      {Posts.map((post) => (
-        <div>
-          <Link to={`/blog/${post.node.uid}`}>{post.node.data.title.text}</Link>
-          <p>{post.node.data.date}</p>
-        </div>
+      <StyledHeader>Showing Results for tag: {tag}</StyledHeader>
+      {Posts.map(({ node: { data, tags, uid } }) => (
+        <ArticleCard
+          key={uid.concat(data.title.text)}
+          title={data.title.text}
+          date={moment(data.date).format('MMMM DD, YYYY')}
+          imageSrc={data.hero_image.thumbnails.thumbnail.url}
+          uid={uid}
+          tags={tags}
+        />
       ))}
     </Wrapper>
   );

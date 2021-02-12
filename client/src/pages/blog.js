@@ -3,5 +3,9 @@ import Layout from '../components/Marketing/Layout';
 import Blog from '../screens/Marketing/Blog';
 
 export default function BlogPage() {
-  return <Blog />;
+  return (
+    <Layout>
+      <Blog />
+    </Layout>
+  );
 }

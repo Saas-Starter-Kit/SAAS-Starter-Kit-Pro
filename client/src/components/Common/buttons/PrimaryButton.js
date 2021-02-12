@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { ButtonBase } from './ButtonBase';
 import { colors, breakpoints } from '../../../styles/theme';
 
-export const PrimaryButton = styled(ButtonBase)`
+const PrimaryButton = styled(ButtonBase)`
   color: ${colors.white};
   background-color: ${colors.royalBlue};
   border: 1px solid transparent;
@@ -27,3 +27,5 @@ export const PrimaryButton = styled(ButtonBase)`
     );
   }
 `;
+
+export default PrimaryButton;

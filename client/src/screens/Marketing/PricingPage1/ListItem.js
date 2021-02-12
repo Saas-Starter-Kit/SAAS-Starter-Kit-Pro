@@ -3,6 +3,13 @@ import styled from 'styled-components';
 import Tick from '../../../components/Marketing/svgs/tick';
 import { colors } from '../../../styles/theme';
 
+const StyledTick = styled.div`
+  margin-top: -1rem;
+  color: ${colors.green500};
+  height: 1.5rem;
+  width: 1.5rem;
+`;
+
 const Item = styled.li`
   display: flex;
   align-items: flex-start;
@@ -23,7 +30,9 @@ const Paragraph = styled.p`
 const ListItem = ({ text }) => (
   <Item>
     <Wrapper>
-      <Tick />
+      <StyledTick>
+        <Tick />
+      </StyledTick>
     </Wrapper>
     <Paragraph>{text}</Paragraph>
   </Item>
