@@ -9,9 +9,13 @@ export const getAppModel = async (user_id) => {
 };
 
 export const postAppModel = async (name) => {
-  let app = new Apps({ app_name: name });
-  app.save();
-  return app._id;
+  if (name) {
+    let app = new Apps({ app_name: name });
+    await app.save();
+    return app._id;
+  } else {
+    return ''
+  }
 };
 
 export const deleteAppModel = async (app_id) => {
