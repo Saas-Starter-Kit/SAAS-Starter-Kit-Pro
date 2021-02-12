@@ -3,7 +3,7 @@ import styled, { keyframes } from 'styled-components';
 import { breakpoints, colors } from '../../../styles/theme';
 import Background from './images/howItWorks/background.png';
 import MainImage from './images/howItWorks/mainImage.png';
-import { PrimaryButton } from '../../../components/Common/buttons/PrimaryButton';
+import PrimaryButton from '../../../components/Common/buttons/PrimaryButton';
 
 const Container = styled.section`
   min-height: 630px;
@@ -117,7 +117,7 @@ const ContentContainer2 = styled.div`
     width: 100%;
     margin-left: 0px;
   }
-  @media (min-width: ${breakpoints.medium}) {
+  @media (min-width: 769px) {
     width: 45%;
     margin-left: 58%;
   }

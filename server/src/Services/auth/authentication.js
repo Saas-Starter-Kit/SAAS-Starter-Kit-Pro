@@ -32,8 +32,6 @@ export const SignUp = async (req, res) => {
   //First Check if User exists
   let userExists = await getUser(email);
 
-  console.log('userExists', userExists);
-
   //If user exists send error message, otherwise continue code
   if (userExists) {
     res.status(400).send({ type: 'Failed Sign Up', message: 'User Already Exists' });

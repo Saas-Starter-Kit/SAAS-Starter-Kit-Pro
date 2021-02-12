@@ -2,23 +2,20 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import styled, { keyframes } from 'styled-components';
 import moment from 'moment';
+
 import { colors, breakpoints } from '../styles/theme';
-import SliceZone from './sliceZone';
 import Disqus from '../services/disqus';
+
+import SliceZone from './sliceZone';
 import { BaseCard } from '../screens/Marketing/Blog/cards';
 import RelatedArticles from '../screens/Marketing/Blog/relatedArticles';
 import TagsSection from '../screens/Marketing/Blog/tagsSection';
 
-const Wrapper1 = styled.div`
+const Wrapper = styled.div`
   background-color: ${colors.alabaster2};
-  padding: 2rem 0 4rem;
-`;
-
-const Wrapper2 = styled.div`
-  max-width: ${breakpoints.large};
-  margin-left: auto;
-  margin-right: auto;
-  padding: 2rem;
+  padding-left: 3rem;
+  padding-top: 2rem;
+  padding-bottom: 3rem;
 `;
 
 const fadeInDown = keyframes`
@@ -34,7 +31,6 @@ const fadeInDown = keyframes`
 
 const TitleWrapper = styled.div`
   padding: 0 0.6rem;
-
   animation-name: ${fadeInDown};
   animation-duration: 1000ms;
   animation-delay: 0ms;
@@ -78,7 +74,6 @@ const fadeInUp = keyframes`
 
 const ContentWrapper = styled.div`
   display: flex;
-
   animation-name: ${fadeInUp};
   animation-duration: 1000ms;
   animation-delay: 0ms;
@@ -87,16 +82,18 @@ const ContentWrapper = styled.div`
 `;
 
 const FirstColumn = styled.div`
-  flex-basis: 66%;
-  @media (max-width: ${breakpoints.medium}) {
+  flex-basis: 80%;
+
+  @media (max-width: ${breakpoints.large}) {
     flex-basis: 100%;
   }
 `;
 
 const SecondColumn = styled.div`
   padding-left: 3rem;
-  flex-basis: 33%;
-  @media (max-width: ${breakpoints.medium}) {
+  margin-right: 2rem;
+  flex-basis: 20%;
+  @media (max-width: ${breakpoints.large}) {
     display: none;
   }
 `;
@@ -117,31 +114,29 @@ const Post = ({ data }) => {
   const related_articles = [related_article1, related_article2];
 
   return (
-    <Wrapper1>
-      <Wrapper2>
-        <TitleWrapper>
-          <Title>{title}</Title>
-          <Subtitle>
-            By <Bold>{author}</Bold> ・ {date}
-          </Subtitle>
-        </TitleWrapper>
-        <ContentWrapper>
-          <FirstColumn>
-            <BaseCard>
-              <img src={hero_image.thumbnails.desktop.url} />
-              <CardContentWrapper>
-                <SliceZone body={body} />
-                <Disqus url={`${siteUrl + '/' + pageUid}`} identifier={pageUid} title={title} />
-              </CardContentWrapper>
-            </BaseCard>
-          </FirstColumn>
-          <SecondColumn>
-            <RelatedArticles articles={related_articles} />
-            <TagsSection tags={tags} />
-          </SecondColumn>
-        </ContentWrapper>
-      </Wrapper2>
-    </Wrapper1>
+    <Wrapper>
+      <TitleWrapper>
+        <Title>{title}</Title>
+        <Subtitle>
+          By <Bold>{author}</Bold> ・ {date}
+        </Subtitle>
+      </TitleWrapper>
+      <ContentWrapper>
+        <FirstColumn>
+          <BaseCard>
+            <img src={hero_image.thumbnails.desktop.url} />
+            <CardContentWrapper>
+              <SliceZone body={body} />
+              <Disqus url={`${siteUrl + '/' + pageUid}`} identifier={pageUid} title={title} />
+            </CardContentWrapper>
+          </BaseCard>
+        </FirstColumn>
+        <SecondColumn>
+          <RelatedArticles articles={related_articles} />
+          <TagsSection tags={tags} />
+        </SecondColumn>
+      </ContentWrapper>
+    </Wrapper>
   );
 };
 

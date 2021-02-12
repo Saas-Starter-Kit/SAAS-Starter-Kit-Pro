@@ -4,17 +4,84 @@ import { Link } from 'gatsby';
 
 import AuthContext from '../../../utils/authContext';
 import ApiContext from '../../../utils/apiContext';
+import { colors, breakpoints } from '../../../styles/theme';
 import axios from '../../../services/axios';
 
 import LoadingOverlay from '../../../components/Common/loadingOverlay';
 import DeleteAppModal from './DeleteAppModal';
+import Card from '../../../components/Common/Card';
+import Button from '../../../components/Common/buttons/PrimaryButton';
+import TextInput from '../../../components/Common/forms/TextInput';
+import FieldLabel from '../../../components/Common/forms/FieldLabel';
+import TextInputWrapper from '../../../components/Common/forms/TextInputWrapper';
 
-const Card = styled.div`
+const ContentWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @media (min-width: ${breakpoints.medium}) {
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+`;
+
+const StyledButton = styled(Button)`
+  width: 8rem;
+  margin-top: 2rem;
+`;
+
+const StyledCard = styled(Card)`
   display: flex;
   flex-direction: column;
   padding: 2rem;
   border: 1px solid black;
-  max-width: 14rem;
+  max-width: 24rem;
+  width: 100%;
+`;
+
+const CreateAppWrapper = styled.div`
+  width: 24rem;
+`;
+
+const DeleteButton = styled(Button)`
+  background-color: red;
+  color: white;
+  width: 8rem;
+`;
+
+const RoleText = styled.div`
+  padding-top: 0.4rem;
+  padding-bottom: 0.4rem;
+  font-size: 1.075rem;
+  font-weight: 500;
+  color: black;
+`;
+
+const StyledLink = styled.div`
+  color: black;
+  font-size: 1.3rem;
+  font-weight: 500;
+`;
+
+const AppsSection = styled.div`
+  margin: 0;
+  @media (min-width: ${breakpoints.medium}) {
+    margin-right: 5rem;
+  }
+`;
+
+const StyledHeader = styled.h1`
+  text-align: center;
+  @media (min-width: ${breakpoints.medium}) {
+    text-align: left;
+  }
+`;
+
+const AppsWrapper = styled.div`
+  width: 24rem;
+  padding-bottom: 3rem;
 `;
 
 const Dashboard = () => {
@@ -46,7 +113,6 @@ const Dashboard = () => {
     let adminApps = result.data.filter((item) => item.role == 'admin');
     let userApps = result.data.filter((item) => item.role == 'user');
 
-    console.log(result);
     setApps(adminApps);
     setUserApps(userApps);
   };
@@ -69,7 +135,6 @@ const Dashboard = () => {
   };
 
   const createRole = async (result) => {
-    console.log(result);
     let app_id = result.data.app_id;
     let user_id = authState.user.id;
     let role = 'admin';
@@ -80,11 +145,10 @@ const Dashboard = () => {
       role
     };
 
-    const roleResult = await axios.post(`/api/post/role`, data).catch((err) => {
+    await axios.post(`/api/post/role`, data).catch((err) => {
       fetchFailure(err);
     });
 
-    console.log(roleResult);
     getApps();
     fetchSuccess();
   };
@@ -112,39 +176,38 @@ const Dashboard = () => {
   return (
     <div>
       {isLoading && <LoadingOverlay />}
-      <h1>Dashboard</h1>
-      <h2>Create App</h2>
-      <form onSubmit={postApp}>
-        <input type="text" name="name" />
-        <button type="submit">Save</button>
-      </form>
-      <Link to="/user/settings/account">Account</Link>
-      <Link to="/user/settings/payment">Payment</Link>
-      <Link to="/user/settings/subscription">Subscription</Link>
-      <h2>My Apps:</h2>
-      <button onClick={getApps}>Get Apps</button>
-      <div>
-        {apps &&
-          apps.map((app) => (
-            <Card key={app.app_id}>
-              <Link to={`/app/${app.app_id}/dashboard`} state={{ app }}>
-                {app.app_name}
-              </Link>
-              <button onClick={() => handleDeleteAppModal(app.app_id)}>Delete App</button>
-            </Card>
-          ))}
-      </div>
-      <div>
-        <h2>User Apps:</h2>
-        {userApps &&
-          userApps.map((app) => (
-            <Card key={app.app_id}>
-              <Link to={`/app/${app.app_id}/dashboard`} state={{ app }}>
-                {app.app_name}
-              </Link>
-            </Card>
-          ))}
-      </div>
+      <StyledHeader>Dashboard</StyledHeader>
+      <ContentWrapper>
+        <AppsSection>
+          <h2>My Apps:</h2>
+          <AppsWrapper>
+            {apps &&
+              apps.map((app) => (
+                <StyledCard key={app.app_id}>
+                  <Link to={`/app/${app.app_id}/dashboard`} state={{ app }}>
+                    <StyledLink>{app.app_name}</StyledLink>
+                  </Link>
+                  <RoleText>Role: admin</RoleText>
+                  <DeleteButton onClick={() => handleDeleteAppModal(app.app_id)}>
+                    Delete App
+                  </DeleteButton>
+                </StyledCard>
+              ))}
+          </AppsWrapper>
+        </AppsSection>
+        <CreateAppWrapper>
+          <h2>Create App:</h2>
+          <form onSubmit={postApp}>
+            <StyledCard>
+              <TextInputWrapper>
+                <FieldLabel htmlFor="name">Create:</FieldLabel>
+                <TextInput type="text" name="name" />
+              </TextInputWrapper>
+              <StyledButton type="submit">Save</StyledButton>
+            </StyledCard>
+          </form>
+        </CreateAppWrapper>
+      </ContentWrapper>
       <DeleteAppModal
         handleModalCancel={handleModalCancel}
         isModal={isModal}

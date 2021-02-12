@@ -42,7 +42,7 @@ const ConfirmButton = styled.button`
   cursor: pointer;
 `;
 
-const Text = styled.h2`
+const Text = styled.div`
   padding-right: 2rem;
   padding-left: 2rem;
   margin-top: 1.5rem;

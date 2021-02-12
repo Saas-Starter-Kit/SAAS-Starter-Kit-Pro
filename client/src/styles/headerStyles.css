@@ -1,4 +1,4 @@
-/* Header Link Styles for Gatsby Link component */
+/* Marketing Header Link Styles for Gatsby Link component */
 .header_link {
   margin-left: 2.5rem;
   text-decoration: none;
@@ -85,4 +85,41 @@
   font-size: 1.1rem;
   font-weight: 800;
   color: #eb4d4b;
+}
+
+/* Header Links in User Dashboard */
+
+.header_link_user {
+  font-size: 1.075rem;
+  font-weight: 500;
+  color: darkgrey;
+  padding: 0.6rem;
+}
+
+.header_link_user:hover {
+  color: white;
+  border-radius: 0.5rem;
+}
+
+.header_link_user_active {
+  color: white;
+}
+
+/* Header Links for User Settings Page */
+
+.header_link_settings {
+  padding: 0.3rem;
+  padding-bottom: 0.5rem;
+  margin: 0.3rem;
+  font-weight: 900;
+  color: black;
+}
+
+.header_link_settings:hover {
+  border-bottom: 3px blue solid;
+  color: black;
+}
+
+.header_link_settings_active {
+  border-bottom: 3px blue solid;
 }

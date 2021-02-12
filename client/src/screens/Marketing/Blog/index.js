@@ -1,7 +1,9 @@
 import React from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 import styled from 'styled-components';
+
 import { colors, breakpoints } from '../../../styles/theme';
+
 import RecentlyPublished from './recentlyPublished';
 import Featured from './featured';
 import TopArticles from './topArticles';
@@ -12,6 +14,8 @@ const Wrapper = styled.div`
   flex-direction: column;
   font-family: 'Inter', sans-serif;
   letter-spacing: 0.03em;
+  padding-bottom: 3rem;
+  background-color: ${colors.coolGray50};
 `;
 
 const ColumnsWrapper = styled.div`
