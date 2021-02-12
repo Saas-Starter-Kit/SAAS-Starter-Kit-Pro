@@ -1,12 +1,12 @@
 import { Roles, Apps } from '../../../Database/mongo/models.js';
 
 export const checkRoleExists = async (app_id, user_id) => {
-  let role = Roles.findOne({ app_id, user_id });
+  let role = await Roles.findOne({ app_id, user_id });
   return role;
 };
 
 export const getRoleModel = async (app_id, user_id) => {
-  let apps = Apps.findOne({ app_id, user_id });
+  let apps = await Apps.findOne({ app_id, user_id });
   let roles = Roles.findOne({ app_id, user_id });
 
   console.log(apps, roles);

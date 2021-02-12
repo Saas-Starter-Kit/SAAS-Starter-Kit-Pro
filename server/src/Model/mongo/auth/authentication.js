@@ -1,3 +1,5 @@
+import mongoose from 'mongoose';
+const objectId = mongoose.Types.ObjectId;
 import { Users } from '../../../Database/mongo/models.js';
 
 export const getUser = async (email) => {
