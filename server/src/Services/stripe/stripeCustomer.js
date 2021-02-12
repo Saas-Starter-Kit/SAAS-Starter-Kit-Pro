@@ -32,7 +32,7 @@ export const CreateCustomer = async (req, res) => {
   //send jwt token for user auth requests
   let token = setToken(userId);
 
-  res.send({ stripe: result, token });
+  res.status(200).send({ stripe: result, token });
 };
 
 export const UpdateCustomer = async (stripe_id, email) => {
