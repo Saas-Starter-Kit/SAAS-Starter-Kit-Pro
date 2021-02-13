@@ -1,9 +1,16 @@
 import React from 'react';
 import { Link } from 'gatsby';
 import styled from 'styled-components';
+import { breakpoints } from '../../../styles/theme';
 
 const Wrapper = styled.div`
-  margin-left: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  @media (min-width: ${breakpoints.small}) {
+    display: block;
+    margin-left: 2rem;
+  }
 `;
 
 const ProductNav = () => {
@@ -11,22 +18,22 @@ const ProductNav = () => {
     <Wrapper>
       <h1>Product</h1>
       <Link
-        className="header_link_settings"
-        activeClassName="header_link_settings_active"
+        className="header_link_product"
+        activeClassName="header_link_product_active"
         to="/product/page1"
       >
         Page1
       </Link>
       <Link
-        className="header_link_settings"
-        activeClassName="header_link_settings_active"
+        className="header_link_product"
+        activeClassName="header_link_product_active"
         to="/product/page2"
       >
         Page2
       </Link>
       <Link
-        className="header_link_settings"
-        activeClassName="header_link_settings_active"
+        className="header_link_product"
+        activeClassName="header_link_product_active"
         to="/product/page3"
       >
         Page3
