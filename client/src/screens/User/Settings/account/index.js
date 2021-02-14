@@ -60,6 +60,7 @@ const AccountSettings = () => {
     fetchInit();
     let curEmail = authState.user.email;
 
+    console.log(id);
     const data = { id, username, curEmail };
 
     await axios.put(`/auth/put/username`, data).catch((err) => {

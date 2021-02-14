@@ -166,6 +166,7 @@ const CheckoutForm = () => {
   }, [authState]);
 
   const getWallet = async () => {
+    console.log(authState);
     setLoadingSpin(true);
     //get customers list of available payment methods
     let params = {

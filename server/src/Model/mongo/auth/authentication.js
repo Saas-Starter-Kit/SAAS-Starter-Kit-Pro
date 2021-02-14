@@ -13,6 +13,7 @@ export const saveUsertoDB = async (email, username, firebaseId) => {
 };
 
 export const updateUsernameModel = async (username, id) => {
+  console.log(username, id);
   try {
     return await Users.findByIdAndUpdate(
       { _id: objectId(id) },
@@ -25,6 +26,7 @@ export const updateUsernameModel = async (username, id) => {
 };
 
 export const updateEmailModel = async (email, id) => {
+  console.log(email, id);
   try {
     return await Users.findByIdAndUpdate(
       { _id: objectId(id) },

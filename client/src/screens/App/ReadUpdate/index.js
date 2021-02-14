@@ -64,7 +64,7 @@ const ReadUpdate = ({ app_id }) => {
 
   const deleteTodo = async (todo) => {
     fetchInit();
-    let todo_id = todo.todo_id;
+    let todo_id = todo.todo_id ? todo.todo_id : todo._id;
 
     let params = { todo_id };
     await axios
@@ -86,7 +86,9 @@ const ReadUpdate = ({ app_id }) => {
     let title = event.target.title.value;
     let description = event.target.description.value;
     let author = user.username;
-    let todo_id = todo.todo_id;
+    let todo_id = todo;
+
+    console.log(todo);
 
     let data = { title, description, author, todo_id };
     await axios.put(`/api/put/todo`, data).catch((err) => {

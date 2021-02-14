@@ -13,7 +13,7 @@ export const getTodos = async (req, res, next) => {
 
     res.status(200).send(result);
   } catch (e) {
-    next(e)
+    next(e);
   }
 };
 
@@ -33,25 +33,26 @@ export const putTodo = async (req, res, next) => {
     let title = req.body.title;
     let description = req.body.description;
     let author = req.body.author;
-    let todo_id = req.body.todo_id;
+    let todo_id = req.body.todo_id.todo_id ? req.body.todo_id.todo_id : req.body.todo_id._id;
+
+    console.log(todo_id);
 
     await putTodoModel(title, description, author, todo_id);
 
     res.status(200).send('Put Successful');
   } catch (e) {
-    next(e)
+    next(e);
   }
-
 };
 
 export const deleteTodo = async (req, res, next) => {
   try {
-    let todo_id = req.body.todo_id;
+    let todo_id = req.query.todo_id;
 
     await deleteTodoModel(todo_id);
 
     res.status(200).send('Delete Successful');
   } catch (e) {
-    next(e)
+    next(e);
   }
 };
