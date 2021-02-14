@@ -42,7 +42,9 @@ export const postAppModel = async (name) => {
   if (name) {
     let app = new Apps({ app_name: name });
     await app.save();
-    return app._id;
+    return {
+      app_id: app._id
+    }
   } else {
     return '';
   }

@@ -45,7 +45,7 @@ export const SignUp = async (req, res) => {
 
   //save user firebase info to our own db, and get unique user database id
   let result = await saveUsertoDB(email, username, firebaseId);
-
+  console.log('result', result.id)
   let userId = result.id;
 
   res.send({ token: setToken(userId) });

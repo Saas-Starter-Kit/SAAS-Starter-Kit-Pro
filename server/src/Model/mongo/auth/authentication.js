@@ -7,10 +7,9 @@ export const getUser = async (email) => {
 };
 
 export const saveUsertoDB = async (email, username, firebaseId) => {
-  console.log(firebaseId);
   let user = new Users({ email, username, firebase_user_id: firebaseId });
-  let id = await user.save();
-  return id;
+  let result = await user.save();
+  return result ? { id: result._id } : { id: '' };
 };
 
 export const updateUsernameModel = async (username, id) => {

@@ -9,19 +9,19 @@ export const postTodoModel = async (title, description, author, app_id) => {
 };
 
 export const getTodosModel = async (app_id) => {
-  return await Todos.find({ app_id });
+  return await Todos.find({ app_id: objectId(app_id) });
 };
 
 export const putTodoModel = async (title, description, author, todo_id) => {
   try {
-    return await Todos.findByIdAndUpdate(todo_id,
-      { $set: { title, author, description } }, {useFindAndModify: false});
-  } catch(e) {
+    return await Todos.findByIdAndUpdate({ _id: objectId(todo_id) },
+      { $set: { title, author, description } }, { useFindAndModify: false });
+  } catch (e) {
     throw new Error(e)
   }
-  
+
 };
 
 export const deleteTodoModel = async (todo_id) => {
-  return await Todos.findByIdAndDelete(todo_id);
+  return await Todos.findByIdAndDelete({ _id: objectId(todo_id) });
 };

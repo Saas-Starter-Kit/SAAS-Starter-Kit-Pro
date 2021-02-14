@@ -1,6 +1,6 @@
+import { Roles, Apps } from '../../../Database/mongo/models.js';
 import mongoose from 'mongoose';
 const objectId = mongoose.Types.ObjectId;
-import { Roles, Apps } from '../../../Database/mongo/models.js';
 
 export const checkRoleExists = async (app_id, user_id) => {
   try {
