@@ -50,12 +50,4 @@ app.use('/api', usersApi);
 app.use(errorHandler);
 process.on('unhandledRejection', unhandledRejectionHandler);
 
-//server setup
-const port = process.env.PORT || 80;
-
-if (process.env.NODE_ENV !== 'test') {
-    app.listen(port);
-}
-// console.log('Server listening on:', port);
-
 export default app;
