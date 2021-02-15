@@ -105,18 +105,45 @@ const Card = styled.div`
 `;
 
 const StyledCardDisplayWrapper = styled.div`
-  border: 1px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 1rem;
+  padding: 1rem;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
   margin-bottom: 1rem;
-  cursor: pointer;
 `;
 
 const StyledCardDisplay = styled.div`
-  border: 1px solid black;
+  font-size: 1.075rem;
   border-radius: 1rem;
   padding: 0.5rem;
+  background-color: darkblue;
+  color: white;
+  font-weight: 500;
+  width: 14rem;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
   margin: 1rem;
+  cursor: pointer;
+`;
+
+const CardNumber = styled.div`
+  font-size: 1.3rem;
+  padding-left: 0.5rem;
+`;
+
+const Expires = styled.div`
+  padding-left: 0.5rem;
+`;
+
+const SecondCardRow = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const CardBrandImage = styled.img`
+  padding-right: 0.5rem;
 `;
 
 const CheckoutForm = () => {
@@ -221,13 +248,13 @@ const CheckoutForm = () => {
   const setIcons = (brand) => {
     switch (brand) {
       case 'visa':
-        return <img src={visa} alt="" />;
+        return <CardBrandImage src={visa} alt="" />;
       case 'amex':
-        return <img src={american_express} alt="" />;
+        return <CardBrandImage src={american_express} alt="" />;
       case 'discover':
-        return <img src={discover} alt="" />;
+        return <CardBrandImage src={discover} alt="" />;
       case 'mastercard':
-        return <img src={mastercard} alt="" />;
+        return <CardBrandImage src={mastercard} alt="" />;
       default:
         return <FaRegCreditCard />;
     }
@@ -286,9 +313,13 @@ const CheckoutForm = () => {
             payCards.map((item) => (
               <StyledCardDisplayWrapper key={item.id}>
                 <StyledCardDisplay onClick={() => setPaymentMethod(item.id)}>
-                  {setIcons(item.card.brand)}
-                  {item.card.brand} **** **** **** {item.card.last4} expires {item.card.exp_month}/
-                  {item.card.exp_year}
+                  <CardNumber>**** **** **** {item.card.last4}</CardNumber>
+                  <SecondCardRow>
+                    <Expires>
+                      {item.card.exp_month}/{item.card.exp_year.toString().slice(-2)}
+                    </Expires>
+                    {setIcons(item.card.brand)}
+                  </SecondCardRow>
                 </StyledCardDisplay>
               </StyledCardDisplayWrapper>
             ))

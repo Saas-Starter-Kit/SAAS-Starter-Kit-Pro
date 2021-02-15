@@ -93,7 +93,7 @@ const Expires = styled.div`
   padding-left: 0.5rem;
 `;
 
-const CardImage = styled.img`
+const CardBrandImage = styled.img`
   padding-right: 0.5rem;
 `;
 
@@ -109,13 +109,13 @@ const UpdatePaymentCard = ({
   const setIcons = (brand) => {
     switch (brand) {
       case 'visa':
-        return <CardImage src={visa} alt="" />;
+        return <CardBrandImage src={visa} alt="" />;
       case 'amex':
-        return <CardImage src={american_express} alt="" />;
+        return <CardBrandImage src={american_express} alt="" />;
       case 'discover':
-        return <CardImage src={discover} alt="" />;
+        return <CardBrandImage src={discover} alt="" />;
       case 'mastercard':
-        return <CardImage src={mastercard} alt="" />;
+        return <CardBrandImage src={mastercard} alt="" />;
       default:
         return <FaRegCreditCard />;
     }
@@ -126,8 +126,8 @@ const UpdatePaymentCard = ({
       <SectionTitle>Update Payment</SectionTitle>
       {!paymentRemoved ? (
         payCards.map((item) => (
-          <StyledCardDisplayWrapper>
-            <StyledCardDisplay key={item.id}>
+          <StyledCardDisplayWrapper key={item.id}>
+            <StyledCardDisplay>
               <CardNumber>**** **** **** {item.card.last4}</CardNumber>
               <SecondCardRow>
                 <Expires>
