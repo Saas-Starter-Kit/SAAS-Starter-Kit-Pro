@@ -74,7 +74,7 @@ const Header = () => {
         <Step
           status={loginStatus}
           title="Login"
-          icon={pageName == 'checkauth' ? <LoadingOutlined /> : <UserOutlined />}
+          icon={pageName == 'checkauth' || '' ? <LoadingOutlined /> : <UserOutlined />}
         />
         <Step
           status={planStatus}

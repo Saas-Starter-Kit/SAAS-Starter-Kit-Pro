@@ -18,7 +18,7 @@ import FieldLabel from '../../../components/Common/forms/FieldLabel';
 import TextInput from '../../../components/Common/forms/TextInput';
 import ErrorText from '../../../components/Common/errorText';
 
-const { Column, ColumnGroup } = Table;
+const { Column } = Table;
 
 const ValidSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Email Required')
