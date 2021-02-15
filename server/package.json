@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node --experimental-json-modules ./index.js",
+    "start": "node --experimental-json-modules ./server.js",
     "test": "jest"
   },
   "dependencies": {
