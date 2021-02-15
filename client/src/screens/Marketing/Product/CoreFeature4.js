@@ -150,12 +150,12 @@ const ImageWrapper = styled.div`
   background-color: ${colors.indigo500};
 `;
 
-const CoreFeature3 = () => (
+const CoreFeature4 = () => (
   <Container>
     <Wrapper>
       <FeatureWrapper1>
         <div>
-          <LargeHeader>Explanation #1 about Core Feature 3</LargeHeader>
+          <LargeHeader>Explanation #1 about Core Feature 4</LargeHeader>
           <LargeParagraph>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur minima sequi
             recusandae, porro maiores officia assumenda aliquam laborum ab aliquid veritatis impedit
@@ -200,7 +200,7 @@ const CoreFeature3 = () => (
       </FeatureWrapper1>
       <FeatureWrapper2>
         <FeatureWrapper2b>
-          <LargeHeader>Explanation #2 about Core Feature 3</LargeHeader>
+          <LargeHeader>Explanation #2 about Core Feature 4</LargeHeader>
           <LargeParagraph>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit ex obcaecati natus
             eligendi delectus, cum deleniti sunt in labore nihil quod quibusdam expedita nemo.
@@ -246,4 +246,4 @@ const CoreFeature3 = () => (
   </Container>
 );
 
-export default CoreFeature3;
+export default CoreFeature4;

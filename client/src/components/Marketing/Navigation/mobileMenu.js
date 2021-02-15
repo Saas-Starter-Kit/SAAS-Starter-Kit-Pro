@@ -188,7 +188,7 @@ const MobileMenu = ({ mobileMenuHandler }) => (
     </Header>
     <div>
       <Nav>
-        <Link to="/pricing">
+        <Link to="/pricing/pricing1">
           <Item>
             <MenuImageWrapper>
               {/*<!-- Heroicon name: view-grid -->*/}
@@ -197,16 +197,44 @@ const MobileMenu = ({ mobileMenuHandler }) => (
             <Title>Pricing</Title>
           </Item>
         </Link>
-        <Link to="/app">
+        <hr />
+        <h3>Solutions</h3>
+        <Link to="/product/page1">
           <Item>
             <MenuImageWrapper>
               {/*<!-- Heroicon name: view-grid -->*/}
               <MenuImg src={ViewGrid} alt="click" />
             </MenuImageWrapper>
-            <Title>App</Title>
+            <Title>Product Page 1</Title>
           </Item>
         </Link>
-        <hr />
+        <Link to="/product/page2">
+          <Item>
+            <MenuImageWrapper>
+              {/*<!-- Heroicon name: view-grid -->*/}
+              <MenuImg src={ViewGrid} alt="click" />
+            </MenuImageWrapper>
+            <Title>Product Page 2</Title>
+          </Item>
+        </Link>
+        <Link to="/product/page3">
+          <Item>
+            <MenuImageWrapper>
+              {/*<!-- Heroicon name: view-grid -->*/}
+              <MenuImg src={ViewGrid} alt="click" />
+            </MenuImageWrapper>
+            <Title>Product Page 3</Title>
+          </Item>
+        </Link>
+        <Link to="/product/page4">
+          <Item>
+            <MenuImageWrapper>
+              {/*<!-- Heroicon name: view-grid -->*/}
+              <MenuImg src={ViewGrid} alt="click" />
+            </MenuImageWrapper>
+            <Title>Product Page 4</Title>
+          </Item>
+        </Link>
       </Nav>
     </div>
     <ButtonWrapper1>

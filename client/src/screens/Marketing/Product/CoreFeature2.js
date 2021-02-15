@@ -149,7 +149,7 @@ const ImageWrapper = styled.div`
   background-color: ${colors.indigo500};
 `;
 
-const CoreFeature1 = () => (
+const CoreFeature2 = () => (
   <Container>
     <Wrapper>
       <FeatureWrapper1>
@@ -245,4 +245,4 @@ const CoreFeature1 = () => (
   </Container>
 );
 
-export default CoreFeature1;
+export default CoreFeature2;

@@ -5,6 +5,7 @@ import useOutsideClick from '../../../hooks/useOutsideClick';
 import { Link } from 'gatsby';
 import { colors, breakpoints } from '../../../styles/theme';
 import FlyoutMenu from './flyoutMenu';
+
 import MobileMenu from './mobileMenu';
 import SmallLogo from '../../../assets/images/logo/small_logo.svg';
 import MenuImageSrc from '../../../assets/images/icons/menu.svg';
@@ -96,35 +97,6 @@ const FlyoutMenuWrapper = styled.div`
   animation: ${fadeInUp} 0.3s ease-in forwards;
 `;
 
-const StyledLink = css`
-  margin-left: 2.5rem;
-  text-decoration: none;
-  cursor: pointer;
-  position: relative;
-  font-size: 1.1rem;
-  font-weight: 800;
-
-  &:before {
-    content: '';
-    margin-bottom: -5px;
-    position: absolute;
-    width: 0;
-    height: 6px;
-    bottom: 0;
-    left: 0;
-    background-color: red;
-    visibility: ;
-    transition: all 0.3s ease-in-out;
-  }
-
-  &:hover {
-    &:before {
-      visibility: visible;
-      width: 100%;
-    }
-  }
-`;
-
 const ButtonWrapper = styled.div`
   display: none;
   @media (min-width: ${breakpoints.medium}) {
@@ -178,7 +150,7 @@ const Button = styled.div`
   transition-duration: 150ms;
 `;
 
-const SolutionsButton = styled.button`
+const SolutionsButton = styled.div`
   color: ${colors.gray500};
   display: inline-flex;
   align-items: center;
@@ -186,10 +158,8 @@ const SolutionsButton = styled.button`
   justify-content: space-between;
   font-size: 1rem;
   line-height: 1.5rem;
-  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow,
-    transform;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
+  cursor: pointer;
+
   &:hover {
     color: ${colors.gray900};
   }
@@ -242,8 +212,6 @@ const Header = () => {
 
   const mobileMenuHandler = () => (mobileMenu ? toggleMobileMenu(false) : toggleMobileMenu(true));
 
-  const menuHandler = () => (menu ? toggleMenu(false) : toggleMenu(true));
-
   useOutsideClick(ref, () => toggleMenu(false));
   useOutsideClick(refMobile, () => toggleMobileMenu(false));
 
@@ -262,11 +230,12 @@ const Header = () => {
           {mobileMenu ? <MobileMenu mobileMenuHandler={mobileMenuHandler} /> : null}
         </MenuWrapper>
         <Nav>
-          <SolutionsWrapper ref={ref}>
-            <SolutionsButton onClick={menuHandler} type="button">
+          <SolutionsWrapper onMouseOver={() => toggleMenu(true)} ref={ref}>
+            <SolutionsButton type="button">
               Solutions
               <Chevron src={ChevronDown} alt="down arrow" />
             </SolutionsButton>
+
             {menu ? (
               <FlyoutMenuWrapper>
                 <FlyoutMenu />

@@ -38,6 +38,13 @@ const ProductNav = () => {
       >
         Page3
       </Link>
+      <Link
+        className="header_link_product"
+        activeClassName="header_link_product_active"
+        to="/product/page4"
+      >
+        Page4
+      </Link>
     </Wrapper>
   );
 };
