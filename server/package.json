@@ -30,7 +30,10 @@
   },
   "type": "module",
   "jest": {
-    "testEnviroment": "node"
+    "testEnviroment": "node",
+    "setupFiles": [
+      "<rootDir>/src/__tests__/fixtures/setEnvVars.js"
+    ]
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
