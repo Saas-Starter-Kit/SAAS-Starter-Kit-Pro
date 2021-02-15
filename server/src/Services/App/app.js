@@ -6,8 +6,6 @@ export const getApp = async (req, res, next) => {
 
     let result = await getAppModel(user_id);
 
-    console.log(result);
-
     res.status(200).send(result);
   } catch (e) {
     next(e);
@@ -18,7 +16,7 @@ export const postApp = async (req, res, next) => {
   try {
     let name = req.body.name;
 
-    console.log(name);
+    console.log('name', name);
 
     let result = await postAppModel(name);
 

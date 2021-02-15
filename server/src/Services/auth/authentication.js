@@ -45,7 +45,6 @@ export const SignUp = async (req, res) => {
 
   //save user firebase info to our own db, and get unique user database id
   let result = await saveUsertoDB(email, username, firebaseId);
-  console.log('result', result.id);
   let userId = result.id;
 
   res.send({ token: setToken(userId) });
@@ -63,8 +62,6 @@ export const Login = async (req, res) => {
   //Check if User exists
   let user = await getUser(email);
 
-  console.log(user);
-
   //If user not found send error message
   if (!user) {
     //delete user from firebase
@@ -74,7 +71,6 @@ export const Login = async (req, res) => {
   }
 
   let user_id = user.id ? user.id : user._id;
-  console.log(user_id);
   let stripe_customer_id = user.stripe_customer_id;
   let subscription_id = user.subscription_id;
 

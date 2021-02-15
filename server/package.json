@@ -4,12 +4,13 @@
   "private": true,
   "scripts": {
     "start": "node --experimental-json-modules ./app.js",
-    "test": "mocha  --experimental-json-modules ./src/test/*"
+    "test": "NODE_ENV=test jest --testEnvironment=node"
   },
   "dependencies": {
     "@casl/ability": "^5.2.2",
     "@sentry/node": "^6.0.2",
     "@sentry/tracing": "^6.0.2",
+    "babel-preset-env": "^1.7.0",
     "body-parser": "^1.19.0",
     "chai-http": "^4.3.0",
     "cors": "^2.8.5",
