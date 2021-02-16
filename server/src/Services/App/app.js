@@ -1,42 +1,25 @@
-import { deleteAppModel, getAppModel, postAppModel } from '../../Model/mongo/app/app.js';
+import { deleteAppModel, getAppModel, postAppModel } from '../../Model/sql/app/app.js';
 
-export const getApp = async (req, res, next) => {
-  try {
-    let user_id = req.query.user_id;
+export const getApp = async (req, res) => {
+  let user_id = req.query.user_id;
 
-    let result = await getAppModel(user_id);
+  let result = await getAppModel(user_id);
 
-    res.status(200).send(result);
-  } catch (e) {
-    next(e);
-  }
+  res.status(200).send(result);
 };
 
-export const postApp = async (req, res, next) => {
-  try {
-    let name = req.body.name;
+export const postApp = async (req, res) => {
+  let name = req.body.name;
 
-    console.log('name', name);
+  let result = await postAppModel(name);
 
-    let result = await postAppModel(name);
-
-    res.status(200).send(result);
-  } catch (e) {
-    next(e);
-  }
+  res.status(200).send(result);
 };
 
-export const deleteApp = async (req, res, next) => {
-  try {
-    let app_id = req.query.app_id;
-    if (app_id) {
-      await deleteAppModel(app_id);
+export const deleteApp = async (req, res) => {
+  let app_id = req.query.app_id;
 
-      res.status(200).send('Delete Successful');
-    } else {
-      throw new Error('App id is required');
-    }
-  } catch (e) {
-    next(e);
-  }
+  await deleteAppModel(app_id);
+
+  res.status(200).send('Delete Successful');
 };

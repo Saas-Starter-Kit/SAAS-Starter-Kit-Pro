@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node --experimental-json-modules ./server.js",
-    "test": "jest"
+    "test": "jest  --runInBand"
   },
   "dependencies": {
     "@casl/ability": "^5.2.2",

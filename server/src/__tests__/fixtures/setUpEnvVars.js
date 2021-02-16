@@ -25,6 +25,6 @@ process.env.STRIPE_WEBHOOK_SECRET = 'whsec_xxxxxxxxxx';
 
 //Send in blue env vars, multiple listIds can be added
 process.env.SendInBlue_API_KEY = 'xkeysib-xxxxxxxxxxxxxxxxxx';
-process.env.SendInBlue_User = 'example@eee.com';
+process.env.SendInBlue_User = 'example@gmail.com';
 process.env.SendInBlue_Password = 'password';
 process.env.SendInBlue_ListId = 5;

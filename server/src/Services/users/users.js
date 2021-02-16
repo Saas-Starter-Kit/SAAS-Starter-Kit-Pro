@@ -1,17 +1,13 @@
 import { sendEmail } from '../../Config/email.js';
-import { getUser } from '../../Model/mongo/auth/authentication.js';
-import { getAppUsersModel } from '../../Model/mongo/users/users.js';
+import { getUser } from '../../Model/sql/auth/authentication.js';
+import { getAppUsersModel } from '../../Model/sql/users/users.js';
 
 export const GetAppUsers = async (req, res, next) => {
-  try {
-    let app_id = req.query.app_id;
+  let app_id = req.query.app_id;
 
-    let result = await getAppUsersModel(app_id);
+  let result = await getAppUsersModel(app_id);
 
-    res.status(200).send(result);
-  } catch (e) {
-    next(e);
-  }
+  res.status(200).send(result);
 };
 
 export const InviteUser = async (req, res) => {

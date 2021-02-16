@@ -8,7 +8,7 @@ import {
   getUser,
   updateUsernameModel,
   updateEmailModel
-} from '../../Model/mongo/auth/authentication.js';
+} from '../../Model/sql/auth/authentication.js';
 
 export const verifyEmail = async (req, res) => {
   let email = req.body.email;
@@ -78,46 +78,38 @@ export const Login = async (req, res) => {
 };
 
 export const updateUsername = async (req, res, next) => {
-  try {
-    let id = req.body.id;
-    let username = req.body.username;
-    let email = req.body.curEmail;
-    let user = await getUser(email);
-    let uid = user.firebase_user_id;
-    console.log(user, uid);
+  let id = req.body.id;
+  let username = req.body.username;
+  let email = req.body.curEmail;
 
-    firebaseAdmin.auth().updateUser(uid, {
-      displayName: username
-    });
+  let user = await getUser(email);
+  let uid = user.firebase_user_id;
 
-    await updateUsernameModel(username, id);
+  firebaseAdmin.auth().updateUser(uid, {
+    displayName: username
+  });
 
-    res.status(200).send('Update Successful');
-  } catch (e) {
-    next(e);
-  }
+  await updateUsernameModel(username, id);
+
+  res.status(200).send('Update Successful');
 };
 
 export const updateEmail = async (req, res, next) => {
-  try {
-    let id = req.body.id;
-    let email = req.body.email;
-    let oldEmail = req.body.oldEmail;
+  let id = req.body.id;
+  let email = req.body.email;
+  let oldEmail = req.body.oldEmail;
 
-    let user = await getUser(oldEmail);
-    let uid = user.firebase_user_id;
-    let stripe_id = user.stripe_customer_id;
+  let user = await getUser(oldEmail);
+  let uid = user.firebase_user_id;
+  let stripe_id = user.stripe_customer_id;
 
-    firebaseAdmin.auth().updateUser(uid, {
-      email
-    });
+  firebaseAdmin.auth().updateUser(uid, {
+    email
+  });
 
-    await updateEmailModel(email, id);
-    await UpdateCustomer(stripe_id, email);
-    await UpdateContact(email, oldEmail);
+  await updateEmailModel(email, id);
+  await UpdateCustomer(stripe_id, email);
+  await UpdateContact(email, oldEmail);
 
-    res.status(200).send('Update Successful');
-  } catch (e) {
-    next(e);
-  }
+  res.status(200).send('Update Successful');
 };

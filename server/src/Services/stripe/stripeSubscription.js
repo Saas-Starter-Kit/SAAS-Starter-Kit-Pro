@@ -1,11 +1,11 @@
 import stripe from '../../Config/stripe.js';
-import { getUser } from '../../Model/mongo/auth/authentication.js';
+import { getUser } from '../../Model/sql/auth/authentication.js';
 import { sendEmail } from '../../Config/email.js';
 import moment from 'moment';
 import {
   cancelSubscriptionModel,
   createSubscriptionModel
-} from '../../Model/mongo/stripe/stripeSubscription.js';
+} from '../../Model/sql/stripe/stripeSubscription.js';
 
 export const UpdateSubscription = async (req, res) => {
   let subscription_id = req.body.subscriptionId;
@@ -48,7 +48,7 @@ export const GetSubscription = async (req, res) => {
 
   const subscription = await stripe.subscriptions.retrieve(subscription_id);
 
-  res.status(200).send(subscription)
+  res.status(200).send(subscription);
 };
 
 export const CreateSubscription = async (req, res) => {
@@ -86,7 +86,7 @@ export const CreateSubscription = async (req, res) => {
     let locals = { amount, start_date, trial_end };
     await sendEmail(email, template, locals);
 
-    res.status(200).send(subscription)
+    res.status(200).send(subscription);
   } else {
     //if subscription fails send error message
     res
