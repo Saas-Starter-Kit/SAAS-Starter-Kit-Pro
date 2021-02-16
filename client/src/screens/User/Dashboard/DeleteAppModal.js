@@ -1,26 +1,8 @@
 import React from 'react';
 import { Modal } from 'antd';
-import styled from 'styled-components';
 
-const CancelDangerButton = styled.button`
-  background-color: white;
-  color: black;
-  padding: 0.4rem 0.8rem;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-  margin-left: 1rem;
-  margin-bottom: 1rem;
-  cursor: pointer;
-`;
-
-const DangerButton = styled.button`
-  background-color: red;
-  color: white;
-  padding: 0.4rem 0.8rem;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-  margin-left: 1rem;
-  margin-bottom: 1rem;
-  cursor: pointer;
-`;
+import CancelButton from '../../../components/Common/buttons/CancelButton';
+import DangerButton from '../../../components/Common/buttons/DangerButton';
 
 const DeleteAppModal = ({ isModal, handleModalCancel, deleteApp }) => {
   return (
@@ -30,7 +12,7 @@ const DeleteAppModal = ({ isModal, handleModalCancel, deleteApp }) => {
       onCancel={handleModalCancel}
       footer={[
         <DangerButton onClick={deleteApp}>Delete App</DangerButton>,
-        <CancelDangerButton onClick={handleModalCancel}>Cancel</CancelDangerButton>
+        <CancelButton onClick={handleModalCancel}>Cancel</CancelButton>
       ]}
     >
       Are You sure you want to Delete App?

@@ -13,11 +13,7 @@ import Button from '../../../components/Common/buttons/AltButton1';
 import Card from '../../../components/Common/Card';
 import FieldLabel from '../../../components/Common/forms/FieldLabel';
 import TextInput from '../../../components/Common/forms/TextInput';
-
-const InputWrapper = styled.div`
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-`;
+import InputWrapper from '../../../components/Common/forms/TextInputWrapper';
 
 const Permissions = () => {
   const ability = useContext(CaslContext);

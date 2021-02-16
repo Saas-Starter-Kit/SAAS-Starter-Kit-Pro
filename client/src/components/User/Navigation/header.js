@@ -2,12 +2,24 @@ import React, { useState, useRef, useContext } from 'react';
 import { Link } from 'gatsby';
 import { MdAccountCircle } from 'react-icons/md';
 import styled from 'styled-components';
+import moment from 'moment';
+import { Popover, Badge, List } from 'antd';
+
 import { colors, breakpoints } from '../../../styles/theme';
 import useOutsideClick from '../../../hooks/useOutsideClick';
 import AvatarDropDown from './avatarDropDown';
 import AuthContext from '../../../utils/authContext';
 import Burger from '../svgs/burger';
 import SmallLogo from '../../../assets/images/logo/small_logo.svg';
+import { RightOutlined } from '@ant-design/icons';
+import { IoNotificationsOutline } from 'react-icons/io5';
+
+const notifications = [
+  { date: moment.now(), title: 'Hey there' },
+  { date: moment.now(), title: 'Welcome!' }
+];
+
+const onAllNotificationsRead = () => {};
 
 const Wrapper = styled.div`
   display: flex;
@@ -15,7 +27,7 @@ const Wrapper = styled.div`
   background-color: black;
 `;
 
-const Button = styled.div`
+const MenuButton = styled.div`
   padding-top: 0.5rem;
   padding-left: 0.5rem;
   font-weight: 600;
@@ -87,6 +99,74 @@ const StyledMdAccountCircle = styled(MdAccountCircle)`
   flex-shrink: 0;
 `;
 
+const IconButton = styled(Badge)`
+  display: none;
+  @media (min-width: ${breakpoints.medium}) {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 24px;
+    cursor: pointer;
+    margin-top: 0.8rem;
+    margin-right: 0.5rem;
+    & + .iconButton {
+      margin-left: 8px;
+    }
+  }
+`;
+
+const IconFont = styled(IoNotificationsOutline)`
+  color: ${colors.cadetBlue};
+  font-size: 24px;
+  &:hover {
+    color: ${colors.dodgerBlue};
+  }
+`;
+
+const StyledPopover = styled(Popover)`
+  .ant-popover-arrow {
+    display: none;
+  }
+  .ant-list-item-content {
+    flex: 0;
+    margin-left: 16px;
+  }
+`;
+
+const Notification = styled.div`
+  padding: 1rem;
+  width: 320px;
+`;
+
+const ClearButton = styled.div`
+  text-align: center;
+  height: 48px;
+  line-height: 48px;
+  cursor: pointer;
+`;
+
+const NotificationItem = styled(List.Item)`
+  transition: all 0.3s;
+  padding: 1rem;
+  cursor: pointer;
+`;
+
+const StyledRightOutlined = styled(RightOutlined)`
+  font-size: 10px;
+  color: ${colors.silver};
+`;
+
+const ListItemMeta = styled(List.Item.Meta)`
+  h4 {
+    color: ${colors.doveGray};
+  }
+  div.ant-list-item-meta-description {
+    color: ${colors.doveGray};
+  }
+`;
+
 const MobileHeader = ({ mobileMenuHandler }) => {
   const { authState } = useContext(AuthContext);
   const photo = authState.user ? authState.user.photo : null;
@@ -97,10 +177,10 @@ const MobileHeader = ({ mobileMenuHandler }) => {
   useOutsideClick(ref, () => toggleAvatarMenu(false));
 
   return (
-    <Wrapper>
-      <Button onClick={mobileMenuHandler} aria-label="Open sidebar">
+    <Wrapper id="primaryLayout">
+      <MenuButton onClick={mobileMenuHandler} aria-label="Open sidebar">
         <Burger />
-      </Button>
+      </MenuButton>
       <LogoWrapper>
         <Link to="/user/dashboard">
           <Logo src={SmallLogo} alt="Logo" />
@@ -126,7 +206,36 @@ const MobileHeader = ({ mobileMenuHandler }) => {
           </Link>
         </LinkItem>
       </LinksWrapper>
-
+      <StyledPopover
+        placement="bottomRight"
+        trigger="click"
+        key="notifications"
+        getPopupContainer={() => document.querySelector('#primaryLayout')}
+        content={
+          <Notification>
+            <List
+              itemLayout="horizontal"
+              dataSource={notifications}
+              locale={{
+                emptyText: 'You have viewed all notifications.'
+              }}
+              renderItem={(item) => (
+                <NotificationItem>
+                  <ListItemMeta title={item.title} description={moment(item.date).fromNow()} />
+                  <StyledRightOutlined />
+                </NotificationItem>
+              )}
+            />
+            {notifications.length ? (
+              <ClearButton onClick={onAllNotificationsRead}>Clear notifications</ClearButton>
+            ) : null}
+          </Notification>
+        }
+      >
+        <IconButton count={notifications.length} offset={[-10, 10]}>
+          <IconFont />
+        </IconButton>
+      </StyledPopover>
       <AvatarWrapper ref={ref}>
         {photo ? (
           <Image onClick={avatarMenuHandler} src={photo} alt="" />

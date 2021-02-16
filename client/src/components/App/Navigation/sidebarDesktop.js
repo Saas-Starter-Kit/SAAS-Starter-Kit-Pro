@@ -112,7 +112,7 @@ const StyledLink = styled(Link)`
 `;
 
 const ItemWrapper = styled.div`
-  /*font-size: 13px;*/
+  font-size: 13px;
 `;
 
 const Footer = styled.div`

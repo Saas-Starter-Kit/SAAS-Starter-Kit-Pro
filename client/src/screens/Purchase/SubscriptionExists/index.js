@@ -1,8 +1,9 @@
 import React, { useContext, useEffect } from 'react';
 import styled from 'styled-components';
 import { breakpoints, colors } from '../../../styles/theme';
-import AuthContext from '../../../utils/authContext';
 import { navigate } from 'gatsby';
+
+import ConfirmButton from '../../../components/Purchase/purchaseButton';
 
 const Wrapper = styled.div`
   background-color: ${colors.coolGray50};
@@ -10,7 +11,7 @@ const Wrapper = styled.div`
   padding-top: 2rem;
 `;
 
-const Card = styled.div`
+const SubscriptionExistsCard = styled.div`
   text-align: center;
   background-color: white;
   padding: 1rem;
@@ -30,18 +31,6 @@ const Title = styled.h2`
   font-size: 1.5rem;
 `;
 
-const ConfirmButton = styled.button`
-  padding: 0.5rem 1rem;
-  margin-top: 1rem;
-  margin-bottom: 2rem;
-  font-size: 1rem;
-  font-weight: 500;
-  width: 7rem;
-  background-color: blue;
-  color: white;
-  cursor: pointer;
-`;
-
 const Text = styled.h2`
   padding-right: 2rem;
   padding-left: 2rem;
@@ -52,15 +41,9 @@ const Text = styled.h2`
 `;
 
 const SubscriptionExists = () => {
-  const { LogOut } = useContext(AuthContext);
-
-  useEffect(() => {
-    LogOut();
-  }, []);
-
   return (
     <Wrapper>
-      <Card>
+      <SubscriptionExistsCard>
         <Title>Our Records indicate you already have an active subscription with us</Title>
         <Text>
           If you would like to upgrade an existing plan, please visit your subscription settings
@@ -70,7 +53,7 @@ const SubscriptionExists = () => {
           Click Here
         </ConfirmButton>
         <Text>If you think you are getting this message in error, please contact support</Text>
-      </Card>
+      </SubscriptionExistsCard>
     </Wrapper>
   );
 };

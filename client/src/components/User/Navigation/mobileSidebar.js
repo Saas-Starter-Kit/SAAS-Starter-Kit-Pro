@@ -6,7 +6,6 @@ import MobileSidebarItem from './mobileSidebarItem';
 import Cross from '../svgs/cross';
 import Home from '../svgs/home';
 import Persons from '../svgs/persons';
-import Folder from '../svgs/folder';
 import LargeLogo from '../../../assets/images/logo/large_logo.svg';
 
 const Wrapper = styled.div`
@@ -37,10 +36,6 @@ const AbsoluteDiv = styled.div`
   right: 0;
   left: 0;
   background-color: ${colors.gray600};
-  opacity: 0.75;
-  transition-property: opacity;
-  transition-duration: 300ms;
-  transition-timing-function: linear;
 `;
 
 const showMobileSidebar = keyframes`
@@ -62,7 +57,7 @@ const Wrapper3 = styled.div`
   flex-direction: column;
   max-width: 20rem;
   width: 100%;
-  background-color: ${(props) => props.theme.primary};
+  background-color: black;
 `;
 
 const Sidebar = styled.div`
@@ -81,7 +76,7 @@ const ButtonWrapper = styled.div`
   padding: 0.25rem;
 `;
 
-const Button = styled.div`
+const CloseButton = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -118,7 +113,7 @@ const ShrinkDiv = styled.div`
   flex-shrink: 0;
 `;
 
-const SidebarMobile = ({ toggleMobileMenu, app_id }) => {
+const SidebarMobile = ({ toggleMobileMenu }) => {
   const ref = useRef();
   useOutsideClick(ref, () => toggleMobileMenu(false));
 
@@ -129,9 +124,9 @@ const SidebarMobile = ({ toggleMobileMenu, app_id }) => {
       </FixedDiv>
       <Wrapper3 ref={ref}>
         <ButtonWrapper>
-          <Button onClick={() => toggleMobileMenu(false)} aria-label="Close sidebar">
+          <CloseButton onClick={() => toggleMobileMenu(false)} aria-label="Close sidebar">
             <Cross />
-          </Button>
+          </CloseButton>
         </ButtonWrapper>
         <Sidebar>
           <LogoWrapper>
@@ -139,28 +134,16 @@ const SidebarMobile = ({ toggleMobileMenu, app_id }) => {
           </LogoWrapper>
           <Nav>
             <MobileSidebarItem
-              link={`/app/${app_id}/dashboard`}
+              link={`/user/teamapps`}
               toggleMenu={() => toggleMobileMenu(false)}
               svg={<Home />}
-              title="Dashboard"
+              title="Team Apps"
             />
             <MobileSidebarItem
-              link={`/app/${app_id}/readupdate`}
+              link={`/user/settings/account`}
               toggleMenu={() => toggleMobileMenu(false)}
               svg={<Persons />}
-              title="Read Update"
-            />
-            <MobileSidebarItem
-              link={`/app/${app_id}/create`}
-              toggleMenu={() => toggleMobileMenu(false)}
-              svg={<Folder />}
-              title="Create"
-            />
-            <MobileSidebarItem
-              link={`/app/${app_id}/permissions`}
-              toggleMenu={() => toggleMobileMenu(false)}
-              svg={<Folder />}
-              title="Permissions"
+              title="Settings"
             />
           </Nav>
         </Sidebar>

@@ -3,8 +3,6 @@ import axios from 'axios';
 import qs from 'qs';
 import styled from 'styled-components';
 
-import { colors } from '../../../styles/theme';
-
 import Button from '../../../components/Common/buttons/AltButton1';
 import Card from '../../../components/Common/Card';
 import FieldLabel from '../../../components/Common/forms/FieldLabel';

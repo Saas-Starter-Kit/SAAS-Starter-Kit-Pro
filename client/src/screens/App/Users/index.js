@@ -4,7 +4,10 @@ import { Formik } from 'formik';
 import { useStaticQuery, graphql } from 'gatsby';
 import * as Yup from 'yup';
 import { Spin, message } from 'antd';
+import { Table } from 'antd';
+import { UserOutlined } from '@ant-design/icons';
 
+import Can from '../../../services/casl';
 import axios from '../../../services/axios';
 import AuthContext from '../../../utils/authContext';
 import ApiContext from '../../../utils/apiContext';
@@ -13,16 +16,14 @@ import Button from '../../../components/Common/buttons/AltButton1';
 import Card from '../../../components/Common/Card';
 import FieldLabel from '../../../components/Common/forms/FieldLabel';
 import TextInput from '../../../components/Common/forms/TextInput';
+import InputWrapper from '../../../components/Common/forms/TextInputWrapper';
 import ErrorText from '../../../components/Common/errorText';
+
+const { Column } = Table;
 
 const ValidSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Email Required')
 });
-
-const InputWrapper = styled.div`
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-`;
 
 const ButtonWrapper = styled.div`
   padding-top: 1rem;
@@ -30,13 +31,29 @@ const ButtonWrapper = styled.div`
   text-align: left;
 `;
 
+const RemoveUserButton = styled.button`
+  cursor: pointer;
+  background-color: red;
+  color: white;
+  font-weight: 500;
+  padding: 0.2rem;
+  border-radius: 0.5rem;
+  border: none;
+`;
+
+const dummyData = [
+  { email: 'email1', username: 'username1', role: 'admin' },
+  { email: 'email2', username: 'username2', role: 'user' },
+  { email: 'email3', username: 'username3', role: 'admin' }
+];
+
 const Users = ({ app_id }) => {
   const { authState } = useContext(AuthContext);
   const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
   const { isLoading } = apiState;
   const data = useStaticQuery(staticQuery);
   const domainUrl = data.site.siteMetadata.siteUrl;
-  const [appUsers, setUsers] = useState();
+  const [appUsers, setUsers] = useState(dummyData);
 
   const handleSubmit = async (values) => {
     fetchInit();
@@ -113,20 +130,26 @@ const Users = ({ app_id }) => {
         <Spin tip="Loading..." spinning={isLoading}>
           <h2>Get App Users</h2>
           <Button onClick={getAppUsers}>Submit</Button>
-          <div>
-            {appUsers &&
-              appUsers.map((user) => (
-                <div>
-                  <div>Email: {user.email}</div>
-                  <div>Role: {user.role}</div>
-                  {console.log(user)}
-                  <div>Username: {user.username}</div>
-                  {user.role == 'user' && (
-                    <button onClick={() => removeUserRole(user.role_id)}>Remove</button>
+
+          <Table dataSource={appUsers}>
+            <Column title="" key="avatar" render={() => <UserOutlined />} />
+            <Column title="Email" dataIndex="email" key="email" />
+            <Column title="Username" dataIndex="username" key="username" />
+            <Column title="Role" dataIndex="role" key="role" />
+            <Column
+              title="Actions"
+              key="action"
+              render={(row) => (
+                <Can I="remove" a="user">
+                  {row.role == 'user' && (
+                    <RemoveUserButton onClick={() => removeUserRole(row.role_id)}>
+                      Remove
+                    </RemoveUserButton>
                   )}
-                </div>
-              ))}
-          </div>
+                </Can>
+              )}
+            />
+          </Table>
         </Spin>
       </Card>
     </div>

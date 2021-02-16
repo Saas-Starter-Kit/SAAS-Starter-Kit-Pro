@@ -123,3 +123,22 @@
 .header_link_settings_active {
   border-bottom: 3px blue solid;
 }
+
+/* Header Links for product Nav */
+
+.header_link_product {
+  padding: 0.5rem;
+  margin-right: 0.7rem;
+  font-weight: 900;
+  color: black;
+  font-size: 1.05rem;
+}
+
+.header_link_product:hover {
+  border-bottom: 3px blue solid;
+  color: black;
+}
+
+.header_link_product_active {
+  border-bottom: 3px blue solid;
+}

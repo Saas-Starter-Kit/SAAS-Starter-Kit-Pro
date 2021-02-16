@@ -5,7 +5,6 @@ import Layout from './index';
 const ProductLayout = ({ children }) => {
   return (
     <Layout>
-      <div>Product</div>
       <ProductNav />
       <div>{children}</div>
     </Layout>

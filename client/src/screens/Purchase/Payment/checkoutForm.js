@@ -11,6 +11,8 @@ import ApiContext from '../../../utils/apiContext';
 import axios from '../../../services/axios';
 import { colors, breakpoints } from '../../../styles/theme';
 
+import Button from '../../../components/Common/buttons/PrimaryButton';
+import Card from '../../../components/Common/Card';
 import LoadingOverlay from '../../../components/Common/loadingOverlay';
 import visa from '../../../assets/images/credit card icons/visa.png';
 import discover from '../../../assets/images/credit card icons/discover.png';
@@ -64,59 +66,46 @@ const ButtonWrapper = styled.div`
   text-align: left;
 `;
 
-const Button = styled.button`
-  padding: 0.5rem 1rem;
-  font-weight: 500;
-  width: 100%;
-  color: ${colors.white};
-  background-color: ${colors.indigo600};
-  border: 1px solid transparent;
-  border-radius: 0.375rem;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-  cursor: pointer;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  &:hover {
-    background-color: ${colors.indigo500};
-  }
-  &:focus {
-    box-shadow: 0 0 0 3px rgba(164, 202, 254, 0.45);
-    outline: 2px solid transparent;
-    outline-offset: 2px;
-  }
-  &:active {
-    background-color: ${colors.indigo600};
-  }
-  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow,
-    transform;
-  transition-duration: 150ms;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-`;
-
-const Card = styled.div`
-  background-color: ${colors.white};
-  padding: 2rem 1rem;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-  @media (min-width: ${breakpoints.small}) {
-    border-radius: 0.5rem;
-    padding-left: 2.5rem;
-    padding-right: 2.5rem;
-  }
-`;
-
 const StyledCardDisplayWrapper = styled.div`
-  border: 1px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 1rem;
+  padding: 1rem;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
   margin-bottom: 1rem;
-  cursor: pointer;
 `;
 
 const StyledCardDisplay = styled.div`
-  border: 1px solid black;
+  font-size: 1.075rem;
   border-radius: 1rem;
   padding: 0.5rem;
+  background-color: darkblue;
+  color: white;
+  font-weight: 500;
+  width: 14rem;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
   margin: 1rem;
+  cursor: pointer;
+`;
+
+const CardNumber = styled.div`
+  font-size: 1.3rem;
+  padding-left: 0.5rem;
+`;
+
+const Expires = styled.div`
+  padding-left: 0.5rem;
+`;
+
+const SecondCardRow = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const CardBrandImage = styled.img`
+  padding-right: 0.5rem;
 `;
 
 const CheckoutForm = () => {
@@ -222,13 +211,13 @@ const CheckoutForm = () => {
   const setIcons = (brand) => {
     switch (brand) {
       case 'visa':
-        return <img src={visa} alt="" />;
+        return <CardBrandImage src={visa} alt="" />;
       case 'amex':
-        return <img src={american_express} alt="" />;
+        return <CardBrandImage src={american_express} alt="" />;
       case 'discover':
-        return <img src={discover} alt="" />;
+        return <CardBrandImage src={discover} alt="" />;
       case 'mastercard':
-        return <img src={mastercard} alt="" />;
+        return <CardBrandImage src={mastercard} alt="" />;
       default:
         return <FaRegCreditCard />;
     }
@@ -287,9 +276,13 @@ const CheckoutForm = () => {
             payCards.map((item) => (
               <StyledCardDisplayWrapper key={item.id}>
                 <StyledCardDisplay onClick={() => setPaymentMethod(item.id)}>
-                  {setIcons(item.card.brand)}
-                  {item.card.brand} **** **** **** {item.card.last4} expires {item.card.exp_month}/
-                  {item.card.exp_year}
+                  <CardNumber>**** **** **** {item.card.last4}</CardNumber>
+                  <SecondCardRow>
+                    <Expires>
+                      {item.card.exp_month}/{item.card.exp_year.toString().slice(-2)}
+                    </Expires>
+                    {setIcons(item.card.brand)}
+                  </SecondCardRow>
                 </StyledCardDisplay>
               </StyledCardDisplayWrapper>
             ))

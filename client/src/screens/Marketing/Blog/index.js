@@ -4,10 +4,10 @@ import styled from 'styled-components';
 
 import { colors, breakpoints } from '../../../styles/theme';
 
-import RecentlyPublished from './recentlyPublished';
-import Featured from './featured';
-import TopArticles from './topArticles';
-import TagsSection from './tagsSection';
+import RecentlyPublished from '../../../components/Marketing/Blog/recentlyPublished';
+import Featured from '../../../components/Marketing/Blog/featured';
+import TopArticles from '../../../components/Marketing/Blog/topArticles';
+import TagsSection from '../../../components/Marketing/Blog/tagsSection';
 
 const Wrapper = styled.div`
   display: flex;

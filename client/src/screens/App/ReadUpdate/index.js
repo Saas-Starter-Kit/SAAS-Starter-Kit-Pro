@@ -50,7 +50,6 @@ const ReadUpdate = ({ app_id }) => {
           fetchFailure(err);
         });
       setTodos(result.data);
-      console.log(result.data);
       fetchSuccess();
     } else {
       //show dummy data

@@ -1,60 +1,21 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import styled from 'styled-components';
+import { Spin } from 'antd';
 
 import AuthContext from '../../../../utils/authContext';
 import ApiContext from '../../../../utils/apiContext';
 import { colors, breakpoints } from '../../../../styles/theme';
-import styled from 'styled-components';
-
-import { Spin } from 'antd';
 import axios from '../../../../services/axios';
+
+import Card from '../../../../components/Common/Card';
+import Button from '../../../../components/Common/buttons/PrimaryButton';
 
 const ButtonWrapper = styled.div`
   padding-top: 2rem;
   padding-bottom: 1rem;
   background-color: ${colors.white};
   text-align: left;
-`;
-
-const Card = styled.div`
-  background-color: ${colors.white};
-  width: 100%;
-  padding: 1rem;
-  border-radius: 0.75rem;
-  margin-bottom: 2rem;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-  @media (min-width: ${breakpoints.large}) {
-    width: 75%;
-  }
-`;
-
-const Button = styled.button`
-  margin-top: 1rem;
-  padding: 0.6rem 2rem 0.6rem 2rem;
-  font-weight: 500;
-  color: ${colors.white};
-  background-color: ${colors.indigo600};
-  border: 1px solid transparent;
-  border-radius: 0.375rem;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-  cursor: pointer;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  &:hover {
-    background-color: ${colors.indigo500};
-  }
-  &:focus {
-    box-shadow: 0 0 0 3px rgba(164, 202, 254, 0.45);
-    outline: 2px solid transparent;
-    outline-offset: 2px;
-  }
-  &:active {
-    background-color: ${colors.indigo600};
-  }
-  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow,
-    transform;
-  transition-duration: 150ms;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 `;
 
 const Header = styled.h2`
