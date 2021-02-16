@@ -1,7 +1,7 @@
 //Require the dev-dependencies
 import supertest from 'supertest';
 import server from '../app.js';
-import expect from 'expect';
+
 const request = supertest(server);
 
 describe('GET subscription info API /stripe/get-subscription', () => {
@@ -58,5 +58,3 @@ describe('POST create customer API /stripe/create-customer', () => {
     expect(res.status).toEqual(200);
   });
 });
-
-

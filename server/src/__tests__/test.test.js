@@ -1,10 +1,13 @@
 //Require the dev-dependencies
 import supertest from 'supertest';
 import server from '../app.js';
-import expect from 'expect';
 const request = supertest(server);
 
-it('returns the expected value', () => {
-  console.log();
-  expect(1).toEqual(1);
+describe('POST create App /post/app', () => {
+  it('Should create app', async () => {
+    let res = await request.post('/api/post/app').send({
+      name: 'app-test-node'
+    });
+    expect(res.status).toEqual(200);
+  });
 });

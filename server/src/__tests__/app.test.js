@@ -1,6 +1,5 @@
 //Require the dev-dependencies
 import supertest from 'supertest';
-import expect from 'expect';
 import server from '../app.js';
 const request = supertest(server);
 

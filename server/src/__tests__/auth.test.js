@@ -1,7 +1,7 @@
 //Require the dev-dependencies
 import supertest from 'supertest';
 import server from '../app.js';
-import expect from 'expect';
+
 const request = supertest(server);
 
 describe('PUT User Update API /put/username', () => {

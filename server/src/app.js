@@ -2,6 +2,8 @@ import express from 'express';
 
 import './Config/dotenv.js';
 import './Config/stripe.js';
+import './Config/sentry.js';
+import './Config/firebase.js';
 import './Database/mongo/db.js';
 import './Database/sql/db.js';
 
@@ -13,9 +15,6 @@ import limiter from './Middleware/rateLimiter.js';
 import { errorHandler } from './Middleware/errorHandler.js';
 import { unhandledRejectionHandler } from './Middleware/unhandledRejectionHandler.js';
 import { createPermissions } from './Middleware/permissions.js';
-
-//initialize sentry
-import './Config/sentry.js';
 
 import auth from './API/auth.js';
 import todoApi from './API/todos.js';

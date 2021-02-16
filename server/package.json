@@ -33,15 +33,14 @@
   "jest": {
     "testEnvironment": "node",
     "setupFiles": [
-      "<rootDir>/src/__tests__/fixtures/setUpEnvVars.js"
+      "<rootDir>/src/__tests__/fixtures/setUpEnvVars.js",
+      "<rootDir>/src/__tests__/fixtures/setUpMockLibraries.js"
     ]
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
     "@babel/preset-env": "^7.12.16",
     "babel-jest": "^26.6.3",
-    "chai": "*",
-    "chai-http": "^4.3.0",
     "jest": "^26.6.3",
     "supertest": "^6.1.3"
   }
