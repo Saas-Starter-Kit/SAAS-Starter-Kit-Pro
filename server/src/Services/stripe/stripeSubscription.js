@@ -48,7 +48,7 @@ export const GetSubscription = async (req, res) => {
 
   const subscription = await stripe.subscriptions.retrieve(subscription_id);
 
-  res.send(subscription);
+  res.status(200).send(subscription);
 };
 
 export const CreateSubscription = async (req, res) => {
@@ -86,7 +86,7 @@ export const CreateSubscription = async (req, res) => {
     let locals = { amount, start_date, trial_end };
     await sendEmail(email, template, locals);
 
-    res.send(subscription);
+    res.status(200).send(subscription);
   } else {
     //if subscription fails send error message
     res

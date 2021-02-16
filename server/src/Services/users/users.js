@@ -2,7 +2,7 @@ import { sendEmail } from '../../Config/email.js';
 import { getUser } from '../../Model/sql/auth/authentication.js';
 import { getAppUsersModel } from '../../Model/sql/users/users.js';
 
-export const GetAppUsers = async (req, res) => {
+export const GetAppUsers = async (req, res, next) => {
   let app_id = req.query.app_id;
 
   let result = await getAppUsersModel(app_id);

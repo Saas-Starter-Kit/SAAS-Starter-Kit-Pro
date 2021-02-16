@@ -1,5 +1,4 @@
 export const errorHandler = (err, req, res, next) => {
-  console.error(err);
 
-  res.status(500).send({ error });
+  res.status(500).send({ err: err.message });
 };

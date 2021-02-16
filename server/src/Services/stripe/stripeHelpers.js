@@ -7,7 +7,7 @@ export const CreateSetupIntent = async (req, res) => {
     customer: customer_id
   });
 
-  res.send(setupIntent);
+  res.status(200).send(setupIntent)
 };
 
 export const AttachPaymentMethod = async (req, res) => {
@@ -42,7 +42,7 @@ export const GetWallet = async (req, res) => {
     type: 'card'
   });
 
-  res.send(paymentMethods);
+  res.status(200).send(paymentMethods)
 };
 
 export const CreatePaymentIntent = async (req, res) => {

@@ -27,12 +27,10 @@ export const CreateCustomer = async (req, res) => {
   //save stripe id to our own db
   let result = await createCustomerModel(customer, email);
 
-  console.log(result);
-
   //send jwt token for user auth requests
   let token = setToken(userId);
 
-  res.send({ stripe: result, token });
+  res.status(200).send({ stripe: result, token });
 };
 
 export const UpdateCustomer = async (stripe_id, email) => {

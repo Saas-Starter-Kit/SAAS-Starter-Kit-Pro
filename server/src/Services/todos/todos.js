@@ -5,7 +5,7 @@ import {
   deleteTodoModel
 } from '../../Model/sql/todos/todos.js';
 
-export const getTodos = async (req, res) => {
+export const getTodos = async (req, res, next) => {
   let app_id = req.query.app_id;
 
   let result = await getTodosModel(app_id);
@@ -24,19 +24,21 @@ export const postTodo = async (req, res) => {
   res.status(200).send('Post Successful');
 };
 
-export const putTodo = async (req, res) => {
+export const putTodo = async (req, res, next) => {
   let title = req.body.title;
   let description = req.body.description;
   let author = req.body.author;
-  let todo_id = req.body.todo_id;
+  let todo_id = req.body.todo_id.todo_id ? req.body.todo_id.todo_id : req.body.todo_id._id;
+
+  console.log(todo_id);
 
   await putTodoModel(title, description, author, todo_id);
 
   res.status(200).send('Put Successful');
 };
 
-export const deleteTodo = async (req, res) => {
-  let todo_id = req.body.todo_id;
+export const deleteTodo = async (req, res, next) => {
+  let todo_id = req.query.todo_id;
 
   await deleteTodoModel(todo_id);
 

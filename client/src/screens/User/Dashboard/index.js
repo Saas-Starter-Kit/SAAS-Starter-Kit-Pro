@@ -111,6 +111,8 @@ const Dashboard = () => {
       fetchFailure(err);
     });
 
+    console.log(result);
+
     let adminApps = result.data.filter((item) => item.role == 'admin');
 
     setApps(adminApps);

@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node --experimental-json-modules ./app.js",
-    "test": "jest"
+    "start": "node --experimental-json-modules ./server.js",
+    "test": "jest  --runInBand"
   },
   "dependencies": {
     "@casl/ability": "^5.2.2",
@@ -29,8 +29,19 @@
     "stripe": "^8.129.0"
   },
   "type": "module",
+  "jest": {
+    "testEnvironment": "node",
+    "setupFiles": [
+      "<rootDir>/src/__tests__/fixtures/setUpEnvVars.js"
+    ]
+  },
   "devDependencies": {
+    "@babel/core": "^7.12.16",
+    "@babel/preset-env": "^7.12.16",
+    "babel-jest": "^26.6.3",
+    "chai": "*",
+    "chai-http": "^4.3.0",
     "jest": "^26.6.3",
-    "chai": "*"
+    "supertest": "^6.1.3"
   }
 }

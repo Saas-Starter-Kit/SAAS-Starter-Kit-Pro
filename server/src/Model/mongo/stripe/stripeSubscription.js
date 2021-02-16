@@ -1,9 +1,12 @@
-import { Users } from '../../../Database/mongo/db.js';
+import { Users } from '../../../Database/mongo/models.js';
 
-export const createSubscriptionModel = (email, subscriptionId) => {
-  Users.findOneAndUpdate({ email }, { is_paid_member: true, subscription_id: subscriptionId });
+export const createSubscriptionModel = async (email, subscription_id) => {
+  return await Users.findOneAndUpdate({ email },
+    { $set: { is_paid_member: true, subscription_id: subscription_id } }, { new: true }
+  );
 };
 
-export const cancelSubscriptionModel = (email) => {
-  Users.findOneAndUpdate({ email }, { is_paid_member: false, subscription_id: '' });
+export const cancelSubscriptionModel = async (email) => {
+  return await Users.findOneAndUpdate({ email },
+    { $set: { is_paid_member: false, subscription_id: '' } }, { new: true });
 };

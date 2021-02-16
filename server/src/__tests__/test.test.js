@@ -1,5 +1,3 @@
-describe('My Test Suite', () => {
-  it('My Test Case', () => {
-    expect(true).toEqual(true);
-  });
+it('returns the expected value', () => {
+  expect(1).toEqual(1);
 });
