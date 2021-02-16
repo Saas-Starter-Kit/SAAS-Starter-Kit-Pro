@@ -1,20 +1,7 @@
 import React from 'react';
 import moment from 'moment';
-import styled from 'styled-components';
-import { colors, breakpoints, fieldStyles } from '../../../../styles/theme';
-import { Link } from 'gatsby';
 
-const Card = styled.div`
-  background-color: ${colors.white};
-  width: 100%;
-  padding: 1rem;
-  border-radius: 0.75rem;
-  margin-bottom: 2rem;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-  @media (min-width: ${breakpoints.large}) {
-    width: 75%;
-  }
-`;
+import Card from '../../../../components/Common/Card';
 
 const PaymentInformationCard = ({ subscriptionState, price, planType }) => {
   return (

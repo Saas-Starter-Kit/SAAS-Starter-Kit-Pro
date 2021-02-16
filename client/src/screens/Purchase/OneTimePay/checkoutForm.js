@@ -9,6 +9,12 @@ import axios from '../../../services/axios';
 import ApiContext from '../../../utils/apiContext';
 import { colors, breakpoints, fieldStyles } from '../../../styles/theme';
 
+import Button from '../../../components/Common/buttons/AltButton1';
+import Card from '../../../components/Common/Card';
+import Label from '../../../components/Common/forms/FieldLabel';
+import Input from '../../../components/Common/forms/TextInput';
+import InputWrapper from '../../../components/Common/forms/TextInputWrapper';
+import ErrorText from '../../../components/Common/errorText';
 import LoadingOverlay from '../../../components/Common/loadingOverlay';
 
 //valid format for setting an email and username
@@ -31,36 +37,10 @@ const ElementWrapper = styled.div`
   margin-top: 3rem;
 `;
 
-const Card = styled.div`
+const StyledCard = styled(Card)`
   width: 34rem;
   height: max-content;
-  margin-top: 2rem;
-  background-color: ${colors.white};
-  padding: 2rem 1rem;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-  @media (min-width: ${breakpoints.small}) {
-    border-radius: 0.5rem;
-    padding-left: 2.5rem;
-    padding-right: 2.5rem;
-  }
-`;
-
-const Label = styled.label`
-  display: block;
-  font-weight: 500;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-  color: ${colors.gray700};
-  padding-top: 0.5rem;
-`;
-
-const InputWrapper = styled.div`
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-`;
-
-const Input = styled.input`
-  ${fieldStyles}
 `;
 
 const ButtonWrapper = styled.div`
@@ -69,38 +49,6 @@ const ButtonWrapper = styled.div`
   background-color: ${colors.white};
   text-align: left;
   margin-top: 1rem;
-`;
-
-const Button = styled.button`
-  padding: 0.5rem 1rem;
-  font-weight: 500;
-  width: 100%;
-  color: ${colors.white};
-  background-color: ${colors.indigo600};
-  border: 1px solid transparent;
-  border-radius: 0.375rem;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-  cursor: pointer;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  &:hover {
-    background-color: ${colors.indigo500};
-  }
-  &:focus {
-    box-shadow: 0 0 0 3px rgba(164, 202, 254, 0.45);
-    outline: 2px solid transparent;
-    outline-offset: 2px;
-  }
-  &:active {
-    background-color: ${colors.indigo600};
-  }
-`;
-
-const ErrorText = styled.div`
-  color: red;
-  font-size: 0.8em;
-  margin-bottom: 0.5em;
-  margin-top: -0.2rem;
 `;
 
 const CheckoutForm = () => {
@@ -171,7 +119,7 @@ const CheckoutForm = () => {
   return (
     <Wrapper>
       {isLoading && <LoadingOverlay />}
-      <Card>
+      <StyledCard>
         <h2>Purchasing Item</h2>
         <Formik
           validationSchema={ValidSchema}
@@ -215,7 +163,7 @@ const CheckoutForm = () => {
             </form>
           )}
         </Formik>
-      </Card>
+      </StyledCard>
     </Wrapper>
   );
 };

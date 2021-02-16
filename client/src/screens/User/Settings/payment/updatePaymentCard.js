@@ -5,22 +5,13 @@ import { colors, breakpoints, fieldStyles } from '../../../../styles/theme';
 import ModalCardDelete from './deleteCardConfirmModal';
 import { FaRegCreditCard } from 'react-icons/fa';
 
+import Card from '../../../../components/Common/Card';
+import DangerButton from '../../../../components/Common/buttons/DangerButton';
+
 import visa from '../../../../assets/images/credit card icons/visa.png';
 import discover from '../../../../assets/images/credit card icons/discover.png';
 import mastercard from '../../../../assets/images/credit card icons/mastercard.png';
 import american_express from '../../../../assets/images/credit card icons/american_express.png';
-
-const Card = styled.div`
-  background-color: ${colors.white};
-  width: 100%;
-  padding: 1rem;
-  border-radius: 0.75rem;
-  margin-bottom: 2rem;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-  @media (min-width: ${breakpoints.large}) {
-    width: 75%;
-  }
-`;
 
 const StyledCardDisplayWrapper = styled.div`
   display: flex;
@@ -47,27 +38,6 @@ const StyledCardDisplay = styled.div`
 const SectionTitle = styled.h2`
   font-size: 1.25rem;
   padding-top: 1.5rem;
-`;
-
-const Button = styled.button`
-  padding: 0.2rem 0.5rem 0.2rem 0.5rem;
-  border: 1px solid transparent;
-  font-weight: 500;
-  border-radius: 0.375rem;
-  color: ${colors.white};
-  cursor: pointer;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  height &:hover {
-    background-color: ${colors.indigo500};
-  }
-  &:active {
-    background-color: ${colors.indigo600};
-  }
-`;
-
-const DangerButton = styled(Button)`
-  background-color: ${colors.red500};
-  height: 3rem;
 `;
 
 const SuccessResponse = styled.div`

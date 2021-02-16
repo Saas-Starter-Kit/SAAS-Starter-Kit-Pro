@@ -27,7 +27,7 @@ const Wrapper = styled.div`
   background-color: black;
 `;
 
-const Button = styled.div`
+const MenuButton = styled.div`
   padding-top: 0.5rem;
   padding-left: 0.5rem;
   font-weight: 600;
@@ -178,9 +178,9 @@ const MobileHeader = ({ mobileMenuHandler }) => {
 
   return (
     <Wrapper id="primaryLayout">
-      <Button onClick={mobileMenuHandler} aria-label="Open sidebar">
+      <MenuButton onClick={mobileMenuHandler} aria-label="Open sidebar">
         <Burger />
-      </Button>
+      </MenuButton>
       <LogoWrapper>
         <Link to="/user/dashboard">
           <Logo src={SmallLogo} alt="Logo" />

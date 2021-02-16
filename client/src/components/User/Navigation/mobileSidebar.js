@@ -36,10 +36,6 @@ const AbsoluteDiv = styled.div`
   right: 0;
   left: 0;
   background-color: ${colors.gray600};
-  opacity: 0.75;
-  transition-property: opacity;
-  transition-duration: 300ms;
-  transition-timing-function: linear;
 `;
 
 const showMobileSidebar = keyframes`
@@ -80,7 +76,7 @@ const ButtonWrapper = styled.div`
   padding: 0.25rem;
 `;
 
-const Button = styled.div`
+const CloseButton = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -128,9 +124,9 @@ const SidebarMobile = ({ toggleMobileMenu }) => {
       </FixedDiv>
       <Wrapper3 ref={ref}>
         <ButtonWrapper>
-          <Button onClick={() => toggleMobileMenu(false)} aria-label="Close sidebar">
+          <CloseButton onClick={() => toggleMobileMenu(false)} aria-label="Close sidebar">
             <Cross />
-          </Button>
+          </CloseButton>
         </ButtonWrapper>
         <Sidebar>
           <LogoWrapper>

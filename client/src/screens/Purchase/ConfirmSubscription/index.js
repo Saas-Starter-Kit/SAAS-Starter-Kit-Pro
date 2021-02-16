@@ -1,8 +1,12 @@
 import React, { useContext, useEffect } from 'react';
 import styled from 'styled-components';
+import { navigate } from 'gatsby';
+
 import { breakpoints } from '../../../styles/theme';
 import AuthContext from '../../../utils/authContext';
-import { navigate } from 'gatsby';
+
+import Card from '../../../components/Common/Card';
+import ConfirmButton from '../../../components/Purchase/purchaseButton';
 
 const Wrapper = styled.div`
   margin-top: 2rem;
@@ -15,11 +19,6 @@ const Wrapper = styled.div`
   }
 `;
 
-const Card = styled.div`
-  background-color: white;
-  padding: 1rem;
-`;
-
 const Title = styled.h2`
   padding-right: 2rem;
   padding-left: 2rem;
@@ -28,18 +27,6 @@ const Title = styled.h2`
   text-align: center;
   font-weight: 400;
   font-size: 1.5rem;
-`;
-
-const ConfirmButton = styled.button`
-  padding: 0.5rem 1rem;
-  margin-top: 1rem;
-  margin-bottom: 2rem;
-  font-size: 1rem;
-  font-weight: 500;
-  width: 7rem;
-  background-color: blue;
-  color: white;
-  cursor: pointer;
 `;
 
 const Text = styled.div`

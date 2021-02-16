@@ -6,6 +6,7 @@ import { Link } from 'gatsby';
 import { colors, breakpoints } from '../../../styles/theme';
 import FlyoutMenu from './flyoutMenu';
 
+import Button from '../../Common/buttons/PrimaryButton';
 import MobileMenu from './mobileMenu';
 import SmallLogo from '../../../assets/images/logo/small_logo.svg';
 import MenuImageSrc from '../../../assets/images/icons/menu.svg';
@@ -58,10 +59,6 @@ const MenuButton = styled.div`
     color: ${colors.gray500};
     background-color: ${colors.gray100};
   }
-  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow,
-    transform;
-  transition-duration: 150ms;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 `;
 
 const MenuImage = styled.img`
@@ -117,39 +114,6 @@ const ButtonSpan = styled.span`
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
 `;
 
-const Button = styled.div`
-  cursor: pointer;
-  white-space: nowrap;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.5rem 1rem;
-  border-width: 1px;
-  border-color: transparent;
-  font-size: 1rem;
-  font-weight: 500;
-  border-radius: 0.375rem;
-  line-height: 1.5rem;
-  color: ${colors.white};
-  background-color: ${colors.indigo600};
-  &:hover {
-    background-color: ${colors.indigo500};
-  }
-  &:focus {
-    outline: 2px solid transparent;
-    outline-offset: 2px;
-    border-color: ${colors.indigo700};
-    box-shadow: 0 0 0 3px rgba(180, 198, 252, 0.45);
-  }
-  &:active {
-    background-color: ${colors.indigo700};
-  }
-  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow,
-    transform;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-`;
-
 const SolutionsButton = styled.div`
   color: ${colors.gray500};
   display: inline-flex;
@@ -175,10 +139,7 @@ const Chevron = styled.img`
   color: ${colors.gray500};
   height: 1.25rem;
   width: 1.25rem;
-  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow,
-    transform;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
+
   &:hover ${SolutionsButton} {
     color: ${colors.gray500};
   }

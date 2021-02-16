@@ -8,6 +8,7 @@ import AuthContext from '../../../utils/authContext';
 import ApiContext from '../../../utils/apiContext';
 import axios from '../../../services/axios';
 
+import ConfirmButton from '../../../components/Purchase/purchaseButton';
 import LoadingOverlay from '../../../components/Common/loadingOverlay';
 import Card from '../../../components/Common/Card';
 
@@ -34,18 +35,6 @@ const Title = styled.h2`
   text-align: center;
   font-weight: 400;
   font-size: 1.5rem;
-`;
-
-const ConfirmButton = styled.button`
-  padding: 0.5rem 1rem;
-  margin-top: 1rem;
-  margin-bottom: 2rem;
-  font-size: 1rem;
-  font-weight: 500;
-  width: 7rem;
-  background-color: blue;
-  color: white;
-  cursor: pointer;
 `;
 
 const ConfirmedInvite = () => {

@@ -12,6 +12,7 @@ import LoadingOverlay from '../../../components/Common/loadingOverlay';
 import DeleteAppModal from './DeleteAppModal';
 import Card from '../../../components/Common/Card';
 import Button from '../../../components/Common/buttons/PrimaryButton';
+import DangerButton from '../../../components/Common/buttons/DangerButton';
 import TextInput from '../../../components/Common/forms/TextInput';
 import FieldLabel from '../../../components/Common/forms/FieldLabel';
 import TextInputWrapper from '../../../components/Common/forms/TextInputWrapper';
@@ -46,7 +47,7 @@ const CreateAppWrapper = styled.div`
   width: 24rem;
 `;
 
-const DeleteButton = styled(Button)`
+const DeleteButton = styled(DangerButton)`
   background-color: red;
   color: white;
   width: 8rem;

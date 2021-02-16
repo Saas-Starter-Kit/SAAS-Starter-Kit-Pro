@@ -23,10 +23,6 @@ const Wrapper = styled.div`
     outline: 2px solid transparent;
     outline-offset: 2px;
   }
-  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow,
-    transform;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
 `;
 
 const SvgWrapper = styled.div`

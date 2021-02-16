@@ -16,6 +16,7 @@ import Button from '../../../components/Common/buttons/AltButton1';
 import Card from '../../../components/Common/Card';
 import FieldLabel from '../../../components/Common/forms/FieldLabel';
 import TextInput from '../../../components/Common/forms/TextInput';
+import InputWrapper from '../../../components/Common/forms/TextInputWrapper';
 import ErrorText from '../../../components/Common/errorText';
 
 const { Column } = Table;
@@ -23,11 +24,6 @@ const { Column } = Table;
 const ValidSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Email Required')
 });
-
-const InputWrapper = styled.div`
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-`;
 
 const ButtonWrapper = styled.div`
   padding-top: 1rem;

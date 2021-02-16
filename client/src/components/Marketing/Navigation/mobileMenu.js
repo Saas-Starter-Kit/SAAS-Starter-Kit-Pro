@@ -28,10 +28,7 @@ const Wrapper = styled.div`
   padding: 1.25rem 1.25rem 1.5rem;
   background-color: ${colors.white};
   border-color: ${colors.gray50};
-  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow,
-    transform;
-  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow,
-    transform;
+
   transform-origin: top right;
   @media (min-width: ${breakpoints.medium}) {
     display: none;
@@ -73,10 +70,6 @@ const CloseButton = styled.div`
     color: ${colors.gray500};
     background-color: ${colors.gray100};
   }
-  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow,
-    transform;
-  transition-duration: 150ms;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 `;
 
 const CloseImage = styled.img`
@@ -101,10 +94,6 @@ const Item = styled.div`
   &:hover {
     background-color: ${colors.gray50};
   }
-  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow,
-    transform;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
 `;
 
 const MenuImageWrapper = styled.div`
@@ -170,10 +159,6 @@ const Button = styled.div`
   &:active {
     background-color: ${colors.indigo700};
   }
-  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow,
-    transform;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
 `;
 
 const MobileMenu = ({ mobileMenuHandler }) => (
