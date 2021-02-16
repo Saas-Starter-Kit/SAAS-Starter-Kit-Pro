@@ -19,7 +19,7 @@ process.env.SENTRY_DSN = 'https://xxxxx@xxxxxx.ingest.sentry.io/xxxxx';
 process.env.DB_PASSWORD = 'password';
 process.env.DB_USER = 'postgres';
 process.env.DB_HOST = 'localhost';
-process.env.DB_NAME = 'db5';
+process.env.DB_NAME = 'testdb';
 process.env.DB_PORT = 5432;
 
 //Stripe Secret and price for one time payment
