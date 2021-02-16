@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node --experimental-json-modules ./server.js",
+    "start": "node ./server.js",
     "test": "jest  --runInBand"
   },
   "dependencies": {

@@ -2,16 +2,20 @@
 
 //Firebase env vars
 process.env.GOOGLE_CLOUD_PROJECT = 'example-project1';
-process.env.FirebaseDatabaseUrl = 'https://example-project1.firebaseio.com';
+process.env.FIREBASE_DATABASE_URL = 'https://example1.firebaseio.com';
+process.env.FIREBASE_PROJECT_ID = 'example1';
+process.env.FIREBASE_CLIENT_EMAIL = 'firebase-adminsdk-z30fn@example1.iam.gserviceaccount.com';
+process.env.FIREBASE_PRIVATE_KEY = '-----BEGIN PRIVATE KEY-----KEY\n-----END PRIVATE KEY-----\n';
 
 //user set auth secret
 process.env.AUTH_SECRET = 'Secret';
 
 //Sentry
-process.env.SENTRY_DSN = 'https://3de53d3b8bbc4078bfc589a522222320@o512746.ingest.sentry.io/xxxxx';
+process.env.SENTRY_DSN = 'https://xxxxx@xxxxxx.ingest.sentry.io/xxxxx';
 
 //Postgres credentials,
-//Make a seperate db for tests
+//Make a seperate db for tests,
+//These credentials are not mocked
 process.env.DB_PASSWORD = 'password';
 process.env.DB_USER = 'postgres';
 process.env.DB_HOST = 'localhost';
