@@ -15,6 +15,7 @@
     "dotenv": "^8.2.0",
     "email-templates": "^8.0.3",
     "express": "^4.17.1",
+    "express-rate-limit": "^5.2.5",
     "firebase-admin": "^9.4.2",
     "handlebars": "^4.7.6",
     "hbs": "^4.1.1",
