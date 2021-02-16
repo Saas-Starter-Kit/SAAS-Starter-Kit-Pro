@@ -3,7 +3,7 @@ import { useStaticQuery, graphql } from 'gatsby';
 import styled from 'styled-components';
 import { useLocation } from '@reach/router';
 import moment from 'moment';
-import ArticleCard from './articleCard';
+import ArticleCard from '../../../components/Marketing/Blog/articleCard';
 
 const Wrapper = styled.div`
   display: flex;

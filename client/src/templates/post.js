@@ -7,9 +7,9 @@ import { colors, breakpoints } from '../styles/theme';
 import Disqus from '../services/disqus';
 
 import SliceZone from './sliceZone';
-import { BaseCard } from '../screens/Marketing/Blog/cards';
-import RelatedArticles from '../screens/Marketing/Blog/relatedArticles';
-import TagsSection from '../screens/Marketing/Blog/tagsSection';
+import { BaseCard } from '../components/Marketing/Blog/cards';
+import RelatedArticles from '../components/Marketing/Blog/relatedArticles';
+import TagsSection from '../components/Marketing/Blog/tagsSection';
 
 const Wrapper = styled.div`
   background-color: ${colors.alabaster2};

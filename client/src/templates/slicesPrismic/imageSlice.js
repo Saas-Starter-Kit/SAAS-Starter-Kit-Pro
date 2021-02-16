@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 //import Img from 'gatsby-image';
-import { BaseCard } from '../../screens/Marketing/Blog/cards';
+import { BaseCard } from '../../components/Marketing/Blog/cards';
 
 const Image = ({ slice }) => {
   const desktop = slice.primary.image.thumbnails.desktop;
