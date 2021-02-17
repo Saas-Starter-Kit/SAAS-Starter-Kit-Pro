@@ -27,15 +27,16 @@ const createUser = async (email, username, firebaseId) => {
 };
 
 const clearAppDb = async () => {
-  let text = `DELETE FROM apps`;
-  let text2 = `DELETE FROM users`;
-  let text3 = `DELETE FROM roles`;
+  let text1 = `DELETE FROM roles`;
+  let text2 = `DELETE FROM todos`;
+  let text3 = `DELETE FROM apps`;
+  let text4 = `DELETE FROM users`;
 
-  await db.query(text);
+  await db.query(text1);
   await db.query(text2);
   await db.query(text3);
+  await db.query(text4);
 };
-
 afterEach(() => {
   clearAppDb();
 });
@@ -52,12 +53,11 @@ describe('POST create App /post/app', () => {
 });
 
 describe('GET App info /get/app', () => {
-  it('get app with user id', async (done) => {
+  it('get app with user id', async () => {
     let user = await createUser('example2@ex.com', 'username2', 'firebaseId2');
 
     let res = await request.get(`/api/get/app?user_id=${user.id}`);
     expect(res.status).toEqual(200);
-    done();
   });
 });
 

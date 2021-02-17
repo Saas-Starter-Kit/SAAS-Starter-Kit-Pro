@@ -6,6 +6,7 @@ const request = supertest(server);
 
 describe('GET subscription info API /stripe/get-subscription', () => {
   it('get subscription info', async () => {
+    //create user
     let res = await request.get('/stripe/get-subscription?email=k1424sap@gmail.com');
     expect(res.status).toEqual(200);
   });

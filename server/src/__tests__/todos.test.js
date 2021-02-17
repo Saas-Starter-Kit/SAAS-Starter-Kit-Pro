@@ -5,6 +5,8 @@ const request = supertest(server);
 
 describe('GET Todo info /get/todos', () => {
   it('get todo info with app id', async () => {
+    //create app
+
     let res = await request.get('/api/get/todos?app_id=6025e9b0bcfcf3098888eadc');
     expect(res.status).toEqual(200);
   });
@@ -12,6 +14,8 @@ describe('GET Todo info /get/todos', () => {
 
 describe('POST API Todo /post/todo', () => {
   it('create new todo', async () => {
+    //create app
+
     let res = await request.post('/api/post/todo').send({
       title: 'guribhai',
       description: 'working',
@@ -24,6 +28,8 @@ describe('POST API Todo /post/todo', () => {
 
 describe('PUT API Todo /put/todo', () => {
   it('update todo info', async () => {
+    //create todo
+
     let res = await request.put('/api/put/todo').send({
       title: 'guribhai',
       description: 'working',
@@ -36,6 +42,8 @@ describe('PUT API Todo /put/todo', () => {
 
 describe('DELETE Todo  /delete/todo', () => {
   it('delete todo with todo id', async () => {
+    //create todo
+
     let res = await request.delete('/api/delete/todo').send({
       todo_id: '602689c86dfb7c7ded72c200'
     });
