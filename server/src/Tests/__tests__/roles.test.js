@@ -78,11 +78,9 @@ describe('POST API Role /post/role', () => {
 
 describe('DELETE Role  /delete/role', () => {
   it('delete role with role id', async () => {
-    let app = await createApp('app3');
-    let user = await createUser('email3@example.com', 'username3', 'firebaseid3');
-    let role = await createRole(app.app_id, user.id, 'admin');
+    let role_id = 5;
 
-    let res = await request.delete(`/api/delete/role?role_id=${role.role_id}`);
+    let res = await request.delete(`/api/delete/role?role_id=${role_id}`);
 
     expect(res.status).toEqual(200);
   });

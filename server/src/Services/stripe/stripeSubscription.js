@@ -101,6 +101,11 @@ export const CancelSubscription = async (req, res) => {
 
   //check if user exists
   const user = await getUser(email);
+  console.log(user);
+
+  if (!user.subscription_id) {
+    res.status(500).send('No Subscription Found');
+  }
 
   let subscription_id = user.subscription_id;
 

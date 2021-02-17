@@ -36,32 +36,16 @@ jest.mock('stripe', () => {
   });
 });
 
-const createUser = async (email, username, stripeId) => {
-  let text = `INSERT INTO users (username, email, stripe_customer_id)
-              VALUES($1, $2, $3)
-              RETURNING id`;
-  let values = [username, email, stripeId];
+const createUser = async (email, username, stripeId, subId) => {
+  let text = `INSERT INTO users (email, username, stripe_customer_id, subscription_id)
+              VALUES($1, $2, $3, $4)
+              RETURNING email`;
+  let values = [email, username, stripeId, subId];
 
   let queryResult = await db.query(text, values);
 
   return queryResult.rows[0];
 };
-
-const clearAppDb = async () => {
-  let text1 = `DELETE FROM roles`;
-  let text2 = `DELETE FROM todos`;
-  let text3 = `DELETE FROM apps`;
-  let text4 = `DELETE FROM users`;
-
-  await db.query(text1);
-  await db.query(text2);
-  await db.query(text3);
-  await db.query(text4);
-};
-
-afterEach(() => {
-  clearAppDb();
-});
 
 describe('POST create customer API /stripe/create-customer', () => {
   it('create new customer and update stripe details', async () => {
@@ -75,9 +59,9 @@ describe('POST create customer API /stripe/create-customer', () => {
 
 describe('GET subscription info API /stripe/get-subscription', () => {
   it('get subscription info', async () => {
-    await createUser('example1@gmail.com', 'username1', 'cus244id');
+    await createUser('example133@gmail.com', 'username13', 'cus244id');
 
-    let res = await request.get('/stripe/get-subscription?email=example1@gmail.com');
+    let res = await request.get('/stripe/get-subscription?email=example133@gmail.com');
     expect(res.status).toEqual(200);
   });
 });
@@ -98,10 +82,10 @@ describe('POST create subscription API /stripe/create-subscription', () => {
 
 describe('POST cancel subscription API /stripe/cancel-subscription', () => {
   it('Cancel subscription', async () => {
-    await createUser('example3@gmail.com', 'username3', 'cus3234ID');
+    let user = await createUser('example51@gmail.com', 'username3', 'cus3234ID', 'subId35445');
 
     let res = await request.post('/stripe/cancel-subscription').send({
-      email: 'example3@gmail.com'
+      email: user.email
     });
     expect(res.status).toEqual(200);
   });
