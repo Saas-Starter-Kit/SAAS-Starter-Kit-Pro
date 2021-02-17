@@ -14,14 +14,18 @@ export const getTodos = async (req, res, next) => {
 };
 
 export const postTodo = async (req, res) => {
-  let title = req.body.title;
-  let description = req.body.description;
-  let author = req.body.author;
-  let app_id = req.body.app_id;
+  try {
+    let title = req.body.title;
+    let description = req.body.description;
+    let author = req.body.author;
+    let app_id = req.body.app_id;
 
-  await postTodoModel(title, description, author, app_id);
+    await postTodoModel(title, description, author, app_id);
 
-  res.status(200).send('Post Successful');
+    res.status(200).send('Post Successful');
+  } catch (e) {
+    console.log(e);
+  }
 };
 
 export const putTodo = async (req, res, next) => {
