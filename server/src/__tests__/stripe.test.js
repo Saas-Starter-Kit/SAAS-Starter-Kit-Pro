@@ -4,6 +4,28 @@ import server from '../app.js';
 
 const request = supertest(server);
 
+jest.mock('stripe', () => {
+  return jest.fn().mockImplementation(() => {
+    return {
+      setupIntents: {
+        create: () => {
+          return {};
+        }
+      }
+    };
+  });
+});
+
+describe('GET subscription info API /stripe/', () => {
+  it('get subscription info', async () => {
+    //create user
+    let res = await request.post('/stripe/wallet').send({
+      customer: { stripeCustomerKey: 'customerkey' }
+    });
+    expect(res.status).toEqual(200);
+  });
+});
+
 describe('GET subscription info API /stripe/get-subscription', () => {
   it('get subscription info', async () => {
     //create user

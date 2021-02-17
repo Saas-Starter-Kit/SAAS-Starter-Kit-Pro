@@ -1,6 +1,6 @@
 import db from '../../Database/sql/db.js';
 
-export const clearDb = async () => {
+const clearDb = async () => {
   let text = `DELETE FROM apps`;
   let text2 = `DELETE FROM users`;
   let text3 = `DELETE FROM roles`;

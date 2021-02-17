@@ -1,6 +1,6 @@
 import db from '../../Database/sql/db.js';
 
-export const createApp = async (name) => {
+const createApp = async (name) => {
   let text = `INSERT INTO apps(app_name)
               VALUES ($1)
               RETURNING app_id`;
@@ -11,7 +11,7 @@ export const createApp = async (name) => {
   return queryResult.rows[0];
 };
 
-export const createUser = async (email, username, firebaseId) => {
+const createUser = async (email, username, firebaseId) => {
   let text = `INSERT INTO users (username, email, firebase_user_id)
               VALUES($1, $2, $3)
               RETURNING id`;
