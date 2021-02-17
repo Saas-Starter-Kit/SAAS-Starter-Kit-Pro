@@ -37,6 +37,7 @@ const clearAppDb = async () => {
   await db.query(text3);
   await db.query(text4);
 };
+
 afterEach(() => {
   clearAppDb();
 });
