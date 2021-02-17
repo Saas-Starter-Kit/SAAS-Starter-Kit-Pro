@@ -3,11 +3,15 @@ import { getUser } from '../../Model/sql/auth/authentication.js';
 import { getAppUsersModel } from '../../Model/sql/users/users.js';
 
 export const GetAppUsers = async (req, res, next) => {
-  let app_id = req.query.app_id;
+  try {
+    let app_id = req.query.app_id;
 
-  let result = await getAppUsersModel(app_id);
+    let result = await getAppUsersModel(app_id);
 
-  res.status(200).send(result);
+    res.status(200).send(result);
+  } catch (e) {
+    console.log(e);
+  }
 };
 
 export const InviteUser = async (req, res) => {
