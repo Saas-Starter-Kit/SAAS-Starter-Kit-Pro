@@ -33,8 +33,8 @@
   "jest": {
     "testEnvironment": "node",
     "setupFiles": [
-      "<rootDir>/src/__tests__/fixtures/setUpEnvVars.js",
-      "<rootDir>/src/__tests__/fixtures/setUpMockLibraries.js"
+      "<rootDir>/src/Tests/fixtures/setUpEnvVars.js",
+      "<rootDir>/src/Tests/fixtures/setUpMockLibraries.js"
     ]
   },
   "devDependencies": {

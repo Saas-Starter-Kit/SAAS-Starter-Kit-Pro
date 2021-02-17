@@ -1,8 +1,8 @@
 //Require the dev-dependencies
 import supertest from 'supertest';
-import server from '../app.js';
+import server from '../../app.js';
 const request = supertest(server);
-import db from '../Database/sql/db.js';
+import db from '../../Database/sql/db.js';
 
 jest.mock('stripe', () => {
   return jest.fn().mockImplementation(() => {

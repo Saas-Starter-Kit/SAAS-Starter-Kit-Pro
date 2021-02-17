@@ -1,6 +1,6 @@
 import supertest from 'supertest';
-import server from '../app.js';
-import db from '../Database/sql/db.js';
+import server from '../../app.js';
+import db from '../../Database/sql/db.js';
 const request = supertest(server);
 
 const createApp = async (name) => {

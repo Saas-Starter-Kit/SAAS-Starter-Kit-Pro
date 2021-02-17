@@ -1,8 +1,8 @@
 //Require the dev-dependencies
 import supertest from 'supertest';
-import server from '../app.js';
+import server from '../../app.js';
 const request = supertest(server);
-import db from '../Database/sql/db.js';
+import db from '../../Database/sql/db.js';
 
 const createApp = async (name) => {
   let text = `INSERT INTO apps(app_name)
