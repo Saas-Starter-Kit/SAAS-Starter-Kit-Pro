@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Spin } from 'antd';
-import styled from 'styled-components';
 
 import { updateRole } from '../../../utils/caslAbility';
 import CaslContext from '../../../utils/caslContext';

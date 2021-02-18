@@ -1,4 +1,4 @@
-import { defineAbilityFor } from '../Config/permissions.js';
+import { buildAbilityFor } from '../Config/permissions.js';
 
 export const requirePermissions = (req, res, next) => {
   let userAction = req.body.userAction || req.query.userAction;
@@ -18,6 +18,6 @@ export const requirePermissions = (req, res, next) => {
 
 export const createPermissions = (req, _, next) => {
   let role = req.body.role || req.query.role || null;
-  req.ability = defineAbilityFor(role);
+  req.ability = buildAbilityFor(role);
   next();
 };
