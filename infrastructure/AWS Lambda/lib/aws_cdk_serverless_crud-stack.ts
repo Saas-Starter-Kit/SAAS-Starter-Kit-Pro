@@ -18,20 +18,20 @@ export class AwsCdkServerlessCrudStack extends cdk.Stack {
       removalPolicy: cdk.RemovalPolicy.DESTROY,
     })
 
-    //const createOne2 = new lambdaNode.NodejsFunction(this, "createItemFunction", {
-    //  entry: "Lambda/create/create.js",
-    //  handler: "handler",
-    //  //externalModules: ["aws-sdk", "uuid"],
-    //})
-
-    const createOne = new lambda.Function(this, "createItemFunction", {
-      code: lambda.Code.fromAsset("LambdaBuilt/create.zip"),
-      handler: "create.handler",
-      runtime: lambda.Runtime.NODEJS_10_X,
-      environment: {
-        TABLE_NAME: dynamoTable.tableName,
-      },
+    const createOne = new lambdaNode.NodejsFunction(this, "createItemFunction", {
+      entry: "Lambda/create/create.js",
+      handler: "handler",
+      //externalModules: ["aws-sdk", "uuid"],
     })
+
+    //const createOne = new lambda.Function(this, "createItemFunction", {
+    //  code: lambda.Code.fromAsset("LambdaBuilt/create.zip"),
+    //  handler: "create.handler",
+    //  runtime: lambda.Runtime.NODEJS_10_X,
+    //  environment: {
+    //    TABLE_NAME: dynamoTable.tableName,
+    //  },
+    //})
 
     const getOneLambda = new lambda.Function(this, "getOneItemFunction", {
       code: lambda.Code.fromAsset("LambdaBuilt/get-one.zip"),

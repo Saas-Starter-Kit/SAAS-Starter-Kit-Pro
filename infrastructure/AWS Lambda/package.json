@@ -11,22 +11,23 @@
     "cdk": "cdk"
   },
   "devDependencies": {
-    "@aws-cdk/assert": "^1.66.0",
-    "@types/jest": "^26.0.10",
-    "@types/node": "^10.17.27",
-    "@types/webpack-env": "^1.15.2",
-    "aws-cdk": "^1.66.0",
-    "jest": "^26.4.2",
-    "ts-jest": "^26.2.0",
-    "ts-node": "^8.1.0",
-    "typescript": "~3.9.7"
+    "@aws-cdk/assert": "^1.90.0",
+    "@types/jest": "^26.0.20",
+    "@types/node": "^14.14.28",
+    "@types/webpack-env": "^1.16.0",
+    "aws-cdk": "^1.90.0",
+    "jest": "^26.6.3",
+    "ts-jest": "^26.5.1",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.1.5"
   },
   "dependencies": {
-    "@aws-cdk/aws-apigateway": "^1.66.0",
-    "@aws-cdk/aws-dynamodb": "^1.66.0",
-    "@aws-cdk/aws-lambda": "^1.66.0",
-    "@aws-cdk/aws-lambda-nodejs": "^1.66.0",
-    "@aws-cdk/core": "1.66.0",
-    "source-map-support": "^0.5.16"
+    "@aws-cdk/aws-apigateway": "^1.90.0",
+    "@aws-cdk/aws-dynamodb": "^1.90.0",
+    "@aws-cdk/aws-lambda": "^1.90.0",
+    "@aws-cdk/aws-lambda-nodejs": "^1.90.0",
+    "@aws-cdk/core": "^1.90.0",
+    "aws-sdk": "^2.847.0",
+    "source-map-support": "^0.5.19"
   }
 }
