@@ -1,6 +1,6 @@
 {
   "name": "saas-starter-kit",
-  "description": "A saas starter and admin panel for React and Nodejs",
+  "description": "A saas starter and full stack admin panel for React and Nodejs",
   "author": "Moe Iqbal",
   "dependencies": {
     "@ant-design/icons": "^4.4.0",

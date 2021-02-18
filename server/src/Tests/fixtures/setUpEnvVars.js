@@ -1,5 +1,14 @@
 //Env variables for tests
 
+//Postgres credentials,
+//Make a seperate db for tests,
+//These credentials are not mocked
+process.env.DB_PASSWORD = 'password';
+process.env.DB_USER = 'postgres';
+process.env.DB_HOST = 'localhost';
+process.env.DB_NAME = 'testdb';
+process.env.DB_PORT = 5432;
+
 //Firebase env vars
 process.env.GOOGLE_CLOUD_PROJECT = 'example-project1';
 process.env.FIREBASE_DATABASE_URL = 'https://example1.firebaseio.com';
@@ -12,15 +21,6 @@ process.env.AUTH_SECRET = 'Secret';
 
 //Sentry
 process.env.SENTRY_DSN = 'https://xxxxx@xxxxxx.ingest.sentry.io/xxxxx';
-
-//Postgres credentials,
-//Make a seperate db for tests,
-//These credentials are not mocked
-process.env.DB_PASSWORD = 'password';
-process.env.DB_USER = 'postgres';
-process.env.DB_HOST = 'localhost';
-process.env.DB_NAME = 'testdb';
-process.env.DB_PORT = 5432;
 
 //Stripe Secret and price for one time payment
 process.env.STRIPE_SECRET = 'sk_test_xxxxxxxxxxxxx';

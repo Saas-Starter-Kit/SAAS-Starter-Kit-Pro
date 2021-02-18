@@ -1,5 +1,6 @@
 import express from 'express';
 
+//initialize libraries
 import './Config/dotenv.js';
 import './Config/stripe.js';
 import './Config/sentry.js';
