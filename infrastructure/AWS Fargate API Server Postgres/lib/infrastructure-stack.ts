@@ -25,7 +25,12 @@ export class InfrastructureStack extends cdk.Stack {
         Secrets Setup 
     */
 
-    const dbSecret = new secretsmanager.Secret(this, "Secret")
+    const dbSecret = new secretsmanager.Secret(this, "Secret", {
+      generateSecretString: {
+        excludeCharacters: "/@\" \\'",
+      },
+    })
+
     const role = new iam.Role(this, "FargateRole", {
       assumedBy: new iam.ServicePrincipal("ecs-tasks.amazonaws.com"),
       managedPolicies: [iam.ManagedPolicy.fromAwsManagedPolicyName("service-role/AmazonECSTaskExecutionRolePolicy")],
@@ -42,10 +47,10 @@ export class InfrastructureStack extends cdk.Stack {
     const dbPassword = dbSecret.secretValue
 
     const dbInstance = new rds.DatabaseInstance(this, "Instance", {
-      engine: rds.DatabaseInstanceEngine.postgres({version: rds.PostgresEngineVersion.VER_10}),
+      engine: rds.DatabaseInstanceEngine.postgres({version: rds.PostgresEngineVersion.VER_12}),
       vpc,
       vpcSubnets: {
-        subnetType: ec2.SubnetType.PRIVATE,
+        subnetType: ec2.SubnetType.ISOLATED,
       },
       instanceType: ec2.InstanceType.of(ec2.InstanceClass.T2, ec2.InstanceSize.MICRO),
       credentials: rds.Credentials.fromPassword(dbUsername, dbPassword),
@@ -53,6 +58,8 @@ export class InfrastructureStack extends cdk.Stack {
     })
 
     const dbHost = dbInstance.dbInstanceEndpointAddress
+
+    dbInstance.secret
 
     /* 
         Fargate Service
@@ -70,12 +77,13 @@ export class InfrastructureStack extends cdk.Stack {
 
     const GoogleProjectID = process.env.GOOGLE_CLOUD_PROJECT ? process.env.GOOGLE_CLOUD_PROJECT : "Gid"
     const AuthSecret = process.env.AUTH_SECRET ? process.env.AUTH_SECRET : "Secret"
+    //const AuthSecret = process.env?.AUTH_SECRET
 
     const loadBalancedFargateService = new ecs_patterns.ApplicationLoadBalancedFargateService(this, "MyFargateService", {
       cluster: cluster,
       cpu: 512,
       taskImageOptions: {
-        image: ecs.ContainerImage.fromAsset("../server"),
+        image: ecs.ContainerImage.fromAsset("../../server"),
         taskRole: role,
         secrets: {
           DB_PASSWORD: ecs.Secret.fromSecretsManager(dbSecret),
@@ -112,7 +120,7 @@ export class InfrastructureStack extends cdk.Stack {
     securityGroupBastion.addEgressRule(ec2.Peer.ipv4("0.0.0.0/0"), ec2.Port.tcp(80))
 
     //Bastion Host to access DB
-    const host = new ec2.BastionHostLinux(this, "BastionHost", {
+    new ec2.BastionHostLinux(this, "BastionHost", {
       vpc,
       securityGroup: securityGroupBastion,
     })

@@ -2,7 +2,7 @@
   "name": "aws_cdk_ec2_rds",
   "version": "0.1.0",
   "bin": {
-    "aws_cdk_ec2_rds": "bin/aws_cdk_ec2_rds.js"
+    "aws_cdk_ec2_rds": "bin/aws_cicd.js"
   },
   "scripts": {
     "build": "tsc",
@@ -21,15 +21,12 @@
     "typescript": "^4.1.5"
   },
   "dependencies": {
-    "@aws-cdk/aws-autoscaling": "^1.90.0",
     "@aws-cdk/aws-cloudfront": "^1.90.0",
     "@aws-cdk/aws-cloudfront-origins": "^1.90.0",
     "@aws-cdk/aws-codebuild": "^1.90.0",
     "@aws-cdk/aws-codedeploy": "^1.90.0",
     "@aws-cdk/aws-codepipeline": "^1.90.0",
     "@aws-cdk/aws-codepipeline-actions": "^1.90.0",
-    "@aws-cdk/aws-ec2": "^1.90.0",
-    "@aws-cdk/aws-elasticloadbalancingv2": "^1.90.0",
     "@aws-cdk/aws-iam": "^1.90.0",
     "@aws-cdk/aws-s3": "^1.90.0",
     "@aws-cdk/aws-secretsmanager": "^1.90.0",

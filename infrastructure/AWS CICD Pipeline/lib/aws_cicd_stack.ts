@@ -15,7 +15,7 @@ require("dotenv").config()
 //2. Set the Token AWS secrets manager console.
 //3. Get the arn
 
-export class InfraStack extends cdk.Stack {
+export class CICDStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props)
 
@@ -87,11 +87,6 @@ export class InfraStack extends cdk.Stack {
     //      commands: ["npm run build", "npm run export"],
     //    },
     //  },
-    //  artifacts: {
-    //    files: ["out/*"],
-    //    basedirectory: 'client'
-    //  },
-    //}
 
     const project = new codebuild.PipelineProject(this, "MyProject", {
       buildSpec: codebuild.BuildSpec.fromObject(buildSpecObj),
