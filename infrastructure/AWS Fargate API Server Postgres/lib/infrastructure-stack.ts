@@ -83,7 +83,7 @@ export class InfrastructureStack extends cdk.Stack {
       cluster: cluster,
       cpu: 512,
       taskImageOptions: {
-        image: ecs.ContainerImage.fromAsset("../../server"),
+        image: ecs.ContainerImage.fromAsset("../local-image"),
         taskRole: role,
         secrets: {
           DB_PASSWORD: ecs.Secret.fromSecretsManager(dbSecret),

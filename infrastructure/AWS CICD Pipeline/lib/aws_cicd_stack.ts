@@ -56,7 +56,7 @@ export class CICDStack extends cdk.Stack {
       phases: {
         install: {
           "runtime-versions": {
-            nodejs: 10,
+            nodejs: 14,
           },
         },
         pre_build: {

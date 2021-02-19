@@ -1,0 +1,7 @@
+version: "3.8"
+services:
+  web:
+    stdin_open: true
+    build: .
+    ports:
+      - 80:8080
