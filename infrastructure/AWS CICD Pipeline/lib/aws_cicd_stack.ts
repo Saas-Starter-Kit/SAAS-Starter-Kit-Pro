@@ -21,7 +21,7 @@ export class CICDStack extends cdk.Stack {
 
     //create vpc
     const vpc = new ec2.Vpc(this, "VPC", {
-      natGateways: 1,
+      natGateways: 0,
       maxAzs: 3,
     })
 
@@ -67,7 +67,7 @@ export class CICDStack extends cdk.Stack {
         },
       },
       artifacts: {
-        files: ["*/*"],
+        files: ["build/*"],
         basedirectory: "build",
       },
     }
