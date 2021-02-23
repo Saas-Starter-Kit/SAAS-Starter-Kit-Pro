@@ -55,7 +55,7 @@ export class CICDStack extends cdk.Stack {
     const project = new codebuild.PipelineProject(this, 'MyProject', {
       buildSpec: codebuild.BuildSpec.fromSourceFilename('client/buildspec.yml'),
       environmentVariables: {
-        key1: { value: 'Value1' }
+        REACT_APP_key1: { value: 'Value1' }
       }
     });
 
