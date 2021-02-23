@@ -66,7 +66,7 @@
     "start": "npm run develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
-    "test": "jest",
+    "test": "jest --forceExit",
     "cypress": "cypress open"
   }
 }
