@@ -7,7 +7,9 @@ phases:
   pre_build:
     commands:
       - echo Installing source NPM dependencies...
+      - cd client
       - npm install
+      - npm run test
   build:
     commands:
       - echo Build started on `date`
@@ -15,4 +17,4 @@ phases:
 artifacts:
   files:
     - '**/*'
-  base-directory: build
+  base-directory: client/build
