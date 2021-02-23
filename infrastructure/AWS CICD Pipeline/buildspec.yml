@@ -1,6 +1,7 @@
 version: 0.2
 
-# Optional alternate build setup
+# Included here for reference
+# Make sure this file exists in the source project root directory
 
 phases:
   pre_build:
@@ -13,5 +14,5 @@ phases:
       - npm run build
 artifacts:
   files:
-    - "**/*"
+    - '**/*'
   base-directory: build
