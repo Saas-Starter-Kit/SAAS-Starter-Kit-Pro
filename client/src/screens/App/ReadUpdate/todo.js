@@ -55,7 +55,8 @@ const Todo = ({
 }) => (
   <Wrapper>
     <h4>{todo.title}</h4>
-    <p>{todo.description}</p>
+    <div>{todo.description}</div>
+    <p>By {todo.author}</p>
     <ButtonsWrapper>
       <Button
         onClick={() => editTodo(todo)}

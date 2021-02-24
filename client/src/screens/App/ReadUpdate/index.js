@@ -29,7 +29,7 @@ const ReadUpdate = ({ app_id }) => {
   const { isLoading } = apiState;
   const { user } = authState;
 
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState(todosDummy);
 
   //Edit Todo state and form state
   const [isEditting, setEdit] = useState(false);
