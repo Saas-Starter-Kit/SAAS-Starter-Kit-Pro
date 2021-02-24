@@ -20,7 +20,7 @@ const SectionTitle = styled.h2`
 `;
 
 const ButtonWrapper = styled.div`
-  margin-top: 2rem;
+  margin-top: 1rem;
 `;
 
 const UpdatePasswordCard = () => {

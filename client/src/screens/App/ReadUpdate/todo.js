@@ -1,7 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
+
 import { colors } from '../../../styles/theme';
+
 import Button from '../../../components/Common/buttons/SecondaryButton';
+import CancelButton from '../../../components/Common/buttons/CancelButton';
+import DangerButton from '../../../components/Common/buttons/DangerAltButton';
 import Card from '../../../components/Common/Card';
 import FieldLabel from '../../../components/Common/forms/FieldLabel';
 import TextArea from '../../../components/Common/forms/TextArea';
@@ -14,11 +18,8 @@ const Wrapper = styled.div`
 
 const ButtonsWrapper = styled.div`
   display: flex;
+  justify-content: space-between;
   padding-bottom: 1rem;
-`;
-
-const DeleteButton = styled(Button)`
-  margin-left: 1rem;
 `;
 
 const TitleWrapper = styled.div`
@@ -34,10 +35,6 @@ const DescriptionWrapper = styled.div`
 
 const FormButtonsWrapper = styled.div`
   padding: 1rem 0;
-`;
-
-const CancelButton = styled(Button)`
-  margin-left: 1rem;
 `;
 
 const Todo = ({
@@ -68,7 +65,7 @@ const Todo = ({
         Edit
       </Button>
 
-      <DeleteButton
+      <DangerButton
         onClick={() => deleteTodo(todo)}
         backgroundColor={colors.red500}
         textColor={colors.white}
@@ -76,7 +73,7 @@ const Todo = ({
         activeBackgroundColor={colors.indigo600}
       >
         Delete
-      </DeleteButton>
+      </DangerButton>
     </ButtonsWrapper>
     {isEditting && todo.todo_id === editTodoID && (
       <form onSubmit={(event) => putTodo(event, todo)}>

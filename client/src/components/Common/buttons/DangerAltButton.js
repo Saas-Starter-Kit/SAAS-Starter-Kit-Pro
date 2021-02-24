@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { colors } from '../../../styles/theme';
 
-const DangerButton = styled.button`
+const DangerAltButton = styled.button`
   position: relative;
   color: ${colors.white};
   background-color: #c62828;
@@ -15,31 +15,9 @@ const DangerButton = styled.button`
   border: none;
   border-radius: 0.2rem;
   cursor: pointer;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
-  transition: box-shadow 0.3s ease-in-out;
 
   &:hover {
     opacity: 90%;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  }
-  &:after {
-    content: '';
-    background: #e57373;
-    display: block;
-    position: absolute;
-    padding-top: 300%;
-    padding-left: 350%;
-    margin-left: -20px !important;
-    margin-top: -120%;
-    opacity: 0;
-    transition: all 0.8s;
-  }
-
-  &:active:after {
-    padding: 0;
-    margin: 0;
-    opacity: 1;
-    transition: 0s;
   }
 
   &:focus {
@@ -49,4 +27,4 @@ const DangerButton = styled.button`
   }
 `;
 
-export default DangerButton;
+export default DangerAltButton;

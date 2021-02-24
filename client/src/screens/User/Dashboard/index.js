@@ -30,11 +30,6 @@ const ContentWrapper = styled.div`
   }
 `;
 
-const StyledButton = styled(Button)`
-  width: 8rem;
-  margin-top: 2rem;
-`;
-
 const StyledCard = styled(Card)`
   display: flex;
   flex-direction: column;
@@ -46,13 +41,6 @@ const StyledCard = styled(Card)`
 
 const CreateAppWrapper = styled.div`
   width: 24rem;
-`;
-
-const DeleteButton = styled(DangerButton)`
-  background-color: red;
-  color: white;
-  width: 8rem;
-  margin: 0;
 `;
 
 const RoleText = styled.div`
@@ -192,9 +180,9 @@ const Dashboard = () => {
                     <StyledLink>{app.app_name}</StyledLink>
                   </Link>
                   <RoleText>Role: admin</RoleText>
-                  <DeleteButton onClick={() => handleDeleteAppModal(app.app_id)}>
-                    Delete App
-                  </DeleteButton>
+                  <DangerButton onClick={() => handleDeleteAppModal(app.app_id)}>
+                    Delete
+                  </DangerButton>
                 </StyledCard>
               ))
             ) : (
@@ -210,7 +198,7 @@ const Dashboard = () => {
                 <FieldLabel htmlFor="name">Create:</FieldLabel>
                 <TextInput type="text" name="name" />
               </TextInputWrapper>
-              <StyledButton type="submit">Save</StyledButton>
+              <Button type="submit">Save</Button>
             </StyledCard>
           </form>
         </CreateAppWrapper>

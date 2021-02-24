@@ -75,8 +75,8 @@ const TeamApps = () => {
         <h1>Team Apps:</h1>
         {teamApps &&
           teamApps.map((app) => (
-            <Link to={`/app/${app.app_id}/dashboard`} state={{ app }}>
-              <StyledCard key={app.app_id}>
+            <Link key={app.app_id} to={`/app/${app.app_id}/dashboard`} state={{ app }}>
+              <StyledCard>
                 <StyledLink>{app.app_name}</StyledLink>
                 <RoleText>Role: user</RoleText>
               </StyledCard>

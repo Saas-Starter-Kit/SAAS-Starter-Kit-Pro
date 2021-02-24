@@ -24,7 +24,7 @@ const Form = styled.form`
 `;
 
 const ButtonWrapper = styled.div`
-  margin-top: 2rem;
+  margin-top: 1rem;
 `;
 
 const UpdateEmailCard = ({ handleEmailChange, isEmail, email, updateEmail }) => {
