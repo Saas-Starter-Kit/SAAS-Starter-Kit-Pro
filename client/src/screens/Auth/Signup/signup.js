@@ -95,6 +95,7 @@ const Signup = () => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.email}
+                  data-test-id="email"
                 />
               </InputWrapper>
               {errors.email && touched.email && <ErrorText>{errors.email}</ErrorText>}
@@ -107,6 +108,7 @@ const Signup = () => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.username}
+                  data-test-id="username"
                 />
               </InputWrapper>
               {errors.username && touched.username && <ErrorText>{errors.username}</ErrorText>}
@@ -119,6 +121,7 @@ const Signup = () => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.password}
+                  data-test-id="password"
                 />
               </InputWrapper>
               {errors.password && touched.password && <ErrorText>{errors.password}</ErrorText>}

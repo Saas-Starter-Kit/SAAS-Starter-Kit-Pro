@@ -3,7 +3,11 @@ describe('Accessibility tests', () => {
     cy.visit('/');
   });
 
-  it('Has no detectable accessibility violations on load', () => {
-    cy.visit('/app/1/create');
+  it('Signup Works correctly', () => {
+    cy.visit('/auth/signup');
+    cy.get('[data-test-id="email"]').type('email1234@example.com');
+    cy.get('[data-test-id="username"]').type('firstname lastname');
+    cy.get('[data-test-id="password"]').type('password1');
+    cy.get('button').click();
   });
 });
