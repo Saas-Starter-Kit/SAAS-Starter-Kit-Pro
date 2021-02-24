@@ -9,7 +9,7 @@ import axios from '../../../services/axios';
 import ApiContext from '../../../utils/apiContext';
 import { colors, breakpoints, fieldStyles } from '../../../styles/theme';
 
-import Button from '../../../components/Common/buttons/AltButton1';
+import Button from '../../../components/Common/buttons/SecondaryButton';
 import Card from '../../../components/Common/Card';
 import Label from '../../../components/Common/forms/FieldLabel';
 import Input from '../../../components/Common/forms/TextInput';

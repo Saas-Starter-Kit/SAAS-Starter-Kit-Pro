@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { colors } from '../../../styles/theme';
-import Button from '../../../components/Common/buttons/AltButton1';
+import Button from '../../../components/Common/buttons/SecondaryButton';
 import Card from '../../../components/Common/Card';
 import FieldLabel from '../../../components/Common/forms/FieldLabel';
 import TextArea from '../../../components/Common/forms/TextArea';

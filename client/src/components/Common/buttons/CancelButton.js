@@ -1,13 +1,23 @@
 import styled from 'styled-components';
+import { colors } from '../../../styles/theme';
 
 const CancelButton = styled.button`
-  background-color: white;
   color: black;
-  padding: 0.4rem 0.8rem;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-  margin-left: 1rem;
-  margin-bottom: 1rem;
+  background-color: ${colors.white};
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  font-weight: 600;
+  letter-spacing: 0.025rem;
+  margin: 1rem;
+  transition-duration: 0.4s;
+  overflow: hidden;
+  width: 8rem;
+  border: 1px solid black;
+  border-radius: 0.2rem;
   cursor: pointer;
+
+  &:hover {
+    opacity: 90%;
+  }
 `;
 
 export default CancelButton;

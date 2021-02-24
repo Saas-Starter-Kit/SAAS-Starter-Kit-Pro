@@ -1,30 +1,51 @@
 import styled from 'styled-components';
-import { ButtonBase } from './ButtonBase';
 import { colors, breakpoints } from '../../../styles/theme';
 
-const PrimaryButton = styled(ButtonBase)`
+const PrimaryButton = styled.button`
+  position: relative;
   color: ${colors.white};
-  background-color: ${colors.royalBlue};
-  border: 1px solid transparent;
-  font-size: 13px;
-  @media (min-width: ${breakpoints.small}) {
-    font-size: 14px;
+  background-color: #1565c0;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  font-weight: 600;
+  letter-spacing: 0.025rem;
+  margin: 1rem;
+  transition-duration: 0.4s;
+  overflow: hidden;
+  width: 8rem;
+  border: none;
+  border-radius: 0.2rem;
+  cursor: pointer;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+  transition: box-shadow 0.3s ease-in-out;
+
+  &:hover {
+    opacity: 90%;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
   }
-  min-width: 120px;
-  @media (min-width: ${breakpoints.large}) {
-    min-width: 156px;
+  &:after {
+    content: '';
+    background: #64b5f6;
+    display: block;
+    position: absolute;
+    padding-top: 300%;
+    padding-left: 350%;
+    margin-left: -20px !important;
+    margin-top: -120%;
+    opacity: 0;
+    transition: all 0.8s;
   }
-  &:hover,
-  &:active,
+
+  &:active:after {
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s;
+  }
+
   &:focus {
-    border: 1px solid transparent;
-    outline: none;
-    box-shadow: 0px 9px 20px -5px rgba(82, 104, 219, 0.57);
-    background-image: linear-gradient(
-      31deg,
-      rgba(215, 178, 233, 0.4) 0%,
-      rgba(83, 105, 220, 0.4) 100%
-    );
+    box-shadow: 0 0 0 3px lightblue;
+    outline-width: 1px;
+    outline-color: lightblue;
   }
 `;
 

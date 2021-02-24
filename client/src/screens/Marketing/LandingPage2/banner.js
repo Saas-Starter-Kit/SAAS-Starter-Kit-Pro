@@ -2,7 +2,7 @@ import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import { colors, breakpoints } from '../../../styles/theme';
 import PrimaryButton from '../../../components/Common/buttons/PrimaryButton';
-import { SecondaryButton } from '../../../components/Common/buttons/SecondaryButton';
+
 import Particles from './particles';
 import BannerObject1 from './images/bannerObjects/bannerObject1.png';
 import BannerObject2 from './images/bannerObjects/bannerObject2.png';
@@ -173,7 +173,6 @@ const Banner = () => (
           </Description>
           <ButtonWrapper>
             <PrimaryButton>FREE TRIAL</PrimaryButton>
-            <SecondaryButton>EXPLORE MORE</SecondaryButton>
           </ButtonWrapper>
         </Container3>
       </Container2>

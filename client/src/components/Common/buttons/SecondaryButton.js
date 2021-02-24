@@ -1,16 +1,30 @@
 import styled from 'styled-components';
-import { ButtonBase } from './ButtonBase';
 import { colors } from '../../../styles/theme';
 
-export const SecondaryButton = styled(ButtonBase)`
-  color: ${colors.royalBlue};
-  background-color: ${colors.white};
-  border: 1px solid ${colors.royalBlue20};
-  font-size: 14px;
-  min-width: 156px;
-  margin-left: 18px;
+const SecondaryButton = styled.button`
+  position: relative;
+  color: ${colors.white};
+  background-color: #1565c0;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  font-weight: 600;
+  letter-spacing: 0.025rem;
+  margin: 1rem;
+  transition-duration: 0.4s;
+  overflow: hidden;
+  width: 8rem;
+  border: none;
+  border-radius: 0.2rem;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 90%;
+  }
+
   &:focus {
-    outline: none;
-    box-shadow: none;
+    box-shadow: 0 0 0 3px lightblue;
+    outline-width: 1px;
+    outline-color: lightblue;
   }
 `;
+
+export default SecondaryButton;

@@ -12,6 +12,7 @@ import LoadingOverlay from '../../../components/Common/loadingOverlay';
 import DeleteAppModal from './DeleteAppModal';
 import Card from '../../../components/Common/Card';
 import Button from '../../../components/Common/buttons/PrimaryButton';
+
 import DangerButton from '../../../components/Common/buttons/DangerButton';
 import TextInput from '../../../components/Common/forms/TextInput';
 import FieldLabel from '../../../components/Common/forms/FieldLabel';
@@ -51,6 +52,7 @@ const DeleteButton = styled(DangerButton)`
   background-color: red;
   color: white;
   width: 8rem;
+  margin: 0;
 `;
 
 const RoleText = styled.div`
@@ -116,6 +118,7 @@ const Dashboard = () => {
     let adminApps = result.data.filter((item) => item.role == 'admin');
 
     setApps(adminApps);
+    fetchSuccess();
   };
 
   const postApp = async (event) => {

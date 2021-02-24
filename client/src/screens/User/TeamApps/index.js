@@ -6,7 +6,12 @@ import AuthContext from '../../../utils/authContext';
 import ApiContext from '../../../utils/apiContext';
 import axios from '../../../services/axios';
 import Card from '../../../components/Common/Card';
-import Button from '../../../components/Common/buttons/PrimaryButton';
+
+import { Button } from 'antd';
+import PrimaryButton from '../../../components/Common/buttons/PrimaryButton';
+import CancelButton from '../../../components/Common/buttons/CancelButton';
+import DangerButton from '../../../components/Common/buttons/DangerButton';
+import SecondaryButton from '../../../components/Common/buttons/SecondaryButton';
 
 const StyledCard = styled(Card)`
   display: flex;

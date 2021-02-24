@@ -12,7 +12,7 @@ import axios from '../../../services/axios';
 import AuthContext from '../../../utils/authContext';
 import ApiContext from '../../../utils/apiContext';
 
-import Button from '../../../components/Common/buttons/AltButton1';
+import Button from '../../../components/Common/buttons/SecondaryButton';
 import Card from '../../../components/Common/Card';
 import FieldLabel from '../../../components/Common/forms/FieldLabel';
 import TextInput from '../../../components/Common/forms/TextInput';
