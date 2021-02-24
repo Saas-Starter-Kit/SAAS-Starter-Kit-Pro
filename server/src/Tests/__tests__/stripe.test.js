@@ -36,6 +36,22 @@ jest.mock('stripe', () => {
   });
 });
 
+const clearAppDb = async () => {
+  let text1 = `DELETE FROM roles`;
+  let text2 = `DELETE FROM todos`;
+  let text3 = `DELETE FROM apps`;
+  let text4 = `DELETE FROM users`;
+
+  await db.query(text1);
+  await db.query(text2);
+  await db.query(text3);
+  await db.query(text4);
+};
+
+afterAll(() => {
+  clearAppDb();
+});
+
 const createUser = async (email, username, stripeId, subId) => {
   let text = `INSERT INTO users (email, username, stripe_customer_id, subscription_id)
               VALUES($1, $2, $3, $4)
