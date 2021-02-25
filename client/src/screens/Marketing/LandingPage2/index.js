@@ -8,6 +8,8 @@ import NavBar from './nav';
 import Banner from './banner';
 import Services from './services';
 import HowItWorks from './howItWorks';
+import Testimonials from './testimonials';
+import Footer from '../../../components/Marketing/Navigation/footer';
 
 const Background = styled.div`
   background-image: url(${BannerBackground});
@@ -24,6 +26,8 @@ const LandingPage2 = () => (
     <Banner />
     <Services />
     <HowItWorks />
+    <Testimonials />
+    <Footer />
   </Background>
 );
 
