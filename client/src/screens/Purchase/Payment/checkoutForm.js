@@ -39,6 +39,7 @@ const PaymentConfirm = styled.div`
   height: max-content;
   padding: 1rem;
   padding-bottom: 2rem;
+
   @media (max-width: ${breakpoints.small}) {
     flex-direction: column;
     margin: 1rem;
@@ -107,6 +108,17 @@ const SecondCardRow = styled.div`
 
 const CardBrandImage = styled.img`
   padding-right: 0.5rem;
+`;
+
+const PaymentConfirmRow = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 0.3rem 0 0.3rem 0;
+`;
+
+const StyledHr = styled.hr`
+  background-color: black;
+  height: 2px;
 `;
 
 const CheckoutForm = () => {
@@ -309,18 +321,29 @@ const CheckoutForm = () => {
       </PaymentInfo>
 
       <PaymentConfirm>
-        <Spin tip="Loading" spinning={isLoading}>
-          <h3>
-            {isUpgradeFlow ? <span>Changing to</span> : <span>Purchasing</span>} {planType} Plan
-          </h3>
-          <p>${price}/month </p>
-          <Button
-            disabled={!paymentMethod}
-            onClick={isUpgradeFlow ? updateSubscription : createSubscription}
-          >
-            Confirm
-          </Button>
-        </Spin>
+        <h3>
+          {isUpgradeFlow ? <span>Changing to</span> : <span>Purchasing</span>} {planType} Plan
+        </h3>
+
+        <PaymentConfirmRow>
+          <div>{planType}</div>
+          <div>
+            <strong>${price}/month</strong>
+          </div>
+        </PaymentConfirmRow>
+        <StyledHr />
+        <PaymentConfirmRow>
+          <div>
+            <strong>Subtotal</strong>
+          </div>
+          <div>${price}</div>
+        </PaymentConfirmRow>
+        <Button
+          disabled={!paymentMethod}
+          onClick={isUpgradeFlow ? updateSubscription : createSubscription}
+        >
+          Confirm
+        </Button>
       </PaymentConfirm>
     </Wrapper>
   );
