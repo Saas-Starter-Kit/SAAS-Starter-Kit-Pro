@@ -132,6 +132,7 @@ const Post = ({ data }) => {
           </BaseCard>
         </FirstColumn>
         <SecondColumn>
+          {console.log(related_articles)}
           <RelatedArticles articles={related_articles} />
           <TagsSection tags={tags} />
         </SecondColumn>
@@ -183,7 +184,7 @@ export const pageQuery = graphql`
         related_article1 {
           document {
             ... on PrismicPost {
-              id
+              uid
               data {
                 hero_image {
                   alt
@@ -201,7 +202,7 @@ export const pageQuery = graphql`
         related_article2 {
           document {
             ... on PrismicPost {
-              id
+              uid
               data {
                 hero_image {
                   alt

@@ -60,11 +60,11 @@ const Date = styled.div`
 const RelatedArticles = ({ articles }) => (
   <Wrapper>
     <StyledTitle>Related Articles</StyledTitle>
-    {articles.map(({ document: { data: { title: { text }, date }, id } }, index) => (
+    {articles.map(({ document: { data: { title: { text }, date }, uid } }, index) => (
       <Card
-        key={id.concat(index)}
+        key={uid}
         onClick={() => {
-          navigate(`/blog/${id}`);
+          navigate(`/blog/${uid}`);
         }}
       >
         <CardContent>
