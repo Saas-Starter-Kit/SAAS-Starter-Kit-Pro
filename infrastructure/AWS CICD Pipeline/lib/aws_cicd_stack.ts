@@ -10,8 +10,6 @@ import * as origins from '@aws-cdk/aws-cloudfront-origins';
 
 require('dotenv').config();
 
-
-
 export class CICDStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
@@ -44,29 +42,28 @@ export class CICDStack extends cdk.Stack {
     const project = new codebuild.PipelineProject(this, 'MyProject', {
       buildSpec: codebuild.BuildSpec.fromSourceFilename('client/buildspec.yml'),
       environmentVariables: {
-GATSBY_SERVER_URL: {value: process.env.GATSBY_SERVER_URL},
-GATSBY_FIREBASE_API_KEY: {value: process.env.GATSBY_FIREBASE_API_KEY},
-GATSBY_FIREBASE_AUTH_DOMAIN: {value: process.env.GATSBY_FIREBASE_AUTH_DOMAIN},
-GATSBY_PRISMIC_REPO_NAME: {value: process.env.GATSBY_PRISMIC_REPO_NAME},
-GATSBY_GOOGLE_ANALYTICS_ID: {value: process.env.GATSBY_GOOGLE_ANALYTICS_ID},
-GATSBY_SENTRY_DNS: {value:process.env.GATSBY_SENTRY_DNS},
-GATSBY_ALGOLIA_APP_ID: {value: process.env.GATSBY_ALGOLIA_APP_ID},
+        GATSBY_SERVER_URL: { value: process.env.GATSBY_SERVER_URL },
 
+        GATSBY_FIREBASE_API_KEY: { value: process.env.GATSBY_FIREBASE_API_KEY },
+        GATSBY_FIREBASE_AUTH_DOMAIN: { value: process.env.GATSBY_FIREBASE_AUTH_DOMAIN },
 
-GATSBY_ALGOLIA_INDEX_NAME
-GATSBY_ALGOLIA_SEARCH_KEY
-GATSBY_ALGOLIA_ADMIN_KEY
+        GATSBY_PRISMIC_REPO_NAME: { value: process.env.GATSBY_PRISMIC_REPO_NAME },
+        GATSBY_GOOGLE_ANALYTICS_ID: { value: process.env.GATSBY_GOOGLE_ANALYTICS_ID },
+        GATSBY_SENTRY_DNS: { value: process.env.GATSBY_SENTRY_DNS },
 
-GATSBY_DISQUS_SHORTNAME
+        GATSBY_ALGOLIA_APP_ID: { value: process.env.GATSBY_ALGOLIA_APP_ID },
+        GATSBY_ALGOLIA_INDEX_NAME: { value: process.env.GATSBY_ALGOLIA_INDEX_NAME },
+        GATSBY_ALGOLIA_SEARCH_KEY: { value: process.env.GATSBY_ALGOLIA_SEARCH_KEY },
+        GATSBY_ALGOLIA_ADMIN_KEY: { value: process.env.GATSBY_ALGOLIA_ADMIN_KEY },
+        GATSBY_DISQUS_SHORTNAME: { value: process.env.GATSBY_DISQUS_SHORTNAME },
 
-
-GATSBY_STRIPE_BASIC_PLAN
-GATSBY_STRIPE_BASIC_PLAN_PRICE
-GATSBY_STRIPE_BASIC_PLAN_TYPE
-GATSBY_STRIPE_PREMIUM_PLAN
-GATSBY_STRIPE_PREMIUM_PLAN_PRICE
-GATSBY_STRIPE_PREMIUM_PLAN_TYPE
-GATSBY_STRIPE_PUBLIC_KEY
+        GATSBY_STRIPE_BASIC_PLAN: { value: process.env.GATSBY_STRIPE_BASIC_PLAN },
+        GATSBY_STRIPE_BASIC_PLAN_PRICE: { value: process.env.GATSBY_STRIPE_BASIC_PLAN_PRICE },
+        GATSBY_STRIPE_BASIC_PLAN_TYPE: { value: process.env.GATSBY_STRIPE_BASIC_PLAN_TYPE },
+        GATSBY_STRIPE_PREMIUM_PLAN: { value: process.env.GATSBY_STRIPE_PREMIUM_PLAN },
+        GATSBY_STRIPE_PREMIUM_PLAN_PRICE: { value: process.env.GATSBY_STRIPE_PREMIUM_PLAN_PRICE },
+        GATSBY_STRIPE_PREMIUM_PLAN_TYPE: { value: process.env.GATSBY_STRIPE_PREMIUM_PLAN_TYPE },
+        GATSBY_STRIPE_PUBLIC_KEY: { value: process.env.GATSBY_STRIPE_PREMIUM_PLAN_TYPE }
       }
     });
 
