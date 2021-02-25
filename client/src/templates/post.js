@@ -10,6 +10,7 @@ import SliceZone from './sliceZone';
 import { BaseCard } from '../components/Marketing/Blog/cards';
 import RelatedArticles from '../components/Marketing/Blog/relatedArticles';
 import TagsSection from '../components/Marketing/Blog/tagsSection';
+import Layout from '../components/Marketing/Layout';
 
 const Wrapper = styled.div`
   background-color: ${colors.alabaster2};
@@ -114,30 +115,32 @@ const Post = ({ data }) => {
   const related_articles = [related_article1, related_article2];
 
   return (
-    <Wrapper>
-      <TitleWrapper>
-        <Title>{title}</Title>
-        <Subtitle>
-          By <Bold>{author}</Bold> ・ {date}
-        </Subtitle>
-      </TitleWrapper>
-      <ContentWrapper>
-        <FirstColumn>
-          <BaseCard>
-            <img src={hero_image.thumbnails.desktop.url} />
-            <CardContentWrapper>
-              <SliceZone body={body} />
-              <Disqus url={`${siteUrl + '/' + pageUid}`} identifier={pageUid} title={title} />
-            </CardContentWrapper>
-          </BaseCard>
-        </FirstColumn>
-        <SecondColumn>
-          {console.log(related_articles)}
-          <RelatedArticles articles={related_articles} />
-          <TagsSection tags={tags} />
-        </SecondColumn>
-      </ContentWrapper>
-    </Wrapper>
+    <Layout>
+      <Wrapper>
+        <TitleWrapper>
+          <Title>{title}</Title>
+          <Subtitle>
+            By <Bold>{author}</Bold> ・ {date}
+          </Subtitle>
+        </TitleWrapper>
+        <ContentWrapper>
+          <FirstColumn>
+            <BaseCard>
+              <img src={hero_image.thumbnails.desktop.url} />
+              <CardContentWrapper>
+                <SliceZone body={body} />
+                <Disqus url={`${siteUrl + '/' + pageUid}`} identifier={pageUid} title={title} />
+              </CardContentWrapper>
+            </BaseCard>
+          </FirstColumn>
+          <SecondColumn>
+            {console.log(related_articles)}
+            <RelatedArticles articles={related_articles} />
+            <TagsSection tags={tags} />
+          </SecondColumn>
+        </ContentWrapper>
+      </Wrapper>
+    </Layout>
   );
 };
 
