@@ -4,6 +4,7 @@ import { useLocation } from '@reach/router';
 
 import AuthContext from '../utils/authContext';
 import CaslContext from '../utils/caslContext';
+import ApiContext from '../utils/apiContext';
 import { getRole } from './helpers';
 
 import Layout from '../components/App/AppLayout';
@@ -22,11 +23,12 @@ const Routes = () => {
   const location = useLocation();
   const ability = useContext(CaslContext);
   const { authState } = useContext(AuthContext);
+  const { fetchFailure } = useContext(ApiContext);
   const splitPath = location.pathname.split('/');
   const app_id = splitPath[2];
 
   useEffect(() => {
-    if (authState.user) getRole(app_id, ability, authState);
+    if (authState.user) getRole(app_id, ability, authState, fetchFailure);
   }, [authState]);
 
   return (

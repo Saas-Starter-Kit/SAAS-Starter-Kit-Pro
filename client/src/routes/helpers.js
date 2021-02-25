@@ -21,7 +21,7 @@ export const PrivateRoute = ({ component: Component, location, app_id, ...rest }
   }
 };
 
-export const getRole = async (app_id, ability, authState) => {
+export const getRole = async (app_id, ability, authState, fetchFailure) => {
   let user_id = authState.user.id;
 
   let params = {
@@ -30,18 +30,15 @@ export const getRole = async (app_id, ability, authState) => {
   };
 
   const result = await axios.get(`/api/get/role`, { params }).catch((err) => {
-    //fetchFailure(err);
-    console.log(err);
+    fetchFailure(err);
   });
 
-  console.log(result);
   if (result.data.length == 0) {
     //navigate to 403 page
+    navigate('/403');
   }
 
   let role = result.data[0].role;
-
-  console.log(role);
 
   updateRole(ability, role);
 };
