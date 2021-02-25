@@ -53,6 +53,7 @@ const Blog = () => {
   const blogLinks = edges;
   const featuredArticle = edges.filter((edge) => edge.node.tags.includes('featured'));
   const topArticles = edges.filter((edge) => edge.node.tags.includes('top article'));
+  console.log(edges);
   const allTags = edges.map((edge) => edge.node.tags).flat();
   const uniqueTags = allTags.filter((value, index) => allTags.indexOf(value) === index);
 
