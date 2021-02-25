@@ -1,19 +1,25 @@
 import React from 'react';
 import { Link } from 'gatsby';
 import styled from 'styled-components';
-import SocialBarFooter from './socialBarFooter';
 import { colors } from '../../../styles/theme';
-//import WaveFooter from '../../../assets/images/illustrations/waveFooter.svg'
+import logo from '../../../assets/images/logo/small_logo.svg';
 
 const Wrapper = styled.div`
-  background-color: ${colors.blue800};
+  background-color: #292c2f;
+  font-size: 0.9rem;
+`;
+
+const TopBuffer = styled.div`
+  background-color: ${colors.blue900};
+  padding-top: 3rem;
 `;
 
 const Container = styled.div`
   display: grid;
-  grid-template-columns: auto auto;
+  grid-template-columns: auto auto auto;
   padding: 2rem;
-  background-color: ${colors.blue800};
+  padding-top: 4rem;
+  padding-bottom: 3rem;
 `;
 
 const Column = styled.div`
@@ -22,37 +28,47 @@ const Column = styled.div`
   align-items: center;
 `;
 
-const FooterLink = styled.p`
-  padding: 1rem;
-  font-weight: 800;
-  color: white;
+const FooterLink = styled.div`
+  font-weight: 500;
+  color: #bbb;
   cursor: pointer;
-`;
-
-const IMGContainer = styled.div`
-  background-color: ${(props) => (props.isHome ? colors.indigo600 : colors.white)};
+  &:hover {
+    color: white;
+  }
 `;
 
 const BottomFooter = styled.div`
   background-color: ${colors.blue900};
   color: white;
-  font-size: 1.25rem;
-  padding: 1rem;
+  padding-top: 0.8rem;
+  height: 3rem;
   text-align: center;
 `;
 
-const FooterColHeader = styled.p`
+const FooterColHeader = styled.div`
   font-weight: 800;
-  color: white;
-  text-decoration: underline;
+  color: #bbb;
+`;
+
+const ImageCol = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+`;
+
+const StyledImg = styled.img`
+  height: 5rem;
+  width: 5rem;
 `;
 
 const Footer = () => {
   return (
     <Wrapper>
-      <IMGContainer>{/*<img src={WaveFooter} alt="wave" />*/}</IMGContainer>
-      <SocialBarFooter />
+      <TopBuffer />
       <Container>
+        <ImageCol>
+          <StyledImg src={logo} alt="" />
+        </ImageCol>
         <Column>
           <FooterColHeader>Header 1</FooterColHeader>
           <Link href="/">
