@@ -63,7 +63,7 @@ export class CICDStack extends cdk.Stack {
         GATSBY_STRIPE_PREMIUM_PLAN: { value: process.env.GATSBY_STRIPE_PREMIUM_PLAN },
         GATSBY_STRIPE_PREMIUM_PLAN_PRICE: { value: process.env.GATSBY_STRIPE_PREMIUM_PLAN_PRICE },
         GATSBY_STRIPE_PREMIUM_PLAN_TYPE: { value: process.env.GATSBY_STRIPE_PREMIUM_PLAN_TYPE },
-        GATSBY_STRIPE_PUBLIC_KEY: { value: process.env.GATSBY_STRIPE_PREMIUM_PLAN_TYPE }
+        GATSBY_STRIPE_PUBLIC_KEY: { value: process.env.GATSBY_STRIPE_PUBLIC_KEY }
       }
     });
 

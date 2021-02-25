@@ -115,7 +115,7 @@ const Post = ({ data }) => {
   const related_articles = [related_article1, related_article2];
 
   return (
-    <Layout>
+    <Layout title={title}>
       <Wrapper>
         <TitleWrapper>
           <Title>{title}</Title>

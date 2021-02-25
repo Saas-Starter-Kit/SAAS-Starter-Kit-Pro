@@ -87,6 +87,7 @@ const StyledCardDisplay = styled.div`
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
   margin: 1rem;
   cursor: pointer;
+  border: ${(props) => (props.isActive ? '4px solid lightblue' : null)};
 `;
 
 const CardNumber = styled.div`
@@ -113,7 +114,6 @@ const CheckoutForm = () => {
   const { authState } = useContext(AuthContext);
   const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
   const { isLoading } = apiState;
-  const [loadingSpin, setLoadingSpin] = useState(false);
   const [plan, setPlan] = useState();
   const [price, setPrice] = useState();
   const [planType, setPlanType] = useState();
@@ -155,8 +155,7 @@ const CheckoutForm = () => {
   }, [authState]);
 
   const getWallet = async () => {
-    console.log(authState);
-    setLoadingSpin(true);
+    fetchInit();
     //get customers list of available payment methods
     let params = {
       customer: authState.user.stripeCustomerKey
@@ -169,7 +168,7 @@ const CheckoutForm = () => {
     const cards = wallet.data.data;
     setPayCards(cards);
     setIcons(cards);
-    setLoadingSpin(false);
+    fetchSuccess();
   };
 
   const addPaymentMethod = async (event) => {
@@ -268,14 +267,16 @@ const CheckoutForm = () => {
 
   return (
     <Wrapper>
-      {isLoading && <LoadingOverlay />}
       <PaymentInfo>
-        <Spin tip="Loading" spinning={loadingSpin}>
+        <Spin tip="Loading" spinning={isLoading}>
           <h2>Please Choose Payment Method</h2>
           {!payCards.length == 0 ? (
             payCards.map((item) => (
               <StyledCardDisplayWrapper key={item.id}>
-                <StyledCardDisplay onClick={() => setPaymentMethod(item.id)}>
+                <StyledCardDisplay
+                  isActive={item.id == paymentMethod}
+                  onClick={() => setPaymentMethod(item.id)}
+                >
                   <CardNumber>**** **** **** {item.card.last4}</CardNumber>
                   <SecondCardRow>
                     <Expires>
@@ -293,28 +294,33 @@ const CheckoutForm = () => {
           )}
         </Spin>
 
-        <Card>
-          <form onSubmit={addPaymentMethod}>
-            <CardElement />
-            <ButtonWrapper>
-              <Button type="submit" disabled={!stripe}>
-                Add Card
-              </Button>
-            </ButtonWrapper>
-          </form>
-        </Card>
+        <Spin tip="Loading" spinning={isLoading}>
+          <Card>
+            <form onSubmit={addPaymentMethod}>
+              <CardElement />
+              <ButtonWrapper>
+                <Button type="submit" disabled={!stripe}>
+                  Add Card
+                </Button>
+              </ButtonWrapper>
+            </form>
+          </Card>
+        </Spin>
       </PaymentInfo>
+
       <PaymentConfirm>
-        <h3>
-          {isUpgradeFlow ? <span>Changing to</span> : <span>Purchasing</span>} {planType} Plan
-        </h3>
-        <p>${price}/month </p>
-        <Button
-          disabled={!paymentMethod}
-          onClick={isUpgradeFlow ? updateSubscription : createSubscription}
-        >
-          Confirm
-        </Button>
+        <Spin tip="Loading" spinning={isLoading}>
+          <h3>
+            {isUpgradeFlow ? <span>Changing to</span> : <span>Purchasing</span>} {planType} Plan
+          </h3>
+          <p>${price}/month </p>
+          <Button
+            disabled={!paymentMethod}
+            onClick={isUpgradeFlow ? updateSubscription : createSubscription}
+          >
+            Confirm
+          </Button>
+        </Spin>
       </PaymentConfirm>
     </Wrapper>
   );
