@@ -1,5 +1,4 @@
 import * as cdk from '@aws-cdk/core';
-import * as ec2 from '@aws-cdk/aws-ec2';
 import * as codepipeline from '@aws-cdk/aws-codepipeline';
 import * as codepipeline_actions from '@aws-cdk/aws-codepipeline-actions';
 import * as codebuild from '@aws-cdk/aws-codebuild';
@@ -8,24 +7,14 @@ import * as iam from '@aws-cdk/aws-iam';
 import * as s3 from '@aws-cdk/aws-s3';
 import * as cloudfront from '@aws-cdk/aws-cloudfront';
 import * as origins from '@aws-cdk/aws-cloudfront-origins';
-import { DockerIgnoreStrategy } from '@aws-cdk/core';
-import { BuildEnvironmentVariableType } from '@aws-cdk/aws-codebuild';
 
 require('dotenv').config();
 
-//1. Generate Github Access token
-//2. Set the Token AWS secrets manager console.
-//3. Get the arn
+
 
 export class CICDStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
-
-    //create vpc
-    const vpc = new ec2.Vpc(this, 'VPC', {
-      natGateways: 0,
-      maxAzs: 3
-    });
 
     //Get Github access token
     const secretGithub = secretsmanager.Secret.fromSecretAttributes(this, 'ImportedSecret', {
@@ -55,7 +44,29 @@ export class CICDStack extends cdk.Stack {
     const project = new codebuild.PipelineProject(this, 'MyProject', {
       buildSpec: codebuild.BuildSpec.fromSourceFilename('client/buildspec.yml'),
       environmentVariables: {
-        REACT_APP_key1: { value: 'Value1' }
+GATSBY_SERVER_URL: {value: process.env.GATSBY_SERVER_URL},
+GATSBY_FIREBASE_API_KEY: {value: process.env.GATSBY_FIREBASE_API_KEY},
+GATSBY_FIREBASE_AUTH_DOMAIN: {value: process.env.GATSBY_FIREBASE_AUTH_DOMAIN},
+GATSBY_PRISMIC_REPO_NAME: {value: process.env.GATSBY_PRISMIC_REPO_NAME},
+GATSBY_GOOGLE_ANALYTICS_ID: {value: process.env.GATSBY_GOOGLE_ANALYTICS_ID},
+GATSBY_SENTRY_DNS: {value:process.env.GATSBY_SENTRY_DNS},
+GATSBY_ALGOLIA_APP_ID: {value: process.env.GATSBY_ALGOLIA_APP_ID},
+
+
+GATSBY_ALGOLIA_INDEX_NAME
+GATSBY_ALGOLIA_SEARCH_KEY
+GATSBY_ALGOLIA_ADMIN_KEY
+
+GATSBY_DISQUS_SHORTNAME
+
+
+GATSBY_STRIPE_BASIC_PLAN
+GATSBY_STRIPE_BASIC_PLAN_PRICE
+GATSBY_STRIPE_BASIC_PLAN_TYPE
+GATSBY_STRIPE_PREMIUM_PLAN
+GATSBY_STRIPE_PREMIUM_PLAN_PRICE
+GATSBY_STRIPE_PREMIUM_PLAN_TYPE
+GATSBY_STRIPE_PUBLIC_KEY
       }
     });
 
