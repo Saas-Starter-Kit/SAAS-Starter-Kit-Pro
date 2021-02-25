@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { connectHits } from 'react-instantsearch-dom';
 import { connectSearchBox } from 'react-instantsearch/connectors';
 
-import SearchList from './SearchList';
+//import SearchList from './SearchList';
 import { AiOutlineFileSearch } from 'react-icons/ai';
 import { colors } from '../../../styles/theme';
 
@@ -28,9 +28,7 @@ const Hits = connectHits(({ hits }) => (
     {hits && hits.length > 0 ? (
       <React.Fragment>
         {hits.map((hit) => (
-          <SearchListContainer>
-            <SearchList key={hit.id} hit={hit} />
-          </SearchListContainer>
+          <SearchListContainer>{/*<SearchList key={hit.id} hit={hit} />*/}</SearchListContainer>
         ))}
       </React.Fragment>
     ) : (
