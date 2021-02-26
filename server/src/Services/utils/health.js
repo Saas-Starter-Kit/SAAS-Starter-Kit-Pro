@@ -13,6 +13,5 @@ export const privateRoute = (req, res) => {
 */
 
 export const _healthCheck = (req, res) => {
-  let var3 = process.env.TEST_VAR;
-  res.status(200).send('All ok' + var3);
+  res.status(200).send('All ok');
 };
