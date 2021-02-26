@@ -18,7 +18,7 @@
     "formik": "^2.2.5",
     "gatsby": "^2.32.8",
     "gatsby-image": "^2.11.0",
-    "gatsby-plugin-algolia": "^0.16.3",
+    "gatsby-plugin-algolia": "^0.16.2",
     "gatsby-plugin-create-client-paths": "^2.10.0",
     "gatsby-plugin-disqus": "^1.2.2",
     "gatsby-plugin-google-gtag": "^2.8.0",
