@@ -114,6 +114,32 @@ const StyledListItem = styled(ListItem)`
   margin-top: 1rem;
 `;
 
+const StyledLink = styled(Link)`
+  display: block;
+  width: 100%;
+  text-align: center;
+  width: 100%;
+  background-color: ${colors.white};
+  color: ${colors.indigo600};
+  border-radius: 0.5rem;
+  border-width: 1px;
+  border-color: transparent;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 500;
+
+  &:hover {
+    color: white;
+    background-color: ${colors.indigo500};
+  }
+  &:focus {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 3px rgba(118, 169, 250, 0.45);
+  }
+`;
+
 const BasicCard = ({ title, price, left }) => {
   const id = 'tier-' + title.toLowerCase();
   return (
@@ -138,9 +164,9 @@ const BasicCard = ({ title, price, left }) => {
             <StyledListItem text="Vel ipsa esse repudiandae" />
           </ul>
           <LinkWrapper>
-            <Link href="/auth/signup" aria-describedby={id}>
+            <StyledLink href="/auth/signup" aria-describedby={id}>
               Start your trial
-            </Link>
+            </StyledLink>
           </LinkWrapper>
         </CardBody>
       </InnerWrapper>

@@ -1,10 +1,10 @@
-import React from "react"
-import styled from "styled-components"
-import { colors, breakpoints } from "../../../styles/theme"
-import ChartBar from '../../../assets/images/icons/chart-bar.svg'
+import React from 'react';
+import styled from 'styled-components';
+import { colors, breakpoints } from '../../../styles/theme';
+import ChartBar from '../../../assets/images/icons/chart-bar.svg';
 
 const Container = styled.div`
-  background-color: ${props => props.theme.backgroundLanding};
+  background-color: ${(props) => props.theme.backgroundLanding};
   margin-left: auto;
   margin-right: auto;
   padding: 4rem 1rem 4rem 1rem;
@@ -16,7 +16,7 @@ const Container = styled.div`
     padding: 6rem 2rem 6rem 2rem;
     max-width: 1280px;
   }
-`
+`;
 
 const LargeHeader = styled.h4`
   font-size: 1.5rem;
@@ -27,7 +27,7 @@ const LargeHeader = styled.h4`
     font-size: 1.875rem;
     text-align: left;
   }
-`
+`;
 
 const LargeParagraph = styled.p`
   margin-top: 0.75rem;
@@ -37,31 +37,31 @@ const LargeParagraph = styled.p`
   @media (min-width: ${breakpoints.small}) {
     text-align: left;
   }
-`
+`;
 
 const TextWrapper = styled.div`
   margin-left: 1rem;
-`
+`;
 
 const SmallHeader = styled.h5`
   font-size: 1.125rem;
   line-height: 1.5rem;
   font-weight: 500;
   color: ${colors.gray900};
-`
+`;
 
 const SmallParagraph = styled.p`
   margin-top: 0.5rem;
   font-size: 1rem;
   line-height: 1.5rem;
   color: ${colors.gray500};
-`
+`;
 
 const MenuImg = styled.img`
   height: 2rem;
   width: 2rem;
   color: ${colors.white};
-`
+`;
 
 const FeatureImage = styled.img`
   width: 100%;
@@ -70,7 +70,7 @@ const FeatureImage = styled.img`
   }
   margin-left: auto;
   margin-right: auto;
-`
+`;
 
 const FeatureWrapper1 = styled.div`
   margin-top: 3rem;
@@ -82,7 +82,7 @@ const FeatureWrapper1 = styled.div`
     gap: 2rem;
     align-items: center;
   }
-`
+`;
 
 const FeatureWrapper2 = styled.div`
   margin-top: 3rem;
@@ -98,29 +98,30 @@ const FeatureWrapper2 = styled.div`
     align-items: center;
     margin-top: 6rem;
   }
-`
+`;
 
 const FeatureWrapper2b = styled.div`
   @media (min-width: ${breakpoints.large}) {
     grid-column-start: 2;
   }
-`
+`;
 
 const List = styled.ul`
   margin-top: 2.5rem;
   margin-left: -1rem;
+  list-style-type: none;
   @media (min-width: ${breakpoints.small}) {
     margin-left: 0;
   }
-`
+`;
 
 const ListItem = styled.li`
   margin-top: 2.5rem;
-`
+`;
 
 const Item = styled.div`
   display: flex;
-`
+`;
 
 const ImageWrapper = styled.div`
   display: flex;
@@ -132,7 +133,7 @@ const ImageWrapper = styled.div`
   border-radius: 0.375rem;
   color: ${colors.white};
   background-color: ${colors.indigo500};
-`
+`;
 
 const LandingFeatures = () => (
   <Container>
@@ -140,10 +141,9 @@ const LandingFeatures = () => (
       <div>
         <LargeHeader>Awesome Feature about App 1</LargeHeader>
         <LargeParagraph>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur
-          minima sequi recusandae, porro maiores officia assumenda aliquam
-          laborum ab aliquid veritatis impedit odit adipisci optio iste
-          blanditiis facere. Totam, velit.
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur minima sequi recusandae,
+          porro maiores officia assumenda aliquam laborum ab aliquid veritatis impedit odit adipisci
+          optio iste blanditiis facere. Totam, velit.
         </LargeParagraph>
         <List>
           <ListItem>
@@ -154,9 +154,8 @@ const LandingFeatures = () => (
               <TextWrapper>
                 <SmallHeader>Sub Feature 1</SmallHeader>
                 <SmallParagraph>
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Maiores impedit perferendis suscipit eaque, iste dolor
-                  cupiditate blanditiis ratione.
+                  Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit
+                  perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.
                 </SmallParagraph>
               </TextWrapper>
             </Item>
@@ -169,9 +168,8 @@ const LandingFeatures = () => (
               <TextWrapper>
                 <SmallHeader>Sub Feature 2</SmallHeader>
                 <SmallParagraph>
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Maiores impedit perferendis suscipit eaque, iste dolor
-                  cupiditate blanditiis ratione.
+                  Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit
+                  perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.
                 </SmallParagraph>
               </TextWrapper>
             </Item>
@@ -188,9 +186,8 @@ const LandingFeatures = () => (
       <FeatureWrapper2b>
         <LargeHeader>Awesome Feature about App 2</LargeHeader>
         <LargeParagraph>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit ex
-          obcaecati natus eligendi delectus, cum deleniti sunt in labore nihil
-          quod quibusdam expedita nemo.
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit ex obcaecati natus
+          eligendi delectus, cum deleniti sunt in labore nihil quod quibusdam expedita nemo.
         </LargeParagraph>
         <List>
           <ListItem>
@@ -201,9 +198,8 @@ const LandingFeatures = () => (
               <TextWrapper>
                 <SmallHeader>Sub Feature 1</SmallHeader>
                 <SmallParagraph>
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Maiores impedit perferendis suscipit eaque, iste dolor
-                  cupiditate blanditiis ratione.
+                  Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit
+                  perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.
                 </SmallParagraph>
               </TextWrapper>
             </Item>
@@ -216,9 +212,8 @@ const LandingFeatures = () => (
               <TextWrapper>
                 <SmallHeader>Sub Feature 2</SmallHeader>
                 <SmallParagraph>
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Maiores impedit perferendis suscipit eaque, iste dolor
-                  cupiditate blanditiis ratione.
+                  Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit
+                  perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.
                 </SmallParagraph>
               </TextWrapper>
             </Item>
@@ -232,6 +227,6 @@ const LandingFeatures = () => (
       />
     </FeatureWrapper2>
   </Container>
-)
+);
 
-export default LandingFeatures
+export default LandingFeatures;

@@ -143,6 +143,31 @@ const LinkWrapper = styled.div`
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 `;
 
+const StyledLink = styled(Link)`
+  display: block;
+  width: 100%;
+  text-align: center;
+  background-color: ${colors.indigo600};
+  padding: 1rem 1.5rem;
+  font-weight: 500;
+  color: ${colors.white};
+  border-radius: 0.5rem;
+  border-width: 1px;
+  border-width: 1px;
+  font-size: 1.25rem;
+  line-height: 1.5rem;
+  &:hover {
+    color: white;
+    background-color: ${colors.indigo650};
+  }
+  &:focus {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    border-color: ${colors.indigo700};
+    box-shadow: 0 0 0 3px rgba(180, 198, 252, 0.45);
+  }
+`;
+
 const GrowthCard = () => (
   <Wrapper>
     <Border />
@@ -172,9 +197,9 @@ const GrowthCard = () => (
         <StyledListItem text="Nam ut ipsa nesciunt culpa modi dolor" />
       </ul>
       <LinkWrapper>
-        <Link href="/auth/signup" aria-describedby="tier-growth">
+        <StyledLink href="/auth/signup" aria-describedby="tier-growth">
           Start your trial
-        </Link>
+        </StyledLink>
       </LinkWrapper>
     </CardBody>
   </Wrapper>

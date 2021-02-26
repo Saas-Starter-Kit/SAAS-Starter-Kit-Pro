@@ -1,15 +1,16 @@
-import React from "react"
-import styled from "styled-components"
-import { colors, breakpoints } from "../../../styles/theme"
+import React from 'react';
+import styled from 'styled-components';
+import { colors, breakpoints } from '../../../styles/theme';
+import { FcAdvertising, FcAutomatic, FcBusinessContact } from 'react-icons/fc';
 
 const Wrapper = styled.div`
-  background-color: ${props => props.theme.backgroundLanding};
+  background-color: ${(props) => props.theme.backgroundLanding};
   padding: 6rem 2rem 2rem 2rem;
-`
+`;
 
 const Heading = styled.div`
   padding-bottom: 3rem;
-`
+`;
 
 const LargeHeader = styled.h3`
   text-align: center;
@@ -22,7 +23,7 @@ const LargeHeader = styled.h3`
     font-size: 2.25rem;
     line-height: 2.5rem;
   }
-`
+`;
 
 const SectionDescription = styled.p`
   margin-top: 1rem;
@@ -32,7 +33,7 @@ const SectionDescription = styled.p`
   margin-right: auto;
   font-size: 1.25rem;
   line-height: 1.75rem;
-`
+`;
 
 const ContentWrapper = styled.div`
   max-width: 36rem;
@@ -53,86 +54,105 @@ const ContentWrapper = styled.div`
     padding-left: 2rem;
     padding-right: 2rem;
   }
-`
+`;
 
 const Column = styled.div`
   margin-top: 2.5rem;
   @media (min-width: ${breakpoints.large}) {
     margin-top: 0;
   }
-`
+`;
 
-const FakeIcon = styled.div`
+const IconWrapper = styled.div`
   background-color: ${colors.indigo500};
   border-radius: 0.375rem;
   height: 3rem;
   width: 3rem;
-`
+`;
 
 const TextWrapper = styled.div`
   margin-top: 1.25rem;
-`
+`;
 
 const SmallHeader = styled.h5`
   font-size: 1.125rem;
   line-height: 1.5rem;
   font-weight: 500;
-`
+`;
 
 const Paragraph = styled.p`
   margin-top: 0.5rem;
   font-size: 1rem;
   line-height: 1.5rem;
-`
+`;
+
+const StyledAdvertising = styled(FcAdvertising)`
+  margin: 0.5rem;
+  height: 2rem;
+  width: 2rem;
+`;
+
+const StyledAutomatic = styled(FcAutomatic)`
+  margin: 0.5rem;
+  height: 2rem;
+  width: 2rem;
+`;
+
+const StyledContact = styled(FcBusinessContact)`
+  margin: 0.5rem;
+  height: 2rem;
+  width: 2rem;
+`;
 
 const TripleColFeatures = () => (
   <Wrapper>
     <Heading>
-      <LargeHeader>A better way to send money</LargeHeader>
+      <LargeHeader>Main Features</LargeHeader>
       <SectionDescription>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus magnam
-        voluptatum cupiditate veritatis in, accusamus quisquam.
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus magnam voluptatum
+        cupiditate veritatis in, accusamus quisquam.
       </SectionDescription>
     </Heading>
     <ContentWrapper>
       <Column>
-        {/*<!-- Heroicon name: globe-alt -->*/}
-        <FakeIcon />
+        <IconWrapper>
+          <StyledAdvertising />
+        </IconWrapper>
         <TextWrapper>
-          <SmallHeader>Competitive exchange rates</SmallHeader>
+          <SmallHeader>Feature #1</SmallHeader>
           <Paragraph>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores
-            impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis
-            ratione.
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis
+            suscipit eaque, iste dolor cupiditate blanditiis ratione.
           </Paragraph>
         </TextWrapper>
       </Column>
       <Column>
-        {/*<!-- Heroicon name: scale -->*/}
-        <FakeIcon />
+        <IconWrapper>
+          <StyledAutomatic />
+        </IconWrapper>
         <TextWrapper>
-          <SmallHeader>No hidden fees</SmallHeader>
+          <SmallHeader>Feature #2</SmallHeader>
           <Paragraph>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores
-            impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis
-            ratione.
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis
+            suscipit eaque, iste dolor cupiditate blanditiis ratione.
           </Paragraph>
         </TextWrapper>
       </Column>
       <Column>
-        {/*<!-- Heroicon name: lightning-bolt -->*/}
-        <FakeIcon />
+        <IconWrapper>
+          <StyledContact />
+        </IconWrapper>
+
         <TextWrapper>
-          <SmallHeader>Transfers are instant</SmallHeader>
+          <SmallHeader>Feature #3</SmallHeader>
           <Paragraph>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores
-            impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis
-            ratione.
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis
+            suscipit eaque, iste dolor cupiditate blanditiis ratione.
           </Paragraph>
         </TextWrapper>
       </Column>
     </ContentWrapper>
   </Wrapper>
-)
+);
 
-export default TripleColFeatures
+export default TripleColFeatures;
