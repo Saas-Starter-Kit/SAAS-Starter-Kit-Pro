@@ -17,4 +17,4 @@ phases:
 artifacts:
   files:
     - '**/*'
-  base-directory: client/build
+  base-directory: client/public
