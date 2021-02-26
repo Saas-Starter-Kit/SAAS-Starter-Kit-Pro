@@ -1,166 +1,133 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'gatsby';
-import { colors, breakpoints, transform } from '../../../styles/theme';
+import { colors, breakpoints } from '../../../styles/theme';
 import ChartBar from '../../../assets/images/icons/chart-bar.svg';
-import CursorClick from '../../../assets/images/icons/cursor-click.svg';
-import ShieldCheck from '../../../assets/images/icons/shield-check.svg';
-import ViewGrid from '../../../assets/images/icons/view-grid.svg';
+import { FcBullish, FcInvite, FcSerialTasks, FcTimeline } from 'react-icons/fc';
 
-const Container1 = styled.div`
+const Container = styled.div`
   position: absolute;
-  margin-left: -1rem;
-  margin-top: 0.75rem;
-  ${transform}
-  width: max-content;
-  max-width: 28rem;
-  @media (min-width: ${breakpoints.medium}) {
-    max-width: 48rem;
-  }
-  @media (min-width: ${breakpoints.large}) {
-    margin-left: 0;
-    left: 50%;
-    --transform-translate-x: -50%;
-  }
-`;
-
-const Container2 = styled.div`
-  border-radius: 0.5rem;
-`;
-
-const Container3 = styled.div`
-  border-radius: 0.5rem;
-  overflow: hidden;
-`;
-
-const Container4 = styled.div`
+  display: flex;
+  flex-direction: column;
   z-index: 20;
-  position: relative;
-  display: grid;
-  grid-gap: 1.5rem;
-  gap: 1.5rem;
-  border: 1px black solid;
+  margin-top: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  border: 1.5px black solid;
   background-color: ${colors.white};
   padding: 1.5rem 1.25rem;
-  @media (min-width: ${breakpoints.small}) {
-    grid-gap: 2rem;
-    gap: 2rem;
-    padding: 2rem;
-  }
-  @media (min-width: ${breakpoints.large}) {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-`;
-
-const MenuImg = styled.img`
-  height: 2rem;
-  width: 2rem;
-  color: white;
+  min-width: 28rem;
 `;
 
 const Item = styled.div`
-  margin: -0.75rem;
-  padding: 0.75rem;
   cursor: pointer;
   display: flex;
-  align-items: flex-start;
-  border-radius: 0.5rem;
+  align-items: center;
+  margin: 0.4rem 0 0.4rem 0;
+  padding: 0.2rem;
+
   &:hover {
     background-color: ${colors.gray50};
   }
 `;
 
 const MenuImageWrapper = styled.div`
-  flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 2.5rem;
-  width: 2.5rem;
+  height: 3rem;
+  width: 3rem;
   border-radius: 0.375rem;
   background-color: ${colors.indigo500};
   color: ${colors.white};
-  @media (min-width: ${breakpoints.small}) {
-    height: 3rem;
-    width: 3rem;
-  }
 `;
 
 const TextWrapper = styled.div`
-  margin-top: 0.25rem;
-  margin-left: 1rem;
+  width: 100%;
 `;
 
-const Title = styled.p`
+const Title = styled.div`
   font-size: 1rem;
-  line-height: 1.5rem;
   font-weight: 500;
   color: ${colors.gray900};
 `;
 
-const Description = styled.p`
+const Description = styled.div`
   font-size: 0.875rem;
-  line-height: 1.25rem;
   color: ${colors.gray500};
 `;
 
+const StyledIconBullish = styled(FcBullish)`
+  width: 4rem;
+  height: 4rem;
+  padding-left: 0.5rem;
+`;
+
+const StyledIconInvite = styled(FcInvite)`
+  width: 4rem;
+  height: 4rem;
+  padding-left: 0.5rem;
+`;
+
+const StyledIconTasks = styled(FcSerialTasks)`
+  width: 4rem;
+  height: 4rem;
+  padding-left: 0.5rem;
+`;
+
+const StyledTimeline = styled(FcTimeline)`
+  width: 4rem;
+  height: 4rem;
+  padding-left: 0.5rem;
+`;
+
 const FlyoutMenu = () => (
-  <Container1>
-    <Container2>
-      <Container3>
-        <Container4>
-          <Link to="/product/page1">
-            <Item>
-              <MenuImageWrapper>
-                <MenuImg src={ChartBar} alt="chart bar" />
-              </MenuImageWrapper>
-              <TextWrapper>
-                <Title>Analytics</Title>
-                <Description>
-                  Get a better understanding of where your traffic is coming from.
-                </Description>
-              </TextWrapper>
-            </Item>
-          </Link>
-          <Link to="/product/page2">
-            <Item>
-              <MenuImageWrapper>
-                <MenuImg src={CursorClick} alt="click" />
-              </MenuImageWrapper>
-              <TextWrapper>
-                <Title>Engagement</Title>
-                <Description>
-                  Speak directly to your customers in a more meaningful way.
-                </Description>
-              </TextWrapper>
-            </Item>
-          </Link>
-          <Link to="/product/page3">
-            <Item>
-              <MenuImageWrapper>
-                <MenuImg src={ShieldCheck} alt="click" />
-              </MenuImageWrapper>
-              <TextWrapper>
-                <Title>Security</Title>
-                <Description>Your customers data will be safe and secure.</Description>
-              </TextWrapper>
-            </Item>
-          </Link>
-          <Link to="/product/page4">
-            <Item>
-              <MenuImageWrapper>
-                <MenuImg src={ViewGrid} alt="click" />
-              </MenuImageWrapper>
-              <TextWrapper>
-                <Title>Integrations</Title>
-                <Description>Connect with third-party tools that you’re already using.</Description>
-              </TextWrapper>
-            </Item>
-          </Link>
-        </Container4>
-      </Container3>
-    </Container2>
-  </Container1>
+  <Container>
+    <Link to="/product/page1">
+      <Item>
+        <MenuImageWrapper>
+          <StyledIconBullish />
+        </MenuImageWrapper>
+        <TextWrapper>
+          <Title>Core Feature 1</Title>
+          <Description>Lorem ipsum dolor sit amet, consectetur </Description>
+        </TextWrapper>
+      </Item>
+    </Link>
+    <Link to="/product/page2">
+      <Item>
+        <MenuImageWrapper>
+          <StyledIconInvite />
+        </MenuImageWrapper>
+        <TextWrapper>
+          <Title>Core Feature 2</Title>
+          <Description>Lorem ipsum dolor sit amet, consectetur </Description>
+        </TextWrapper>
+      </Item>
+    </Link>
+    <Link to="/product/page3">
+      <Item>
+        <MenuImageWrapper>
+          <StyledIconTasks />
+        </MenuImageWrapper>
+        <TextWrapper>
+          <Title>Core Feature 3</Title>
+          <Description>Lorem ipsum dolor sit amet, consectetur </Description>
+        </TextWrapper>
+      </Item>
+    </Link>
+    <Link to="/product/page4">
+      <Item>
+        <MenuImageWrapper>
+          <StyledTimeline />
+        </MenuImageWrapper>
+        <TextWrapper>
+          <Title>Core Feature 4</Title>
+          <Description>Lorem ipsum dolor sit amet, consectetur</Description>
+        </TextWrapper>
+      </Item>
+    </Link>
+  </Container>
 );
 
 export default FlyoutMenu;

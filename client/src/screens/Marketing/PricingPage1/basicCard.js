@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import ListItem from './ListItem';
 import { colors, breakpoints } from '../../../styles/theme';
+import { Link } from 'gatsby';
 
 const OuterWrapper = styled.div`
   margin-left: auto;
@@ -113,34 +114,6 @@ const StyledListItem = styled(ListItem)`
   margin-top: 1rem;
 `;
 
-const Link = styled.a`
-  display: block;
-  width: 100%;
-  text-align: center;
-  width: 100%;
-  background-color: ${colors.white};
-  color: ${colors.indigo600};
-  border-radius: 0.5rem;
-  border-width: 1px;
-  border-color: transparent;
-  padding: 0.75rem 1.5rem;
-  font-size: 1rem;
-  line-height: 1.5rem;
-  font-weight: 500;
-  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow,
-    transform;
-  transition-duration: 150ms;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  &:hover {
-    color: ${colors.indigo500};
-  }
-  &:focus {
-    outline: 2px solid transparent;
-    outline-offset: 2px;
-    box-shadow: 0 0 0 3px rgba(118, 169, 250, 0.45);
-  }
-`;
-
 const BasicCard = ({ title, price, left }) => {
   const id = 'tier-' + title.toLowerCase();
   return (
@@ -165,7 +138,7 @@ const BasicCard = ({ title, price, left }) => {
             <StyledListItem text="Vel ipsa esse repudiandae" />
           </ul>
           <LinkWrapper>
-            <Link href="#" aria-describedby={id}>
+            <Link href="/auth/signup" aria-describedby={id}>
               Start your trial
             </Link>
           </LinkWrapper>
