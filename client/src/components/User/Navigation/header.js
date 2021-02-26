@@ -7,7 +7,7 @@ import { Popover, Badge, List } from 'antd';
 
 import { colors, breakpoints } from '../../../styles/theme';
 import useOutsideClick from '../../../hooks/useOutsideClick';
-//import AvatarDropDown from './avatarDropDown';
+import AvatarDropDown from './avatarDropDown';
 import AuthContext from '../../../utils/authContext';
 import Burger from '../svgs/burger';
 import SmallLogo from '../../../assets/images/logo/small_logo.svg';
@@ -243,7 +243,7 @@ const MobileHeader = ({ mobileMenuHandler }) => {
           <StyledMdAccountCircle onClick={avatarMenuHandler} />
         )}
       </AvatarWrapper>
-      {/*{avatarMenu && <AvatarDropDown avatarMenuHandler={avatarMenuHandler} />}*/}
+      {avatarMenu && <AvatarDropDown avatarMenuHandler={avatarMenuHandler} />}
     </Wrapper>
   );
 };

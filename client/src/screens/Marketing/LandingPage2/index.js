@@ -6,7 +6,7 @@ import { GlobalStyle } from './styles';
 
 import NavBar from './nav';
 import Banner from './banner';
-//import Services from './services';
+import Services from './services';
 import HowItWorks from './howItWorks';
 import Testimonials from './testimonials';
 import Footer from '../../../components/Marketing/Navigation/footer';
@@ -24,7 +24,7 @@ const LandingPage2 = () => (
     <GlobalStyle />
     <NavBar />
     <Banner />
-    {/*<Services />*/}
+    <Services />
     <HowItWorks />
     <Testimonials />
     <Footer />
