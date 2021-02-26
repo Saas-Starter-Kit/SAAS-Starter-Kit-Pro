@@ -26,10 +26,6 @@ const Button = styled.button`
   &:active {
     background-color: ${colors.indigo600};
   }
-  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow,
-    transform;
-  transition-duration: 150ms;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 `;
 
 export default Button;

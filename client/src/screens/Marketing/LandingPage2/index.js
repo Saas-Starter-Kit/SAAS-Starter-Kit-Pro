@@ -8,7 +8,7 @@ import NavBar from './nav';
 import Banner from './banner';
 import HowItWorks from './howItWorks';
 import Testimonials from './testimonials';
-import Services from '../LandingPage2/services';
+import Services from './servicesSection';
 import Footer from '../../../components/Marketing/Navigation/footer';
 
 const Background = styled.div`
