@@ -2,8 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'gatsby';
 import { colors, breakpoints } from '../../../styles/theme';
-import ChartBar from '../../../assets/images/icons/chart-bar.svg';
-import { FcBullish, FcInvite, FcSerialTasks, FcTimeline } from 'react-icons/fc';
+import {
+  FcDoughnutChart,
+  FcCurrencyExchange,
+  FcBullish,
+  FcInvite,
+  FcSerialTasks,
+  FcTimeline
+} from 'react-icons/fc';
 
 const Container = styled.div`
   position: absolute;
@@ -81,8 +87,50 @@ const StyledTimeline = styled(FcTimeline)`
   padding-left: 0.5rem;
 `;
 
+const StyledPrice = styled(FcCurrencyExchange)`
+  width: 4rem;
+  height: 4rem;
+  padding-left: 0.5rem;
+`;
+
+const StyledChart = styled(FcDoughnutChart)`
+  width: 4rem;
+  height: 4rem;
+  padding-left: 0.5rem;
+`;
+
+const StyledHr = styled.hr`
+  height: 2px;
+  width: 100%;
+  background-color: black;
+  margin: 0.5rem 0 0.5rem 0;
+`;
+
 const FlyoutMenu = () => (
   <Container>
+    <Link to="/pricing">
+      <Item>
+        <MenuImageWrapper>
+          <StyledPrice />
+        </MenuImageWrapper>
+        <TextWrapper>
+          <Title>Pricing</Title>
+          <Description>Lorem ipsum dolor sit amet, consectetur </Description>
+        </TextWrapper>
+      </Item>
+    </Link>
+    <Link to="/app/1/dashboard">
+      <Item>
+        <MenuImageWrapper>
+          <StyledChart />
+        </MenuImageWrapper>
+        <TextWrapper>
+          <Title>App</Title>
+          <Description>Lorem ipsum dolor sit amet, consectetur </Description>
+        </TextWrapper>
+      </Item>
+    </Link>
+    <StyledHr />
     <Link to="/product/page1">
       <Item>
         <MenuImageWrapper>
