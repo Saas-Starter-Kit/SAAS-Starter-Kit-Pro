@@ -6,7 +6,7 @@ import Card from '../../../../components/Common/Card';
 import DangerButton from '../../../../components/Common/buttons/DangerButton';
 
 const CancelSubscriptionButton = styled(DangerButton)`
-  margin: 0;
+  width: max-content;
 `;
 
 const SectionTitle = styled.h2`
