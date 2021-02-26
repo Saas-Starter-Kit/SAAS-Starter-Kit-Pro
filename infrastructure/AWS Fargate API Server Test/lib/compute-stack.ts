@@ -37,13 +37,15 @@ export class ComputeStack extends cdk.Stack {
       vpc
     });
 
-    const dbName = process.env.DB_NAME || 'postgresDB';
-    const dbUsername = process.env.DB_USERNAME || 'postgresUser';
-    const dbPort = process.env.DB_PORT || '5432';
-    const dbHost = process.env.DB_HOST || 'dbHost';
+    const dbName = process.env.DB_NAME ? process.env.DB_NAME : 'postgresDB';
+    const dbUsername = process.env.DB_USERNAME ? process.env.DB_USERNAME : 'postgresUser';
+    const dbPort = process.env.DB_PORT ? process.env.DB_PORT : '5432';
+    const dbHost = process.env.DB_HOST ? process.env.DB_HOST : 'dbHost';
 
-    const GoogleProjectID = process.env.GOOGLE_CLOUD_PROJECT || 'GID';
-    const AuthSecret = process.env.AUTH_SECRET || 'Secret';
+    const GoogleProjectID = process.env.GOOGLE_CLOUD_PROJECT
+      ? process.env.GOOGLE_CLOUD_PROJECT
+      : 'GID';
+    const AuthSecret = process.env.AUTH_SECRET ? process.env.AUTH_SECRET : 'Secret';
 
     const loadBalancedFargateService = new ecs_patterns.ApplicationLoadBalancedFargateService(
       this,

@@ -17,8 +17,8 @@ export class DatabaseStack extends cdk.Stack {
 
     const { vpc, dbSecret, securityGroupBastion, securityGroupFargate } = props;
 
-    const dbName = process.env.DB_NAME || 'postgresDB';
-    const dbUsername = process.env.DB_USERNAME || 'postgresUser';
+    const dbName = process.env.DB_NAME ? process.env.DB_NAME : 'postgresDB';
+    const dbUsername = process.env.DB_USERNAME ? process.env.DB_USERNAME : 'postgresUser';
     const dbPassword = dbSecret.secretValue;
 
     const dbInstance = new rds.DatabaseInstance(this, 'Instance', {

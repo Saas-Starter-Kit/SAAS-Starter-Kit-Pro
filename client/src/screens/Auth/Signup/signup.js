@@ -17,6 +17,7 @@ import ContinueWith from '../../../components/Auth/continueWith';
 import GoogleButton from '../../../components/Auth/Buttons/googleButton';
 import LoadingOverlay from '../../../components/Common/loadingOverlay';
 import SignUpFormHeader from './signupFormHeader';
+import axios from '../../../services/axios';
 
 const Signup = () => {
   const location = useLocation();
@@ -74,10 +75,15 @@ const Signup = () => {
     SignupAuth(authRes, firebase, fetchFailure, null, domainUrl, isInviteFlow, appId);
   };
 
+  const getHealth = () => {
+    axios.get('/health').then((res) => console.log(res));
+  };
+
   return (
     <div>
       {isLoading && <LoadingOverlay />}
       <SignUpFormHeader />
+      <button onClick={getHealth}>FFFFFFFF</button>
       <AuthCard>
         <Formik
           validationSchema={ValidSchema}
