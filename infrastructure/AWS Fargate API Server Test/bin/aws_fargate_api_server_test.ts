@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 import 'source-map-support/register';
+require('dotenv').config();
+
 import * as cdk from '@aws-cdk/core';
 import { VpcStack } from '../lib/vpc-stack';
 import { RolesStack } from '../lib/roles-stack';

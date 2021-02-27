@@ -37,10 +37,10 @@ export class ComputeStack extends cdk.Stack {
       vpc
     });
 
-    const dbName = 'postgresDB';
-    const dbUsername = 'postgresUser';
-    const dbPort = '5432';
-    const dbHost = 'di1u2ugo64n9ihp.cbjw4ykutut4.us-east-1.rds.amazonaws.com';
+    const dbName = process.env.DB_NAME || 'postgresDB';
+    const dbUsername = process.env.DB_USERNAME || 'postgresUser';
+    const dbPort = process.env.DB_PORT || '5432';
+    const dbHost = process.env.DB_HOST || 'dbHost';
 
     const loadBalancedFargateService = new ecs_patterns.ApplicationLoadBalancedFargateService(
       this,
