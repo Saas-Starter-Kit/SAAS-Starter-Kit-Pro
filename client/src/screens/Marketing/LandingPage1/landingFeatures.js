@@ -1,7 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import { colors, breakpoints } from '../../../styles/theme';
-import ChartBar from '../../../assets/images/icons/chart-bar.svg';
+
+import image1 from '../../../assets/images/illustrations/undraw_Build_wireframe_re_ln7g.svg';
+import image2 from '../../../assets/images/illustrations/undraw_All_the_data_re_hh4w.svg';
+import { FcApproval, FcBarChart, FcCollect, FcConferenceCall } from 'react-icons/fc';
 
 const Container = styled.div`
   background-color: ${(props) => props.theme.backgroundLanding};
@@ -55,12 +58,6 @@ const SmallParagraph = styled.p`
   font-size: 1rem;
   line-height: 1.5rem;
   color: ${colors.gray500};
-`;
-
-const MenuImg = styled.img`
-  height: 2rem;
-  width: 2rem;
-  color: ${colors.white};
 `;
 
 const FeatureImage = styled.img`
@@ -135,6 +132,26 @@ const ImageWrapper = styled.div`
   background-color: ${colors.indigo500};
 `;
 
+const StyledApproval = styled(FcApproval)`
+  height: 2rem;
+  width: 2rem;
+`;
+
+const StyledBarChart = styled(FcBarChart)`
+  height: 2rem;
+  width: 2rem;
+`;
+
+const StyledCollect = styled(FcCollect)`
+  height: 2rem;
+  width: 2rem;
+`;
+
+const StyledCall = styled(FcConferenceCall)`
+  height: 2rem;
+  width: 2rem;
+`;
+
 const LandingFeatures = () => (
   <Container>
     <FeatureWrapper1>
@@ -149,7 +166,7 @@ const LandingFeatures = () => (
           <ListItem>
             <Item>
               <ImageWrapper>
-                <MenuImg src={ChartBar} alt="chart bar" />
+                <StyledApproval />
               </ImageWrapper>
               <TextWrapper>
                 <SmallHeader>Sub Feature 1</SmallHeader>
@@ -163,7 +180,7 @@ const LandingFeatures = () => (
           <ListItem>
             <Item>
               <ImageWrapper>
-                <MenuImg src={ChartBar} alt="chart bar" />
+                <StyledBarChart />
               </ImageWrapper>
               <TextWrapper>
                 <SmallHeader>Sub Feature 2</SmallHeader>
@@ -176,11 +193,7 @@ const LandingFeatures = () => (
           </ListItem>
         </List>
       </div>
-      <FeatureImage
-        width="490"
-        src="https://tailwindui.com/img/features/feature-example-1.png"
-        alt=""
-      />
+      <FeatureImage width="490" src={image1} alt="" />
     </FeatureWrapper1>
     <FeatureWrapper2>
       <FeatureWrapper2b>
@@ -193,7 +206,7 @@ const LandingFeatures = () => (
           <ListItem>
             <Item>
               <ImageWrapper>
-                <MenuImg src={ChartBar} alt="chart bar" />
+                <StyledCollect />
               </ImageWrapper>
               <TextWrapper>
                 <SmallHeader>Sub Feature 1</SmallHeader>
@@ -207,7 +220,7 @@ const LandingFeatures = () => (
           <ListItem>
             <Item>
               <ImageWrapper>
-                <MenuImg src={ChartBar} alt="chart bar" />
+                <StyledCall />
               </ImageWrapper>
               <TextWrapper>
                 <SmallHeader>Sub Feature 2</SmallHeader>
@@ -220,11 +233,7 @@ const LandingFeatures = () => (
           </ListItem>
         </List>
       </FeatureWrapper2b>
-      <FeatureImage
-        width="490"
-        src="https://tailwindui.com/img/features/feature-example-2.png"
-        alt=""
-      />
+      <FeatureImage width="490" src={image2} alt="" />
     </FeatureWrapper2>
   </Container>
 );

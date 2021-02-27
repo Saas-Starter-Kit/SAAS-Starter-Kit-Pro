@@ -1,25 +1,19 @@
-import React from "react"
-import styled from "styled-components"
-import { breakpoints } from "../../../styles/theme"
+import React from 'react';
+import styled from 'styled-components';
+import { Carousel } from 'antd';
+import { breakpoints } from '../../../styles/theme';
 
 const Wrapper = styled.div`
   max-width: 1280px;
   margin-left: auto;
   margin-right: auto;
-  padding: 3rem 1rem 0rem 1rem;
-  background-color: ${props => props.theme.backgroundLanding};
+  padding: 1rem;
   overflow: hidden;
-  @media (min-width: ${breakpoints.small}) {
-    padding: 5rem 1.5rem 0rem 1.5rem;
-  }
-  @media (min-width: ${breakpoints.large}) {
-    padding: 6rem 2rem 1rem 2rem;
-  }
-`
+`;
 
 const TextWrapper = styled.div`
-  margin-top: 2rem;
-`
+  margin-top: 0.1rem;
+`;
 
 const QuoteWrapper = styled.div`
   max-width: 48rem;
@@ -29,7 +23,7 @@ const QuoteWrapper = styled.div`
   font-size: 1.5rem;
   line-height: 2.25rem;
   font-weight: 500;
-`
+`;
 
 const FooterWrapper = styled.div`
   margin-top: 2rem;
@@ -39,13 +33,13 @@ const FooterWrapper = styled.div`
     align-items: center;
     justify-content: center;
   }
-`
+`;
 
 const ImageWrapper = styled.div`
   @media (min-width: ${breakpoints.medium}) {
     flex-shrink: 0;
   }
-`
+`;
 
 const Image = styled.img`
   margin-left: auto;
@@ -53,7 +47,7 @@ const Image = styled.img`
   height: 2.5rem;
   width: 2.5rem;
   border-radius: 50%;
-`
+`;
 
 const TitleWrapper = styled.div`
   margin-top: 0.75rem;
@@ -64,40 +58,36 @@ const TitleWrapper = styled.div`
     display: flex;
     align-items: center;
   }
-`
+`;
 
 const Title = styled.div`
   font-size: 1rem;
   line-height: 1.5rem;
   font-weight: 500;
-`
+`;
 
 const SlashSvg = styled.svg`
   display: none;
   @media (min-width: ${breakpoints.medium}) {
     display: block;
   }
-  color: ${props => props.theme.primary};
+  color: ${(props) => props.theme.primary};
   margin-left: 0.25rem;
   margin-right: 0.25rem;
   width: 1.25rem;
-`
+`;
 
 const Job = styled.div`
   font-size: 1rem;
   line-height: 1.5rem;
   font-weight: 500;
-`
+`;
 
-const Testimonial = () => (
+const Testimonial = ({ testimonial, name, job }) => (
   <Wrapper>
     <TextWrapper>
       <QuoteWrapper>
-        <p>
-          &ldquo;Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo
-          expedita voluptas culpa sapiente alias molestiae. Numquam corrupti in
-          laborum sed rerum et corporis.&rdquo;
-        </p>
+        <p>{testimonial}</p>
       </QuoteWrapper>
       <FooterWrapper>
         <ImageWrapper>
@@ -107,15 +97,43 @@ const Testimonial = () => (
           />
         </ImageWrapper>
         <TitleWrapper>
-          <Title>Judith Black</Title>
+          <Title>{name}</Title>
           <SlashSvg fill="currentColor" viewBox="0 0 20 20">
             <path d="M11 0h3L9 20H6l5-20z" />
           </SlashSvg>
-          <Job>CEO, Workcation</Job>
+          <Job>{job}</Job>
         </TitleWrapper>
       </FooterWrapper>
     </TextWrapper>
   </Wrapper>
-)
+);
 
-export default Testimonial
+const Container = styled.div`
+  background-color: ${(props) => props.theme.backgroundLanding};
+  padding-top: 7rem;
+  padding-bottom: -3rem;
+`;
+
+const testimonials = [
+  { title: 'Testimonial 1', name: 'Karel johnsoh', job: 'CEO, Company 1' },
+  { title: 'Lorem Ipsep 2', name: 'Jenny Smith', job: 'CFO, Example Inc' },
+  { title: 'Excellent Product', name: 'Racheal Aniston', job: 'CEO, Private LLC' }
+];
+
+const Testimonials = () => {
+  return (
+    <Container>
+      <Carousel autoplay>
+        {testimonials.map((testimonial) => (
+          <Testimonial
+            testimonial={testimonial.title}
+            name={testimonial.name}
+            job={testimonial.job}
+          />
+        ))}
+      </Carousel>
+    </Container>
+  );
+};
+
+export default Testimonials;

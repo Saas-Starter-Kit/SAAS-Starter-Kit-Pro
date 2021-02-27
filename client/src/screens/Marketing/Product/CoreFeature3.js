@@ -1,7 +1,10 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import { colors, breakpoints } from '../../../styles/theme';
-import ChartBar from '../../../assets/images/icons/chart-bar.svg';
+
+import image1 from '../../../assets/images/illustrations/undraw_Build_wireframe_re_ln7g.svg';
+import image2 from '../../../assets/images/illustrations/undraw_All_the_data_re_hh4w.svg';
+import { FcApproval, FcBarChart, FcCollect, FcConferenceCall } from 'react-icons/fc';
 
 const fadeInUp = keyframes`
   from {
@@ -21,15 +24,15 @@ const Wrapper = styled.div`
 const Container = styled.div`
   margin-left: auto;
   margin-right: auto;
-
   padding: 4rem 1rem 4rem 1rem;
+
   @media (min-width: ${breakpoints.small}) {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
   }
   @media (min-width: ${breakpoints.large}) {
     padding: 6rem 2rem 6rem 2rem;
-    margin-top: -10rem;
+    margin-top: -8rem;
     max-width: 1280px;
   }
 `;
@@ -71,12 +74,6 @@ const SmallParagraph = styled.p`
   font-size: 1rem;
   line-height: 1.5rem;
   color: ${colors.gray500};
-`;
-
-const MenuImg = styled.img`
-  height: 2rem;
-  width: 2rem;
-  color: ${colors.white};
 `;
 
 const FeatureImage = styled.img`
@@ -125,6 +122,7 @@ const FeatureWrapper2b = styled.div`
 const List = styled.ul`
   margin-top: 2.5rem;
   margin-left: -1rem;
+  list-style-type: none;
   @media (min-width: ${breakpoints.small}) {
     margin-left: 0;
   }
@@ -150,12 +148,32 @@ const ImageWrapper = styled.div`
   background-color: ${colors.indigo500};
 `;
 
+const StyledApproval = styled(FcApproval)`
+  height: 2rem;
+  width: 2rem;
+`;
+
+const StyledBarChart = styled(FcBarChart)`
+  height: 2rem;
+  width: 2rem;
+`;
+
+const StyledCollect = styled(FcCollect)`
+  height: 2rem;
+  width: 2rem;
+`;
+
+const StyledCall = styled(FcConferenceCall)`
+  height: 2rem;
+  width: 2rem;
+`;
+
 const CoreFeature3 = () => (
   <Container>
     <Wrapper>
       <FeatureWrapper1>
         <div>
-          <LargeHeader>Explanation #1 about Core Feature 3</LargeHeader>
+          <LargeHeader>Awesome Feature about App 1</LargeHeader>
           <LargeParagraph>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur minima sequi
             recusandae, porro maiores officia assumenda aliquam laborum ab aliquid veritatis impedit
@@ -165,7 +183,7 @@ const CoreFeature3 = () => (
             <ListItem>
               <Item>
                 <ImageWrapper>
-                  <MenuImg src={ChartBar} alt="chart bar" />
+                  <StyledApproval />
                 </ImageWrapper>
                 <TextWrapper>
                   <SmallHeader>Sub Feature 1</SmallHeader>
@@ -179,7 +197,7 @@ const CoreFeature3 = () => (
             <ListItem>
               <Item>
                 <ImageWrapper>
-                  <MenuImg src={ChartBar} alt="chart bar" />
+                  <StyledBarChart />
                 </ImageWrapper>
                 <TextWrapper>
                   <SmallHeader>Sub Feature 2</SmallHeader>
@@ -192,15 +210,11 @@ const CoreFeature3 = () => (
             </ListItem>
           </List>
         </div>
-        <FeatureImage
-          width="490"
-          src="https://tailwindui.com/img/features/feature-example-1.png"
-          alt=""
-        />
+        <FeatureImage width="490" src={image1} alt="" />
       </FeatureWrapper1>
       <FeatureWrapper2>
         <FeatureWrapper2b>
-          <LargeHeader>Explanation #2 about Core Feature 3</LargeHeader>
+          <LargeHeader>Awesome Feature about App 2</LargeHeader>
           <LargeParagraph>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit ex obcaecati natus
             eligendi delectus, cum deleniti sunt in labore nihil quod quibusdam expedita nemo.
@@ -209,7 +223,7 @@ const CoreFeature3 = () => (
             <ListItem>
               <Item>
                 <ImageWrapper>
-                  <MenuImg src={ChartBar} alt="chart bar" />
+                  <StyledCollect />
                 </ImageWrapper>
                 <TextWrapper>
                   <SmallHeader>Sub Feature 1</SmallHeader>
@@ -223,7 +237,7 @@ const CoreFeature3 = () => (
             <ListItem>
               <Item>
                 <ImageWrapper>
-                  <MenuImg src={ChartBar} alt="chart bar" />
+                  <StyledCall />
                 </ImageWrapper>
                 <TextWrapper>
                   <SmallHeader>Sub Feature 2</SmallHeader>
@@ -236,11 +250,7 @@ const CoreFeature3 = () => (
             </ListItem>
           </List>
         </FeatureWrapper2b>
-        <FeatureImage
-          width="490"
-          src="https://tailwindui.com/img/features/feature-example-2.png"
-          alt=""
-        />
+        <FeatureImage width="490" src={image2} alt="" />
       </FeatureWrapper2>
     </Wrapper>
   </Container>

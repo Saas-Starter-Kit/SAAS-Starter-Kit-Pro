@@ -5,7 +5,7 @@ import { FcAdvertising, FcAutomatic, FcBusinessContact } from 'react-icons/fc';
 
 const Wrapper = styled.div`
   background-color: ${(props) => props.theme.backgroundLanding};
-  padding: 6rem 2rem 2rem 2rem;
+  padding: 2rem;
 `;
 
 const Heading = styled.div`

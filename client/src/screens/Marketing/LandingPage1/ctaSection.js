@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { colors, breakpoints } from '../../../styles/theme';
+import { Link } from 'gatsby';
 
 const Background = styled.div`
   background-color: ${colors.indigo600};
@@ -43,7 +44,7 @@ const Paragraph = styled.p`
   color: ${colors.indigo200};
 `;
 
-const Link = styled.a`
+const StyledLink = styled(Link)`
   margin-top: 2rem;
   width: 100%;
   display: inline-flex;
@@ -72,14 +73,14 @@ const CTASection = () => (
   <Background>
     <Wrapper>
       <Header>
-        <Span>Boost your productivity.</Span>
-        <Span>Start using Workflow today.</Span>
+        <Span>Main Benefit of Product</Span>
+        <Span>Call to Action </Span>
       </Header>
       <Paragraph>
         Ac euismod vel sit maecenas id pellentesque eu sed consectetur. Malesuada adipiscing
         sagittis vel nulla nec.
       </Paragraph>
-      <Link href="#">Sign up for free</Link>
+      <StyledLink href="/auth/signup">Sign up for free</StyledLink>
     </Wrapper>
   </Background>
 );
