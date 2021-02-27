@@ -5,58 +5,113 @@ import 'react-perfect-scrollbar/dist/css/styles.css';
 import { Layout, Menu, Switch } from 'antd';
 import { HomeOutlined, UserOutlined, FolderOutlined, BulbOutlined } from '@ant-design/icons';
 import { Link } from 'gatsby';
+
 import LargeLogo from '../../Common/svgs/LargeLogo';
 import SmallLogo from '../../Common/svgs/SmallLogo';
 import { THEMES } from '../AppLayout';
 import { colors, breakpoints } from '../../../styles/theme';
+import {
+  FcBarChart,
+  FcCollect,
+  FcConferenceCall,
+  FcGenealogy,
+  FcTimeline,
+  FcUpload,
+  FcPrivacy
+} from 'react-icons/fc';
+
+const StyledIcon = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 0.8rem;
+  margin-bottom: 0.5rem;
+  padding-top: 0.5rem;
+`;
+
+const StyledBar = styled(FcBarChart)`
+  height: 1.3rem;
+  width: 1.3rem;
+`;
+
+const StyledRead = styled(FcCollect)`
+  height: 1.3rem;
+  width: 1.3rem;
+`;
+
+const StyledCollab = styled(FcConferenceCall)`
+  height: 1.3rem;
+  width: 1.3rem;
+`;
+
+const StyledCreate = styled(FcUpload)`
+  height: 1.3rem;
+  width: 1.3rem;
+`;
+
+const StyledPermissions = styled(FcPrivacy)`
+  height: 1.3rem;
+  width: 1.3rem;
+`;
+
+const StyledOnboarding = styled(FcTimeline)`
+  height: 1.3rem;
+  width: 1.3rem;
+`;
+
+const StyledML = styled(FcGenealogy)`
+  height: 1.3rem;
+  width: 1.3rem;
+`;
 
 const getMenus = (app_id) => [
   {
     id: '1',
     name: 'Dashboard',
     route: `/app/${app_id}/dashboard`,
-    icon: <HomeOutlined />
+    icon: <StyledBar />
   },
   {
     id: '2',
     name: 'Read Update',
     route: `/app/${app_id}/readupdate`,
-    icon: <UserOutlined />
+    icon: <StyledRead />
   },
   {
     id: '3',
     name: 'Create',
     route: `/app/${app_id}/create`,
-    icon: <FolderOutlined />
+    icon: <StyledCreate />
   },
   {
     id: '4',
     name: 'Permissions',
     route: `/app/${app_id}/permissions`,
-    icon: <FolderOutlined />
+    icon: <StyledPermissions />
   },
   {
     id: '5',
     name: 'Users',
     route: `/app/${app_id}/users`,
-    icon: <FolderOutlined />
+    icon: <StyledCollab />
   },
   {
     id: '6',
     name: 'Onboarding',
     route: `/app/${app_id}/onboarding`,
-    icon: <FolderOutlined />
+    icon: <StyledOnboarding />
   },
   {
     id: '7',
     name: 'Machine Learning',
     route: `/app/${app_id}/machinelearning`,
-    icon: <FolderOutlined />
+    icon: <StyledML />
   }
 ];
 
 const StyledSider = styled(Layout.Sider)`
   display: none;
+
   @media (min-width: ${breakpoints.medium}) {
     display: initial;
   }
@@ -112,7 +167,8 @@ const StyledLink = styled(Link)`
 `;
 
 const ItemWrapper = styled.div`
-  font-size: 13px;
+  font-size: 15px;
+  font-weight: 500;
 `;
 
 const Footer = styled.div`
@@ -171,7 +227,7 @@ const SidebarDesktop = ({ theme, toggleTheme, app_id, location, collapsed }) => 
             {menus.map(({ id, route, icon, name }) => (
               <Menu.Item key={id} title={name}>
                 <StyledLink to={route || '#'}>
-                  <div>{icon}</div>
+                  <StyledIcon>{icon}</StyledIcon>
                   {!collapsed && <ItemWrapper>{name}</ItemWrapper>}
                 </StyledLink>
               </Menu.Item>

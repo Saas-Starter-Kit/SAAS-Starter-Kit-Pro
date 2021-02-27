@@ -35,6 +35,8 @@ const DescriptionWrapper = styled.div`
 
 const FormButtonsWrapper = styled.div`
   padding: 1rem 0;
+  display: flex;
+  justify-content: space-between;
 `;
 
 const Todo = ({
