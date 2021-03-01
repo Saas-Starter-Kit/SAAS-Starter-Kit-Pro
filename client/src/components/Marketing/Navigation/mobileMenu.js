@@ -173,7 +173,7 @@ const MobileMenu = ({ mobileMenuHandler }) => (
     </Header>
     <div>
       <Nav>
-        <Link to="/pricing/pricing1">
+        <Link to="/pricing">
           <Item>
             <MenuImageWrapper>
               {/*<!-- Heroicon name: view-grid -->*/}
