@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import { Link } from 'gatsby';
-import { colors, breakpoints } from '../../../styles/theme';
+import { breakpoints } from '../../../styles/theme';
 import StepUp from '../../../assets/images/illustrations/undraw_stepping_up_g6oo.svg';
 
 const Container = styled.div`

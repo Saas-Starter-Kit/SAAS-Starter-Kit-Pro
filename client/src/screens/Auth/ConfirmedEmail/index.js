@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Link } from 'gatsby';
 import { useLocation } from '@reach/router';
 import styled from 'styled-components';
@@ -7,7 +7,7 @@ import AuthContext from '../../../utils/authContext';
 import ApiContext from '../../../utils/apiContext';
 import axios from '../../../services/axios';
 import { setAnalyticsUserId, sendEventToAnalytics } from '../../../services/analytics';
-import { colors, breakpoints, fieldStyles } from '../../../styles/theme';
+import { colors, breakpoints } from '../../../styles/theme';
 
 import Title from '../../../components/Auth/title';
 import AuthCard from '../../../components/Auth/authCard';
@@ -62,6 +62,7 @@ const ConfirmedEmail = () => {
 
   let user = { email, username, id, photo, provider };
 
+  /* eslint-disable */
   useEffect(() => {
     return () => fetchSuccess();
   }, []);
@@ -71,8 +72,9 @@ const ConfirmedEmail = () => {
   }, [location]);
 
   useEffect(() => {
-    if (isInviteFlow == 'true') createRole();
+    if (isInviteFlow === 'true') createRole();
   }, [isInviteFlow]);
+  /* eslint-enable */
 
   const createValidUser = async () => {
     fetchInit();
@@ -98,7 +100,7 @@ const ConfirmedEmail = () => {
 
     user = { ...user, ...stripeCustomerKey, ...jwt_token };
 
-    if (!process.env.NODE_ENV == 'development') {
+    if (!process.env.NODE_ENV === 'development') {
       //save event and user id to Google Analytics
       let parameters = {
         method: 'Email'
@@ -140,7 +142,7 @@ const ConfirmedEmail = () => {
       {isLoading && <LoadingOverlay />}
       <Title>Thank You for confirming your email, your account is setup and ready to use</Title>
       <AuthCard>
-        {isInviteFlow == 'true' && (
+        {isInviteFlow === 'true' && (
           <>
             <CardText>Click below to navigate to the app your were invited to</CardText>
             <TextWrapper>

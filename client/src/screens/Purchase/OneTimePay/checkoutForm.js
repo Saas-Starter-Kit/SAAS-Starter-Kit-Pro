@@ -7,7 +7,7 @@ import { navigate } from 'gatsby';
 
 import axios from '../../../services/axios';
 import ApiContext from '../../../utils/apiContext';
-import { colors, breakpoints, fieldStyles } from '../../../styles/theme';
+import { colors } from '../../../styles/theme';
 
 import Button from '../../../components/Common/buttons/SecondaryButton';
 import Card from '../../../components/Common/Card';
@@ -58,6 +58,7 @@ const CheckoutForm = () => {
   const stripe = useStripe();
   const elements = useElements();
 
+  /* eslint-disable */
   useEffect(() => {
     getPaymentIntent();
   }, []);
@@ -65,6 +66,7 @@ const CheckoutForm = () => {
   useEffect(() => {
     return () => fetchSuccess();
   }, []);
+  /* eslint-disable */
 
   const getPaymentIntent = async () => {
     let result = await axios.get('/stripe/payment-intent').catch((err) => {

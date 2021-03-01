@@ -41,9 +41,11 @@ const Text = styled.div`
 const ConfirmSub = () => {
   const { LogOut } = useContext(AuthContext);
 
+  /* eslint-disable */
   useEffect(() => {
     LogOut();
   }, []);
+  /* eslint-enable */
 
   return (
     <Wrapper>

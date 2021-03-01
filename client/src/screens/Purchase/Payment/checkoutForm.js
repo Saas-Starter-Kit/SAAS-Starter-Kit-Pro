@@ -13,7 +13,6 @@ import { colors, breakpoints } from '../../../styles/theme';
 
 import Button from '../../../components/Common/buttons/PrimaryButton';
 import Card from '../../../components/Common/Card';
-import LoadingOverlay from '../../../components/Common/loadingOverlay';
 import visa from '../../../assets/images/credit card icons/visa.png';
 import discover from '../../../assets/images/credit card icons/discover.png';
 import mastercard from '../../../assets/images/credit card icons/mastercard.png';
@@ -138,6 +137,7 @@ const CheckoutForm = () => {
   const stripe = useStripe();
   const elements = useElements();
 
+  /* eslint-disable */
   useEffect(() => {
     if (location.state) {
       let Plan = location.state.plan;
@@ -165,6 +165,7 @@ const CheckoutForm = () => {
   useEffect(() => {
     if (authState.user) getWallet();
   }, [authState]);
+  /* eslint-enable */
 
   const getWallet = async () => {
     fetchInit();
@@ -282,11 +283,11 @@ const CheckoutForm = () => {
       <PaymentInfo>
         <Spin tip="Loading" spinning={isLoading}>
           <h2>Please Choose Payment Method</h2>
-          {!payCards.length == 0 ? (
+          {!payCards.length === 0 ? (
             payCards.map((item) => (
               <StyledCardDisplayWrapper key={item.id}>
                 <StyledCardDisplay
-                  isActive={item.id == paymentMethod}
+                  isActive={item.id === paymentMethod}
                   onClick={() => setPaymentMethod(item.id)}
                 >
                   <CardNumber>**** **** **** {item.card.last4}</CardNumber>

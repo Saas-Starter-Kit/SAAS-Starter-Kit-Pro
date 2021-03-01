@@ -33,16 +33,16 @@ export const getRole = async (app_id, ability, authState, fetchFailure) => {
     fetchFailure(err);
   });
 
-  if (result.data.length == 0) {
-    //navigate to 403 page
+  if (result.data.length === 0) {
     navigate('/403');
   }
 
   let role = result.data[0].role;
 
+  // Use for Local testing of permissions,
+  // subsitute in for the role variable in updateRole()
+  // let userRole= 'user'
+  // let adminRole = 'admin'
+
   updateRole(ability, role);
 };
-
-//Use for Local testing of permissions, subsitute in for the role variable in updateRole()
-//let userRole= 'user'
-//let adminRole = 'admin'

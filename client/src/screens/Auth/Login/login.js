@@ -7,7 +7,7 @@ import { useLocation } from '@reach/router';
 import AuthContext from '../../../utils/authContext';
 import ApiContext from '../../../utils/apiContext';
 import { LoginAuth } from '../helpers';
-import { colors, breakpoints, fieldStyles } from '../../../styles/theme';
+import { colors } from '../../../styles/theme';
 
 import ErrorText from '../../../components/Common/errorText';
 import InputWrapper from '../../../components/Common/forms/TextInputWrapper';
@@ -48,13 +48,14 @@ const RememberMeLabel = styled.label`
 
 const Login = () => {
   const location = useLocation();
-  const { firebase, LogIn, LogOut } = useContext(AuthContext);
+  const { firebase, LogIn } = useContext(AuthContext);
   const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
   const { isLoading } = apiState;
   const [appId, setAppId] = useState();
   const [isInviteFlow, setInviteFlow] = useState();
   const [isPaymentFlow, setPaymentFlow] = useState();
 
+  /* eslint-disable */
   //extract data from query params
   useEffect(() => {
     if (location.search) {
@@ -71,6 +72,7 @@ const Login = () => {
   useEffect(() => {
     if (location.state) setPaymentFlow(location.state.isPaymentFlow);
   }, [location]);
+  /* eslint-enable */
 
   const handleSubmit = async (values) => {
     fetchInit();

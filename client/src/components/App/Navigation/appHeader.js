@@ -197,7 +197,7 @@ const AppHeader = ({
 
   return (
     <div>
-      <LayoutHeader id="layoutHeader" collapsed={collapsed} theme={theme}>
+      <LayoutHeader id="layoutHeader" theme={theme}>
         <CollapseButton onClick={onCollapseChange} theme={theme}>
           {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
         </CollapseButton>

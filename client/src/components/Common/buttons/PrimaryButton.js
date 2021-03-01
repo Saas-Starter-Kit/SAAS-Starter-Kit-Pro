@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colors, breakpoints } from '../../../styles/theme';
+import { colors } from '../../../styles/theme';
 
 const PrimaryButton = styled.button`
   position: relative;

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colors, breakpoints, fieldStyles } from '../../styles/theme';
+import { colors } from '../../styles/theme';
 
 const Label = styled.label`
   display: block;

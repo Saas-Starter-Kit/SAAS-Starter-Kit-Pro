@@ -1,7 +1,9 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
+import OrContinueWith from '../components/Auth/continueWith';
 
-test('Basic Test', () => {
-  expect(1).toEqual(1);
+test('Continue With text correctly displays', () => {
+  render(<OrContinueWith />);
+  expect(screen.getByText('Or Continue With')).toBeInTheDocument();
 });

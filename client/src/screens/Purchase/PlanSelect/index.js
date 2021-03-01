@@ -97,6 +97,7 @@ const PlanSelect = ({ location }) => {
   const [subscription_id, setSubscriptionId] = useState();
   const [subscription_item, setSubscriptionItem] = useState();
 
+  /* eslint-disable */
   useEffect(() => {
     if (location.state) {
       let isUpgradeFlow = location.state.isUpgradeFlow;
@@ -120,6 +121,7 @@ const PlanSelect = ({ location }) => {
       }
     }
   }, [isUpgradeFlow]);
+  /* eslint-enable */
 
   const selectPlan = (plan, price, type) => {
     setPlan(plan);
@@ -133,11 +135,11 @@ const PlanSelect = ({ location }) => {
       <PurchaseText>Main Benefit of product</PurchaseText>
       <CardsWrapper>
         <PlanCard
-          isActive={plan == basic_plan}
+          isActive={plan === basic_plan}
           onClick={() => selectPlan(basic_plan, basic_price, basic_type)}
         >
           <PlanHeader>Basic Plan</PlanHeader>
-          {isUpgradeFlow && currentPlan == basic_plan && <div>Current Plan</div>}
+          {isUpgradeFlow && currentPlan === basic_plan && <div>Current Plan</div>}
           <PlanPrice>${basic_price}/month</PlanPrice>
           <FeaturesWrapper>
             <Feature>Feature 1</Feature>
@@ -149,11 +151,11 @@ const PlanSelect = ({ location }) => {
           </FeaturesWrapper>
         </PlanCard>
         <PlanCard
-          isActive={plan == premium_plan}
+          isActive={plan === premium_plan}
           onClick={() => selectPlan(premium_plan, premium_price, premium_type)}
         >
           <PlanHeader>Premium Plan</PlanHeader>
-          {isUpgradeFlow && currentPlan == premium_plan && <div>Current Plan</div>}
+          {isUpgradeFlow && currentPlan === premium_plan && <div>Current Plan</div>}
           <PlanPrice>${premium_price}/month</PlanPrice>
           <FeaturesWrapper>
             <Feature>Feature 1</Feature>
@@ -167,7 +169,7 @@ const PlanSelect = ({ location }) => {
       </CardsWrapper>
       <ButtonWrapper>
         <Link
-          disabled={plan == currentPlan}
+          disabled={plan === currentPlan}
           to="/purchase/payment"
           state={{ plan, price, planType, subscription_id, isUpgradeFlow, subscription_item }}
         >

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { colors, breakpoints } from '../../../styles/theme';
+import { breakpoints } from '../../../styles/theme';
 
 const Wrapper = styled.div`
   display: flex;

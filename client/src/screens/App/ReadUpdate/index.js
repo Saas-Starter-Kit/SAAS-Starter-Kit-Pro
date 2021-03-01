@@ -17,19 +17,13 @@ const Title = styled.h1`
   font-size: 1.25rem;
 `;
 
-const todosDummy = [
-  { app_id: 4, author: 'author1', description: 'description1', title: 'title1', todo_id: 1 },
-  { app_id: 4, author: 'author1', description: 'description2', title: 'title2', todo_id: 2 },
-  { app_id: 4, author: 'author2', description: 'description3', title: 'title3', todo_id: 3 }
-];
-
 const ReadUpdate = ({ app_id }) => {
   const { authState } = useContext(AuthContext);
   const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
   const { isLoading } = apiState;
   const { user } = authState;
 
-  const [todos, setTodos] = useState(todosDummy);
+  const [todos, setTodos] = useState([]);
 
   //Edit Todo state and form state
   const [isEditting, setEdit] = useState(false);
@@ -119,7 +113,7 @@ const ReadUpdate = ({ app_id }) => {
       <Title>Todos: </Title>
       <Card>
         <Spin tip="Loading..." spinning={isLoading}>
-          {!todos.length == 0 ? (
+          {!todos.length === 0 ? (
             todos.map((todo) => (
               <Todo
                 todo={todo}

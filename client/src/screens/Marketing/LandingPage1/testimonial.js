@@ -115,9 +115,9 @@ const Container = styled.div`
 `;
 
 const testimonials = [
-  { title: 'Testimonial 1', name: 'Karel johnsoh', job: 'CEO, Company 1' },
-  { title: 'Lorem Ipsep 2', name: 'Jenny Smith', job: 'CFO, Example Inc' },
-  { title: 'Excellent Product', name: 'Racheal Aniston', job: 'CEO, Private LLC' }
+  { id: 1, title: 'Testimonial 1', name: 'Karel johnsoh', job: 'CEO, Company 1' },
+  { id: 2, title: 'Lorem Ipsep 2', name: 'Jenny Smith', job: 'CFO, Example Inc' },
+  { id: 3, title: 'Excellent Product', name: 'Racheal Aniston', job: 'CEO, Private LLC' }
 ];
 
 const Testimonials = () => {
@@ -126,6 +126,7 @@ const Testimonials = () => {
       <Carousel autoplay>
         {testimonials.map((testimonial) => (
           <Testimonial
+            key={testimonial.id}
             testimonial={testimonial.title}
             name={testimonial.name}
             job={testimonial.job}

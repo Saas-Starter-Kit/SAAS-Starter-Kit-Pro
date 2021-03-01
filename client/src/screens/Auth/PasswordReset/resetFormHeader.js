@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { colors, breakpoints } from '../../../styles/theme';
+import { breakpoints } from '../../../styles/theme';
 import Title from '../../../components/Auth/title';
 
 const Wrapper = styled.div`

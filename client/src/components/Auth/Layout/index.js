@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { colors, breakpoints, fieldStyles } from '../../../styles/theme';
+import { colors, breakpoints } from '../../../styles/theme';
 
 import Header from '../Navigation/header';
 import Footer from '../Navigation/footer';

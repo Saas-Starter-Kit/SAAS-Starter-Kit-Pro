@@ -1,7 +1,7 @@
 import React from 'react';
 import Title from '../../../components/Auth/title';
 import styled from 'styled-components';
-import { colors, breakpoints, fieldStyles } from '../../../styles/theme';
+import { colors, breakpoints } from '../../../styles/theme';
 
 const Wrapper = styled.div`
   background-color: ${colors.gray50};

@@ -1,8 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 
 import AuthContext from '../../../utils/authContext';
-import { colors, breakpoints, fieldStyles } from '../../../styles/theme';
+import { colors, breakpoints } from '../../../styles/theme';
 import ApiContext from '../../../utils/apiContext';
 
 import LoadingOverlay from '../../../components/Common/loadingOverlay';
@@ -32,7 +32,7 @@ const Wrapper = styled.div`
 `;
 
 const PasswordReset = () => {
-  const { firebase, LogIn, LogOut } = useContext(AuthContext);
+  const { firebase } = useContext(AuthContext);
   const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
   const { isLoading } = apiState;
   const [success, setSuccess] = useState(false);

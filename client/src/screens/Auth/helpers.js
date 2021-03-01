@@ -52,9 +52,7 @@ export const LoginAuth = async (
     jwt_token
   };
 
-  console.log(user);
-
-  if (!process.env.NODE_ENV == 'development') {
+  if (!process.env.NODE_ENV === 'development') {
     //save event and user id to Google Analytics
     let parameters = {
       method: 'Email'

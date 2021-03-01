@@ -65,6 +65,12 @@ const Header = () => {
         setPaymentStatus('finish');
         setConfirmStatus('finish');
         break;
+      default:
+        setLoginStatus('finish');
+        setPlanStatus('finish');
+        setPaymentStatus('finish');
+        setConfirmStatus('finish');
+        break;
     }
   };
 
@@ -74,17 +80,17 @@ const Header = () => {
         <Step
           status={loginStatus}
           title="Login"
-          icon={pageName == 'checkauth' || '' ? <LoadingOutlined /> : <UserOutlined />}
+          icon={pageName === 'checkauth' || '' ? <LoadingOutlined /> : <UserOutlined />}
         />
         <Step
           status={planStatus}
           title="Plan"
-          icon={pageName == 'plan' ? <LoadingOutlined /> : <SolutionOutlined />}
+          icon={pageName === 'plan' ? <LoadingOutlined /> : <SolutionOutlined />}
         />
         <Step
           status={paymentStatus}
           title="Payment"
-          icon={pageName == 'payment' ? <LoadingOutlined /> : <CreditCardOutlined />}
+          icon={pageName === 'payment' ? <LoadingOutlined /> : <CreditCardOutlined />}
         />
         <Step status={confirmStatus} title="Done" icon={<CheckCircleOutlined />} />
       </Steps>

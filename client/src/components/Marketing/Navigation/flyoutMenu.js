@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'gatsby';
-import { colors, breakpoints } from '../../../styles/theme';
+import { colors } from '../../../styles/theme';
 import {
   FcDoughnutChart,
   FcCurrencyExchange,

@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, { keyframes, css } from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { useState, useRef } from 'react';
 import useOutsideClick from '../../../hooks/useOutsideClick';
 import { Link } from 'gatsby';

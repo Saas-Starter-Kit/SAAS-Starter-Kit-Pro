@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { colors, breakpoints, fieldStyles } from '../../styles/theme';
+import { colors, breakpoints } from '../../styles/theme';
 
 const Card = styled.div`
   background-color: ${colors.white};

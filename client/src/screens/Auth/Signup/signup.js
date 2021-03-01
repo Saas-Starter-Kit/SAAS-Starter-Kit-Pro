@@ -22,12 +22,13 @@ const Signup = () => {
   const location = useLocation();
   const data = useStaticQuery(staticQuery);
   const domainUrl = data.site.siteMetadata.siteUrl;
-  const { firebase, LogIn, LogOut } = useContext(AuthContext);
+  const { firebase } = useContext(AuthContext);
   const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
   const { isLoading } = apiState;
   const [appId, setAppId] = useState();
   const [isInviteFlow, setInviteFlow] = useState();
 
+  /* eslint-disable */
   //extract data from query params
   useEffect(() => {
     if (location.search) {
@@ -40,6 +41,7 @@ const Signup = () => {
   useEffect(() => {
     return () => fetchSuccess();
   }, []);
+  /* eslint-disable */
 
   const handleSubmit = async (values) => {
     fetchInit();

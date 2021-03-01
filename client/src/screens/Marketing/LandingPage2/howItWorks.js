@@ -158,6 +158,7 @@ const HowItWorks = () => {
   const intersectTarget = useRef(null);
   const [isVisible, setTarget] = useState(false);
 
+  /* eslint-disable */
   useEffect(() => {
     const opts = {
       root: null,
@@ -180,6 +181,7 @@ const HowItWorks = () => {
 
     observerScroll.observe(intersectTarget.current);
   }, []);
+  /* eslint-enable */
 
   return (
     <Container>

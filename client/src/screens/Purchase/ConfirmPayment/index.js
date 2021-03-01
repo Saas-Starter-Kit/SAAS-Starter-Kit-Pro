@@ -22,9 +22,11 @@ const Title = styled.h2`
 const ConfirmPayment = () => {
   const { LogOut } = useContext(AuthContext);
 
+  /* eslint-disable */
   useEffect(() => {
     LogOut();
   }, []);
+  /* eslint-disable */
 
   return (
     <Wrapper>

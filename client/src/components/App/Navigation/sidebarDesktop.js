@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import ScrollBar from 'react-perfect-scrollbar';
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import { Layout, Menu, Switch } from 'antd';
-import { HomeOutlined, UserOutlined, FolderOutlined, BulbOutlined } from '@ant-design/icons';
+import { BulbOutlined } from '@ant-design/icons';
 import { Link } from 'gatsby';
 
 import LargeLogo from '../../Common/svgs/LargeLogo';

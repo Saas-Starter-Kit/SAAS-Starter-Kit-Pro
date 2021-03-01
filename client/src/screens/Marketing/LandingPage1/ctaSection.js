@@ -80,7 +80,7 @@ const CTASection = () => (
         Ac euismod vel sit maecenas id pellentesque eu sed consectetur. Malesuada adipiscing
         sagittis vel nulla nec.
       </Paragraph>
-      <StyledLink href="/auth/signup">Sign up for free</StyledLink>
+      <StyledLink to="/auth/signup">Sign up for free</StyledLink>
     </Wrapper>
   </Background>
 );

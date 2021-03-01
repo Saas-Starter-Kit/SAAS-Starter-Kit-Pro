@@ -24,6 +24,7 @@ const Permissions = () => {
   const [privateJWTData, setPrivateJWTData] = useState();
   const [isAdmin, setAdmin] = useState(true);
 
+  /* eslint-disable */
   //meant to address React hydration issue
   useEffect(() => {
     setClient(true);
@@ -32,6 +33,7 @@ const Permissions = () => {
   useEffect(() => {
     updateRole(ability, 'admin');
   }, []);
+  /* eslint-enable */
 
   const apiPermission = async (event) => {
     event.preventDefault();
