@@ -1,13 +1,24 @@
 import React, { useRef } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { Switch } from 'antd';
-import { HomeOutlined, UserOutlined, FolderOutlined, BulbOutlined } from '@ant-design/icons';
+import { BulbOutlined } from '@ant-design/icons';
+
 import useOutsideClick from '../../../hooks/useOutsideClick';
 import { colors, breakpoints } from '../../../styles/theme';
+
 import MobileSidebarItem from './mobileSidebarItem';
 import Cross from '../svgs/cross';
 import LargeLogo from '../../Common/svgs/LargeLogo';
 import { THEMES } from '../AppLayout';
+import {
+  FcBarChart,
+  FcCollect,
+  FcConferenceCall,
+  FcGenealogy,
+  FcTimeline,
+  FcUpload,
+  FcPrivacy
+} from 'react-icons/fc';
 
 const Wrapper = styled.div`
   position: fixed;
@@ -185,49 +196,49 @@ const SidebarMobile = ({ toggleMobileMenu, app_id, theme, toggleTheme }) => {
                 theme={theme}
                 link={`/app/${app_id}/dashboard`}
                 toggleMenu={() => toggleMobileMenu(false)}
-                svg={<HomeOutlined />}
+                svg={<FcBarChart />}
                 title="Dashboard"
               />
               <MobileSidebarItem
                 theme={theme}
                 link={`/app/${app_id}/readupdate`}
                 toggleMenu={() => toggleMobileMenu(false)}
-                svg={<UserOutlined />}
+                svg={<FcCollect />}
                 title="Read Update"
               />
               <MobileSidebarItem
                 theme={theme}
                 link={`/app/${app_id}/create`}
                 toggleMenu={() => toggleMobileMenu(false)}
-                svg={<FolderOutlined />}
+                svg={<FcUpload />}
                 title="Create"
               />
               <MobileSidebarItem
                 theme={theme}
                 link={`/app/${app_id}/permissions`}
                 toggleMenu={() => toggleMobileMenu(false)}
-                svg={<FolderOutlined />}
+                svg={<FcPrivacy />}
                 title="Permissions"
               />
               <MobileSidebarItem
                 theme={theme}
                 link={`/app/${app_id}/users`}
                 toggleMenu={() => toggleMobileMenu(false)}
-                svg={<FolderOutlined />}
+                svg={<FcConferenceCall />}
                 title="Users"
               />
               <MobileSidebarItem
                 theme={theme}
                 link={`/app/${app_id}/onboarding`}
                 toggleMenu={() => toggleMobileMenu(false)}
-                svg={<FolderOutlined />}
+                svg={<FcTimeline />}
                 title="Onboarding"
               />
               <MobileSidebarItem
                 theme={theme}
                 link={`/app/${app_id}/machinelearning`}
                 toggleMenu={() => toggleMobileMenu(false)}
-                svg={<FolderOutlined />}
+                svg={<FcGenealogy />}
                 title="Machine Learning"
               />
             </Nav>

@@ -12,6 +12,25 @@ import SmallLogo from '../../../assets/images/logo/small_logo.svg';
 import MenuImageSrc from '../../../assets/images/icons/menu.svg';
 import ChevronDown from '../../../assets/images/icons/chevron-down.svg';
 
+const Container = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 1rem;
+  height: 5rem;
+  background-color: ${colors.white};
+  @media (min-width: ${breakpoints.small}) {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+  @media (min-width: ${breakpoints.medium}) {
+    justify-content: flex-start;
+  }
+  * {
+    margin-right: 10px;
+  }
+`;
+
 const LogoWrapper = styled.div`
   @media (min-width: ${breakpoints.large}) {
     width: 0;
@@ -104,12 +123,6 @@ const ButtonWrapper = styled.div`
   margin-left: 2rem;
 `;
 
-const ButtonSpan = styled.span`
-  display: inline-flex;
-  border-radius: 0.375rem;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-`;
-
 const SolutionsButton = styled.div`
   color: ${colors.gray500};
   display: inline-flex;
@@ -144,25 +157,6 @@ const Chevron = styled.img`
   }
 `;
 
-const Container2 = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1.5rem 1rem;
-  height: 5rem;
-  background-color: ${colors.white};
-  @media (min-width: ${breakpoints.small}) {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-  }
-  @media (min-width: ${breakpoints.medium}) {
-    justify-content: flex-start;
-  }
-  * {
-    margin-right: 10px;
-  }
-`;
-
 const Header = () => {
   const ref = useRef();
   const refMobile = useRef();
@@ -175,7 +169,7 @@ const Header = () => {
   useOutsideClick(refMobile, () => toggleMobileMenu(false));
 
   return (
-    <Container2>
+    <Container>
       <LogoWrapper>
         <Link to="/">
           <Logo src={SmallLogo} alt="Logo" />
@@ -212,13 +206,11 @@ const Header = () => {
         </Link>
       </Nav>
       <ButtonWrapper>
-        <ButtonSpan>
-          <Link to="/auth/login">
-            <Button>Sign-In</Button>
-          </Link>
-        </ButtonSpan>
+        <Link to="/auth/login">
+          <Button>Sign-In</Button>
+        </Link>
       </ButtonWrapper>
-    </Container2>
+    </Container>
   );
 };
 

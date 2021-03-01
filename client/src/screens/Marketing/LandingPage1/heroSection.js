@@ -97,8 +97,8 @@ const HeroSection = () => (
   <Container>
     <HeroTextContainer>
       <HeroHeader>
-        Data to enrich your
-        <Span> online business</Span>
+        Main Value Proposition of
+        <Span> your business</Span>
       </HeroHeader>
       <Paragraph>
         Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo.

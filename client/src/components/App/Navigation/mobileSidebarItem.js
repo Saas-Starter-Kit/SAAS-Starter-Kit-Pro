@@ -8,7 +8,7 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   font-weight: 500;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.25rem;
   color: ${({ theme }) => (theme === THEMES.DARK ? colors.silver : colors.doveGray)};
   padding: 0 16px 0 24px;
@@ -30,8 +30,8 @@ const SvgWrapper = styled.div`
 `;
 
 const TitleWrapper = styled.span`
-  font-size: 13px;
-  font-weight: normal;
+  font-size: 15px;
+  font-weight: 500;
 `;
 
 const MobileSidebarItem = ({ link, toggleMenu, svg, title, theme }) => (
