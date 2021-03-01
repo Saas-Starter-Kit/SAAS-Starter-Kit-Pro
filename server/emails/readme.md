@@ -17,4 +17,5 @@ emails are fully functional, meaning that the crucial pieces of info and functio
 operational and setup. Only styling is required.
 
 The emails not in the Email Marketing directory are all transactional
-emails and should not be moved or deleted.
+emails and should not be moved or deleted as this will affect the functionality
+of the app.
