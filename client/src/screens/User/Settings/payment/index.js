@@ -17,7 +17,7 @@ const Title = styled.h1`
 `;
 
 const PaymentSettings = () => {
-  const { firebase, authState } = useContext(AuthContext);
+  const { authState } = useContext(AuthContext);
   const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
   const { isLoading } = apiState;
 
@@ -27,11 +27,9 @@ const PaymentSettings = () => {
   const [deletePaymentId, setDeletePaymentId] = useState();
   const [payCards, setPayCards] = useState([]);
   const [paymentRemoved, setPaymentRemoved] = useState(false);
-
-  //user state
-  const [id, setId] = useState();
   const [stripeCustomerId, setStripeId] = useState();
 
+  /* eslint-disable */
   useEffect(() => {
     if (authState.user) {
       setUser();
@@ -47,6 +45,7 @@ const PaymentSettings = () => {
   useEffect(() => {
     return () => fetchSuccess();
   }, []);
+  /* eslint-enable */
 
   /*
       Auth Methods
@@ -54,9 +53,7 @@ const PaymentSettings = () => {
 
   const setUser = () => {
     let stripeCustomerId = authState.user.stripeCustomerKey;
-    let id = authState.user.id;
 
-    setId(id);
     setStripeId(stripeCustomerId);
   };
 

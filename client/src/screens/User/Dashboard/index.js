@@ -5,7 +5,7 @@ import { Empty } from 'antd';
 
 import AuthContext from '../../../utils/authContext';
 import ApiContext from '../../../utils/apiContext';
-import { colors, breakpoints } from '../../../styles/theme';
+import { breakpoints } from '../../../styles/theme';
 import axios from '../../../services/axios';
 
 import LoadingOverlay from '../../../components/Common/loadingOverlay';
@@ -84,11 +84,13 @@ const Dashboard = () => {
   const [isModal, setModal] = useState(false);
   const [deleteAppId, setDeleteAppId] = useState();
 
+  /* eslint-disable */
   useEffect(() => {
     if (authState.user) {
       getApps();
     }
   }, [authState]);
+  /* eslint-enable */
 
   const getApps = async () => {
     let user_id = authState.user.id;
@@ -103,7 +105,7 @@ const Dashboard = () => {
 
     console.log(result);
 
-    let adminApps = result.data.filter((item) => item.role == 'admin');
+    let adminApps = result.data.filter((item) => item.role === 'admin');
 
     setApps(adminApps);
     fetchSuccess();
@@ -173,7 +175,7 @@ const Dashboard = () => {
         <AppsSection>
           <h2>My Apps:</h2>
           <AppsWrapper>
-            {!apps.length == 0 ? (
+            {!apps.length === 0 ? (
               apps.map((app) => (
                 <StyledCard key={app.app_id}>
                   <Link to={`/app/${app.app_id}/dashboard`} state={{ app }}>

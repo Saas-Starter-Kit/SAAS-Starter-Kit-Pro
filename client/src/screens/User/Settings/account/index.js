@@ -29,6 +29,7 @@ const AccountSettings = () => {
   const [username, setUsername] = useState('');
   const [isEmail, setIsEmail] = useState();
 
+  /* eslint-disable */
   useEffect(() => {
     if (authState.user) {
       setUser();
@@ -38,6 +39,7 @@ const AccountSettings = () => {
   useEffect(() => {
     return () => fetchSuccess();
   }, []);
+  /* eslint-enable */
 
   /*
       Auth Methods

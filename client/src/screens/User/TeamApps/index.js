@@ -7,12 +7,6 @@ import ApiContext from '../../../utils/apiContext';
 import axios from '../../../services/axios';
 import Card from '../../../components/Common/Card';
 
-import { Button } from 'antd';
-import PrimaryButton from '../../../components/Common/buttons/PrimaryButton';
-import CancelButton from '../../../components/Common/buttons/CancelButton';
-import DangerButton from '../../../components/Common/buttons/DangerButton';
-import SecondaryButton from '../../../components/Common/buttons/SecondaryButton';
-
 const StyledCard = styled(Card)`
   display: flex;
   flex-direction: column;
@@ -36,24 +30,21 @@ const StyledLink = styled.div`
   font-weight: 500;
 `;
 
-const DummyData = [
-  { app_id: 1, app_name: 'app3' },
-  { app_id: 2, app_name: 'app4' }
-];
-
 const TeamApps = () => {
   const { authState } = useContext(AuthContext);
-  const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
-  const { isLoading } = apiState;
-  const [teamApps, setTeamApps] = useState(DummyData);
+  const { fetchFailure, fetchInit, fetchSuccess } = useContext(ApiContext);
+  const [teamApps, setTeamApps] = useState([]);
 
+  /* eslint-disable */
   useEffect(() => {
     if (authState.user) {
-      //  getApps();
+      getApps();
     }
   }, [authState]);
+  /* eslint-enable */
 
   const getApps = async () => {
+    fetchInit();
     let user_id = authState.user.id;
 
     let params = {
@@ -64,9 +55,10 @@ const TeamApps = () => {
       fetchFailure(err);
     });
 
-    let userApps = result.data.filter((item) => item.role == 'user');
+    let userApps = result.data.filter((item) => item.role === 'user');
 
     setTeamApps(userApps);
+    fetchSuccess();
   };
 
   return (

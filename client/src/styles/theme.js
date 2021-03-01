@@ -1,5 +1,3 @@
-import { css } from 'styled-components';
-
 export const theme = {
   primary: '#42389D',
   primaryHover: '#5145CD',
@@ -52,7 +50,6 @@ export const colors = {
   whisper: '#F9F9FC',
   dustyGray: '#999999',
   silver: '#CCCCCC',
-  cadetBlue: '#B2B0C7',
   midnight: '#001529',
   gallery: '#F0F0F0',
   lilyWhite: '#E6F7FF',

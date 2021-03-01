@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { Link } from 'gatsby';
 import { useLocation } from '@reach/router';
 import styled from 'styled-components';
-import { breakpoints, colors } from '../../../styles/theme';
+import { breakpoints } from '../../../styles/theme';
 
 import AuthContext from '../../../utils/authContext';
 import ApiContext from '../../../utils/apiContext';
@@ -45,9 +45,11 @@ const ConfirmedInvite = () => {
   const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
   const { isLoading } = apiState;
 
+  /* eslint-disable */
   useEffect(() => {
     if (authState.user) createRole();
   }, [authState]);
+  /* eslint-enable */
 
   const createRole = async () => {
     fetchInit();

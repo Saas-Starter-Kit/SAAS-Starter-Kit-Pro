@@ -27,9 +27,11 @@ const Routes = () => {
   const splitPath = location.pathname.split('/');
   const app_id = splitPath[2];
 
+  /* eslint-disable */
   useEffect(() => {
     if (authState.user) getRole(app_id, ability, authState, fetchFailure);
   }, [authState]);
+  /* eslint-enable */
 
   return (
     <Layout app_id={app_id}>

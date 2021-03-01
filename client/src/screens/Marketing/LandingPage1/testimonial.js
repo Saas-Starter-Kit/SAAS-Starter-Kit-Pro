@@ -123,7 +123,7 @@ const testimonials = [
 const Testimonials = () => {
   return (
     <Container>
-      <Carousel autoplay>
+      <Carousel dotPosition="top" autoplay>
         {testimonials.map((testimonial) => (
           <Testimonial
             key={testimonial.id}

@@ -18,7 +18,7 @@ const PaymentInformationCard = ({ subscriptionState, price, planType }) => {
         <p>{moment(subscriptionState.current_period_end * 1000).format('MMM Do YYYY')}</p>
         <div>Member Since</div>
         <p>{moment(subscriptionState.created * 1000).format('MMM Do YYYY')}</p>
-        {subscriptionState.status == 'trialing' && (
+        {subscriptionState.status === 'trialing' && (
           <div>
             <div>Trial start</div>
             <p>{moment(subscriptionState.trial_start * 1000).format('MMM Do YYYY')}</p>

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 import { Formik } from 'formik';
 import { useStaticQuery, graphql } from 'gatsby';
@@ -141,7 +141,7 @@ const Users = ({ app_id }) => {
               key="action"
               render={(row) => (
                 <Can I="remove" a="user">
-                  {row.role == 'user' && (
+                  {row.role === 'user' && (
                     <RemoveUserButton onClick={() => removeUserRole(row.role_id)}>
                       Remove
                     </RemoveUserButton>

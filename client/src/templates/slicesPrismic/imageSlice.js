@@ -1,6 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
-//import Img from 'gatsby-image';
 import { BaseCard } from '../../components/Marketing/Blog/cards';
 
 const Image = ({ slice }) => {

@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { message } from 'antd';
-import { navigate, Link } from 'gatsby';
+import { navigate } from 'gatsby';
 import styled from 'styled-components';
 
 import AuthContext from '../../../../utils/authContext';
@@ -30,22 +30,20 @@ const SubscriptionSettings = () => {
   const premium_type = process.env.GATSBY_STRIPE_PREMIUM_PLAN_TYPE;
   const basic_type = process.env.GATSBY_STRIPE_BASIC_PLAN_TYPE;
 
-  const { firebase, authState, LogOut } = useContext(AuthContext);
-  const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
+  const { authState, LogOut } = useContext(AuthContext);
+  const { fetchFailure, fetchSuccess, apiState } = useContext(ApiContext);
   const { isLoading } = apiState;
 
   const [isModalSub, setModalSub] = useState(false);
 
   //stripe payment state
   const [subscriptionState, setSubscription] = useState();
-  const [stripeCustomerId, setStripeId] = useState();
-  const [plan, setPlan] = useState();
+  const [stripeCustomerId, setStripeId] = useState(); //eslint-disable-line
+  const [plan, setPlan] = useState(); //eslint-disable-line
   const [planType, setPlanType] = useState();
   const [price, setPrice] = useState();
 
-  //user state
-  const [id, setId] = useState();
-
+  /* eslint-disable */
   useEffect(() => {
     if (authState.user) {
       setUser();
@@ -62,6 +60,7 @@ const SubscriptionSettings = () => {
   useEffect(() => {
     return () => fetchSuccess();
   }, []);
+  /* eslint-enable */
 
   /*
       Auth Methods
@@ -69,9 +68,7 @@ const SubscriptionSettings = () => {
 
   const setUser = () => {
     let stripeCustomerId = authState.user.stripeCustomerKey;
-    let id = authState.user.id;
 
-    setId(id);
     setStripeId(stripeCustomerId);
   };
 
@@ -110,11 +107,11 @@ const SubscriptionSettings = () => {
   */
 
   const setCurrentSubscription = () => {
-    if (subscriptionState.plan.id == premium_plan) {
+    if (subscriptionState.plan.id === premium_plan) {
       setPlan(premium_plan);
       setPrice(premium_price);
       setPlanType(premium_type);
-    } else if (subscriptionState.plan.id == basic_plan) {
+    } else if (subscriptionState.plan.id === basic_plan) {
       setPlan(basic_plan);
       setPrice(basic_price);
       setPlanType(basic_type);

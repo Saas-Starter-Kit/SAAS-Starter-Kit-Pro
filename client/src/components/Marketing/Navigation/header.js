@@ -12,11 +12,6 @@ import SmallLogo from '../../../assets/images/logo/small_logo.svg';
 import MenuImageSrc from '../../../assets/images/icons/menu.svg';
 import ChevronDown from '../../../assets/images/icons/chevron-down.svg';
 
-const Container1 = styled.div`
-  position: relative;
-  background-color: ${colors.white};
-`;
-
 const LogoWrapper = styled.div`
   @media (min-width: ${breakpoints.large}) {
     width: 0;
@@ -26,6 +21,7 @@ const LogoWrapper = styled.div`
 
 const Logo = styled.img`
   cursor: pointer;
+  margin-top: 1rem;
   height: 2rem;
   width: auto;
   @media (min-width: ${breakpoints.small}) {
@@ -153,6 +149,8 @@ const Container2 = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 1.5rem 1rem;
+  height: 5rem;
+  background-color: ${colors.white};
   @media (min-width: ${breakpoints.small}) {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
@@ -177,50 +175,50 @@ const Header = () => {
   useOutsideClick(refMobile, () => toggleMobileMenu(false));
 
   return (
-    <Container1>
-      <Container2>
-        <LogoWrapper>
-          <Link to="/">
-            <Logo src={SmallLogo} alt="Logo" />
-          </Link>
-        </LogoWrapper>
-        <MenuWrapper ref={refMobile}>
-          <MenuButton onClick={mobileMenuHandler}>
-            <MenuImage src={MenuImageSrc} alt="menu" />
-          </MenuButton>
-          {mobileMenu ? <MobileMenu mobileMenuHandler={mobileMenuHandler} /> : null}
-        </MenuWrapper>
-        <Nav>
-          <SolutionsWrapper onMouseOver={() => toggleMenu(true)} ref={ref}>
-            <SolutionsButton type="button">
-              Solutions
-              <Chevron src={ChevronDown} alt="down arrow" />
-            </SolutionsButton>
+    <Container2>
+      <LogoWrapper>
+        <Link to="/">
+          <Logo src={SmallLogo} alt="Logo" />
+        </Link>
+      </LogoWrapper>
+      <MenuWrapper ref={refMobile}>
+        <MenuButton onClick={mobileMenuHandler}>
+          <MenuImage src={MenuImageSrc} alt="menu" />
+        </MenuButton>
+        {mobileMenu ? <MobileMenu mobileMenuHandler={mobileMenuHandler} /> : null}
+      </MenuWrapper>
+      <Nav>
+        <SolutionsWrapper onMouseOver={() => toggleMenu(true)} ref={ref}>
+          <SolutionsButton type="button">
+            Solutions
+            <Chevron src={ChevronDown} alt="down arrow" />
+          </SolutionsButton>
 
-            {menu ? (
-              <FlyoutMenuWrapper>
-                <FlyoutMenu />
-              </FlyoutMenuWrapper>
-            ) : null}
-          </SolutionsWrapper>
+          {menu ? (
+            <FlyoutMenuWrapper>
+              <FlyoutMenu />
+            </FlyoutMenuWrapper>
+          ) : null}
+        </SolutionsWrapper>
 
-          <Link className="header_link" activeClassName="header_active_link" to="/pricing/pricing1">
-            Pricing
+        <Link className="header_link" activeClassName="header_active_link" to="/pricing">
+          Pricing
+        </Link>
+        <Link className="header_link" activeClassName="header_active_link" to="/blog">
+          Blog
+        </Link>
+        <Link className="header_link" activeClassName="header_active_link" to="/docs/overview">
+          Docs
+        </Link>
+      </Nav>
+      <ButtonWrapper>
+        <ButtonSpan>
+          <Link to="/auth/login">
+            <Button>Sign-In</Button>
           </Link>
-
-          <Link className="header_link" activeClassName="header_active_link" to="/app/dashboard">
-            App
-          </Link>
-        </Nav>
-        <ButtonWrapper>
-          <ButtonSpan>
-            <Link to="/auth/login">
-              <Button>Sign-In</Button>
-            </Link>
-          </ButtonSpan>
-        </ButtonWrapper>
-      </Container2>
-    </Container1>
+        </ButtonSpan>
+      </ButtonWrapper>
+    </Container2>
   );
 };
 

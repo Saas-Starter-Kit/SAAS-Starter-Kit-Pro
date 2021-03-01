@@ -126,7 +126,7 @@ const Post = ({ data }) => {
         <ContentWrapper>
           <FirstColumn>
             <BaseCard>
-              <img src={hero_image.thumbnails.desktop.url} />
+              <img src={hero_image.thumbnails.desktop.url} alt="" />
               <CardContentWrapper>
                 <SliceZone body={body} />
                 <Disqus url={`${siteUrl + '/' + pageUid}`} identifier={pageUid} title={title} />

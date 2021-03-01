@@ -182,13 +182,22 @@ const MobileMenu = ({ mobileMenuHandler }) => (
             <Title>Pricing</Title>
           </Item>
         </Link>
-        <Link to="/app/1/dashboard">
+        <Link to="/docs/overview">
           <Item>
             <MenuImageWrapper>
               {/*<!-- Heroicon name: view-grid -->*/}
               <MenuImg src={ViewGrid} alt="click" />
             </MenuImageWrapper>
-            <Title>App</Title>
+            <Title>Docs</Title>
+          </Item>
+        </Link>
+        <Link to="/blog">
+          <Item>
+            <MenuImageWrapper>
+              {/*<!-- Heroicon name: view-grid -->*/}
+              <MenuImg src={ViewGrid} alt="click" />
+            </MenuImageWrapper>
+            <Title>Blog</Title>
           </Item>
         </Link>
         <hr />

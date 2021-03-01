@@ -1,7 +1,6 @@
 import React from 'react';
 
-import styled, { keyframes } from 'styled-components';
-import { colors, breakpoints, fieldStyles } from '../../../../styles/theme';
+import styled from 'styled-components';
 import ModalCardDelete from './deleteCardConfirmModal';
 import { FaRegCreditCard } from 'react-icons/fa';
 

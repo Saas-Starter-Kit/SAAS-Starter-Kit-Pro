@@ -5,7 +5,7 @@ import { Spin } from 'antd';
 
 import AuthContext from '../../../../utils/authContext';
 import ApiContext from '../../../../utils/apiContext';
-import { colors, breakpoints } from '../../../../styles/theme';
+import { colors } from '../../../../styles/theme';
 import axios from '../../../../services/axios';
 
 import Card from '../../../../components/Common/Card';
@@ -41,6 +41,12 @@ const AttachPaymentForm = () => {
   const stripe = useStripe();
   const elements = useElements();
 
+  /* eslint-disable  */
+  useEffect(() => {
+    if (authState.user) createSetupIntent();
+  }, [authState]);
+  /* eslint-enable */
+
   const createSetupIntent = async () => {
     let data = { customer: authState.user };
     const result = await axios.post('/stripe/wallet', data).catch((err) => {
@@ -49,11 +55,6 @@ const AttachPaymentForm = () => {
 
     setSetupIntent(result.data);
   };
-
-  useEffect(() => {
-    if (authState.user) createSetupIntent();
-    console.log(authState);
-  }, [authState]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();

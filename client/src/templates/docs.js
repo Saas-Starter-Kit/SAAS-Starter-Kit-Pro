@@ -1,9 +1,9 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { graphql } from 'gatsby';
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 import { Drawer } from 'antd';
 
-import { colors, breakpoints } from '../styles/theme';
+import { breakpoints } from '../styles/theme';
 import Menu from '../components/Marketing/svgs/BurgerIcon';
 
 import SliceZone from './sliceZone';
