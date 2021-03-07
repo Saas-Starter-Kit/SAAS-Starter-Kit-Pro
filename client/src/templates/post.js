@@ -5,7 +5,6 @@ import moment from 'moment';
 
 import { colors, breakpoints } from '../styles/theme';
 import Disqus from '../services/disqus';
-
 import SliceZone from './sliceZone';
 import { BaseCard } from '../components/Marketing/Blog/cards';
 import RelatedArticles from '../components/Marketing/Blog/relatedArticles';
