@@ -7,30 +7,28 @@ import nodemailer from 'nodemailer';
 */
 let transport;
 
-if (process.env.NODE_ENV === 'development') {
-  transport = nodemailer.createTransport({
-    host: 'smtp.mailtrap.io',
-    //host: 'localhost', //will cause error but show email preview
-    port: 465,
-    secure: false,
-    auth: {
-      user: process.env.MAIL_TRAP_USERNAME,
-      pass: process.env.MAIL_TRAP_PASSWORD
-    }
-  });
-} else {
-  transport = nodemailer.createTransport({
-    service: 'SendinBlue',
-    auth: {
-      user: process.env.SendInBlue_User,
-      pass: process.env.SendInBlue_Password
-    }
-  });
-}
+let devTransport = nodemailer.createTransport({
+  host: 'smtp.mailtrap.io',
+  //host: 'localhost', //will cause error but show email preview
+  port: 465,
+  secure: false,
+  auth: {
+    user: process.env.MAIL_TRAP_USERNAME,
+    pass: process.env.MAIL_TRAP_PASSWORD
+  }
+});
+
+const prodTransport = nodemailer.createTransport({
+  service: 'SendinBlue',
+  auth: {
+    user: process.env.SendInBlue_User,
+    pass: process.env.SendInBlue_Password
+  }
+});
 
 export const email = new Email({
   send: true,
-  transport,
+  transport: devTransport,
   preview: true, // to preview emails in your own browser
   views: {
     options: {
