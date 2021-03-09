@@ -6,7 +6,7 @@ import nodemailer from 'nodemailer';
   sendinblue when going live.
 */
 
-const devTransport = nodemailer.createTransport({
+let devTransport = nodemailer.createTransport({
   host: 'smtp.mailtrap.io',
   //host: 'localhost', //will cause error but show email preview
   port: 465,
