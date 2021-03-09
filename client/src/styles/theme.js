@@ -31,6 +31,7 @@ export const colors = {
   green100: '#DEf7EC',
   green500: '#0E9F6E',
   green800: '#03543F',
+  indigo100: '#E0E7FF',
   indigo200: '#CDDBFE',
   indigo300: '#B4C6FC',
   indigo400: '#8DA2FB',

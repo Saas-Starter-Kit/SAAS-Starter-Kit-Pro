@@ -8,7 +8,6 @@ const Container = styled.div`
   display: grid;
   grid-template-columns: auto auto;
   background-color: ${(props) => props.theme.backgroundLanding};
-  background-image: url('/illustrations/blobSmall.svg');
   background-repeat: no-repeat;
   background-size: contain;
   background-position: 0% 0%;
@@ -64,7 +63,6 @@ const StyledButton = styled.button`
 const ImageContainer = styled.div`
   display: none;
   background-color: ${(props) => props.theme.backgroundLanding};
-  background-image: url('/illustrations/blobBig.svg');
   background-repeat: no-repeat;
   background-position: 0% 0%;
 
@@ -87,7 +85,7 @@ const fadeInLeft = keyframes`
 const Image = styled.img`
   margin-top: 3rem;
   padding: 3rem;
-  height: auto;
+  height: calc(32rem * 330 / 416);
   width: 32rem;
   z-index: 10;
   animation: ${fadeInLeft} 0.7s ease-in forwards;
