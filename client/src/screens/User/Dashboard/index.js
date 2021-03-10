@@ -8,6 +8,7 @@ import ApiContext from '../../../utils/apiContext';
 import { breakpoints } from '../../../styles/theme';
 import axios from '../../../services/axios';
 
+import SEO from '../../../components/Marketing/Layout/seo';
 import LoadingOverlay from '../../../components/Common/loadingOverlay';
 import DeleteAppModal from './DeleteAppModal';
 import Card from '../../../components/Common/Card';
@@ -167,50 +168,58 @@ const Dashboard = () => {
     setModal(true);
   };
 
+  const seoData = {
+    title: 'Saas Starter Kit Pro Dashboard page',
+    description: 'Saas Starter Kit Pro Dashboard page'
+  };
+
   return (
-    <div>
-      {isLoading && <LoadingOverlay />}
-      <StyledHeader>Dashboard</StyledHeader>
-      <ContentWrapper>
-        <AppsSection>
-          <h2>My Apps:</h2>
-          <AppsWrapper>
-            {!apps.length === 0 ? (
-              apps.map((app) => (
-                <StyledCard key={app.app_id}>
-                  <Link to={`/app/${app.app_id}/dashboard`} state={{ app }}>
-                    <StyledLink>{app.app_name}</StyledLink>
-                  </Link>
-                  <RoleText>Role: admin</RoleText>
-                  <DangerButton onClick={() => handleDeleteAppModal(app.app_id)}>
-                    Delete
-                  </DangerButton>
-                </StyledCard>
-              ))
-            ) : (
-              <Empty />
-            )}
-          </AppsWrapper>
-        </AppsSection>
-        <CreateAppWrapper>
-          <h2>Create App:</h2>
-          <form onSubmit={postApp}>
-            <StyledCard>
-              <TextInputWrapper>
-                <FieldLabel htmlFor="name">Create:</FieldLabel>
-                <TextInput type="text" name="name" />
-              </TextInputWrapper>
-              <Button type="submit">Save</Button>
-            </StyledCard>
-          </form>
-        </CreateAppWrapper>
-      </ContentWrapper>
-      <DeleteAppModal
-        handleModalCancel={handleModalCancel}
-        isModal={isModal}
-        deleteApp={deleteApp}
-      />
-    </div>
+    <React.Fragment>
+      <SEO seoData={seoData} />
+      <div>
+        {isLoading && <LoadingOverlay />}
+        <StyledHeader>Dashboard</StyledHeader>
+        <ContentWrapper>
+          <AppsSection>
+            <h2>My Apps:</h2>
+            <AppsWrapper>
+              {!apps.length === 0 ? (
+                apps.map((app) => (
+                  <StyledCard key={app.app_id}>
+                    <Link to={`/app/${app.app_id}/dashboard`} state={{ app }}>
+                      <StyledLink>{app.app_name}</StyledLink>
+                    </Link>
+                    <RoleText>Role: admin</RoleText>
+                    <DangerButton onClick={() => handleDeleteAppModal(app.app_id)}>
+                      Delete
+                    </DangerButton>
+                  </StyledCard>
+                ))
+              ) : (
+                <Empty />
+              )}
+            </AppsWrapper>
+          </AppsSection>
+          <CreateAppWrapper>
+            <h2>Create App:</h2>
+            <form onSubmit={postApp}>
+              <StyledCard>
+                <TextInputWrapper>
+                  <FieldLabel htmlFor="name">Create:</FieldLabel>
+                  <TextInput type="text" name="name" />
+                </TextInputWrapper>
+                <Button type="submit">Save</Button>
+              </StyledCard>
+            </form>
+          </CreateAppWrapper>
+        </ContentWrapper>
+        <DeleteAppModal
+          handleModalCancel={handleModalCancel}
+          isModal={isModal}
+          deleteApp={deleteApp}
+        />
+      </div>
+    </React.Fragment>
   );
 };
 

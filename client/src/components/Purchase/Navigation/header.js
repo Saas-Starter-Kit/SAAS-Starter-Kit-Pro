@@ -10,6 +10,7 @@ import {
   CheckCircleOutlined,
   CreditCardOutlined
 } from '@ant-design/icons';
+import { colors } from '../../../styles/theme';
 
 const { Step } = Steps;
 
@@ -18,6 +19,13 @@ const Wrapper = styled.div`
   width: 80%;
   margin-left: auto;
   margin-right: auto;
+
+  .ant-steps-item-wait
+    > .ant-steps-item-container
+    > .ant-steps-item-content
+    > .ant-steps-item-title {
+    color: ${colors.gray500};
+  }
 `;
 
 const Header = () => {
