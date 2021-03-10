@@ -39,7 +39,7 @@ export const colors = {
   indigo600: '#5850EC',
   indigo700: '#5145CD',
   indigo800: '#42389D',
-  indigo900: '42389D',
+  indigo900: '#42389D',
   red100: '#FDE8E8',
   red500: '#F05252',
   red800: '#9B1C1C',

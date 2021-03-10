@@ -56,24 +56,24 @@ const ArticleTitle = styled.div`
 `;
 
 const Author = styled.div`
-  color: ${colors.cadetBlue};
+  color: ${colors.gray500};
   font-size: 12px;
   font-weight: 700;
 `;
 
 const Date = styled.div`
-  color: ${colors.cadetBlue};
+  color: ${colors.gray500};
   font-size: 12px;
 `;
 
-const ArticleCard = ({ title, date, imageSrc, uid, tags }) => (
+const ArticleCard = ({ title, date, imageSrc, imageAlt, uid, tags }) => (
   <Card
     onClick={() => {
       navigate(`/blog/${uid}`);
     }}
   >
     <ImageWrapper>
-      <Image src={imageSrc} />
+      <Image src={imageSrc} alt={imageAlt || 'Blog post thumbnail image'} />
     </ImageWrapper>
     <TextWrapper>
       <TagWrapper>

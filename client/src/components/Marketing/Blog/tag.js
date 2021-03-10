@@ -11,7 +11,7 @@ const Tag = styled.div`
   padding: 0.225rem 0.9rem;
   line-height: 1.3rem;
   background-color: ${colors.gray200};
-  color: ${colors.slateGray};
+  color: ${colors.gray600};
   &:hover {
     color: ${colors.gray200};
     background-color: ${colors.slateGray};

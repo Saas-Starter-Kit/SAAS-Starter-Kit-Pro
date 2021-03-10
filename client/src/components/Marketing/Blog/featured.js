@@ -88,7 +88,10 @@ const Featured = ({
       }}
     >
       <ImageWrapper>
-        <Image src={data.hero_image.thumbnails.desktop.url} />
+        <Image
+          src={data.hero_image.thumbnails.desktop.url}
+          alt={data.hero_image.thumbnails.desktop.alt || 'Featured blog post hero image'}
+        />
       </ImageWrapper>
       <TextWrapper>
         <ArticleTitle>{data.title.text}</ArticleTitle>
