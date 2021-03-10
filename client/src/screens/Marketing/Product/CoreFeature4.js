@@ -1,9 +1,8 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
+import { StaticImage } from 'gatsby-plugin-image';
 import { colors, breakpoints } from '../../../styles/theme';
 
-import image1 from '../../../assets/images/illustrations/undraw_Build_wireframe_re_ln7g.svg';
-import image2 from '../../../assets/images/illustrations/undraw_All_the_data_re_hh4w.svg';
 import { FcApproval, FcBarChart, FcCollect, FcConferenceCall } from 'react-icons/fc';
 
 const fadeInUp = keyframes`
@@ -37,7 +36,7 @@ const Container = styled.div`
   }
 `;
 
-const LargeHeader = styled.h4`
+const LargeHeader = styled.h2`
   font-size: 1.5rem;
   line-height: 2rem;
   font-weight: 800;
@@ -62,7 +61,7 @@ const TextWrapper = styled.div`
   margin-left: 1rem;
 `;
 
-const SmallHeader = styled.h5`
+const SmallHeader = styled.h3`
   font-size: 1.125rem;
   line-height: 1.5rem;
   font-weight: 500;
@@ -74,15 +73,6 @@ const SmallParagraph = styled.p`
   font-size: 1rem;
   line-height: 1.5rem;
   color: ${colors.gray500};
-`;
-
-const FeatureImage = styled.img`
-  width: 100%;
-  @media (min-width: ${breakpoints.large}) {
-    width: 90%;
-  }
-  margin-left: auto;
-  margin-right: auto;
 `;
 
 const FeatureWrapper1 = styled.div`
@@ -210,7 +200,10 @@ const CoreFeature4 = () => (
             </ListItem>
           </List>
         </div>
-        <FeatureImage width="490" src={image1} alt="" />
+        <StaticImage
+          src="../../../assets/images/illustrations/undraw_Build_wireframe_re_ln7g.svg"
+          alt="Abstract illustration of man wearing a turtleneck standing next to floating graphs and images"
+        />
       </FeatureWrapper1>
       <FeatureWrapper2>
         <FeatureWrapper2b>
@@ -250,7 +243,10 @@ const CoreFeature4 = () => (
             </ListItem>
           </List>
         </FeatureWrapper2b>
-        <FeatureImage width="490" src={image2} alt="" />
+        <StaticImage
+          src="../../../assets/images/illustrations/undraw_All_the_data_re_hh4w.svg"
+          alt="Abstract illustration of man wearing a suit standing next to floating graphs and images"
+        />
       </FeatureWrapper2>
     </Wrapper>
   </Container>
