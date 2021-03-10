@@ -1,9 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
+import { colors } from '../../../styles/theme';
 
 const Wrapper = styled.div`
   padding: 1rem;
-  color: grey;
+  color: ${colors.gray500};
   text-align: center;
 `;
 

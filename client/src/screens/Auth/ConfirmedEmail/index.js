@@ -3,6 +3,7 @@ import { Link } from 'gatsby';
 import { useLocation } from '@reach/router';
 import styled from 'styled-components';
 
+import SEO from '../../../components/Marketing/Layout/seo';
 import AuthContext from '../../../utils/authContext';
 import ApiContext from '../../../utils/apiContext';
 import axios from '../../../services/axios';
@@ -137,29 +138,37 @@ const ConfirmedEmail = () => {
     fetchSuccess();
   };
 
+  const seoData = {
+    title: 'Saas Starter Kit Pro Email Confirmed Page',
+    description: 'Saas Starter Kit Pro Email Confirmed Page'
+  };
+
   return (
-    <Wrapper>
-      {isLoading && <LoadingOverlay />}
-      <Title>Thank You for confirming your email, your account is setup and ready to use</Title>
-      <AuthCard>
-        {isInviteFlow === 'true' && (
-          <>
-            <CardText>Click below to navigate to the app your were invited to</CardText>
-            <TextWrapper>
-              <Link to={`/app/${app_id}/dashboard`}>Go to App</Link>
-            </TextWrapper>
-          </>
-        )}
-        <CardText>Click here to navigate to the user dashboard as a free tier user</CardText>
-        <TextWrapper>
-          <Link to="/user/dashboard">Go to Dashboard</Link>
-        </TextWrapper>
-        <CardText>Click here to add a subscription your account</CardText>
-        <TextWrapper>
-          <Link to="/purchase/plan">Upgrade Plan</Link>
-        </TextWrapper>
-      </AuthCard>
-    </Wrapper>
+    <React.Fragment>
+      <SEO seoData={seoData} />
+      <Wrapper>
+        {isLoading && <LoadingOverlay />}
+        <Title>Thank You for confirming your email, your account is setup and ready to use</Title>
+        <AuthCard>
+          {isInviteFlow === 'true' && (
+            <>
+              <CardText>Click below to navigate to the app your were invited to</CardText>
+              <TextWrapper>
+                <Link to={`/app/${app_id}/dashboard`}>Go to App</Link>
+              </TextWrapper>
+            </>
+          )}
+          <CardText>Click here to navigate to the user dashboard as a free tier user</CardText>
+          <TextWrapper>
+            <Link to="/user/dashboard">Go to Dashboard</Link>
+          </TextWrapper>
+          <CardText>Click here to add a subscription your account</CardText>
+          <TextWrapper>
+            <Link to="/purchase/plan">Upgrade Plan</Link>
+          </TextWrapper>
+        </AuthCard>
+      </Wrapper>
+    </React.Fragment>
   );
 };
 
