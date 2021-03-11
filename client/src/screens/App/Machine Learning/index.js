@@ -60,56 +60,82 @@ const MachineLearning = () => {
       <h3>Your Predicted house price is: {prediction}</h3>
       <form onSubmit={mlAnalysis}>
         <InputWrapper>
-          <FieldLabel>Bedrooms</FieldLabel>
-          <TextInput name="bedrooms" type="number" />
+          <FieldLabel>
+            Bedrooms
+            <TextInput name="bedrooms" type="number" />
+          </FieldLabel>
         </InputWrapper>
         <InputWrapper>
-          <FieldLabel>Bathrooms</FieldLabel>
-          <TextInput name="bathrooms" type="number" />
+          <FieldLabel>
+            Bathrooms
+            <TextInput name="bathrooms" type="number" />
+          </FieldLabel>
         </InputWrapper>
         <InputWrapper>
-          <FieldLabel>Square Foot Living, number around 2000</FieldLabel>
-          <TextInput name="sqlive" type="number" />
+          <FieldLabel>
+            Square Foot Living, number around 2000
+            <TextInput name="sqlive" type="number" />
+          </FieldLabel>
         </InputWrapper>
         <InputWrapper>
-          <FieldLabel>Square Foot Lot, number around 15,000</FieldLabel>
-          <TextInput name="sqlot" type="number" />
+          <FieldLabel>
+            Square Foot Lot, number around 15,000
+            <TextInput name="sqlot" type="number" />
+          </FieldLabel>
         </InputWrapper>
         <InputWrapper>
-          <FieldLabel>Number of floors</FieldLabel>
-          <TextInput name="floors" type="number" />
+          <FieldLabel>
+            Number of floors
+            <TextInput name="floors" type="number" />
+          </FieldLabel>
         </InputWrapper>
         <InputWrapper>
-          <FieldLabel>Water front, 0 or 1</FieldLabel>
-          <TextInput name="water" type="number" />
+          <FieldLabel>
+            Water front, 0 or 1
+            <TextInput name="water" type="number" />
+          </FieldLabel>
         </InputWrapper>
         <InputWrapper>
-          <FieldLabel>Number of views, 0 to 4</FieldLabel>
-          <TextInput name="views" type="number" />
+          <FieldLabel>
+            Number of views, 0 to 4
+            <TextInput name="views" type="number" />
+          </FieldLabel>
         </InputWrapper>
         <InputWrapper>
-          <FieldLabel>Condition, number from 1 to 5</FieldLabel>
-          <TextInput name="condition" type="number" />
+          <FieldLabel>
+            Condition, number from 1 to 5
+            <TextInput name="condition" type="number" />
+          </FieldLabel>
         </InputWrapper>
         <InputWrapper>
-          <FieldLabel>Grade, number from 1 to 13</FieldLabel>
-          <TextInput name="grade" type="number" />
+          <FieldLabel>
+            Grade, number from 1 to 13
+            <TextInput name="grade" type="number" />
+          </FieldLabel>
         </InputWrapper>
         <InputWrapper>
-          <FieldLabel>Square foot above, number around 1800</FieldLabel>
-          <TextInput name="sqabove" type="number" />
+          <FieldLabel>
+            Square foot above, number around 1800
+            <TextInput name="sqabove" type="number" />
+          </FieldLabel>
         </InputWrapper>
         <InputWrapper>
-          <FieldLabel>Square foot basement, number around 300</FieldLabel>
-          <TextInput name="basement" type="number" />
+          <FieldLabel>
+            Square foot basement, number around 300
+            <TextInput name="basement" type="number" />
+          </FieldLabel>
         </InputWrapper>
         <InputWrapper>
-          <FieldLabel>Year built, year around 1970</FieldLabel>
-          <TextInput name="built" type="number" />
+          <FieldLabel>
+            Year built, year around 1970
+            <TextInput name="built" type="number" />
+          </FieldLabel>
         </InputWrapper>
         <InputWrapper>
-          <FieldLabel>Year renovated, year around 1980</FieldLabel>
-          <TextInput name="renovate" type="number" />
+          <FieldLabel>
+            Year renovated, year around 1980
+            <TextInput name="renovate" type="number" />
+          </FieldLabel>
         </InputWrapper>
         <ButtonWrapper>
           <Button type="submit">Predict</Button>
