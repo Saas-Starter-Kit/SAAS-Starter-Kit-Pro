@@ -7,9 +7,9 @@ CREATE TABLE users (
   firebase_user_id VARCHAR(255)
 );
 
-CREATE TABLE tenant (
+CREATE TABLE organization (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-  tenant_name VARCHAR,
+  org_name VARCHAR,
   primary_email VARCHAR(255) REFERENCES users(email),
   stripe_customer_id VARCHAR(255),
   subscription_id VARCHAR(255)
@@ -17,7 +17,7 @@ CREATE TABLE tenant (
 
 CREATE TABLE roles (
   id SERIAL PRIMARY KEY,
-  tenant_id UUID REFERENCES tenant(id),
+  org_id UUID REFERENCES organization(id),
   user_id UUID REFERENCES users(id),
   role VARCHAR(255)
 );
@@ -27,6 +27,6 @@ CREATE TABLE todos (
   title VARCHAR(255),
   description VARCHAR(1000),
   author VARCHAR(255),
-  tenant_id UUID REFERENCES tenant(id)
+  org_id UUID REFERENCES organization(id)
 );
 
