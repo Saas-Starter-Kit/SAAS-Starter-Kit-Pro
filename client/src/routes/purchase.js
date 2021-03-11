@@ -7,10 +7,7 @@ import { Payment, CheckAuth, PlanSelect, ConfirmSub } from '../screens/Purchase'
 
 const Routes = () => {
   return (
-    <Layout
-      title="Saas Starter Kit Pro Purchase page"
-      description="Saas Starter Kit Pro Purchase page"
-    >
+    <Layout>
       <Router>
         <CheckAuth path="/purchase/checkauth" />
         <Payment path="/purchase/payment" />
