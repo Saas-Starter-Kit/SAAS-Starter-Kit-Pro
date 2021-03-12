@@ -16,6 +16,13 @@ const Wrapper = styled.div`
   padding-left: 3rem;
   padding-top: 2rem;
   padding-bottom: 3rem;
+  @media (max-width: ${breakpoints.large}) {
+    padding-right: 3rem;
+  }
+  @media (max-width: ${breakpoints.small}) {
+    padding-right: 1rem;
+    padding-left: 1rem;
+  }
 `;
 
 const fadeInDown = keyframes`
@@ -91,7 +98,7 @@ const FirstColumn = styled.div`
 
 const SecondColumn = styled.div`
   padding-left: 3rem;
-  margin-right: 2rem;
+  margin-right: 3rem;
   flex-basis: 20%;
   @media (max-width: ${breakpoints.large}) {
     display: none;

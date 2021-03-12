@@ -1,7 +1,7 @@
 import React from 'react';
 import { navigate } from 'gatsby';
 import styled from 'styled-components';
-import { colors } from '../../../styles/theme';
+import { colors, breakpoints } from '../../../styles/theme';
 import { AnimatedCard } from './cards';
 import Tag from './tag';
 
@@ -15,6 +15,9 @@ const ImageWrapper = styled.picture`
   margin: 0.5rem 0 0.5rem 0.5rem;
   flex-basis: 40%;
   min-height: 200px;
+  @media (max-width: ${breakpoints.small}) {
+    display: none;
+  }
 `;
 
 const Image = styled.img`
