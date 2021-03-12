@@ -88,7 +88,6 @@ const ConfirmedEmail = () => {
         fetchFailure(err);
       });
 
-    console.log(stripeServerRes);
     //save verified email to sendinblue
     let sibData = { email, firstName };
     await axios.post('/api/post/contact', sibData).catch((err) => {
@@ -109,7 +108,6 @@ const ConfirmedEmail = () => {
       sendEventToAnalytics('signup', parameters);
       setAnalyticsUserId(id);
     }
-    console.log(user);
 
     //Login to context
     await LogIn(user);

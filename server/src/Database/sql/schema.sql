@@ -4,7 +4,9 @@ CREATE TABLE users (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
   username VARCHAR(255),
   email VARCHAR(255) UNIQUE,
-  firebase_user_id VARCHAR(255)
+  firebase_user_id VARCHAR(255),
+  verify_key VARCHAR(255),
+  is_email_verified BOOLEAN DEFAULT FALSE
 );
 
 CREATE TABLE organization (

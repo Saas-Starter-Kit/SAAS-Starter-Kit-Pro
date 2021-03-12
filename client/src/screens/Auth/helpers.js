@@ -86,9 +86,8 @@ export const SignupAuth = async (
   isInviteFlow,
   app_id
 ) => {
-  // If user signed up with email, then set their display name
+  // If user signed up with email, then set their display username
   const isEmailSignup = authRes.additionalUserInfo.providerId === 'password';
-  console.log(isEmailSignup);
   if (isEmailSignup && name) {
     let curUser = await firebase.auth().currentUser;
 
@@ -113,25 +112,13 @@ export const SignupAuth = async (
   let username = authRes.user.displayName ? authRes.user.displayName : name;
   let email = authRes.user.email;
 
-  let authData = { email, username, token };
-  let authServerRes = await axios.post(`/auth/signup`, authData).catch((err) => {
+  // the url the user is redirected to after email verify
+  const confirmEmailUrl = `${domainUrl}/auth/confirmedemail`;
+
+  let authData = { email, username, token, confirmEmailUrl };
+  await axios.post(`/auth/signup`, authData).catch((err) => {
     fetchFailure(err);
   });
-
-  //extract user id from jwt token
-  let validToken = isValidToken(authServerRes.data.token, fetchFailure);
-  let userId = validToken.user;
-
-  // the url the user is redirected to after email verify
-  const baseUrl = `${domainUrl}/auth/confirmedemail`;
-  let provider = authRes.user.providerData[0].providerId;
-
-  //save user info to url for later extraction
-  const redirectUrl = `${baseUrl}/?email=${email}&userId=${userId}&username=${username}&provider=${provider}&isInviteFlow=${isInviteFlow}&app_id=${app_id}`;
-  let verifyEmailData = { email, redirectUrl, username };
-
-  //Send Verification Email
-  await axios.post('/auth/verify-email', verifyEmailData).catch((err) => fetchFailure(err));
 
   navigate('/auth/emailconfirm');
 };

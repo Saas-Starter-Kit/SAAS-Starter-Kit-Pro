@@ -12,14 +12,13 @@ export const getUser = async (email) => {
   return queryResult.rows[0];
 };
 
-export const saveUsertoDB = async (email, username, firebaseId) => {
+export const saveUsertoDB = async (email, username, firebaseId, verifyKey) => {
   /* Save user to our own db and get unique key from db */
 
   //insert into database
-  let text = `INSERT INTO users (username, email, firebase_user_id)
-              VALUES($1, $2, $3)
-              RETURNING id`;
-  let values = [username, email, firebaseId];
+  let text = `INSERT INTO users (username, email, firebase_user_id, verify_key)
+              VALUES($1, $2, $3, $4)`;
+  let values = [username, email, firebaseId, verifyKey];
 
   let queryResult = await db.query(text, values);
 

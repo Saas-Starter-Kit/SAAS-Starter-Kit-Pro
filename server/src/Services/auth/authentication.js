@@ -3,6 +3,8 @@ import firebaseAdmin from '../../Config/firebase.js';
 import { sendEmail } from '../../Config/email.js';
 import { UpdateContact } from '../users/contacts.js';
 import { UpdateCustomer } from '../stripe/stripeCustomer.js';
+import db from '../../Database/sql/db.js';
+import { nanoid } from 'nanoid';
 import {
   saveUsertoDB,
   getUser,
@@ -10,24 +12,14 @@ import {
   updateEmailModel
 } from '../../Model/sql/auth/authentication.js';
 
-export const verifyEmail = async (req, res) => {
-  let email = req.body.email;
-  let username = req.body.username;
-  //remove spaces from url
-  let redirectUrl = encodeURI(req.body.redirectUrl);
-
-  let template = 'verify email';
-  let locals = { redirectUrl, username };
-
-  //send verification email
-  await sendEmail(email, template, locals);
-  res.status(200).send('Email Successfully Sent');
-};
+export const CreateUser = async (req, res) => {};
 
 export const SignUp = async (req, res) => {
   let token = req.body.token;
   let username = req.body.username;
   let email = req.body.email;
+  //remove spaces from url
+  let confirmEmailUrl = encodeURI(req.body.confirmEmailUrl);
 
   //First Check if User exists
   let userExists = await getUser(email);
@@ -40,14 +32,21 @@ export const SignUp = async (req, res) => {
 
   //decode the firebase token recieved from frontend and save firebase uuid
   let decodedToken = await firebaseAdmin.auth().verifyIdToken(token);
-
   let firebaseId = decodedToken.user_id;
 
-  //save user firebase info to our own db, and get unique user database id
-  let result = await saveUsertoDB(email, username, firebaseId);
-  let userId = result.id;
+  //generate random bytes for user email verify
+  const randomBytes = nanoid();
+  confirmEmailUrl = `${confirmEmailUrl}/?key=${randomBytes}`;
 
-  res.send({ token: setToken(userId) });
+  //send verification email
+  let template = 'verify email';
+  let locals = { confirmEmailUrl, username };
+  await sendEmail(email, template, locals);
+
+  //save user firebase info to our own db, and get unique user database id
+  await saveUsertoDB(email, username, firebaseId, randomBytes);
+
+  res.send('Email Confirm Sent');
 };
 
 export const Login = async (req, res) => {
