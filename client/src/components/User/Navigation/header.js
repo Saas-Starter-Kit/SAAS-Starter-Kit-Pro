@@ -65,7 +65,7 @@ const LinkItem = styled.div`
 const Logo = styled.img`
   cursor: pointer;
   height: 2rem;
-  width: auto;
+  width: calc(2rem * 34 / 32);
 `;
 
 const LogoWrapper = styled.div`

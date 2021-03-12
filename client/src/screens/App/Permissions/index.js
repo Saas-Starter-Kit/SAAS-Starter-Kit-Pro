@@ -144,12 +144,16 @@ const Permissions = () => {
               </div>
               <form onSubmit={apiPermission}>
                 <InputWrapper>
-                  <FieldLabel htmlFor="userAction">User Action</FieldLabel>
-                  <TextInput type="text" name="userAction" placeholder="read" />
+                  <FieldLabel htmlFor="userAction">
+                    User Action
+                    <TextInput type="text" name="userAction" placeholder="read" />
+                  </FieldLabel>
                 </InputWrapper>
                 <InputWrapper>
-                  <FieldLabel htmlFor="subject">Subject</FieldLabel>
-                  <TextInput type="text" name="subject" placeholder="password" />
+                  <FieldLabel htmlFor="subject">
+                    Subject
+                    <TextInput type="text" name="subject" placeholder="password" />
+                  </FieldLabel>
                 </InputWrapper>
                 <Button>Submit</Button>
               </form>

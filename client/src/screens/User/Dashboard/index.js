@@ -205,8 +205,9 @@ const Dashboard = () => {
             <form onSubmit={postApp}>
               <StyledCard>
                 <TextInputWrapper>
-                  <FieldLabel htmlFor="name">Create:</FieldLabel>
-                  <TextInput type="text" name="name" />
+                  <FieldLabel htmlFor="name">
+                    Create: <TextInput type="text" name="name" />
+                  </FieldLabel>
                 </TextInputWrapper>
                 <Button type="submit">Save</Button>
               </StyledCard>
