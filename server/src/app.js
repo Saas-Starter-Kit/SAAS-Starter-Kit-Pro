@@ -9,7 +9,7 @@ import './Database/mongo/db.js';
 import './Database/sql/db.js';
 
 import cors from 'cors';
-import bodyParser from 'body-parser';
+import { urlencoded, json } from 'body-parser';
 import morgan from 'morgan';
 
 import limiter from './Middleware/rateLimiter.js';
@@ -25,6 +25,7 @@ import stripeWebhook from './API/stripeWebhooks.js';
 import appApi from './API/app.js';
 import roleApi from './API/roles.js';
 import usersApi from './API/users.js';
+import orgApi from './API/org.js';
 
 const app = express();
 
@@ -35,14 +36,15 @@ app.use('/stripe', stripeWebhook);
 app.use(cors());
 app.use(limiter);
 app.use(morgan('dev'));
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(urlencoded({ extended: true }));
+app.use(json());
 app.use(createPermissions);
 
 //API routes
 app.use('/', utilsApi);
 app.use('/stripe', stripeApi);
 app.use('/auth', auth);
+app.use('/api', orgApi);
 app.use('/api', todoApi);
 app.use('/api', appApi);
 app.use('/api', roleApi);

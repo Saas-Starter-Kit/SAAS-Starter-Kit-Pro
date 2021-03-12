@@ -1,8 +1,9 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'gatsby';
 import { useLocation } from '@reach/router';
 import styled from 'styled-components';
 
+import { Spin } from 'antd';
 import SEO from '../../../components/Marketing/Layout/seo';
 import AuthContext from '../../../utils/authContext';
 import ApiContext from '../../../utils/apiContext';
@@ -43,6 +44,13 @@ const CardText = styled.div`
 
 const ConfirmedEmail = () => {
   const location = useLocation();
+
+  const [email, setEmail] = useState('');
+  const [userId, setUserId] = useState('');
+  const [username, setUsername] = useState('');
+  const [jwt_token, setToken] = useState('');
+
+  const [loadingSpin, setLoading] = useState(false);
   const { LogIn } = useContext(AuthContext);
   const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
   const { isLoading } = apiState;
@@ -75,17 +83,41 @@ const ConfirmedEmail = () => {
     let jwt_token = result.data.token;
     let email = result.data.email;
 
-    let user = { id, username, jwt_token, email };
-    console.log(user);
+    setEmail(email);
+    setUserId(id);
+    setUsername(username);
+    setToken(jwt_token);
 
     //save event and user id to Google Analytics
     setAnalyticsUserId(id);
     sendEventToAnalytics('signup', { method: 'email' });
 
-    //Login to context
+    fetchSuccess();
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setLoading(true);
+    let org_name = event.target.org_name.value;
+    let role = 'admin';
+
+    let data = {
+      email,
+      org_name,
+      userId,
+      role
+    };
+
+    let result = await axios.post('/api/create-org', data);
+
+    let org_id = result.data.org_id;
+    let stripe_id = result.data.stripe_id;
+
+    let user = { userId, username, jwt_token, email, org_id, stripe_id };
+
     await LogIn(user);
 
-    fetchSuccess();
+    setLoading(false);
   };
 
   /* eslint-disable */
@@ -132,25 +164,23 @@ const ConfirmedEmail = () => {
       <SEO seoData={seoData} />
       <Wrapper>
         {isLoading && <LoadingOverlay />}
-        <Title>Thank You for confirming your email, your account is setup and ready to use</Title>
-        <AuthCard>
-          {isInviteFlow === 'true' && (
+        <Title>Thank You for confirming your email, your account is almost ready to use</Title>
+        <Spin tip="Please wait while we setup your account..." spinning={loadingSpin}>
+          <AuthCard>
+            <div>Enter an Organization Name to get Started</div>
+            <form onSubmit={handleSubmit}>
+              <input id="org_name" />
+            </form>
+            {/*{isInviteFlow === 'true' && (
             <>
               <CardText>Click below to navigate to the app your were invited to</CardText>
               <TextWrapper>
                 <Link to={`/app/${app_id}/dashboard`}>Go to App</Link>
               </TextWrapper>
             </>
-          )}
-          <CardText>Click here to navigate to the user dashboard as a free tier user</CardText>
-          <TextWrapper>
-            <Link to="/user/dashboard">Go to Dashboard</Link>
-          </TextWrapper>
-          <CardText>Click here to add a subscription your account</CardText>
-          <TextWrapper>
-            <Link to="/purchase/plan">Upgrade Plan</Link>
-          </TextWrapper>
-        </AuthCard>
+          )}*/}
+          </AuthCard>
+        </Spin>
       </Wrapper>
     </React.Fragment>
   );

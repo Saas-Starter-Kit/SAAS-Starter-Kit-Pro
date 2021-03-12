@@ -22,7 +22,7 @@
     "gatsby-plugin-create-client-paths": "^3.0.0",
     "gatsby-plugin-disqus": "^1.2.2",
     "gatsby-plugin-google-gtag": "^3.0.0",
-    "gatsby-plugin-image": "^1.0.0",
+    "gatsby-plugin-image": "^1.0.1",
     "gatsby-plugin-react-helmet": "^4.0.0",
     "gatsby-plugin-sharp": "^3.0.0",
     "gatsby-plugin-styled-components": "^4.0.0",

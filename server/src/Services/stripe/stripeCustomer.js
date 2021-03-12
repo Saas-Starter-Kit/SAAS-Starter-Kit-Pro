@@ -1,36 +1,24 @@
 import stripe from '../../Config/stripe.js';
-import { setToken } from '../../Middleware/auth.js';
-import { createCustomerModel } from '../../Model/sql/stripe/stripeCustomer.js';
 
-export const CreateCustomer = async (req, res) => {
-  let email = req.body.email;
-  let userId = req.body.userId;
-
+export const CreateCustomer = async (email, account_id) => {
   //check if stripe customer already exists
   const existingCustomers = await stripe.customers.list({
     email
   });
 
-  //if stripe customer exists send error message
+  //if stripe customer exists set error message
   if (existingCustomers.data.length != 0) {
-    res.status(400).send({ type: 'Failed Stripe Sign Up', message: 'User Already Exists' });
-    return;
+    throw new Error('Stripe User Already Exists');
   }
 
   const customer = await stripe.customers.create({
     email,
     metadata: {
-      databaseUID: userId
+      databaseUID: account_id
     }
   });
 
-  //save stripe id to our own db
-  let result = await createCustomerModel(customer, email);
-
-  //send jwt token for user auth requests
-  let token = setToken(userId);
-
-  res.status(200).send({ stripe: result, token });
+  return customer;
 };
 
 export const UpdateCustomer = async (stripe_id, email) => {

@@ -3,8 +3,6 @@ const router = express.Router();
 
 import { asyncHandler } from '../Middleware/asyncErrorHandler.js';
 
-import { CreateCustomer } from '../Services/stripe/stripeCustomer.js';
-
 import { OneTimePayConfirm } from '../Services/stripe/stripeOneTimePay.js';
 
 import {
@@ -41,9 +39,6 @@ router.post('/create-subscription', asyncHandler(CreateSubscription));
 router.post('/cancel-subscription', asyncHandler(CancelSubscription));
 
 router.put('/update-subscription', asyncHandler(UpdateSubscription));
-
-/* Customer Routes */
-router.post('/create-customer', asyncHandler(CreateCustomer));
 
 /* One time pay Routes */
 router.post('/one-time-pay', asyncHandler(OneTimePayConfirm));

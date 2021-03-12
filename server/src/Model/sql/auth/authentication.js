@@ -18,7 +18,7 @@ export const verifyUser = async (verify_key) => {
               WHERE verify_key=$3
               RETURNING id, email, username`;
 
-  let values = [' ', 't', verify_key];
+  let values = ['', 't', verify_key];
   let queryResult = await db.query(text, values);
 
   return queryResult.rows[0];
