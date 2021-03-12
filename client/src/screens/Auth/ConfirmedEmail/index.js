@@ -101,45 +101,6 @@ const ConfirmedEmail = () => {
   //}, [isInviteFlow]);
   /* eslint-enable */
 
-  //const createValidUser = async () => {
-  //  fetchInit();
-
-  //  //after verified email, the user info is saved to stripe
-  //  let userId = id;
-  //  let stripeApiData = { userId, email };
-  //  let stripeServerRes = await axios
-  //    .post('/stripe/create-customer', stripeApiData)
-  //    .catch((err) => {
-  //      fetchFailure(err);
-  //    });
-
-  //  //save verified email to sendinblue
-  //  let sibData = { email, firstName };
-  //  await axios.post('/api/post/contact', sibData).catch((err) => {
-  //    fetchFailure(err);
-  //  });
-
-  //  let stripeCustomerKey = { stripeCustomerKey: stripeServerRes.data.stripe.stripe_customer_id };
-  //  let jwt_token = { token: stripeServerRes.data.token };
-
-  //  user = { ...user, ...stripeCustomerKey, ...jwt_token };
-
-  //  if (!process.env.NODE_ENV === 'development') {
-  //    //save event and user id to Google Analytics
-  //    let parameters = {
-  //      method: 'Email'
-  //    };
-
-  //    //setAnalyticsUserId(id);
-  //    sendEventToAnalytics('signup', parameters);
-  //  }
-
-  //  //Login to context
-  //  await LogIn(user);
-
-  //  fetchSuccess();
-  //};
-
   //if the signup process is part of the invite flow
   //then create role
   //const createRole = async () => {
