@@ -3,6 +3,7 @@ import { graphql } from 'gatsby';
 import styled from 'styled-components';
 import { Drawer } from 'antd';
 
+import SEO from '../components/Marketing/Layout/seo';
 import { breakpoints } from '../styles/theme';
 import Menu from '../components/Marketing/svgs/BurgerIcon';
 
@@ -57,26 +58,38 @@ const Docs = ({ data }) => {
   const mobileMenuHandler = () =>
     showMobileMenu ? toggleShowMobileMenu(false) : toggleShowMobileMenu(true);
 
+  const seoData = {
+    title: 'Saas Starter Kit Pro Documentation',
+    description: 'Saas Starter Kit Pro Documentation'
+  };
+
   return (
-    <Wrapper>
-      <Drawer placement="left" onClose={() => toggleShowMobileMenu(false)} visible={showMobileMenu}>
-        <MobileSideBar>
-          {showMobileMenu && <DocsSidebar mobileMenuHandler={mobileMenuHandler} />}
-        </MobileSideBar>
-      </Drawer>
-      <Sidebar>
-        <DocsSidebar />
-      </Sidebar>
-      <Content>
-        <DocsHeader>
-          <Menu onClick={mobileMenuHandler} />
-        </DocsHeader>
-        <h1>{title}</h1>
-        <div>
-          <SliceZone body={body} />
-        </div>
-      </Content>
-    </Wrapper>
+    <React.Fragment>
+      <SEO seoData={seoData} />
+      <Wrapper>
+        <Drawer
+          placement="left"
+          onClose={() => toggleShowMobileMenu(false)}
+          visible={showMobileMenu}
+        >
+          <MobileSideBar>
+            {showMobileMenu && <DocsSidebar mobileMenuHandler={mobileMenuHandler} />}
+          </MobileSideBar>
+        </Drawer>
+        <Sidebar>
+          <DocsSidebar />
+        </Sidebar>
+        <Content>
+          <DocsHeader>
+            <Menu onClick={mobileMenuHandler} />
+          </DocsHeader>
+          <h1>{title}</h1>
+          <div>
+            <SliceZone body={body} />
+          </div>
+        </Content>
+      </Wrapper>
+    </React.Fragment>
   );
 };
 

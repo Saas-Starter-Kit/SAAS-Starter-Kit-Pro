@@ -84,12 +84,16 @@ const CreateTask = ({ app_id }) => {
         <Card>
           <Spin tip="Loading..." spinning={isLoading}>
             <InputWrapper>
-              <FieldLabel htmlFor="title">Title</FieldLabel>
-              <TextInput onChange={handleTitleChange} value={formTitle} name="title" />
+              <FieldLabel htmlFor="title">
+                Title
+                <TextInput onChange={handleTitleChange} value={formTitle} name="title" />
+              </FieldLabel>
             </InputWrapper>
             <TextAreaWrapper>
-              <FieldLabel htmlFor="description">Description</FieldLabel>
-              <TextArea onChange={handleDescChange} value={formDescription} name="description" />
+              <FieldLabel htmlFor="description">
+                Description
+                <TextArea onChange={handleDescChange} value={formDescription} name="description" />
+              </FieldLabel>
             </TextAreaWrapper>
             <ButtonWrapper>
               <Button

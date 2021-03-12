@@ -23,11 +23,15 @@ const AltText = styled.div`
   color: ${colors.gray500};
 `;
 
+const StyledLink = styled(Link)`
+  color: ${colors.royalBlue};
+`;
+
 const LoginFormHeader = () => (
   <Wrapper>
     <Title>Sign-In to Your Account</Title>
     <AltText>
-      <Link to="/auth/signup">Dont have an Account? Sign-Up here</Link>
+      <StyledLink to="/auth/signup">Dont have an Account? Sign-Up here</StyledLink>
     </AltText>
   </Wrapper>
 );

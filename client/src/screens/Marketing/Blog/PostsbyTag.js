@@ -3,6 +3,7 @@ import { useStaticQuery, graphql } from 'gatsby';
 import styled from 'styled-components';
 import { useLocation } from '@reach/router';
 import moment from 'moment';
+import SEO from '../../../components/Marketing/Layout/seo';
 import ArticleCard from '../../../components/Marketing/Blog/articleCard';
 
 const Wrapper = styled.div`
@@ -26,20 +27,28 @@ const PostsbyTag = () => {
 
   let Posts = edges.filter((edge) => edge.node.tags.includes(tag));
 
+  const seoData = {
+    title: 'Saas Starter Kit Pro Tags page',
+    description: 'Saas Starter Pro Kit Tags page'
+  };
+
   return (
-    <Wrapper>
-      <StyledHeader>Showing Results for tag: {tag}</StyledHeader>
-      {Posts.map(({ node: { data, tags, uid } }) => (
-        <ArticleCard
-          key={uid.concat(data.title.text)}
-          title={data.title.text}
-          date={moment(data.date).format('MMMM DD, YYYY')}
-          imageSrc={data.hero_image.thumbnails.thumbnail.url}
-          uid={uid}
-          tags={tags}
-        />
-      ))}
-    </Wrapper>
+    <React.Fragment>
+      <SEO seoData={seoData} />
+      <Wrapper>
+        <StyledHeader>Showing Results for tag: {tag}</StyledHeader>
+        {Posts.map(({ node: { data, tags, uid } }) => (
+          <ArticleCard
+            key={uid.concat(data.title.text)}
+            title={data.title.text}
+            date={moment(data.date).format('MMMM DD, YYYY')}
+            imageSrc={data.hero_image.thumbnails.thumbnail.url}
+            uid={uid}
+            tags={tags}
+          />
+        ))}
+      </Wrapper>
+    </React.Fragment>
   );
 };
 

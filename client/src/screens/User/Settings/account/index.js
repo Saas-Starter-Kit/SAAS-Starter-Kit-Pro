@@ -6,6 +6,7 @@ import AuthContext from '../../../../utils/authContext';
 import ApiContext from '../../../../utils/apiContext';
 import axios from '../../../../services/axios';
 
+import SEO from '../../../../components/Marketing/Layout/seo';
 import LoadingOverlay from '../../../../components/Common/loadingOverlay';
 import styled from 'styled-components';
 
@@ -97,25 +98,33 @@ const AccountSettings = () => {
     setEmail(event.target.value);
   };
 
+  const seoData = {
+    title: 'Saas Starter Kit Pro Account page',
+    description: 'Saas Starter Kit Pro Account page'
+  };
+
   return (
-    <div>
-      <SettingsHeader />
-      <Title>Account Settings</Title>
-      {isLoading && <LoadingOverlay />}
-      <UpdateUsernameCard
-        isEmail={isEmail}
-        handleUsernameChange={handleUsernameChange}
-        username={username}
-        updateUsername={updateUsername}
-      />
-      <UpdateEmailCard
-        handleEmailChange={handleEmailChange}
-        isEmail={isEmail}
-        email={email}
-        updateEmail={updateEmail}
-      />
-      <UpdatePasswordCard />
-    </div>
+    <React.Fragment>
+      <SEO seoData={seoData} />
+      <div>
+        <SettingsHeader />
+        <Title>Account Settings</Title>
+        {isLoading && <LoadingOverlay />}
+        <UpdateUsernameCard
+          isEmail={isEmail}
+          handleUsernameChange={handleUsernameChange}
+          username={username}
+          updateUsername={updateUsername}
+        />
+        <UpdateEmailCard
+          handleEmailChange={handleEmailChange}
+          isEmail={isEmail}
+          email={email}
+          updateEmail={updateEmail}
+        />
+        <UpdatePasswordCard />
+      </div>
+    </React.Fragment>
   );
 };
 

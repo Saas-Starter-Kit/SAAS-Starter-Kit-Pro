@@ -16,6 +16,13 @@ const Wrapper = styled.div`
   padding-left: 3rem;
   padding-top: 2rem;
   padding-bottom: 3rem;
+  @media (max-width: ${breakpoints.large}) {
+    padding-right: 3rem;
+  }
+  @media (max-width: ${breakpoints.small}) {
+    padding-right: 1rem;
+    padding-left: 1rem;
+  }
 `;
 
 const fadeInDown = keyframes`
@@ -46,7 +53,7 @@ const Title = styled.h1`
 `;
 
 const Subtitle = styled.div`
-  color: ${colors.slateGray};
+  color: ${colors.gray500};
   font-size: 1rem;
   font-weight: normal;
   padding-bottom: 2rem;
@@ -91,9 +98,15 @@ const FirstColumn = styled.div`
 
 const SecondColumn = styled.div`
   padding-left: 3rem;
-  margin-right: 2rem;
+  margin-right: 3rem;
   flex-basis: 20%;
   @media (max-width: ${breakpoints.large}) {
+    display: none;
+  }
+`;
+
+const Image = styled.img`
+  @media (max-width: ${breakpoints.small}) {
     display: none;
   }
 `;
@@ -114,7 +127,7 @@ const Post = ({ data }) => {
   const related_articles = [related_article1, related_article2];
 
   return (
-    <Layout title={title}>
+    <Layout title={title} description={title}>
       <Wrapper>
         <TitleWrapper>
           <Title>{title}</Title>
@@ -125,7 +138,10 @@ const Post = ({ data }) => {
         <ContentWrapper>
           <FirstColumn>
             <BaseCard>
-              <img src={hero_image.thumbnails.desktop.url} alt="" />
+              <Image
+                src={hero_image.thumbnails.desktop.url}
+                alt={hero_image.thumbnails.desktop.alt || 'Blog post hero image'}
+              />
               <CardContentWrapper>
                 <SliceZone body={body} />
                 <Disqus url={`${siteUrl + '/' + pageUid}`} identifier={pageUid} title={title} />

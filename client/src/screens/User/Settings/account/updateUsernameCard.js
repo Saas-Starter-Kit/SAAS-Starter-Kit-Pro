@@ -37,13 +37,15 @@ const UpdateUsernameCard = ({ handleUsernameChange, isEmail, username, updateUse
       )}
       <SectionTitle>Update Username</SectionTitle>
       <Form>
-        <Label htmlFor="title">Username:</Label>
-        <Input
-          onChange={handleUsernameChange}
-          value={username}
-          type="text"
-          disabled={isEmail ? false : true}
-        />
+        <Label htmlFor="title">
+          Username:
+          <Input
+            onChange={handleUsernameChange}
+            value={username}
+            type="text"
+            disabled={isEmail ? false : true}
+          />
+        </Label>
         <ButtonWrapper>
           <Button onClick={updateUsername} disabled={isEmail ? false : true}>
             Save

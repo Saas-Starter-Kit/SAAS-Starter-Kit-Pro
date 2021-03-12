@@ -6,6 +6,7 @@ import AuthContext from '../../../../utils/authContext';
 import ApiContext from '../../../../utils/apiContext';
 import axios from '../../../../services/axios';
 
+import SEO from '../../../../components/Marketing/Layout/seo';
 import SettingsHeader from '../../../../components/User/Navigation/settingsHeader';
 import UpdatePaymentCard from './updatePaymentCard';
 import AttachPaymentFormWrapper from './attachPaymentFormWrapper';
@@ -99,24 +100,32 @@ const PaymentSettings = () => {
     setModalCard(false);
   };
 
-  return (
-    <Wrapper>
-      <SettingsHeader />
+  const seoData = {
+    title: 'Saas Starter Kit Pro Settings page',
+    description: 'Saas Starter Kit Pro Settings page'
+  };
 
-      <Title>Payment Settings</Title>
-      <Spin tip="Loading..." spinning={isLoading}>
-        <UpdatePaymentCard
-          payCards={payCards}
-          paymentRemoved={paymentRemoved}
-          isModalCard={isModalCard}
-          handleModalCardCancel={handleModalCardCancel}
-          deletePaymentMethod={deletePaymentMethod}
-          setDeletePaymentId={setDeletePaymentId}
-          setModalCard={setModalCard}
-        />
-      </Spin>
-      <AttachPaymentFormWrapper />
-    </Wrapper>
+  return (
+    <React.Fragment>
+      <SEO seoData={seoData} />
+      <Wrapper>
+        <SettingsHeader />
+
+        <Title>Payment Settings</Title>
+        <Spin tip="Loading..." spinning={isLoading}>
+          <UpdatePaymentCard
+            payCards={payCards}
+            paymentRemoved={paymentRemoved}
+            isModalCard={isModalCard}
+            handleModalCardCancel={handleModalCardCancel}
+            deletePaymentMethod={deletePaymentMethod}
+            setDeletePaymentId={setDeletePaymentId}
+            setModalCard={setModalCard}
+          />
+        </Spin>
+        <AttachPaymentFormWrapper />
+      </Wrapper>
+    </React.Fragment>
   );
 };
 

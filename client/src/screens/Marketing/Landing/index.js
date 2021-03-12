@@ -8,7 +8,10 @@ import Layout from '../../../components/Marketing/Layout';
 
 export default function Index() {
   return (
-    <Layout>
+    <Layout
+      title="Saas Starter Kit Home page"
+      description="Saas Starter Kit is a modern and comprehensive SAAS boilerplate."
+    >
       <HeroSection />
       <TripleColFeatures />
       <Testimonial />

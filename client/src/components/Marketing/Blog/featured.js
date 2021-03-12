@@ -32,6 +32,9 @@ const ImageWrapper = styled.picture`
   position: relative;
   margin: 0.5rem 0 0.5rem 0.5rem;
   flex-basis: 40%;
+  @media (max-width: ${breakpoints.small}) {
+    display: none;
+  }
 `;
 
 const Image = styled.img`
@@ -88,7 +91,10 @@ const Featured = ({
       }}
     >
       <ImageWrapper>
-        <Image src={data.hero_image.thumbnails.desktop.url} />
+        <Image
+          src={data.hero_image.thumbnails.desktop.url}
+          alt={data.hero_image.thumbnails.desktop.alt || 'Featured blog post hero image'}
+        />
       </ImageWrapper>
       <TextWrapper>
         <ArticleTitle>{data.title.text}</ArticleTitle>

@@ -4,7 +4,7 @@ import { colors } from '../../styles/theme';
 
 const Wrapper = styled.div`
   p {
-    color: ${colors.slateGray};
+    color: ${colors.gray500};
     font-size: 1rem;
   }
 `;

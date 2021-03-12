@@ -41,7 +41,7 @@ const Paragraph = styled.p`
   margin-top: 1rem;
   font-size: 1.125rem;
   line-height: 1.5rem;
-  color: ${colors.indigo200};
+  color: ${colors.indigo100};
 `;
 
 const StyledLink = styled(Link)`

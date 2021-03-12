@@ -8,6 +8,7 @@ import AuthContext from '../../../utils/authContext';
 import ApiContext from '../../../utils/apiContext';
 import axios from '../../../services/axios';
 
+import SEO from '../../../components/Marketing/Layout/seo';
 import ConfirmButton from '../../../components/Purchase/purchaseButton';
 import LoadingOverlay from '../../../components/Common/loadingOverlay';
 import Card from '../../../components/Common/Card';
@@ -68,16 +69,26 @@ const ConfirmedInvite = () => {
     fetchSuccess();
   };
 
+  const seoData = {
+    title: 'Saas Starter Kit Pro Confirmed Invite page',
+    description: 'Saas Starter Kit Pro Confirmed Invite page'
+  };
+
   return (
-    <Wrapper>
-      {isLoading && <LoadingOverlay />}
-      <StyledCard>
-        <Title>Your invite to the app has been confirmed, click below to navigate to the app</Title>
-        <Link to={`/app/${app_id}/dashboard`}>
-          <ConfirmButton>Go to App</ConfirmButton>
-        </Link>
-      </StyledCard>
-    </Wrapper>
+    <React.Fragment>
+      <SEO seoData={seoData} />
+      <Wrapper>
+        {isLoading && <LoadingOverlay />}
+        <StyledCard>
+          <Title>
+            Your invite to the app has been confirmed, click below to navigate to the app
+          </Title>
+          <Link to={`/app/${app_id}/dashboard`}>
+            <ConfirmButton>Go to App</ConfirmButton>
+          </Link>
+        </StyledCard>
+      </Wrapper>
+    </React.Fragment>
   );
 };
 

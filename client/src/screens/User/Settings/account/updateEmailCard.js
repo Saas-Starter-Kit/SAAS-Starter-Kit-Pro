@@ -37,13 +37,15 @@ const UpdateEmailCard = ({ handleEmailChange, isEmail, email, updateEmail }) => 
       )}
       <SectionTitle>Update Email</SectionTitle>
       <Form>
-        <Label htmlFor="title">Email:</Label>
-        <Input
-          type="email"
-          onChange={handleEmailChange}
-          value={email}
-          disabled={isEmail ? false : true}
-        />
+        <Label htmlFor="title">
+          Email:
+          <Input
+            type="email"
+            onChange={handleEmailChange}
+            value={email}
+            disabled={isEmail ? false : true}
+          />
+        </Label>
         <ButtonWrapper>
           <Button onClick={updateEmail} disabled={isEmail ? false : true}>
             Save

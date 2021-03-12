@@ -6,6 +6,7 @@ import { useLocation } from '@reach/router';
 import AuthContext from '../../../utils/authContext';
 import { colors, breakpoints } from '../../../styles/theme';
 import useWindowSize from '../../../hooks/useWindowSize';
+import SEO from '../../Marketing/Layout/seo';
 
 import SidebarDesktop from '../Navigation/sidebarDesktop';
 import SidebarMobile from '../Navigation/sidebarMobile';
@@ -82,44 +83,52 @@ const Layout = ({ children, app_id }) => {
   const themeHandler = () =>
     theme === THEMES.LIGHT ? setTheme(THEMES.DARK) : setTheme(THEMES.LIGHT);
 
+  const seoData = {
+    title: 'Saas Starter Kit Pro App',
+    description: 'Saas Starter Kit Pro App'
+  };
+
   return (
-    <Wrapper>
-      {!isMobile && (
-        <SidebarDesktop
-          app_id={app_id}
-          theme={theme}
-          toggleTheme={themeHandler}
-          location={location}
-          collapsed={isDesktopMenuCollapsed}
-        />
-      )}
-      <Content>
-        <AppHeader
-          collapsed={isDesktopMenuCollapsed}
-          username={username}
-          notifications={[
-            { date: moment.now(), title: 'Hey there' },
-            { date: moment.now(), title: 'Welcome!' }
-          ]}
-          onCollapseChange={handleCollapseChange}
-          theme={theme}
-        />
-        {showMobileMenu && (
-          <SidebarMobile
+    <React.Fragment>
+      <SEO seoData={seoData} />
+      <Wrapper>
+        {!isMobile && (
+          <SidebarDesktop
             app_id={app_id}
-            toggleMobileMenu={toggleShowMobileMenu}
             theme={theme}
             toggleTheme={themeHandler}
+            location={location}
+            collapsed={isDesktopMenuCollapsed}
           />
         )}
-        <Main tabindex="0">
-          {/*App Screens Here*/}
-          <ContentWrapper theme={theme} id="primaryLayout">
-            {children}
-          </ContentWrapper>
-        </Main>
-      </Content>
-    </Wrapper>
+        <Content>
+          <AppHeader
+            collapsed={isDesktopMenuCollapsed}
+            username={username}
+            notifications={[
+              { date: moment.now(), title: 'Hey there' },
+              { date: moment.now(), title: 'Welcome!' }
+            ]}
+            onCollapseChange={handleCollapseChange}
+            theme={theme}
+          />
+          {showMobileMenu && (
+            <SidebarMobile
+              app_id={app_id}
+              toggleMobileMenu={toggleShowMobileMenu}
+              theme={theme}
+              toggleTheme={themeHandler}
+            />
+          )}
+          <Main tabindex="0">
+            {/*App Screens Here*/}
+            <ContentWrapper theme={theme} id="primaryLayout">
+              {children}
+            </ContentWrapper>
+          </Main>
+        </Content>
+      </Wrapper>
+    </React.Fragment>
   );
 };
 

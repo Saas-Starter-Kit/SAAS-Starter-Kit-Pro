@@ -62,8 +62,10 @@ const SmallParagraph = styled.p`
 
 const FeatureImage = styled.img`
   width: 100%;
+  height: ${({ aspectRatio }) => `calc(100% * ${aspectRatio})`};
   @media (min-width: ${breakpoints.large}) {
     width: 90%;
+    height: ${({ aspectRatio }) => `calc(90% * ${aspectRatio})`};
   }
   margin-left: auto;
   margin-right: auto;
@@ -193,7 +195,11 @@ const LandingFeatures = () => (
           </ListItem>
         </List>
       </div>
-      <FeatureImage width="490" src={image1} alt="" />
+      <FeatureImage
+        aspectRatio={532 / 417}
+        src={image1}
+        alt="Abstract illustration of man wearing a turtleneck standing next to floating graphs and images"
+      />
     </FeatureWrapper1>
     <FeatureWrapper2>
       <FeatureWrapper2b>
@@ -233,7 +239,11 @@ const LandingFeatures = () => (
           </ListItem>
         </List>
       </FeatureWrapper2b>
-      <FeatureImage width="490" src={image2} alt="" />
+      <FeatureImage
+        src={image2}
+        aspectRatio={532 / 372}
+        alt="Abstract illustration of man wearing a suit standing next to floating graphs and images"
+      />
     </FeatureWrapper2>
   </Container>
 );

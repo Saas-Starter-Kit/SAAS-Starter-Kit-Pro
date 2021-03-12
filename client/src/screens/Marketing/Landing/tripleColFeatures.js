@@ -74,7 +74,7 @@ const TextWrapper = styled.div`
   margin-top: 1.25rem;
 `;
 
-const SmallHeader = styled.h5`
+const SmallHeader = styled.h4`
   font-size: 1.125rem;
   line-height: 1.5rem;
   font-weight: 500;

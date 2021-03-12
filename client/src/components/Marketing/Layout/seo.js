@@ -24,7 +24,11 @@ const SEO = ({ seoData: { title, description, image, article, pathname } }) => {
 
   return (
     <>
-      <Helmet>
+      <Helmet
+        htmlAttributes={{
+          lang: 'en'
+        }}
+      >
         <title>{seo.title}</title>
         <meta name="description" content={seo.description} />
         <meta name="image" content={seo.image} />
