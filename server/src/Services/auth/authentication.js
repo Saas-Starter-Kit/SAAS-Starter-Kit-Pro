@@ -2,8 +2,8 @@ import { setToken } from '../../Middleware/auth.js';
 import firebaseAdmin from '../../Config/firebase.js';
 import { sendEmail } from '../../Config/email.js';
 import { UpdateContact } from '../users/contacts.js';
-import { UpdateCustomer } from '../stripe/stripeCustomer.js';
-import db from '../../Database/sql/db.js';
+import { verifyUser } from '../../Model/sql/auth/authentication.js';
+import { CreateContact } from '../users/contacts.js';
 import { nanoid } from 'nanoid';
 import {
   saveUsertoDB,
@@ -12,7 +12,26 @@ import {
   updateEmailModel
 } from '../../Model/sql/auth/authentication.js';
 
-export const CreateUser = async (req, res) => {};
+export const CreateUser = async (req, res) => {
+  let verify_key = req.body.verify_key;
+
+  //verify signup key
+  let result = await verifyUser(verify_key);
+  let user_id = result.id;
+  let username = result.username;
+  let email = result.email;
+
+  //save contact to email marketing and sales crm
+  let FIRSTNAME = username.split(' ')[0];
+  await CreateContact(email, FIRSTNAME);
+
+  //send welcome email
+  let template = 'welcome';
+  let locals = { FIRSTNAME };
+  await sendEmail(email, template, locals);
+
+  res.send({ token: setToken(user_id), user_id, username, email });
+};
 
 export const SignUp = async (req, res) => {
   let token = req.body.token;
@@ -55,7 +74,6 @@ export const Login = async (req, res) => {
 
   //decode the firebase token recieved from frontend
   let decodedToken = await firebaseAdmin.auth().verifyIdToken(token);
-
   let firebaseId = decodedToken.user_id;
 
   //Check if User exists
@@ -84,7 +102,7 @@ export const updateUsername = async (req, res, next) => {
   let user = await getUser(email);
   let uid = user.firebase_user_id;
 
-  firebaseAdmin.auth().updateUser(uid, {
+  await firebaseAdmin.auth().updateUser(uid, {
     displayName: username
   });
 
@@ -100,14 +118,12 @@ export const updateEmail = async (req, res, next) => {
 
   let user = await getUser(oldEmail);
   let uid = user.firebase_user_id;
-  let stripe_id = user.stripe_customer_id;
 
-  firebaseAdmin.auth().updateUser(uid, {
+  await firebaseAdmin.auth().updateUser(uid, {
     email
   });
 
   await updateEmailModel(email, id);
-  await UpdateCustomer(stripe_id, email);
   await UpdateContact(email, oldEmail);
 
   res.status(200).send('Update Successful');

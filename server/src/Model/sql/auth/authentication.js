@@ -12,6 +12,18 @@ export const getUser = async (email) => {
   return queryResult.rows[0];
 };
 
+export const verifyUser = async (verify_key) => {
+  //find by email, set email_verified and verify_key to empty
+  let text = `UPDATE users SET verify_key=$1, is_email_verified=$2 
+              WHERE verify_key=$3
+              RETURNING id, email, username`;
+
+  let values = [' ', 't', verify_key];
+  let queryResult = await db.query(text, values);
+
+  return queryResult.rows[0];
+};
+
 export const saveUsertoDB = async (email, username, firebaseId, verifyKey) => {
   /* Save user to our own db and get unique key from db */
 

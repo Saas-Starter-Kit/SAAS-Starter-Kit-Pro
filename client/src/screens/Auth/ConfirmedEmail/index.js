@@ -48,66 +48,38 @@ const ConfirmedEmail = () => {
 
   //extract query params
   const queryParams = location.search.split('=');
-  console.log(queryParams);
-  const email = queryParams[1].split('&')[0];
-  const id = queryParams[2].split('&')[0];
-  const provider = queryParams[4].split('&')[0];
-  const usernameRaw = queryParams[3].split('&')[0];
-  const name = usernameRaw.split('%20');
-  const firstName = name[0];
-  const username = `${name[0]} ${name[1]}`;
-  const isInviteFlow = queryParams[5].split('&')[0];
-  const app_id = queryParams[6];
-  const photo = null;
+  const verify_key = queryParams[1].split('&')[0];
 
-  let user = { email, username, id, photo, provider };
+  //const isInviteFlow = queryParams[5].split('&')[0];
+  //const app_id = queryParams[6];
+  //const photo = null;
 
-  /* eslint-disable */
+  //let user = { email, username, id, photo, provider };
+
   useEffect(() => {
-    return () => fetchSuccess();
+    createUser();
   }, []);
 
-  useEffect(() => {
-    createValidUser();
-  }, [location]);
-
-  useEffect(() => {
-    if (isInviteFlow === 'true') createRole();
-  }, [isInviteFlow]);
-  /* eslint-enable */
-
-  const createValidUser = async () => {
+  const createUser = async () => {
     fetchInit();
 
-    //after verified email, the user info is saved to stripe
-    let userId = id;
-    let stripeApiData = { userId, email };
-    let stripeServerRes = await axios
-      .post('/stripe/create-customer', stripeApiData)
-      .catch((err) => {
-        fetchFailure(err);
-      });
+    let data = {
+      verify_key
+    };
 
-    //save verified email to sendinblue
-    let sibData = { email, firstName };
-    await axios.post('/api/post/contact', sibData).catch((err) => {
-      fetchFailure(err);
-    });
+    let result = await axios.post('/auth/create-user', data);
 
-    let stripeCustomerKey = { stripeCustomerKey: stripeServerRes.data.stripe.stripe_customer_id };
-    let jwt_token = { token: stripeServerRes.data.token };
+    let id = result.data.user_id;
+    let username = result.data.username;
+    let jwt_token = result.data.token;
+    let email = result.data.email;
 
-    user = { ...user, ...stripeCustomerKey, ...jwt_token };
+    let user = { id, username, jwt_token, email };
+    console.log(user);
 
-    if (!process.env.NODE_ENV === 'development') {
-      //save event and user id to Google Analytics
-      let parameters = {
-        method: 'Email'
-      };
-
-      sendEventToAnalytics('signup', parameters);
-      setAnalyticsUserId(id);
-    }
+    //save event and user id to Google Analytics
+    setAnalyticsUserId(id);
+    sendEventToAnalytics('signup', { method: 'email' });
 
     //Login to context
     await LogIn(user);
@@ -115,39 +87,92 @@ const ConfirmedEmail = () => {
     fetchSuccess();
   };
 
+  /* eslint-disable */
+  useEffect(() => {
+    return () => fetchSuccess();
+  }, []);
+
+  useEffect(() => {
+    //createValidUser();
+  }, [location]);
+
+  //useEffect(() => {
+  //if (isInviteFlow === 'true') createRole();
+  //}, [isInviteFlow]);
+  /* eslint-enable */
+
+  //const createValidUser = async () => {
+  //  fetchInit();
+
+  //  //after verified email, the user info is saved to stripe
+  //  let userId = id;
+  //  let stripeApiData = { userId, email };
+  //  let stripeServerRes = await axios
+  //    .post('/stripe/create-customer', stripeApiData)
+  //    .catch((err) => {
+  //      fetchFailure(err);
+  //    });
+
+  //  //save verified email to sendinblue
+  //  let sibData = { email, firstName };
+  //  await axios.post('/api/post/contact', sibData).catch((err) => {
+  //    fetchFailure(err);
+  //  });
+
+  //  let stripeCustomerKey = { stripeCustomerKey: stripeServerRes.data.stripe.stripe_customer_id };
+  //  let jwt_token = { token: stripeServerRes.data.token };
+
+  //  user = { ...user, ...stripeCustomerKey, ...jwt_token };
+
+  //  if (!process.env.NODE_ENV === 'development') {
+  //    //save event and user id to Google Analytics
+  //    let parameters = {
+  //      method: 'Email'
+  //    };
+
+  //    //setAnalyticsUserId(id);
+  //    sendEventToAnalytics('signup', parameters);
+  //  }
+
+  //  //Login to context
+  //  await LogIn(user);
+
+  //  fetchSuccess();
+  //};
+
   //if the signup process is part of the invite flow
   //then create role
-  const createRole = async () => {
-    fetchInit();
-    let user_id = id;
-    let role = 'user';
+  //const createRole = async () => {
+  //  fetchInit();
+  //  let user_id = id;
+  //  let role = 'user';
 
-    let data = {
-      app_id,
-      user_id,
-      role
-    };
+  //  let data = {
+  //    app_id,
+  //    user_id,
+  //    role
+  //  };
 
-    const result = await axios.post(`/api/post/role`, data).catch((err) => {
-      fetchFailure(err);
-    });
-    console.log(result);
-    fetchSuccess();
-  };
+  //  const result = await axios.post(`/api/post/role`, data).catch((err) => {
+  //    fetchFailure(err);
+  //  });
+  //  console.log(result);
+  //  fetchSuccess();
+  //};
 
   return (
     <Wrapper>
       {isLoading && <LoadingOverlay />}
       <Title>Thank You for confirming your email, your account is setup and ready to use</Title>
       <AuthCard>
-        {isInviteFlow === 'true' && (
+        {/*{isInviteFlow === 'true' && (
           <>
             <CardText>Click below to navigate to the app your were invited to</CardText>
             <TextWrapper>
               <Link to={`/app/${app_id}/dashboard`}>Go to App</Link>
             </TextWrapper>
           </>
-        )}
+        )}*/}
         <CardText>Click here to navigate to the user dashboard as a free tier user</CardText>
         <TextWrapper>
           <Link to="/user/dashboard">Go to Dashboard</Link>
