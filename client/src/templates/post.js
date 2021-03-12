@@ -46,7 +46,7 @@ const Title = styled.h1`
 `;
 
 const Subtitle = styled.div`
-  color: ${colors.slateGray};
+  color: ${colors.gray500};
   font-size: 1rem;
   font-weight: normal;
   padding-bottom: 2rem;
@@ -98,6 +98,12 @@ const SecondColumn = styled.div`
   }
 `;
 
+const Image = styled.img`
+  @media (max-width: ${breakpoints.small}) {
+    display: none;
+  }
+`;
+
 const Post = ({ data }) => {
   const author = data.prismicPost.data.author.text;
   const date = moment(data.prismicPost.data.date).format('MMM Do YY');
@@ -114,7 +120,7 @@ const Post = ({ data }) => {
   const related_articles = [related_article1, related_article2];
 
   return (
-    <Layout title={title}>
+    <Layout title={title} description={title}>
       <Wrapper>
         <TitleWrapper>
           <Title>{title}</Title>
@@ -125,7 +131,10 @@ const Post = ({ data }) => {
         <ContentWrapper>
           <FirstColumn>
             <BaseCard>
-              <img src={hero_image.thumbnails.desktop.url} alt="" />
+              <Image
+                src={hero_image.thumbnails.desktop.url}
+                alt={hero_image.thumbnails.desktop.alt || 'Blog post hero image'}
+              />
               <CardContentWrapper>
                 <SliceZone body={body} />
                 <Disqus url={`${siteUrl + '/' + pageUid}`} identifier={pageUid} title={title} />

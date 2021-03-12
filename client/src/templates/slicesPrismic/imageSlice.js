@@ -8,8 +8,13 @@ const Image = ({ slice }) => {
   return (
     <BaseCard>
       <picture>
-        <source width="100%" srcSet={mobile.url} alt={mobile.alt} media="(max-width: 678px)" />
-        <img width="100%" src={desktop.url} alt={desktop.alt} />
+        <source
+          width="100%"
+          srcSet={mobile.url}
+          alt={mobile.alt || 'Dynamically fetched image'}
+          media="(max-width: 678px)"
+        />
+        <img width="100%" src={desktop.url} alt={desktop.alt || 'Image'} />
       </picture>
     </BaseCard>
   );
