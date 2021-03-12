@@ -1,7 +1,7 @@
 import React from 'react';
 import { navigate } from 'gatsby';
 import styled from 'styled-components';
-import { colors } from '../../../styles/theme';
+import { colors, breakpoints } from '../../../styles/theme';
 import { AnimatedCard } from './cards';
 import Tag from './tag';
 
@@ -15,6 +15,9 @@ const ImageWrapper = styled.picture`
   margin: 0.5rem 0 0.5rem 0.5rem;
   flex-basis: 40%;
   min-height: 200px;
+  @media (max-width: ${breakpoints.small}) {
+    display: none;
+  }
 `;
 
 const Image = styled.img`
@@ -56,24 +59,24 @@ const ArticleTitle = styled.div`
 `;
 
 const Author = styled.div`
-  color: ${colors.cadetBlue};
+  color: ${colors.gray500};
   font-size: 12px;
   font-weight: 700;
 `;
 
 const Date = styled.div`
-  color: ${colors.cadetBlue};
+  color: ${colors.gray500};
   font-size: 12px;
 `;
 
-const ArticleCard = ({ title, date, imageSrc, uid, tags }) => (
+const ArticleCard = ({ title, date, imageSrc, imageAlt, uid, tags }) => (
   <Card
     onClick={() => {
       navigate(`/blog/${uid}`);
     }}
   >
     <ImageWrapper>
-      <Image src={imageSrc} />
+      <Image src={imageSrc} alt={imageAlt || 'Blog post thumbnail image'} />
     </ImageWrapper>
     <TextWrapper>
       <TagWrapper>

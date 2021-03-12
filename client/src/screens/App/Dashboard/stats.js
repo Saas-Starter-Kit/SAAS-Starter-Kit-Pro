@@ -5,7 +5,7 @@ import StatColumn from './statColumn';
 import ArrowUp from '../../../components/App/svgs/arrowUp';
 import ArrowDown from '../../../components/App/svgs/arrowDown';
 
-const Title = styled.h3`
+const Title = styled.h2`
   font-size: 1.125rem;
   line-height: 1.5rem;
   font-weight: 500;

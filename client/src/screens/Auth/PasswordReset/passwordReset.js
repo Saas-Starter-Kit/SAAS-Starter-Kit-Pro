@@ -5,6 +5,7 @@ import AuthContext from '../../../utils/authContext';
 import { colors, breakpoints } from '../../../styles/theme';
 import ApiContext from '../../../utils/apiContext';
 
+import SEO from '../../../components/Marketing/Layout/seo';
 import LoadingOverlay from '../../../components/Common/loadingOverlay';
 import ResetFormHeader from './resetFormHeader';
 import ResetSuccess from './resetSuccessMessage';
@@ -54,26 +55,34 @@ const PasswordReset = () => {
     fetchSuccess();
   };
 
+  const seoData = {
+    title: 'Saas Starter Kit Pro Reset Password Page',
+    description: 'Saas Starter Kit Pro Reset Password Page'
+  };
+
   return (
-    <Wrapper>
-      {isLoading && <LoadingOverlay />}
-      {!success ? (
-        <div>
-          <ResetFormHeader />
-          <AuthCard>
-            <form onSubmit={handleSubmit}>
-              <Label htmlFor="email">Email:</Label>
-              <InputWrapper>
-                <Input type="email" name="email" id="email" />
-              </InputWrapper>
-              <Button type="submit">Submit</Button>
-            </form>
-          </AuthCard>
-        </div>
-      ) : (
-        <ResetSuccess />
-      )}
-    </Wrapper>
+    <React.Fragment>
+      <SEO seoData={seoData} />
+      <Wrapper>
+        {isLoading && <LoadingOverlay />}
+        {!success ? (
+          <div>
+            <ResetFormHeader />
+            <AuthCard>
+              <form onSubmit={handleSubmit}>
+                <Label htmlFor="email">Email:</Label>
+                <InputWrapper>
+                  <Input type="email" name="email" id="email" />
+                </InputWrapper>
+                <Button type="submit">Submit</Button>
+              </form>
+            </AuthCard>
+          </div>
+        ) : (
+          <ResetSuccess />
+        )}
+      </Wrapper>
+    </React.Fragment>
   );
 };
 

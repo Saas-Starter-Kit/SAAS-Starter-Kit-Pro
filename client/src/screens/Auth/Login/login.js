@@ -9,6 +9,7 @@ import ApiContext from '../../../utils/apiContext';
 import { LoginAuth } from '../helpers';
 import { colors } from '../../../styles/theme';
 
+import SEO from '../../../components/Marketing/Layout/seo';
 import ErrorText from '../../../components/Common/errorText';
 import InputWrapper from '../../../components/Common/forms/TextInputWrapper';
 import Button from '../../../components/Auth/Buttons/authButton';
@@ -44,6 +45,10 @@ const RememberMeLabel = styled.label`
   margin-left: 0.1rem;
   font-size: 0.925rem;
   color: ${colors.coolGray900};
+`;
+
+const StyledLink = styled(Link)`
+  color: ${colors.royalBlue};
 `;
 
 const Login = () => {
@@ -104,59 +109,67 @@ const Login = () => {
     LoginAuth(authRes, LogIn, firebase, fetchFailure, isPaymentFlow, isInviteFlow, appId);
   };
 
+  const seoData = {
+    title: 'Saas Starter Kit Pro Login Page',
+    description: 'Saas Starter Kit Pro Login Page'
+  };
+
   return (
-    <div>
-      {isLoading && <LoadingOverlay />}
-      <LoginFormHeader />
+    <React.Fragment>
+      <SEO seoData={seoData} />
+      <div>
+        {isLoading && <LoadingOverlay />}
+        <LoginFormHeader />
 
-      <AuthCard>
-        <Formik initialValues={{ email: '', password: '' }} onSubmit={handleSubmit}>
-          {({ values, errors, touched, handleChange, handleBlur, handleSubmit }) => (
-            <form onSubmit={handleSubmit}>
-              <Label htmlFor="email">Email:</Label>
-              <InputWrapper>
-                <Input
-                  type="email"
-                  name="email"
-                  id="email"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.email}
-                />
-              </InputWrapper>
-              {errors.email && touched.email && <ErrorText>{errors.email}</ErrorText>}
-              <Label htmlFor="password">Password:</Label>
-              <InputWrapper>
-                <Input
-                  type="password"
-                  name="password"
-                  id="password"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.password}
-                />
-              </InputWrapper>
-              {errors.password && touched.password && <ErrorText>{errors.password}</ErrorText>}
+        <AuthCard>
+          <Formik initialValues={{ email: '', password: '' }} onSubmit={handleSubmit}>
+            {({ values, errors, touched, handleChange, handleBlur, handleSubmit }) => (
+              <form onSubmit={handleSubmit}>
+                <Label htmlFor="email">Email:</Label>
+                <InputWrapper>
+                  <Input
+                    type="email"
+                    name="email"
+                    id="email"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.email}
+                  />
+                </InputWrapper>
+                {errors.email && touched.email && <ErrorText>{errors.email}</ErrorText>}
+                <Label htmlFor="password">Password:</Label>
+                <InputWrapper>
+                  <Input
+                    type="password"
+                    name="password"
+                    id="password"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.password}
+                  />
+                </InputWrapper>
+                {errors.password && touched.password && <ErrorText>{errors.password}</ErrorText>}
 
-              <Button type="submit">Signin</Button>
-            </form>
-          )}
-        </Formik>
-        <ForgotPasswordWrapper>
-          <RememberMeWrapper>
-            <input id="remember_me" name="remember_me" type="checkbox" />
-            <RememberMeLabel htmlFor="remember_me">Remember me</RememberMeLabel>
-          </RememberMeWrapper>
+                <Button type="submit">Signin</Button>
+              </form>
+            )}
+          </Formik>
+          <ForgotPasswordWrapper>
+            <RememberMeWrapper>
+              <input id="remember_me" name="remember_me" type="checkbox" />
+              <RememberMeLabel htmlFor="remember_me">Remember me</RememberMeLabel>
+            </RememberMeWrapper>
 
-          <ForgotPassword>
-            <Link to="/auth/passwordreset"> Forgot your password?</Link>
-          </ForgotPassword>
-        </ForgotPasswordWrapper>
+            <ForgotPassword>
+              <StyledLink to="/auth/passwordreset"> Forgot your password?</StyledLink>
+            </ForgotPassword>
+          </ForgotPasswordWrapper>
 
-        <ContinueWith />
-        <GoogleButton GoogleSignin={GoogleSignin} />
-      </AuthCard>
-    </div>
+          <ContinueWith />
+          <GoogleButton GoogleSignin={GoogleSignin} />
+        </AuthCard>
+      </div>
+    </React.Fragment>
   );
 };
 

@@ -42,9 +42,10 @@ const Logo = styled.img`
   cursor: pointer;
   margin-top: 1rem;
   height: 2rem;
-  width: auto;
+  width: calc(2rem * 43 / 40);
   @media (min-width: ${breakpoints.small}) {
     height: 2.5rem;
+    width: calc(2.5rem * 43 / 40);
   }
 `;
 

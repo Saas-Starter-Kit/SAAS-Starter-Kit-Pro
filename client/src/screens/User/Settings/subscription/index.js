@@ -7,6 +7,7 @@ import AuthContext from '../../../../utils/authContext';
 import ApiContext from '../../../../utils/apiContext';
 import axios from '../../../../services/axios';
 
+import SEO from '../../../../components/Marketing/Layout/seo';
 import SettingsHeader from '../../../../components/User/Navigation/settingsHeader';
 import LoadingOverlay from '../../../../components/Common/loadingOverlay';
 import NullSubscriptionCard from './NullSubscriptionCard';
@@ -122,32 +123,40 @@ const SubscriptionSettings = () => {
     setModalSub(false);
   };
 
+  const seoData = {
+    title: 'Saas Starter Kit Pro Subscription page',
+    description: 'Saas Starter Kit Pro Subscription page'
+  };
+
   return (
-    <Wrapper>
-      <SettingsHeader />
+    <React.Fragment>
+      <SEO seoData={seoData} />
+      <Wrapper>
+        <SettingsHeader />
 
-      <Title>Subscription Settings</Title>
-      {isLoading && <LoadingOverlay />}
-      {!subscriptionState && <NullSubscriptionCard />}
+        <Title>Subscription Settings</Title>
+        {isLoading && <LoadingOverlay />}
+        {!subscriptionState && <NullSubscriptionCard />}
 
-      {subscriptionState && (
-        <PaymentInformationCard
-          planType={planType}
-          price={price}
-          subscriptionState={subscriptionState}
-        />
-      )}
+        {subscriptionState && (
+          <PaymentInformationCard
+            planType={planType}
+            price={price}
+            subscriptionState={subscriptionState}
+          />
+        )}
 
-      {subscriptionState && <UpgradeSubscription subscriptionState={subscriptionState} />}
-      {subscriptionState && (
-        <CancelSubscriptionCard
-          setModalSub={setModalSub}
-          isModalSub={isModalSub}
-          handleModalSubCancel={handleModalSubCancel}
-          cancelSubscription={cancelSubscription}
-        />
-      )}
-    </Wrapper>
+        {subscriptionState && <UpgradeSubscription subscriptionState={subscriptionState} />}
+        {subscriptionState && (
+          <CancelSubscriptionCard
+            setModalSub={setModalSub}
+            isModalSub={isModalSub}
+            handleModalSubCancel={handleModalSubCancel}
+            cancelSubscription={cancelSubscription}
+          />
+        )}
+      </Wrapper>
+    </React.Fragment>
   );
 };
 

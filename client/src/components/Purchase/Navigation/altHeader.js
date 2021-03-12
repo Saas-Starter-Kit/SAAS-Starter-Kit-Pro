@@ -7,6 +7,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   padding: 0.7rem;
   background-color: ${colors.coolGray50};
   @media (min-width: ${breakpoints.small}) {
@@ -17,7 +18,7 @@ const Wrapper = styled.div`
 
 const Image = styled.img`
   height: 3rem;
-  width: auto;
+  width: calc(3rem * 164 / 150);
   cursor: pointer;
 `;
 

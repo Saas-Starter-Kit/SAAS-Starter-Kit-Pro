@@ -64,7 +64,7 @@ const PlanPrice = styled.div`
   font-weight: 900;
 `;
 
-const PurchaseHeader = styled.div`
+const PurchaseHeader = styled.h1`
   font-size: 1.125rem;
   font-weight: 700;
   color: ${colors.coolGray500};

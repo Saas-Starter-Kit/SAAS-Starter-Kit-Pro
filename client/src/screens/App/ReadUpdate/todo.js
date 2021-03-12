@@ -81,12 +81,20 @@ const Todo = ({
       <form onSubmit={(event) => putTodo(event, todo)}>
         <Card>
           <TitleWrapper>
-            <FieldLabel>Title</FieldLabel>
-            <TextInput onChange={handleEditTitleChange} value={editTitle} name="title" />
+            <FieldLabel>
+              Title
+              <TextInput onChange={handleEditTitleChange} value={editTitle} name="title" />
+            </FieldLabel>
           </TitleWrapper>
           <DescriptionWrapper>
-            <FieldLabel>Description</FieldLabel>
-            <TextArea onChange={handleEditDescChange} value={editDescription} name="description" />
+            <FieldLabel>
+              Description
+              <TextArea
+                onChange={handleEditDescChange}
+                value={editDescription}
+                name="description"
+              />
+            </FieldLabel>
           </DescriptionWrapper>
           <FormButtonsWrapper>
             <Button

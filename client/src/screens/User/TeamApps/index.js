@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import { Link } from 'gatsby';
 
+import SEO from '../../../components/Marketing/Layout/seo';
 import AuthContext from '../../../utils/authContext';
 import ApiContext from '../../../utils/apiContext';
 import axios from '../../../services/axios';
@@ -61,21 +62,29 @@ const TeamApps = () => {
     fetchSuccess();
   };
 
+  const seoData = {
+    title: 'Saas Starter Kit Pro Team Apps page',
+    description: 'Saas Starter Kit Pro Team Apps page'
+  };
+
   return (
-    <div>
+    <React.Fragment>
+      <SEO seoData={seoData} />
       <div>
-        <h1>Team Apps:</h1>
-        {teamApps &&
-          teamApps.map((app) => (
-            <Link key={app.app_id} to={`/app/${app.app_id}/dashboard`} state={{ app }}>
-              <StyledCard>
-                <StyledLink>{app.app_name}</StyledLink>
-                <RoleText>Role: user</RoleText>
-              </StyledCard>
-            </Link>
-          ))}
+        <div>
+          <h1>Team Apps:</h1>
+          {teamApps &&
+            teamApps.map((app) => (
+              <Link key={app.app_id} to={`/app/${app.app_id}/dashboard`} state={{ app }}>
+                <StyledCard>
+                  <StyledLink>{app.app_name}</StyledLink>
+                  <RoleText>Role: user</RoleText>
+                </StyledCard>
+              </Link>
+            ))}
+        </div>
       </div>
-    </div>
+    </React.Fragment>
   );
 };
 
