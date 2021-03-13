@@ -9,11 +9,11 @@ const isTokenValid = () => {
   return new Date().getTime() < expiresAt;
 };
 
-export const PrivateRoute = ({ component: Component, location, app_id, ...rest }) => {
+export const PrivateRoute = ({ component: Component, location, org_id, ...rest }) => {
   if (!isTokenValid()) {
     navigate('/auth/login');
     return null;
-  } else if (!app_id) {
+  } else if (!org_id) {
     navigate('/user/dashboard');
     return null;
   } else {
@@ -21,17 +21,19 @@ export const PrivateRoute = ({ component: Component, location, app_id, ...rest }
   }
 };
 
-export const getRole = async (app_id, ability, authState, fetchFailure) => {
+export const getRole = async (org_id, ability, authState, fetchFailure) => {
   let user_id = authState.user.id;
 
   let params = {
     user_id,
-    app_id
+    org_id
   };
 
   const result = await axios.get(`/api/get/role`, { params }).catch((err) => {
     fetchFailure(err);
   });
+
+  console.log(result);
 
   if (result.data.length === 0) {
     navigate('/403');

@@ -10,21 +10,21 @@ export const checkRoleExists = async (app_id, user_id) => {
   return queryResult.rows[0];
 };
 
-export const getRoleModel = async (user_id, app_id) => {
+export const getRoleModel = async (user_id, org_id) => {
   let text = `
       SELECT
-        a.app_id,
-        a.app_name,
+        o.id,
+        o.org_name,
         r.user_id,
         r.role
       FROM
-        apps a
+        organization o
       INNER JOIN roles r 
-          ON r.app_id = a.app_id
-      WHERE r.user_id=$1 AND r.app_id=$2
+          ON r.org_id = o.id
+      WHERE r.user_id=$1 AND r.org_id=$2
   `;
 
-  let values = [user_id, app_id];
+  let values = [user_id, org_id];
 
   let queryResult = await db.query(text, values);
 

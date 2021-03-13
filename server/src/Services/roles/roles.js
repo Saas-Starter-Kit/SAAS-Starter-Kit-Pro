@@ -7,9 +7,9 @@ import {
 
 export const getRole = async (req, res, next) => {
   let user_id = req.query.user_id;
-  let app_id = req.query.app_id;
+  let org_id = req.query.org_id;
 
-  let result = await getRoleModel(app_id, user_id);
+  let result = await getRoleModel(user_id, org_id);
 
   res.status(200).send(result);
 };

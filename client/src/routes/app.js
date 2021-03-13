@@ -25,11 +25,13 @@ const Routes = () => {
   const { authState } = useContext(AuthContext);
   const { fetchFailure } = useContext(ApiContext);
   const splitPath = location.pathname.split('/');
-  const app_id = splitPath[2];
+  const org_id = splitPath[2];
+
+  const app_id = 34545;
 
   /* eslint-disable */
   useEffect(() => {
-    if (authState.user) getRole(app_id, ability, authState, fetchFailure);
+    if (authState.user) getRole(org_id, ability, authState, fetchFailure);
   }, [authState]);
   /* eslint-enable */
 
