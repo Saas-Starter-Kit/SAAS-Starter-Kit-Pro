@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Link } from 'gatsby';
+import { Link, navigate } from 'gatsby';
 import { useLocation } from '@reach/router';
 import styled from 'styled-components';
 
@@ -14,6 +14,8 @@ import { colors, breakpoints } from '../../../styles/theme';
 import Title from '../../../components/Auth/title';
 import AuthCard from '../../../components/Auth/authCard';
 import LoadingOverlay from '../../../components/Common/loadingOverlay';
+import FieldLabel from '../../../components/Common/forms/FieldLabel';
+import TextInput from '../../../components/Common/forms/TextInput';
 
 const Wrapper = styled.div`
   background-color: ${colors.gray50};
@@ -46,7 +48,7 @@ const ConfirmedEmail = () => {
   const location = useLocation();
 
   const [email, setEmail] = useState('');
-  const [userId, setUserId] = useState('');
+  const [user_id, setUserId] = useState('');
   const [username, setUsername] = useState('');
   const [jwt_token, setToken] = useState('');
 
@@ -76,7 +78,9 @@ const ConfirmedEmail = () => {
       verify_key
     };
 
-    let result = await axios.post('/auth/create-user', data);
+    let result = await axios.post('/auth/create-user', data).catch((err) => {
+      fetchFailure(err);
+    });
 
     let id = result.data.user_id;
     let username = result.data.username;
@@ -104,25 +108,23 @@ const ConfirmedEmail = () => {
     let data = {
       email,
       org_name,
-      userId,
+      user_id,
       role
     };
 
-    let result = await axios.post('/api/create-org', data);
+    await axios.post('/api/org', data).catch((err) => {
+      fetchFailure(err);
+    });
 
-    let org_id = result.data.org_id;
-    let stripe_id = result.data.stripe_id;
-
-    let user = { userId, username, jwt_token, email, org_id, stripe_id };
+    let user = { id: user_id, username, jwt_token, email };
 
     await LogIn(user);
-
-    setLoading(false);
+    navigate('/user/dashboard');
   };
 
   /* eslint-disable */
   useEffect(() => {
-    return () => fetchSuccess();
+    return () => setLoading(false);
   }, []);
 
   useEffect(() => {
@@ -167,9 +169,12 @@ const ConfirmedEmail = () => {
         <Title>Thank You for confirming your email, your account is almost ready to use</Title>
         <Spin tip="Please wait while we setup your account..." spinning={loadingSpin}>
           <AuthCard>
-            <div>Enter an Organization Name to get Started</div>
+            <h2>Enter an Organization Name to get Started</h2>
             <form onSubmit={handleSubmit}>
-              <input id="org_name" />
+              <FieldLabel htmlFor="org_name">
+                Organization Name:
+                <TextInput id="org_name" />
+              </FieldLabel>
             </form>
             {/*{isInviteFlow === 'true' && (
             <>

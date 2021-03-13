@@ -1,20 +1,11 @@
 import stripe from '../../Config/stripe.js';
 
-export const CreateCustomer = async (email, account_id) => {
-  //check if stripe customer already exists
-  const existingCustomers = await stripe.customers.list({
-    email
-  });
-
-  //if stripe customer exists set error message
-  if (existingCustomers.data.length != 0) {
-    throw new Error('Stripe User Already Exists');
-  }
-
+export const CreateCustomer = async (email, user_id, org_id) => {
   const customer = await stripe.customers.create({
     email,
     metadata: {
-      databaseUID: account_id
+      org_id,
+      user_id
     }
   });
 

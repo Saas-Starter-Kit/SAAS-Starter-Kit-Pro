@@ -10,7 +10,7 @@ import axios from '../../../services/axios';
 
 import SEO from '../../../components/Marketing/Layout/seo';
 import LoadingOverlay from '../../../components/Common/loadingOverlay';
-import DeleteAppModal from './DeleteAppModal';
+import DeleteAppModal from './DeleteOrgModal';
 import Card from '../../../components/Common/Card';
 import Button from '../../../components/Common/buttons/PrimaryButton';
 
@@ -81,81 +81,67 @@ const Dashboard = () => {
   const { authState } = useContext(AuthContext);
   const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
   const { isLoading } = apiState;
-  const [apps, setApps] = useState([]);
+  const [orgs, setOrgs] = useState([]);
   const [isModal, setModal] = useState(false);
-  const [deleteAppId, setDeleteAppId] = useState();
+  const [deleteOrgId, setDeleteOrgId] = useState();
 
   /* eslint-disable */
   useEffect(() => {
     if (authState.user) {
-      getApps();
+      getOrgs();
     }
   }, [authState]);
   /* eslint-enable */
 
-  const getApps = async () => {
+  const getOrgs = async () => {
     let user_id = authState.user.id;
 
     let params = {
       user_id
     };
 
-    const result = await axios.get(`/api/get/app`, { params }).catch((err) => {
+    const result = await axios.get(`/api/org`, { params }).catch((err) => {
       fetchFailure(err);
     });
 
-    console.log(result);
+    let adminOrgs = result.data.filter((item) => item.role === 'admin');
 
-    let adminApps = result.data.filter((item) => item.role === 'admin');
-
-    setApps(adminApps);
+    setOrgs(adminOrgs);
     fetchSuccess();
   };
 
-  const postApp = async (event) => {
+  const postOrg = async (event) => {
     event.preventDefault();
     fetchInit();
 
-    let name = event.target.name.value;
-
-    let data = {
-      name
-    };
-
-    const result = await axios.post(`/api/post/app`, data).catch((err) => {
-      fetchFailure(err);
-    });
-
-    createRole(result);
-  };
-
-  const createRole = async (result) => {
-    let app_id = result.data.app_id;
+    let org_name = event.target.name.value;
+    let email = authState.user.email;
     let user_id = authState.user.id;
     let role = 'admin';
 
     let data = {
-      app_id,
-      user_id,
-      role
+      org_name,
+      role,
+      email,
+      user_id
     };
 
-    await axios.post(`/api/post/role`, data).catch((err) => {
+    await axios.post(`/api/org`, data).catch((err) => {
       fetchFailure(err);
     });
 
-    getApps();
+    getOrgs();
     fetchSuccess();
   };
 
-  const deleteApp = async () => {
+  const deleteOrg = async () => {
     setModal(false);
     fetchInit();
-    let params = { app_id: deleteAppId };
+    let params = { org_id: deleteOrgId };
 
-    await axios.delete('/api/delete/app', { params });
+    await axios.delete('/api/org', { params });
 
-    getApps();
+    getOrgs();
     fetchSuccess();
   };
 
@@ -163,8 +149,8 @@ const Dashboard = () => {
     setModal(false);
   };
 
-  const handleDeleteAppModal = (app_id) => {
-    setDeleteAppId(app_id);
+  const handleDeleteModal = (org_id) => {
+    setDeleteOrgId(org_id);
     setModal(true);
   };
 
@@ -181,18 +167,16 @@ const Dashboard = () => {
         <StyledHeader>Dashboard</StyledHeader>
         <ContentWrapper>
           <AppsSection>
-            <h2>My Apps:</h2>
+            <h2>My Orgs:</h2>
             <AppsWrapper>
-              {!apps.length === 0 ? (
-                apps.map((app) => (
-                  <StyledCard key={app.app_id}>
-                    <Link to={`/app/${app.app_id}/dashboard`} state={{ app }}>
-                      <StyledLink>{app.app_name}</StyledLink>
+              {!orgs.length == 0 ? (
+                orgs.map((org) => (
+                  <StyledCard key={org.id}>
+                    <Link to={`/app/${org.id}/dashboard`} state={{ org }}>
+                      <StyledLink>{org.org_name}</StyledLink>
                     </Link>
                     <RoleText>Role: admin</RoleText>
-                    <DangerButton onClick={() => handleDeleteAppModal(app.app_id)}>
-                      Delete
-                    </DangerButton>
+                    <DangerButton onClick={() => handleDeleteModal(org.id)}>Delete</DangerButton>
                   </StyledCard>
                 ))
               ) : (
@@ -201,8 +185,8 @@ const Dashboard = () => {
             </AppsWrapper>
           </AppsSection>
           <CreateAppWrapper>
-            <h2>Create App:</h2>
-            <form onSubmit={postApp}>
+            <h2>Create Org:</h2>
+            <form onSubmit={postOrg}>
               <StyledCard>
                 <TextInputWrapper>
                   <FieldLabel htmlFor="name">
@@ -217,7 +201,7 @@ const Dashboard = () => {
         <DeleteAppModal
           handleModalCancel={handleModalCancel}
           isModal={isModal}
-          deleteApp={deleteApp}
+          deleteOrg={deleteOrg}
         />
       </div>
     </React.Fragment>

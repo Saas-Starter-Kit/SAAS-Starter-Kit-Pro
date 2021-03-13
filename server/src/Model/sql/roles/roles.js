@@ -31,10 +31,13 @@ export const getRoleModel = async (user_id, app_id) => {
   return queryResult.rows;
 };
 
-export const postRoleModel = async (app_id, user_id, role) => {
-  let text = `INSERT INTO roles(app_id, user_id, role)
-              VALUES ($1, $2, $3)`;
-  let values = [app_id, user_id, role];
+export const postRoleModel = () => {};
+
+export const CreateOrgRole = async (org_id, user_id, role) => {
+  let text = `INSERT INTO roles(org_id, user_id, role)
+              VALUES($1, $2, $3)`;
+
+  let values = [org_id, user_id, role];
 
   await db.query(text, values);
 
