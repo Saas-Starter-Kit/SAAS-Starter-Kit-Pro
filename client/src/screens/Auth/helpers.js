@@ -77,7 +77,7 @@ export const SignupAuth = async (
   name,
   domainUrl,
   isInviteFlow,
-  app_id
+  invite_key
 ) => {
   // If user signed up with email, then set their display username
   const isEmailSignup = authRes.additionalUserInfo.providerId === 'password';
@@ -108,7 +108,8 @@ export const SignupAuth = async (
   // the url the user is redirected to after email verify
   const confirmEmailUrl = `${domainUrl}/auth/confirmedemail`;
 
-  let authData = { email, username, token, confirmEmailUrl };
+  let authData = { email, username, token, confirmEmailUrl, isInviteFlow, invite_key };
+
   await axios.post(`/auth/signup`, authData).catch((err) => {
     fetchFailure(err);
   });

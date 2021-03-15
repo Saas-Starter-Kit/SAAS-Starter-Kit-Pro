@@ -1,9 +1,9 @@
 import db from '../../../Database/sql/db.js';
 
-export const checkRoleExists = async (app_id, user_id) => {
+export const checkRoleExists = async (org_id, user_id) => {
   let text = `SELECT * FROM roles
-              WHERE app_id=$1 AND user_id=$2`;
-  let values = [app_id, user_id];
+              WHERE org_id=$1 AND user_id=$2`;
+  let values = [org_id, user_id];
 
   let queryResult = await db.query(text, values);
 
@@ -33,8 +33,6 @@ export const getRoleModel = async (user_id, org_id) => {
 
   return queryResult.rows;
 };
-
-export const postRoleModel = () => {};
 
 export const CreateOrgRole = async (org_id, user_id, role) => {
   let text = `INSERT INTO roles(org_id, user_id, role)

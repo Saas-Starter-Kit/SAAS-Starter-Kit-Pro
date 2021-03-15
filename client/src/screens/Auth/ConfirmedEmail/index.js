@@ -47,10 +47,11 @@ const CardText = styled.div`
 const ConfirmedEmail = () => {
   const location = useLocation();
 
-  const [email, setEmail] = useState('');
-  const [user_id, setUserId] = useState('');
-  const [username, setUsername] = useState('');
-  const [jwt_token, setToken] = useState('');
+  const [email, setEmail] = useState();
+  const [user_id, setUserId] = useState();
+  const [username, setUsername] = useState();
+  const [jwt_token, setToken] = useState();
+  const [org_id, setOrgId] = useState();
 
   const [loadingSpin, setLoading] = useState(false);
   const { LogIn } = useContext(AuthContext);
@@ -60,16 +61,18 @@ const ConfirmedEmail = () => {
   //extract query params
   const queryParams = location.search.split('=');
   const verify_key = queryParams[1].split('&')[0];
+  const isInviteFlow = queryParams[2].split('&')[0];
+  const invite_key = queryParams[3];
 
-  //const isInviteFlow = queryParams[5].split('&')[0];
-  //const app_id = queryParams[6];
-  //const photo = null;
-
-  //let user = { email, username, id, photo, provider };
+  /* eslint-disable */
+  useEffect(() => {
+    return () => setLoading(false);
+  }, []);
 
   useEffect(() => {
     createUser();
   }, []);
+  /* eslint-enable */
 
   const createUser = async () => {
     fetchInit();
@@ -96,6 +99,45 @@ const ConfirmedEmail = () => {
     setAnalyticsUserId(id);
     sendEventToAnalytics('signup', { method: 'email' });
 
+    if (isInviteFlow === 'true') {
+      verifyInvite(id);
+    } else {
+      fetchSuccess();
+    }
+  };
+
+  const verifyInvite = async (user_id) => {
+    //verify invite key, returing org id.
+    let data = { invite_key };
+    let result = await axios
+      .post('/api/users/verify-invite', data)
+      .catch((err) => fetchFailure(err));
+
+    let org_id = result.data.org_id;
+    setOrgId(org_id);
+    createRole(org_id, user_id);
+  };
+
+  //if the signup process is part of the invite flow
+  //then create role
+  const createRole = async (org_id, user_id) => {
+    fetchInit();
+    let role = 'user';
+
+    let data = {
+      org_id,
+      user_id,
+      role
+    };
+
+    await axios.post(`/api/post/role`, data).catch((err) => {
+      fetchFailure(err);
+    });
+
+    // Save user data to global state
+    let user = { id: user_id, username, jwt_token, email };
+    await LogIn(user);
+
     fetchSuccess();
   };
 
@@ -116,45 +158,12 @@ const ConfirmedEmail = () => {
       fetchFailure(err);
     });
 
+    // Save user data to global state
     let user = { id: user_id, username, jwt_token, email };
-
     await LogIn(user);
+
     navigate('/user/dashboard');
   };
-
-  /* eslint-disable */
-  useEffect(() => {
-    return () => setLoading(false);
-  }, []);
-
-  useEffect(() => {
-    //createValidUser();
-  }, [location]);
-
-  //useEffect(() => {
-  //if (isInviteFlow === 'true') createRole();
-  //}, [isInviteFlow]);
-  /* eslint-enable */
-
-  //if the signup process is part of the invite flow
-  //then create role
-  //const createRole = async () => {
-  //  fetchInit();
-  //  let user_id = id;
-  //  let role = 'user';
-
-  //  let data = {
-  //    app_id,
-  //    user_id,
-  //    role
-  //  };
-
-  //  const result = await axios.post(`/api/post/role`, data).catch((err) => {
-  //    fetchFailure(err);
-  //  });
-  //  console.log(result);
-  //  fetchSuccess();
-  //};
 
   const seoData = {
     title: 'Saas Starter Kit Pro Email Confirmed Page',
@@ -169,21 +178,24 @@ const ConfirmedEmail = () => {
         <Title>Thank You for confirming your email, your account is almost ready to use</Title>
         <Spin tip="Please wait while we setup your account..." spinning={loadingSpin}>
           <AuthCard>
-            <h2>Enter an Organization Name to get Started</h2>
-            <form onSubmit={handleSubmit}>
-              <FieldLabel htmlFor="org_name">
-                Organization Name:
-                <TextInput id="org_name" />
-              </FieldLabel>
-            </form>
-            {/*{isInviteFlow === 'true' && (
-            <>
-              <CardText>Click below to navigate to the app your were invited to</CardText>
-              <TextWrapper>
-                <Link to={`/app/${app_id}/dashboard`}>Go to App</Link>
-              </TextWrapper>
-            </>
-          )}*/}
+            {isInviteFlow === 'true' ? (
+              <div>
+                <CardText>Click below to navigate to the app your were invited to</CardText>
+                <TextWrapper>
+                  <Link to={`/app/${org_id}/dashboard`}>Go to App</Link>
+                </TextWrapper>
+              </div>
+            ) : (
+              <div>
+                <h2>Enter an Organization Name to get Started</h2>
+                <form onSubmit={handleSubmit}>
+                  <FieldLabel htmlFor="org_name">
+                    Organization Name:
+                    <TextInput id="org_name" />
+                  </FieldLabel>
+                </form>
+              </div>
+            )}
           </AuthCard>
         </Spin>
       </Wrapper>

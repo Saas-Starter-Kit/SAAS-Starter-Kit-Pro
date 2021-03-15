@@ -37,6 +37,8 @@ export const SignUp = async (req, res) => {
   let token = req.body.token;
   let username = req.body.username;
   let email = req.body.email;
+  let invite_key = req.body.invite_key;
+  let isInviteFlow = req.body.isInviteFlow;
   //remove spaces from url
   let confirmEmailUrl = encodeURI(req.body.confirmEmailUrl);
 
@@ -55,7 +57,9 @@ export const SignUp = async (req, res) => {
 
   //generate random bytes for user email verify
   const randomBytes = nanoid();
-  confirmEmailUrl = `${confirmEmailUrl}/?key=${randomBytes}`;
+  confirmEmailUrl = `
+    ${confirmEmailUrl}/?key=${randomBytes}&isInviteFlow=${isInviteFlow}&invite_key=${invite_key}
+  `;
 
   //send verification email
   let template = 'verify email';

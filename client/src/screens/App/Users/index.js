@@ -44,10 +44,10 @@ const RemoveUserButton = styled.button`
 const dummyData = [
   { email: 'email1@example.com', username: 'username1', role: 'admin' },
   { email: 'email2@example.com', username: 'username2', role: 'user' },
-  { email: 'email3@example.com', username: 'username3', role: 'admin' }
+  { email: 'email3@example.com', username: 'username3', role: 'user' }
 ];
 
-const Users = ({ app_id }) => {
+const Users = ({ org_id }) => {
   const { authState } = useContext(AuthContext);
   const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
   const { isLoading } = apiState;
@@ -57,11 +57,11 @@ const Users = ({ app_id }) => {
 
   const handleSubmit = async (values) => {
     fetchInit();
-    let inviterEmail = authState.user.email;
-    let inviterDisplayName = authState.user.username;
-    let inviteRecipient = values.email;
+    let sender_email = authState.user.email;
+    let sender_display_name = authState.user.username;
+    let recipient_email = values.email;
 
-    let data = { domainUrl, inviteRecipient, inviterEmail, inviterDisplayName, app_id };
+    let data = { domainUrl, recipient_email, sender_email, sender_display_name, org_id };
     await axios.post('/api/users/invite', data).catch((err) => {
       fetchFailure(err);
     });
@@ -72,7 +72,7 @@ const Users = ({ app_id }) => {
   const getAppUsers = async () => {
     fetchInit();
 
-    let params = { app_id };
+    let params = { org_id };
     let result = await axios.get('/api/get/app-users', { params }).catch((err) => {
       fetchFailure(err);
     });
