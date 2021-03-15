@@ -52,7 +52,7 @@ const ContentWrapper = styled.div`
   }
 `;
 
-const Layout = ({ children, app_id }) => {
+const Layout = ({ children, org_id }) => {
   const location = useLocation();
   const { authState } = useContext(AuthContext);
 
@@ -94,7 +94,7 @@ const Layout = ({ children, app_id }) => {
       <Wrapper>
         {!isMobile && (
           <SidebarDesktop
-            app_id={app_id}
+            org_id={org_id}
             theme={theme}
             toggleTheme={themeHandler}
             location={location}
@@ -114,7 +114,7 @@ const Layout = ({ children, app_id }) => {
           />
           {showMobileMenu && (
             <SidebarMobile
-              app_id={app_id}
+              org_id={org_id}
               toggleMobileMenu={toggleShowMobileMenu}
               theme={theme}
               toggleTheme={themeHandler}

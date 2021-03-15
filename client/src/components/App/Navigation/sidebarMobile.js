@@ -168,7 +168,7 @@ const Span = styled.span`
   color: ${colors.doveGray};
 `;
 
-const SidebarMobile = ({ toggleMobileMenu, app_id, theme, toggleTheme }) => {
+const SidebarMobile = ({ toggleMobileMenu, org_id, theme, toggleTheme }) => {
   const ref = useRef();
   useOutsideClick(ref, () => toggleMobileMenu(false));
 
@@ -194,49 +194,49 @@ const SidebarMobile = ({ toggleMobileMenu, app_id, theme, toggleTheme }) => {
             <Nav>
               <MobileSidebarItem
                 theme={theme}
-                link={`/app/${app_id}/dashboard`}
+                link={`/app/${org_id}/dashboard`}
                 toggleMenu={() => toggleMobileMenu(false)}
                 svg={<FcBarChart />}
                 title="Dashboard"
               />
               <MobileSidebarItem
                 theme={theme}
-                link={`/app/${app_id}/readupdate`}
+                link={`/app/${org_id}/readupdate`}
                 toggleMenu={() => toggleMobileMenu(false)}
                 svg={<FcCollect />}
                 title="Read Update"
               />
               <MobileSidebarItem
                 theme={theme}
-                link={`/app/${app_id}/create`}
+                link={`/app/${org_id}/create`}
                 toggleMenu={() => toggleMobileMenu(false)}
                 svg={<FcUpload />}
                 title="Create"
               />
               <MobileSidebarItem
                 theme={theme}
-                link={`/app/${app_id}/permissions`}
+                link={`/app/${org_id}/permissions`}
                 toggleMenu={() => toggleMobileMenu(false)}
                 svg={<FcPrivacy />}
                 title="Permissions"
               />
               <MobileSidebarItem
                 theme={theme}
-                link={`/app/${app_id}/users`}
+                link={`/app/${org_id}/users`}
                 toggleMenu={() => toggleMobileMenu(false)}
                 svg={<FcConferenceCall />}
                 title="Users"
               />
               <MobileSidebarItem
                 theme={theme}
-                link={`/app/${app_id}/onboarding`}
+                link={`/app/${org_id}/onboarding`}
                 toggleMenu={() => toggleMobileMenu(false)}
                 svg={<FcTimeline />}
                 title="Onboarding"
               />
               <MobileSidebarItem
                 theme={theme}
-                link={`/app/${app_id}/machinelearning`}
+                link={`/app/${org_id}/machinelearning`}
                 toggleMenu={() => toggleMobileMenu(false)}
                 svg={<FcGenealogy />}
                 title="Machine Learning"

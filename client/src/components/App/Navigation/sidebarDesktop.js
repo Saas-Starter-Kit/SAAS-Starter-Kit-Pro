@@ -64,47 +64,47 @@ const StyledML = styled(FcGenealogy)`
   width: 1.3rem;
 `;
 
-const getMenus = (app_id) => [
+const getMenus = (org_id) => [
   {
     id: '1',
     name: 'Dashboard',
-    route: `/app/${app_id}/dashboard`,
+    route: `/app/${org_id}/dashboard`,
     icon: <StyledBar />
   },
   {
     id: '2',
     name: 'Read Update',
-    route: `/app/${app_id}/readupdate`,
+    route: `/app/${org_id}/readupdate`,
     icon: <StyledRead />
   },
   {
     id: '3',
     name: 'Create',
-    route: `/app/${app_id}/create`,
+    route: `/app/${org_id}/create`,
     icon: <StyledCreate />
   },
   {
     id: '4',
     name: 'Permissions',
-    route: `/app/${app_id}/permissions`,
+    route: `/app/${org_id}/permissions`,
     icon: <StyledPermissions />
   },
   {
     id: '5',
     name: 'Users',
-    route: `/app/${app_id}/users`,
+    route: `/app/${org_id}/users`,
     icon: <StyledCollab />
   },
   {
     id: '6',
     name: 'Onboarding',
-    route: `/app/${app_id}/onboarding`,
+    route: `/app/${org_id}/onboarding`,
     icon: <StyledOnboarding />
   },
   {
     id: '7',
     name: 'Machine Learning',
-    route: `/app/${app_id}/machinelearning`,
+    route: `/app/${org_id}/machinelearning`,
     icon: <StyledML />
   }
 ];
@@ -202,8 +202,8 @@ const Span = styled.span`
   color: ${colors.doveGray};
 `;
 
-const SidebarDesktop = ({ theme, toggleTheme, app_id, location, collapsed }) => {
-  const menus = getMenus(app_id);
+const SidebarDesktop = ({ theme, toggleTheme, org_id, location, collapsed }) => {
+  const menus = getMenus(org_id);
   const selectedKey = menus.find((menu) => menu.route === location.pathname);
   return (
     <StyledSider

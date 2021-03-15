@@ -27,8 +27,6 @@ const Routes = () => {
   const splitPath = location.pathname.split('/');
   const org_id = splitPath[2];
 
-  const app_id = 34545;
-
   /* eslint-disable */
   useEffect(() => {
     if (authState.user) getRole(org_id, ability, authState, fetchFailure);
@@ -36,16 +34,16 @@ const Routes = () => {
   /* eslint-enable */
 
   return (
-    <Layout app_id={app_id}>
+    <Layout org_id={org_id}>
       <Router>
         {/*<PrivateRoute path="/app/:id/dashboard" component={Dashboard} app_id={app_id} />*/}
-        <Dashboard app_id={app_id} path="/app/:id/dashboard" />
-        <Create app_id={app_id} path="/app/:id/create" />
-        <ReadUpdate app_id={app_id} path="/app/:id/readupdate" />
-        <Permissions app_id={app_id} path="/app/:id/permissions" />
-        <Users app_id={app_id} path="/app/:id/users" />
-        <Onboarding app_id={app_id} path="/app/:id/onboarding" />
-        <MachineLearning app_id={app_id} path="/app/:id/machinelearning" />
+        <Dashboard org_id={org_id} path="/app/:id/dashboard" />
+        <Create org_id={org_id} path="/app/:id/create" />
+        <ReadUpdate org_id={org_id} path="/app/:id/readupdate" />
+        <Permissions org_id={org_id} path="/app/:id/permissions" />
+        <Users org_id={org_id} path="/app/:id/users" />
+        <Onboarding org_id={org_id} path="/app/:id/onboarding" />
+        <MachineLearning org_id={org_id} path="/app/:id/machinelearning" />
       </Router>
     </Layout>
   );

@@ -32,3 +32,10 @@ CREATE TABLE todos (
   org_id UUID REFERENCES organization(id)
 );
 
+CREATE TABLE invites (
+  id SERIAL PRIMARY KEY,
+  org_id UUID REFERENCES organization(id),
+  verify_key VARCHAR(255),
+  recipient_email VARCHAR(255),
+  sender_email VARCHAR (255)
+);

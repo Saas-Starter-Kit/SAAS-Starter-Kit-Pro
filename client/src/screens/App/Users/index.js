@@ -42,9 +42,9 @@ const RemoveUserButton = styled.button`
 `;
 
 const dummyData = [
-  { email: 'email1', username: 'username1', role: 'admin' },
-  { email: 'email2', username: 'username2', role: 'user' },
-  { email: 'email3', username: 'username3', role: 'admin' }
+  { email: 'email1@example.com', username: 'username1', role: 'admin' },
+  { email: 'email2@example.com', username: 'username2', role: 'user' },
+  { email: 'email3@example.com', username: 'username3', role: 'admin' }
 ];
 
 const Users = ({ app_id }) => {

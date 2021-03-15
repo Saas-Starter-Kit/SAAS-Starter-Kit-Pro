@@ -33,8 +33,6 @@ export const getRole = async (org_id, ability, authState, fetchFailure) => {
     fetchFailure(err);
   });
 
-  console.log(result);
-
   if (result.data.length === 0) {
     navigate('/403');
   }
