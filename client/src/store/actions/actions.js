@@ -1,4 +1,12 @@
-import { LOGIN, LOGOUT, FETCH_FAILURE, FETCH_SUCCESS, FETCH_INIT } from './actionTypes';
+import {
+  LOGIN,
+  LOGOUT,
+  FETCH_FAILURE,
+  FETCH_SUCCESS,
+  FETCH_INIT,
+  SET_ORG,
+  REMOVE_ORG
+} from './actionTypes';
 
 export const Login = (user) => {
   return {
@@ -23,4 +31,14 @@ export const Fetch_failure = (error) => {
 };
 export const Fetch_success = {
   type: FETCH_SUCCESS
+};
+
+export const Set_Org = (payload) => {
+  return {
+    type: SET_ORG,
+    payload
+  };
+};
+export const Remove_Org = {
+  type: REMOVE_ORG
 };

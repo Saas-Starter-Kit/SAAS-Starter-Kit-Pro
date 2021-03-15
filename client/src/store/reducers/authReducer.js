@@ -20,11 +20,19 @@ export const authReducer = (state, action) => {
       localStorage.setItem('expiresIn', JSON.stringify(expiresIn));
       localStorage.setItem('user', JSON.stringify(user));
 
-      return { isAuthenticated: true, user: user };
+      return { isAuthenticated: true, user };
     case LOGOUT:
       localStorage.removeItem('expiresIn');
       localStorage.removeItem('user');
-      return { ...state, isAuthenticated: false, user: null };
+
+      let nullUser = {
+        id: null,
+        username: null,
+        email: null,
+        jwt_token: null
+      };
+
+      return { ...state, isAuthenticated: false, user: nullUser };
     default:
       return state;
   }

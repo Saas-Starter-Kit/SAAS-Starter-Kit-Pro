@@ -15,6 +15,9 @@ export const getRoleModel = async (user_id, org_id) => {
       SELECT
         o.id,
         o.org_name,
+        o.primary_email,
+        o.stripe_customer_id,
+        o.subscription_id,
         r.user_id,
         r.role
       FROM
