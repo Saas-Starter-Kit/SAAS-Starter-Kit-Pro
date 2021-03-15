@@ -52,15 +52,8 @@ export const LoginAuth = async (
     jwt_token
   };
 
-  if (!process.env.NODE_ENV === 'development') {
-    //save event and user id to Google Analytics
-    let parameters = {
-      method: 'Email'
-    };
-
-    sendEventToAnalytics('login', parameters);
-    setAnalyticsUserId(id);
-  }
+  sendEventToAnalytics('login', { method: 'Email' });
+  setAnalyticsUserId(id);
 
   //save user info to React context
   await LogIn(user);

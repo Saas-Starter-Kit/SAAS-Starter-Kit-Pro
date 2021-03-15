@@ -53,7 +53,8 @@ export const getRole = async (org_id, ability, authState, orgState, SetOrg, fetc
     subscription_id
   };
 
-  SetOrg(org);
+  //save org info to global state if role is admin
+  if (role === 'admin') SetOrg(org);
 
   updateRole(ability, role);
 };
