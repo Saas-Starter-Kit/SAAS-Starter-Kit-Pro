@@ -53,7 +53,7 @@ const Users = ({ org_id }) => {
   const { isLoading } = apiState;
   const data = useStaticQuery(staticQuery);
   const domainUrl = data.site.siteMetadata.siteUrl;
-  const [appUsers, setUsers] = useState(dummyData);
+  const [appUsers, setUsers] = useState();
 
   const handleSubmit = async (values) => {
     fetchInit();
