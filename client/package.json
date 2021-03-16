@@ -16,7 +16,7 @@
     "dotenv": "^8.2.0",
     "firebase": "^8.2.9",
     "formik": "^2.2.6",
-    "gatsby": "^3.0.3",
+    "gatsby": "^3.0.4",
     "gatsby-image": "^3.0.0",
     "gatsby-plugin-algolia": "^0.16.3",
     "gatsby-plugin-create-client-paths": "^3.0.0",
