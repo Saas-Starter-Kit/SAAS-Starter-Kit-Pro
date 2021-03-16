@@ -21,17 +21,24 @@ import SignUpFormHeader from './signupFormHeader';
 
 const Signup = () => {
   const location = useLocation();
-  const queryParams = location.search.split('=');
-  const invite_key = queryParams[1].split('&')[0];
-  const isInviteFlow = queryParams[2];
   const data = useStaticQuery(staticQuery);
   const domainUrl = data.site.siteMetadata.siteUrl;
   const { firebase } = useContext(AuthContext);
   const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
   const { isLoading } = apiState;
+  const [invite_key, setInviteKey] = useState();
+  const [isInviteFlow, setInviteFlow] = useState();
 
   /* eslint-disable */
   //extract data from query params
+  useEffect(() => {
+    const queryParams = location.search.split('=');
+
+    if (queryParams[1]) {
+      setInviteFlow(queryParams[1].split('&')[0]);
+      setInviteKey(queryParams[2]);
+    }
+  }, [location]);
 
   useEffect(() => {
     return () => fetchSuccess();

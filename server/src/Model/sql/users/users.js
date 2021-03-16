@@ -20,3 +20,25 @@ export const getAppUsersModel = async (app_id) => {
   let queryResult = await db.query(text, values);
   return queryResult.rows;
 };
+
+export const CreateInvite = async (org_id, randomBytes, recipient_email, sender_email) => {
+  let text = `INSERT INTO invites(org_id, verify_key, recipient_email, sender_email)
+              VALUES($1, $2, $3, $4)`;
+
+  let values = [org_id, randomBytes, recipient_email, sender_email];
+
+  await db.query(text, values);
+
+  return;
+};
+
+export const VerifyInviteModel = async (invite_key) => {
+  let text = `SELECT org_id from invites
+              WHERE verify_key=$1`;
+
+  let values = [invite_key];
+
+  let queryResult = await db.query(text, values);
+
+  return queryResult.rows[0];
+};

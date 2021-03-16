@@ -21,7 +21,7 @@ export const PrivateRoute = ({ component: Component, location, org_id, ...rest }
   }
 };
 
-export const getRole = async (org_id, ability, authState, orgState, SetOrg, fetchFailure) => {
+export const getRole = async (org_id, ability, authState, SetOrg, fetchFailure) => {
   let user_id = authState.user.id;
 
   let params = {

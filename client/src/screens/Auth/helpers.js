@@ -9,9 +9,8 @@ export const LoginAuth = async (
   LogIn,
   firebase,
   fetchFailure,
-  isPaymentFlow,
   isInviteFlow,
-  app_id
+  invite_key
 ) => {
   //Get Auth id token from Firebase
   let token = await firebase
@@ -21,7 +20,7 @@ export const LoginAuth = async (
       fetchFailure(err);
     });
 
-  //server firebase authentication, returns jwt token
+  //server authentication, returns jwt token
   let email = authRes.user.email;
   let data = { email, token };
   let authServerRes = await axios.post(`/auth/login`, data).catch((err) => {
@@ -29,26 +28,19 @@ export const LoginAuth = async (
   });
 
   let validToken = isValidToken(authServerRes.data.token, fetchFailure);
-  let userId = validToken.user;
-  let jwt_token = authServerRes.data.token;
 
-  console.log(authServerRes);
-
+  let id = validToken.user;
   let username = authRes.user.displayName;
-  let id = userId;
   let photo = authRes.user.photoURL;
   let provider = authRes.user.providerData[0].providerId;
-  let stripeCustomerKey = authServerRes.data.stripe_customer_id;
-  let subscription_id = authServerRes.data.subscription_id;
+  let jwt_token = authServerRes.data.token;
 
   let user = {
+    id,
     email,
     username,
-    id,
     photo,
     provider,
-    stripeCustomerKey,
-    subscription_id,
     jwt_token
   };
 
@@ -59,12 +51,8 @@ export const LoginAuth = async (
   await LogIn(user);
 
   //navigate to correct route based on flow
-  if (isPaymentFlow && !subscription_id) {
-    navigate('/purchase/plan');
-  } else if (isPaymentFlow && subscription_id) {
-    navigate('/purchase/subcriptionexists');
-  } else if (isInviteFlow) {
-    navigate(`/user/confirmedinvite/${app_id}`);
+  if (isInviteFlow) {
+    navigate(`/user/confirmedinvite/${invite_key}`);
   } else {
     navigate('/user/dashboard');
   }

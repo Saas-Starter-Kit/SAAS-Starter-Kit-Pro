@@ -24,14 +24,14 @@ const Routes = () => {
   const location = useLocation();
   const ability = useContext(CaslContext);
   const { authState } = useContext(AuthContext);
-  const { orgState, SetOrg } = useContext(OrgContext);
+  const { SetOrg } = useContext(OrgContext);
   const { fetchFailure } = useContext(ApiContext);
   const splitPath = location.pathname.split('/');
   const org_id = splitPath[2];
 
   /* eslint-disable */
   useEffect(() => {
-    if (authState.user.id) getRole(org_id, ability, authState, orgState, SetOrg, fetchFailure);
+    if (authState.user.id) getRole(org_id, ability, authState, SetOrg, fetchFailure);
   }, [authState]);
   /* eslint-enable */
 

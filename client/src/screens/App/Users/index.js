@@ -67,6 +67,7 @@ const Users = ({ org_id }) => {
     });
 
     fetchSuccess();
+    message.success('Invite Sent');
   };
 
   const getAppUsers = async () => {

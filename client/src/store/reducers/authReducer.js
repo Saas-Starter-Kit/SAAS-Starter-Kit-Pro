@@ -6,7 +6,9 @@ export const initialStateAuth = {
     id: null,
     username: null,
     email: null,
-    jwt_token: null
+    jwt_token: null,
+    provider: null,
+    photo: null
   }
 };
 

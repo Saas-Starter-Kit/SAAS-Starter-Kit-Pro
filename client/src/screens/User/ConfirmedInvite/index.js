@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Link } from 'gatsby';
 import { useLocation } from '@reach/router';
 import styled from 'styled-components';
@@ -41,24 +41,38 @@ const Title = styled.h2`
 const ConfirmedInvite = () => {
   const location = useLocation();
   const splitPath = location.pathname.split('/');
-  const app_id = splitPath[3];
+  const invite_key = splitPath[3];
   const { authState } = useContext(AuthContext);
   const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
   const { isLoading } = apiState;
+  const [org_id, setOrgId] = useState();
 
   /* eslint-disable */
   useEffect(() => {
-    if (authState.user) createRole();
+    if (authState.user.id) verifyInvite();
   }, [authState]);
   /* eslint-enable */
 
-  const createRole = async () => {
-    fetchInit();
+  const verifyInvite = async () => {
+    //verify invite key, returing org id.
     let user_id = authState.user.id;
+
+    let data = { invite_key };
+    let result = await axios
+      .post('/api/users/verify-invite', data)
+      .catch((err) => fetchFailure(err));
+
+    let org_id = result.data.org_id;
+    setOrgId(org_id);
+    createRole(org_id, user_id);
+  };
+
+  const createRole = async (org_id, user_id) => {
+    fetchInit();
     let role = 'user';
 
     let data = {
-      app_id,
+      org_id,
       user_id,
       role
     };
@@ -83,7 +97,7 @@ const ConfirmedInvite = () => {
           <Title>
             Your invite to the app has been confirmed, click below to navigate to the app
           </Title>
-          <Link to={`/app/${app_id}/dashboard`}>
+          <Link to={`/app/${org_id}/dashboard`}>
             <ConfirmButton>Go to App</ConfirmButton>
           </Link>
         </StyledCard>

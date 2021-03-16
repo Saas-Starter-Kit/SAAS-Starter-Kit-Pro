@@ -1,7 +1,6 @@
 import { sendEmail } from '../../Config/email.js';
 import { getUser } from '../../Model/sql/auth/authentication.js';
-import { getAppUsersModel } from '../../Model/sql/users/users.js';
-import db from '../../Database/sql/db.js';
+import { getAppUsersModel, CreateInvite, VerifyInviteModel } from '../../Model/sql/users/users.js';
 import { nanoid } from 'nanoid';
 
 export const GetAppUsers = async (req, res) => {
@@ -25,24 +24,19 @@ export const InviteUser = async (req, res) => {
   //check user exists
   let userExists = await getUser(recipient_email);
 
-  let text = `INSERT INTO invites(org_id, verify_key, recipient_email, sender_email)
-              VALUES($1, $2, $3, $4)`;
-
-  let values = [org_id, randomBytes, recipient_email, sender_email];
-
-  await db.query(text, values);
-
-  //If user doesnt exist, require sign up process,
-  //if exists use login flow
+  //If user doesnt exist, require sign up flow,
+  //If exists use login flow
   if (!userExists) {
-    redirectUrl = `${domainUrl}/auth/signup/?key=${randomBytes}&isInviteFlow=${true}&verify_key=${randomBytes}`;
+    redirectUrl = `${domainUrl}/auth/signup/?isInviteFlow=${true}&verify_key=${randomBytes}`;
     isSignup = true;
   } else {
-    redirectUrl = `${domainUrl}/auth/login/?key=${randomBytes}&isInviteFlow=${true}&verify_key=${randomBytes}`;
+    redirectUrl = `${domainUrl}/auth/login/?&isInviteFlow=${true}&verify_key=${randomBytes}`;
     isSignup = false;
   }
 
-  //send email with url containing all the variables
+  await CreateInvite(org_id, randomBytes, recipient_email, sender_email);
+
+  //send invite through email
   let template = 'invite';
   let locals = { sender_email, sender_display_name, redirectUrl, isSignup };
 
@@ -53,17 +47,14 @@ export const InviteUser = async (req, res) => {
 export const VerifyInvite = async (req, res) => {
   let invite_key = req.body.invite_key;
 
-  let text = `SELECT * from invites
-              WHERE verify_key=$1`;
+  let result = await VerifyInviteModel(invite_key);
 
-  let values = [invite_key];
-
-  let result = await db.query(text, values);
-  let org_id = result.rows[0].org_id;
-
-  if (result === 0) {
+  if (!result) {
     //send verify failed error
+    let error = { type: 'Verify Key Invalid', message: 'Invite verification failed' };
+    res.status(400).send(error);
+  } else {
+    let org_id = result.org_id;
+    res.send({ org_id });
   }
-
-  res.send({ org_id });
 };
