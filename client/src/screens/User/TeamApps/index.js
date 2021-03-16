@@ -38,7 +38,7 @@ const TeamApps = () => {
 
   /* eslint-disable */
   useEffect(() => {
-    if (authState.user) {
+    if (authState.user.id) {
       getApps();
     }
   }, [authState]);
@@ -52,7 +52,7 @@ const TeamApps = () => {
       user_id
     };
 
-    const result = await axios.get(`/api/get/app`, { params }).catch((err) => {
+    const result = await axios.get(`/api/org`, { params }).catch((err) => {
       fetchFailure(err);
     });
 
@@ -74,10 +74,10 @@ const TeamApps = () => {
         <div>
           <h1>Team Apps:</h1>
           {teamApps &&
-            teamApps.map((app) => (
-              <Link key={app.app_id} to={`/app/${app.app_id}/dashboard`} state={{ app }}>
+            teamApps.map((org) => (
+              <Link key={org.id} to={`/app/${org.id}/dashboard`}>
                 <StyledCard>
-                  <StyledLink>{app.app_name}</StyledLink>
+                  <StyledLink>{org.org_name}</StyledLink>
                   <RoleText>Role: user</RoleText>
                 </StyledCard>
               </Link>
