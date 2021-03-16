@@ -17,7 +17,8 @@ import {
   FcGenealogy,
   FcTimeline,
   FcUpload,
-  FcPrivacy
+  FcPrivacy,
+  FcEngineering
 } from 'react-icons/fc';
 
 const Wrapper = styled.div`
@@ -240,6 +241,13 @@ const SidebarMobile = ({ toggleMobileMenu, org_id, theme, toggleTheme }) => {
                 toggleMenu={() => toggleMobileMenu(false)}
                 svg={<FcGenealogy />}
                 title="Machine Learning"
+              />
+              <MobileSidebarItem
+                theme={theme}
+                link={`/app/${org_id}/settings`}
+                toggleMenu={() => toggleMobileMenu(false)}
+                svg={<FcEngineering />}
+                title="Settings"
               />
             </Nav>
             <Footer>

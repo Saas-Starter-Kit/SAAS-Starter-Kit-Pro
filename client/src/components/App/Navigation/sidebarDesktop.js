@@ -17,7 +17,8 @@ import {
   FcGenealogy,
   FcTimeline,
   FcUpload,
-  FcPrivacy
+  FcPrivacy,
+  FcEngineering
 } from 'react-icons/fc';
 
 const StyledIcon = styled.div`
@@ -30,6 +31,11 @@ const StyledIcon = styled.div`
 `;
 
 const StyledBar = styled(FcBarChart)`
+  height: 1.3rem;
+  width: 1.3rem;
+`;
+
+const StyledEng = styled(FcEngineering)`
   height: 1.3rem;
   width: 1.3rem;
 `;
@@ -106,6 +112,12 @@ const getMenus = (org_id) => [
     name: 'Machine Learning',
     route: `/app/${org_id}/machinelearning`,
     icon: <StyledML />
+  },
+  {
+    id: '8',
+    name: 'Settings',
+    route: `/app/${org_id}/settings`,
+    icon: <StyledEng />
   }
 ];
 
@@ -171,6 +183,11 @@ const ItemWrapper = styled.div`
   font-weight: 500;
 `;
 
+const FooterWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
 const Footer = styled.div`
   width: 100%;
   height: 48px;
@@ -192,6 +209,12 @@ const Footer = styled.div`
     margin-right: 4px;
     font-size: 14px;
   }
+`;
+
+const SettingsWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const Bulb = styled(BulbOutlined)`
@@ -235,19 +258,23 @@ const SidebarDesktop = ({ theme, toggleTheme, org_id, location, collapsed }) => 
           </Menu>
         </ScrollBar>
       </SidebarItems>
+
       {!collapsed && (
-        <Footer>
-          <span>
-            <Bulb />
-            <Span theme={theme}>Switch Theme</Span>
-          </span>
-          <Switch
-            onChange={toggleTheme}
-            defaultChecked={theme === THEMES.DARK}
-            checkedChildren="Dark"
-            unCheckedChildren="Light"
-          />
-        </Footer>
+        <FooterWrapper>
+          <SettingsWrapper></SettingsWrapper>
+          <Footer>
+            <span>
+              <Bulb />
+              <Span theme={theme}>Switch Theme</Span>
+            </span>
+            <Switch
+              onChange={toggleTheme}
+              defaultChecked={theme === THEMES.DARK}
+              checkedChildren="Dark"
+              unCheckedChildren="Light"
+            />
+          </Footer>
+        </FooterWrapper>
       )}
     </StyledSider>
   );

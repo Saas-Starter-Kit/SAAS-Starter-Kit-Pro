@@ -9,7 +9,7 @@ import OrgContext from '../utils/orgContext';
 import { getRole } from './helpers';
 
 import Layout from '../components/App/AppLayout';
-
+import { OrgSettings, PaymentSettings, SubscriptionSettings } from '../screens/App/Settings';
 import {
   Create,
   Dashboard,
@@ -46,6 +46,9 @@ const Routes = () => {
         <Users org_id={org_id} path="/app/:id/users" />
         <Onboarding org_id={org_id} path="/app/:id/onboarding" />
         <MachineLearning org_id={org_id} path="/app/:id/machinelearning" />
+        <OrgSettings path="/app/:id/settings/" />
+        <PaymentSettings path="/app/:id/settings/payment" />
+        <SubscriptionSettings path="/app/:id/settings/subscription" />
       </Router>
     </Layout>
   );
