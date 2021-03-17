@@ -16,7 +16,6 @@ export const orgReducer = (state, action) => {
       let { id, org_name, primary_email, role, stripe_customer_id, subscription_id } = org;
 
       return {
-        ...state,
         id,
         org_name,
         primary_email,
@@ -26,8 +25,12 @@ export const orgReducer = (state, action) => {
       };
     case REMOVE_ORG:
       return {
-        ...state,
-        isLoading: false
+        id: null,
+        org_name: null,
+        primary_email: null,
+        role: null,
+        stripe_customer_id: null,
+        subscription_id: null
       };
     default:
       return {

@@ -46,9 +46,9 @@ const Routes = () => {
         <Users org_id={org_id} path="/app/:id/users" />
         <Onboarding org_id={org_id} path="/app/:id/onboarding" />
         <MachineLearning org_id={org_id} path="/app/:id/machinelearning" />
-        <OrgSettings path="/app/:id/settings/" />
-        <PaymentSettings path="/app/:id/settings/payment" />
-        <SubscriptionSettings path="/app/:id/settings/subscription" />
+        <OrgSettings org_id={org_id} path="/app/:id/settings/" />
+        <PaymentSettings org_id={org_id} path="/app/:id/settings/payment" />
+        <SubscriptionSettings org_id={org_id} path="/app/:id/settings/subscription" />
       </Router>
     </Layout>
   );

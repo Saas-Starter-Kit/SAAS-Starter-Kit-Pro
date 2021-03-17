@@ -31,10 +31,12 @@ export const authReducer = (state, action) => {
         id: null,
         username: null,
         email: null,
-        jwt_token: null
+        jwt_token: null,
+        provider: null,
+        photo: null
       };
 
-      return { ...state, isAuthenticated: false, user: nullUser };
+      return { isAuthenticated: false, user: nullUser };
     default:
       return state;
   }

@@ -4,10 +4,11 @@ import styled from 'styled-components';
 
 import AuthContext from '../../../../utils/authContext';
 import ApiContext from '../../../../utils/apiContext';
+import OrgContext from '../../../../utils/orgContext';
 import axios from '../../../../services/axios';
 
 import SEO from '../../../../components/Marketing/Layout/seo';
-import SettingsHeader from '../../../../components/User/Navigation/settingsHeader';
+import SettingsHeader from '../../../../components/App/Navigation/settingsHeader';
 import UpdatePaymentCard from './updatePaymentCard';
 import AttachPaymentFormWrapper from './attachPaymentFormWrapper';
 
@@ -17,9 +18,10 @@ const Title = styled.h1`
   font-size: 1.5rem;
 `;
 
-const PaymentSettings = () => {
-  const { authState } = useContext(AuthContext);
+const PaymentSettings = ({ org_id }) => {
   const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
+  const { orgState } = useContext(OrgContext);
+  const { stripe_customer_id } = orgState;
   const { isLoading } = apiState;
 
   const [isModalCard, setModalCard] = useState(false);
@@ -28,35 +30,19 @@ const PaymentSettings = () => {
   const [deletePaymentId, setDeletePaymentId] = useState();
   const [payCards, setPayCards] = useState([]);
   const [paymentRemoved, setPaymentRemoved] = useState(false);
-  const [stripeCustomerId, setStripeId] = useState();
 
   /* eslint-disable */
-  useEffect(() => {
-    if (authState.user) {
-      setUser();
-    }
-  }, [authState]);
 
   useEffect(() => {
-    if (stripeCustomerId) {
+    if (stripe_customer_id) {
       getWallet();
     }
-  }, [stripeCustomerId]);
+  }, [orgState]);
 
   useEffect(() => {
     return () => fetchSuccess();
   }, []);
   /* eslint-enable */
-
-  /*
-      Auth Methods
-  */
-
-  const setUser = () => {
-    let stripeCustomerId = authState.user.stripeCustomerKey;
-
-    setStripeId(stripeCustomerId);
-  };
 
   /* 
       Stripe Methods
@@ -72,21 +58,21 @@ const PaymentSettings = () => {
       fetchFailure(err);
     });
 
-    console.log(wallet);
     //show ant d success message
     setPaymentRemoved(true);
   };
 
   const getWallet = async () => {
     fetchInit();
+
     let params = {
-      customer: stripeCustomerId
+      customer: stripe_customer_id
     };
 
     let wallet = await axios.get('/stripe/get-wallet', { params }).catch((err) => {
       fetchFailure(err);
     });
-    console.log(wallet);
+
     const cards = wallet.data.data;
     setPayCards(cards);
     fetchSuccess();
@@ -109,7 +95,7 @@ const PaymentSettings = () => {
     <React.Fragment>
       <SEO seoData={seoData} />
       <Wrapper>
-        <SettingsHeader />
+        <SettingsHeader org_id={org_id} />
 
         <Title>Payment Settings</Title>
         <Spin tip="Loading..." spinning={isLoading}>

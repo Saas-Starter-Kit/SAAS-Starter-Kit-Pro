@@ -9,12 +9,10 @@ export const apiReducer = (state, action) => {
   switch (action.type) {
     case FETCH_INIT:
       return {
-        ...state,
         isLoading: true
       };
     case FETCH_SUCCESS:
       return {
-        ...state,
         isLoading: false
       };
     case FETCH_FAILURE:
@@ -23,12 +21,10 @@ export const apiReducer = (state, action) => {
       apiErrorHandler(error);
 
       return {
-        ...state,
         isLoading: false
       };
     default:
       return {
-        ...state,
         isLoading: false
       };
   }

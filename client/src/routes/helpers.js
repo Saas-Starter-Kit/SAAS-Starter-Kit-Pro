@@ -41,8 +41,14 @@ export const getRole = async (org_id, ability, authState, SetOrg, fetchFailure) 
   let org_name = result.data[0].org_name;
   let primary_email = result.data[0].primary_email;
   let role = result.data[0].role;
-  let stripe_customer_id = result.data[0].stripe_customer_id;
-  let subscription_id = result.data[0].subscription_id;
+  let stripe_customer_id;
+  let subscription_id;
+
+  //save payment info to global state if role is admin
+  if (role === 'admin') {
+    stripe_customer_id = result.data[0].stripe_customer_id;
+    subscription_id = result.data[0].subscription_id;
+  }
 
   let org = {
     id,
@@ -53,8 +59,7 @@ export const getRole = async (org_id, ability, authState, SetOrg, fetchFailure) 
     subscription_id
   };
 
-  //save org info to global state if role is admin
-  if (role === 'admin') SetOrg(org);
+  SetOrg(org);
 
   updateRole(ability, role);
 };

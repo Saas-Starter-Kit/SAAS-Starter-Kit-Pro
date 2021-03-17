@@ -1,17 +1,17 @@
 import stripe from '../../Config/stripe.js';
 
 export const CreateSetupIntent = async (req, res) => {
-  let customer_id = req.body.customer.stripeCustomerKey;
+  let customer_id = req.body.customer;
 
   const setupIntent = await stripe.setupIntents.create({
     customer: customer_id
   });
 
-  res.status(200).send(setupIntent)
+  res.status(200).send(setupIntent);
 };
 
 export const AttachPaymentMethod = async (req, res) => {
-  let customer_id = req.body.customer.stripeCustomerKey;
+  let customer_id = req.body.customer;
   let payment_method = req.body.payment_method;
 
   // Attach the  payment method to the customer
@@ -42,7 +42,7 @@ export const GetWallet = async (req, res) => {
     type: 'card'
   });
 
-  res.status(200).send(paymentMethods)
+  res.status(200).send(paymentMethods);
 };
 
 export const CreatePaymentIntent = async (req, res) => {
@@ -51,5 +51,5 @@ export const CreatePaymentIntent = async (req, res) => {
     currency: 'usd'
   });
 
-  res.status(200).send(paymentIntent)
+  res.status(200).send(paymentIntent);
 };
