@@ -15,7 +15,7 @@ const SettingsHeader = ({ org_id }) => {
         activeClassName="header_link_settings_active"
         to={`/app/${org_id}/settings`}
       >
-        Org
+        Organization
       </Link>
       <Link
         className="header_link_settings"

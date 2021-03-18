@@ -10,7 +10,6 @@ import axios from '../../../services/axios';
 
 import SEO from '../../../components/Marketing/Layout/seo';
 import LoadingOverlay from '../../../components/Common/loadingOverlay';
-import DeleteAppModal from './DeleteOrgModal';
 import Card from '../../../components/Common/Card';
 import Button from '../../../components/Common/buttons/PrimaryButton';
 
@@ -82,8 +81,6 @@ const Dashboard = () => {
   const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
   const { isLoading } = apiState;
   const [orgs, setOrgs] = useState([]);
-  const [isModal, setModal] = useState(false);
-  const [deleteOrgId, setDeleteOrgId] = useState();
 
   /* eslint-disable */
   useEffect(() => {
@@ -134,26 +131,6 @@ const Dashboard = () => {
     fetchSuccess();
   };
 
-  const deleteOrg = async () => {
-    setModal(false);
-    fetchInit();
-    let params = { org_id: deleteOrgId };
-
-    await axios.delete('/api/org', { params });
-
-    getOrgs();
-    fetchSuccess();
-  };
-
-  const handleModalCancel = () => {
-    setModal(false);
-  };
-
-  const handleDeleteModal = (org_id) => {
-    setDeleteOrgId(org_id);
-    setModal(true);
-  };
-
   const seoData = {
     title: 'Saas Starter Kit Pro Dashboard page',
     description: 'Saas Starter Kit Pro Dashboard page'
@@ -171,13 +148,13 @@ const Dashboard = () => {
             <AppsWrapper>
               {!orgs.length == 0 ? (
                 orgs.map((org) => (
-                  <StyledCard key={org.id}>
-                    <Link to={`/app/${org.id}/dashboard`} state={{ org }}>
+                  <Link to={`/app/${org.id}/dashboard`} state={{ org }}>
+                    <StyledCard key={org.id}>
                       <StyledLink>{org.org_name}</StyledLink>
-                    </Link>
-                    <RoleText>Role: admin</RoleText>
-                    <DangerButton onClick={() => handleDeleteModal(org.id)}>Delete</DangerButton>
-                  </StyledCard>
+
+                      <RoleText>Role: admin</RoleText>
+                    </StyledCard>
+                  </Link>
                 ))
               ) : (
                 <Empty />
@@ -198,11 +175,6 @@ const Dashboard = () => {
             </form>
           </CreateAppWrapper>
         </ContentWrapper>
-        <DeleteAppModal
-          handleModalCancel={handleModalCancel}
-          isModal={isModal}
-          deleteOrg={deleteOrg}
-        />
       </div>
     </React.Fragment>
   );

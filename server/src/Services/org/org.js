@@ -3,6 +3,7 @@ import {
   CreateOrgModel,
   SetOrgStripeId,
   GetOrgModel,
+  PutOrgModel,
   DeleteOrgModel
 } from '../../Model/sql/org/org.js';
 import { CreateOrgRole } from '../../Model/sql/roles/roles.js';
@@ -38,4 +39,13 @@ export const DeleteOrg = async (req, res) => {
   await DeleteOrgModel(org_id);
 
   res.status(200).send('Delete Successful');
+};
+
+export const PutOrg = async (req, res) => {
+  let org_id = req.body.org_id;
+  let org_name = req.body.org_name;
+
+  await PutOrgModel(org_id, org_name);
+
+  res.status(200).send('Put Successful');
 };
