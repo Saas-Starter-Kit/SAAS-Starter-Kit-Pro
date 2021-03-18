@@ -14,7 +14,8 @@ CREATE TABLE organization (
   org_name VARCHAR,
   primary_email VARCHAR(255) REFERENCES users(email),
   stripe_customer_id VARCHAR(255),
-  subscription_id VARCHAR(255)
+  subscription_id VARCHAR(255),
+  plan_type VARCHAR(255)
 );
 
 CREATE TABLE roles (

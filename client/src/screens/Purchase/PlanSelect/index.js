@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'gatsby';
 import styled from 'styled-components';
 import { colors, breakpoints } from '../../../styles/theme';
+import OrgContext from '../../../utils/orgContext';
 
 const CardsWrapper = styled.div`
   display: flex;
@@ -67,14 +68,14 @@ const PlanPrice = styled.div`
 const PurchaseHeader = styled.h1`
   font-size: 1.125rem;
   font-weight: 700;
-  color: ${colors.coolGray500};
+  color: ${colors.coolGray700};
   text-align: center;
 `;
 
 const PurchaseText = styled.div`
-  font-size: 0.9rem;
-  font-weight: 300;
-  color: ${colors.coolGray500};
+  font-size: 1.075rem;
+  font-weight: 500;
+  color: ${colors.coolGray700};
   text-align: center;
   padding-bottom: 1rem;
 `;
@@ -89,28 +90,19 @@ const PlanSelect = ({ location }) => {
   const premium_type = process.env.GATSBY_STRIPE_PREMIUM_PLAN_TYPE;
   const basic_type = process.env.GATSBY_STRIPE_BASIC_PLAN_TYPE;
 
+  const { orgState } = useContext(OrgContext);
+  const { org_name } = orgState;
+
   const [plan, setPlan] = useState(basic_plan);
   const [planType, setPlanType] = useState(basic_type);
   const [price, setPrice] = useState(basic_price);
-  const [isUpgradeFlow, setUpgradeFlow] = useState();
-  const [currentPlan, setCurrentPlan] = useState();
-  const [subscription_id, setSubscriptionId] = useState();
-  const [subscription_item, setSubscriptionItem] = useState();
+
+  let isUpgradeFlow = location.state?.isUpgradeFlow;
+  let currentPlan = location.state?.currentPlan;
+  let subscription_id = location.state?.subscription_id;
+  let subscription_item = location.state?.subscription_item;
 
   /* eslint-disable */
-  useEffect(() => {
-    if (location.state) {
-      let isUpgradeFlow = location.state.isUpgradeFlow;
-      let currentPlan = location.state.currentPlan;
-      let subscription_id = location.state.subscription_id;
-      let subscription_item = location.state.subscription_item;
-
-      setUpgradeFlow(isUpgradeFlow);
-      setCurrentPlan(currentPlan);
-      setSubscriptionId(subscription_id);
-      setSubscriptionItem(subscription_item);
-    }
-  }, [location]);
 
   useEffect(() => {
     if (isUpgradeFlow) {
@@ -131,8 +123,8 @@ const PlanSelect = ({ location }) => {
 
   return (
     <div>
-      <PurchaseHeader>Buy SAAS Pro Now</PurchaseHeader>
-      <PurchaseText>Main Benefit of product</PurchaseText>
+      <PurchaseHeader>Purchasing SAAS Pro </PurchaseHeader>
+      <PurchaseText>for {org_name}</PurchaseText>
       <CardsWrapper>
         <PlanCard
           isActive={plan === basic_plan}

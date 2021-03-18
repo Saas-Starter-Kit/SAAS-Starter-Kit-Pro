@@ -22,7 +22,7 @@ const Title = styled.h1`
 `;
 
 const StyledCard = styled(Card)`
-  width: max-content;
+  width: 24rem;
 `;
 
 const DangerCard = styled(StyledCard)`

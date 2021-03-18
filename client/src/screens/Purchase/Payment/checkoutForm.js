@@ -6,7 +6,7 @@ import { FaRegCreditCard } from 'react-icons/fa';
 import { navigate } from 'gatsby';
 import { Spin } from 'antd';
 
-import AuthContext from '../../../utils/authContext';
+import OrgContext from '../../../utils/orgContext';
 import ApiContext from '../../../utils/apiContext';
 import axios from '../../../services/axios';
 import { colors, breakpoints } from '../../../styles/theme';
@@ -32,7 +32,6 @@ const Wrapper = styled.div`
 
 const PaymentConfirm = styled.div`
   background-color: white;
-  width: 30%;
   margin-right: 2rem;
   margin-left: 1rem;
   height: max-content;
@@ -122,65 +121,51 @@ const StyledHr = styled.hr`
 
 const CheckoutForm = () => {
   const location = useLocation();
-  const { authState } = useContext(AuthContext);
+  const { orgState } = useContext(OrgContext);
+  const { id, stripe_customer_id, primary_email, org_name } = orgState;
   const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
   const { isLoading } = apiState;
-  const [plan, setPlan] = useState();
-  const [price, setPrice] = useState();
-  const [planType, setPlanType] = useState();
+
+  let plan = location.state?.plan;
+  let price = location.state?.price;
+  let planType = location.state?.planType;
+  let isUpgradeFlow = location.state?.isUpgradeFlow;
+  let subscription_id = location.state?.subscription_id;
+  let subscription_item = location.state?.subscription_item;
+
   const [paymentMethod, setPaymentMethod] = useState();
   const [payCards, setPayCards] = useState([]);
-  const [isUpgradeFlow, setUpgradeFlow] = useState();
-  const [subscription_id, setSubscriptionId] = useState();
-  const [subscription_item, setSubscriptionItem] = useState();
 
   const stripe = useStripe();
   const elements = useElements();
 
   /* eslint-disable */
-  useEffect(() => {
-    if (location.state) {
-      let Plan = location.state.plan;
-      let Price = location.state.price;
-      let PlanType = location.state.planType;
-      let isUpgradeFlow = location.state.isUpgradeFlow;
-      let subscription_id = location.state.subscription_id;
-      let subscription_item = location.state.subscription_item;
-
-      setUpgradeFlow(isUpgradeFlow);
-      setSubscriptionItem(subscription_item);
-      setSubscriptionId(subscription_id);
-      setPlan(Plan);
-      setPrice(Price);
-      setPlanType(PlanType);
-    } else {
-      navigate('/purchase/plan');
-    }
-  }, [location]);
 
   useEffect(() => {
     return () => fetchSuccess();
   }, []);
 
   useEffect(() => {
-    if (authState.user) getWallet();
-  }, [authState]);
+    if (stripe_customer_id) getWallet();
+  }, [orgState]);
   /* eslint-enable */
 
   const getWallet = async () => {
     fetchInit();
     //get customers list of available payment methods
     let params = {
-      customer: authState.user.stripeCustomerKey
+      customer: stripe_customer_id
     };
 
     let wallet = await axios.get('/stripe/get-wallet', { params }).catch((err) => {
       fetchFailure(err);
     });
 
+    console.log(wallet);
+
     const cards = wallet.data.data;
     setPayCards(cards);
-    setIcons(cards);
+
     fetchSuccess();
   };
 
@@ -188,7 +173,7 @@ const CheckoutForm = () => {
     event.preventDefault();
     fetchInit();
 
-    let data = { customer: authState.user };
+    let data = { customer: stripe_customer_id };
     //get stripe client secret
     const result = await axios.post('/stripe/wallet', data).catch((err) => {
       fetchFailure(err);
@@ -238,13 +223,11 @@ const CheckoutForm = () => {
   const updateSubscription = async () => {
     fetchInit();
 
-    let subscriptionId = subscription_id;
     let planSelect = plan;
     let payment_method = paymentMethod;
-    let subscriptionItem = subscription_item;
-    let email = authState.user.email;
+    let email = primary_email;
 
-    let data = { subscriptionId, planSelect, payment_method, subscriptionItem, planType, email };
+    let data = { subscription_id, planSelect, payment_method, subscription_item, planType, email };
 
     await axios.put('/stripe/update-subscription', data).catch((err) => {
       fetchFailure(err);
@@ -257,10 +240,12 @@ const CheckoutForm = () => {
     fetchInit();
 
     let payment_method = paymentMethod;
-    let customer = authState.user;
+    let customer = stripe_customer_id;
     let planSelect = plan;
+    let org_id = id;
+    let email = primary_email;
 
-    let data = { payment_method, customer, planSelect };
+    let data = { payment_method, customer, email, planSelect, org_id, planType };
 
     //create subscription
     let result = await axios.post('/stripe/create-subscription', data).catch((err) => {
@@ -282,8 +267,9 @@ const CheckoutForm = () => {
     <Wrapper>
       <PaymentInfo>
         <Spin tip="Loading" spinning={isLoading}>
-          <h2>Please Choose Payment Method</h2>
-          {!payCards.length === 0 ? (
+          <h2>Purchasing Subscription for {org_name}</h2>
+          <h3>Please Choose Payment Method</h3>
+          {payCards.length !== 0 ? (
             payCards.map((item) => (
               <StyledCardDisplayWrapper key={item.id}>
                 <StyledCardDisplay
@@ -321,31 +307,33 @@ const CheckoutForm = () => {
         </Spin>
       </PaymentInfo>
 
-      <PaymentConfirm>
-        <h3>
-          {isUpgradeFlow ? <span>Changing to</span> : <span>Purchasing</span>} {planType} Plan
-        </h3>
+      <Spin tip="Loading" spinning={isLoading}>
+        <PaymentConfirm>
+          <h3>
+            {isUpgradeFlow ? <span>Changing to</span> : <span>Purchasing</span>} {planType} Plan
+          </h3>
 
-        <PaymentConfirmRow>
-          <div>{planType}</div>
-          <div>
-            <strong>${price}/month</strong>
-          </div>
-        </PaymentConfirmRow>
-        <StyledHr />
-        <PaymentConfirmRow>
-          <div>
-            <strong>Subtotal</strong>
-          </div>
-          <div>${price}</div>
-        </PaymentConfirmRow>
-        <Button
-          disabled={!paymentMethod}
-          onClick={isUpgradeFlow ? updateSubscription : createSubscription}
-        >
-          Confirm
-        </Button>
-      </PaymentConfirm>
+          <PaymentConfirmRow>
+            <div>{planType}</div>
+            <div>
+              <strong>${price}/month</strong>
+            </div>
+          </PaymentConfirmRow>
+          <StyledHr />
+          <PaymentConfirmRow>
+            <div>
+              <strong>Subtotal</strong>
+            </div>
+            <div>${price}</div>
+          </PaymentConfirmRow>
+          <Button
+            disabled={!paymentMethod}
+            onClick={isUpgradeFlow ? updateSubscription : createSubscription}
+          >
+            Confirm
+          </Button>
+        </PaymentConfirm>
+      </Spin>
     </Wrapper>
   );
 };

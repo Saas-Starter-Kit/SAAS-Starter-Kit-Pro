@@ -44,12 +44,3 @@ export const GetWallet = async (req, res) => {
 
   res.status(200).send(paymentMethods);
 };
-
-export const CreatePaymentIntent = async (req, res) => {
-  const paymentIntent = await stripe.paymentIntents.create({
-    amount: process.env.STRIPE_ITEM_PRICE,
-    currency: 'usd'
-  });
-
-  res.status(200).send(paymentIntent);
-};

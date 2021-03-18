@@ -31,8 +31,8 @@ const SubscriptionSettings = ({ org_id }) => {
   const premium_type = process.env.GATSBY_STRIPE_PREMIUM_PLAN_TYPE;
   const basic_type = process.env.GATSBY_STRIPE_BASIC_PLAN_TYPE;
 
-  const { orgState, primary_email } = useContext(OrgContext);
-  const { stripe_customer_id } = orgState;
+  const { orgState } = useContext(OrgContext);
+  const { id, stripe_customer_id, primary_email, subscription_id } = orgState;
   const { fetchFailure, fetchSuccess, apiState } = useContext(ApiContext);
   const { isLoading } = apiState;
 
@@ -45,10 +45,10 @@ const SubscriptionSettings = ({ org_id }) => {
 
   /* eslint-disable */
   useEffect(() => {
-    if (stripe_customer_id) {
+    if (stripe_customer_id && subscription_id) {
       getSubscription();
     }
-  }, [authState]);
+  }, [orgState]);
 
   useEffect(() => {
     if (subscriptionState) {
@@ -66,7 +66,7 @@ const SubscriptionSettings = ({ org_id }) => {
   */
 
   const getSubscription = async () => {
-    let params = { email: primary_email };
+    let params = { subscription_id };
 
     const subscription = await axios.get('/stripe/get-subscription', { params }).catch((err) => {
       fetchFailure(err);
@@ -78,7 +78,9 @@ const SubscriptionSettings = ({ org_id }) => {
   const cancelSubscription = async () => {
     setModalSub(false);
     let data = {
-      email: primary_email
+      email: primary_email,
+      subscription_id,
+      org_id: id
     };
 
     await axios.post('/stripe/cancel-subscription', data).catch((err) => {
@@ -87,6 +89,7 @@ const SubscriptionSettings = ({ org_id }) => {
 
     setModalSub(false);
     message.success('Subscription Canceled');
+    navigate('/user');
   };
 
   /* 
@@ -103,7 +106,7 @@ const SubscriptionSettings = ({ org_id }) => {
     }
   };
 
-  const handleModalSubCancel = () => {
+  const handleModal = () => {
     setModalSub(false);
   };
 
@@ -121,23 +124,21 @@ const SubscriptionSettings = ({ org_id }) => {
         <Title>Subscription Settings</Title>
         {isLoading && <LoadingOverlay />}
         {!subscriptionState && <NullSubscriptionCard />}
-
         {subscriptionState && (
-          <PaymentInformationCard
-            planType={planType}
-            price={price}
-            subscriptionState={subscriptionState}
-          />
-        )}
-
-        {subscriptionState && <UpgradeSubscription subscriptionState={subscriptionState} />}
-        {subscriptionState && (
-          <CancelSubscriptionCard
-            setModalSub={setModalSub}
-            isModalSub={isModalSub}
-            handleModalSubCancel={handleModalSubCancel}
-            cancelSubscription={cancelSubscription}
-          />
+          <React.Fragment>
+            <PaymentInformationCard
+              planType={planType}
+              price={price}
+              subscriptionState={subscriptionState}
+            />
+            <UpgradeSubscription subscriptionState={subscriptionState} />
+            <CancelSubscriptionCard
+              setModalSub={setModalSub}
+              isModalSub={isModalSub}
+              handleModal={handleModal}
+              cancelSubscription={cancelSubscription}
+            />
+          </React.Fragment>
         )}
       </Wrapper>
     </React.Fragment>

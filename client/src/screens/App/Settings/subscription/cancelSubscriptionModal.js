@@ -7,17 +7,18 @@ import CancelButton from '../../../../components/Common/buttons/CancelButton';
 
 const StyledDangerButton = styled(DangerButton)`
   width: max-content;
+  margin-right: 2rem;
 `;
 
-const ModalSubscriptionCancel = ({ isModalSub, handleModalSubCancel, cancelSubscription }) => {
+const ModalSubscriptionCancel = ({ isModalSub, handleModal, cancelSubscription }) => {
   return (
     <Modal
       visible={isModalSub}
       title="Ending Subscription"
-      onCancel={handleModalSubCancel}
+      onCancel={handleModal}
       footer={[
         <StyledDangerButton onClick={cancelSubscription}>Delete Subscription</StyledDangerButton>,
-        <CancelButton onClick={handleModalSubCancel}>Cancel</CancelButton>
+        <CancelButton onClick={handleModal}>Cancel</CancelButton>
       ]}
     >
       Are You sure you want to Cancel Subscription?

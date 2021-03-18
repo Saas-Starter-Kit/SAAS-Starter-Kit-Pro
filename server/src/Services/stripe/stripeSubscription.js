@@ -8,10 +8,10 @@ import {
 } from '../../Model/sql/stripe/stripeSubscription.js';
 
 export const UpdateSubscription = async (req, res) => {
-  let subscription_id = req.body.subscriptionId;
+  let subscription_id = req.body.subscription_id;
   let payment_method = req.body.payment_method;
   let price = req.body.planSelect;
-  let id = req.body.subscriptionItem;
+  let id = req.body.subscription_item;
   let planType = req.body.planType;
   let email = req.body.email;
 
@@ -28,23 +28,14 @@ export const UpdateSubscription = async (req, res) => {
 
   res.status(200).send(subscription);
 
+  //Subscription id stays the same only subscription item changes.
+  //so no need to update database.
   //optionally add a field to the database for different membership tiers
   //see createSubscription() as an example
 };
 
 export const GetSubscription = async (req, res) => {
-  let email = req.query.email;
-
-  //check if user exists
-  const user = await getUser(email);
-
-  //If subscription not found send non-error message
-  if (!user.subscription_id) {
-    res.status(200).send({ type: 'No Subscription', message: 'Subscription Not Found' });
-    return;
-  }
-
-  let subscription_id = user.subscription_id;
+  let subscription_id = req.query.subscription_id;
 
   const subscription = await stripe.subscriptions.retrieve(subscription_id);
 
@@ -52,10 +43,12 @@ export const GetSubscription = async (req, res) => {
 };
 
 export const CreateSubscription = async (req, res) => {
-  let customer_id = req.body.customer.stripeCustomerKey;
+  let customer_id = req.body.customer;
   let payment_method = req.body.payment_method;
-  let email = req.body.customer.email;
+  let email = req.body.email;
   let price = req.body.planSelect;
+  let planType = req.body.planType;
+  let org_id = req.body.org_id;
 
   // Attach the  payment method to the customer
   await stripe.paymentMethods.attach(payment_method, { customer: customer_id });
@@ -76,7 +69,7 @@ export const CreateSubscription = async (req, res) => {
 
   if (subscription.status === 'succeeded' || subscription.status === 'trialing') {
     //update db to users subscription
-    createSubscriptionModel(email, subscriptionId);
+    await createSubscriptionModel(org_id, subscriptionId, planType);
 
     //send email confirm for subscription creation
     let amount = subscription.plan.amount * 0.01;
@@ -97,24 +90,16 @@ export const CreateSubscription = async (req, res) => {
 };
 
 export const CancelSubscription = async (req, res) => {
+  let org_id = req.body.org_id;
   let email = req.body.email;
-
-  //check if user exists
-  const user = await getUser(email);
-  console.log(user);
-
-  if (!user.subscription_id) {
-    res.status(500).send('No Subscription Found');
-  }
-
-  let subscription_id = user.subscription_id;
+  let subscription_id = req.body.subscription_id;
 
   //delete subscription and send back response
   const subscription = await stripe.subscriptions.del(subscription_id);
 
   if (subscription.status === 'canceled') {
     //update our own db for canceled subscription
-    await cancelSubscriptionModel(email);
+    await cancelSubscriptionModel(org_id);
 
     //cancel subscription confirm email
     let template = 'cancel subscription';

@@ -13,12 +13,7 @@ const SectionTitle = styled.h2`
   font-size: 1.25rem;
 `;
 
-const CancelSubscriptionCard = ({
-  setModalSub,
-  isModalSub,
-  handleModalSubCancel,
-  cancelSubscription
-}) => {
+const CancelSubscriptionCard = ({ setModalSub, isModalSub, handleModal, cancelSubscription }) => {
   return (
     <Card>
       <SectionTitle>Manage Subscription</SectionTitle>
@@ -27,7 +22,7 @@ const CancelSubscriptionCard = ({
       </CancelSubscriptionButton>
       <ModalSubscriptionCancel
         isModalSub={isModalSub}
-        handleModalSubCancel={handleModalSubCancel}
+        handleModal={handleModal}
         cancelSubscription={cancelSubscription}
       />
     </Card>
