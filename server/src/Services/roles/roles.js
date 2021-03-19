@@ -5,7 +5,7 @@ import {
   deleteRoleModel
 } from '../../Model/sql/roles/roles.js';
 
-export const getRole = async (req, res, next) => {
+export const getRole = async (req, res) => {
   let user_id = req.query.user_id;
   let org_id = req.query.org_id;
 
@@ -15,7 +15,7 @@ export const getRole = async (req, res, next) => {
 };
 
 //create role
-export const createRole = async (req, res, next) => {
+export const createRole = async (req, res) => {
   let org_id = req.body.org_id;
   let user_id = req.body.user_id;
   let role = req.body.role;
@@ -34,7 +34,7 @@ export const createRole = async (req, res, next) => {
   res.status(200).send('Post Successful');
 };
 
-export const deleteRole = async (req, res, next) => {
+export const deleteRole = async (req, res) => {
   let role_id = req.query.role_id;
 
   await deleteRoleModel(role_id);

@@ -22,7 +22,6 @@ import todoApi from './API/todos.js';
 import utilsApi from './API/utils.js';
 import stripeApi from './API/stripe.js';
 import stripeWebhook from './API/stripeWebhooks.js';
-import appApi from './API/app.js';
 import roleApi from './API/roles.js';
 import usersApi from './API/users.js';
 import orgApi from './API/org.js';
@@ -46,7 +45,6 @@ app.use('/stripe', stripeApi);
 app.use('/auth', auth);
 app.use('/api', orgApi);
 app.use('/api', todoApi);
-app.use('/api', appApi);
 app.use('/api', roleApi);
 app.use('/api', usersApi);
 

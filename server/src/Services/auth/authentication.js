@@ -91,11 +91,9 @@ export const Login = async (req, res) => {
     return;
   }
 
-  let user_id = user.id ? user.id : user._id;
-  let stripe_customer_id = user.stripe_customer_id;
-  let subscription_id = user.subscription_id;
+  let user_id = user.id;
 
-  res.send({ token: setToken(user_id), stripe_customer_id, subscription_id });
+  res.send({ token: setToken(user_id) });
 };
 
 export const updateUsername = async (req, res, next) => {

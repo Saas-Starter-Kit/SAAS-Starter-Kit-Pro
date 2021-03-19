@@ -1,4 +1,4 @@
-import { CreateCustomer } from '../stripe/stripeCustomer.js';
+import { CreateStripeCustomer } from '../stripe/stripeCustomer.js';
 import {
   CreateOrgModel,
   SetOrgStripeId,
@@ -16,7 +16,7 @@ export const CreateOrg = async (req, res) => {
 
   let org_id = await CreateOrgModel(primary_email, org_name);
 
-  let stripe_id = await CreateCustomer(primary_email, user_id, org_id);
+  let stripe_id = await CreateStripeCustomer(primary_email, user_id, org_id);
 
   await SetOrgStripeId(stripe_id.id, org_id);
 

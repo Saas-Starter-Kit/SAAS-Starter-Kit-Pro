@@ -1,7 +1,7 @@
 import db from '../../../Database/sql/db.js';
 
 export const CreateOrgModel = async (primary_email, org_name) => {
-  let text = `INSERT INTO organization(primary_email, org_name)
+  let text = `INSERT INTO organizations(primary_email, org_name)
               VALUES($1, $2)
               RETURNING id`;
 
@@ -20,7 +20,7 @@ export const GetOrgModel = async (user_id) => {
         r.user_id,
         r.role
       FROM
-        organization o
+        organizations o
       INNER JOIN roles r 
           ON r.org_id = o.id
       WHERE r.user_id=$1
@@ -33,7 +33,7 @@ export const GetOrgModel = async (user_id) => {
 };
 
 export const SetOrgStripeId = async (stripe_id, org_id) => {
-  let text = `UPDATE organization SET stripe_customer_id=$1 WHERE id=$2`;
+  let text = `UPDATE organizations SET stripe_customer_id=$1 WHERE id=$2`;
 
   let values = [stripe_id, org_id];
 
@@ -44,7 +44,7 @@ export const DeleteOrgModel = async (org_id) => {
   let roleText = `DELETE FROM roles WHERE org_id=$1`;
   let roleValues = [org_id];
 
-  let appText = `DELETE FROM organization WHERE id=$1`;
+  let appText = `DELETE FROM organizations WHERE id=$1`;
   let appValues = [org_id];
 
   let todosText = `DELETE FROM todos WHERE org_id=$1`;
@@ -60,7 +60,7 @@ export const DeleteOrgModel = async (org_id) => {
 };
 
 export const PutOrgModel = async (org_id, org_name) => {
-  let text = `UPDATE organization SET org_name=$2 
+  let text = `UPDATE organizations SET org_name=$2 
               WHERE id=$1`;
 
   let values = [org_id, org_name];

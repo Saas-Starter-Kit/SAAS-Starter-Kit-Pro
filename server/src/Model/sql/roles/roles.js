@@ -21,7 +21,7 @@ export const getRoleModel = async (user_id, org_id) => {
         r.user_id,
         r.role
       FROM
-        organization o
+        organizations o
       INNER JOIN roles r 
           ON r.org_id = o.id
       WHERE r.user_id=$1 AND r.org_id=$2
