@@ -1,18 +1,18 @@
 import db from '../../../Database/sql/db.js';
 
-export const postTodoModel = async (title, description, author, app_id) => {
-  let text = `INSERT INTO todos(title, description, author, app_id)
+export const postTodoModel = async (title, description, author, org_id) => {
+  let text = `INSERT INTO todos(title, description, author, org_id)
               VALUES ($1, $2, $3, $4)`;
-  let values = [title, description, author, app_id];
+  let values = [title, description, author, org_id];
 
   await db.query(text, values);
 
   return;
 };
 
-export const getTodosModel = async (app_id) => {
-  let text = `SELECT * FROM todos WHERE app_id=$1`;
-  let values = [app_id];
+export const getTodosModel = async (org_id) => {
+  let text = `SELECT * FROM todos WHERE org_id=$1`;
+  let values = [org_id];
 
   let queryResult = await db.query(text, values);
 
@@ -21,7 +21,7 @@ export const getTodosModel = async (app_id) => {
 
 export const putTodoModel = async (title, description, author, todo_id) => {
   let text = `UPDATE todos SET title= $1, description=$2, author=$3
-              WHERE todo_id = $4`;
+              WHERE id = $4`;
   let values = [title, description, author, todo_id];
 
   await db.query(text, values);
@@ -31,7 +31,7 @@ export const putTodoModel = async (title, description, author, todo_id) => {
 
 export const deleteTodoModel = async (todo_id) => {
   let text = `DELETE FROM todos 
-              WHERE todo_id=$1`;
+              WHERE id=$1`;
   let values = [todo_id];
 
   await db.query(text, values);

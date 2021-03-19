@@ -17,11 +17,10 @@ const Title = styled.h1`
   font-size: 1.25rem;
 `;
 
-const ReadUpdate = ({ app_id }) => {
+const ReadUpdate = ({ org_id }) => {
   const { authState } = useContext(AuthContext);
   const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
   const { isLoading } = apiState;
-  const { user } = authState;
 
   const [todos, setTodos] = useState([]);
 
@@ -31,42 +30,34 @@ const ReadUpdate = ({ app_id }) => {
   const [editTitle, setEditTitle] = useState('');
   const [editDescription, setEditDescription] = useState('');
 
+  /* eslint-disable */
+  useEffect(() => {
+    if (org_id) fetchTodos();
+  }, [org_id]);
+  /* eslint-enable */
+
   const fetchTodos = async () => {
     fetchInit();
-    if (user) {
-      let params = { app_id };
 
-      let result = await axios
-        .get(`/api/get/todos`, {
-          params
-        })
-        .catch((err) => {
-          fetchFailure(err);
-        });
-      setTodos(result.data);
-      fetchSuccess();
-    } else {
-      //show dummy data
-      fetchSuccess();
-    }
+    let params = { org_id };
+
+    let result = await axios.get(`/api/get/todos`, { params }).catch((err) => {
+      fetchFailure(err);
+    });
+
+    setTodos(result.data);
+    fetchSuccess();
   };
-
-  useEffect(() => {
-    //if (authState) fetchTodos();
-  }, [authState]);
 
   const deleteTodo = async (todo) => {
     fetchInit();
-    let todo_id = todo.todo_id ? todo.todo_id : todo._id;
+    let todo_id = todo.id;
 
     let params = { todo_id };
-    await axios
-      .delete(`/api/delete/todo`, {
-        params
-      })
-      .catch((err) => {
-        fetchFailure(err);
-      });
+    await axios.delete(`/api/delete/todo`, { params }).catch((err) => {
+      fetchFailure(err);
+    });
+
     setEdit(false);
 
     setTimeout(() => fetchTodos(), 300);
@@ -78,15 +69,14 @@ const ReadUpdate = ({ app_id }) => {
     fetchInit();
     let title = event.target.title.value;
     let description = event.target.description.value;
-    let author = user.username;
-    let todo_id = todo;
-
-    console.log(todo);
+    let author = authState?.user.username;
+    let todo_id = todo.id;
 
     let data = { title, description, author, todo_id };
     await axios.put(`/api/put/todo`, data).catch((err) => {
       fetchFailure(err);
     });
+
     setEdit(false);
     //Save data to context to limit api calls
     setTimeout(() => fetchTodos(), 300);
@@ -95,7 +85,7 @@ const ReadUpdate = ({ app_id }) => {
 
   const editTodo = (todo) => {
     setEdit(true);
-    setTodoID(todo.todo_id);
+    setTodoID(todo.id);
     setEditTitle(todo.title);
     setEditDescription(todo.description);
   };
@@ -113,7 +103,7 @@ const ReadUpdate = ({ app_id }) => {
       <Title>Todos: </Title>
       <Card>
         <Spin tip="Loading..." spinning={isLoading}>
-          {!todos.length === 0 ? (
+          {todos.length !== 0 ? (
             todos.map((todo) => (
               <Todo
                 todo={todo}

@@ -77,7 +77,7 @@ const Todo = ({
         Delete
       </DangerButton>
     </ButtonsWrapper>
-    {isEditting && todo.todo_id === editTodoID && (
+    {isEditting && todo.id === editTodoID && (
       <form onSubmit={(event) => putTodo(event, todo)}>
         <Card>
           <TitleWrapper>
