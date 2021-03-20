@@ -14,7 +14,7 @@ export const getUser = async (email) => {
 
 export const verifyUser = async (verify_key) => {
   //find by email, set email_verified and verify_key to empty
-  let text = `UPDATE users SET verify_key=$1, is_email_verified=$2 
+  let text = `UPDATE users SET verify_key=$1, is_email_verified=$2
               WHERE verify_key=$3
               RETURNING id, email, username`;
 

@@ -3,37 +3,26 @@ const objectId = mongoose.Types.ObjectId;
 import { Users } from '../../../Database/mongo/models.js';
 
 export const getUser = async (email) => {
-  return await Users.findOne({ email: email }).lean();
+  await Users.findOne({ email });
 };
 
-export const saveUsertoDB = async (email, username, firebaseId) => {
-  let user = new Users({ email, username, firebase_user_id: firebaseId });
-  let result = await user.save();
-  return result ? { id: result._id } : { id: '' };
+export const verifyUser = async (verify_key) => {
+  let user = await Users.findByIdAndUpdate(
+    { verify_key },
+    { verify_key: '', is_email_verified: true }
+  );
+  return user;
+};
+
+export const saveUsertoDB = async (email, username, firebase_user_id, verify_key) => {
+  let user = new Users({ email, username, firebase_user_id, verify_key });
+  await user.save();
 };
 
 export const updateUsernameModel = async (username, id) => {
-  console.log(username, id);
-  try {
-    return await Users.findByIdAndUpdate(
-      { _id: objectId(id) },
-      { $set: { username: username } },
-      { useFindAndModify: false }
-    );
-  } catch (e) {
-    throw new Error(e);
-  }
+  await Users.findByIdAndUpdate({ id }, { username });
 };
 
 export const updateEmailModel = async (email, id) => {
-  console.log(email, id);
-  try {
-    return await Users.findByIdAndUpdate(
-      { _id: objectId(id) },
-      { $set: { email: email } },
-      { useFindAndModify: false }
-    );
-  } catch (e) {
-    throw new error(e);
-  }
+  return await Users.findByIdAndUpdate({ id }, { email });
 };

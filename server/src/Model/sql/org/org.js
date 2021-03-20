@@ -44,18 +44,17 @@ export const DeleteOrgModel = async (org_id) => {
   let roleText = `DELETE FROM roles WHERE org_id=$1`;
   let roleValues = [org_id];
 
-  let appText = `DELETE FROM organizations WHERE id=$1`;
-  let appValues = [org_id];
-
   let todosText = `DELETE FROM todos WHERE org_id=$1`;
   let todosValues = [org_id];
 
-  await db.query(roleText, roleValues);
+  let orgText = `DELETE FROM organizations WHERE id=$1`;
+  let orgValues = [org_id];
 
-  await db.query(appText, appValues);
+  await db.query(roleText, roleValues);
 
   await db.query(todosText, todosValues);
 
+  await db.query(orgText, orgValues);
   return;
 };
 
