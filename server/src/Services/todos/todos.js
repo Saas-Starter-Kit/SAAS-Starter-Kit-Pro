@@ -3,7 +3,7 @@ import {
   getTodosModel,
   putTodoModel,
   deleteTodoModel
-} from '../../Model/sql/todos/todos.js';
+} from '../../Model/mongo/todos/todos.js';
 
 export const getTodos = async (req, res) => {
   let org_id = req.query.org_id;

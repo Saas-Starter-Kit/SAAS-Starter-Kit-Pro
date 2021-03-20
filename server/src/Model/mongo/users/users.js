@@ -1,6 +1,4 @@
-import mongoose from 'mongoose';
 import { Users, Roles, Invites } from '../../../Database/mongo/models.js';
-const objectId = mongoose.Types.ObjectId;
 
 export const getAppUsersModel = async (org_id) => {
   let roles = Roles.find({ org_id });

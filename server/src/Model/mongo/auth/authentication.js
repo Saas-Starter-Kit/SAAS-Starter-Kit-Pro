@@ -1,5 +1,3 @@
-import mongoose from 'mongoose';
-const objectId = mongoose.Types.ObjectId;
 import { Users } from '../../../Database/mongo/models.js';
 
 export const getUser = async (email) => {
@@ -7,10 +5,12 @@ export const getUser = async (email) => {
 };
 
 export const verifyUser = async (verify_key) => {
-  let user = await Users.findByIdAndUpdate(
+  let user = await Users.findOneAndUpdate(
     { verify_key },
-    { verify_key: '', is_email_verified: true }
+    { verify_key: '', is_email_verified: true },
+    { useFindAndModify: false }
   );
+
   return user;
 };
 
@@ -24,5 +24,5 @@ export const updateUsernameModel = async (username, id) => {
 };
 
 export const updateEmailModel = async (email, id) => {
-  return await Users.findByIdAndUpdate({ id }, { email });
+  await Users.findByIdAndUpdate({ id }, { email });
 };

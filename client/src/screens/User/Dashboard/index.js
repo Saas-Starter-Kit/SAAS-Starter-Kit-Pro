@@ -84,7 +84,7 @@ const Dashboard = () => {
 
   /* eslint-disable */
   useEffect(() => {
-    if (authState.user) {
+    if (authState.user.id) {
       getOrgs();
     }
   }, [authState]);
@@ -100,7 +100,7 @@ const Dashboard = () => {
     const result = await axios.get(`/api/org`, { params }).catch((err) => {
       fetchFailure(err);
     });
-
+    console.log(result);
     let adminOrgs = result.data.filter((item) => item.role === 'admin');
 
     setOrgs(adminOrgs);

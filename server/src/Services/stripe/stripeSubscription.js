@@ -1,11 +1,10 @@
 import stripe from '../../Config/stripe.js';
-import { getUser } from '../../Model/sql/auth/authentication.js';
 import { sendEmail } from '../../Config/email.js';
 import moment from 'moment';
 import {
   cancelSubscriptionModel,
   createSubscriptionModel
-} from '../../Model/sql/stripe/stripeSubscription.js';
+} from '../../Model/mongo/stripe/stripeSubscription.js';
 
 export const UpdateSubscription = async (req, res) => {
   let subscription_id = req.body.subscription_id;

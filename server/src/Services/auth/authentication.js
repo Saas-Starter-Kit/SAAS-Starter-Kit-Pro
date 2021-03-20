@@ -2,7 +2,7 @@ import { setToken } from '../../Middleware/auth.js';
 import firebaseAdmin from '../../Config/firebase.js';
 import { sendEmail } from '../../Config/email.js';
 import { UpdateContact } from '../users/contacts.js';
-import { verifyUser } from '../../Model/sql/auth/authentication.js';
+import { verifyUser } from '../../Model/mongo/auth/authentication.js';
 import { CreateContact } from '../users/contacts.js';
 import { nanoid } from 'nanoid';
 import {
@@ -10,7 +10,7 @@ import {
   getUser,
   updateUsernameModel,
   updateEmailModel
-} from '../../Model/sql/auth/authentication.js';
+} from '../../Model/mongo/auth/authentication.js';
 
 export const CreateUser = async (req, res) => {
   let verify_key = req.body.verify_key;
