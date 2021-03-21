@@ -21,6 +21,7 @@ export const CreateOrgRole = async (org_id, user_id, role) => {
   return userRole;
 };
 
-export const deleteRoleModel = async (role_id) => {
-  await Roles.findByIdAndDelete({ id: role_id });
+export const deleteRoleModel = async (_id) => {
+  console.log(_id);
+  await Roles.findByIdAndDelete({ _id });
 };

@@ -113,6 +113,7 @@ const ConfirmedEmail = () => {
       .post('/api/users/verify-invite', data)
       .catch((err) => fetchFailure(err));
 
+    console.log(result);
     let org_id = result.data.org_id;
     setOrgId(org_id);
     createRole(org_id, user_id);

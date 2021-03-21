@@ -24,19 +24,19 @@ export const GetOrgModel = async (user_id) => {
   //merge roles and orgs
   orgs.map((item, index) => OrgsRolesArr.push(_.merge(orgs[index], roles[index])));
 
-  return [...orgs, ...roles];
+  return [...OrgsRolesArr];
 };
 
-export const SetOrgStripeId = async (stripe_customer_id, id) => {
-  await Organizations.findByIdAndUpdate({ _id: id }, { stripe_customer_id });
+export const SetOrgStripeId = async (stripe_customer_id, _id) => {
+  await Organizations.findByIdAndUpdate({ _id }, { stripe_customer_id });
 };
 
 export const DeleteOrgModel = async (org_id) => {
   await Roles.findOneAndDelete({ org_id });
   await Todos.findOneAndDelete({ org_id });
-  await Organizations.findByIdAndDelete({ id: org_id });
+  await Organizations.findByIdAndDelete({ _id: org_id });
 };
 
-export const PutOrgModel = async (id, org_name) => {
-  await Organizations.findByIdAndUpdate({ id }, { org_name });
+export const PutOrgModel = async (_id, org_name) => {
+  await Organizations.findByIdAndUpdate({ _id }, { org_name });
 };

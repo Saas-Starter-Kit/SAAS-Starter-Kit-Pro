@@ -1,7 +1,8 @@
 import { Users } from '../../../Database/mongo/models.js';
 
 export const getUser = async (email) => {
-  await Users.findOne({ email });
+  let user = await Users.findOne({ email });
+  return user;
 };
 
 export const verifyUser = async (verify_key) => {
@@ -19,10 +20,10 @@ export const saveUsertoDB = async (email, username, firebase_user_id, verify_key
   await user.save();
 };
 
-export const updateUsernameModel = async (username, id) => {
-  await Users.findByIdAndUpdate({ id }, { username });
+export const updateUsernameModel = async (username, _id) => {
+  await Users.findByIdAndUpdate({ _id }, { username });
 };
 
-export const updateEmailModel = async (email, id) => {
-  await Users.findByIdAndUpdate({ id }, { email });
+export const updateEmailModel = async (email, _id) => {
+  await Users.findByIdAndUpdate({ _id }, { email });
 };

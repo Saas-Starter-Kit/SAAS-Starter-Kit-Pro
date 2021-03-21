@@ -85,6 +85,8 @@ const Users = ({ org_id }) => {
   const removeUserRole = async (role_id) => {
     let params = { role_id };
 
+    console.log(role_id);
+
     await axios.delete('/api/delete/role', { params }).catch((err) => {
       fetchFailure(err);
     });
@@ -143,7 +145,7 @@ const Users = ({ org_id }) => {
               render={(row) => (
                 <Can I="remove" a="user">
                   {row.role === 'user' && (
-                    <RemoveUserButton onClick={() => removeUserRole(row.role_id)}>
+                    <RemoveUserButton onClick={() => removeUserRole(row.id)}>
                       Remove
                     </RemoveUserButton>
                   )}

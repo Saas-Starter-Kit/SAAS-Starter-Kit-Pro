@@ -7,13 +7,16 @@ export const postTodoModel = async (title, description, author, org_id) => {
 };
 
 export const getTodosModel = async (org_id) => {
-  await Todos.find({ org_id });
+  let todos = await Todos.find({ org_id }).lean();
+  todos = todos.map((item) => ({ ...item, id: item._id }));
+
+  return todos;
 };
 
-export const putTodoModel = async (title, description, author, todo_id) => {
-  await Todos.findByIdAndUpdate({ _id: todo_id }, { title, author, description });
+export const putTodoModel = async (title, description, author, _id) => {
+  await Todos.findByIdAndUpdate({ _id }, { title, author, description });
 };
 
-export const deleteTodoModel = async (todo_id) => {
-  await Todos.findByIdAndDelete({ _id: todo_id });
+export const deleteTodoModel = async (_id) => {
+  await Todos.findByIdAndDelete({ _id });
 };
