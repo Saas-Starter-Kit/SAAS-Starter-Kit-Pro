@@ -4,7 +4,7 @@ import moment from 'moment';
 import {
   cancelSubscriptionModel,
   createSubscriptionModel
-} from '../../Model/mongo/stripe/stripeSubscription.js';
+} from '../../Model/sql/stripe/stripeSubscription.js';
 
 export const UpdateSubscription = async (req, res) => {
   let subscription_id = req.body.subscription_id;

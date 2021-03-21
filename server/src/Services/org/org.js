@@ -5,8 +5,8 @@ import {
   GetOrgModel,
   PutOrgModel,
   DeleteOrgModel
-} from '../../Model/mongo/org/org.js';
-import { CreateOrgRole } from '../../Model/mongo/roles/roles.js';
+} from '../../Model/sql/org/org.js';
+import { CreateOrgRole } from '../../Model/sql/roles/roles.js';
 
 export const CreateOrg = async (req, res) => {
   let primary_email = req.body.email;
