@@ -46,7 +46,7 @@ export const CreateOrgRole = async (org_id, user_id, role) => {
 };
 
 export const deleteRoleModel = async (role_id) => {
-  let text = `DELETE FROM roles WHERE role_id=$1`;
+  let text = `DELETE FROM roles WHERE id=$1`;
   let values = [role_id];
 
   await db.query(text, values);
