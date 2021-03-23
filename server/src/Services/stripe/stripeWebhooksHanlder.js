@@ -1,4 +1,3 @@
-// Use body-parser to retrieve the raw body as a buffer
 import stripe from '../../Config/stripe.js';
 
 export const WebHookHandler = async (req, res) => {

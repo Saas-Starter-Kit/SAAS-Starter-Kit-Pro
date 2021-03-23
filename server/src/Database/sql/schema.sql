@@ -12,7 +12,7 @@ CREATE TABLE users (
 CREATE TABLE organizations (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
   org_name VARCHAR,
-  primary_email VARCHAR(255) REFERENCES users(email),
+  primary_email VARCHAR(255) REFERENCES users(email) ON UPDATE CASCADE,
   stripe_customer_id VARCHAR(255),
   subscription_id VARCHAR(255),
   plan_type VARCHAR(255)

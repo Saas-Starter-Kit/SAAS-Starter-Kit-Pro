@@ -66,3 +66,13 @@ export const PutOrgModel = async (org_id, org_name) => {
 
   await db.query(text, values);
 };
+
+export const GetOrgsbyEmail = async (primary_email) => {
+  let text = `SELECT * from organizations where primary_email=$1`;
+
+  let values = [primary_email];
+
+  let queryResult = await db.query(text, values);
+
+  return queryResult.rows;
+};

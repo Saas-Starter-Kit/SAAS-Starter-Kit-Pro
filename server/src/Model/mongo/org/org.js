@@ -40,3 +40,8 @@ export const DeleteOrgModel = async (org_id) => {
 export const PutOrgModel = async (_id, org_name) => {
   await Organizations.findByIdAndUpdate({ _id }, { org_name });
 };
+
+export const GetOrgsbyEmail = async (primary_email) => {
+  let orgs = await Organizations.find({ primary_email });
+  return orgs;
+};

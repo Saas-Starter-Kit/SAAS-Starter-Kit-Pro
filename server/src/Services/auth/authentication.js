@@ -1,10 +1,12 @@
 import { setToken } from '../../Middleware/auth.js';
 import firebaseAdmin from '../../Config/firebase.js';
 import { sendEmail } from '../../Config/email.js';
+import { UpdateStripeCustomer } from '../stripe/stripeCustomer.js';
 import { UpdateContact } from '../users/contacts.js';
 import { verifyUser } from '../../Model/sql/auth/authentication.js';
 import { CreateContact } from '../users/contacts.js';
 import { nanoid } from 'nanoid';
+import { GetOrgsbyEmail } from '../../Model/sql/org/org.js';
 import {
   saveUsertoDB,
   getUser,
@@ -113,7 +115,7 @@ export const updateUsername = async (req, res, next) => {
   res.status(200).send('Update Successful');
 };
 
-export const updateEmail = async (req, res, next) => {
+export const updateEmail = async (req, res) => {
   let id = req.body.id;
   let email = req.body.email;
   let oldEmail = req.body.oldEmail;
@@ -124,6 +126,15 @@ export const updateEmail = async (req, res, next) => {
   await firebaseAdmin.auth().updateUser(uid, {
     email
   });
+
+  //if the update email is an organization primary email,
+  //update the email in stripe for all the orgs.
+  let orgs = await GetOrgsbyEmail(oldEmail);
+  if (orgs) {
+    orgs.map(async (org) => {
+      await UpdateStripeCustomer(org.stripe_customer_id, email);
+    });
+  }
 
   await updateEmailModel(email, id);
   await UpdateContact(email, oldEmail);
