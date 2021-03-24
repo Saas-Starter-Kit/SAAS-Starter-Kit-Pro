@@ -12,7 +12,7 @@ import {
   getUser,
   updateUsernameModel,
   updateEmailModel
-} from '../../Model/mongo/auth/authentication.js';
+} from '../../Model/sql/auth/authentication.js';
 
 export const CreateUser = async (req, res) => {
   let verify_key = req.body.verify_key;

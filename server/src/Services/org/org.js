@@ -1,4 +1,4 @@
-import { CreateStripeCustomer } from '../stripe/stripeCustomer.js';
+import { CreateStripeCustomer, DeleteStripeCustomer } from '../stripe/stripeCustomer.js';
 import {
   CreateOrgModel,
   SetOrgStripeId,
@@ -35,7 +35,9 @@ export const GetOrgs = async (req, res) => {
 
 export const DeleteOrg = async (req, res) => {
   let org_id = req.query.org_id;
+  let stripe_customer_id = req.query.stripe_customer_id;
 
+  await DeleteStripeCustomer(stripe_customer_id);
   await DeleteOrgModel(org_id);
 
   res.status(200).send('Delete Successful');

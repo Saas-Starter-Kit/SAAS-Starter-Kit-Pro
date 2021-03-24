@@ -50,7 +50,7 @@ const StyledIcon = styled(FcHighPriority)`
 
 const OrgSettings = ({ org_id }) => {
   const { orgState } = useContext(OrgContext);
-  const { org_name } = orgState;
+  const { org_name, stripe_customer_id } = orgState;
   const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
   const { isLoading } = apiState;
   const [orgName, setOrgName] = useState();
@@ -83,7 +83,7 @@ const OrgSettings = ({ org_id }) => {
   const deleteOrg = async () => {
     setModal(false);
     fetchInit();
-    let params = { org_id };
+    let params = { org_id, stripe_customer_id };
 
     await axios.delete('/api/org', { params }).catch((err) => {
       fetchFailure(err);
