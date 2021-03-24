@@ -7,15 +7,15 @@ import {
   updateUsername,
   Login,
   SignUp,
-  verifyEmail
+  CreateUser
 } from '../Services/auth/authentication.js';
 
 //sign in or sign up user then send jwt token
 router.post('/signup', asyncHandler(SignUp));
 router.post('/login', asyncHandler(Login));
 
-//verify user email address
-router.post('/verify-email', asyncHandler(verifyEmail));
+//create user after verified email
+router.post('/create-user', asyncHandler(CreateUser));
 
 //update username
 router.put('/put/username', asyncHandler(updateUsername));

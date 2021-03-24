@@ -5,7 +5,6 @@ import nodemailer from 'nodemailer';
   Use mailtrap for testing and switch to 
   sendinblue when going live.
 */
-let transport;
 
 let devTransport = nodemailer.createTransport({
   host: 'smtp.mailtrap.io',

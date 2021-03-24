@@ -1,8 +1,9 @@
-import React, { useContext, useEffect } from 'react';
-import { Link } from 'gatsby';
+import React, { useContext, useEffect, useState } from 'react';
+import { Link, navigate } from 'gatsby';
 import { useLocation } from '@reach/router';
 import styled from 'styled-components';
 
+import { Spin } from 'antd';
 import SEO from '../../../components/Marketing/Layout/seo';
 import AuthContext from '../../../utils/authContext';
 import ApiContext from '../../../utils/apiContext';
@@ -13,6 +14,8 @@ import { colors, breakpoints } from '../../../styles/theme';
 import Title from '../../../components/Auth/title';
 import AuthCard from '../../../components/Auth/authCard';
 import LoadingOverlay from '../../../components/Common/loadingOverlay';
+import FieldLabel from '../../../components/Common/forms/FieldLabel';
+import TextInput from '../../../components/Common/forms/TextInput';
 
 const Wrapper = styled.div`
   background-color: ${colors.gray50};
@@ -43,99 +46,124 @@ const CardText = styled.div`
 
 const ConfirmedEmail = () => {
   const location = useLocation();
+
+  const [email, setEmail] = useState();
+  const [user_id, setUserId] = useState();
+  const [username, setUsername] = useState();
+  const [jwt_token, setToken] = useState();
+  const [org_id, setOrgId] = useState();
+
+  const [loadingSpin, setLoading] = useState(false);
   const { LogIn } = useContext(AuthContext);
   const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
   const { isLoading } = apiState;
 
   //extract query params
   const queryParams = location.search.split('=');
-  console.log(queryParams);
-  const email = queryParams[1].split('&')[0];
-  const id = queryParams[2].split('&')[0];
-  const provider = queryParams[4].split('&')[0];
-  const usernameRaw = queryParams[3].split('&')[0];
-  const name = usernameRaw.split('%20');
-  const firstName = name[0];
-  const username = `${name[0]} ${name[1]}`;
-  const isInviteFlow = queryParams[5].split('&')[0];
-  const app_id = queryParams[6];
-  const photo = null;
-
-  let user = { email, username, id, photo, provider };
+  const verify_key = queryParams[1].split('&')[0];
+  const isInviteFlow = queryParams[2].split('&')[0];
+  const invite_key = queryParams[3];
 
   /* eslint-disable */
   useEffect(() => {
-    return () => fetchSuccess();
+    return () => setLoading(false);
   }, []);
 
   useEffect(() => {
-    createValidUser();
-  }, [location]);
-
-  useEffect(() => {
-    if (isInviteFlow === 'true') createRole();
-  }, [isInviteFlow]);
+    createUser();
+  }, []);
   /* eslint-enable */
 
-  const createValidUser = async () => {
+  const createUser = async () => {
     fetchInit();
 
-    //after verified email, the user info is saved to stripe
-    let userId = id;
-    let stripeApiData = { userId, email };
-    let stripeServerRes = await axios
-      .post('/stripe/create-customer', stripeApiData)
-      .catch((err) => {
-        fetchFailure(err);
-      });
+    let data = {
+      verify_key
+    };
 
-    console.log(stripeServerRes);
-    //save verified email to sendinblue
-    let sibData = { email, firstName };
-    await axios.post('/api/post/contact', sibData).catch((err) => {
+    let result = await axios.post('/auth/create-user', data).catch((err) => {
       fetchFailure(err);
     });
 
-    let stripeCustomerKey = { stripeCustomerKey: stripeServerRes.data.stripe.stripe_customer_id };
-    let jwt_token = { token: stripeServerRes.data.token };
+    let id = result.data.user_id;
+    let username = result.data.username;
+    let jwt_token = result.data.token;
+    let email = result.data.email;
 
-    user = { ...user, ...stripeCustomerKey, ...jwt_token };
+    setEmail(email);
+    setUserId(id);
+    setUsername(username);
+    setToken(jwt_token);
 
-    if (!process.env.NODE_ENV === 'development') {
-      //save event and user id to Google Analytics
-      let parameters = {
-        method: 'Email'
-      };
+    //save event and user id to Google Analytics
+    setAnalyticsUserId(id);
+    sendEventToAnalytics('signup', { method: 'email' });
 
-      sendEventToAnalytics('signup', parameters);
-      setAnalyticsUserId(id);
+    if (isInviteFlow === 'true') {
+      verifyInvite(id);
+    } else {
+      fetchSuccess();
     }
-    console.log(user);
+  };
 
-    //Login to context
+  const verifyInvite = async (user_id) => {
+    //verify invite key, returing org id.
+    let data = { invite_key };
+    let result = await axios
+      .post('/api/users/verify-invite', data)
+      .catch((err) => fetchFailure(err));
+
+    console.log(result);
+    let org_id = result.data.org_id;
+    setOrgId(org_id);
+    createRole(org_id, user_id);
+  };
+
+  //if the signup process is part of the invite flow
+  //then create role
+  const createRole = async (org_id, user_id) => {
+    fetchInit();
+    let role = 'user';
+
+    let data = {
+      org_id,
+      user_id,
+      role
+    };
+
+    await axios.post(`/api/post/role`, data).catch((err) => {
+      fetchFailure(err);
+    });
+
+    // Save user data to global state
+    let user = { id: user_id, username, jwt_token, email };
     await LogIn(user);
 
     fetchSuccess();
   };
 
-  //if the signup process is part of the invite flow
-  //then create role
-  const createRole = async () => {
-    fetchInit();
-    let user_id = id;
-    let role = 'user';
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setLoading(true);
+    let org_name = event.target.org_name.value;
+    let role = 'admin';
 
     let data = {
-      app_id,
+      email,
+      org_name,
       user_id,
       role
     };
 
-    const result = await axios.post(`/api/post/role`, data).catch((err) => {
+    await axios.post('/api/org', data).catch((err) => {
       fetchFailure(err);
     });
-    console.log(result);
-    fetchSuccess();
+
+    // Save user data to global state
+    let user = { id: user_id, username, jwt_token, email };
+    await LogIn(user);
+
+    navigate('/user/dashboard');
   };
 
   const seoData = {
@@ -148,25 +176,29 @@ const ConfirmedEmail = () => {
       <SEO seoData={seoData} />
       <Wrapper>
         {isLoading && <LoadingOverlay />}
-        <Title>Thank You for confirming your email, your account is setup and ready to use</Title>
-        <AuthCard>
-          {isInviteFlow === 'true' && (
-            <>
-              <CardText>Click below to navigate to the app your were invited to</CardText>
-              <TextWrapper>
-                <Link to={`/app/${app_id}/dashboard`}>Go to App</Link>
-              </TextWrapper>
-            </>
-          )}
-          <CardText>Click here to navigate to the user dashboard as a free tier user</CardText>
-          <TextWrapper>
-            <Link to="/user/dashboard">Go to Dashboard</Link>
-          </TextWrapper>
-          <CardText>Click here to add a subscription your account</CardText>
-          <TextWrapper>
-            <Link to="/purchase/plan">Upgrade Plan</Link>
-          </TextWrapper>
-        </AuthCard>
+        <Title>Thank You for confirming your email, your account is almost ready to use</Title>
+        <Spin tip="Please wait while we setup your account..." spinning={loadingSpin}>
+          <AuthCard>
+            {isInviteFlow === 'true' ? (
+              <div>
+                <CardText>Click below to navigate to the app your were invited to</CardText>
+                <TextWrapper>
+                  <Link to={`/app/${org_id}/dashboard`}>Go to App</Link>
+                </TextWrapper>
+              </div>
+            ) : (
+              <div>
+                <h2>Enter an Organization Name to get Started</h2>
+                <form onSubmit={handleSubmit}>
+                  <FieldLabel htmlFor="org_name">
+                    Organization Name:
+                    <TextInput id="org_name" />
+                  </FieldLabel>
+                </form>
+              </div>
+            )}
+          </AuthCard>
+        </Spin>
       </Wrapper>
     </React.Fragment>
   );

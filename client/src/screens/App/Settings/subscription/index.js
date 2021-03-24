@@ -3,12 +3,12 @@ import { message } from 'antd';
 import { navigate } from 'gatsby';
 import styled from 'styled-components';
 
-import AuthContext from '../../../../utils/authContext';
+import OrgContext from '../../../../utils/orgContext';
 import ApiContext from '../../../../utils/apiContext';
 import axios from '../../../../services/axios';
 
 import SEO from '../../../../components/Marketing/Layout/seo';
-import SettingsHeader from '../../../../components/User/Navigation/settingsHeader';
+import SettingsHeader from '../../../../components/App/Navigation/settingsHeader';
 import LoadingOverlay from '../../../../components/Common/loadingOverlay';
 import NullSubscriptionCard from './NullSubscriptionCard';
 import CancelSubscriptionCard from './cancelSubscirptionCard';
@@ -21,7 +21,7 @@ const Title = styled.h1`
   font-size: 1.5rem;
 `;
 
-const SubscriptionSettings = () => {
+const SubscriptionSettings = ({ org_id }) => {
   const premium_plan = process.env.GATSBY_STRIPE_PREMIUM_PLAN;
   const basic_plan = process.env.GATSBY_STRIPE_BASIC_PLAN;
 
@@ -31,7 +31,8 @@ const SubscriptionSettings = () => {
   const premium_type = process.env.GATSBY_STRIPE_PREMIUM_PLAN_TYPE;
   const basic_type = process.env.GATSBY_STRIPE_BASIC_PLAN_TYPE;
 
-  const { authState, LogOut } = useContext(AuthContext);
+  const { orgState } = useContext(OrgContext);
+  const { id, stripe_customer_id, primary_email, subscription_id } = orgState;
   const { fetchFailure, fetchSuccess, apiState } = useContext(ApiContext);
   const { isLoading } = apiState;
 
@@ -39,18 +40,15 @@ const SubscriptionSettings = () => {
 
   //stripe payment state
   const [subscriptionState, setSubscription] = useState();
-  const [stripeCustomerId, setStripeId] = useState(); //eslint-disable-line
-  const [plan, setPlan] = useState(); //eslint-disable-line
   const [planType, setPlanType] = useState();
   const [price, setPrice] = useState();
 
   /* eslint-disable */
   useEffect(() => {
-    if (authState.user) {
-      setUser();
+    if (stripe_customer_id && subscription_id) {
       getSubscription();
     }
-  }, [authState]);
+  }, [orgState]);
 
   useEffect(() => {
     if (subscriptionState) {
@@ -63,22 +61,12 @@ const SubscriptionSettings = () => {
   }, []);
   /* eslint-enable */
 
-  /*
-      Auth Methods
-  */
-
-  const setUser = () => {
-    let stripeCustomerId = authState.user.stripeCustomerKey;
-
-    setStripeId(stripeCustomerId);
-  };
-
   /* 
       Stripe Methods
   */
 
   const getSubscription = async () => {
-    let params = { email: authState.user.email };
+    let params = { subscription_id };
 
     const subscription = await axios.get('/stripe/get-subscription', { params }).catch((err) => {
       fetchFailure(err);
@@ -90,7 +78,9 @@ const SubscriptionSettings = () => {
   const cancelSubscription = async () => {
     setModalSub(false);
     let data = {
-      email: authState.user.email
+      email: primary_email,
+      subscription_id,
+      org_id: id
     };
 
     await axios.post('/stripe/cancel-subscription', data).catch((err) => {
@@ -98,9 +88,8 @@ const SubscriptionSettings = () => {
     });
 
     setModalSub(false);
-    LogOut();
     message.success('Subscription Canceled');
-    setTimeout(() => navigate('/auth/login'), 500);
+    navigate('/user');
   };
 
   /* 
@@ -109,17 +98,15 @@ const SubscriptionSettings = () => {
 
   const setCurrentSubscription = () => {
     if (subscriptionState.plan.id === premium_plan) {
-      setPlan(premium_plan);
       setPrice(premium_price);
       setPlanType(premium_type);
     } else if (subscriptionState.plan.id === basic_plan) {
-      setPlan(basic_plan);
       setPrice(basic_price);
       setPlanType(basic_type);
     }
   };
 
-  const handleModalSubCancel = () => {
+  const handleModal = () => {
     setModalSub(false);
   };
 
@@ -132,28 +119,26 @@ const SubscriptionSettings = () => {
     <React.Fragment>
       <SEO seoData={seoData} />
       <Wrapper>
-        <SettingsHeader />
+        <SettingsHeader org_id={org_id} />
 
         <Title>Subscription Settings</Title>
         {isLoading && <LoadingOverlay />}
         {!subscriptionState && <NullSubscriptionCard />}
-
         {subscriptionState && (
-          <PaymentInformationCard
-            planType={planType}
-            price={price}
-            subscriptionState={subscriptionState}
-          />
-        )}
-
-        {subscriptionState && <UpgradeSubscription subscriptionState={subscriptionState} />}
-        {subscriptionState && (
-          <CancelSubscriptionCard
-            setModalSub={setModalSub}
-            isModalSub={isModalSub}
-            handleModalSubCancel={handleModalSubCancel}
-            cancelSubscription={cancelSubscription}
-          />
+          <React.Fragment>
+            <PaymentInformationCard
+              planType={planType}
+              price={price}
+              subscriptionState={subscriptionState}
+            />
+            <UpgradeSubscription subscriptionState={subscriptionState} />
+            <CancelSubscriptionCard
+              setModalSub={setModalSub}
+              isModalSub={isModalSub}
+              handleModal={handleModal}
+              cancelSubscription={cancelSubscription}
+            />
+          </React.Fragment>
         )}
       </Wrapper>
     </React.Fragment>

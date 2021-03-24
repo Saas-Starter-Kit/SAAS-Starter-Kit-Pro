@@ -1,9 +1,7 @@
 import React from 'react';
 import { Router } from '@reach/router';
-
 import Layout from '../components/User/Layout';
-
-import { AccountSettings, PaymentSettings, SubscriptionSettings } from '../screens/User/Settings';
+import { AccountSettings, PasswordSettings } from '../screens/User/Settings';
 import Dashboard from '../screens/User/Dashboard';
 import ConfirmedInvite from '../screens/User/ConfirmedInvite';
 import TeamApps from '../screens/User/TeamApps';
@@ -16,8 +14,7 @@ const Routes = () => {
         <TeamApps path="/user/teamapps" />
         <ConfirmedInvite path="/user/confirmedinvite/:id" />
         <AccountSettings path="/user/settings/account" />
-        <PaymentSettings path="/user/settings/payment" />
-        <SubscriptionSettings path="/user/settings/subscription" />
+        <PasswordSettings path="/user/settings/password" />
         <Dashboard path="/user" />
       </Router>
     </Layout>

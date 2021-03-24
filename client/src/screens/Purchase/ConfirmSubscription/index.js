@@ -43,6 +43,7 @@ const ConfirmSub = () => {
 
   /* eslint-disable */
   useEffect(() => {
+    //maybe add purchase event
     LogOut();
   }, []);
   /* eslint-enable */

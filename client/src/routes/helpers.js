@@ -9,11 +9,11 @@ const isTokenValid = () => {
   return new Date().getTime() < expiresAt;
 };
 
-export const PrivateRoute = ({ component: Component, location, app_id, ...rest }) => {
+export const PrivateRoute = ({ component: Component, location, org_id, ...rest }) => {
   if (!isTokenValid()) {
     navigate('/auth/login');
     return null;
-  } else if (!app_id) {
+  } else if (!org_id) {
     navigate('/user/dashboard');
     return null;
   } else {
@@ -21,12 +21,12 @@ export const PrivateRoute = ({ component: Component, location, app_id, ...rest }
   }
 };
 
-export const getRole = async (app_id, ability, authState, fetchFailure) => {
+export const getRole = async (org_id, ability, authState, SetOrg, fetchFailure) => {
   let user_id = authState.user.id;
 
   let params = {
     user_id,
-    app_id
+    org_id
   };
 
   const result = await axios.get(`/api/get/role`, { params }).catch((err) => {
@@ -37,12 +37,29 @@ export const getRole = async (app_id, ability, authState, fetchFailure) => {
     navigate('/403');
   }
 
+  let id = result.data[0].id;
+  let org_name = result.data[0].org_name;
+  let primary_email = result.data[0].primary_email;
   let role = result.data[0].role;
+  let stripe_customer_id;
+  let subscription_id;
 
-  // Use for Local testing of permissions,
-  // subsitute in for the role variable in updateRole()
-  // let userRole= 'user'
-  // let adminRole = 'admin'
+  //save payment info to global state if role is admin
+  if (role === 'admin') {
+    stripe_customer_id = result.data[0].stripe_customer_id;
+    subscription_id = result.data[0].subscription_id;
+  }
+
+  let org = {
+    id,
+    org_name,
+    primary_email,
+    role,
+    stripe_customer_id,
+    subscription_id
+  };
+
+  SetOrg(org);
 
   updateRole(ability, role);
 };

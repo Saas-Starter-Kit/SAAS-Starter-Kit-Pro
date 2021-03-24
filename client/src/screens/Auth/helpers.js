@@ -9,9 +9,8 @@ export const LoginAuth = async (
   LogIn,
   firebase,
   fetchFailure,
-  isPaymentFlow,
   isInviteFlow,
-  app_id
+  invite_key
 ) => {
   //Get Auth id token from Firebase
   let token = await firebase
@@ -21,7 +20,7 @@ export const LoginAuth = async (
       fetchFailure(err);
     });
 
-  //server firebase authentication, returns jwt token
+  //server authentication, returns jwt token
   let email = authRes.user.email;
   let data = { email, token };
   let authServerRes = await axios.post(`/auth/login`, data).catch((err) => {
@@ -29,49 +28,31 @@ export const LoginAuth = async (
   });
 
   let validToken = isValidToken(authServerRes.data.token, fetchFailure);
-  let userId = validToken.user;
-  let jwt_token = authServerRes.data.token;
 
-  console.log(authServerRes);
-
+  let id = validToken.user;
   let username = authRes.user.displayName;
-  let id = userId;
   let photo = authRes.user.photoURL;
   let provider = authRes.user.providerData[0].providerId;
-  let stripeCustomerKey = authServerRes.data.stripe_customer_id;
-  let subscription_id = authServerRes.data.subscription_id;
+  let jwt_token = authServerRes.data.token;
 
   let user = {
+    id,
     email,
     username,
-    id,
     photo,
     provider,
-    stripeCustomerKey,
-    subscription_id,
     jwt_token
   };
 
-  if (!process.env.NODE_ENV === 'development') {
-    //save event and user id to Google Analytics
-    let parameters = {
-      method: 'Email'
-    };
-
-    sendEventToAnalytics('login', parameters);
-    setAnalyticsUserId(id);
-  }
+  sendEventToAnalytics('login', { method: 'Email' });
+  setAnalyticsUserId(id);
 
   //save user info to React context
   await LogIn(user);
 
   //navigate to correct route based on flow
-  if (isPaymentFlow && !subscription_id) {
-    navigate('/purchase/plan');
-  } else if (isPaymentFlow && subscription_id) {
-    navigate('/purchase/subcriptionexists');
-  } else if (isInviteFlow) {
-    navigate(`/user/confirmedinvite/${app_id}`);
+  if (isInviteFlow) {
+    navigate(`/user/confirmedinvite/${invite_key}`);
   } else {
     navigate('/user/dashboard');
   }
@@ -84,11 +65,10 @@ export const SignupAuth = async (
   name,
   domainUrl,
   isInviteFlow,
-  app_id
+  invite_key
 ) => {
-  // If user signed up with email, then set their display name
+  // If user signed up with email, then set their display username
   const isEmailSignup = authRes.additionalUserInfo.providerId === 'password';
-  console.log(isEmailSignup);
   if (isEmailSignup && name) {
     let curUser = await firebase.auth().currentUser;
 
@@ -113,25 +93,14 @@ export const SignupAuth = async (
   let username = authRes.user.displayName ? authRes.user.displayName : name;
   let email = authRes.user.email;
 
-  let authData = { email, username, token };
-  let authServerRes = await axios.post(`/auth/signup`, authData).catch((err) => {
+  // the url the user is redirected to after email verify
+  const confirmEmailUrl = `${domainUrl}/auth/confirmedemail`;
+
+  let authData = { email, username, token, confirmEmailUrl, isInviteFlow, invite_key };
+
+  await axios.post(`/auth/signup`, authData).catch((err) => {
     fetchFailure(err);
   });
-
-  //extract user id from jwt token
-  let validToken = isValidToken(authServerRes.data.token, fetchFailure);
-  let userId = validToken.user;
-
-  // the url the user is redirected to after email verify
-  const baseUrl = `${domainUrl}/auth/confirmedemail`;
-  let provider = authRes.user.providerData[0].providerId;
-
-  //save user info to url for later extraction
-  const redirectUrl = `${baseUrl}/?email=${email}&userId=${userId}&username=${username}&provider=${provider}&isInviteFlow=${isInviteFlow}&app_id=${app_id}`;
-  let verifyEmailData = { email, redirectUrl, username };
-
-  //Send Verification Email
-  await axios.post('/auth/verify-email', verifyEmailData).catch((err) => fetchFailure(err));
 
   navigate('/auth/emailconfirm');
 };

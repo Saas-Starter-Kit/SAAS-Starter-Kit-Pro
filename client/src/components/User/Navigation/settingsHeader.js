@@ -20,16 +20,9 @@ const SettingsHeader = () => {
       <Link
         className="header_link_settings"
         activeClassName="header_link_settings_active"
-        to="/user/settings/payment"
+        to="/user/settings/password"
       >
-        Payment
-      </Link>
-      <Link
-        className="header_link_settings"
-        activeClassName="header_link_settings_active"
-        to="/user/settings/subscription"
-      >
-        Subscription
+        Password
       </Link>
     </Wrapper>
   );

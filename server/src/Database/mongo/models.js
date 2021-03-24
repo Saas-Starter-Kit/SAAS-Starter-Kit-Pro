@@ -2,33 +2,44 @@ import mongoose from 'mongoose';
 
 const Schema = mongoose.Schema;
 
-const appsSchema = new Schema({
-  app_name: String
+const usersSchema = new Schema({
+  username: String,
+  email: String,
+  firebase_user_id: String,
+  verify_key: String,
+  is_email_verified: { type: Boolean, default: false }
+});
+
+const orgSchema = new Schema({
+  org_name: String,
+  primary_email: String,
+  stripe_customer_id: String,
+  subscription_id: String,
+  plan_type: String
 });
 
 const rolesSchema = new Schema({
   role: String,
-  app_id: { type: Schema.Types.ObjectId, ref: 'Apps' },
+  org_id: { type: Schema.Types.ObjectId, ref: 'Organizations' },
   user_id: { type: Schema.Types.ObjectId, ref: 'Users' }
-});
-
-const usersSchema = new Schema({
-  username: String,
-  email: String,
-  stripe_customer_id: String,
-  firebase_user_id: String,
-  is_paid_member: Boolean,
-  subscription_id: String
 });
 
 const todosSchema = new Schema({
   title: String,
   description: String,
   author: String,
-  app_id: { type: Schema.Types.ObjectId, ref: 'Apps' }
+  org_id: { type: Schema.Types.ObjectId, ref: 'Organizations' }
 });
 
-export const Apps = mongoose.model('Apps', appsSchema);
+const invitesSchema = new Schema({
+  org_id: { type: Schema.Types.ObjectId, ref: 'Organizations' },
+  verify_key: String,
+  recipient_email: String,
+  sender_email: String
+});
+
 export const Roles = mongoose.model('Roles', rolesSchema);
 export const Users = mongoose.model('Users', usersSchema);
 export const Todos = mongoose.model('Todos', todosSchema);
+export const Invites = mongoose.model('Invites', invitesSchema);
+export const Organizations = mongoose.model('Organizations', orgSchema);

@@ -6,19 +6,13 @@ import { Layout, Menu, Switch } from 'antd';
 import { BulbOutlined } from '@ant-design/icons';
 import { Link } from 'gatsby';
 
-import LargeLogo from '../../Common/svgs/LargeLogo';
+//import LargeLogo from '../../../assets/images/logo/large_logo.svg';
+import LargeLogo from '../../../assets/images/logo/large_logo.png';
+//import LargeLogo from '../../Common/svgs/LargeLogo';
 import SmallLogo from '../../Common/svgs/SmallLogo';
 import { THEMES } from '../AppLayout';
 import { colors, breakpoints } from '../../../styles/theme';
-import {
-  FcBarChart,
-  FcCollect,
-  FcConferenceCall,
-  FcGenealogy,
-  FcTimeline,
-  FcUpload,
-  FcPrivacy
-} from 'react-icons/fc';
+import { getMenus } from './menuConfig';
 
 const StyledIcon = styled.div`
   display: flex;
@@ -28,86 +22,6 @@ const StyledIcon = styled.div`
   margin-bottom: 0.5rem;
   padding-top: 0.5rem;
 `;
-
-const StyledBar = styled(FcBarChart)`
-  height: 1.3rem;
-  width: 1.3rem;
-`;
-
-const StyledRead = styled(FcCollect)`
-  height: 1.3rem;
-  width: 1.3rem;
-`;
-
-const StyledCollab = styled(FcConferenceCall)`
-  height: 1.3rem;
-  width: 1.3rem;
-`;
-
-const StyledCreate = styled(FcUpload)`
-  height: 1.3rem;
-  width: 1.3rem;
-`;
-
-const StyledPermissions = styled(FcPrivacy)`
-  height: 1.3rem;
-  width: 1.3rem;
-`;
-
-const StyledOnboarding = styled(FcTimeline)`
-  height: 1.3rem;
-  width: 1.3rem;
-`;
-
-const StyledML = styled(FcGenealogy)`
-  height: 1.3rem;
-  width: 1.3rem;
-`;
-
-const getMenus = (app_id) => [
-  {
-    id: '1',
-    name: 'Dashboard',
-    route: `/app/${app_id}/dashboard`,
-    icon: <StyledBar />
-  },
-  {
-    id: '2',
-    name: 'Read Update',
-    route: `/app/${app_id}/readupdate`,
-    icon: <StyledRead />
-  },
-  {
-    id: '3',
-    name: 'Create',
-    route: `/app/${app_id}/create`,
-    icon: <StyledCreate />
-  },
-  {
-    id: '4',
-    name: 'Permissions',
-    route: `/app/${app_id}/permissions`,
-    icon: <StyledPermissions />
-  },
-  {
-    id: '5',
-    name: 'Users',
-    route: `/app/${app_id}/users`,
-    icon: <StyledCollab />
-  },
-  {
-    id: '6',
-    name: 'Onboarding',
-    route: `/app/${app_id}/onboarding`,
-    icon: <StyledOnboarding />
-  },
-  {
-    id: '7',
-    name: 'Machine Learning',
-    route: `/app/${app_id}/machinelearning`,
-    icon: <StyledML />
-  }
-];
 
 const StyledSider = styled(Layout.Sider)`
   display: none;
@@ -131,14 +45,6 @@ const LogoWrapper = styled.div`
   padding: 0 24px;
   height: 72px;
   box-shadow: 0 1px 9px -3px rgba(0, 0, 0, 0.2);
-`;
-
-const StyledLargeLogo = styled(LargeLogo)`
-  width: 150px;
-`;
-
-const StyledSmallLogo = styled(SmallLogo)`
-  width: 36px;
 `;
 
 const SidebarItems = styled.div`
@@ -202,8 +108,16 @@ const Span = styled.span`
   color: ${colors.doveGray};
 `;
 
-const SidebarDesktop = ({ theme, toggleTheme, app_id, location, collapsed }) => {
-  const menus = getMenus(app_id);
+const StyledLargeLogo = styled.img`
+  width: 120px;
+  height: auto;
+  margin-right: 2rem;
+`;
+
+const StyledSmallLogo = styled.div``;
+
+const SidebarDesktop = ({ theme, toggleTheme, org_id, location, collapsed }) => {
+  const menus = getMenus(org_id);
   const selectedKey = menus.find((menu) => menu.route === location.pathname);
   return (
     <StyledSider
@@ -214,13 +128,7 @@ const SidebarDesktop = ({ theme, toggleTheme, app_id, location, collapsed }) => 
       collapsible
       collapsed={collapsed}
     >
-      <LogoWrapper>
-        {collapsed ? (
-          <StyledSmallLogo />
-        ) : (
-          <StyledLargeLogo textColor={theme === THEMES.DARK ? colors.white : colors.indigo400} />
-        )}
-      </LogoWrapper>
+      <LogoWrapper>{collapsed ? <StyledSmallLogo /> : <StyledLargeLogo />}</LogoWrapper>
       <SidebarItems>
         <ScrollBar options={{ suppressScrollX: true }}>
           <Menu mode="inline" theme={theme} selectedKeys={[selectedKey && selectedKey.id]}>
@@ -235,6 +143,7 @@ const SidebarDesktop = ({ theme, toggleTheme, app_id, location, collapsed }) => 
           </Menu>
         </ScrollBar>
       </SidebarItems>
+
       {!collapsed && (
         <Footer>
           <span>

@@ -1,8 +1,13 @@
 import React from 'react';
 import { Modal } from 'antd';
+import styled from 'styled-components';
 
 import DangerButton from '../../../../components/Common/buttons/DangerButton';
 import CancelButton from '../../../../components/Common/buttons/CancelButton';
+
+const ButtonWrapper = styled(DangerButton)`
+  margin-right: 3rem;
+`;
 
 const ModalCardDelete = ({ isModalCard, handleModalCardCancel, deletePaymentMethod }) => {
   return (
@@ -11,7 +16,7 @@ const ModalCardDelete = ({ isModalCard, handleModalCardCancel, deletePaymentMeth
       title="Removing Card"
       onCancel={handleModalCardCancel}
       footer={[
-        <DangerButton onClick={deletePaymentMethod}>Remove?</DangerButton>,
+        <ButtonWrapper onClick={deletePaymentMethod}>Remove</ButtonWrapper>,
         <CancelButton onClick={handleModalCardCancel}>Cancel</CancelButton>
       ]}
     >

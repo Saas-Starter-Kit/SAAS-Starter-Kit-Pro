@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { Spin } from 'antd';
 
 import AuthContext from '../../../../utils/authContext';
+import OrgContext from '../../../../utils/orgContext';
 import ApiContext from '../../../../utils/apiContext';
 import { colors } from '../../../../styles/theme';
 import axios from '../../../../services/axios';
@@ -31,7 +32,8 @@ const SuccessResponse = styled.div`
 `;
 
 const AttachPaymentForm = () => {
-  const { authState } = useContext(AuthContext);
+  const { orgState } = useContext(OrgContext);
+  const { stripe_customer_id } = orgState;
   const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
   const { isLoading } = apiState;
 
@@ -43,12 +45,12 @@ const AttachPaymentForm = () => {
 
   /* eslint-disable  */
   useEffect(() => {
-    if (authState.user) createSetupIntent();
-  }, [authState]);
+    if (stripe_customer_id) createSetupIntent();
+  }, [orgState]);
   /* eslint-enable */
 
   const createSetupIntent = async () => {
-    let data = { customer: authState.user };
+    let data = { customer: stripe_customer_id };
     const result = await axios.post('/stripe/wallet', data).catch((err) => {
       fetchFailure(err);
     });
@@ -78,7 +80,7 @@ const AttachPaymentForm = () => {
 
     let data = {
       payment_method: setupIntent.payment_method,
-      customer: authState.user
+      customer: stripe_customer_id
     };
 
     await axios.post('/stripe/attach-payment', data).catch((err) => {

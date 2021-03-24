@@ -1,42 +1,35 @@
-import mongoose from 'mongoose';
-import { Users, Roles } from '../../../Database/mongo/models.js';
+import { Users, Roles, Invites } from '../../../Database/mongo/models.js';
+import _ from 'lodash';
 
-const objectId = mongoose.Types.ObjectId;
+export const getAppUsersModel = async (org_id) => {
+  // get org roles user is associated with
+  let roles = await Roles.find({ org_id }).lean();
+  roles = roles.map((item) => ({ ...item, id: item._id }));
 
-export const getAppUsersModel = async (app_id) => {
-  try {
-    const allData = await Roles.aggregate([
-      {
-        $lookup:
-        {
-          from: "users",
-          localField: "user_id",
-          foreignField: "_id",
-          as: "userInfo"
-        }
-      },
-      {
-        $match: {
-          "app_id": objectId(app_id)
-        }
-      }
-    ]);
+  //create array with org ids
+  let UserIds = roles.map((item) => item.user_id);
 
-    if (allData && allData.length) {
-      const filterData = allData.map((thread) => {
-        return {
-          role_id: thread._id,
-          role: thread.role,
-          user_id: thread.user_id,
-          username: (thread.userInfo && thread.userInfo.length) ? thread.userInfo[0].username : '',
-          email: (thread.userInfo && thread.userInfo.length) ? thread.userInfo[0].email : '',
-        }
-      })
-      return filterData
-    } else {
-      return []
-    }
-  } catch (e) {
-    throw new Error(e)
-  }
+  //find orgs with matching role ids and add id property
+  let users = await Users.find({ _id: { $in: UserIds } }).lean();
+  users = users.map((item) => ({ ...item, id: item._id }));
+
+  let UsersRolesArr = [];
+
+  //merge roles and orgs
+  users.map((item, index) => UsersRolesArr.push(_.merge(users[index], roles[index])));
+
+  console.log(UsersRolesArr);
+
+  return [...UsersRolesArr];
+};
+
+export const CreateInvite = async (org_id, verify_key, recipient_email, sender_email) => {
+  let invite = new Invites({ org_id, verify_key, recipient_email, sender_email });
+  await invite.save();
+};
+
+export const VerifyInviteModel = async (verify_key) => {
+  let invite = await Invites.findOne({ verify_key });
+
+  return invite;
 };

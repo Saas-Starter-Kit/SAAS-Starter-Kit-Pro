@@ -26,16 +26,17 @@ const Signup = () => {
   const { firebase } = useContext(AuthContext);
   const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
   const { isLoading } = apiState;
-  const [appId, setAppId] = useState();
+  const [invite_key, setInviteKey] = useState();
   const [isInviteFlow, setInviteFlow] = useState();
 
   /* eslint-disable */
   //extract data from query params
   useEffect(() => {
-    if (location.search) {
-      const queryParams = location.search.split('=');
-      setAppId(queryParams[1].split('&')[0]);
-      setInviteFlow(queryParams[2]);
+    const queryParams = location.search.split('=');
+
+    if (queryParams[1]) {
+      setInviteFlow(queryParams[1].split('&')[0]);
+      setInviteKey(queryParams[2]);
     }
   }, [location]);
 
@@ -58,7 +59,7 @@ const Signup = () => {
         fetchFailure(error);
       });
 
-    SignupAuth(authRes, firebase, fetchFailure, username, domainUrl, isInviteFlow, appId);
+    SignupAuth(authRes, firebase, fetchFailure, username, domainUrl, isInviteFlow, invite_key);
   };
 
   //Google OAuth2 Signin
@@ -74,7 +75,7 @@ const Signup = () => {
         fetchFailure(error);
       });
 
-    SignupAuth(authRes, firebase, fetchFailure, null, domainUrl, isInviteFlow, appId);
+    SignupAuth(authRes, firebase, fetchFailure, null, domainUrl, isInviteFlow, invite_key);
   };
 
   const seoData = {

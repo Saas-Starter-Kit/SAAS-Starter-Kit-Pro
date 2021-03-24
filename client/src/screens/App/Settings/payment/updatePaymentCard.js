@@ -40,11 +40,9 @@ const SectionTitle = styled.h2`
 `;
 
 const SuccessResponse = styled.div`
-  font-size: 0.9rem;
   color: green;
-  font-weight: 100;
-  margin-bottom: 1rem;
-  margin-top: -3rem;
+  font-weight: 300;
+  margin-top: 1rem;
 `;
 
 const SecondCardRow = styled.div`

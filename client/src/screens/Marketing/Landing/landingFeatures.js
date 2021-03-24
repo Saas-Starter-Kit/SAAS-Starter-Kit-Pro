@@ -17,7 +17,6 @@ const Container = styled.div`
   }
   @media (min-width: ${breakpoints.large}) {
     padding: 6rem 2rem 6rem 2rem;
-    max-width: 1280px;
   }
 `;
 

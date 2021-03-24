@@ -32,36 +32,27 @@ const ButtonWrapper = styled.div`
   text-align: left;
 `;
 
-const CreateTask = ({ app_id }) => {
+const CreateTask = ({ org_id }) => {
   const [formTitle, setTitle] = useState('');
   const [formDescription, setDescription] = useState('');
   const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
   const { isLoading } = apiState;
-  const context = useContext(AuthContext);
-  const { authState } = context;
-  const { user } = authState;
+  const { authState } = useContext(AuthContext);
 
   const postTodo = async (event) => {
     event.preventDefault();
     fetchInit();
 
-    let author = user ? user.username : 'Guest';
+    let author = authState?.user.username;
     let title = event.target.title.value;
     let description = event.target.description.value;
-    let data = { title, description, author, app_id };
+    let data = { title, description, author, org_id };
 
     await axios.post(`/api/post/todo`, data).catch((err) => {
       fetchFailure(err);
     });
 
-    if (!process.env.NODE_ENV === 'development') {
-      //send event data to Google Analytics
-      let eventType = 'create_todo';
-      let parameters = {
-        description: 'user created todo'
-      };
-      sendEventToAnalytics(eventType, parameters);
-    }
+    sendEventToAnalytics('create_todo', { description: 'user created todo' });
 
     setTitle('');
     setDescription('');

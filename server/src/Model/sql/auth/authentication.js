@@ -12,14 +12,25 @@ export const getUser = async (email) => {
   return queryResult.rows[0];
 };
 
-export const saveUsertoDB = async (email, username, firebaseId) => {
+export const verifyUser = async (verify_key) => {
+  //find by email, set email_verified and verify_key to empty
+  let text = `UPDATE users SET verify_key=$1, is_email_verified=$2
+              WHERE verify_key=$3
+              RETURNING id, email, username`;
+
+  let values = ['', 't', verify_key];
+  let queryResult = await db.query(text, values);
+
+  return queryResult.rows[0];
+};
+
+export const saveUsertoDB = async (email, username, firebaseId, verifyKey) => {
   /* Save user to our own db and get unique key from db */
 
   //insert into database
-  let text = `INSERT INTO users (username, email, firebase_user_id)
-              VALUES($1, $2, $3)
-              RETURNING id`;
-  let values = [username, email, firebaseId];
+  let text = `INSERT INTO users (username, email, firebase_user_id, verify_key)
+              VALUES($1, $2, $3, $4)`;
+  let values = [username, email, firebaseId, verifyKey];
 
   let queryResult = await db.query(text, values);
 
