@@ -14,7 +14,8 @@ jest.mock('stripe', () => {
         create: () => {
           return { id: 'cus245fedf' };
         },
-        update: () => {}
+        update: () => {},
+        del: () => {}
       },
       paymentMethods: { attach: () => {} },
       subscriptions: {
