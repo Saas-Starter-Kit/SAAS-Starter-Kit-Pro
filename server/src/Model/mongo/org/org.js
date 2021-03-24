@@ -42,6 +42,6 @@ export const PutOrgModel = async (_id, org_name) => {
 };
 
 export const GetOrgsbyEmail = async (primary_email) => {
-  let orgs = await Organizations.find({ primary_email });
+  let orgs = await Organizations.find({ primary_email }).lean();
   return orgs;
 };
