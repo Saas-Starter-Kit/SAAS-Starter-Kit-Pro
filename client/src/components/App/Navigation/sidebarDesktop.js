@@ -12,16 +12,7 @@ import LargeLogo from '../../../assets/images/logo/large_logo.png';
 import SmallLogo from '../../Common/svgs/SmallLogo';
 import { THEMES } from '../AppLayout';
 import { colors, breakpoints } from '../../../styles/theme';
-import {
-  FcBarChart,
-  FcCollect,
-  FcConferenceCall,
-  FcGenealogy,
-  FcTimeline,
-  FcUpload,
-  FcPrivacy,
-  FcEngineering
-} from 'react-icons/fc';
+import { getMenus } from './menuConfig';
 
 const StyledIcon = styled.div`
   display: flex;
@@ -31,97 +22,6 @@ const StyledIcon = styled.div`
   margin-bottom: 0.5rem;
   padding-top: 0.5rem;
 `;
-
-const StyledBar = styled(FcBarChart)`
-  height: 1.3rem;
-  width: 1.3rem;
-`;
-
-const StyledEng = styled(FcEngineering)`
-  height: 1.3rem;
-  width: 1.3rem;
-`;
-
-const StyledRead = styled(FcCollect)`
-  height: 1.3rem;
-  width: 1.3rem;
-`;
-
-const StyledCollab = styled(FcConferenceCall)`
-  height: 1.3rem;
-  width: 1.3rem;
-`;
-
-const StyledCreate = styled(FcUpload)`
-  height: 1.3rem;
-  width: 1.3rem;
-`;
-
-const StyledPermissions = styled(FcPrivacy)`
-  height: 1.3rem;
-  width: 1.3rem;
-`;
-
-const StyledOnboarding = styled(FcTimeline)`
-  height: 1.3rem;
-  width: 1.3rem;
-`;
-
-const StyledML = styled(FcGenealogy)`
-  height: 1.3rem;
-  width: 1.3rem;
-`;
-
-const getMenus = (org_id) => [
-  {
-    id: '1',
-    name: 'Dashboard',
-    route: `/app/${org_id}/dashboard`,
-    icon: <StyledBar />
-  },
-  {
-    id: '2',
-    name: 'Read Update',
-    route: `/app/${org_id}/readupdate`,
-    icon: <StyledRead />
-  },
-  {
-    id: '3',
-    name: 'Create',
-    route: `/app/${org_id}/create`,
-    icon: <StyledCreate />
-  },
-  {
-    id: '4',
-    name: 'Permissions',
-    route: `/app/${org_id}/permissions`,
-    icon: <StyledPermissions />
-  },
-  {
-    id: '5',
-    name: 'Users',
-    route: `/app/${org_id}/users`,
-    icon: <StyledCollab />
-  },
-  {
-    id: '6',
-    name: 'Onboarding',
-    route: `/app/${org_id}/onboarding`,
-    icon: <StyledOnboarding />
-  },
-  {
-    id: '7',
-    name: 'Machine Learning',
-    route: `/app/${org_id}/machinelearning`,
-    icon: <StyledML />
-  },
-  {
-    id: '8',
-    name: 'Settings',
-    route: `/app/${org_id}/settings`,
-    icon: <StyledEng />
-  }
-];
 
 const StyledSider = styled(Layout.Sider)`
   display: none;
@@ -177,11 +77,6 @@ const ItemWrapper = styled.div`
   font-weight: 500;
 `;
 
-const FooterWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
 const Footer = styled.div`
   width: 100%;
   height: 48px;
@@ -203,12 +98,6 @@ const Footer = styled.div`
     margin-right: 4px;
     font-size: 14px;
   }
-`;
-
-const SettingsWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
 `;
 
 const Bulb = styled(BulbOutlined)`
@@ -256,21 +145,18 @@ const SidebarDesktop = ({ theme, toggleTheme, org_id, location, collapsed }) => 
       </SidebarItems>
 
       {!collapsed && (
-        <FooterWrapper>
-          <SettingsWrapper></SettingsWrapper>
-          <Footer>
-            <span>
-              <Bulb />
-              <Span theme={theme}>Switch Theme</Span>
-            </span>
-            <Switch
-              onChange={toggleTheme}
-              defaultChecked={theme === THEMES.DARK}
-              checkedChildren="Dark"
-              unCheckedChildren="Light"
-            />
-          </Footer>
-        </FooterWrapper>
+        <Footer>
+          <span>
+            <Bulb />
+            <Span theme={theme}>Switch Theme</Span>
+          </span>
+          <Switch
+            onChange={toggleTheme}
+            defaultChecked={theme === THEMES.DARK}
+            checkedChildren="Dark"
+            unCheckedChildren="Light"
+          />
+        </Footer>
       )}
     </StyledSider>
   );
