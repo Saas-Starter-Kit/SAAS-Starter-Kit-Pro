@@ -43,11 +43,11 @@
     "react-icons": "^4.2.0",
     "react-instantsearch": "^6.10.3",
     "react-instantsearch-dom": "^6.10.3",
-    "react-joyride": "^2.3.0",
     "react-particles-js": "^3.4.1",
     "react-perfect-scrollbar": "^1.5.8",
     "react-stickynode": "^3.0.5",
     "react-syntax-highlighter": "^15.4.3",
+    "reactour": "^1.18.3",
     "styled-components": "^5.2.1",
     "yup": "^0.32.9"
   },

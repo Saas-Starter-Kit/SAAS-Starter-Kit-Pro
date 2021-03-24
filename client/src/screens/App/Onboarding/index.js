@@ -1,6 +1,8 @@
-import React from 'react';
-import Joyride from 'react-joyride';
+import React, { useState } from 'react';
+import Tour from 'reactour';
 import styled from 'styled-components';
+import PrimaryButton from '../../../components/Common/buttons/PrimaryButton';
+import DoneButton from '../../../components/Common/buttons/CancelButton';
 
 const StyledStep = styled.div`
   margin: 8rem;
@@ -12,47 +14,37 @@ const StyledStepAlt = styled.div`
 
 const steps = [
   {
-    target: '.step-1',
+    selector: '.step-1',
     content: 'This is the 1st awesome feature!'
   },
   {
-    target: '.step-2',
+    selector: '.step-2',
     content: 'This is another awesome feature!'
   },
   {
-    target: '.step-3',
+    selector: '.step-3',
     content: 'This is another awesome feature!'
   },
   {
-    target: '.step-4',
+    selector: '.step-4',
     content: 'This is the last awesome feature!'
   }
 ];
 
 const Onboarding = () => {
+  const [isTourOpen, setTourOpen] = useState(false);
+
   return (
     <div>
       <h1>Onboarding</h1>
+      <h2>Click Below To Start Tour</h2>
+      <PrimaryButton onClick={() => setTourOpen(true)}>Start</PrimaryButton>
       <div>
-        <Joyride
+        <Tour
+          lastStepNextButton={<DoneButton>Done!</DoneButton>}
           steps={steps}
-          continuous={true}
-          showSkipButton={true}
-          locale={{
-            last: 'End tour',
-            skip: 'Close tour'
-          }}
-          styles={{
-            tooltipContainer: {
-              textAlign: 'left'
-            },
-            buttonNext: {
-              backgroundColor: 'green'
-            },
-            buttonBack: {
-              marginRight: 10
-            }
-          }}
+          isOpen={isTourOpen}
+          onRequestClose={() => setTourOpen(false)}
         />
       </div>
 
