@@ -1,5 +1,4 @@
 import AccountSettings from './account';
-import SubscriptionSettings from './subscription';
-import PaymentSettings from './payment';
+import PasswordSettings from './password';
 
-export { AccountSettings, SubscriptionSettings, PaymentSettings };
+export { AccountSettings, PasswordSettings };

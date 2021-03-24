@@ -7,6 +7,7 @@ import { FiSearch, FiArrowRight } from 'react-icons/fi';
 import searchClient from '../../../services/algolia';
 import LargeLogo from '../../../components/Common/svgs/LargeLogo';
 import { colors } from '../../../styles/theme';
+import { Link } from 'gatsby';
 import Results from './results';
 
 const Container = styled.div`
@@ -77,7 +78,9 @@ const SearchBox = ({ currentRefinement, refine }) => {
   return (
     <Container>
       <LogoContainer>
-        <StyledLargeLogo textColor={colors.indigo400} />
+        <Link to="/">
+          <StyledLargeLogo textColor={colors.indigo400} />
+        </Link>
         <IconContainer>
           <StyledFiSearch size={20} onClick={() => setShowDrawer(!showDrawer)} />
         </IconContainer>

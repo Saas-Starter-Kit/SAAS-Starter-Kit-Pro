@@ -13,7 +13,6 @@ import styled from 'styled-components';
 import SettingsHeader from '../../../../components/User/Navigation/settingsHeader';
 import UpdateUsernameCard from './updateUsernameCard';
 import UpdateEmailCard from './updateEmailCard';
-import UpdatePasswordCard from './updatePasswordCard';
 
 const Title = styled.h1`
   font-size: 1.5rem;
@@ -122,7 +121,6 @@ const AccountSettings = () => {
           email={email}
           updateEmail={updateEmail}
         />
-        <UpdatePasswordCard />
       </div>
     </React.Fragment>
   );

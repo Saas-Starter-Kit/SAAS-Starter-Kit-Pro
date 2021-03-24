@@ -6,6 +6,7 @@ import MobileSidebarItem from './mobileSidebarItem';
 import Cross from '../svgs/cross';
 import Home from '../svgs/home';
 import Persons from '../svgs/persons';
+import Folder from '../svgs/folder';
 import LargeLogo from '../../../assets/images/logo/large_logo.svg';
 
 const Wrapper = styled.div`
@@ -134,15 +135,21 @@ const SidebarMobile = ({ toggleMobileMenu }) => {
           </LogoWrapper>
           <Nav>
             <MobileSidebarItem
-              link={`/user/teamapps`}
+              link={`/user/dashboard`}
               toggleMenu={() => toggleMobileMenu(false)}
               svg={<Home />}
+              title="Dashboard"
+            />
+            <MobileSidebarItem
+              link={`/user/teamapps`}
+              toggleMenu={() => toggleMobileMenu(false)}
+              svg={<Persons />}
               title="Team Apps"
             />
             <MobileSidebarItem
               link={`/user/settings/account`}
               toggleMenu={() => toggleMobileMenu(false)}
-              svg={<Persons />}
+              svg={<Folder />}
               title="Settings"
             />
           </Nav>
