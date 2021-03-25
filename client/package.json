@@ -36,6 +36,7 @@
     "qs": "^6.9.6",
     "rc-drawer": "^4.3.1",
     "react": "^17.0.1",
+    "react-countup": "^4.3.3",
     "react-dom": "^17.0.1",
     "react-google-button": "^0.7.2",
     "react-headroom": "^3.1.0",

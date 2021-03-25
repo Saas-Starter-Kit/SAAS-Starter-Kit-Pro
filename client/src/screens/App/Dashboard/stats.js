@@ -58,8 +58,7 @@ const Stats = () => (
       <div>
         <StatColumn
           title="Total Subscribers"
-          number="71,897"
-          initialNumber="from 70,946"
+          number={71897}
           svg={<StyledArrowUp />}
           diffDescription="Increased by"
           diff="12%"
@@ -69,9 +68,8 @@ const Stats = () => (
       </div>
       <BorderDiv>
         <StatColumn
-          title="Avg. Open Rate"
-          number="58.16%"
-          initialNumber="from 56.14%"
+          title="Total Purchases"
+          number={12333}
           svg={<StyledArrowUp />}
           diffDescription="Increased by"
           diff="2.02%"
@@ -81,9 +79,8 @@ const Stats = () => (
       </BorderDiv>
       <BorderDiv>
         <StatColumn
-          title="Avg. Click Rate"
-          number="24.57%"
-          initialNumber="from 28.62%"
+          title="Total Views"
+          number={23235}
           svg={<StyledArrowDown />}
           diffDescription="Decreased by"
           diff="4.05%"
