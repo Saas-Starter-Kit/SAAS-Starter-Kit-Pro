@@ -119,7 +119,6 @@ const Login = () => {
       <div>
         {isLoading && <LoadingOverlay />}
         <LoginFormHeader />
-
         <AuthCard>
           <Formik initialValues={{ email: '', password: '' }} onSubmit={handleSubmit}>
             {({ values, errors, touched, handleChange, handleBlur, handleSubmit }) => (
