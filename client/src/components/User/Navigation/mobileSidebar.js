@@ -4,7 +4,7 @@ import useOutsideClick from '../../../hooks/useOutsideClick';
 import { colors, breakpoints } from '../../../styles/theme';
 import MobileSidebarItem from './mobileSidebarItem';
 import Cross from '../svgs/cross';
-import Home from '../svgs/home';
+import { Link } from 'gatsby';
 import Persons from '../svgs/persons';
 import Folder from '../svgs/folder';
 import LargeLogo from '../../../assets/images/logo/large_logo.svg';
@@ -131,15 +131,11 @@ const SidebarMobile = ({ toggleMobileMenu }) => {
         </ButtonWrapper>
         <Sidebar>
           <LogoWrapper>
-            <Logo src={LargeLogo} alt="Workflow" />
+            <Link to="/user/dashboard">
+              <Logo src={LargeLogo} alt="Workflow" />
+            </Link>
           </LogoWrapper>
           <Nav>
-            <MobileSidebarItem
-              link={`/user/dashboard`}
-              toggleMenu={() => toggleMobileMenu(false)}
-              svg={<Home />}
-              title="Dashboard"
-            />
             <MobileSidebarItem
               link={`/user/teamapps`}
               toggleMenu={() => toggleMobileMenu(false)}

@@ -44,7 +44,7 @@ const Logo = styled.img`
   height: 2rem;
   width: calc(2rem * 43 / 40);
   @media (min-width: ${breakpoints.small}) {
-    height: 2.5rem;
+    height: 8rem;
     width: calc(2.5rem * 43 / 40);
   }
 `;
