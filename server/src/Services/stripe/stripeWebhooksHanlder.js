@@ -21,6 +21,9 @@ export const WebHookHandler = async (req, res) => {
       //link to payment page
       console.log(event);
       break;
+    case 'customer.subscription.created':
+      console.log(event.data.object.plan);
+      break;
     case 'customer.subscription.past_due':
       //send email notification
       //cancel subscription
