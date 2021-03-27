@@ -3,19 +3,12 @@ import { PieChart, Pie } from 'recharts';
 import styled from 'styled-components';
 import { colors } from '../../../../styles/theme';
 
-const Card = styled.div`
-  background-color: ${colors.white};
-  border-radius: 0.5rem;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-  margin-top: 1.25rem;
-  padding: 1rem;
-`;
-
 const Title = styled.h2`
   font-size: 1.125rem;
   line-height: 1.5rem;
   font-weight: 500;
   color: ${colors.gray900};
+  margin-left: 1rem;
 `;
 
 const data01 = [
@@ -39,7 +32,7 @@ const data02 = [
 ];
 
 const TwoLevelPieChart = () => (
-  <Card>
+  <div>
     <Title>Two Level Pie Chart</Title>
     <PieChart width={400} height={400}>
       <Pie data={data01} dataKey="value" cx={200} cy={200} outerRadius={60} fill="#8884d8" />
@@ -54,7 +47,7 @@ const TwoLevelPieChart = () => (
         label
       />
     </PieChart>
-  </Card>
+  </div>
 );
 
 export default TwoLevelPieChart;

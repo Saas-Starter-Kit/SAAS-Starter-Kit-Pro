@@ -14,15 +14,29 @@ const Title = styled.h1`
   font-size: 1.5rem;
 `;
 
+const ChartsContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-row-gap: 1rem;
+  grid-column-gap: 1rem;
+  background-color: ${colors.white};
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  margin-top: 1.25rem;
+  padding: 1rem;
+`;
+
 const Dashboard = () => (
   <div>
     <div>
       <Title>Dashboard</Title>
       <Stats />
-      <LineBarAreaComposedChart />
-      <TwoLevelPieChart />
-      <AreaChartFillByValue />
-      <SimpleBarChart />
+      <ChartsContainer>
+        <LineBarAreaComposedChart />
+        <TwoLevelPieChart />
+        <AreaChartFillByValue />
+        <SimpleBarChart />
+      </ChartsContainer>
       <ActivityList />
     </div>
   </div>

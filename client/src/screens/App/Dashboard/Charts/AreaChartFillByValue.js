@@ -3,19 +3,12 @@ import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts'
 import styled from 'styled-components';
 import { colors } from '../../../../styles/theme';
 
-const Card = styled.div`
-  background-color: ${colors.white};
-  border-radius: 0.5rem;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-  margin-top: 1.25rem;
-  padding: 1rem;
-`;
-
 const Title = styled.h2`
   font-size: 1.125rem;
   line-height: 1.5rem;
   font-weight: 500;
   color: ${colors.gray900};
+  margin-left: 1rem;
 `;
 
 const data = [
@@ -80,7 +73,7 @@ const gradientOffset = () => {
 const off = gradientOffset();
 
 const AreaChartFillByValue = () => (
-  <Card>
+  <div>
     <Title>Area Chart Fill By Value</Title>
     <AreaChart
       width={500}
@@ -105,7 +98,7 @@ const AreaChartFillByValue = () => (
       </defs>
       <Area type="monotone" dataKey="uv" stroke="#000" fill="url(#splitColor)" />
     </AreaChart>
-  </Card>
+  </div>
 );
 
 export default AreaChartFillByValue;

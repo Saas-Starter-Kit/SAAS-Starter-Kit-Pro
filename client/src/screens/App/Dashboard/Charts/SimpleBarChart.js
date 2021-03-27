@@ -3,19 +3,12 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'rec
 import styled from 'styled-components';
 import { colors } from '../../../../styles/theme';
 
-const Card = styled.div`
-  background-color: ${colors.white};
-  border-radius: 0.5rem;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-  margin-top: 1.25rem;
-  padding: 1rem;
-`;
-
 const Title = styled.h2`
   font-size: 1.125rem;
   line-height: 1.5rem;
   font-weight: 500;
   color: ${colors.gray900};
+  margin-left: 1rem;
 `;
 
 const data = [
@@ -64,7 +57,7 @@ const data = [
 ];
 
 const SimpleBarChart = () => (
-  <Card>
+  <div>
     <Title>Simple Bar Chart</Title>
     <BarChart
       width={500}
@@ -85,7 +78,7 @@ const SimpleBarChart = () => (
       <Bar dataKey="pv" fill="#8884d8" />
       <Bar dataKey="uv" fill="#82ca9d" />
     </BarChart>
-  </Card>
+  </div>
 );
 
 export default SimpleBarChart;
