@@ -51,6 +51,7 @@
     "react-stickynode": "^3.0.5",
     "react-syntax-highlighter": "^15.4.3",
     "reactour": "^1.18.3",
+    "recharts": "^2.0.9",
     "styled-components": "^5.2.1",
     "yup": "^0.32.9"
   },
