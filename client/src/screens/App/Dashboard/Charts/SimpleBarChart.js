@@ -1,15 +1,16 @@
 import React from 'react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
-import styled from 'styled-components';
-import { colors } from '../../../../styles/theme';
-
-const Title = styled.h2`
-  font-size: 1.125rem;
-  line-height: 1.5rem;
-  font-weight: 500;
-  color: ${colors.gray900};
-  margin-left: 1rem;
-`;
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer
+} from 'recharts';
+import ChartCard from './ChartCard';
+import ChartTitle from './ChartTitle';
 
 const data = [
   {
@@ -57,28 +58,30 @@ const data = [
 ];
 
 const SimpleBarChart = () => (
-  <div>
-    <Title>Simple Bar Chart</Title>
-    <BarChart
-      width={500}
-      height={300}
-      data={data}
-      margin={{
-        top: 5,
-        right: 30,
-        left: 20,
-        bottom: 5
-      }}
-    >
-      <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="name" />
-      <YAxis />
-      <Tooltip />
-      <Legend />
-      <Bar dataKey="pv" fill="#8884d8" />
-      <Bar dataKey="uv" fill="#82ca9d" />
-    </BarChart>
-  </div>
+  <ChartCard>
+    <ChartTitle>Simple Bar Chart</ChartTitle>
+    <ResponsiveContainer width="100%" aspect="2">
+      <BarChart
+        width={500}
+        height={300}
+        data={data}
+        margin={{
+          top: 5,
+          right: 30,
+          left: 20,
+          bottom: 5
+        }}
+      >
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="name" />
+        <YAxis />
+        <Tooltip />
+        <Legend />
+        <Bar dataKey="pv" fill="#8884d8" />
+        <Bar dataKey="uv" fill="#82ca9d" />
+      </BarChart>
+    </ResponsiveContainer>
+  </ChartCard>
 );
 
 export default SimpleBarChart;

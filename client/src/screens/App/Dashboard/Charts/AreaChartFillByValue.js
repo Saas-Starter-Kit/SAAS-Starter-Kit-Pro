@@ -1,15 +1,15 @@
 import React from 'react';
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
-import styled from 'styled-components';
-import { colors } from '../../../../styles/theme';
-
-const Title = styled.h2`
-  font-size: 1.125rem;
-  line-height: 1.5rem;
-  font-weight: 500;
-  color: ${colors.gray900};
-  margin-left: 1rem;
-`;
+import {
+  AreaChart,
+  Area,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer
+} from 'recharts';
+import ChartCard from './ChartCard';
+import ChartTitle from './ChartTitle';
 
 const data = [
   {
@@ -73,32 +73,34 @@ const gradientOffset = () => {
 const off = gradientOffset();
 
 const AreaChartFillByValue = () => (
-  <div>
-    <Title>Area Chart Fill By Value</Title>
-    <AreaChart
-      width={500}
-      height={400}
-      data={data}
-      margin={{
-        top: 10,
-        right: 30,
-        left: 0,
-        bottom: 0
-      }}
-    >
-      <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="name" />
-      <YAxis />
-      <Tooltip />
-      <defs>
-        <linearGradient id="splitColor" x1="0" y1="0" x2="0" y2="1">
-          <stop offset={off} stopColor="green" stopOpacity={1} />
-          <stop offset={off} stopColor="red" stopOpacity={1} />
-        </linearGradient>
-      </defs>
-      <Area type="monotone" dataKey="uv" stroke="#000" fill="url(#splitColor)" />
-    </AreaChart>
-  </div>
+  <ChartCard>
+    <ChartTitle>Area Chart Fill By Value</ChartTitle>
+    <ResponsiveContainer width="100%" aspect="2">
+      <AreaChart
+        width={500}
+        height={400}
+        data={data}
+        margin={{
+          top: 10,
+          right: 30,
+          left: 0,
+          bottom: 0
+        }}
+      >
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="name" />
+        <YAxis />
+        <Tooltip />
+        <defs>
+          <linearGradient id="splitColor" x1="0" y1="0" x2="0" y2="1">
+            <stop offset={off} stopColor="green" stopOpacity={1} />
+            <stop offset={off} stopColor="red" stopOpacity={1} />
+          </linearGradient>
+        </defs>
+        <Area type="monotone" dataKey="uv" stroke="#000" fill="url(#splitColor)" />
+      </AreaChart>
+    </ResponsiveContainer>
+  </ChartCard>
 );
 
 export default AreaChartFillByValue;

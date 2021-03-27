@@ -1,15 +1,8 @@
 import React from 'react';
-import { PieChart, Pie } from 'recharts';
+import { PieChart, Pie, ResponsiveContainer } from 'recharts';
 import styled from 'styled-components';
-import { colors } from '../../../../styles/theme';
-
-const Title = styled.h2`
-  font-size: 1.125rem;
-  line-height: 1.5rem;
-  font-weight: 500;
-  color: ${colors.gray900};
-  margin-left: 1rem;
-`;
+import ChartCard from './ChartCard';
+import ChartTitle from './ChartTitle';
 
 const data01 = [
   { name: 'Group A', value: 400 },
@@ -31,23 +24,29 @@ const data02 = [
   { name: 'D2', value: 50 }
 ];
 
+const StyledResponsiveContainer = styled(ResponsiveContainer)`
+  margin-top: -6rem;
+`;
+
 const TwoLevelPieChart = () => (
-  <div>
-    <Title>Two Level Pie Chart</Title>
-    <PieChart width={400} height={400}>
-      <Pie data={data01} dataKey="value" cx={200} cy={200} outerRadius={60} fill="#8884d8" />
-      <Pie
-        data={data02}
-        dataKey="value"
-        cx={200}
-        cy={200}
-        innerRadius={70}
-        outerRadius={90}
-        fill="#82ca9d"
-        label
-      />
-    </PieChart>
-  </div>
+  <ChartCard>
+    <ChartTitle>Two Level Pie Chart</ChartTitle>
+    <StyledResponsiveContainer width="100%" aspect="1">
+      <PieChart width={400} height={400}>
+        <Pie data={data01} dataKey="value" cx={200} cy={200} outerRadius={60} fill="#8884d8" />
+        <Pie
+          data={data02}
+          dataKey="value"
+          cx={200}
+          cy={200}
+          innerRadius={70}
+          outerRadius={90}
+          fill="#82ca9d"
+          label
+        />
+      </PieChart>
+    </StyledResponsiveContainer>
+  </ChartCard>
 );
 
 export default TwoLevelPieChart;

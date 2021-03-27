@@ -9,18 +9,11 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
-  Scatter
+  Scatter,
+  ResponsiveContainer
 } from 'recharts';
-import styled from 'styled-components';
-import { colors } from '../../../../styles/theme';
-
-const Title = styled.h2`
-  font-size: 1.125rem;
-  line-height: 1.5rem;
-  font-weight: 500;
-  color: ${colors.gray900};
-  margin-left: 1rem;
-`;
+import ChartCard from './ChartCard';
+import ChartTitle from './ChartTitle';
 
 const data = [
   {
@@ -68,30 +61,32 @@ const data = [
 ];
 
 const LineBarAreaComposedChart = () => (
-  <div>
-    <Title>Line Bar Area Composed Chart</Title>
-    <ComposedChart
-      width={500}
-      height={400}
-      data={data}
-      margin={{
-        top: 20,
-        right: 20,
-        bottom: 20,
-        left: 20
-      }}
-    >
-      <CartesianGrid stroke="#f5f5f5" />
-      <XAxis dataKey="name" />
-      <YAxis />
-      <Tooltip />
-      <Legend />
-      <Area type="monotone" dataKey="amt" fill="#8884d8" stroke="#8884d8" />
-      <Bar dataKey="pv" barSize={20} fill="#413ea0" />
-      <Line type="monotone" dataKey="uv" stroke="#ff7300" />
-      <Scatter dataKey="cnt" fill="red" />
-    </ComposedChart>
-  </div>
+  <ChartCard>
+    <ChartTitle>Line Bar Area Composed Chart</ChartTitle>
+    <ResponsiveContainer width="100%" aspect="2">
+      <ComposedChart
+        width={500}
+        height={400}
+        data={data}
+        margin={{
+          top: 20,
+          right: 20,
+          bottom: 20,
+          left: 20
+        }}
+      >
+        <CartesianGrid stroke="#f5f5f5" />
+        <XAxis dataKey="name" />
+        <YAxis />
+        <Tooltip />
+        <Legend />
+        <Area type="monotone" dataKey="amt" fill="#8884d8" stroke="#8884d8" />
+        <Bar dataKey="pv" barSize={20} fill="#413ea0" />
+        <Line type="monotone" dataKey="uv" stroke="#ff7300" />
+        <Scatter dataKey="cnt" fill="red" />
+      </ComposedChart>
+    </ResponsiveContainer>
+  </ChartCard>
 );
 
 export default LineBarAreaComposedChart;
