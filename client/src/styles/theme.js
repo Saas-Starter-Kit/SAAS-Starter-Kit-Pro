@@ -63,7 +63,11 @@ export const colors = {
   slateGray: '#718096',
   cadetBlue: '#A0AEC0',
   cornflowerBlue: '#667EEA',
-  sail: '#A3BFFA'
+  sail: '#A3BFFA',
+  electricViolet: '#803EFF',
+  denim: '#1976D2',
+  matisse: '#155A93',
+  blueZodiac: '#0F1A57'
 };
 
 export const breakpoints = {

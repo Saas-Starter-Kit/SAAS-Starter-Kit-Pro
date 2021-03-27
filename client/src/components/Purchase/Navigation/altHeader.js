@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { colors, breakpoints } from '../../../styles/theme';
 import { navigate } from 'gatsby';
+import SmallLogo from '../../Common/svgs/SmallLogo';
 
 const Wrapper = styled.div`
   display: flex;
@@ -16,20 +17,10 @@ const Wrapper = styled.div`
   }
 `;
 
-const Image = styled.img`
-  height: 3rem;
-  width: calc(3rem * 164 / 150);
-  cursor: pointer;
-`;
-
 const Header = () => {
   return (
     <Wrapper>
-      <Image
-        onClick={() => navigate('/')}
-        src="https://tailwindui.com/img/logos/v1/workflow-mark-on-white.svg"
-        alt="Workflow"
-      />
+      <SmallLogo height={50} width={59} onClick={() => navigate('/')} />
     </Wrapper>
   );
 };
