@@ -19,3 +19,8 @@ export const UpdateStripeCustomer = async (stripe_id, email) => {
 export const DeleteStripeCustomer = async (stripe_id) => {
   await stripe.customers.del(stripe_id);
 };
+
+export const GetStripeCustomer = async (stripe_id) => {
+  const customer = await stripe.customers.retrieve(stripe_id);
+  return customer;
+};

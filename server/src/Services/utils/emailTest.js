@@ -2,14 +2,13 @@ import Email from 'email-templates';
 import nodemailer from 'nodemailer';
 
 /* 
-   Use this transport to test email templates
+   Use this transport to test or develop email templates
 */
 
 const transporter = nodemailer.createTransport({
   host: 'smtp.mailtrap.io',
   //host: 'localhost',
   port: 465,
-  secure: false,
   auth: {
     user: process.env.MAIL_TRAP_USERNAME,
     pass: process.env.MAIL_TRAP_PASSWORD

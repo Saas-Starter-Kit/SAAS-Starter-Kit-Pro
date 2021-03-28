@@ -6,28 +6,36 @@ import nodemailer from 'nodemailer';
   sendinblue when going live.
 */
 
-let devTransport = nodemailer.createTransport({
-  host: 'smtp.mailtrap.io',
-  //host: 'localhost', //will cause error but show email preview
-  port: 465,
-  secure: false,
-  auth: {
-    user: process.env.MAIL_TRAP_USERNAME,
-    pass: process.env.MAIL_TRAP_PASSWORD
-  }
-});
+let host;
+let port;
+let user;
+let pass;
 
-const prodTransport = nodemailer.createTransport({
-  service: 'SendinBlue',
+if (process.env.NODE_ENV !== 'production') {
+  host = 'smtp.mailtrap.io';
+  port = 2525;
+  user = process.env.MAIL_TRAP_USERNAME;
+  pass = process.env.MAIL_TRAP_PASSWORD;
+} else {
+  host = 'smtp-relay.sendinblue.com';
+  port = 587;
+  user = process.env.SendInBlue_User;
+  pass = process.env.SendInBlue_Password;
+}
+
+let transport = nodemailer.createTransport({
+  host,
+  //host: 'localhost', //will cause error but show email preview
+  port,
   auth: {
-    user: process.env.SendInBlue_User,
-    pass: process.env.SendInBlue_Password
+    user,
+    pass
   }
 });
 
 export const email = new Email({
   send: true,
-  transport: devTransport,
+  transport,
   preview: true, // to preview emails in your own browser
   views: {
     options: {
@@ -36,12 +44,17 @@ export const email = new Email({
   }
 });
 
+let product_name = process.env.PRODUCT_NAME;
+let product_url = process.env.PRODUCT_URL;
+let company_name = process.env.COMPANY_NAME;
+let company_address = process.env.COMPANY_ADDRESS;
+
 export const sendEmail = async (toEmail, template, locals) => {
   await email.send({
-    template: template,
+    template,
     message: {
       to: toEmail
     },
-    locals
+    locals: { ...locals, product_name, product_url, company_address, company_name }
   });
 };

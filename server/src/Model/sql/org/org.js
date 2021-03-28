@@ -76,3 +76,11 @@ export const GetOrgsbyEmail = async (primary_email) => {
 
   return queryResult.rows;
 };
+
+export const CancelPlanbySubId = async (subscription_id) => {
+  let text = `UPDATE organizations SET plan_type=$1 WHERE subscription_id=$2`;
+
+  let values = [null, subscription_id];
+
+  await db.query(text, values);
+};

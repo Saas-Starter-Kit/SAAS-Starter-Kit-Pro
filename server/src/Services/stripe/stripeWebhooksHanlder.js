@@ -1,4 +1,5 @@
 import stripe from '../../Config/stripe.js';
+import { PastDue, Unpaid, TrailWillEnd } from './stripeWebhooks.js';
 
 export const WebHookHandler = async (req, res) => {
   const sig = req.headers['stripe-signature'];
@@ -7,26 +8,18 @@ export const WebHookHandler = async (req, res) => {
   let event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
 
   switch (event.type) {
-    case 'customer.subscription.created':
-      //console.log(event.data.object.plan);
-      break;
-    case 'customer.subscription.updated':
-      console.log(event);
-      break;
+    // use to test subscription events
+    //case 'customer.subscription.created':
+    //  console.log(event);
+    //  break;
     case 'customer.subscription.trial_will_end':
-      //send email notification
-      //link to payment page
-      console.log(event);
+      TrailWillEnd(event);
       break;
     case 'customer.subscription.past_due':
-      //send email notification
-      //cancel subscription
-      console.log(event);
+      PastDue(event);
       break;
     case 'customer.subscription.unpaid':
-      //send email notification
-      //cancel subscription
-      console.log(event);
+      Unpaid(event);
       break;
     default:
       console.log(`Unhandled event type ${event.type}`);

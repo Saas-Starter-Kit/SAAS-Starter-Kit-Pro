@@ -45,3 +45,11 @@ export const GetOrgsbyEmail = async (primary_email) => {
   let orgs = await Organizations.find({ primary_email }).lean();
   return orgs;
 };
+
+export const CancelPlanbySubId = async (subscription_id) => {
+  await Organizations.findOneAndUpdate(
+    { subscription_id },
+    { plan_type: null },
+    { useFindAndModify: false }
+  );
+};
