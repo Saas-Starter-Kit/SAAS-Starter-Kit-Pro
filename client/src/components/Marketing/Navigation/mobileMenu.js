@@ -2,7 +2,7 @@ import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import { Link } from 'gatsby';
 import { colors, breakpoints } from '../../../styles/theme';
-import SmallLogo from '../../../assets/images/logo/small_logo.svg';
+import SmallLogo from '../../../components/Common/svgs/SmallLogo';
 import Close from '../../../assets/images/icons/close.svg';
 import ViewGrid from '../../../assets/images/icons/view-grid.svg';
 
@@ -44,9 +44,8 @@ const Header = styled.div`
 }
 `;
 
-const LogoImage = styled.img`
-  height: 2rem;
-  width: auto;
+const StyledSmallLogo = styled(SmallLogo)`
+  margin-left: 16px;
 `;
 
 const CloseButtonWrapper = styled.div`
@@ -164,7 +163,7 @@ const Button = styled.div`
 const MobileMenu = ({ mobileMenuHandler }) => (
   <Wrapper>
     <Header>
-      <LogoImage src={SmallLogo} alt="Workflow" />
+      <StyledSmallLogo height={34} width={40} />
       <CloseButtonWrapper>
         <CloseButton onClick={mobileMenuHandler} type="button">
           <CloseImage src={Close} alt="menu icon" />

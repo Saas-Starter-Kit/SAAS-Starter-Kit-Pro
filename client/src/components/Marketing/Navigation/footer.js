@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'gatsby';
 import styled from 'styled-components';
 import { colors } from '../../../styles/theme';
-import logo from '../../../assets/images/logo/small_logo.svg';
+import SmallLogo from '../../../components/Common/svgs/SmallLogo';
 
 const Wrapper = styled.div`
   background-color: #292c2f;
@@ -56,18 +56,13 @@ const ImageCol = styled.div`
   align-items: center;
 `;
 
-const StyledImg = styled.img`
-  height: 5rem;
-  width: 5rem;
-`;
-
 const Footer = () => {
   return (
     <Wrapper>
       <TopBuffer />
       <Container>
         <ImageCol>
-          <StyledImg src={logo} alt="" />
+          <SmallLogo height={65} width={76} />
         </ImageCol>
         <Column>
           <FooterColHeader>Header 1</FooterColHeader>

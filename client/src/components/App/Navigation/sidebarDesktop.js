@@ -6,9 +6,7 @@ import { Layout, Menu, Switch } from 'antd';
 import { BulbOutlined } from '@ant-design/icons';
 import { Link } from 'gatsby';
 
-//import LargeLogo from '../../../assets/images/logo/large_logo.svg';
-import LargeLogo from '../../../assets/images/logo/large_logo.png';
-//import LargeLogo from '../../Common/svgs/LargeLogo';
+import LargeLogo from '../../Common/svgs/LargeLogo';
 import SmallLogo from '../../Common/svgs/SmallLogo';
 import { THEMES } from '../AppLayout';
 import { colors, breakpoints } from '../../../styles/theme';
@@ -40,7 +38,6 @@ const StyledSider = styled(Layout.Sider)`
 
 const LogoWrapper = styled.div`
   display: flex;
-  justify-content: center;
   align-items: center;
   padding: 0 24px;
   height: 72px;
@@ -108,14 +105,6 @@ const Span = styled.span`
   color: ${colors.doveGray};
 `;
 
-const StyledLargeLogo = styled.img`
-  width: 120px;
-  height: auto;
-  margin-right: 2rem;
-`;
-
-const StyledSmallLogo = styled.div``;
-
 const SidebarDesktop = ({ theme, toggleTheme, org_id, location, collapsed }) => {
   const menus = getMenus(org_id);
   const selectedKey = menus.find((menu) => menu.route === location.pathname);
@@ -128,7 +117,13 @@ const SidebarDesktop = ({ theme, toggleTheme, org_id, location, collapsed }) => 
       collapsible
       collapsed={collapsed}
     >
-      <LogoWrapper>{collapsed ? <StyledSmallLogo /> : <StyledLargeLogo />}</LogoWrapper>
+      <LogoWrapper>
+        {collapsed ? (
+          <SmallLogo />
+        ) : (
+          <LargeLogo textColor={theme === THEMES.DARK ? colors.white : colors.blueZodiac} />
+        )}
+      </LogoWrapper>
       <SidebarItems>
         <ScrollBar options={{ suppressScrollX: true }}>
           <Menu mode="inline" theme={theme} selectedKeys={[selectedKey && selectedKey.id]}>

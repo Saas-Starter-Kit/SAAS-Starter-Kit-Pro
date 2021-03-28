@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { breakpoints } from '../../../styles/theme';
+import SmallLogo from '../../Common/svgs/SmallLogo';
 
 const Wrapper = styled.div`
   display: flex;
@@ -16,15 +17,10 @@ const Wrapper = styled.div`
   }
 `;
 
-const Image = styled.img`
-  height: 3rem;
-  width: calc(3rem * 164 / 150);
-`;
-
 const Header = () => {
   return (
     <Wrapper>
-      <Image src="https://tailwindui.com/img/logos/v1/workflow-mark-on-white.svg" alt="Workflow" />
+      <SmallLogo height={50} width={59} />
     </Wrapper>
   );
 };

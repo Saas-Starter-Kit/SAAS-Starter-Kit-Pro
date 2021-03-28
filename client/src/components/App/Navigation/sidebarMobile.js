@@ -110,15 +110,10 @@ const LogoWrapper = styled.div`
   flex-shrink: 0;
   display: flex;
   align-items: center;
-  justify-content: center;
-  padding-left: 1rem;
+  padding-left: 1.5rem;
   padding-right: 1rem;
   box-shadow: 0 1px 9px -3px rgba(0, 0, 0, 0.2);
   height: 72px;
-`;
-
-const StyledLogo = styled(LargeLogo)`
-  width: 150px;
 `;
 
 const Nav = styled.nav`
@@ -186,10 +181,7 @@ const SidebarMobile = ({ toggleMobileMenu, org_id, theme, toggleTheme }) => {
         </ButtonWrapper>
         <Sidebar>
           <LogoWrapper>
-            <StyledLogo
-              textColor={theme === THEMES.DARK ? colors.white : colors.indigo400}
-              alt="Workflow"
-            />
+            <LargeLogo textColor={theme === THEMES.DARK ? colors.white : colors.blueZodiac} />
           </LogoWrapper>
           <Wrapper4>
             <Nav>

@@ -21,10 +21,6 @@ const LogoContainer = styled.div`
   justify-content: space-between;
 `;
 
-const StyledLargeLogo = styled(LargeLogo)`
-  width: 120px;
-`;
-
 const IconContainer = styled.div`
   display: flex;
   align-items: center;
@@ -79,7 +75,7 @@ const SearchBox = ({ currentRefinement, refine }) => {
     <Container>
       <LogoContainer>
         <Link to="/">
-          <StyledLargeLogo textColor={colors.indigo400} />
+          <LargeLogo />
         </Link>
         <IconContainer>
           <StyledFiSearch size={20} onClick={() => setShowDrawer(!showDrawer)} />

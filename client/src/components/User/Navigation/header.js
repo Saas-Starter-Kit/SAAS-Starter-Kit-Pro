@@ -10,7 +10,7 @@ import useOutsideClick from '../../../hooks/useOutsideClick';
 import AvatarDropDown from '../Navigation/avatarDropdown';
 import AuthContext from '../../../utils/authContext';
 import Burger from '../svgs/burger';
-import SmallLogo from '../../../assets/images/logo/small_logo.svg';
+import LargeLogo from '../../../components/Common/svgs/LargeLogo';
 import { RightOutlined } from '@ant-design/icons';
 import { IoNotificationsOutline } from 'react-icons/io5';
 
@@ -60,12 +60,6 @@ const LinksWrapper = styled.div`
 const LinkItem = styled.div`
   padding: 0.3rem;
   padding-right: 1rem;
-`;
-
-const Logo = styled.img`
-  cursor: pointer;
-  height: 2rem;
-  width: calc(2rem * 34 / 32);
 `;
 
 const LogoWrapper = styled.div`
@@ -183,7 +177,7 @@ const MobileHeader = ({ mobileMenuHandler }) => {
       </MenuButton>
       <LogoWrapper>
         <Link to="/user/dashboard">
-          <Logo src={SmallLogo} alt="Logo" />
+          <LargeLogo textColor={colors.white} />
         </Link>
       </LogoWrapper>
       <LinksWrapper>
