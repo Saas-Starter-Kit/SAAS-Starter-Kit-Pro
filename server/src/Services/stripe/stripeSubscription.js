@@ -74,7 +74,7 @@ export const CreateSubscription = async (req, res) => {
     let amount = subscription.plan.amount * 0.01;
     let start_date = moment(subscription.created * 1000).format('MMM Do YYYY');
     let trial_end = moment(subscription.trial_end * 1000).format('MMM Do YYYY');
-    let template = 'start subscription';
+    let template = 'start trail';
     let locals = { amount, start_date, trial_end };
     await sendEmail(email, template, locals);
 

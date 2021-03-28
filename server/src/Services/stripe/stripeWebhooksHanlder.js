@@ -7,22 +7,16 @@ export const WebHookHandler = async (req, res) => {
   let event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
 
   switch (event.type) {
-    case 'invoice.payment_failed':
-      //send email notification
-      //ask to fix
-      console.log(event);
+    case 'customer.subscription.created':
+      //console.log(event.data.object.plan);
       break;
-    case 'invoice.payment_action_required':
-      //send email notification
+    case 'customer.subscription.updated':
       console.log(event);
       break;
     case 'customer.subscription.trial_will_end':
       //send email notification
       //link to payment page
       console.log(event);
-      break;
-    case 'customer.subscription.created':
-      console.log(event.data.object.plan);
       break;
     case 'customer.subscription.past_due':
       //send email notification
