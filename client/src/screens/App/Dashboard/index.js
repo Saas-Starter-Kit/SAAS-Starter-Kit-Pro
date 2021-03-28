@@ -4,7 +4,7 @@ import Stats from './stats';
 import ActivityList from './activityList';
 import { colors, breakpoints } from '../../../styles/theme';
 import LineBarAreaComposedChart from './Charts/LineBarAreaComposedChart';
-import TwoLevelPieChart from './Charts/TwoLevelPieChart';
+import StackedChart from './Charts/StackedChart';
 import AreaChartFillByValue from './Charts/AreaChartFillByValue';
 import SimpleBarChart from './Charts/SimpleBarChart';
 
@@ -33,7 +33,7 @@ const Dashboard = () => (
     <Stats />
     <ChartsContainer>
       <LineBarAreaComposedChart />
-      <TwoLevelPieChart />
+      <StackedChart />
       <AreaChartFillByValue />
       <SimpleBarChart />
     </ChartsContainer>
