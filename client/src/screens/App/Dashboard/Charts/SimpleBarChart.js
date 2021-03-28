@@ -60,7 +60,7 @@ const data = [
 const SimpleBarChart = () => (
   <ChartCard>
     <ChartTitle>Simple Bar Chart</ChartTitle>
-    <ResponsiveContainer width="100%" aspect="2">
+    <ResponsiveContainer width="99%" height="280px" aspect="2">
       <BarChart
         width={500}
         height={300}

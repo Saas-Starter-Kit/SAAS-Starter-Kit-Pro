@@ -75,7 +75,7 @@ const off = gradientOffset();
 const AreaChartFillByValue = () => (
   <ChartCard>
     <ChartTitle>Area Chart Fill By Value</ChartTitle>
-    <ResponsiveContainer width="100%" aspect="2">
+    <ResponsiveContainer width="99%" height="280px" aspect="2">
       <AreaChart
         width={500}
         height={400}

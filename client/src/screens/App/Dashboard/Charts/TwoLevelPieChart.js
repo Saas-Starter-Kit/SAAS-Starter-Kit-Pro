@@ -31,7 +31,7 @@ const StyledResponsiveContainer = styled(ResponsiveContainer)`
 const TwoLevelPieChart = () => (
   <ChartCard>
     <ChartTitle>Two Level Pie Chart</ChartTitle>
-    <StyledResponsiveContainer width="100%" aspect="1">
+    <StyledResponsiveContainer width="99%" height="280px" aspect="1">
       <PieChart width={400} height={400}>
         <Pie data={data01} dataKey="value" cx={200} cy={200} outerRadius={60} fill="#8884d8" />
         <Pie

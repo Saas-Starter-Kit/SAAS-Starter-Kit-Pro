@@ -63,7 +63,7 @@ const data = [
 const LineBarAreaComposedChart = () => (
   <ChartCard>
     <ChartTitle>Line Bar Area Composed Chart</ChartTitle>
-    <ResponsiveContainer width="100%" aspect="2">
+    <ResponsiveContainer width="99%" height="280px" aspect="2">
       <ComposedChart
         width={500}
         height={400}
