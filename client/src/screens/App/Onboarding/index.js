@@ -6,10 +6,12 @@ import DoneButton from '../../../components/Common/buttons/CancelButton';
 
 const StyledStep = styled.div`
   margin: 8rem;
+  width: 5rem;
 `;
 
 const StyledStepAlt = styled.div`
   margin: 2rem;
+  width: 5rem;
 `;
 
 const steps = [
