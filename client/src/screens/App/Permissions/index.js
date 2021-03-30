@@ -35,32 +35,19 @@ const Permissions = () => {
   }, []);
   /* eslint-enable */
 
-  const apiPermission = async (event) => {
-    event.preventDefault();
+  const apiPermission = async () => {
     fetchInit();
 
     //api for permission routes
     let role = isAdmin ? 'admin' : 'user';
-    let userAction = event.target.userAction.value;
-    let subject = event.target.subject.value;
 
-    let data = { role, userAction, subject };
+    let data = { role };
 
-    //role, userAction and subject object keys are expected
     //for permission api requests
     let result = await axios.post('/private/permissions', data).catch((err) => {
       fetchFailure(err);
     });
 
-    //get request with permissions
-    //let params = { role, userAction, subject };
-
-    //set role in query param for get requests
-    //let result = await axios.get('/private/permissions', { params }).catch((err) => {
-    //  fetchFailure(err);
-    //});
-
-    console.log(result);
     setPrivateData(result.data);
 
     fetchSuccess();
@@ -69,7 +56,8 @@ const Permissions = () => {
   const apiJWTAuth = async () => {
     let token = authState.user.jwt_token;
     const headers = { Authorization: `Bearer ${token}` };
-    let result = await axios.get('/private/auth', { headers }).catch((err) => {
+    const params = { key: 'value' };
+    let result = await axios.get('/private/auth', { headers, params }).catch((err) => {
       fetchFailure(err);
     });
 
@@ -77,7 +65,10 @@ const Permissions = () => {
 
     //for post or put requests, headers go after body data
     //const data = { data: 'data' };
-    //let result = await axios.post('/private/auth', data, { headers });
+    //let result = await axios.post('/private/auth', data, { headers }).catch((err) => {
+    //  fetchFailure(err);
+    //});
+    //setPrivateJWTData(result.data);
   };
 
   const roleHandler = () => {
@@ -138,25 +129,8 @@ const Permissions = () => {
             <Spin tip="Loading..." spinning={isLoading}>
               <div>Permissions Also Need to be Setup Server Side</div>
               <div>Click below to make an api request with permissions check.</div>
-              <div>
-                User actions and subjects are the same ones defined in roleRules() in
-                /utils/caslAbility.js. The roleRules() should match in the server.
-              </div>
-              <form onSubmit={apiPermission}>
-                <InputWrapper>
-                  <FieldLabel htmlFor="userAction">
-                    User Action
-                    <TextInput type="text" name="userAction" placeholder="read" />
-                  </FieldLabel>
-                </InputWrapper>
-                <InputWrapper>
-                  <FieldLabel htmlFor="subject">
-                    Subject
-                    <TextInput type="text" name="subject" placeholder="password" />
-                  </FieldLabel>
-                </InputWrapper>
-                <Button>Submit</Button>
-              </form>
+              <div>API request will pass for Admin but fail for user.</div>
+              <Button onClick={apiPermission}>Submit</Button>
               <p>{privateData}</p>
             </Spin>
           </Card>

@@ -19,14 +19,18 @@ router.get('/private/auth', requireAuth, asyncHandler(privateRoute));
 router.post('/private/auth', requireAuth, asyncHandler(privateRoute));
 
 //Example of permissions route, use for development/testing
-router.get('/private/permissions', requirePermissions, asyncHandler(privateRoute));
-router.post('/private/permissions', requirePermissions, asyncHandler(privateRoute));
+router.post('/private/permissions', requirePermissions('read', 'data'), asyncHandler(privateRoute));
 
 //Example of authenticated and permissions route
-router.get('/private/authpermissions', requireAuth, requirePermissions, asyncHandler(privateRoute));
+router.get(
+  '/private/authpermissions',
+  requireAuth,
+  requirePermissions('read', 'data'),
+  asyncHandler(privateRoute)
+);
 
 /* 
-    DO NOT MODIFY is using AWS, '/health' is used by AWS Fargate 
+    DO NOT MODIFY. Used by AWS. '/health' is used by AWS Fargate 
     to run a health check and determine when to 
     launch a new container. 
 */

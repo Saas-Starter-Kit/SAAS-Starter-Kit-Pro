@@ -1,19 +1,18 @@
 import { buildAbilityFor } from '../Config/permissions.js';
 
-export const requirePermissions = (req, res, next) => {
-  let userAction = req.body.userAction || req.query.userAction;
-  let subject = req.body.subject || req.query.subject;
+export const requirePermissions = (action, subject) => {
+  return (req, res, next) => {
+    if (!req.ability.can(action, subject)) {
+      let error = {
+        type: '403 Forbidden',
+        message: 'User does not have access to this resource'
+      };
 
-  if (!req.ability.can(userAction, subject)) {
-    let error = {
-      type: '403 Forbidden',
-      message: 'User does not have access to this resource'
-    };
-
-    res.status(403).send(error);
-  } else {
-    next();
-  }
+      res.status(403).send(error);
+    } else {
+      next();
+    }
+  };
 };
 
 export const createPermissions = (req, _, next) => {
