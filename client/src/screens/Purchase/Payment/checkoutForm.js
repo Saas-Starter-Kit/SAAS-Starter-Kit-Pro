@@ -8,6 +8,7 @@ import { Spin } from 'antd';
 
 import OrgContext from '../../../utils/orgContext';
 import ApiContext from '../../../utils/apiContext';
+import AuthContext from '../../../utils/authContext';
 import axios from '../../../services/axios';
 import { colors, breakpoints } from '../../../styles/theme';
 
@@ -125,6 +126,9 @@ const CheckoutForm = () => {
   const { id, stripe_customer_id, primary_email, org_name } = orgState;
   const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
   const { isLoading } = apiState;
+  const { authState } = useContext(AuthContext);
+  let token = authState?.user.jwt_token;
+  const headers = { Authorization: `Bearer ${token}` };
 
   let plan = location.state?.plan;
   let price = location.state?.price;
@@ -160,8 +164,6 @@ const CheckoutForm = () => {
     let wallet = await axios.get('/stripe/get-wallet', { params }).catch((err) => {
       fetchFailure(err);
     });
-
-    console.log(wallet);
 
     const cards = wallet.data.data;
     setPayCards(cards);
@@ -229,7 +231,7 @@ const CheckoutForm = () => {
 
     let data = { subscription_id, planSelect, payment_method, subscription_item, planType, email };
 
-    await axios.put('/stripe/update-subscription', data).catch((err) => {
+    await axios.put('/stripe/update-subscription', data, { headers }).catch((err) => {
       fetchFailure(err);
     });
 
@@ -248,7 +250,7 @@ const CheckoutForm = () => {
     let data = { payment_method, customer, email, planSelect, org_id, planType };
 
     //create subscription
-    let result = await axios.post('/stripe/create-subscription', data).catch((err) => {
+    let result = await axios.post('/stripe/create-subscription', data, { headers }).catch((err) => {
       fetchFailure(err);
     });
 

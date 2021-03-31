@@ -3,6 +3,7 @@ import { navigate } from 'gatsby';
 import { Spin } from 'antd';
 import OrgContext from '../../../../utils/orgContext';
 import ApiContext from '../../../../utils/apiContext';
+import AuthContext from '../../../../utils/authContext';
 import axios from '../../../../services/axios';
 
 import SEO from '../../../../components/Marketing/Layout/seo';
@@ -50,11 +51,14 @@ const StyledIcon = styled(FcHighPriority)`
 
 const OrgSettings = ({ org_id }) => {
   const { orgState } = useContext(OrgContext);
-  const { org_name, stripe_customer_id } = orgState;
+  const { org_name, stripe_customer_id, role } = orgState;
   const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
+  const { authState } = useContext(AuthContext);
   const { isLoading } = apiState;
   const [orgName, setOrgName] = useState();
   const [isModal, setModal] = useState(false);
+  let token = authState?.user.jwt_token;
+  const headers = { Authorization: `Bearer ${token}` };
 
   /* eslint-disable */
   useEffect(() => {
@@ -69,7 +73,7 @@ const OrgSettings = ({ org_id }) => {
     let org_name = event.target.org_name.value;
     let data = { org_id, org_name };
 
-    await axios.put('/api/org', data).catch((err) => {
+    await axios.put('/api/org', data, { headers }).catch((err) => {
       fetchFailure(err);
     });
 
@@ -83,9 +87,9 @@ const OrgSettings = ({ org_id }) => {
   const deleteOrg = async () => {
     setModal(false);
     fetchInit();
-    let params = { org_id, stripe_customer_id };
+    let params = { org_id, stripe_customer_id, role };
 
-    await axios.delete('/api/org', { params }).catch((err) => {
+    await axios.delete('/api/org', { params, headers }).catch((err) => {
       fetchFailure(err);
     });
 

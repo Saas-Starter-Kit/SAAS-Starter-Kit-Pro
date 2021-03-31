@@ -2,6 +2,7 @@ import express from 'express';
 const router = express.Router();
 
 import { asyncHandler } from '../Middleware/asyncErrorHandler.js';
+import { requireAuth } from '../Middleware/auth.js';
 import {
   updateEmail,
   updateUsername,
@@ -18,10 +19,10 @@ router.post('/login', asyncHandler(Login));
 router.post('/create-user', asyncHandler(CreateUser));
 
 //update username
-router.put('/put/username', asyncHandler(updateUsername));
+router.put('/put/username', requireAuth, asyncHandler(updateUsername));
 
 //update email
-router.put('/put/email', asyncHandler(updateEmail));
+router.put('/put/email', requireAuth, asyncHandler(updateEmail));
 
 /*
 JWT is sessionless, so logout only needs to be implemented

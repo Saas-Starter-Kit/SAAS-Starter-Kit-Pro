@@ -35,6 +35,8 @@ const TeamApps = () => {
   const { authState } = useContext(AuthContext);
   const { fetchFailure, fetchInit, fetchSuccess } = useContext(ApiContext);
   const [teamApps, setTeamApps] = useState([]);
+  let token = authState?.user.jwt_token;
+  const headers = { Authorization: `Bearer ${token}` };
 
   /* eslint-disable */
   useEffect(() => {
@@ -52,7 +54,7 @@ const TeamApps = () => {
       user_id
     };
 
-    const result = await axios.get(`/api/org`, { params }).catch((err) => {
+    const result = await axios.get(`/api/org`, { params, headers }).catch((err) => {
       fetchFailure(err);
     });
 

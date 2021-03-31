@@ -21,6 +21,8 @@ const ReadUpdate = ({ org_id }) => {
   const { authState } = useContext(AuthContext);
   const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
   const { isLoading } = apiState;
+  let token = authState?.user.jwt_token;
+  const headers = { Authorization: `Bearer ${token}` };
 
   const [todos, setTodos] = useState([]);
 
@@ -41,7 +43,7 @@ const ReadUpdate = ({ org_id }) => {
 
     let params = { org_id };
 
-    let result = await axios.get(`/api/get/todos`, { params }).catch((err) => {
+    let result = await axios.get(`/api/get/todos`, { params, headers }).catch((err) => {
       fetchFailure(err);
     });
 
@@ -54,7 +56,7 @@ const ReadUpdate = ({ org_id }) => {
     let todo_id = todo.id;
 
     let params = { todo_id };
-    await axios.delete(`/api/delete/todo`, { params }).catch((err) => {
+    await axios.delete(`/api/delete/todo`, { params, headers }).catch((err) => {
       fetchFailure(err);
     });
 
@@ -73,7 +75,7 @@ const ReadUpdate = ({ org_id }) => {
     let todo_id = todo.id;
 
     let data = { title, description, author, todo_id };
-    await axios.put(`/api/put/todo`, data).catch((err) => {
+    await axios.put(`/api/put/todo`, data, { headers }).catch((err) => {
       fetchFailure(err);
     });
 

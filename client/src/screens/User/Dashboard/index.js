@@ -81,6 +81,8 @@ const Dashboard = () => {
   const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
   const { isLoading } = apiState;
   const [orgs, setOrgs] = useState([]);
+  let token = authState?.user.jwt_token;
+  const headers = { Authorization: `Bearer ${token}` };
 
   /* eslint-disable */
   useEffect(() => {
@@ -97,7 +99,7 @@ const Dashboard = () => {
       user_id
     };
 
-    const result = await axios.get(`/api/org`, { params }).catch((err) => {
+    const result = await axios.get(`/api/org`, { params, headers }).catch((err) => {
       fetchFailure(err);
     });
     console.log(result);
@@ -123,7 +125,7 @@ const Dashboard = () => {
       user_id
     };
 
-    await axios.post(`/api/org`, data).catch((err) => {
+    await axios.post(`/api/org`, data, { headers }).catch((err) => {
       fetchFailure(err);
     });
 

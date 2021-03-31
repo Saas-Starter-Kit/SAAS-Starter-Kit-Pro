@@ -10,9 +10,6 @@ import Can from '../../../services/casl';
 
 import Button from '../../../components/Common/buttons/SecondaryButton';
 import Card from '../../../components/Common/Card';
-import FieldLabel from '../../../components/Common/forms/FieldLabel';
-import TextInput from '../../../components/Common/forms/TextInput';
-import InputWrapper from '../../../components/Common/forms/TextInputWrapper';
 
 const Permissions = () => {
   const ability = useContext(CaslContext);

@@ -98,7 +98,7 @@ export const Login = async (req, res) => {
   res.send({ token: setToken(user_id) });
 };
 
-export const updateUsername = async (req, res, next) => {
+export const updateUsername = async (req, res) => {
   let id = req.body.id;
   let username = req.body.username;
   let email = req.body.curEmail;

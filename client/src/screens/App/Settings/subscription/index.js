@@ -35,6 +35,8 @@ const SubscriptionSettings = ({ org_id }) => {
   const { id, stripe_customer_id, primary_email, subscription_id } = orgState;
   const { fetchFailure, fetchSuccess, apiState } = useContext(ApiContext);
   const { isLoading } = apiState;
+  let token = authState?.user.jwt_token;
+  const headers = { Authorization: `Bearer ${token}` };
 
   const [isModalSub, setModalSub] = useState(false);
 
@@ -68,9 +70,11 @@ const SubscriptionSettings = ({ org_id }) => {
   const getSubscription = async () => {
     let params = { subscription_id };
 
-    const subscription = await axios.get('/stripe/get-subscription', { params }).catch((err) => {
-      fetchFailure(err);
-    });
+    const subscription = await axios
+      .get('/stripe/get-subscription', { params, headers })
+      .catch((err) => {
+        fetchFailure(err);
+      });
 
     if (subscription.data.plan) setSubscription(subscription.data);
   };
@@ -83,7 +87,7 @@ const SubscriptionSettings = ({ org_id }) => {
       org_id: id
     };
 
-    await axios.post('/stripe/cancel-subscription', data).catch((err) => {
+    await axios.post('/stripe/cancel-subscription', data, { headers }).catch((err) => {
       fetchFailure(err);
     });
 

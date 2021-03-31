@@ -38,6 +38,8 @@ const CreateTask = ({ org_id }) => {
   const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
   const { isLoading } = apiState;
   const { authState } = useContext(AuthContext);
+  let token = authState?.user.jwt_token;
+  const headers = { Authorization: `Bearer ${token}` };
 
   const postTodo = async (event) => {
     event.preventDefault();
@@ -48,7 +50,7 @@ const CreateTask = ({ org_id }) => {
     let description = event.target.description.value;
     let data = { title, description, author, org_id };
 
-    await axios.post(`/api/post/todo`, data).catch((err) => {
+    await axios.post(`/api/post/todo`, data, { headers }).catch((err) => {
       fetchFailure(err);
     });
 

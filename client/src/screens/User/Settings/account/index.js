@@ -22,6 +22,8 @@ const AccountSettings = () => {
   const { authState } = useContext(AuthContext);
   const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
   const { isLoading } = apiState;
+  let token = authState?.user.jwt_token;
+  const headers = { Authorization: `Bearer ${token}` };
 
   //user state
   const [id, setId] = useState();
@@ -62,10 +64,9 @@ const AccountSettings = () => {
     fetchInit();
     let curEmail = authState.user.email;
 
-    console.log(id);
     const data = { id, username, curEmail };
 
-    await axios.put(`/auth/put/username`, data).catch((err) => {
+    await axios.put(`/auth/put/username`, data, { headers }).catch((err) => {
       fetchFailure(err);
     });
 
@@ -78,7 +79,7 @@ const AccountSettings = () => {
     let oldEmail = authState.user.email;
 
     const data = { id, email, oldEmail };
-    await axios.put(`/auth/put/email`, data).catch((err) => {
+    await axios.put(`/auth/put/email`, data, { headers }).catch((err) => {
       fetchFailure(err);
     });
 

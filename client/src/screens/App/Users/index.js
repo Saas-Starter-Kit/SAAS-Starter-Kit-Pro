@@ -11,6 +11,7 @@ import Can from '../../../services/casl';
 import axios from '../../../services/axios';
 import AuthContext from '../../../utils/authContext';
 import ApiContext from '../../../utils/apiContext';
+import OrgContext from '../../../utils/orgContext';
 
 import Button from '../../../components/Common/buttons/SecondaryButton';
 import Card from '../../../components/Common/Card';
@@ -41,19 +42,16 @@ const RemoveUserButton = styled.button`
   border: none;
 `;
 
-const dummyData = [
-  { email: 'email1@example.com', username: 'username1', role: 'admin' },
-  { email: 'email2@example.com', username: 'username2', role: 'user' },
-  { email: 'email3@example.com', username: 'username3', role: 'user' }
-];
-
 const Users = ({ org_id }) => {
   const { authState } = useContext(AuthContext);
   const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
+  const { role } = useContext(AuthContext);
   const { isLoading } = apiState;
   const data = useStaticQuery(staticQuery);
   const domainUrl = data.site.siteMetadata.siteUrl;
   const [appUsers, setUsers] = useState();
+  let token = authState?.user.jwt_token;
+  const headers = { Authorization: `Bearer ${token}` };
 
   const handleSubmit = async (values) => {
     fetchInit();
@@ -62,7 +60,7 @@ const Users = ({ org_id }) => {
     let recipient_email = values.email;
 
     let data = { domainUrl, recipient_email, sender_email, sender_display_name, org_id };
-    await axios.post('/api/users/invite', data).catch((err) => {
+    await axios.post('/api/users/invite', data, { headers }).catch((err) => {
       fetchFailure(err);
     });
 
@@ -74,7 +72,7 @@ const Users = ({ org_id }) => {
     fetchInit();
 
     let params = { org_id };
-    let result = await axios.get('/api/get/app-users', { params }).catch((err) => {
+    let result = await axios.get('/api/get/app-users', { params, headers }).catch((err) => {
       fetchFailure(err);
     });
 
@@ -83,11 +81,9 @@ const Users = ({ org_id }) => {
   };
 
   const removeUserRole = async (role_id) => {
-    let params = { role_id };
+    let params = { role_id, role };
 
-    console.log(role_id);
-
-    await axios.delete('/api/delete/role', { params }).catch((err) => {
+    await axios.delete('/api/delete/role', { params, headers }).catch((err) => {
       fetchFailure(err);
     });
 

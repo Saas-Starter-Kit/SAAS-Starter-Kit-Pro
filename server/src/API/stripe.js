@@ -2,6 +2,7 @@ import express from 'express';
 const router = express.Router();
 
 import { asyncHandler } from '../Middleware/asyncErrorHandler.js';
+import { requireAuth } from '../Middleware/auth.js';
 
 import {
   CreateSetupIntent,
@@ -27,12 +28,12 @@ router.post('/remove-payment', asyncHandler(RemovePaymentMethod));
 router.post('/attach-payment', asyncHandler(AttachPaymentMethod));
 
 /* Subscription Routes */
-router.get('/get-subscription', asyncHandler(GetSubscription));
+router.get('/get-subscription', requireAuth, asyncHandler(GetSubscription));
 
-router.post('/create-subscription', asyncHandler(CreateSubscription));
+router.post('/create-subscription', requireAuth, asyncHandler(CreateSubscription));
 
-router.post('/cancel-subscription', asyncHandler(CancelSubscription));
+router.post('/cancel-subscription', requireAuth, asyncHandler(CancelSubscription));
 
-router.put('/update-subscription', asyncHandler(UpdateSubscription));
+router.put('/update-subscription', requireAuth, asyncHandler(UpdateSubscription));
 
 export default router;

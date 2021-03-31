@@ -147,6 +147,8 @@ const ConfirmedEmail = () => {
     setLoading(true);
     let org_name = event.target.org_name.value;
     let role = 'admin';
+    let token = jwt_token;
+    const headers = { Authorization: `Bearer ${token}` };
 
     let data = {
       email,
@@ -155,7 +157,7 @@ const ConfirmedEmail = () => {
       role
     };
 
-    await axios.post('/api/org', data).catch((err) => {
+    await axios.post('/api/org', data, { headers }).catch((err) => {
       fetchFailure(err);
     });
 
