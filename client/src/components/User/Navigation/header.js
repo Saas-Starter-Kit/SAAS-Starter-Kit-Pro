@@ -163,7 +163,7 @@ const ListItemMeta = styled(List.Item.Meta)`
 
 const MobileHeader = ({ mobileMenuHandler }) => {
   const { authState } = useContext(AuthContext);
-  const photo = authState.user ? authState.user.photo : null;
+  const photo = authState.user.id ? authState.user.photo : null;
   const [avatarMenu, toggleAvatarMenu] = useState(false);
   const avatarMenuHandler = () => (avatarMenu ? toggleAvatarMenu(false) : toggleAvatarMenu(true));
 

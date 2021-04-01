@@ -33,7 +33,7 @@ const AccountSettings = () => {
 
   /* eslint-disable */
   useEffect(() => {
-    if (authState.user) {
+    if (authState.user.id) {
       setUser();
     }
   }, [authState]);

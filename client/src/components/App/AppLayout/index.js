@@ -67,7 +67,7 @@ const Layout = ({ children, org_id }) => {
   const [isDesktopMenuCollapsed, toggleIsDesktopMenuCollapsed] = useState(false);
 
   useEffect(() => {
-    if (authState.user) setUsername(authState.user.username);
+    if (authState.user.id) setUsername(authState.user.username);
   }, [authState]);
 
   const mobileMenuHandler = () =>
