@@ -2,7 +2,7 @@
   "name": "aws_fargate",
   "version": "0.1.0",
   "bin": {
-    "aws fargate api server test": "bin/aws_fargate_api_server_test.js"
+    "aws fargate api server test": "bin/aws_fargate_api_server.js"
   },
   "scripts": {
     "build": "tsc",
@@ -11,7 +11,7 @@
     "cdk": "cdk"
   },
   "devDependencies": {
-    "@aws-cdk/assert": "1.90.0",
+    "@aws-cdk/assert": "1.95.1",
     "@types/jest": "^26.0.10",
     "@types/node": "10.17.27",
     "jest": "^26.4.2",
@@ -21,14 +21,14 @@
     "typescript": "~3.9.7"
   },
   "dependencies": {
-    "@aws-cdk/core": "1.90.0",
-    "@aws-cdk/aws-ec2": "^1.90.0",
-    "@aws-cdk/aws-ecr-assets": "^1.90.0",
-    "@aws-cdk/aws-ecs": "^1.90.0",
-    "@aws-cdk/aws-ecs-patterns": "^1.90.0",
-    "@aws-cdk/aws-iam": "^1.90.0",
-    "@aws-cdk/aws-rds": "^1.90.0",
-    "@aws-cdk/aws-secretsmanager": "^1.90.0",
+    "@aws-cdk/core": "1.95.1",
+    "@aws-cdk/aws-ec2": "^1.95.1",
+    "@aws-cdk/aws-ecr-assets": "^1.95.1",
+    "@aws-cdk/aws-ecs": "^1.95.1",
+    "@aws-cdk/aws-ecs-patterns": "^1.95.1",
+    "@aws-cdk/aws-iam": "^1.95.1",
+    "@aws-cdk/aws-rds": "^1.95.1",
+    "@aws-cdk/aws-secretsmanager": "^1.95.1",
     "dotenv": "^8.2.0",
     "path": "^0.12.7",
     "source-map-support": "^0.5.16"
