@@ -41,6 +41,9 @@ export class CICDStack extends cdk.Stack {
 
     const project = new codebuild.PipelineProject(this, 'MyProject', {
       buildSpec: codebuild.BuildSpec.fromSourceFilename('client/buildspec.yml'),
+      environment: {
+        buildImage: codebuild.LinuxBuildImage.AMAZON_LINUX_2_3
+      },
       environmentVariables: {
         GATSBY_SERVER_URL: { value: process.env.GATSBY_SERVER_URL },
 
