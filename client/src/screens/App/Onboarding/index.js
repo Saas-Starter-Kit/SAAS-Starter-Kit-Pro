@@ -1,8 +1,15 @@
 import React, { useState } from 'react';
-import Tour from 'reactour';
+//import Tour from 'reactour';
 import styled from 'styled-components';
 import PrimaryButton from '../../../components/Common/buttons/PrimaryButton';
 import DoneButton from '../../../components/Common/buttons/CancelButton';
+import Loadable from 'react-loadable';
+
+//solves reactour ssr issue
+const Tour = Loadable({
+  loader: () => import('reactour'),
+  loading: () => null
+});
 
 const StyledStep = styled.div`
   margin: 8rem;
