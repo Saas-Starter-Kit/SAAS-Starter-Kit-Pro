@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 import OrgContext from '../../../../utils/orgContext';
 import ApiContext from '../../../../utils/apiContext';
+import AuthContext from '../../../../utils/AuthContext';
 import axios from '../../../../services/axios';
 
 import SEO from '../../../../components/Marketing/Layout/seo';
@@ -35,6 +36,7 @@ const SubscriptionSettings = ({ org_id }) => {
   const { id, stripe_customer_id, primary_email, subscription_id } = orgState;
   const { fetchFailure, fetchSuccess, apiState } = useContext(ApiContext);
   const { isLoading } = apiState;
+  const { authState } = useContext(AuthContext);
   let token = authState?.user.jwt_token;
   const headers = { Authorization: `Bearer ${token}` };
 
