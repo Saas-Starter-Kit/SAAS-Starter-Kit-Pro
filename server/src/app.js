@@ -9,7 +9,6 @@ import './Database/mongo/db.js';
 import './Database/sql/db.js';
 
 import cors from 'cors';
-import { urlencoded, json } from 'body-parser';
 import morgan from 'morgan';
 
 import limiter from './Middleware/rateLimiter.js';
@@ -35,8 +34,8 @@ app.use('/stripe', stripeWebhook);
 app.use(cors());
 app.use(limiter);
 app.use(morgan('dev'));
-app.use(urlencoded({ extended: true }));
-app.use(json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(createPermissions);
 
 //API routes

@@ -2,7 +2,7 @@
   "name": "aws_cdk_ec2_rds",
   "version": "0.1.0",
   "bin": {
-    "aws_cdk_ec2_rds": "bin/aws_cicd.js"
+    "aws_cicd_stack": "bin/aws_cicd_stack.ts"
   },
   "scripts": {
     "build": "tsc",
@@ -21,16 +21,16 @@
     "typescript": "^4.1.5"
   },
   "dependencies": {
-    "@aws-cdk/aws-cloudfront": "^1.90.0",
-    "@aws-cdk/aws-cloudfront-origins": "^1.90.0",
-    "@aws-cdk/aws-codebuild": "^1.90.0",
-    "@aws-cdk/aws-codedeploy": "^1.90.0",
-    "@aws-cdk/aws-codepipeline": "^1.90.0",
-    "@aws-cdk/aws-codepipeline-actions": "^1.90.0",
-    "@aws-cdk/aws-iam": "^1.90.0",
-    "@aws-cdk/aws-s3": "^1.90.0",
-    "@aws-cdk/aws-secretsmanager": "^1.90.0",
-    "@aws-cdk/core": "^1.90.0",
+    "@aws-cdk/aws-cloudfront": "^1.95.1",
+    "@aws-cdk/aws-cloudfront-origins": "^1.95.1",
+    "@aws-cdk/aws-codebuild": "^1.95.1",
+    "@aws-cdk/aws-codedeploy": "^1.95.1",
+    "@aws-cdk/aws-codepipeline": "^1.95.1",
+    "@aws-cdk/aws-codepipeline-actions": "^1.95.1",
+    "@aws-cdk/aws-iam": "^1.95.1",
+    "@aws-cdk/aws-s3": "^1.95.1",
+    "@aws-cdk/aws-secretsmanager": "^1.95.1",
+    "@aws-cdk/core": "^1.95.1",
     "dotenv": "^8.2.0",
     "source-map-support": "^0.5.19"
   }
