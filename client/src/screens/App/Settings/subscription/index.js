@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 import OrgContext from '../../../../utils/orgContext';
 import ApiContext from '../../../../utils/apiContext';
-import AuthContext from '../../../../utils/AuthContext';
+import AuthContext from '../../../../utils/authContext';
 import axios from '../../../../services/axios';
 
 import SEO from '../../../../components/Marketing/Layout/seo';
