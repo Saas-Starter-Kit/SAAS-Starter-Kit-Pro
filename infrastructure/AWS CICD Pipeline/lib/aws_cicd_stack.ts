@@ -14,9 +14,11 @@ export class CICDStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
+    let githubsecretArn = process.env.GITHIB_SECRET_ARN;
+
     //Get Github access token
     const secretGithub = secretsmanager.Secret.fromSecretAttributes(this, 'ImportedSecret', {
-      secretArn: `arn:aws:secretsmanager:us-east-1:867137601660:secret:/github-access-token-NuotsR`
+      secretArn: githubsecretArn
     });
     const roleCodeBuild = new iam.Role(this, 'CodeBuildRole', {
       assumedBy: new iam.ServicePrincipal('codebuild.amazonaws.com')
