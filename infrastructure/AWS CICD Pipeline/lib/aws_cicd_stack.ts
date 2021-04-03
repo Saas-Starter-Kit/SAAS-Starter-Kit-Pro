@@ -7,6 +7,7 @@ import * as iam from '@aws-cdk/aws-iam';
 import * as s3 from '@aws-cdk/aws-s3';
 import * as cloudfront from '@aws-cdk/aws-cloudfront';
 import * as origins from '@aws-cdk/aws-cloudfront-origins';
+import * as acm from '@aws-cdk/aws-certificatemanager';
 
 require('dotenv').config();
 
@@ -14,11 +15,11 @@ export class CICDStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    let githubsecretArn = process.env.GITHIB_SECRET_ARN;
+    let githubsecretArn = process.env.GITHIB_SECRET_ARN ? process.env.GITHUB_SECRET_ARN : '';
 
     //Get Github access token
     const secretGithub = secretsmanager.Secret.fromSecretAttributes(this, 'ImportedSecret', {
-      secretArn: githubsecretArn
+      secretArn: `arn:aws:secretsmanager:us-east-1:867137601660:secret:/github-access-token-NuotsR`
     });
     const roleCodeBuild = new iam.Role(this, 'CodeBuildRole', {
       assumedBy: new iam.ServicePrincipal('codebuild.amazonaws.com')
@@ -96,8 +97,14 @@ export class CICDStack extends cdk.Stack {
       input: buildOutput
     });
 
+    //AWS acm
+    let certifcateArn = process.env.CERT_ARN ? process.env.CERT_ARN : '';
+    const certificate = acm.Certificate.fromCertificateArn(this, 'Certificate', certifcateArn);
+
     new cloudfront.Distribution(this, 'myDist', {
-      defaultBehavior: { origin: new origins.S3Origin(outputBucket) }
+      defaultBehavior: { origin: new origins.S3Origin(outputBucket) },
+      certificate,
+      domainNames: ['www.saasstarterkit.com']
     });
 
     //complete pipeline
