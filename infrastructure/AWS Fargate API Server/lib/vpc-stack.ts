@@ -13,7 +13,7 @@ export class VpcStack extends cdk.Stack {
 
     const vpc = new ec2.Vpc(this, 'VPC', {
       maxAzs: 3,
-      natGateways: 1
+      natGateways: 1 // delete Nat Gateway after deploy
     });
 
     this.VPC = vpc;

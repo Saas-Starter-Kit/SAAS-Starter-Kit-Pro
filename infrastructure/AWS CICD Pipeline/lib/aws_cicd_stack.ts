@@ -15,12 +15,14 @@ export class CICDStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    let githubsecretArn = process.env.GITHIB_SECRET_ARN ? process.env.GITHUB_SECRET_ARN : '';
-
     //Get Github access token
-    const secretGithub = secretsmanager.Secret.fromSecretAttributes(this, 'ImportedSecret', {
-      secretArn: `arn:aws:secretsmanager:us-east-1:867137601660:secret:/github-access-token-NuotsR`
-    });
+    let secretArn = process.env.GITHUB_SECRET_ARN ? process.env.GITHUB_SECRET_ARN : '';
+    const secretGithub = secretsmanager.Secret.fromSecretCompleteArn(
+      this,
+      'SecretFromCompleteArn',
+      secretArn
+    );
+
     const roleCodeBuild = new iam.Role(this, 'CodeBuildRole', {
       assumedBy: new iam.ServicePrincipal('codebuild.amazonaws.com')
     });
@@ -97,15 +99,20 @@ export class CICDStack extends cdk.Stack {
       input: buildOutput
     });
 
-    //AWS acm
-    let certifcateArn = process.env.CERT_ARN ? process.env.CERT_ARN : '';
-    const certificate = acm.Certificate.fromCertificateArn(this, 'Certificate', certifcateArn);
+    //AWS Certificate Manager
+    //Requires Setup in Console First
+    //See docs for more info
+    //let certifcateArn = process.env.CERT_ARN ? process.env.CERT_ARN : '';
+    //const certificate = acm.Certificate.fromCertificateArn(this, 'Certificate', certifcateArn);
 
-    new cloudfront.Distribution(this, 'myDist', {
-      defaultBehavior: { origin: new origins.S3Origin(outputBucket) },
-      certificate,
-      domainNames: ['www.saasstarterkit.com']
-    });
+    //new cloudfront.Distribution(this, 'myDist', {
+    //  defaultBehavior: {
+    //    origin: new origins.S3Origin(outputBucket),
+    //    viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS
+    //  },
+    //  certificate,
+    //  domainNames: ['www.example.com']
+    //});
 
     //complete pipeline
     new codepipeline.Pipeline(this, 'MyPipeline', {
