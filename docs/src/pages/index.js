@@ -1,11 +1,11 @@
 import React from 'react';
-import Layout from '../components/Layout';
-import Blog from '../screens/';
+import { Link } from 'gatsby';
+import '../styles/globals.css';
 
 export default function BlogPage() {
   return (
-    <Layout>
-      <Blog />
-    </Layout>
+    <div>
+      <Link to="/docs/overview">Go to Docs</Link>
+    </div>
   );
 }

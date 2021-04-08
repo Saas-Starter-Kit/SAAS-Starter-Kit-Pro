@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colors } from '../../styles/theme';
+import { colors } from '../styles/theme';
 
 export const BaseCard = styled.div`
   background-color: ${colors.white};

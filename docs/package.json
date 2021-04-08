@@ -2,6 +2,8 @@
   "name": "saas-starter-kit",
   "description": "Saas Starterkit Blog",
   "dependencies": {
+    "@ant-design/icons": "^4.6.2",
+    "antd": "^4.15.0",
     "babel-plugin-styled-components": "^1.12.0",
     "dotenv": "^8.2.0",
     "gatsby": "^3.2.1",

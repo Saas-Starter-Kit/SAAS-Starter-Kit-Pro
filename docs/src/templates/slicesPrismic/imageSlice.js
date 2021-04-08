@@ -1,5 +1,5 @@
 import React from 'react';
-import { BaseCard } from '../../components/Blog/cards';
+import { BaseCard } from '../../components/cards';
 
 const Image = ({ slice }) => {
   const desktop = slice.primary.image.thumbnails.desktop;

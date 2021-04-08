@@ -3,12 +3,12 @@ import { graphql } from 'gatsby';
 import styled from 'styled-components';
 import { Drawer } from 'antd';
 
-import SEO from '../components/Marketing/Layout/seo';
+import SEO from '../components/Layout/seo';
 import { breakpoints } from '../styles/theme';
-import Menu from '../components/Marketing/svgs/BurgerIcon';
+import Menu from '../components/svgs/BurgerIcon';
 
 import SliceZone from './sliceZone';
-import DocsSidebar from '../screens/Marketing/Docs/docsSidebar';
+import DocsSidebar from '../screens/docsSidebar';
 
 const Wrapper = styled.div`
   display: flex;
