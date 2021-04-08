@@ -1,0 +1,179 @@
+{
+  "Main": {
+    "uid": {
+      "type": "UID",
+      "config": {
+        "label": "uid"
+      }
+    },
+    "title": {
+      "type": "StructuredText",
+      "config": {
+        "single": "heading1",
+        "label": "title"
+      }
+    },
+    "author": {
+      "type": "StructuredText",
+      "config": {
+        "single": "heading1, heading2, heading3, heading4, heading5, heading6",
+        "label": "author"
+      }
+    },
+    "date": {
+      "type": "Timestamp",
+      "config": {
+        "label": "date"
+      }
+    },
+    "related_article1": {
+      "type": "Link",
+      "config": {
+        "select": "document",
+        "customtypes": ["post"],
+        "label": "related_article1"
+      }
+    },
+    "related_article2": {
+      "type": "Link",
+      "config": {
+        "select": "document",
+        "customtypes": ["post"],
+        "label": "related_article2"
+      }
+    },
+    "hero_image": {
+      "type": "Image",
+      "config": {
+        "constraint": {},
+        "thumbnails": [
+          {
+            "name": "thumbnail",
+            "width": 200,
+            "height": 300
+          },
+          {
+            "name": "desktop",
+            "width": 1200,
+            "height": 800
+          },
+          {
+            "name": "mobile",
+            "width": 300,
+            "height": 400
+          },
+          {
+            "name": "Table",
+            "width": 600,
+            "height": 800
+          }
+        ],
+        "label": "hero_image"
+      }
+    },
+    "body": {
+      "type": "Slices",
+      "fieldset": "Slice zone",
+      "config": {
+        "labels": {
+          "code": [
+            {
+              "name": "code",
+              "display": "code"
+            }
+          ],
+          "image1": [],
+          "quote": [],
+          "content": [],
+          "fullwidthimage": [],
+          "relatedarticles": []
+        },
+        "choices": {
+          "code": {
+            "type": "Slice",
+            "fieldset": "code",
+            "description": "code",
+            "icon": "code",
+            "display": "list",
+            "non-repeat": {
+              "code": {
+                "type": "StructuredText",
+                "config": {
+                  "multi": "preformatted",
+                  "label": "code"
+                }
+              }
+            },
+            "repeat": {}
+          },
+          "content": {
+            "type": "Slice",
+            "fieldset": "content",
+            "description": "content",
+            "icon": "content_copy",
+            "display": "list",
+            "non-repeat": {
+              "content": {
+                "type": "StructuredText",
+                "config": {
+                  "multi": "paragraph, preformatted, heading1, heading2, heading3, heading4, heading5, heading6, strong, em, hyperlink, image, embed, list-item, o-list-item, rtl",
+                  "label": "content"
+                }
+              }
+            },
+            "repeat": {}
+          },
+          "quote": {
+            "type": "Slice",
+            "fieldset": "quote",
+            "description": "quote",
+            "icon": "format_quote",
+            "display": "list",
+            "non-repeat": {
+              "quote": {
+                "type": "StructuredText",
+                "config": {
+                  "multi": "paragraph",
+                  "label": "quote"
+                }
+              }
+            },
+            "repeat": {}
+          },
+          "fullwidthimage": {
+            "type": "Slice",
+            "fieldset": "fullWidthimage",
+            "description": "fullWidthimage",
+            "icon": "image",
+            "display": "list",
+            "non-repeat": {
+              "image": {
+                "type": "Image",
+                "config": {
+                  "constraint": {
+                    "width": null,
+                    "height": null
+                  },
+                  "thumbnails": [
+                    {
+                      "name": "mobile",
+                      "width": 600,
+                      "height": 200
+                    },
+                    {
+                      "name": "desktop",
+                      "width": 800,
+                      "height": 300
+                    }
+                  ],
+                  "label": "image"
+                }
+              }
+            },
+            "repeat": {}
+          }
+        }
+      }
+    }
+  }
+}
