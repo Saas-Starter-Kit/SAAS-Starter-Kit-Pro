@@ -1,5 +1,7 @@
-const queries = require('./src/utils/algoliaQuery');
 require('dotenv').config();
+
+//disable sentry for development
+const sentryDSN = process.env.NODE_ENV == 'development' ? '' : process.env.GATSBY_SENTRY_DNS;
 
 module.exports = {
   siteMetadata: {
@@ -43,34 +45,10 @@ module.exports = {
       }
     },
     {
-      resolve: `gatsby-source-prismic`,
-      options: {
-        repositoryName: process.env.GATSBY_PRISMIC_REPO_NAME,
-        schemas: {
-          post: require('./.prismic/post.json'),
-          docs: require('./.prismic/docs.json')
-        }
-      }
-    },
-    {
       resolve: '@sentry/gatsby',
       options: {
         dsn: sentryDSN,
         sampleRate: 1
-      }
-    },
-    {
-      resolve: `gatsby-plugin-algolia`,
-      options: {
-        appId: process.env.GATSBY_ALGOLIA_APP_ID,
-        apiKey: process.env.GATSBY_ALGOLIA_ADMIN_KEY,
-        queries
-      }
-    },
-    {
-      resolve: `gatsby-plugin-disqus`,
-      options: {
-        shortname: process.env.GATSBY_DISQUS_SHORTNAME
       }
     }
   ]
