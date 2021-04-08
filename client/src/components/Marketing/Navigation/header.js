@@ -188,12 +188,6 @@ const Header = () => {
         <Link className="header_link" activeClassName="header_active_link" to="/pricing">
           Pricing
         </Link>
-        <Link className="header_link" activeClassName="header_active_link" to="/blog">
-          Blog
-        </Link>
-        <Link className="header_link" activeClassName="header_active_link" to="/docs/overview">
-          Docs
-        </Link>
       </Nav>
       <ButtonWrapper>
         <Link to="/auth/login">
