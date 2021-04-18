@@ -1,5 +1,5 @@
-import { loadStripe } from "@stripe/stripe-js"
+import { loadStripe } from '@stripe/stripe-js';
 
-const stripeConfig = loadStripe(process.env.GATSBY_STRIPE_PUBLIC_KEY)
+const stripeConfig = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY);
 
-export default stripeConfig
+export default stripeConfig;
