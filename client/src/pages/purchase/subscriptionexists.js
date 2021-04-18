@@ -1,7 +1,7 @@
 import React from 'react';
-import { SubscriptionExists } from '../screens/Purchase';
-import SEO from '../components/Marketing/Layout/seo';
-import AltHeader from '../components/Purchase/Navigation/altHeader';
+import { SubscriptionExists } from '../../screens/Purchase';
+import SEO from '../../components/Marketing/Layout/seo';
+import AltHeader from '../../components/Purchase/Navigation/altHeader';
 
 const SubscriptionExistsPage = () => {
   const seoData = {

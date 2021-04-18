@@ -48,7 +48,7 @@ const CheckAuth = () => {
     } else if (!id) {
       setNullOrg(true);
     } else if (subscription_id) {
-      router.push('/subscriptionexists');
+      router.push('/purchase/subscriptionexists');
     } else {
       router.push('/purchase/plan');
     }
