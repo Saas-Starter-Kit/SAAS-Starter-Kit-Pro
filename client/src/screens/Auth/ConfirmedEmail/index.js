@@ -59,8 +59,7 @@ const ConfirmedEmail = () => {
   const { isLoading } = apiState;
 
   //extract query params
-  // TODO: this should be obtainable from location.query, but might need some next config?
-  const query = location.asPath.replace(location.pathname, '');
+  const query = location.asPath;
   const queryParams = query.split('=');
   const verify_key = queryParams[1].split('&')[0];
   const isInviteFlow = queryParams[2].split('&')[0];

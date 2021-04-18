@@ -1,5 +1,4 @@
 import jwt_decode from 'jwt-decode';
-import { useRouter } from 'next/router';
 import * as Yup from 'yup';
 import axios from '../../services/axios';
 import { setAnalyticsUserId, sendEventToAnalytics } from '../../services/analytics';
@@ -10,9 +9,9 @@ export const LoginAuth = async (
   firebase,
   fetchFailure,
   isInviteFlow,
-  invite_key
+  invite_key,
+  router
 ) => {
-  const router = useRouter();
   //Get Auth id token from Firebase
   let token = await firebase
     .auth()
@@ -66,9 +65,9 @@ export const SignupAuth = async (
   name,
   domainUrl,
   isInviteFlow,
-  invite_key
+  invite_key,
+  router
 ) => {
-  const router = useRouter();
   // If user signed up with email, then set their display username
   const isEmailSignup = authRes.additionalUserInfo.providerId === 'password';
   if (isEmailSignup && name) {

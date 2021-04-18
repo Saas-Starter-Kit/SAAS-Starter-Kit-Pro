@@ -39,16 +39,16 @@ const Signup = () => {
 
   /* eslint-disable */
   //extract data from query params
-  useEffect(() => {
-    // TODO: this should be obtainable from location.query, but might need some next config?
-    const query = location.asPath.replace(location.pathname, '');
-    const queryParams = query.split('=');
+  //useEffect(() => {
+  //  // TODO: this should be obtainable from location.query, but might need some next config?
+  //  const query = location.asPath.replace(location.pathname, '');
+  //  const queryParams = query.split('=');
 
-    if (queryParams[1]) {
-      setInviteFlow(queryParams[1].split('&')[0]);
-      setInviteKey(queryParams[2]);
-    }
-  }, [location]);
+  //  if (queryParams[1]) {
+  //    setInviteFlow(queryParams[1].split('&')[0]);
+  //    setInviteKey(queryParams[2]);
+  //  }
+  //}, [location]);
 
   useEffect(() => {
     return () => fetchSuccess();
@@ -69,7 +69,16 @@ const Signup = () => {
         fetchFailure(error);
       });
 
-    SignupAuth(authRes, firebase, fetchFailure, username, domainUrl, isInviteFlow, invite_key);
+    SignupAuth(
+      authRes,
+      firebase,
+      fetchFailure,
+      username,
+      domainUrl,
+      isInviteFlow,
+      invite_key,
+      location
+    );
   };
 
   //Google OAuth2 Signin
@@ -85,7 +94,16 @@ const Signup = () => {
         fetchFailure(error);
       });
 
-    SignupAuth(authRes, firebase, fetchFailure, null, domainUrl, isInviteFlow, invite_key);
+    SignupAuth(
+      authRes,
+      firebase,
+      fetchFailure,
+      null,
+      domainUrl,
+      isInviteFlow,
+      invite_key,
+      location
+    );
   };
 
   const seoData = {
