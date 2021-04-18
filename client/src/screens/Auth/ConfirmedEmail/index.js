@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Link, navigate } from 'gatsby';
-import { useLocation } from '@reach/router';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
 import { Spin } from 'antd';
@@ -45,7 +45,7 @@ const CardText = styled.div`
 `;
 
 const ConfirmedEmail = () => {
-  const location = useLocation();
+  const location = useRouter();
 
   const [email, setEmail] = useState();
   const [user_id, setUserId] = useState();
@@ -59,7 +59,9 @@ const ConfirmedEmail = () => {
   const { isLoading } = apiState;
 
   //extract query params
-  const queryParams = location.search.split('=');
+  // TODO: this should be obtainable from location.query, but might need some next config?
+  const query = location.asPath.replace(location.pathname, '');
+  const queryParams = query.split('=');
   const verify_key = queryParams[1].split('&')[0];
   const isInviteFlow = queryParams[2].split('&')[0];
   const invite_key = queryParams[3];
@@ -165,7 +167,7 @@ const ConfirmedEmail = () => {
     let user = { id: user_id, username, jwt_token, email };
     await LogIn(user);
 
-    navigate('/user/dashboard');
+    location.push('/user/dashboard');
   };
 
   const seoData = {
@@ -185,7 +187,9 @@ const ConfirmedEmail = () => {
               <div>
                 <CardText>Click below to navigate to the app your were invited to</CardText>
                 <TextWrapper>
-                  <Link to={`/app/${org_id}/dashboard`}>Go to App</Link>
+                  <Link href={`/app/${org_id}/dashboard`}>
+                    <a>Go to App</a>
+                  </Link>
                 </TextWrapper>
               </div>
             ) : (

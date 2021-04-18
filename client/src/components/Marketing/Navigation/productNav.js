@@ -1,7 +1,7 @@
 import React from 'react';
-import { Link } from 'gatsby';
 import styled from 'styled-components';
 import { breakpoints } from '../../../styles/theme';
+import NavLink from './navLink';
 
 const Wrapper = styled.div`
   display: flex;
@@ -17,34 +17,10 @@ const ProductNav = () => {
   return (
     <Wrapper>
       <h1>Product</h1>
-      <Link
-        className="header_link_product"
-        activeClassName="header_link_product_active"
-        to="/product/page1"
-      >
-        Page1
-      </Link>
-      <Link
-        className="header_link_product"
-        activeClassName="header_link_product_active"
-        to="/product/page2"
-      >
-        Page2
-      </Link>
-      <Link
-        className="header_link_product"
-        activeClassName="header_link_product_active"
-        to="/product/page3"
-      >
-        Page3
-      </Link>
-      <Link
-        className="header_link_product"
-        activeClassName="header_link_product_active"
-        to="/product/page4"
-      >
-        Page4
-      </Link>
+      <NavLink link="/product/page1" text="Page1" />
+      <NavLink link="/product/page2" text="Page2" />
+      <NavLink link="/product/page3" text="Page3" />
+      <NavLink link="/product/page4" text="Page4" />
     </Wrapper>
   );
 };

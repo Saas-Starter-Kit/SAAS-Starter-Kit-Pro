@@ -1,11 +1,12 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { navigate } from 'gatsby';
+import { useRouter } from 'next/router';
 import { Spin } from 'antd';
 import OrgContext from '../../../../utils/orgContext';
 import ApiContext from '../../../../utils/apiContext';
 import AuthContext from '../../../../utils/authContext';
 import axios from '../../../../services/axios';
 
+import getOrgId from '../../../../utils/orgId';
 import SEO from '../../../../components/Marketing/Layout/seo';
 import styled from 'styled-components';
 
@@ -49,7 +50,9 @@ const StyledIcon = styled(FcHighPriority)`
   margin-top: 0.3rem;
 `;
 
-const OrgSettings = ({ org_id }) => {
+const OrgSettings = () => {
+  const org_id = getOrgId();
+  const router = useRouter();
   const { orgState } = useContext(OrgContext);
   const { org_name, stripe_customer_id, role } = orgState;
   const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
@@ -77,7 +80,7 @@ const OrgSettings = ({ org_id }) => {
       fetchFailure(err);
     });
 
-    navigate('/user');
+    router.push('/user');
   };
 
   const handleOrgChange = (event) => {
@@ -93,7 +96,7 @@ const OrgSettings = ({ org_id }) => {
       fetchFailure(err);
     });
 
-    navigate('/user');
+    router.push('/user');
   };
 
   const handleModal = () => {

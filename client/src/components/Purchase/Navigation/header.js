@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { useLocation } from '@reach/router';
+import { useRouter } from 'next/router';
 
 import { Steps } from 'antd';
 import {
@@ -29,7 +29,7 @@ const Wrapper = styled.div`
 `;
 
 const Header = () => {
-  const location = useLocation();
+  const location = useRouter();
   const pageName = location.pathname.split('/')[2];
 
   const [loginStatus, setLoginStatus] = useState('');

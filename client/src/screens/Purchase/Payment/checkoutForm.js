@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
-import { useLocation } from '@reach/router';
+import { useRouter } from 'next/router';
 import { FaRegCreditCard } from 'react-icons/fa';
-import { navigate } from 'gatsby';
 import { Spin } from 'antd';
 
 import OrgContext from '../../../utils/orgContext';
@@ -14,10 +13,6 @@ import { colors, breakpoints } from '../../../styles/theme';
 
 import Button from '../../../components/Common/buttons/PrimaryButton';
 import Card from '../../../components/Common/Card';
-import visa from '../../../assets/images/credit card icons/visa.png';
-import discover from '../../../assets/images/credit card icons/discover.png';
-import mastercard from '../../../assets/images/credit card icons/mastercard.png';
-import american_express from '../../../assets/images/credit card icons/american_express.png';
 
 const Wrapper = styled.div`
   display: flex;
@@ -121,7 +116,7 @@ const StyledHr = styled.hr`
 `;
 
 const CheckoutForm = () => {
-  const location = useLocation();
+  const location = useRouter();
   const { orgState } = useContext(OrgContext);
   const { id, stripe_customer_id, primary_email, org_name } = orgState;
   const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
@@ -210,13 +205,18 @@ const CheckoutForm = () => {
   const setIcons = (brand) => {
     switch (brand) {
       case 'visa':
-        return <CardBrandImage src={visa} alt="" />;
+        return <CardBrandImage src="/credit card icons/visa.png" alt="Visa logo" />;
       case 'amex':
-        return <CardBrandImage src={american_express} alt="" />;
+        return (
+          <CardBrandImage
+            src="/credit card icons/american_express.png"
+            alt="American Express logo"
+          />
+        );
       case 'discover':
-        return <CardBrandImage src={discover} alt="" />;
+        return <CardBrandImage src="/credit card icons/discover.png" alt="Discover logo" />;
       case 'mastercard':
-        return <CardBrandImage src={mastercard} alt="" />;
+        return <CardBrandImage src="/credit card icons/mastercard.png" alt="Mastercard logo" />;
       default:
         return <FaRegCreditCard />;
     }
@@ -235,7 +235,7 @@ const CheckoutForm = () => {
       fetchFailure(err);
     });
 
-    navigate('/purchase/confirm');
+    router.push('/purchase/confirm');
   };
 
   const createSubscription = async () => {
@@ -255,7 +255,7 @@ const CheckoutForm = () => {
     });
 
     if (result.data.status === 'active' || result.data.status === 'trialing') {
-      navigate('/purchase/confirm');
+      router.push('/purchase/confirm');
     } else {
       let error = {
         type: 'Stripe Confirmation Error',

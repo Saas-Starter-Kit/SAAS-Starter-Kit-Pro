@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
-import { Link } from 'gatsby';
+import Link from 'next/link';
 import { Empty } from 'antd';
 
 import AuthContext from '../../../utils/authContext';
@@ -150,12 +150,14 @@ const Dashboard = () => {
             <AppsWrapper>
               {!orgs.length == 0 ? (
                 orgs.map((org) => (
-                  <Link to={`/app/${org.id}/dashboard`} state={{ org }}>
-                    <StyledCard key={org.id}>
-                      <StyledLink>{org.org_name}</StyledLink>
+                  <Link href={`/app/${org.id}/dashboard`} state={{ org }}>
+                    <a>
+                      <StyledCard key={org.id}>
+                        <StyledLink>{org.org_name}</StyledLink>
 
-                      <RoleText>Role: admin</RoleText>
-                    </StyledCard>
+                        <RoleText>Role: admin</RoleText>
+                      </StyledCard>
+                    </a>
                   </Link>
                 ))
               ) : (

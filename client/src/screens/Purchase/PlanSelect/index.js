@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Link } from 'gatsby';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import { colors, breakpoints } from '../../../styles/theme';
 import OrgContext from '../../../utils/orgContext';
@@ -80,7 +81,8 @@ const PurchaseText = styled.div`
   padding-bottom: 1rem;
 `;
 
-const PlanSelect = ({ location }) => {
+const PlanSelect = () => {
+  const location = useRouter();
   const premium_plan = process.env.GATSBY_STRIPE_PREMIUM_PLAN;
   const basic_plan = process.env.GATSBY_STRIPE_BASIC_PLAN;
 
@@ -162,10 +164,12 @@ const PlanSelect = ({ location }) => {
       <ButtonWrapper>
         <Link
           disabled={plan === currentPlan}
-          to="/purchase/payment"
+          href="/purchase/payment"
           state={{ plan, price, planType, subscription_id, isUpgradeFlow, subscription_item }}
         >
-          <PlanButton>Submit</PlanButton>
+          <a>
+            <PlanButton>Submit</PlanButton>
+          </a>
         </Link>
       </ButtonWrapper>
     </div>

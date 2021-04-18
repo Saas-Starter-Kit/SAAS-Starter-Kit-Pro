@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import AuthContext from '../../../utils/authContext';
 import ApiContext from '../../../utils/apiContext';
+import getOrgId from '../../../utils/orgId';
 import Todo from './todo';
 import { Empty, Spin } from 'antd';
 import axios from '../../../services/axios';
@@ -17,7 +18,8 @@ const Title = styled.h1`
   font-size: 1.25rem;
 `;
 
-const ReadUpdate = ({ org_id }) => {
+const ReadUpdate = () => {
+  const org_id = getOrgId();
   const { authState } = useContext(AuthContext);
   const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
   const { isLoading } = apiState;

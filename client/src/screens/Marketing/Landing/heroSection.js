@@ -1,8 +1,7 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
-import { Link } from 'gatsby';
+import Link from 'next/link';
 import { breakpoints } from '../../../styles/theme';
-import StepUp from '../../../assets/images/illustrations/undraw_stepping_up_g6oo.svg';
 
 const Container = styled.div`
   display: grid;
@@ -102,13 +101,15 @@ const HeroSection = () => (
         Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo.
         Elit sunt amet fugiat veniam occaecat fugiat aliqua.
       </Paragraph>
-      <Link to="/auth/login">
-        <StyledButton type="primary">Get started &#8594;</StyledButton>
+      <Link href="/auth/login">
+        <a>
+          <StyledButton type="primary">Get started &#8594;</StyledButton>
+        </a>
       </Link>
     </HeroTextContainer>
 
     <ImageContainer>
-      <Image src={StepUp} alt="Step Up" />
+      <Image src="/illustrations/undraw_stepping_up_g6oo.svg" alt="Step Up" />
     </ImageContainer>
   </Container>
 );

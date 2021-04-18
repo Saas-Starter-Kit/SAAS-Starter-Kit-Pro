@@ -1,6 +1,6 @@
 import React from 'react';
-import { Link } from 'gatsby';
 import styled from 'styled-components';
+import HeaderLink from './headerLink';
 
 const Wrapper = styled.div`
   padding: 1rem;
@@ -10,20 +10,8 @@ const Wrapper = styled.div`
 const SettingsHeader = () => {
   return (
     <Wrapper>
-      <Link
-        className="header_link_settings"
-        activeClassName="header_link_settings_active"
-        to="/user/settings/account"
-      >
-        Account
-      </Link>
-      <Link
-        className="header_link_settings"
-        activeClassName="header_link_settings_active"
-        to="/user/settings/password"
-      >
-        Password
-      </Link>
+      <HeaderLink path="/user/settings/account" text="Account" />
+      <HeaderLink path="/user/settings/password" text="Password" />
     </Wrapper>
   );
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { colors, breakpoints } from '../../../styles/theme';
-import { Link } from 'gatsby';
+import Link from 'next/link';
 import Title from '../../../components/Auth/title';
 
 const Wrapper = styled.div`
@@ -23,7 +23,7 @@ const AltText = styled.div`
   color: ${colors.gray500};
 `;
 
-const StyledLink = styled(Link)`
+const StyledLink = styled.a`
   color: ${colors.royalBlue};
 `;
 
@@ -31,7 +31,9 @@ const LoginFormHeader = () => (
   <Wrapper>
     <Title>Sign-In to Your Account</Title>
     <AltText>
-      <StyledLink to="/auth/signup">Dont have an Account? Sign-Up here</StyledLink>
+      <Link href="/auth/signup" passHref>
+        <StyledLink>Dont have an Account? Sign-Up here</StyledLink>
+      </Link>
     </AltText>
   </Wrapper>
 );

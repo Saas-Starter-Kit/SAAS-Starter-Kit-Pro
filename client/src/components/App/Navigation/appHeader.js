@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import styled, { css } from 'styled-components';
-import { Link, navigate } from 'gatsby';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import moment from 'moment';
 import { Menu, Layout, Avatar, Popover, Badge, List } from 'antd';
 import {
@@ -188,11 +189,12 @@ const AppHeader = ({
   onAllNotificationsRead,
   theme
 }) => {
+  const router = useRouter();
   const { LogOut } = useContext(AuthContext);
 
   const logout = () => {
     LogOut();
-    navigate('/auth/login');
+    router.push('/auth/login');
   };
 
   return (
@@ -254,10 +256,14 @@ const AppHeader = ({
                 Logged in as {username}
               </Menu.Item>
               <Menu.Item icon={<UserOutlined />} key="user">
-                <Link to="/user/dashboard">User Dashboard</Link>
+                <Link href="/user/dashboard">
+                  <a>User Dashboard</a>
+                </Link>
               </Menu.Item>
               <Menu.Item icon={<SettingOutlined />} key="settings">
-                <Link to="/user/settings/account">Settings</Link>
+                <Link href="/user/settings/account">
+                  <a>Settings</a>
+                </Link>
               </Menu.Item>
               <Menu.Item icon={<LogoutOutlined />} onClick={logout} key="SignOut">
                 Sign out

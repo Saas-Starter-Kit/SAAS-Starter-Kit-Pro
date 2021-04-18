@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { colors, breakpoints } from '../../../styles/theme';
-import { navigate } from 'gatsby';
+import { useRouter } from 'next/router';
 import SmallLogo from '../../Common/svgs/SmallLogo';
 
 const Wrapper = styled.div`
@@ -18,9 +18,10 @@ const Wrapper = styled.div`
 `;
 
 const Header = () => {
+  const router = useRouter();
   return (
     <Wrapper>
-      <SmallLogo height={50} width={59} onClick={() => navigate('/')} />
+      <SmallLogo height={50} width={59} onClick={() => router.push('/')} />
     </Wrapper>
   );
 };

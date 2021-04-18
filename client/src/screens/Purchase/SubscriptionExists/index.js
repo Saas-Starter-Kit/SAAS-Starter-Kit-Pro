@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { colors } from '../../../styles/theme';
-import { navigate } from 'gatsby';
+import { useRouter } from 'next/router';
 
 import ConfirmButton from '../../../components/Purchase/purchaseButton';
 
@@ -41,6 +41,7 @@ const Text = styled.h2`
 `;
 
 const SubscriptionExists = () => {
+  const router = useRouter();
   return (
     <Wrapper>
       <SubscriptionExistsCard>
@@ -49,7 +50,7 @@ const SubscriptionExists = () => {
           If you would like to upgrade an existing plan, please visit your subscription settings
           page by clicking the link below.
         </Text>
-        <ConfirmButton onClick={() => navigate('/user/settings/subscription')}>
+        <ConfirmButton onClick={() => router.push('/user/settings/subscription')}>
           Click Here
         </ConfirmButton>
         <Text>If you think you are getting this message in error, please contact support</Text>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'gatsby';
+import Link from 'next/link';
 import styled from 'styled-components';
 import { colors } from '../../../styles/theme';
 import SmallLogo from '../../../components/Common/svgs/SmallLogo';
@@ -66,26 +66,38 @@ const Footer = () => {
         </ImageCol>
         <Column>
           <FooterColHeader>Header 1</FooterColHeader>
-          <Link to="/">
-            <FooterLink>Link1</FooterLink>
+          <Link href="/">
+            <a>
+              <FooterLink>Link1</FooterLink>
+            </a>
           </Link>
-          <Link to="/">
-            <FooterLink>Link2</FooterLink>
+          <Link href="/">
+            <a>
+              <FooterLink>Link2</FooterLink>
+            </a>
           </Link>
-          <Link to="/">
-            <FooterLink>Link3</FooterLink>
+          <Link href="/">
+            <a>
+              <FooterLink>Link3</FooterLink>
+            </a>
           </Link>
         </Column>
         <Column>
           <FooterColHeader>Header 2</FooterColHeader>
-          <Link to="/">
-            <FooterLink>Link1</FooterLink>
+          <Link href="/">
+            <a>
+              <FooterLink>Link1</FooterLink>
+            </a>
           </Link>
-          <Link to="/">
-            <FooterLink>Link2</FooterLink>
+          <Link href="/">
+            <a>
+              <FooterLink>Link2</FooterLink>
+            </a>
           </Link>
-          <Link to="/">
-            <FooterLink>Link3</FooterLink>
+          <Link href="/">
+            <a>
+              <FooterLink>Link3</FooterLink>
+            </a>
           </Link>
         </Column>
       </Container>

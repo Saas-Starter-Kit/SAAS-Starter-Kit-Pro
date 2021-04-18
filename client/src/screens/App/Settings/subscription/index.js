@@ -1,8 +1,9 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { message } from 'antd';
-import { navigate } from 'gatsby';
+import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
+import getOrgId from '../../../../utils/orgId';
 import OrgContext from '../../../../utils/orgContext';
 import ApiContext from '../../../../utils/apiContext';
 import AuthContext from '../../../../utils/authContext';
@@ -22,7 +23,9 @@ const Title = styled.h1`
   font-size: 1.5rem;
 `;
 
-const SubscriptionSettings = ({ org_id }) => {
+const SubscriptionSettings = () => {
+  const org_id = getOrgId();
+  const router = useRouter();
   const premium_plan = process.env.GATSBY_STRIPE_PREMIUM_PLAN;
   const basic_plan = process.env.GATSBY_STRIPE_BASIC_PLAN;
 
@@ -95,7 +98,7 @@ const SubscriptionSettings = ({ org_id }) => {
 
     setModalSub(false);
     message.success('Subscription Canceled');
-    navigate('/user');
+    router.push('/user');
   };
 
   /* 

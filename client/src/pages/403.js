@@ -1,11 +1,15 @@
 import React from 'react';
 import Layout from '../components/Marketing/Layout';
 
-export default function ForbiddenPage() {
+const NotFoundPage = () => {
   return (
-    <Layout>
+    <React.Fragment>
       <h2>Access Denied</h2>
       <div>You do not have permission to view this page</div>
-    </Layout>
+    </React.Fragment>
   );
-}
+};
+
+NotFoundPage.Layout = Layout;
+
+export default NotFoundPage;

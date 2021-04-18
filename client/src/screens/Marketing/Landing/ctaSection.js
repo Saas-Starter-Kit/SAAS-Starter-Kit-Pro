@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { colors, breakpoints } from '../../../styles/theme';
-import { Link } from 'gatsby';
+import Link from 'next/link';
 
 const Background = styled.div`
   background-color: ${colors.indigo600};
@@ -44,7 +44,7 @@ const Paragraph = styled.p`
   color: ${colors.indigo100};
 `;
 
-const StyledLink = styled(Link)`
+const StyledLink = styled.a`
   margin-top: 2rem;
   width: 100%;
   display: inline-flex;
@@ -80,7 +80,9 @@ const CTASection = () => (
         Ac euismod vel sit maecenas id pellentesque eu sed consectetur. Malesuada adipiscing
         sagittis vel nulla nec.
       </Paragraph>
-      <StyledLink to="/auth/signup">Sign up for free</StyledLink>
+      <Link href="/auth/signup" passHref>
+        <StyledLink>Sign up for free</StyledLink>
+      </Link>
     </Wrapper>
   </Background>
 );

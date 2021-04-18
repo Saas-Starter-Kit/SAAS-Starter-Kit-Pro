@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 
-import { navigate } from 'gatsby';
+import { useRouter } from 'next/router';
 
 import AuthContext from '../../../../utils/authContext';
 import ApiContext from '../../../../utils/apiContext';
@@ -19,6 +19,7 @@ const Title = styled.h1`
 `;
 
 const AccountSettings = () => {
+  const router = useRouter();
   const { authState } = useContext(AuthContext);
   const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
   const { isLoading } = apiState;
@@ -70,7 +71,7 @@ const AccountSettings = () => {
       fetchFailure(err);
     });
 
-    navigate('/auth/login');
+    router.push('/auth/login');
   };
 
   const updateEmail = async (event) => {
@@ -83,7 +84,7 @@ const AccountSettings = () => {
       fetchFailure(err);
     });
 
-    navigate('/auth/login');
+    router.push('/auth/login');
   };
 
   /* 

@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { Link } from 'gatsby';
-import { useLocation } from '@reach/router';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import { breakpoints } from '../../../styles/theme';
 
@@ -39,7 +39,7 @@ const Title = styled.h2`
 `;
 
 const ConfirmedInvite = () => {
-  const location = useLocation();
+  const location = useRouter();
   const splitPath = location.pathname.split('/');
   const invite_key = splitPath[3];
   const { authState } = useContext(AuthContext);
@@ -97,8 +97,10 @@ const ConfirmedInvite = () => {
           <Title>
             Your invite to the app has been confirmed, click below to navigate to the app
           </Title>
-          <Link to={`/app/${org_id}/dashboard`}>
-            <ConfirmButton>Go to App</ConfirmButton>
+          <Link href={`/app/${org_id}/dashboard`}>
+            <a>
+              <ConfirmButton>Go to App</ConfirmButton>
+            </a>
           </Link>
         </StyledCard>
       </Wrapper>

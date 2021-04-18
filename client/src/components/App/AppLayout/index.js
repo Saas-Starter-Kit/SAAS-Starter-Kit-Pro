@@ -1,9 +1,10 @@
 import React, { useContext, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import moment from 'moment';
-import { useLocation } from '@reach/router';
+import { useRouter } from 'next/router';
 
 import AuthContext from '../../../utils/authContext';
+import getOrgId from '../../../utils/orgId';
 import { colors, breakpoints } from '../../../styles/theme';
 import useWindowSize from '../../../hooks/useWindowSize';
 import SEO from '../../Marketing/Layout/seo';
@@ -52,8 +53,10 @@ const ContentWrapper = styled.div`
   }
 `;
 
-const Layout = ({ children, org_id }) => {
-  const location = useLocation();
+const Layout = ({ children }) => {
+  const location = useRouter();
+  const org_id = getOrgId();
+
   const { authState } = useContext(AuthContext);
 
   //handle antd sidebar rerender issue

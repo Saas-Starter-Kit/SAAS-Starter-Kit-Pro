@@ -4,7 +4,7 @@ import ScrollBar from 'react-perfect-scrollbar';
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import { Layout, Menu, Switch } from 'antd';
 import { BulbOutlined } from '@ant-design/icons';
-import { Link } from 'gatsby';
+import Link from 'next/link';
 
 import LargeLogo from '../../Common/svgs/LargeLogo';
 import SmallLogo from '../../Common/svgs/SmallLogo';
@@ -65,7 +65,7 @@ const SidebarItems = styled.div`
   }
 `;
 
-const StyledLink = styled(Link)`
+const StyledLink = styled.a`
   display: flex;
 `;
 
@@ -107,7 +107,7 @@ const Span = styled.span`
 
 const SidebarDesktop = ({ theme, toggleTheme, org_id, location, collapsed }) => {
   const menus = getMenus(org_id);
-  const selectedKey = menus.find((menu) => menu.route === location.pathname);
+  const selectedKey = menus.find((menu) => menu.route === location.asPath);
   return (
     <StyledSider
       width={200}
@@ -129,10 +129,12 @@ const SidebarDesktop = ({ theme, toggleTheme, org_id, location, collapsed }) => 
           <Menu mode="inline" theme={theme} selectedKeys={[selectedKey && selectedKey.id]}>
             {menus.map(({ id, route, icon, name }) => (
               <Menu.Item key={id} title={name}>
-                <StyledLink to={route || '#'}>
-                  <StyledIcon>{icon}</StyledIcon>
-                  {!collapsed && <ItemWrapper>{name}</ItemWrapper>}
-                </StyledLink>
+                <Link href={route || '#'} passHref>
+                  <StyledLink>
+                    <StyledIcon>{icon}</StyledIcon>
+                    {!collapsed && <ItemWrapper>{name}</ItemWrapper>}
+                  </StyledLink>
+                </Link>
               </Menu.Item>
             ))}
           </Menu>

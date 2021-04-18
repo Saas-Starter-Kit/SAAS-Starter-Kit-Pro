@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Link, navigate } from 'gatsby';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
 import AuthContext from '../../../utils/authContext';
@@ -29,11 +30,12 @@ const StyledSection = styled.div`
   font-weight: 500;
 `;
 
-const StyledLink = styled(Link)`
+const StyledLink = styled.a`
   color: ${colors.indigo600};
 `;
 
 const CheckAuth = () => {
+  const router = useRouter();
   const { authState } = useContext(AuthContext);
   const { orgState } = useContext(OrgContext);
   const { id, subscription_id } = orgState;
@@ -46,9 +48,9 @@ const CheckAuth = () => {
     } else if (!id) {
       setNullOrg(true);
     } else if (subscription_id) {
-      navigate('/subscriptionexists');
+      router.push('/subscriptionexists');
     } else {
-      navigate('/purchase/plan');
+      router.push('/purchase/plan');
     }
   }, [authState, orgState]);
 
@@ -62,11 +64,15 @@ const CheckAuth = () => {
               <StyledHeader>Please Sign-in or Sign-up</StyledHeader>
               <StyledSection>
                 <div>Already Have an account? login below</div>
-                <StyledLink to="/auth/login">Login</StyledLink>
+                <Link href="/auth/login" passHref>
+                  <StyledLink>Login</StyledLink>
+                </Link>
               </StyledSection>
               <StyledSection>
                 <div>Need to create an account? click below</div>
-                <StyledLink to="/auth/signup">Signup</StyledLink>
+                <Link href="/auth/signup" passHref>
+                  <StyledLink>Signup</StyledLink>
+                </Link>
               </StyledSection>
             </React.Fragment>
           )}
@@ -78,7 +84,9 @@ const CheckAuth = () => {
               </StyledHeader>
               <StyledSection>
                 <div>Please Select an organization from user dashboard</div>
-                <StyledLink to="/user">Go to Dashboard</StyledLink>
+                <Link href="/user" passHref>
+                  <StyledLink>Go to Dashboard</StyledLink>
+                </Link>
               </StyledSection>
             </React.Fragment>
           )}

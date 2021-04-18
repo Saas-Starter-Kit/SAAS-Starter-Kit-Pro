@@ -1,7 +1,8 @@
 import React, { useState, useRef, useContext } from 'react';
-import { Link } from 'gatsby';
+import Link from 'next/link';
 import { MdAccountCircle } from 'react-icons/md';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import { useRouter } from 'next/router';
 import moment from 'moment';
 import { Popover, Badge, List } from 'antd';
 
@@ -161,7 +162,24 @@ const ListItemMeta = styled(List.Item.Meta)`
   }
 `;
 
+const StyledLink = styled.a`
+  font-size: 1.075rem;
+  font-weight: 500;
+  color: darkgrey;
+  padding: 0.6rem;
+  &:hover {
+    color: white;
+    border-radius: 0.5rem;
+  }
+  ${({ isActive }) =>
+    isActive &&
+    css`
+      color: white;
+    `}
+`;
+
 const MobileHeader = ({ mobileMenuHandler }) => {
+  const location = useRouter();
   const { authState } = useContext(AuthContext);
   const photo = authState.user.id ? authState.user.photo : null;
   const [avatarMenu, toggleAvatarMenu] = useState(false);
@@ -176,27 +194,23 @@ const MobileHeader = ({ mobileMenuHandler }) => {
         <Burger />
       </MenuButton>
       <LogoWrapper>
-        <Link to="/user/dashboard">
-          <LargeLogo textColor={colors.white} />
+        <Link href="/user/dashboard">
+          <a>
+            <LargeLogo textColor={colors.white} />
+          </a>
         </Link>
       </LogoWrapper>
       <LinksWrapper>
         <LinkItem>
-          <Link
-            className="header_link_user"
-            activeClassName="header_link_user_active"
-            to="/user/teamapps"
-          >
-            Team Apps
+          <Link href="/user/teamapps" passHref>
+            <StyledLink isActive={location.asPath === '/user/teamapps'}>Team Apps</StyledLink>
           </Link>
         </LinkItem>
         <LinkItem>
-          <Link
-            className="header_link_user"
-            activeClassName="header_link_user_active"
-            to="/user/settings/account"
-          >
-            Settings
+          <Link href="/user/settings/account" passHref>
+            <StyledLink isActive={location.asPath === '/user/settings/account'}>
+              Settings
+            </StyledLink>
           </Link>
         </LinkItem>
       </LinksWrapper>

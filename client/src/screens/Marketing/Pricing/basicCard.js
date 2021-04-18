@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import Link from 'next/link';
 import ListItem from './ListItem';
 import { colors, breakpoints } from '../../../styles/theme';
-import { Link } from 'gatsby';
 
 const OuterWrapper = styled.div`
   margin-left: auto;
@@ -114,7 +114,7 @@ const StyledListItem = styled(ListItem)`
   margin-top: 1rem;
 `;
 
-const StyledLink = styled(Link)`
+const StyledLink = styled.a`
   display: block;
   width: 100%;
   text-align: center;
@@ -164,9 +164,9 @@ const BasicCard = ({ title, price, left }) => {
             <StyledListItem text="Vel ipsa esse repudiandae" />
           </ul>
           <LinkWrapper>
-            <StyledLink href="/auth/signup" aria-describedby={id}>
-              Start your trial
-            </StyledLink>
+            <Link href="/auth/signup" aria-describedby={id} passHref>
+              <StyledLink>Start your trial</StyledLink>
+            </Link>
           </LinkWrapper>
         </CardBody>
       </InnerWrapper>

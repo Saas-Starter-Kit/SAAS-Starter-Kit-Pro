@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import Link from 'next/link';
 import ListItem from './ListItem';
 import { colors, breakpoints } from '../../../styles/theme';
-import { Link } from 'gatsby';
 
 const Wrapper = styled.div`
   position: relative;
@@ -143,7 +143,7 @@ const LinkWrapper = styled.div`
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 `;
 
-const StyledLink = styled(Link)`
+const StyledLink = styled.a`
   display: block;
   width: 100%;
   text-align: center;
@@ -197,9 +197,9 @@ const GrowthCard = () => (
         <StyledListItem text="Nam ut ipsa nesciunt culpa modi dolor" />
       </ul>
       <LinkWrapper>
-        <StyledLink href="/auth/signup" aria-describedby="tier-growth">
-          Start your trial
-        </StyledLink>
+        <Link href="/auth/signup" aria-describedby="tier-growth" passHref>
+          <StyledLink>Start your trial</StyledLink>
+        </Link>
       </LinkWrapper>
     </CardBody>
   </Wrapper>

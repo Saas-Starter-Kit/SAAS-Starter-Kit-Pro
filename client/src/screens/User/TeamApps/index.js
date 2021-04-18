@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
-import { Link } from 'gatsby';
+import Link from 'next/link';
 
 import SEO from '../../../components/Marketing/Layout/seo';
 import AuthContext from '../../../utils/authContext';
@@ -77,11 +77,13 @@ const TeamApps = () => {
           <h1>Team Apps:</h1>
           {teamApps &&
             teamApps.map((org) => (
-              <Link key={org.id} to={`/app/${org.id}/dashboard`}>
-                <StyledCard>
-                  <StyledLink>{org.org_name}</StyledLink>
-                  <RoleText>Role: user</RoleText>
-                </StyledCard>
+              <Link key={org.id} href={`/app/${org.id}/dashboard`}>
+                <a>
+                  <StyledCard>
+                    <StyledLink>{org.org_name}</StyledLink>
+                    <RoleText>Role: user</RoleText>
+                  </StyledCard>
+                </a>
               </Link>
             ))}
         </div>

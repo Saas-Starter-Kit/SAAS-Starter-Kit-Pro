@@ -4,7 +4,7 @@ import useOutsideClick from '../../../hooks/useOutsideClick';
 import { colors, breakpoints } from '../../../styles/theme';
 import MobileSidebarItem from './mobileSidebarItem';
 import Cross from '../svgs/cross';
-import { Link } from 'gatsby';
+import Link from 'next/link';
 import Persons from '../svgs/persons';
 import Folder from '../svgs/folder';
 import LargeLogo from '../../../components/Common/svgs/LargeLogo';
@@ -126,8 +126,10 @@ const SidebarMobile = ({ toggleMobileMenu }) => {
         </ButtonWrapper>
         <Sidebar>
           <LogoWrapper>
-            <Link to="/user/dashboard">
-              <LargeLogo textColor={colors.white} />
+            <Link href="/user/dashboard">
+              <a>
+                <LargeLogo textColor={colors.white} />
+              </a>
             </Link>
           </LogoWrapper>
           <Nav>

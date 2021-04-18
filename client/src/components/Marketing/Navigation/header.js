@@ -1,16 +1,15 @@
-import React from 'react';
-import styled, { keyframes } from 'styled-components';
-import { useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
+import styled, { keyframes, css } from 'styled-components';
+import { useRouter } from 'next/router';
 import useOutsideClick from '../../../hooks/useOutsideClick';
-import { Link } from 'gatsby';
+import Link from 'next/link';
 import { colors, breakpoints } from '../../../styles/theme';
 import FlyoutMenu from './flyoutMenu';
 
 import Button from '../../Common/buttons/PrimaryButton';
 import MobileMenu from './mobileMenu';
 import LargeLogo from '../../../components/Common/svgs/LargeLogo';
-import MenuImageSrc from '../../../assets/images/icons/menu.svg';
-import ChevronDown from '../../../assets/images/icons/chevron-down.svg';
+import ChevronDown from '../svgs/chevronDown';
 
 const Container = styled.div`
   display: flex;
@@ -133,21 +132,76 @@ const SolutionsButton = styled.div`
   }
 `;
 
-const Chevron = styled.img`
+const StyledChevronDown = styled(ChevronDown)`
   margin-left: 8px;
-  color: ${colors.gray500};
-  height: 1.25rem;
-  width: 1.25rem;
+  svg {
+    color: ${colors.gray500};
 
-  &:hover ${SolutionsButton} {
-    color: ${colors.gray500};
-  }
-  &:focus ${SolutionsButton} {
-    color: ${colors.gray500};
+    &:hover ${SolutionsButton} {
+      color: ${colors.gray500};
+    }
+    &:focus ${SolutionsButton} {
+      color: ${colors.gray500};
+    }
   }
 `;
 
+const StyledLink = styled.a`
+  margin-left: 2.5rem;
+  text-decoration: none;
+  cursor: pointer;
+  position: relative;
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: black;
+  &::before {
+    content: '';
+    margin-bottom: -5px;
+    position: absolute;
+    width: 0;
+    height: 6px;
+    bottom: 0;
+    left: 0;
+    background-color: red;
+    visibility: hidden;
+    transition: all 0.3s ease-in-out;
+  }
+
+  &:hover {
+    &::before {
+      visibility: visible !important;
+      width: 100%;
+    }
+  }
+
+  ${({ isActive }) =>
+    isActive &&
+    css`
+      margin-left: 2.5rem;
+      text-decoration: none;
+      cursor: pointer;
+      position: relative;
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: black;
+      &::before {
+        content: '';
+        margin-bottom: -5px;
+        position: absolute;
+        width: 0;
+        height: 6px;
+        bottom: 0;
+        left: 0;
+        background-color: red;
+        visibility: visible;
+        transition: all 0.3s ease-in-out;
+        width: 100%;
+      }
+    `}
+`;
+
 const Header = () => {
+  const location = useRouter();
   const ref = useRef();
   const refMobile = useRef();
   const [menu, toggleMenu] = useState(false);
@@ -161,13 +215,15 @@ const Header = () => {
   return (
     <Container>
       <LogoWrapper>
-        <Link to="/">
-          <LargeLogo />
+        <Link href="/">
+          <a>
+            <LargeLogo />
+          </a>
         </Link>
       </LogoWrapper>
       <MenuWrapper ref={refMobile}>
         <MenuButton onClick={mobileMenuHandler}>
-          <MenuImage src={MenuImageSrc} alt="menu" />
+          <MenuImage src="/icons/menu.svg" alt="menu" />
         </MenuButton>
         {mobileMenu ? <MobileMenu mobileMenuHandler={mobileMenuHandler} /> : null}
       </MenuWrapper>
@@ -175,7 +231,7 @@ const Header = () => {
         <SolutionsWrapper onMouseOver={() => toggleMenu(true)} ref={ref}>
           <SolutionsButton type="button">
             Solutions
-            <Chevron src={ChevronDown} alt="down arrow" />
+            <StyledChevronDown height="1.25rem" width="1.25rem" />
           </SolutionsButton>
 
           {menu ? (
@@ -185,13 +241,15 @@ const Header = () => {
           ) : null}
         </SolutionsWrapper>
 
-        <Link className="header_link" activeClassName="header_active_link" to="/pricing">
-          Pricing
+        <Link href="/pricing" passHref>
+          <StyledLink isActive={location.asPath === '/pricing'}>Pricing</StyledLink>
         </Link>
       </Nav>
       <ButtonWrapper>
-        <Link to="/auth/login">
-          <Button>Sign-In</Button>
+        <Link href="/auth/login" passHref>
+          <a>
+            <Button>Sign-In</Button>
+          </a>
         </Link>
       </ButtonWrapper>
     </Container>

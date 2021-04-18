@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'gatsby';
+import Link from 'next/link';
 
 import Card from '../../../../components/Common/Card';
 import Button from '../../../../components/Common/buttons/PrimaryButton';
@@ -14,10 +14,12 @@ const UpgradeSubscription = ({ subscriptionState }) => {
     <Card>
       <h2>Click Here to change plans</h2>
       <Link
-        to="/purchase/plan"
+        href="/purchase/plan"
         state={{ subscription_id, currentPlan, isUpgradeFlow, subscription_item }}
       >
-        <Button>Submit</Button>
+        <a>
+          <Button>Submit</Button>
+        </a>
       </Link>
     </Card>
   );

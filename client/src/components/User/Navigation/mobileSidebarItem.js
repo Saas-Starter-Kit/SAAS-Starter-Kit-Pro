@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'gatsby';
+import Link from 'next/link';
 import styled from 'styled-components';
 import { colors } from '../../../styles/theme';
 
@@ -29,11 +29,13 @@ const SvgWrapper = styled.div`
 `;
 
 const MobileSidebarItem = ({ link, toggleMenu, svg, title }) => (
-  <Link to={link}>
-    <Wrapper onClick={toggleMenu}>
-      <SvgWrapper>{svg}</SvgWrapper>
-      {title}
-    </Wrapper>
+  <Link href={link}>
+    <a>
+      <Wrapper onClick={toggleMenu}>
+        <SvgWrapper>{svg}</SvgWrapper>
+        {title}
+      </Wrapper>
+    </a>
   </Link>
 );
 

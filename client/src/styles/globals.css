@@ -1,5 +1,4 @@
 @import './normalize.css';
-@import './headerStyles.css';
 
 html,
 body {
@@ -16,9 +15,4 @@ a {
 
 * {
   box-sizing: border-box;
-}
-
-#___gatsby,
-#gatsby-focus-wrapper {
-  height: 100%;
 }

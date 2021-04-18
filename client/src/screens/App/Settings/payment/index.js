@@ -7,6 +7,7 @@ import ApiContext from '../../../../utils/apiContext';
 import OrgContext from '../../../../utils/orgContext';
 import axios from '../../../../services/axios';
 
+import getOrgId from '../../../../utils/orgId';
 import SEO from '../../../../components/Marketing/Layout/seo';
 import SettingsHeader from '../../../../components/App/Navigation/settingsHeader';
 import UpdatePaymentCard from './updatePaymentCard';
@@ -18,7 +19,8 @@ const Title = styled.h1`
   font-size: 1.5rem;
 `;
 
-const PaymentSettings = ({ org_id }) => {
+const PaymentSettings = () => {
+  const org_id = getOrgId();
   const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
   const { orgState } = useContext(OrgContext);
   const { stripe_customer_id } = orgState;

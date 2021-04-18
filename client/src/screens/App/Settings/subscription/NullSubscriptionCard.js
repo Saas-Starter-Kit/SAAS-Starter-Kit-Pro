@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'gatsby';
+import Link from 'next/link';
 import styled from 'styled-components';
 
 import Card from '../../../../components/Common/Card';
@@ -15,8 +15,10 @@ const NullSubscriptionCard = () => {
       <h2>No Subscription Found</h2>
       <h3>Click Below to add subscription</h3>
       <ButtonWrapper>
-        <Link to="/purchase">
-          <Button>Submit</Button>
+        <Link href="/purchase">
+          <a>
+            <Button>Submit</Button>
+          </a>
         </Link>
       </ButtonWrapper>
     </Card>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { navigate } from 'gatsby';
+import { useRouter } from 'next/router';
 
 import styled from 'styled-components';
 
@@ -24,6 +24,7 @@ const ButtonWrapper = styled.div`
 `;
 
 const UpdatePasswordCard = () => {
+  const router = useRouter();
   return (
     <StyledCard>
       <SectionTitle>Update Password</SectionTitle>
@@ -31,7 +32,7 @@ const UpdatePasswordCard = () => {
       <ButtonWrapper>
         <Button
           onClick={() => {
-            navigate('/auth/login');
+            router.push('/auth/login');
           }}
         >
           Go to Login

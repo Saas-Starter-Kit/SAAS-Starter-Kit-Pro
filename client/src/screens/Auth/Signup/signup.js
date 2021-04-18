@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Formik } from 'formik';
-import { useStaticQuery, graphql } from 'gatsby';
-import { useLocation } from '@reach/router';
+import { useRouter } from 'next/router';
 
 import AuthContext from '../../../utils/authContext';
 import ApiContext from '../../../utils/apiContext';
@@ -19,9 +18,18 @@ import GoogleButton from '../../../components/Auth/Buttons/googleButton';
 import LoadingOverlay from '../../../components/Common/loadingOverlay';
 import SignUpFormHeader from './signupFormHeader';
 
+// TODO: replace with actual data
+const getData = () => ({
+  site: {
+    siteMetadata: {
+      siteUrl: 'http://localhost:3000'
+    }
+  }
+});
+
 const Signup = () => {
-  const location = useLocation();
-  const data = useStaticQuery(staticQuery);
+  const location = useRouter();
+  const data = getData();
   const domainUrl = data.site.siteMetadata.siteUrl;
   const { firebase } = useContext(AuthContext);
   const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
@@ -32,7 +40,9 @@ const Signup = () => {
   /* eslint-disable */
   //extract data from query params
   useEffect(() => {
-    const queryParams = location.search.split('=');
+    // TODO: this should be obtainable from location.query, but might need some next config?
+    const query = location.asPath.replace(location.pathname, '');
+    const queryParams = query.split('=');
 
     if (queryParams[1]) {
       setInviteFlow(queryParams[1].split('&')[0]);
@@ -151,13 +161,3 @@ const Signup = () => {
 };
 
 export default Signup;
-
-const staticQuery = graphql`
-  query GetDomainSignup {
-    site {
-      siteMetadata {
-        siteUrl
-      }
-    }
-  }
-`;

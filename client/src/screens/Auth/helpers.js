@@ -1,5 +1,5 @@
 import jwt_decode from 'jwt-decode';
-import { navigate } from 'gatsby';
+import { useRouter } from 'next/router';
 import * as Yup from 'yup';
 import axios from '../../services/axios';
 import { setAnalyticsUserId, sendEventToAnalytics } from '../../services/analytics';
@@ -12,6 +12,7 @@ export const LoginAuth = async (
   isInviteFlow,
   invite_key
 ) => {
+  const router = useRouter();
   //Get Auth id token from Firebase
   let token = await firebase
     .auth()
@@ -52,9 +53,9 @@ export const LoginAuth = async (
 
   //navigate to correct route based on flow
   if (isInviteFlow) {
-    navigate(`/user/confirmedinvite/${invite_key}`);
+    router.push(`/user/confirmedinvite/${invite_key}`);
   } else {
-    navigate('/user/dashboard');
+    router.push('/user/dashboard');
   }
 };
 
@@ -67,6 +68,7 @@ export const SignupAuth = async (
   isInviteFlow,
   invite_key
 ) => {
+  const router = useRouter();
   // If user signed up with email, then set their display username
   const isEmailSignup = authRes.additionalUserInfo.providerId === 'password';
   if (isEmailSignup && name) {
@@ -102,7 +104,7 @@ export const SignupAuth = async (
     fetchFailure(err);
   });
 
-  navigate('/auth/emailconfirm');
+  router.push('/auth/emailconfirm');
 };
 
 //valid format for setting an email, username and password

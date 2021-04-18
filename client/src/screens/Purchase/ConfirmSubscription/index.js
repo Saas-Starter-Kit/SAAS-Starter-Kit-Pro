@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import styled from 'styled-components';
-import { navigate } from 'gatsby';
+import { useRouter } from 'next/router';
 
 import { breakpoints } from '../../../styles/theme';
 import AuthContext from '../../../utils/authContext';
@@ -39,6 +39,7 @@ const Text = styled.div`
 `;
 
 const ConfirmSub = () => {
+  const router = useRouter();
   const { LogOut } = useContext(AuthContext);
 
   /* eslint-disable */
@@ -54,7 +55,7 @@ const ConfirmSub = () => {
         <Title>Your Subscription Has Been Confirmed!</Title>
         <Text>Please sign in again to complete the process</Text>
         <Text>Click below to navigate to the login screen</Text>
-        <ConfirmButton onClick={() => navigate('/auth/login')}>Click Here</ConfirmButton>
+        <ConfirmButton onClick={() => router.push('/auth/login')}>Click Here</ConfirmButton>
       </Card>
     </Wrapper>
   );

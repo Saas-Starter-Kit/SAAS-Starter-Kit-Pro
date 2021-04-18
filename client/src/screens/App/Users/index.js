@@ -1,7 +1,6 @@
 import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 import { Formik } from 'formik';
-import { useStaticQuery, graphql } from 'gatsby';
 import * as Yup from 'yup';
 import { Spin, message } from 'antd';
 import { Table } from 'antd';
@@ -11,6 +10,7 @@ import Can from '../../../services/casl';
 import axios from '../../../services/axios';
 import AuthContext from '../../../utils/authContext';
 import ApiContext from '../../../utils/apiContext';
+import getOrgId from '../../../utils/orgId';
 import OrgContext from '../../../utils/orgContext';
 
 import Button from '../../../components/Common/buttons/SecondaryButton';
@@ -42,12 +42,22 @@ const RemoveUserButton = styled.button`
   border: none;
 `;
 
-const Users = ({ org_id }) => {
+// TODO: replace with actual data
+const getData = () => ({
+  site: {
+    siteMetadata: {
+      siteUrl: 'http://localhost:3000'
+    }
+  }
+});
+
+const Users = () => {
+  const org_id = getOrgId();
   const { authState } = useContext(AuthContext);
   const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
   const { role } = useContext(AuthContext);
   const { isLoading } = apiState;
-  const data = useStaticQuery(staticQuery);
+  const data = getData();
   const domainUrl = data.site.siteMetadata.siteUrl;
   const [appUsers, setUsers] = useState();
   let token = authState?.user.jwt_token;
@@ -156,13 +166,3 @@ const Users = ({ org_id }) => {
 };
 
 export default Users;
-
-const staticQuery = graphql`
-  query GetDomainUsers {
-    site {
-      siteMetadata {
-        siteUrl
-      }
-    }
-  }
-`;

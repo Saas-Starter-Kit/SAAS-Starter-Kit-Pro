@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'gatsby';
+import Link from 'next/link';
 import styled from 'styled-components';
 import { colors } from '../../../styles/theme';
 import { THEMES } from '../AppLayout';
@@ -35,11 +35,13 @@ const TitleWrapper = styled.span`
 `;
 
 const MobileSidebarItem = ({ link, toggleMenu, svg, title, theme }) => (
-  <Link to={link}>
-    <Wrapper onClick={toggleMenu} theme={theme}>
-      <SvgWrapper>{svg}</SvgWrapper>
-      <TitleWrapper>{title}</TitleWrapper>
-    </Wrapper>
+  <Link href={link}>
+    <a>
+      <Wrapper onClick={toggleMenu} theme={theme}>
+        <SvgWrapper>{svg}</SvgWrapper>
+        <TitleWrapper>{title}</TitleWrapper>
+      </Wrapper>
+    </a>
   </Link>
 );
 

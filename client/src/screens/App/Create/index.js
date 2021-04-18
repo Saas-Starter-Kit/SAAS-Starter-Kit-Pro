@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Spin, message } from 'antd';
 
 import AuthContext from '../../../utils/authContext';
+import getOrgId from '../../../utils/orgId';
 import ApiContext from '../../../utils/apiContext';
 import { colors } from '../../../styles/theme';
 import axios from '../../../services/axios';
@@ -32,7 +33,9 @@ const ButtonWrapper = styled.div`
   text-align: left;
 `;
 
-const CreateTask = ({ org_id }) => {
+const CreateTask = () => {
+  const org_id = getOrgId();
+
   const [formTitle, setTitle] = useState('');
   const [formDescription, setDescription] = useState('');
   const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);

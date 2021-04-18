@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Formik } from 'formik';
-import { Link } from 'gatsby';
-import { useLocation } from '@reach/router';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 import AuthContext from '../../../utils/authContext';
 import ApiContext from '../../../utils/apiContext';
@@ -47,12 +47,12 @@ const RememberMeLabel = styled.label`
   color: ${colors.coolGray900};
 `;
 
-const StyledLink = styled(Link)`
+const StyledLink = styled.a`
   color: ${colors.royalBlue};
 `;
 
 const Login = () => {
-  const location = useLocation();
+  const location = useRouter();
   const { firebase, LogIn } = useContext(AuthContext);
   const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
   const { isLoading } = apiState;
@@ -159,7 +159,9 @@ const Login = () => {
             </RememberMeWrapper>
 
             <ForgotPassword>
-              <StyledLink to="/auth/passwordreset"> Forgot your password?</StyledLink>
+              <Link href="/auth/passwordreset" passHref>
+                <StyledLink>Forgot your password?</StyledLink>
+              </Link>
             </ForgotPassword>
           </ForgotPasswordWrapper>
 

@@ -2,8 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import { colors, breakpoints } from '../../../styles/theme';
 
-import image1 from '../../../assets/images/illustrations/undraw_Build_wireframe_re_ln7g.svg';
-import image2 from '../../../assets/images/illustrations/undraw_All_the_data_re_hh4w.svg';
 import { FcApproval, FcBarChart, FcCollect, FcConferenceCall } from 'react-icons/fc';
 
 const Container = styled.div`
@@ -196,7 +194,7 @@ const LandingFeatures = () => (
       </div>
       <FeatureImage
         aspectRatio={532 / 417}
-        src={image1}
+        src="/illustrations/undraw_Build_wireframe_re_ln7g.svg"
         alt="Abstract illustration of man wearing a turtleneck standing next to floating graphs and images"
       />
     </FeatureWrapper1>
@@ -239,7 +237,7 @@ const LandingFeatures = () => (
         </List>
       </FeatureWrapper2b>
       <FeatureImage
-        src={image2}
+        src="/illustrations/undraw_All_the_data_re_hh4w.svg"
         aspectRatio={532 / 372}
         alt="Abstract illustration of man wearing a suit standing next to floating graphs and images"
       />

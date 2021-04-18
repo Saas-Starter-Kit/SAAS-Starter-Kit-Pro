@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'gatsby';
+import Link from 'next/link';
 import { colors } from '../../../styles/theme';
 import {
   FcDoughnutChart,
@@ -108,72 +108,84 @@ const StyledHr = styled.hr`
 
 const FlyoutMenu = () => (
   <Container>
-    <Link to="/pricing">
-      <Item>
-        <MenuImageWrapper>
-          <StyledPrice />
-        </MenuImageWrapper>
-        <TextWrapper>
-          <Title>Pricing</Title>
-          <Description>Lorem ipsum dolor sit amet, consectetur </Description>
-        </TextWrapper>
-      </Item>
+    <Link href="/pricing">
+      <a>
+        <Item>
+          <MenuImageWrapper>
+            <StyledPrice />
+          </MenuImageWrapper>
+          <TextWrapper>
+            <Title>Pricing</Title>
+            <Description>Lorem ipsum dolor sit amet, consectetur </Description>
+          </TextWrapper>
+        </Item>
+      </a>
     </Link>
-    <Link to="/app/1/dashboard">
-      <Item>
-        <MenuImageWrapper>
-          <StyledChart />
-        </MenuImageWrapper>
-        <TextWrapper>
-          <Title>App</Title>
-          <Description>Lorem ipsum dolor sit amet, consectetur </Description>
-        </TextWrapper>
-      </Item>
+    <Link href="/app/1/dashboard">
+      <a>
+        <Item>
+          <MenuImageWrapper>
+            <StyledChart />
+          </MenuImageWrapper>
+          <TextWrapper>
+            <Title>App</Title>
+            <Description>Lorem ipsum dolor sit amet, consectetur </Description>
+          </TextWrapper>
+        </Item>
+      </a>
     </Link>
     <StyledHr />
-    <Link to="/product/page1">
-      <Item>
-        <MenuImageWrapper>
-          <StyledIconBullish />
-        </MenuImageWrapper>
-        <TextWrapper>
-          <Title>Core Feature 1</Title>
-          <Description>Lorem ipsum dolor sit amet, consectetur </Description>
-        </TextWrapper>
-      </Item>
+    <Link href="/product/page1">
+      <a>
+        <Item>
+          <MenuImageWrapper>
+            <StyledIconBullish />
+          </MenuImageWrapper>
+          <TextWrapper>
+            <Title>Core Feature 1</Title>
+            <Description>Lorem ipsum dolor sit amet, consectetur </Description>
+          </TextWrapper>
+        </Item>
+      </a>
     </Link>
-    <Link to="/product/page2">
-      <Item>
-        <MenuImageWrapper>
-          <StyledIconInvite />
-        </MenuImageWrapper>
-        <TextWrapper>
-          <Title>Core Feature 2</Title>
-          <Description>Lorem ipsum dolor sit amet, consectetur </Description>
-        </TextWrapper>
-      </Item>
+    <Link href="/product/page2">
+      <a>
+        <Item>
+          <MenuImageWrapper>
+            <StyledIconInvite />
+          </MenuImageWrapper>
+          <TextWrapper>
+            <Title>Core Feature 2</Title>
+            <Description>Lorem ipsum dolor sit amet, consectetur </Description>
+          </TextWrapper>
+        </Item>
+      </a>
     </Link>
-    <Link to="/product/page3">
-      <Item>
-        <MenuImageWrapper>
-          <StyledIconTasks />
-        </MenuImageWrapper>
-        <TextWrapper>
-          <Title>Core Feature 3</Title>
-          <Description>Lorem ipsum dolor sit amet, consectetur </Description>
-        </TextWrapper>
-      </Item>
+    <Link href="/product/page3">
+      <a>
+        <Item>
+          <MenuImageWrapper>
+            <StyledIconTasks />
+          </MenuImageWrapper>
+          <TextWrapper>
+            <Title>Core Feature 3</Title>
+            <Description>Lorem ipsum dolor sit amet, consectetur </Description>
+          </TextWrapper>
+        </Item>
+      </a>
     </Link>
-    <Link to="/product/page4">
-      <Item>
-        <MenuImageWrapper>
-          <StyledTimeline />
-        </MenuImageWrapper>
-        <TextWrapper>
-          <Title>Core Feature 4</Title>
-          <Description>Lorem ipsum dolor sit amet, consectetur</Description>
-        </TextWrapper>
-      </Item>
+    <Link href="/product/page4">
+      <a>
+        <Item>
+          <MenuImageWrapper>
+            <StyledTimeline />
+          </MenuImageWrapper>
+          <TextWrapper>
+            <Title>Core Feature 4</Title>
+            <Description>Lorem ipsum dolor sit amet, consectetur</Description>
+          </TextWrapper>
+        </Item>
+      </a>
     </Link>
   </Container>
 );

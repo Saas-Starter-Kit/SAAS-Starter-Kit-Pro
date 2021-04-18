@@ -1,10 +1,8 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
-import { Link } from 'gatsby';
+import Link from 'next/link';
 import { colors, breakpoints } from '../../../styles/theme';
 import SmallLogo from '../../../components/Common/svgs/SmallLogo';
-import Close from '../../../assets/images/icons/close.svg';
-import ViewGrid from '../../../assets/images/icons/view-grid.svg';
 
 const menuUp = keyframes`
   from {
@@ -166,66 +164,78 @@ const MobileMenu = ({ mobileMenuHandler }) => (
       <StyledSmallLogo height={34} width={40} />
       <CloseButtonWrapper>
         <CloseButton onClick={mobileMenuHandler} type="button">
-          <CloseImage src={Close} alt="menu icon" />
+          <CloseImage src="/icons/close.svg" alt="menu icon" />
         </CloseButton>
       </CloseButtonWrapper>
     </Header>
     <div>
       <Nav>
-        <Link to="/pricing">
-          <Item>
-            <MenuImageWrapper>
-              {/*<!-- Heroicon name: view-grid -->*/}
-              <MenuImg src={ViewGrid} alt="click" />
-            </MenuImageWrapper>
-            <Title>Pricing</Title>
-          </Item>
+        <Link href="/pricing">
+          <a>
+            <Item>
+              <MenuImageWrapper>
+                {/*<!-- Heroicon name: view-grid -->*/}
+                <MenuImg src="/icons/view-grid.svg" alt="click" />
+              </MenuImageWrapper>
+              <Title>Pricing</Title>
+            </Item>
+          </a>
         </Link>
 
         <hr />
         <h3>Solutions</h3>
-        <Link to="/product/page1">
-          <Item>
-            <MenuImageWrapper>
-              {/*<!-- Heroicon name: view-grid -->*/}
-              <MenuImg src={ViewGrid} alt="click" />
-            </MenuImageWrapper>
-            <Title>Product Page 1</Title>
-          </Item>
+        <Link href="/product/page1">
+          <a>
+            <Item>
+              <MenuImageWrapper>
+                {/*<!-- Heroicon name: view-grid -->*/}
+                <MenuImg src="/icons/view-grid.svg" alt="click" />
+              </MenuImageWrapper>
+              <Title>Product Page 1</Title>
+            </Item>
+          </a>
         </Link>
-        <Link to="/product/page2">
-          <Item>
-            <MenuImageWrapper>
-              {/*<!-- Heroicon name: view-grid -->*/}
-              <MenuImg src={ViewGrid} alt="click" />
-            </MenuImageWrapper>
-            <Title>Product Page 2</Title>
-          </Item>
+        <Link href="/product/page2">
+          <a>
+            <Item>
+              <MenuImageWrapper>
+                {/*<!-- Heroicon name: view-grid -->*/}
+                <MenuImg src="/icons/view-grid.svg" alt="click" />
+              </MenuImageWrapper>
+              <Title>Product Page 2</Title>
+            </Item>
+          </a>
         </Link>
-        <Link to="/product/page3">
-          <Item>
-            <MenuImageWrapper>
-              {/*<!-- Heroicon name: view-grid -->*/}
-              <MenuImg src={ViewGrid} alt="click" />
-            </MenuImageWrapper>
-            <Title>Product Page 3</Title>
-          </Item>
+        <Link href="/product/page3">
+          <a>
+            <Item>
+              <MenuImageWrapper>
+                {/*<!-- Heroicon name: view-grid -->*/}
+                <MenuImg src="/icons/view-grid.svg" alt="click" />
+              </MenuImageWrapper>
+              <Title>Product Page 3</Title>
+            </Item>
+          </a>
         </Link>
-        <Link to="/product/page4">
-          <Item>
-            <MenuImageWrapper>
-              {/*<!-- Heroicon name: view-grid -->*/}
-              <MenuImg src={ViewGrid} alt="click" />
-            </MenuImageWrapper>
-            <Title>Product Page 4</Title>
-          </Item>
+        <Link href="/product/page4">
+          <a>
+            <Item>
+              <MenuImageWrapper>
+                {/*<!-- Heroicon name: view-grid -->*/}
+                <MenuImg src="/icons/view-grid.svg" alt="click" />
+              </MenuImageWrapper>
+              <Title>Product Page 4</Title>
+            </Item>
+          </a>
         </Link>
       </Nav>
     </div>
     <ButtonWrapper1>
       <ButtonWrapper2>
-        <Link to="/auth/login">
-          <Button>Sign up</Button>
+        <Link href="/auth/login">
+          <a>
+            <Button>Sign up</Button>
+          </a>
         </Link>
       </ButtonWrapper2>
     </ButtonWrapper1>

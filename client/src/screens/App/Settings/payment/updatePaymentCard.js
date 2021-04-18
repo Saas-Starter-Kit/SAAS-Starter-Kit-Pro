@@ -1,16 +1,13 @@
 import React from 'react';
 
+import Image from 'next/image';
+
 import styled from 'styled-components';
 import ModalCardDelete from './deleteCardConfirmModal';
 import { FaRegCreditCard } from 'react-icons/fa';
 
 import Card from '../../../../components/Common/Card';
 import DangerButton from '../../../../components/Common/buttons/DangerButton';
-
-import visa from '../../../../assets/images/credit card icons/visa.png';
-import discover from '../../../../assets/images/credit card icons/discover.png';
-import mastercard from '../../../../assets/images/credit card icons/mastercard.png';
-import american_express from '../../../../assets/images/credit card icons/american_express.png';
 
 const StyledCardDisplayWrapper = styled.div`
   display: flex;
@@ -49,6 +46,7 @@ const SecondCardRow = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding-right: 0.5rem;
 `;
 
 const CardNumber = styled.div`
@@ -58,10 +56,6 @@ const CardNumber = styled.div`
 
 const Expires = styled.div`
   padding-left: 0.5rem;
-`;
-
-const CardBrandImage = styled.img`
-  padding-right: 0.5rem;
 `;
 
 const UpdatePaymentCard = ({
@@ -76,13 +70,24 @@ const UpdatePaymentCard = ({
   const setIcons = (brand) => {
     switch (brand) {
       case 'visa':
-        return <CardBrandImage src={visa} alt="" />;
+        return <Image src="/credit card icons/visa.png" alt="Visa logo" width={48} height={48} />;
       case 'amex':
-        return <CardBrandImage src={american_express} alt="" />;
+        return (
+          <Image
+            src="/credit card icons/american_express.png"
+            alt="American Express logo"
+            width={48}
+            height={48}
+          />
+        );
       case 'discover':
-        return <CardBrandImage src={discover} alt="" />;
+        return (
+          <Image src="/credit card icons/discover.png" alt="Discover logo" width={48} height={48} />
+        );
       case 'mastercard':
-        return <CardBrandImage src={mastercard} alt="" />;
+        return (
+          <Image src="/credit card icons/mastercard.png" alt="Mastercard logo" width={48} height={48} />
+        );
       default:
         return <FaRegCreditCard />;
     }

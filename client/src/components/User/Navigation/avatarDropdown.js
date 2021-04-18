@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
-import { navigate, Link } from 'gatsby';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import styled, { keyframes } from 'styled-components';
 import AuthContext from '../../../utils/authContext';
 import { colors } from '../../../styles/theme';
@@ -43,18 +44,21 @@ const Border = styled.div`
 `;
 
 const AvatarDropDown = ({ avatarMenuHandler }) => {
+  const router = useRouter();
   const { LogOut } = useContext(AuthContext);
 
   const signOut = () => {
     LogOut();
-    setTimeout(() => navigate('/auth/login'), 200);
+    setTimeout(() => router.push('/auth/login'), 200);
   };
 
   return (
     <Wrapper role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
       <ItemWrapper>
-        <Link to="/user/settings/account">
-          <DropdownItem onClick={avatarMenuHandler} title="Account Settings" />
+        <Link href="/user/settings/account">
+          <a>
+            <DropdownItem onClick={avatarMenuHandler} title="Account Settings" />
+          </a>
         </Link>
       </ItemWrapper>
       <Border />

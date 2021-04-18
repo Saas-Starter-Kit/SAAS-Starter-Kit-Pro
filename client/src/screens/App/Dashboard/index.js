@@ -27,18 +27,19 @@ const ChartsContainer = styled.div`
   margin-top: 2rem;
 `;
 
-const Dashboard = () => (
-  <div>
-    <Title>Dashboard</Title>
-    <Stats />
-    <ChartsContainer>
-      <LineBarAreaComposedChart />
-      <StackedChart />
-      <AreaChartFillByValue />
-      <SimpleBarChart />
-    </ChartsContainer>
-    <ActivityList />
-  </div>
-);
-
+const Dashboard = () => {
+  return (
+    <div>
+      <Title>Dashboard</Title>
+      <Stats />
+      <ChartsContainer>
+        <LineBarAreaComposedChart />
+        <StackedChart />
+        <AreaChartFillByValue />
+        <SimpleBarChart />
+      </ChartsContainer>
+      <ActivityList />
+    </div>
+  );
+};
 export default Dashboard;

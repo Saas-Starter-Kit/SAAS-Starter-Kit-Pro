@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
-import { StaticImage } from 'gatsby-plugin-image';
+import Image from 'next/image';
 import { colors, breakpoints } from '../../../styles/theme';
 
 import { FcApproval, FcBarChart, FcCollect, FcConferenceCall } from 'react-icons/fc';
@@ -200,8 +200,11 @@ const CoreFeature4 = () => (
             </ListItem>
           </List>
         </div>
-        <StaticImage
-          src="../../../assets/images/illustrations/undraw_Build_wireframe_re_ln7g.svg"
+        <Image
+          layout="responsive"
+          height="80%"
+          width="100%"
+          src="/illustrations/undraw_Build_wireframe_re_ln7g.svg"
           alt="Abstract illustration of man wearing a turtleneck standing next to floating graphs and images"
         />
       </FeatureWrapper1>
@@ -243,8 +246,11 @@ const CoreFeature4 = () => (
             </ListItem>
           </List>
         </FeatureWrapper2b>
-        <StaticImage
-          src="../../../assets/images/illustrations/undraw_All_the_data_re_hh4w.svg"
+        <Image
+          layout="responsive"
+          height="80%"
+          width="100%"
+          src="/illustrations/undraw_All_the_data_re_hh4w.svg"
           alt="Abstract illustration of man wearing a suit standing next to floating graphs and images"
         />
       </FeatureWrapper2>
