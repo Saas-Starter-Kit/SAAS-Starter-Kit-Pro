@@ -39,16 +39,11 @@ const Signup = () => {
 
   /* eslint-disable */
   //extract data from query params
-  //useEffect(() => {
-  //  // TODO: this should be obtainable from location.query, but might need some next config?
-  //  const query = location.asPath.replace(location.pathname, '');
-  //  const queryParams = query.split('=');
-
-  //  if (queryParams[1]) {
-  //    setInviteFlow(queryParams[1].split('&')[0]);
-  //    setInviteKey(queryParams[2]);
-  //  }
-  //}, [location]);
+  useEffect(() => {
+    if (!location.isReady) return;
+    setInviteFlow(location.query.isInviteFlow);
+    setInviteKey(location.query.verify_key);
+  }, [location.isReady]);
 
   useEffect(() => {
     return () => fetchSuccess();

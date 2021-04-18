@@ -62,15 +62,10 @@ const Login = () => {
   /* eslint-disable */
   //extract data from query params
   useEffect(() => {
-    if (location.search) {
-      const queryParams = location.search.split('=');
-
-      if (queryParams[1]) {
-        setInviteFlow(queryParams[1].split('&')[0]);
-        setInviteKey(queryParams[2]);
-      }
-    }
-  }, [location]);
+    if (!location.isReady) return;
+    setInviteFlow(location.query.isInviteFlow);
+    setInviteKey(location.query.verify_key);
+  }, [location.isReady]);
 
   useEffect(() => {
     return () => fetchSuccess();
@@ -90,7 +85,7 @@ const Login = () => {
         fetchFailure(error);
       });
 
-    LoginAuth(authRes, LogIn, firebase, fetchFailure, isInviteFlow, invite_key);
+    LoginAuth(authRes, LogIn, firebase, fetchFailure, isInviteFlow, invite_key, location);
   };
 
   //Google OAuth2 Signin
@@ -105,7 +100,7 @@ const Login = () => {
         fetchFailure(error);
       });
 
-    LoginAuth(authRes, LogIn, firebase, fetchFailure, isInviteFlow, invite_key);
+    LoginAuth(authRes, LogIn, firebase, fetchFailure, isInviteFlow, invite_key, location);
   };
 
   const seoData = {

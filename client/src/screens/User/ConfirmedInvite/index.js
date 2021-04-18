@@ -40,17 +40,21 @@ const Title = styled.h2`
 
 const ConfirmedInvite = () => {
   const location = useRouter();
-  const splitPath = location.pathname.split('/');
-  const invite_key = splitPath[3];
+
   const { authState } = useContext(AuthContext);
   const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
   const { isLoading } = apiState;
   const [org_id, setOrgId] = useState();
 
+  let invite_key;
+
   /* eslint-disable */
   useEffect(() => {
-    if (authState.user.id) verifyInvite();
-  }, [authState]);
+    if (!location.isReady) return;
+    invite_key = location.query.id;
+
+    if (authState.user.id && location.isReady) verifyInvite();
+  }, [authState, location.isReady]);
   /* eslint-enable */
 
   const verifyInvite = async () => {

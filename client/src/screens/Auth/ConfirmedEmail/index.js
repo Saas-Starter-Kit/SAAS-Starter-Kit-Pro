@@ -58,21 +58,24 @@ const ConfirmedEmail = () => {
   const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
   const { isLoading } = apiState;
 
-  //extract query params
-  const query = location.asPath;
-  const queryParams = query.split('=');
-  const verify_key = queryParams[1].split('&')[0];
-  const isInviteFlow = queryParams[2].split('&')[0];
-  const invite_key = queryParams[3];
+  let verify_key;
+  let isInviteFlow;
+  let invite_key;
 
   /* eslint-disable */
+  useEffect(() => {
+    if (!location.isReady) return;
+    console.log(location);
+    verify_key = location.query.key;
+    isInviteFlow = location.query.isInviteFlow;
+    invite_key = location.query.invite_key;
+    createUser();
+  }, [location.isReady]);
+
   useEffect(() => {
     return () => setLoading(false);
   }, []);
 
-  useEffect(() => {
-    createUser();
-  }, []);
   /* eslint-enable */
 
   const createUser = async () => {
