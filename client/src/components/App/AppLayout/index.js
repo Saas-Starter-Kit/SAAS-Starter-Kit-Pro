@@ -4,10 +4,15 @@ import moment from 'moment';
 import { useRouter } from 'next/router';
 
 import AuthContext from '../../../utils/authContext';
+import CaslContext from '../../../utils/caslContext';
+import ApiContext from '../../../utils/apiContext';
+import OrgContext from '../../../utils/orgContext';
 import getOrgId from '../../../utils/orgId';
+import { updateRole } from '../../../utils/caslAbility';
 import { colors, breakpoints } from '../../../styles/theme';
 import useWindowSize from '../../../hooks/useWindowSize';
 import SEO from '../../Marketing/Layout/seo';
+import axios from '../../../services/axios';
 
 import SidebarDesktop from '../Navigation/sidebarDesktop';
 import SidebarMobile from '../Navigation/sidebarMobile';
@@ -57,7 +62,10 @@ const Layout = ({ children }) => {
   const location = useRouter();
   const org_id = getOrgId();
 
+  const ability = useContext(CaslContext);
   const { authState } = useContext(AuthContext);
+  const { SetOrg } = useContext(OrgContext);
+  const { fetchFailure } = useContext(ApiContext);
 
   //handle antd sidebar rerender issue
   const windowSize = useWindowSize();
@@ -72,6 +80,54 @@ const Layout = ({ children }) => {
   useEffect(() => {
     if (authState.user.id) setUsername(authState.user.username);
   }, [authState]);
+
+  useEffect(() => {
+    if (!location.isReady) return;
+    if (authState.user.id) getRole(org_id);
+  }, [location.isReady, authState]);
+
+  const getRole = async (org_id) => {
+    let user_id = authState.user.id;
+
+    let params = {
+      user_id,
+      org_id
+    };
+
+    const result = await axios.get(`/api/get/role`, { params }).catch((err) => {
+      fetchFailure(err);
+    });
+
+    if (result.data.length === 0) {
+      location.push('/403');
+    }
+
+    let id = result.data[0].id;
+    let org_name = result.data[0].org_name;
+    let primary_email = result.data[0].primary_email;
+    let role = result.data[0].role;
+    let stripe_customer_id;
+    let subscription_id;
+
+    //save payment info to global state if role is admin
+    if (role === 'admin') {
+      stripe_customer_id = result.data[0].stripe_customer_id;
+      subscription_id = result.data[0].subscription_id;
+    }
+
+    let org = {
+      id,
+      org_name,
+      primary_email,
+      role,
+      stripe_customer_id,
+      subscription_id
+    };
+
+    SetOrg(org);
+
+    updateRole(ability, role);
+  };
 
   const mobileMenuHandler = () =>
     showMobileMenu ? toggleShowMobileMenu(false) : toggleShowMobileMenu(true);

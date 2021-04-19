@@ -58,19 +58,21 @@ const ConfirmedEmail = () => {
   const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
   const { isLoading } = apiState;
 
-  let verify_key;
-  let isInviteFlow;
-  let invite_key;
+  const [verify_key, setVerifyKey] = useState();
+  const [isInviteFlow, setInviteFlow] = useState();
+  const [invite_key, setInviteKey] = useState();
 
   /* eslint-disable */
   useEffect(() => {
     if (!location.isReady) return;
-    console.log(location);
-    verify_key = location.query.key;
-    isInviteFlow = location.query.isInviteFlow;
-    invite_key = location.query.invite_key;
-    createUser();
-  }, [location.isReady]);
+
+    setVerifyKey(location.query.key);
+    setInviteFlow(location.query.isInviteFlow);
+    setInviteKey(location.query.invite_key);
+
+    console.log(verify_key, isInviteFlow, invite_key);
+    if (verify_key) createUser();
+  }, [location.isReady, verify_key, invite_key, isInviteFlow]);
 
   useEffect(() => {
     return () => setLoading(false);
