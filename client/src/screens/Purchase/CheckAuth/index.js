@@ -84,7 +84,7 @@ const CheckAuth = () => {
               </StyledHeader>
               <StyledSection>
                 <div>Please Select an organization from user dashboard</div>
-                <Link href="/user" passHref>
+                <Link href="/user/dashboard" passHref>
                   <StyledLink>Go to Dashboard</StyledLink>
                 </Link>
               </StyledSection>

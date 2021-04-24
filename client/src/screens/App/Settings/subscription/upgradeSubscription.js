@@ -14,8 +14,10 @@ const UpgradeSubscription = ({ subscriptionState }) => {
     <Card>
       <h2>Click Here to change plans</h2>
       <Link
-        href="/purchase/plan"
-        state={{ subscription_id, currentPlan, isUpgradeFlow, subscription_item }}
+        href={{
+          pathname: '/purchase/plan',
+          query: { subscription_id, currentPlan, isUpgradeFlow, subscription_item }
+        }}
       >
         <a>
           <Button>Submit</Button>

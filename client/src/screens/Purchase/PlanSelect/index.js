@@ -99,12 +99,20 @@ const PlanSelect = () => {
   const [planType, setPlanType] = useState(basic_type);
   const [price, setPrice] = useState(basic_price);
 
-  let isUpgradeFlow = location.state?.isUpgradeFlow;
-  let currentPlan = location.state?.currentPlan;
-  let subscription_id = location.state?.subscription_id;
-  let subscription_item = location.state?.subscription_item;
+  const [isUpgradeFlow, setUpgradeFlow] = useState();
+  const [currentPlan, setCurrentPlan] = useState();
+  const [subscription_id, setSubId] = useState();
+  const [subscription_item, setSubItem] = useState();
 
   /* eslint-disable */
+  useEffect(() => {
+    if (!location.isReady) return;
+
+    setCurrentPlan(location.query?.currentPlan);
+    setUpgradeFlow(location.query?.isUpgradeFlow);
+    setSubId(location.query?.subscription_id);
+    setSubItem(location.query?.subscription_item);
+  }, [location.isReady]);
 
   useEffect(() => {
     if (isUpgradeFlow) {
@@ -121,6 +129,13 @@ const PlanSelect = () => {
     setPlan(plan);
     setPrice(price);
     setPlanType(type);
+  };
+
+  const submitPlan = () => {
+    location.push({
+      pathname: '/purchase/payment',
+      query: { plan, price, planType, subscription_id, isUpgradeFlow, subscription_item }
+    });
   };
 
   return (
@@ -162,15 +177,9 @@ const PlanSelect = () => {
         </PlanCard>
       </CardsWrapper>
       <ButtonWrapper>
-        <Link
-          disabled={plan === currentPlan}
-          href="/purchase/payment"
-          state={{ plan, price, planType, subscription_id, isUpgradeFlow, subscription_item }}
-        >
-          <a>
-            <PlanButton>Submit</PlanButton>
-          </a>
-        </Link>
+        <PlanButton onClick={submitPlan} disabled={plan === currentPlan}>
+          Submit
+        </PlanButton>
       </ButtonWrapper>
     </div>
   );

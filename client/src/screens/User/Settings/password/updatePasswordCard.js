@@ -25,14 +25,15 @@ const ButtonWrapper = styled.div`
 
 const UpdatePasswordCard = () => {
   const router = useRouter();
+
   return (
     <StyledCard>
       <SectionTitle>Update Password</SectionTitle>
-      <Paragraph>Please Reset Password on Login Page</Paragraph>
+      <Paragraph>Please Click Below to Reset Password</Paragraph>
       <ButtonWrapper>
         <Button
           onClick={() => {
-            router.push('/auth/login');
+            router.push('/auth/passwordreset');
           }}
         >
           Go to Login

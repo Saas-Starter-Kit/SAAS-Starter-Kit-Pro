@@ -80,7 +80,7 @@ const OrgSettings = () => {
       fetchFailure(err);
     });
 
-    router.push('/user');
+    router.push('/user/dashboard');
   };
 
   const handleOrgChange = (event) => {
@@ -96,7 +96,7 @@ const OrgSettings = () => {
       fetchFailure(err);
     });
 
-    router.push('/user');
+    router.push('/user/dashboard');
   };
 
   const handleModal = () => {

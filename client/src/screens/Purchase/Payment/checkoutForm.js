@@ -125,12 +125,13 @@ const CheckoutForm = () => {
   let token = authState?.user.jwt_token;
   const headers = { Authorization: `Bearer ${token}` };
 
-  let plan = location.state?.plan;
-  let price = location.state?.price;
-  let planType = location.state?.planType;
-  let isUpgradeFlow = location.state?.isUpgradeFlow;
-  let subscription_id = location.state?.subscription_id;
-  let subscription_item = location.state?.subscription_item;
+  const [plan, setPlan] = useState();
+  const [price, setPrice] = useState();
+  const [planType, setPlanType] = useState();
+
+  const [isUpgradeFlow, setUpgradeFlow] = useState();
+  const [subscription_id, setSubId] = useState();
+  const [subscription_item, setSubItem] = useState();
 
   const [paymentMethod, setPaymentMethod] = useState();
   const [payCards, setPayCards] = useState([]);
@@ -139,6 +140,20 @@ const CheckoutForm = () => {
   const elements = useElements();
 
   /* eslint-disable */
+
+  useEffect(() => {
+    if (!location.isReady) return;
+
+    setPlan(location.query?.plan);
+    setPrice(location.query?.price);
+    setPlanType(location.query?.planType);
+
+    setUpgradeFlow(location.query?.isUpgradeFlow);
+    setSubId(location.query?.subscription_id);
+    setSubItem(location.query?.subscription_item);
+
+    console.log(location);
+  }, [location.isReady]);
 
   useEffect(() => {
     return () => fetchSuccess();
@@ -235,7 +250,7 @@ const CheckoutForm = () => {
       fetchFailure(err);
     });
 
-    router.push('/purchase/confirm');
+    location.push('/purchase/confirm');
   };
 
   const createSubscription = async () => {
@@ -255,7 +270,7 @@ const CheckoutForm = () => {
     });
 
     if (result.data.status === 'active' || result.data.status === 'trialing') {
-      router.push('/purchase/confirm');
+      location.push('/purchase/confirm');
     } else {
       let error = {
         type: 'Stripe Confirmation Error',

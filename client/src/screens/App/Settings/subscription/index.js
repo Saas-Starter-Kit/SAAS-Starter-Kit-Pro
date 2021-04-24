@@ -26,14 +26,14 @@ const Title = styled.h1`
 const SubscriptionSettings = () => {
   const org_id = getOrgId();
   const router = useRouter();
-  const premium_plan = process.env.GATSBY_STRIPE_PREMIUM_PLAN;
-  const basic_plan = process.env.GATSBY_STRIPE_BASIC_PLAN;
+  const premium_plan = process.env.NEXT_PUBLIC_STRIPE_PREMIUM_PLAN;
+  const basic_plan = process.env.NEXT_PUBLIC_STRIPE_BASIC_PLAN;
 
-  const premium_price = process.env.GATSBY_STRIPE_PREMIUM_PLAN_PRICE;
-  const basic_price = process.env.GATSBY_STRIPE_BASIC_PLAN_PRICE;
+  const premium_price = process.env.NEXT_PUBLIC_STRIPE_PREMIUM_PLAN_PRICE;
+  const basic_price = process.env.NEXT_PUBLIC_STRIPE_BASIC_PLAN_PRICE;
 
-  const premium_type = process.env.GATSBY_STRIPE_PREMIUM_PLAN_TYPE;
-  const basic_type = process.env.GATSBY_STRIPE_BASIC_PLAN_TYPE;
+  const premium_type = process.env.NEXT_PUBLIC_STRIPE_PREMIUM_PLAN_TYPE;
+  const basic_type = process.env.NEXT_PUBLIC_STRIPE_BASIC_PLAN_TYPE;
 
   const { orgState } = useContext(OrgContext);
   const { id, stripe_customer_id, primary_email, subscription_id } = orgState;
@@ -98,7 +98,7 @@ const SubscriptionSettings = () => {
 
     setModalSub(false);
     message.success('Subscription Canceled');
-    router.push('/user');
+    router.push('/user/dashboard');
   };
 
   /* 
