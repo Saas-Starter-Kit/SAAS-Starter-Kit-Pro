@@ -16,7 +16,6 @@ import AuthCard from '../../../components/Auth/authCard';
 import LoadingOverlay from '../../../components/Common/loadingOverlay';
 import FieldLabel from '../../../components/Common/forms/FieldLabel';
 import TextInput from '../../../components/Common/forms/TextInput';
-import Title from '../../../components/Auth/title';
 
 const Wrapper = styled.div`
   background-color: ${colors.gray50};
