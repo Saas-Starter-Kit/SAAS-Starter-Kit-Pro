@@ -18,8 +18,7 @@ const Wrapper = styled.div`
 
 const AltText = styled.div`
   text-align: center;
-  margin-top: -1rem;
-  margin-bottom: 2rem;
+  padding-bottom: 2rem;
   color: ${colors.gray500};
 `;
 

@@ -3,6 +3,10 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import styled, { css } from 'styled-components';
 
+const Wrapper = styled.div`
+  margin-top: 1rem;
+`;
+
 const StyledLink = styled.a`
   padding: 0.5rem;
   margin-right: 0.7rem;

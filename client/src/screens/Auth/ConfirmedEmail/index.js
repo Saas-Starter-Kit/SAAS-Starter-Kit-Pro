@@ -11,11 +11,12 @@ import axios from '../../../services/axios';
 import { setAnalyticsUserId, sendEventToAnalytics } from '../../../services/analytics';
 import { colors, breakpoints } from '../../../styles/theme';
 
-import Title from '../../../components/Auth/title';
+import TitleBase from '../../../components/Auth/title';
 import AuthCard from '../../../components/Auth/authCard';
 import LoadingOverlay from '../../../components/Common/loadingOverlay';
 import FieldLabel from '../../../components/Common/forms/FieldLabel';
 import TextInput from '../../../components/Common/forms/TextInput';
+import Title from '../../../components/Auth/title';
 
 const Wrapper = styled.div`
   background-color: ${colors.gray50};
@@ -31,6 +32,10 @@ const Wrapper = styled.div`
     padding-left: 2rem;
     padding-right: 2rem;
   }
+`;
+
+const Title = styled(TitleBase)`
+  margin-bottom: 1rem;
 `;
 
 const TextWrapper = styled.div`

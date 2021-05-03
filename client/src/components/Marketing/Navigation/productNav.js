@@ -13,10 +13,14 @@ const Wrapper = styled.div`
   }
 `;
 
+const Title = styled.h1`
+  margin-bottom: 1rem;
+`;
+
 const ProductNav = () => {
   return (
     <Wrapper>
-      <h1>Product</h1>
+      <Title>Product</Title>
       <NavLink link="/product/page1" text="Page1" />
       <NavLink link="/product/page2" text="Page2" />
       <NavLink link="/product/page3" text="Page3" />
