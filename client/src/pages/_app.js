@@ -1,4 +1,5 @@
 import React, { useReducer, useEffect } from 'react';
+import { useRouter } from 'next/router';
 
 import '../styles/globals.css';
 import 'antd/dist/antd.css';
@@ -21,6 +22,7 @@ import { ability } from '../utils/caslAbility';
 import { firebaseApp as firebase } from '../services/firebase';
 import { ThemeProvider } from 'styled-components';
 import { theme } from '../styles/theme';
+import { pageView } from '../services/analytics';
 
 import { silentAuth } from '../utils/helpers';
 
@@ -30,6 +32,27 @@ function MyApp(props) {
   const [authState, dispatchAuth] = useReducer(authReducer, initialStateAuth);
   const [apiState, dispatchApi] = useReducer(apiReducer, initialStateApi);
   const [orgState, dispatchOrg] = useReducer(orgReducer, initialStateOrg);
+
+  const router = useRouter();
+
+  /* eslint-disable */
+  useEffect(() => {
+    silentAuth(LogIn, LogOut);
+  }, []);
+
+  useEffect(() => {
+    const handleRouteChange = (url) => {
+      gtag.pageview(url);
+    };
+
+    router.events.on('routeChangeComplete', handleRouteChange);
+
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange);
+    };
+  }, [router.events]);
+
+  /* eslint-enable */
 
   const { Component, pageProps } = props;
 
@@ -61,10 +84,6 @@ function MyApp(props) {
   const SetOrg = (payload) => {
     dispatchOrg(Set_Org(payload));
   };
-
-  useEffect(() => {
-    silentAuth(LogIn, LogOut);
-  }, []); // eslint-disable-line
 
   return (
     <AuthContext.Provider value={{ authState, LogIn, LogOut, firebase }}>
