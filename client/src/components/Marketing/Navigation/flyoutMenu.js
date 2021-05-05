@@ -121,19 +121,6 @@ const FlyoutMenu = () => (
         </Item>
       </a>
     </Link>
-    <Link href="/app/1/dashboard">
-      <a>
-        <Item>
-          <MenuImageWrapper>
-            <StyledChart />
-          </MenuImageWrapper>
-          <TextWrapper>
-            <Title>App</Title>
-            <Description>Lorem ipsum dolor sit amet, consectetur </Description>
-          </TextWrapper>
-        </Item>
-      </a>
-    </Link>
     <StyledHr />
     <Link href="/product/page1">
       <a>

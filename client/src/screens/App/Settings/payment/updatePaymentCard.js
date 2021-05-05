@@ -1,7 +1,5 @@
 import React from 'react';
 
-import Image from 'next/image';
-
 import styled from 'styled-components';
 import ModalCardDelete from './deleteCardConfirmModal';
 import { FaRegCreditCard } from 'react-icons/fa';
@@ -70,10 +68,10 @@ const UpdatePaymentCard = ({
   const setIcons = (brand) => {
     switch (brand) {
       case 'visa':
-        return <Image src="/credit card icons/visa.png" alt="Visa logo" width={48} height={48} />;
+        return <img src="/credit card icons/visa.png" alt="Visa logo" width={48} height={48} />;
       case 'amex':
         return (
-          <Image
+          <img
             src="/credit card icons/american_express.png"
             alt="American Express logo"
             width={48}
@@ -82,11 +80,16 @@ const UpdatePaymentCard = ({
         );
       case 'discover':
         return (
-          <Image src="/credit card icons/discover.png" alt="Discover logo" width={48} height={48} />
+          <img src="/credit card icons/discover.png" alt="Discover logo" width={48} height={48} />
         );
       case 'mastercard':
         return (
-          <Image src="/credit card icons/mastercard.png" alt="Mastercard logo" width={48} height={48} />
+          <img
+            src="/credit card icons/mastercard.png"
+            alt="Mastercard logo"
+            width={48}
+            height={48}
+          />
         );
       default:
         return <FaRegCreditCard />;

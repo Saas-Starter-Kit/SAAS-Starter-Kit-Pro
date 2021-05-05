@@ -105,14 +105,14 @@ export class CICDStack extends cdk.Stack {
     //let certifcateArn = process.env.CERT_ARN ? process.env.CERT_ARN : '';
     //const certificate = acm.Certificate.fromCertificateArn(this, 'Certificate', certifcateArn);
 
-    //new cloudfront.Distribution(this, 'myDist', {
-    //  defaultBehavior: {
-    //    origin: new origins.S3Origin(outputBucket),
-    //    viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS
-    //  },
-    //  certificate,
-    //  domainNames: ['www.example.com']
-    //});
+    new cloudfront.Distribution(this, 'myDist', {
+      defaultBehavior: {
+        origin: new origins.S3Origin(outputBucket),
+        viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS
+      },
+      //certificate,
+      domainNames: ['www.example.com']
+    });
 
     //complete pipeline
     new codepipeline.Pipeline(this, 'MyPipeline', {

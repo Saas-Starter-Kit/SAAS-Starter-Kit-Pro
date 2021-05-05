@@ -13,7 +13,6 @@
     "@ant-design/icons": "^4.6.2",
     "@casl/ability": "^5.2.2",
     "@casl/react": "^2.2.2",
-    "@sentry/react": "^6.2.0",
     "@stripe/react-stripe-js": "^1.4.0",
     "@stripe/stripe-js": "^1.13.1",
     "antd": "^4.14.0",

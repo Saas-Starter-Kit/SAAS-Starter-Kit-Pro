@@ -1,6 +1,5 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
-import Image from 'next/image';
 import { colors, breakpoints } from '../../../styles/theme';
 
 import { FcApproval, FcBarChart, FcCollect, FcConferenceCall } from 'react-icons/fc';
@@ -200,8 +199,7 @@ const CoreFeature4 = () => (
             </ListItem>
           </List>
         </div>
-        <Image
-          layout="responsive"
+        <img
           height="80%"
           width="100%"
           src="/illustrations/undraw_Build_wireframe_re_ln7g.svg"
@@ -246,8 +244,7 @@ const CoreFeature4 = () => (
             </ListItem>
           </List>
         </FeatureWrapper2b>
-        <Image
-          layout="responsive"
+        <img
           height="80%"
           width="100%"
           src="/illustrations/undraw_All_the_data_re_hh4w.svg"

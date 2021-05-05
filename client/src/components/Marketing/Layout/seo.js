@@ -1,5 +1,5 @@
 import React from 'react';
-import Helmet from 'react-helmet';
+import Head from 'next/head';
 import siteMetadata from '../../../utils/siteMetadata';
 
 const SEO = ({ seoData: { title, description, image, article, pathname } }) => {
@@ -15,11 +15,7 @@ const SEO = ({ seoData: { title, description, image, article, pathname } }) => {
 
   return (
     <>
-      <Helmet
-        htmlAttributes={{
-          lang: 'en'
-        }}
-      >
+      <Head>
         <title>{seo.title}</title>
         <meta name="description" content={seo.description} />
         <meta name="image" content={seo.image} />
@@ -34,7 +30,7 @@ const SEO = ({ seoData: { title, description, image, article, pathname } }) => {
         <meta name="twitter:title" content={seo.title} />
         <meta name="twitter:description" content={seo.description} />
         <meta name="twitter:image" content={seo.image} />
-      </Helmet>
+      </Head>
     </>
   );
 };
