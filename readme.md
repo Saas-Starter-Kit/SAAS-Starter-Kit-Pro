@@ -1,4 +1,4 @@
-client: Front end code written in React/Gatsby
+client: Front end code written in React/next
 
 server: Nodejs api server
 
