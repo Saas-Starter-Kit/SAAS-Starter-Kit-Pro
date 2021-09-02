@@ -21,7 +21,7 @@ Nodejs, Express, Docker, Jest, Postgres or Mongodb.
   
 ## 🧿 Saas Starterkit Standard 
  
-Saas Starterkit also comes in a lite version. check it out here: 
+Saas Starterkit also comes in a lite barebones version. check it out here: 
   https://github.com/Saas-Starter-Kit/Saas-Starterkit
 
 ## ⚙️ Installation
