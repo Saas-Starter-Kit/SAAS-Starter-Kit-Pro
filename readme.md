@@ -41,6 +41,8 @@ Required Environment Variables
 | NEXT_PUBLIC_SERVER_URL | URL of the nodejs Server. Will be localhost during dev. |
 | NEXT_PUBLIC_FIREBASE_API_KEY | The Firebase API key, found in the Firebase console |
 | NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN  | Firebase Auth Domain, found in the Firebase console  |
+  
+  
 
 
 #### Server:
@@ -58,6 +60,15 @@ Required Environment Variables
 | DB_NAME | Name of Postgres database |
 | DB_PORT | Postgres Port, default is 5432 |
 | MONGO_URL | MongoDB URL is optional, if already using Postgres. Required if not. |
+| NEXT_PUBLIC_GOOGLE_ANALYTICS_ID | Google Analytics Measurement id |
+| NEXT_PUBLIC_STRIPE_BASIC_PLAN | Stripe plan id |
+| NEXT_PUBLIC_STRIPE_BASIC_PLAN_PRICE | Stripe price id |
+| NEXT_PUBLIC_STRIPE_BASIC_PLAN_TYPE | Human Readable plan name |
+| NEXT_PUBLIC_STRIPE_PREMIUM_PLAN | see above |
+| NEXT_PUBLIC_STRIPE_PREMIUM_PLAN_PRICE | see above |
+| NEXT_PULBIC_STRIPE_PREMIUM_PLAN_TYPE | see above |
+| NEXT_PUBLIC_STRIPE_PUBLIC_KEY | stripe public api key |
+  
 <br />
 Once the Environment Variables are defined and node modules installed the boilerplate is ready to go. 
 
