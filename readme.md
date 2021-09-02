@@ -18,6 +18,11 @@ Nodejs, Express, Docker, Jest, Postgres or Mongodb.
 <br />
 
 > *Pro version also includes Stripe, Nodemailer, AWS CDK and more. 
+  
+## 🧿 Saas Starterkit Standard 
+ 
+Saas Starterkit also comes in a lite version. check it out here: 
+  https://github.com/Saas-Starter-Kit/Saas-Starterkit
 
 ## ⚙️ Installation
 
