@@ -41,7 +41,14 @@ Required Environment Variables
 | NEXT_PUBLIC_SERVER_URL | URL of the nodejs Server. Will be localhost during dev. |
 | NEXT_PUBLIC_FIREBASE_API_KEY | The Firebase API key, found in the Firebase console |
 | NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN  | Firebase Auth Domain, found in the Firebase console  |
-  
+| NEXT_PUBLIC_GOOGLE_ANALYTICS_ID | Google Analytics Measurement id |
+| NEXT_PUBLIC_STRIPE_BASIC_PLAN | Stripe plan id |
+| NEXT_PUBLIC_STRIPE_BASIC_PLAN_PRICE | Stripe price id |
+| NEXT_PUBLIC_STRIPE_BASIC_PLAN_TYPE | Human Readable plan name |
+| NEXT_PUBLIC_STRIPE_PREMIUM_PLAN | see above |
+| NEXT_PUBLIC_STRIPE_PREMIUM_PLAN_PRICE | see above |
+| NEXT_PULBIC_STRIPE_PREMIUM_PLAN_TYPE | see above |
+| NEXT_PUBLIC_STRIPE_PUBLIC_KEY | stripe public api key |
   
 
 
@@ -60,14 +67,20 @@ Required Environment Variables
 | DB_NAME | Name of Postgres database |
 | DB_PORT | Postgres Port, default is 5432 |
 | MONGO_URL | MongoDB URL is optional, if already using Postgres. Required if not. |
-| NEXT_PUBLIC_GOOGLE_ANALYTICS_ID | Google Analytics Measurement id |
-| NEXT_PUBLIC_STRIPE_BASIC_PLAN | Stripe plan id |
-| NEXT_PUBLIC_STRIPE_BASIC_PLAN_PRICE | Stripe price id |
-| NEXT_PUBLIC_STRIPE_BASIC_PLAN_TYPE | Human Readable plan name |
-| NEXT_PUBLIC_STRIPE_PREMIUM_PLAN | see above |
-| NEXT_PUBLIC_STRIPE_PREMIUM_PLAN_PRICE | see above |
-| NEXT_PULBIC_STRIPE_PREMIUM_PLAN_TYPE | see above |
-| NEXT_PUBLIC_STRIPE_PUBLIC_KEY | stripe public api key |
+| MAIL_TRAP_USERNAME | Mail trap username |
+| MAIL_TRAP_PASSWORD | Mail trap password |
+| STRIPE_SECRET | Stripe API secret |
+| STRIPE_ITEM_PRICE | Stripe price id |
+| STRIPE_WEBHOOK_SECRET | Stripe webhook secret |
+| SendInBlue_API_KEY | Sendinblue api key |
+| SendInBlue_User | sendinblue username |
+| SendInBlue_Password | sendinblue password |
+| SendInBlue_ListId | sendinblue listid |
+| PRODUCT_NAME |  variable in transactional emails |
+| PRODUCT_URL | variable in transactional emails |
+| COMPANY_NAME |  variable in transactional emails |
+| COMPANY_ADDRESS |  variable in transactional emails |
+
   
 <br />
 Once the Environment Variables are defined and node modules installed the boilerplate is ready to go. 
