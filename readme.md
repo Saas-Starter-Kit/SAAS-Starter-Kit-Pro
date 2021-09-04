@@ -110,7 +110,7 @@ Once the Environment Variables are defined and node modules installed the boiler
 
 ## 📜 Docs 
 
-The Documentation is available here
+The Documentation is available here: https://docs.saasstarterkit.com/docs/Intro/Welcome
 
 If  there are any questions or something is not covered in the docs, feel free to open a github issue on this repo. 
 
