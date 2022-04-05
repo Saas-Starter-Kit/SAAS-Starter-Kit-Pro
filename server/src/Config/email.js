@@ -38,6 +38,9 @@ let transport = nodemailer.createTransport({
 });
 
 export const email = new Email({
+  message: {
+    from: user
+  },
   send: true,
   transport,
   preview: true, // to preview emails in your own browser
