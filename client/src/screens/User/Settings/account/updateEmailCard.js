@@ -33,7 +33,7 @@ const UpdateEmailCard = ({ handleEmailChange, isEmail, email, updateEmail }) => 
       {!isEmail ? (
         <Paragraph>Email Changes Only Available for Email Signups</Paragraph>
       ) : (
-        <Paragraph>Email Changes will reqire Sign-in with new email</Paragraph>
+        <Paragraph>Email Changes will require Sign-in with new email</Paragraph>
       )}
       <SectionTitle>Update Email</SectionTitle>
       <Form>

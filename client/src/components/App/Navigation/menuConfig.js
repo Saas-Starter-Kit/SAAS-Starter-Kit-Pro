@@ -8,15 +8,13 @@ import {
   FcTimeline,
   FcUpload,
   FcPrivacy,
-  FcEngineering
+  FcEngineering,
+  FcDocument,
+  FcGenericSortingAsc,
+  FcSettings,
 } from 'react-icons/fc';
 
 const StyledBar = styled(FcBarChart)`
-  height: 1.3rem;
-  width: 1.3rem;
-`;
-
-const StyledEng = styled(FcEngineering)`
   height: 1.3rem;
   width: 1.3rem;
 `;
@@ -47,6 +45,26 @@ const StyledOnboarding = styled(FcTimeline)`
 `;
 
 const StyledML = styled(FcGenealogy)`
+  height: 1.3rem;
+  width: 1.3rem;
+`;
+
+const StyledDoc = styled(FcDocument)`
+  height: 1.3rem;
+  width: 1.3rem;
+`;
+
+const StyledEng = styled(FcEngineering)`
+  height: 1.3rem;
+  width: 1.3rem;
+`;
+
+const StyledLabs = styled(FcGenericSortingAsc)`
+  height: 1.3rem;
+  width: 1.3rem;
+`;
+
+const StyledSettings = styled(FcSettings)`
   height: 1.3rem;
   width: 1.3rem;
 `;
@@ -98,6 +116,6 @@ export const getMenus = (org_id) => [
     id: '8',
     name: 'Settings',
     route: `/app/${org_id}/settings`,
-    icon: <StyledEng />
-  }
+    icon: <StyledSettings />
+  },
 ];

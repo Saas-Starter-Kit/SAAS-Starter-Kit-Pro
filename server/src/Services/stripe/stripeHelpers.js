@@ -36,6 +36,7 @@ export const RemovePaymentMethod = async (req, res) => {
 export const GetWallet = async (req, res) => {
   let customer = req.query.customer;
 
+  // TODO: Remove console.log
   console.log(customer);
   const paymentMethods = await stripe.paymentMethods.list({
     customer: customer,

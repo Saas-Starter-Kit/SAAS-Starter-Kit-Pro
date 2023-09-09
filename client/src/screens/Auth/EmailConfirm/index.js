@@ -36,7 +36,7 @@ const EmailConfirm = () => {
       <SEO seoData={seoData} />
       <Wrapper>
         <TitleWrapper>
-          <Title>We have Sent you an email confirmation please check your inbox to continue</Title>
+          <Title>We have sent you an email confirmation. Please check your inbox to continue</Title>
         </TitleWrapper>
       </Wrapper>
     </React.Fragment>

@@ -1,5 +1,5 @@
 import stripe from '../../Config/stripe.js';
-import { PastDue, Unpaid, TrailWillEnd } from './stripeWebhooks.js';
+import { PastDue, Unpaid, TrialWillEnd } from './stripeWebhooks.js';
 
 export const WebHookHandler = async (req, res) => {
   const sig = req.headers['stripe-signature'];
@@ -13,7 +13,7 @@ export const WebHookHandler = async (req, res) => {
     //  console.log(event);
     //  break;
     case 'customer.subscription.trial_will_end':
-      TrailWillEnd(event);
+      TrialWillEnd(event);
       break;
     case 'customer.subscription.past_due':
       PastDue(event);

@@ -3,16 +3,16 @@ import firebaseAdmin from '../../Config/firebase.js';
 import { sendEmail } from '../../Config/email.js';
 import { UpdateStripeCustomer } from '../stripe/stripeCustomer.js';
 import { UpdateContact } from '../users/contacts.js';
-import { verifyUser } from '../../Model/sql/auth/authentication.js';
+import { verifyUser } from '../../Model/mongo/auth/authentication.js';
 import { CreateContact } from '../users/contacts.js';
 import { nanoid } from 'nanoid';
-import { GetOrgsbyEmail } from '../../Model/sql/org/org.js';
+import { GetOrgsbyEmail } from '../../Model/mongo/org/org.js';
 import {
   saveUsertoDB,
   getUser,
   updateUsernameModel,
   updateEmailModel
-} from '../../Model/sql/auth/authentication.js';
+} from '../../Model/mongo/auth/authentication.js';
 
 export const CreateUser = async (req, res) => {
   let verify_key = req.body.verify_key;
@@ -53,7 +53,7 @@ export const SignUp = async (req, res) => {
     return;
   }
 
-  //decode the firebase token recieved from frontend and save firebase uuid
+  //decode the firebase token received from frontend and save firebase uuid
   let decodedToken = await firebaseAdmin.auth().verifyIdToken(token);
   let firebaseId = decodedToken.user_id;
 
@@ -78,7 +78,7 @@ export const Login = async (req, res) => {
   let token = req.body.token;
   let email = req.body.email;
 
-  //decode the firebase token recieved from frontend
+  //decode the firebase token received from frontend
   let decodedToken = await firebaseAdmin.auth().verifyIdToken(token);
   let firebaseId = decodedToken.user_id;
 

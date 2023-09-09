@@ -13,7 +13,6 @@ import LoadingOverlay from '../../../components/Common/loadingOverlay';
 import Card from '../../../components/Common/Card';
 import Button from '../../../components/Common/buttons/PrimaryButton';
 
-import DangerButton from '../../../components/Common/buttons/DangerButton';
 import TextInput from '../../../components/Common/forms/TextInput';
 import FieldLabel from '../../../components/Common/forms/FieldLabel';
 import TextInputWrapper from '../../../components/Common/forms/TextInputWrapper';
@@ -102,7 +101,6 @@ const Dashboard = () => {
     const result = await axios.get(`/api/org`, { params, headers }).catch((err) => {
       fetchFailure(err);
     });
-    console.log(result);
     let adminOrgs = result.data.filter((item) => item.role === 'admin');
 
     setOrgs(adminOrgs);
@@ -146,7 +144,7 @@ const Dashboard = () => {
         <StyledHeader>Dashboard</StyledHeader>
         <ContentWrapper>
           <AppsSection>
-            <h2>My Orgs:</h2>
+            <h2>Enter Organizations:</h2>
             <AppsWrapper>
               {!orgs.length == 0 ? (
                 orgs.map((org) => (
@@ -154,7 +152,6 @@ const Dashboard = () => {
                     <a>
                       <StyledCard key={org.id}>
                         <StyledLink>{org.org_name}</StyledLink>
-
                         <RoleText>Role: admin</RoleText>
                       </StyledCard>
                     </a>
@@ -166,7 +163,7 @@ const Dashboard = () => {
             </AppsWrapper>
           </AppsSection>
           <CreateAppWrapper>
-            <h2>Create Org:</h2>
+            <h2>Create Organizations:</h2>
             <form onSubmit={postOrg}>
               <StyledCard>
                 <TextInputWrapper>

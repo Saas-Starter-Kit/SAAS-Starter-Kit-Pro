@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -42,7 +42,6 @@ const RemoveUserButton = styled.button`
   border: none;
 `;
 
-// TODO: replace with actual data
 const getData = () => ({
   site: {
     siteMetadata: {
@@ -54,14 +53,22 @@ const getData = () => ({
 const Users = () => {
   const org_id = getOrgId();
   const { authState } = useContext(AuthContext);
+  const { orgState } = useContext(OrgContext)
   const { fetchFailure, fetchInit, fetchSuccess, apiState } = useContext(ApiContext);
-  const { role } = useContext(AuthContext);
+  const { role } = orgState;
   const { isLoading } = apiState;
   const data = getData();
   const domainUrl = data.site.siteMetadata.siteUrl;
   const [appUsers, setUsers] = useState();
   let token = authState?.user.jwt_token;
   const headers = { Authorization: `Bearer ${token}` };
+
+  // TODO: Change refresh button 146:147 lines, unable to use code below because it keeps render 2 times
+  // useEffect(() => {
+  //   if (org_id) {
+  //     getAppUsers();
+  //   }
+  // }, [getOrgId()]);
 
   const handleSubmit = async (values) => {
     fetchInit();
@@ -138,8 +145,7 @@ const Users = () => {
       <Card>
         <Spin tip="Loading..." spinning={isLoading}>
           <h2>Get App Users</h2>
-          <Button onClick={getAppUsers}>Submit</Button>
-
+          <Button onClick={getAppUsers}>Refresh</Button>
           <Table dataSource={appUsers}>
             <Column title="" key="avatar" render={() => <UserOutlined />} />
             <Column title="Email" dataIndex="email" key="email" />

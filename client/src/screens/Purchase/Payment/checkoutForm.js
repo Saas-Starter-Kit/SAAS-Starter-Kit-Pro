@@ -152,6 +152,7 @@ const CheckoutForm = () => {
     setSubId(location.query?.subscription_id);
     setSubItem(location.query?.subscription_item);
 
+    // TODO: Need to remove the console.log
     console.log(location);
   }, [location.isReady]);
 

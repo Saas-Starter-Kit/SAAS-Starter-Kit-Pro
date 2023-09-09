@@ -9,7 +9,6 @@
 > Saas Starter Kit is a modern SAAS boilerplate. Save weeks of development time having standard SAAS features implemented for you, and start building your core app right away. 
 
 
-
 ## 🎛 Tech Stack 
 #### Frontend:
 React, Nextjs, Styled Components, AntD, Firebase Auth. 
@@ -48,13 +47,13 @@ Required Environment Variables
 | NEXT_PUBLIC_FIREBASE_API_KEY | The Firebase API key, found in the Firebase console |
 | NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN  | Firebase Auth Domain, found in the Firebase console  |
 | NEXT_PUBLIC_GOOGLE_ANALYTICS_ID | Google Analytics Measurement id |
-| NEXT_PUBLIC_STRIPE_BASIC_PLAN | Stripe plan id |
-| NEXT_PUBLIC_STRIPE_BASIC_PLAN_PRICE | Stripe price id |
+| NEXT_PUBLIC_STRIPE_BASIC_PLAN | Stripe price id, starts with price_xxxx |
+| NEXT_PUBLIC_STRIPE_BASIC_PLAN_PRICE | Plan Pricing |
 | NEXT_PUBLIC_STRIPE_BASIC_PLAN_TYPE | Human Readable plan name |
-| NEXT_PUBLIC_STRIPE_PREMIUM_PLAN | see above |
-| NEXT_PUBLIC_STRIPE_PREMIUM_PLAN_PRICE | see above |
-| NEXT_PULBIC_STRIPE_PREMIUM_PLAN_TYPE | see above |
-| NEXT_PUBLIC_STRIPE_PUBLIC_KEY | stripe public api key |
+| NEXT_PUBLIC_STRIPE_PREMIUM_PLAN | Stripe price id, starts with price_xxxx |
+| NEXT_PUBLIC_STRIPE_PREMIUM_PLAN_PRICE | Plan Pricing |
+| NEXT_PULBIC_STRIPE_PREMIUM_PLAN_TYPE | Human Readable plan name |
+| NEXT_PUBLIC_STRIPE_PUBLIC_KEY | Stripe public api key |
   
 
 

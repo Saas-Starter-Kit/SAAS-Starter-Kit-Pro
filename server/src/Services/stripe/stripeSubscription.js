@@ -49,7 +49,7 @@ export const CreateSubscription = async (req, res) => {
   let planType = req.body.planType;
   let org_id = req.body.org_id;
 
-  // Attach the  payment method to the customer
+  // Attach the payment method to the customer
   await stripe.paymentMethods.attach(payment_method, { customer: customer_id });
 
   // Set it as the default payment method for the customer account
@@ -74,7 +74,7 @@ export const CreateSubscription = async (req, res) => {
     let amount = subscription.plan.amount * 0.01;
     let start_date = moment(subscription.created * 1000).format('MMM Do YYYY');
     let trial_end = moment(subscription.trial_end * 1000).format('MMM Do YYYY');
-    let template = 'start trail';
+    let template = 'start trial';
     let locals = { amount, start_date, trial_end };
     await sendEmail(email, template, locals);
 

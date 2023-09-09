@@ -2,7 +2,7 @@ import { sendEmail } from '../../Config/email.js';
 import { GetStripeCustomer } from '../../Services/stripe/stripeCustomer.js';
 import { CancelPlanbySubId } from '../../Model/sql/org/org.js';
 
-export const TrailWillEnd = async (event) => {
+export const TrialWillEnd = async (event) => {
   let customer = event.data.object.customer;
 
   let StripeRes = await GetStripeCustomer(customer);

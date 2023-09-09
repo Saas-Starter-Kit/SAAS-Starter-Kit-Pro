@@ -134,6 +134,12 @@ const SidebarMobile = ({ toggleMobileMenu }) => {
           </LogoWrapper>
           <Nav>
             <MobileSidebarItem
+              link={`/user/dashboard`}
+              toggleMenu={() => toggleMobileMenu(false)}
+              svg={<Persons />}
+              title="Settings"
+            />
+            <MobileSidebarItem
               link={`/user/teamapps`}
               toggleMenu={() => toggleMobileMenu(false)}
               svg={<Persons />}
