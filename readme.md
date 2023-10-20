@@ -117,7 +117,7 @@ If  there are any questions or something is not covered in the docs, feel free t
 ##  💻 Demo
 The Demo can be found here: https://demo.saasstarterkit.com/app/1/dashboard
 
-Certain Features have to be disabled or cant be included in the demo. 
+Certain Features have to be disabled or can't be included in the demo. 
 
 
 ## 🤝 Contributing
